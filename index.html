@@ -183,6 +183,24 @@ dd b{font-weight:500; color:var(--ink)}
 .chk-box p{margin:0; font-size:13.5px; color:var(--ink-2)}
 .err{margin:12px 0 0; padding:11px 13px; font-size:13.5px; border-radius:2px;
   background:rgba(168,50,42,.10); color:var(--seal); border-left:3px solid var(--seal)}
+.cmp{display:grid; grid-template-columns:repeat(auto-fit,minmax(104px,1fr)); gap:8px}
+.cmc{border:1px solid var(--rule); border-radius:2px; padding:11px 6px; text-align:center; background:var(--paper); position:relative}
+.cmc.self{border-color:var(--ink); border-width:1.5px}
+.cmc.best{border-color:var(--mok); border-width:1.5px; background:rgba(62,124,89,.06)}
+.cmc .dt{font-size:11px; color:var(--ink-3)}
+.cmc .ilj{font-family:"Nanum Myeongjo",serif; font-weight:700; font-size:20px; margin:4px 0 2px}
+.cmc .oh5{font-size:10.5px; color:var(--ink-2); letter-spacing:-.02em}
+.cmc .bal{display:block; margin-top:6px; font-size:10.5px; font-weight:700; padding:2px 0; border-radius:2px;
+  background:var(--paper-2); color:var(--ink-3)}
+.cmc.best .bal{background:rgba(62,124,89,.16); color:var(--mok)}
+.cmc .mk{position:absolute; top:-1px; right:-1px; font-size:9.5px; padding:2px 6px;
+  border-radius:0 2px 0 4px; background:var(--ink); color:var(--card); font-weight:700}
+.cmc.best .mk{background:var(--mok)}
+.story p{margin:0 0 12px; font-size:14.5px; line-height:1.85; color:var(--ink-2)}
+.story p:last-child{margin-bottom:0}
+.story b{color:var(--ink); font-weight:500}
+.story .fix{margin-top:4px; padding:13px 15px; background:var(--paper-2);
+  border-left:3px solid var(--seal); border-radius:0 2px 2px 0; font-size:14px}
 .lkl{margin-top:16px; border-top:1px dashed var(--rule); padding-top:12px}
 .lki{display:grid; grid-template-columns:86px 1fr; gap:12px; padding:6px 0; font-size:13px}
 .lkn{font-family:"Nanum Myeongjo",serif; font-weight:700; color:var(--ink)}
@@ -323,6 +341,19 @@ dd b{font-weight:500; color:var(--ink)}
     <div id="jeok"></div>
   </div>
 
+  <div class="card" id="cmpcard">
+    <h2>예정일 앞뒤로 견줘 보기</h2>
+    <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
+      아직 태어나지 않았다면 <b>하루 차이로 사주가 달라집니다.</b> 앞뒤 날짜를 같은 시각으로 놓고 견줬습니다.
+      <b>고른 정도</b>는 다섯 기운이 얼마나 치우치지 않았는지를 본 값입니다.</p>
+    <div id="compare"></div>
+  </div>
+
+  <div class="card">
+    <h2>한눈에 읽는 풀이</h2>
+    <div id="story"></div>
+  </div>
+
   <div class="card">
     <h2>귀인과 살</h2>
     <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
@@ -446,6 +477,12 @@ const LUCK_M={
  정관:"자리와 명예가 서는 때. 조직에서 인정받기 좋습니다.",
  편인:"파고드는 때. 남다른 공부나 기술에 인연이 생깁니다.",
  정인:"배움과 문서의 때. 시험·자격·계약이 잘 풀립니다."};
+const OH_COLOR=["초록","빨강","노랑","흰","검정·남색"];
+const OH_WAY=["동쪽","남쪽","중앙","서쪽","북쪽"];
+const OH_FIX=["가까운 산책과 잎 넓은 화분","햇빛 드는 자리와 밝은 조명","흙을 만지는 취미와 도자기 그릇",
+ "정리정돈과 금속 소품","물가 나들이와 충분한 수분"];
+const OH_LACKM=["밖으로 뻗어 나가는 힘","밝게 드러내는 힘","품고 버티는 힘","끊고 맺는 힘","깊이 스며드는 힘"];
+const OH_OVERM=["뻗으려는 기운","달아오르는 기운","쌓이는 기운","날카로운 기운","가라앉는 기운"];
 const SIP_JOB={
  "비견":"내 힘으로 서는 자리","겁재":"경쟁하고 밀어붙이는 자리","식신":"만들어 내놓는 자리",
  "상관":"재능을 드러내는 자리","편재":"판을 벌이는 자리","정재":"꾸준히 쌓는 자리",
@@ -485,6 +522,8 @@ const GOOD=/밝|빛|아름|클|어질|착|슬기|지혜|복|상서|기쁠|즐|�
 const BAD=/죽|병|앓|슬플|잃|도둑|벌레|어두|흉|재앙|근심|괴로|미워|성낼|두려|무덤|시체|귀신|늙|가난|천할|더러|밧줄|동이|책상|개펄|똥|오줌|뼈|가죽|창자|화살|덫|그물|올가미|허물|죄|벌할|꾸짖|나쁠|악할|어리석|게으|취할|싸울|다툴|찌를|무너|망할|굶주|주릴|아플|의심|속일|훔칠|막을|좁을|낮을|잠길|빠질/;
 
 let reroll=0;                                   // 다시 뽑기 횟수
+const jo=(w,a,b)=>{const c=String(w).charCodeAt(String(w).length-1)-0xAC00;
+  return (c>=0&&c<11172&&c%28!==0)?a:b;};       // 받침 있으면 a, 없으면 b
 const rad=Math.PI/180;
 
 function jdn(y,m,d){                                    // 정수 율리우스적일
@@ -546,6 +585,36 @@ function fmt(jd){                                       // JD(UT) → KST 문자
   let h=f*24, H=Math.floor(h), Mi=Math.round((h-H)*60);
   if(Mi===60){Mi=0;H++;}
   return `${yr}-${pad(mo)}-${pad(day)} ${pad(H)}:${pad(Mi)}`;
+}
+
+
+// 임의 시점의 사주를 계산한다 (예정일 비교용)
+function chartOf(Y,M,D,hh,mi,lon,useEot,yaja){
+  let clockMin=hh*60+mi;
+  if(dstOn(Y,M,D)) clockMin-=60;
+  const mer=meridian(Y,M,D);
+  let trueMin=clockMin+(lon-mer)*4;
+  if(useEot) trueMin+=eqTime(toJD(Y,M,D,(clockMin/60)-9));
+  let aY=Y,aM=M,aD=D,sh=0;
+  if(trueMin<0){trueMin+=1440;sh=-1;} else if(trueMin>=1440){trueMin-=1440;sh=1;}
+  if(sh){const t=new Date(Date.UTC(Y,M-1,D)); t.setUTCDate(t.getUTCDate()+sh);
+    aY=t.getUTCFullYear();aM=t.getUTCMonth()+1;aD=t.getUTCDate();}
+  const tH=Math.floor(trueMin/60);
+  let dY=aY,dM=aM,dD=aD;
+  if(tH>=23 && !yaja){const t=new Date(Date.UTC(aY,aM-1,aD)); t.setUTCDate(t.getUTCDate()+1);
+    dY=t.getUTCFullYear();dM=t.getUTCMonth()+1;dD=t.getUTCDate();}
+  const dayIdx=((jdn(dY,dM,dD)+49)%60+60)%60, dayGan=dayIdx%10, dayJi=dayIdx%12;
+  const jdUT=toJD(aY,aM,aD,(trueMin/60)-9), lam=sunLon(jdUT);
+  const mIdx=Math.floor((((lam-315)%360)+360)%360/30), monJi=(mIdx+2)%12;
+  let yFor=aY; if(jdUT<findTerm(315,toJD(aY,2,4,3))) yFor=aY-1;
+  const yIdx=((yFor-4)%60+60)%60, yGan=yIdx%10, yJi=yIdx%12;
+  const monGan=((yGan%5)*2+2+mIdx)%10;
+  const hourJi=Math.floor((((tH+1)%24))/2), hourGan=((dayGan%5)*2+hourJi)%10;
+  const cnt=[0,0,0,0,0];
+  [[yGan,yJi],[monGan,monJi],[dayGan,dayJi],[hourGan,hourJi]].forEach(([g,j])=>{cnt[GAN_OH[g]]++;cnt[JI_OH[j]]++;});
+  const zero=cnt.filter(v=>v===0).length, spread=Math.max(...cnt)-Math.min(...cnt);
+  return {yGan,yJi,monGan,monJi,dayGan,dayJi,hourGan,hourJi,cnt,zero,spread,
+          balance:10-zero*2-spread};                    // 높을수록 고르다
 }
 
 function calc(){
@@ -762,6 +831,66 @@ function calc(){
     <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
       각 칸의 큰 글자가 그 10년의 <b>기운</b>, 아래는 나와 맺는 <b>관계(십신)</b>입니다. 사주에 부족한 기운이 오는 시기를 좋게 보고, 넘치는 기운이 겹치는 시기를 조심하라고 했습니다.</p>`;
 
+  // ── 예정일 앞뒤 비교
+  {
+    const box=document.getElementById("compare"), card=document.getElementById("cmpcard");
+    const today=new Date(), born=new Date(Date.UTC(Y,M-1,D));
+    const future = born.getTime() > Date.UTC(today.getFullYear(),today.getMonth(),today.getDate());
+    card.classList.toggle("hidden", !future);          // 이미 태어난 사주면 숨긴다
+    if(future){
+      const rows=[];
+      for(let off=-3; off<=3; off++){
+        const t=new Date(Date.UTC(Y,M-1,D)); t.setUTCDate(t.getUTCDate()+off);
+        const yy=t.getUTCFullYear(), mm=t.getUTCMonth()+1, dd=t.getUTCDate();
+        const c=chartOf(yy,mm,dd,hh,mi,lon,useEot,yaja);
+        rows.push({off,mm,dd,c});
+      }
+      const bestB=Math.max(...rows.map(r=>r.c.balance));
+      box.innerHTML=`<div class="cmp">`+rows.map(r=>{
+        const best=r.c.balance===bestB, self=(r.off===0);
+        const none=r.c.cnt.map((v,i)=>v===0?OH[i]:null).filter(Boolean);
+        return `<div class="cmc${self?" self":""}${best&&!self?" best":""}">
+          ${self?`<span class="mk">예정일</span>`:(best?`<span class="mk">고름</span>`:"")}
+          <div class="dt">${M===r.mm?"":r.mm+"월 "}${r.dd}일${r.off?` (${r.off>0?"+":""}${r.off})`:""}</div>
+          <div class="ilj"><span class="${OH_CLS[GAN_OH[r.c.dayGan]]}">${GAN[r.c.dayGan]}</span><span class="${OH_CLS[JI_OH[r.c.dayJi]]}">${JI[r.c.dayJi]}</span></div>
+          <div class="oh5">${r.c.cnt.map((v,i)=>`<span class="${v?OH_CLS[i]:""}">${v}</span>`).join("·")}</div>
+          <span class="bal">${none.length?none.join("·")+" 없음":"다섯 다 있음"}</span>
+        </div>`;}).join("")+`</div>
+        <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
+          숫자는 <b class="m-mok">나무</b>·<b class="m-hwa">불</b>·<b class="m-to">흙</b>·<b class="m-geum">쇠</b>·<b class="m-su">물</b> 순서의 개수입니다.
+          시각을 바꾸면 시주가 달라져 결과도 달라집니다. <b>고르다고 반드시 좋은 사주는 아니며</b>, 태어나는 날을 사람이 고르는 일에는 신중하시길 권해 드립니다.</p>`;
+    }
+  }
+
+  // ── 한눈에 읽는 풀이 (서술형)
+  {
+    const nowD=dus.find(d=>d.now), nextD=dus.find(d=>d.from>age)||dus[0];
+    const overN=cnt[ohTop], lackN=cnt[lack0];
+    const story=[];
+    story.push(`아이는 <b>${OH[dOh]}</b>의 기질을 타고났습니다. ${ILGAN[dayGan][1]}`);
+    story.push(
+      `여덟 글자를 펼쳐 보면 <b>${OH[ohTop]} 기운이 ${overN}개</b>로 몰려 있고, `
+      + (lackN===0 ? `<b>${OH[lack0]} 기운은 하나도 없습니다</b>.` : `<b>${OH[lack0]} 기운이 ${lackN}개</b>로 가장 적습니다.`)
+      + ` ${OH_OVERM[ohTop]}은 넉넉한데 <b>${OH_LACKM[lack0]}</b>이 모자란 형국입니다.`
+      + ` 그래서 작명에서도 이 자리를 메우는 쪽을 봅니다.`);
+    story.push(
+      `기질로 보면 <b>${g1}</b>이 ${g1n}자로 가장 셉니다. ${GROUP_DESC[g1]} `
+      + `그래서 ${GROUP_JOB[g1].slice(0,3).join("·")} 같은 자리와 결이 맞습니다.`
+      + (found.length ? ` 여기에 <b>${found.map(f=>f[0]).join("·")}</b>까지 있어, ${SINSAL_M[found[0][0]].replace(/봅니다\.$/,"보는 자리입니다.")}`
+                      : ` 널리 보는 귀인·살에는 걸리는 자리가 없어, 타고난 여덟 글자 자체로 읽습니다.`));
+    story.push(
+      (preDaeun
+        ? `10년 단위 흐름은 <b>${dus[0].from}세</b>부터 시작합니다. 첫 계절은 <b>${LUCK[dus[0].sp]}</b>이 들어오는 <b>${dus[0].from}~${dus[0].to}세</b>이고, ${LUCK_M[dus[0].sp]}`
+        : `지금은 <b>${nowD?nowD.from+"~"+nowD.to+"세":"첫 계절 전"}</b> 구간으로 <b>${nowD?LUCK[nowD.sp]:"-"}</b>이 들어와 있습니다. ${nowD?LUCK_M[nowD.sp]:""}`)
+      + ` 이어지는 <b>${nextD.from}~${nextD.to}세</b>에는 <b>${LUCK[nextD.sp]}</b>이 들어오고, `
+      + `모자란 ${OH[lack0]} 기운이 채워지는 <b>${(dus.filter(d=>d.score>0&&(preDaeun||d.to>=age)).slice(0,2).map(d=>d.from+"세").join(", "))||"뒷 구간"}</b> 무렵을 순풍으로 봅니다.`);
+    story.push(
+      `<span class="fix"><b>모자란 ${OH[lack0]} 기운을 채우는 법.</b> 옛사람들은 색과 자리로 기운을 보탠다고 했습니다. `
+      + `<b>${OH_COLOR[lack0]}색</b> 물건을 곁에 두고, <b>${OH_WAY[lack0]}</b>을 살피며, <b>${OH_FIX[lack0]}</b>이 도움이 된다고 봤습니다. `
+      + `아이 이름에 이 기운을 담는 것도 같은 생각에서 나온 방법입니다.</span>`);
+    document.getElementById("story").innerHTML=`<div class="story">${story.map(t=>`<p>${t}</p>`).join("")}</div>`;
+  }
+
   // ── 작명 방향: 두 유파
   const lack=lack0, eokPick=eok0;
   document.getElementById("ways").innerHTML=`
@@ -912,6 +1041,12 @@ function calc(){
               return w.length?`<b class="bt">이 기운이 겹쳐 힘을 받는 때는 ${w.slice(0,3).map(d=>d.from+"~"+d.to+"세").join(", ")}입니다.</b>`
                              :`<b class="bt">앞으로 오는 여덟 번의 10년에는 이 기운이 직접 겹치지 않습니다.</b>`;})()}
             </span></div>
+          <div class="bl"><span class="bk">이름의 뜻</span><span>
+            <b>${c.h1[0]}</b>(${c.h1[1]})${jo(c.h1[1],"은","는")} ‘${c.h1[2]}’,
+            <b>${c.h2[0]}</b>(${c.h2[1]})${jo(c.h2[1],"은","는")} ‘${c.h2[2]}’${jo(c.h2[2],"이라는","라는")} 뜻입니다.
+            <b class="bt">${c.h1[2]===c.h2[2]
+              ? `두 글자가 모두 ‘${c.h1[2]}’ 뜻을 담아 의미가 또렷합니다.`
+              : `‘${c.h1[2]}’${jo(c.h1[2],"과","와")} ‘${c.h2[2]}’${jo(c.h2[2],"을","를")} 함께 담은 이름입니다.`}</b></span></div>
           <div class="bl"><span class="bk">사주 풀이</span><span>
             아이는 <b class="${OH_CLS[dOh]}">${OH[dOh]}</b>의 기질을 타고났고 그 힘이
             ${strong?"<b>센</b>":"<b>여린</b>"} 편입니다. 여덟 글자에 <b class="${OH_CLS[lack]}">${OH[lack]}</b>가 ${cnt[lack]}개로 가장 적습니다.
