@@ -183,6 +183,17 @@ dd b{font-weight:500; color:var(--ink)}
 .chk-box p{margin:0; font-size:13.5px; color:var(--ink-2)}
 .err{margin:12px 0 0; padding:11px 13px; font-size:13.5px; border-radius:2px;
   background:rgba(168,50,42,.10); color:var(--seal); border-left:3px solid var(--seal)}
+.lkl{margin-top:16px; border-top:1px dashed var(--rule); padding-top:12px}
+.lki{display:grid; grid-template-columns:86px 1fr; gap:12px; padding:6px 0; font-size:13px}
+.lkn{font-family:"Nanum Myeongjo",serif; font-weight:700; color:var(--ink)}
+.lkn small{display:block; font-family:"Noto Sans KR",sans-serif; font-weight:400; font-size:11px; color:var(--ink-3)}
+.lki p{margin:0; color:var(--ink-2); line-height:1.65}
+.duc .kr{line-height:1.4}
+.rebtn{margin-top:16px; width:100%; padding:12px; font:inherit; font-size:14px; font-weight:700;
+  font-family:"Nanum Myeongjo",serif; letter-spacing:.1em; cursor:pointer;
+  color:var(--ink); background:var(--paper); border:1px solid var(--ink); border-radius:2px}
+.rebtn:hover{background:var(--ink); color:var(--card)}
+.rebtn:focus-visible{outline:2px solid var(--seal); outline-offset:2px}
 .jk{border-left:3px solid var(--rule); padding:2px 0 2px 14px; margin-bottom:14px}
 .jk h4{margin:0 0 4px; font-family:"Nanum Myeongjo",serif; font-size:15px; font-weight:700}
 .jk p{margin:0; font-size:13.5px; color:var(--ink-2); line-height:1.7}
@@ -320,11 +331,15 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
 
   <div class="card">
-    <h2>10년마다 바뀌는 흐름</h2>
+    <h2>10년 단위로 바뀌는 흐름</h2>
     <p style="margin:0 0 10px;font-size:13px;color:var(--ink-2);padding:10px 12px;
        background:var(--paper-2);border-radius:2px">
-      이 구간을 <b>대운(大運)</b>이라 부릅니다. 여기서 <b>‘대’는 “크다”는 뜻이지 “좋다”는 뜻이 아닙니다.</b>
-      10년 단위라는 말이고, 그 안에 순풍인 때도 조심할 때도 있습니다.</p>
+      타고난 여덟 글자가 <b>그릇</b>이라면, 이 10년 구간은 <b>그 그릇을 채우거나 비우는 계절</b>입니다.
+      전통 용어로 <b>대운(大運)</b>이라 하는데, <b>‘대’는 “큰 복”이 아니라 “큰 단위”</b>를 뜻합니다.
+      <span style="display:inline-block;margin-top:6px">
+      <b>대운</b> 10년 · 계절 &nbsp;|&nbsp; <b>세운</b> 1년 · 그해 날씨 &nbsp;|&nbsp; <b>월운</b> 한 달 · 기온</span>
+      <span style="display:block;margin-top:6px;color:var(--ink-3)">
+      봄여름가을겨울에 좋고 나쁨이 없듯, 어느 계절이 나에게 잘 맞는지를 볼 뿐입니다.</span></p>
     <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)" id="daeun-lead"></p>
     <div id="daeun"></div>
   </div>
@@ -338,6 +353,7 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="card">
     <h2>이름 만들기</h2>
     <div id="naming"></div>
+    <button id="reroll" type="button" class="rebtn">다른 이름 다시 뽑기</button>
   </div>
 
   <div class="card">
@@ -417,6 +433,19 @@ const HANJA="佳,가,아름다울,8,1,2|嘉,가,아름다울,14,4,2|柯,가,자�
 const NM_F="서아,서윤,이서,하린,하윤,아린,지안,아윤,지유,시아,윤서,지아,지우,채이,도아,유나,수아,채아,이솔,예린,서하,유하,윤슬,유주,재이,이나,소이,나은,서연,채원,하율,예나,채윤,이현,예서,리아,채은,하은,로아,세아,태리,윤아,시은,서율,소윤,연서,은채,아현,다인,서현,서우,연우,은서,다윤,채린,서은,하리,설아,해린,주아,유이,나윤,해나,아인,소율,유진,지윤,하연,민서,다은,유은,이안,지율,다온,루아,소은,해인,하루,태이,태린,새봄,예은,은하,사랑,유안,은유,단아,하나,시안,제이,도은,지민,이진,지온,지원,예원,나린,서이,주하,서빈,시연,다미,이담,아진,나연,하영,지수,세린,소민,서린,아율,도이,시현,세은,하이,유빈,하늘,연아,윤하,이설,예솔,서안,루나,수빈,지은,시하,현서,민채,다현,소미,이은,다연,도희,하진,여름,나율,리나,가은,다빈,리안,예빈,가을,승아,채하,도연,이솜,정원,윤채,아영,채빈,은재,채유,하빈,민하,예진,하온,민아,채율,하엘,다솜,하랑,유민,이봄,이수,다율,채민,로하,리하,해원,도하,하임,수연,예지,라희,리원,시윤,예온,로은,루다,설하,우주,세연,해윤,민지,라윤,이엘,세인,온유,해온,서진,유리,태은,로희,시온,아라,서희,은솔,인아,고은,세빈,연재,유담,라온,주은,이레,소담,서원,혜원,서인,해리,혜린,한나,한별,해솔,은율,이재,조이,혜인,유아,슬아,윤솔,나현,예슬,하슬,해이,가윤,규리,재아,수민,태연,서유,다나,은별,수현,태희,소희,이음,우리,예봄,유솔,은빈,가빈,소연,소유,이로,하민,제나,채안,세이,유정,라엘,보미,서온,여울,지효,루리,예주,이랑,채연,채희,유현,윤설,지현,재희,다희,제니,제인,하솔,은우,세하,세나,아름,별하,세희,소원,나온,아리,라율,바다,하니,하솜,혜윤,소현,윤지,이연,지연,나엘,새별,로이,은설,채현,희서,가온,다민,세라,예리,채영,하람,라은,주연,수지,아연,보민,서영,민솔,선유,소예,아은,유연,유림,혜나,리윤,안나,재인,지음,지호,다원,하음,민주,예인,유라,담이,이린,채온,다예,빛나,사라,시유,주원,채리,로라,선율,수인,하얀,혜리,단비,선아,엘리,하정,주이,진아,초아,현아,라임,리유,다엘,설윤,수안,예림,지오,그린,서주,선우,세온,시원,재은,하라,다경,다정,루비,루하,시율,아림,아정,엘라,여원,가율,미소,민정,이주,나라,다솔,겨울,세리,아랑,예담,유미,이도,주빈,나예,다해,소하,유온,윤진,이원,다영,단하,연주,예하,이소,이윤,지혜,리온,시우,유원,은지,정윤,가현,다혜,수정,은수,인서,은비,진서,하경,고운,다니,샛별,수진,수하,은아,혜주,나겸,수린,아람,예솜,이유,하늬,하선,도경,유영,지영,희수,나원,로지,리은,시호,지예,나경,아민,윤이,제아,지서,지인,레아,리엘,새나,연수,이지,재나,초이,하유,해봄,민설,서로,소정,율아,이정,준희,해서,희원,노을,누리,다겸,서정,아빈,이루,현주,모아,보나,보아,서담,소영,초은,규빈,나영,려원,루미,보라,세현,승연,유채,윤주,율리,이영,재연,청아,하봄,효주,규린,다아".split(",");
 const NM_M="도윤,이준,하준,시우,도현,서준,선우,이안,태오,은우,도하,수호,이현,우주,지호,유준,은호,윤우,시윤,주원,연우,우진,예준,지한,이도,하진,도준,이한,준우,지후,민준,로운,유찬,이든,유안,태이,태하,지우,현우,건우,시온,시안,도영,하온,서우,서진,정우,윤재,준서,태윤,하민,재하,지안,다온,이찬,시현,유현,선호,서호,지훈,도율,윤호,재이,이진,지오,진우,주안,우빈,도원,유건,아준,재윤,도진,시후,단우,하율,도겸,로이,시원,한결,연준,하루,은찬,시호,우재,도운,이재,라온,주호,하늘,지온,하람,이담,지민,하성,정원,지율,민재,서율,강우,해준,정후,시율,서원,온유,도훈,태양,해인,서하,하빈,태율,유담,태민,지원,태준,하랑,유하,서안,연호,강현,해솔,현준,승우,은율,서한,로건,리안,도건,서후,은성,태인,유진,재현,우준,인우,태온,해든,노아,원우,민우,지운,로하,서빈,우현,선율,도경,유민,시훈,해온,선재,윤성,윤찬,이로,수현,규민,재율,세현,유호,지환,재원,민호,이수,채민,준후,민찬,리호,준호,강민,예찬,시완,로한,은재,해성,리한,시하,수혁,예성,규빈,세준,혜성,강준,현서,태호,리우,리온,우찬,윤후,주한,준희,재희,하윤,서온,신우,지혁,승빈,승유,이건,강윤,로윤,준혁,승호,시환,준수,승현,하겸,도빈,지용,가온,유겸,호수,은준,우영,동하,재준,지성,제이,태현,한별,재민,재우,준영,지완,리오,민성,유성,건하,도한,이겸,채운,바다,서윤,선유,성빈,성준,레오,아인,정민,호연,승민,찬영,시준,유온,이환,여준,채우,주영,주하,건율,원준,윤서,이룬,태건,범준,시헌,윤건,승원,이원,이헌,성윤,세온,유빈,이산,해담,찬우,하담,건호,다원,민혁,유한,찬희,이레,성현,한서,도연,도이,루이,세윤,승윤,이솔,한빈,로빈,민건,우리,이강,이루,정현,테오,다겸,민결,예담,은유,한율,도유,시운,은오,진서,성민,승준,한울,건후,윤준,준성,민규,영우,하운,동윤,우림,은후,태우,해찬,인호,지웅,태산,호윤,서로,윤오,이서,태강,희성,가람,우성,태빈,한솔,로현,시언,예건,지수,태서,하엘,현빈,현호,도담,산하,윤슬,은결,정윤,제하,준범,지섭,채호,주완,주환,찬율,효준,다율,재호,주현,태성,태영,현진,호준,희준,강빈,민서,서현,세진,세하,수오,승후,아진,연후,영준,정빈,태유,다준,도헌,루다,상윤,승찬,연재,준이,태경,해강,현재,도은,루안,은수,윤빈,주혁,호진,다엘,성우,유신,이선,이랑,이음,정안,지구,강훈,도아,세인,이윤,준오,준원,희도,시유,요한,우혁,찬유,다민,리환,수민,이삭,재영,태훈,해원,로아,민율,보현,수빈,아론,재온,태겸,가을,동현,시한,윤겸,해랑,현수,현승,혜준,희우,강인,세민,수안,여름,우민,유원,윤수,의준,재아,정훈,루하,선준,정하,희재,희찬,동준,승재,우솔,이연,준모,하솔,현성,규원,규현,찬빈,도안,도혁,민겸,보겸,상우,서담,윤제,이율,준휘,찬이,한준,도환,도휘,루빈,리원,민수,선오,시오,이호,채준,태주,태희,도언,민석".split(",");
 
+const LUCK={비견:"사람운",겁재:"사람운",식신:"재능운",상관:"재능운",
+ 편재:"재물운",정재:"재물운",편관:"명예운",정관:"명예운",편인:"공부운",정인:"공부운"};
+const LUCK_M={
+ 비견:"친구·동료가 늘고 스스로 판을 벌이는 때. 남에게 기대기보다 제 힘으로 서게 됩니다.",
+ 겁재:"경쟁이 붙는 때. 밀어붙이는 힘은 세지지만 돈이 새기 쉬워 씀씀이를 봐야 합니다.",
+ 식신:"먹을 복과 표현의 때. 하고 싶은 걸 꺼내 놓으면 잘 풀립니다.",
+ 상관:"재능이 튀어나오는 때. 변화가 크고 하던 일을 갈아엎기도 합니다.",
+ 편재:"큰돈이 오가는 때. 기회가 넓게 열리지만 들고 나감도 큽니다.",
+ 정재:"차곡차곡 쌓이는 때. 월급·저축처럼 꾸준한 재물이 붙습니다.",
+ 편관:"책임이 무거워지는 때. 힘들지만 그만큼 단단해집니다.",
+ 정관:"자리와 명예가 서는 때. 조직에서 인정받기 좋습니다.",
+ 편인:"파고드는 때. 남다른 공부나 기술에 인연이 생깁니다.",
+ 정인:"배움과 문서의 때. 시험·자격·계약이 잘 풀립니다."};
 const SIP_JOB={
  "비견":"내 힘으로 서는 자리","겁재":"경쟁하고 밀어붙이는 자리","식신":"만들어 내놓는 자리",
  "상관":"재능을 드러내는 자리","편재":"판을 벌이는 자리","정재":"꾸준히 쌓는 자리",
@@ -455,6 +484,7 @@ const SURHAN=new Set(Object.values(SUR).map(v=>v[0]));
 const GOOD=/밝|빛|아름|클|어질|착|슬기|지혜|복|상서|기쁠|즐|귀할|옥|구슬|보배|맑|깨끗|높|빼어|향기|꽃|별|해|달|하늘|봄|사랑|은혜|편안|화할|이룰|성할|넉넉|도울|곧을|굳|온화|영화|아리따|고울|평안|기릴|우거|무성|순할|미쁠|정성|믿을|너그|맺을|이룰/;
 const BAD=/죽|병|앓|슬플|잃|도둑|벌레|어두|흉|재앙|근심|괴로|미워|성낼|두려|무덤|시체|귀신|늙|가난|천할|더러|밧줄|동이|책상|개펄|똥|오줌|뼈|가죽|창자|화살|덫|그물|올가미|허물|죄|벌할|꾸짖|나쁠|악할|어리석|게으|취할|싸울|다툴|찌를|무너|망할|굶주|주릴|아플|의심|속일|훔칠|막을|좁을|낮을|잠길|빠질/;
 
+let reroll=0;                                   // 다시 뽑기 횟수
 const rad=Math.PI/180;
 
 function jdn(y,m,d){                                    // 정수 율리우스적일
@@ -699,7 +729,7 @@ function calc(){
     const plus=os.filter(o=>needSet.includes(o)).length;
     const minus=os.filter(o=>o===overOh).length;
     const score=Math.sign(plus-minus);
-    dus.push({from,to:from+9,g,j,score,now:(age>=from&&age<from+10)});
+    dus.push({from,to:from+9,g,j,score,sp:sipsin(dOh,dYY,GAN_OH[g],GAN_YY[g]),now:(age>=from&&age<from+10)});
   }
   document.getElementById("daeun-lead").innerHTML=
     `10년마다 큰 흐름이 바뀐다고 봅니다. 이 사주는 <b>${forward?"순행":"역행"}</b>이고
@@ -707,27 +737,30 @@ function calc(){
      <span style="color:var(--ink-3)">(${yangY?"양":"음"}의 해 · ${male?"남아":"여아"} 기준)</span>`;
   const preDaeun = age < dus[0].from;
   document.getElementById("daeun").innerHTML=`<div class="du">`+dus.map((d,di)=>`
-    <div class="duc${d.now?" now":(preDaeun&&di===0?" soon":"")}">${
-      d.now?`<span class="tagx">지금 대운</span>`
-      :(preDaeun&&di===0?`<span class="tagx s">여기서 시작</span>`:"")}
+    <div class="duc${d.now?" now":""}">${d.now?`<span class="tagx">지금 이 구간</span>`:""}
       <div class="ag">${d.from}~${d.to}세</div>
       <div class="gj"><span class="${OH_CLS[GAN_OH[d.g]]}">${GAN[d.g]}</span><span class="${OH_CLS[JI_OH[d.j]]}">${JI[d.j]}</span></div>
-      <div class="kr">${GAN_K[d.g]}${JI_K[d.j]}</div>
+      <div class="kr"><b>${LUCK[d.sp]}</b><br><span style="color:var(--ink-3)">${d.sp}</span></div>
       <span class="lv ${LV[d.score][0]}">${LV[d.score][1]}</span></div>`).join("")+`</div>
     <div class="dlg">
       <span><b class="lv g" style="display:inline">순풍</b>모자란 기운이 채워지는 때</span>
       <span><b class="lv m" style="display:inline">무난</b>반반인 때</span>
       <span><b class="lv b" style="display:inline">조심</b>넘치는 기운이 겹치는 때</span>
     </div>
+    <div class="lkl">${[...new Set(dus.map(d=>d.sp))].map(k=>
+      `<div class="lki"><span class="lkn">${LUCK[k]}<small>${k}</small></span><p>${LUCK_M[k]}</p></div>`).join("")}</div>
     <p style="margin:10px 0 0;font-size:12.5px;color:var(--ink-2)">
+      ${sex0==="F"?"여자 사주에서는 <b>명예운(관성)</b>이 오는 때를 <b>배우자·애정운</b>으로도 봅니다."
+                 :"남자 사주에서는 <b>재물운(재성)</b>이 오는 때를 <b>배우자·애정운</b>으로도 봅니다."}
       이 사주는 <b class="${OH_CLS[lack0]}">${OH[lack0]}</b>·<b class="${OH_CLS[eok0]}">${OH[eok0]}</b>이 모자라고
       <b class="${OH_CLS[overOh]}">${OH[overOh]}</b>이 넘칩니다. 그래서 <b>모자란 기운이 오는 10년</b>을 순풍으로,
       <b>넘치는 기운이 또 겹치는 10년</b>을 조심할 때로 봤습니다.
       합충이나 계절까지 따지는 정식 풀이보다 <b>훨씬 단순화한 기준</b>입니다.</p>
-    ${preDaeun?`<p style="margin:12px 0 0;font-size:13px;color:var(--ink-2)">
-      아직 <b>첫 구간(${dus[0].from}세)에 이르기 전</b>입니다. 그전까지는 사주 여덟 글자 자체의 기운으로 봅니다.</p>`:""}
+    ${preDaeun?`<p style="margin:12px 0 0;font-size:13px;color:var(--ink-2);padding:10px 12px;
+      background:var(--paper-2);border-radius:2px">
+      첫 계절은 <b>${dus[0].from}세</b>에 시작합니다. 그전까지는 <b>타고난 여덟 글자의 영향이 그대로</b> 이어집니다.</p>`:""}
     <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
-      각 칸의 위 글자가 그 10년의 <b>기운</b>입니다. 사주에 부족한 기운이 오는 시기를 좋게 보고, 넘치는 기운이 겹치는 시기를 조심하라고 했습니다.</p>`;
+      각 칸의 큰 글자가 그 10년의 <b>기운</b>, 아래는 나와 맺는 <b>관계(십신)</b>입니다. 사주에 부족한 기운이 오는 시기를 좋게 보고, 넘치는 기운이 겹치는 시기를 조심하라고 했습니다.</p>`;
 
   // ── 작명 방향: 두 유파
   const lack=lack0, eokPick=eok0;
@@ -816,7 +849,11 @@ function calc(){
       const pFlow=(flow?7:2)-nClash*7;
       cand.push({nm,idx,...best,flow,nClash,o1,o2,rankB,pFlow,sc:best.hs+pFlow+rankB});
     });
-    cand.sort((x,y)=>y.sc-x.sc||x.idx-y.idx);
+    // 점수가 엇비슷한 후보끼리는 순서를 섞어, 누를 때마다 다른 이름이 올라오게 한다
+    let seed=reroll*2654435761+12345;
+    const rnd=()=>(((seed=Math.imul(seed,1664525)+1013904223|0)>>>8)/16777216);
+    cand.forEach(c=>{c.jit=c.sc+rnd()*12;});
+    cand.sort((x,y)=>y.jit-x.jit||x.idx-y.idx);
     // 소리가 겹치지 않게 먼저 채우고(1개씩), 모자라면 한도를 풀어 가며 마저 채운다
     const useA={}, useB={}, list=[], picked=new Set();
     for(let cap=1; cap<=3 && list.length<topN; cap++){
@@ -940,6 +977,10 @@ function calc(){
   document.getElementById("out").classList.remove("hidden");
 }
 
+document.getElementById("reroll").addEventListener("click",()=>{
+  reroll++; calc();
+  document.getElementById("naming").scrollIntoView({behavior:"smooth",block:"start"});
+});
 document.getElementById("go").addEventListener("click",()=>{
   calc();
   // 결과가 화면 밖에 있으면 눌러도 아무 일 없어 보인다 → 결과로 데려간다
