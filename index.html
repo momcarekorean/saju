@@ -199,7 +199,7 @@ dd b{font-weight:500; color:var(--ink)}
 .story p{margin:0 0 12px; font-size:14.5px; line-height:1.85; color:var(--ink-2)}
 .story p:last-child{margin-bottom:0}
 .story b{color:var(--ink); font-weight:500}
-.story .fix{margin-top:4px; padding:13px 15px; background:var(--paper-2);
+.story .fix{display:block; margin-top:6px; padding:13px 15px; line-height:1.8; background:var(--paper-2);
   border-left:3px solid var(--seal); border-radius:0 2px 2px 0; font-size:14px}
 .lkl{margin-top:16px; border-top:1px dashed var(--rule); padding-top:12px}
 .lki{display:grid; grid-template-columns:86px 1fr; gap:12px; padding:6px 0; font-size:13px}
@@ -291,8 +291,8 @@ dd b{font-weight:500; color:var(--ink)}
       <input type="text" id="surname" value="홍" maxlength="2" placeholder="예: 홍, 남궁">
     </div>
     <div>
-      <label for="given">가진 이름 확인 (선택)</label>
-      <input type="text" id="given" maxlength="3" value="길동" placeholder="예: 길동">
+      <label for="given">미리 지어둔 이름이 있다면 (선택)</label>
+      <input type="text" id="given" maxlength="3" value="길동" placeholder="예: 길동 — 사주와 맞는지 봐 드립니다">
     </div>
     <div>
       <label for="topn">추천 이름 개수</label>
