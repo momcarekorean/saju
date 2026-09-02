@@ -787,7 +787,7 @@ function calc(){
       const c1=nm[0], c2=nm[1];
       const o1=CHO_OH[choOf(c1)], o2=CHO_OH[choOf(c2)];
       if(o1===undefined||o2===undefined) return;
-      if(clash(sOh,o1)||clash(o1,o2)) return;                    // 발음 상극 배열 제외
+      const nClash=(clash(sOh,o1)?1:0)+(clash(o1,o2)?1:0);       // 상극은 제외가 아니라 감점
       if(c1===sur[0]||c2===sur[0]) return;                       // 성과 같은 소리는 이름에 안 쓴다
       const flow0=(o1===(sOh+1)%5 && o2===(o1+1)%5);
       const rankB0=Math.max(0,6-Math.floor(idx/90));
@@ -813,7 +813,8 @@ function calc(){
       if(!best) return;
       const flow=(o1===(sOh+1)%5 && o2===(o1+1)%5);
       const rankB=Math.max(0,6-Math.floor(idx/90));               // 인기 상위에 소폭 가산
-      cand.push({nm,idx,...best,flow,o1,o2,rankB,pFlow:(flow?7:2),sc:best.hs+(flow?7:2)+rankB});
+      const pFlow=(flow?7:2)-nClash*7;
+      cand.push({nm,idx,...best,flow,nClash,o1,o2,rankB,pFlow,sc:best.hs+pFlow+rankB});
     });
     cand.sort((x,y)=>y.sc-x.sc||x.idx-y.idx);
     // 소리가 겹치지 않게 먼저 채우고(1개씩), 모자라면 한도를 풀어 가며 마저 채운다
@@ -857,7 +858,8 @@ function calc(){
             ${sur[0]}<b class="${OH_CLS[sOh]}">${OH_HAN[sOh]}</b> →
             ${c.nm[0]}<b class="${OH_CLS[c.o1]}">${OH_HAN[c.o1]}</b> →
             ${c.nm[1]}<b class="${OH_CLS[c.o2]}">${OH_HAN[c.o2]}</b>
-            <b class="bt">${c.flow?"→ 서로 낳는 순생 배열 · +7점":"→ 상극은 없음 · +2점"}</b></span></div>
+            <b class="bt">${c.nClash?`→ 부딪히는 자리 ${c.nClash}군데 · ${c.pFlow}점`
+              :c.flow?"→ 서로 낳는 순생 배열 · +7점":"→ 상극은 없음 · +2점"}</b></span></div>
           <div class="bl"><span class="bk">자원오행</span><span>
             ${c.h1[0]}<b class="${OH_CLS[c.h1[4]]}">${OH_HAN[c.h1[4]]}</b> ·
             ${c.h2[0]}<b class="${OH_CLS[c.h2[4]]}">${OH_HAN[c.h2[4]]}</b>
@@ -879,8 +881,9 @@ function calc(){
             ${c.pOh===8?`이 이름은 두 글자 모두 모자란 기운을 담아 <b>가장 직접적으로 채워 줍니다</b>.`
               :c.pOh===4?`${(target.includes(c.h1[4])?c.h1[0]:c.h2[0])} 한 글자가 <b class="${OH_CLS[target.includes(c.h1[4])?c.h1[4]:c.h2[4]]}">${OH[target.includes(c.h1[4])?c.h1[4]:c.h2[4]]}</b> 기운을 채워 줍니다.`
               :`한자로는 모자란 기운을 담지 못하지만, <b>소리와 획수</b>가 받쳐 줍니다.`}
-            ${c.flow?` 소리도 ${sur[0]}(${OH[sOh]})에서 시작해 <b>끊기지 않고 이어집니다</b>.`
-                    :` 발음은 부딪히는 자리 없이 무난합니다.`}
+            ${c.nClash?` 다만 소리에 <b>부딪히는 자리가 ${c.nClash}군데</b> 있습니다.`
+              :c.flow?` 소리도 ${sur[0]}(${OH[sOh]})에서 시작해 <b>끊기지 않고 이어집니다</b>.`
+              :` 소리는 부딪히는 자리 없이 무난합니다.`}
             <b class="bt">${c.gil===4?"수리 네 격이 모두 길수라 획수 쪽도 걸리는 데가 없습니다."
               :c.gil>=2?`수리는 네 격 중 ${c.gil}개가 길수입니다. ${4-c.gil}개는 흉수라 이 부분을 감안하세요.`
               :"수리 쪽은 약한 편이라, 획수를 중시하는 유파라면 다시 보셔야 합니다."}</b></span></div>
