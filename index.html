@@ -320,7 +320,11 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
 
   <div class="card">
-    <h2>10년마다 바뀌는 흐름 (대운)</h2>
+    <h2>10년마다 바뀌는 흐름</h2>
+    <p style="margin:0 0 10px;font-size:13px;color:var(--ink-2);padding:10px 12px;
+       background:var(--paper-2);border-radius:2px">
+      이 구간을 <b>대운(大運)</b>이라 부릅니다. 여기서 <b>‘대’는 “크다”는 뜻이지 “좋다”는 뜻이 아닙니다.</b>
+      10년 단위라는 말이고, 그 안에 순풍인 때도 조심할 때도 있습니다.</p>
     <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)" id="daeun-lead"></p>
     <div id="daeun"></div>
   </div>
@@ -705,7 +709,7 @@ function calc(){
   document.getElementById("daeun").innerHTML=`<div class="du">`+dus.map((d,di)=>`
     <div class="duc${d.now?" now":(preDaeun&&di===0?" soon":"")}">${
       d.now?`<span class="tagx">지금 대운</span>`
-      :(preDaeun&&di===0?`<span class="tagx s">첫 대운</span>`:"")}
+      :(preDaeun&&di===0?`<span class="tagx s">여기서 시작</span>`:"")}
       <div class="ag">${d.from}~${d.to}세</div>
       <div class="gj"><span class="${OH_CLS[GAN_OH[d.g]]}">${GAN[d.g]}</span><span class="${OH_CLS[JI_OH[d.j]]}">${JI[d.j]}</span></div>
       <div class="kr">${GAN_K[d.g]}${JI_K[d.j]}</div>
@@ -721,7 +725,7 @@ function calc(){
       <b>넘치는 기운이 또 겹치는 10년</b>을 조심할 때로 봤습니다.
       합충이나 계절까지 따지는 정식 풀이보다 <b>훨씬 단순화한 기준</b>입니다.</p>
     ${preDaeun?`<p style="margin:12px 0 0;font-size:13px;color:var(--ink-2)">
-      아직 <b>첫 대운(${dus[0].from}세)에 이르기 전</b>입니다. 그전까지는 사주 여덟 글자 자체의 기운으로 봅니다.</p>`:""}
+      아직 <b>첫 구간(${dus[0].from}세)에 이르기 전</b>입니다. 그전까지는 사주 여덟 글자 자체의 기운으로 봅니다.</p>`:""}
     <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
       각 칸의 위 글자가 그 10년의 <b>기운</b>입니다. 사주에 부족한 기운이 오는 시기를 좋게 보고, 넘치는 기운이 겹치는 시기를 조심하라고 했습니다.</p>`;
 
