@@ -192,7 +192,8 @@ dd b{font-weight:500; color:var(--ink)}
 .cmc .oh5{font-size:10.5px; color:var(--ink-2); letter-spacing:-.02em}
 .cmc .bal{display:block; margin-top:6px; font-size:10.5px; font-weight:700; padding:2px 0; border-radius:2px;
   background:var(--paper-2); color:var(--ink-3)}
-.cmc.best .bal{background:rgba(62,124,89,.16); color:var(--mok)}
+.cmc .bal.g{background:rgba(62,124,89,.16); color:var(--mok)}
+.cmc .bal.b{background:rgba(168,50,42,.13); color:var(--seal)}
 .cmc .mk{position:absolute; top:-1px; right:-1px; font-size:9.5px; padding:2px 6px;
   border-radius:0 2px 0 4px; background:var(--ink); color:var(--card); font-weight:700}
 .cmc.best .mk{background:var(--mok)}
@@ -201,6 +202,23 @@ dd b{font-weight:500; color:var(--ink)}
 .story b{color:var(--ink); font-weight:500}
 .story .fix{display:block; margin-top:6px; padding:13px 15px; line-height:1.8; background:var(--paper-2);
   border-left:3px solid var(--seal); border-radius:0 2px 2px 0; font-size:14px}
+.split{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px}
+.split>div{border:1px solid var(--rule); border-radius:2px; padding:15px 17px; background:var(--paper)}
+.split .sp2{border-color:var(--seal)}
+.split h4{margin:0 0 6px; font-family:"Nanum Myeongjo",serif; font-size:15.5px; font-weight:700}
+.split .sp2 h4{color:var(--seal)}
+.split p{margin:0 0 9px; font-size:13px; color:var(--ink-2)}
+.split ul{margin:0; padding-left:17px; font-size:13.5px; color:var(--ink-2); line-height:1.9}
+.thm{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:10px}
+.thc{border:1px solid var(--rule); border-radius:2px; padding:13px 15px; background:var(--paper)}
+.thc.on{border-color:var(--seal)}
+.thh{display:flex; align-items:center; gap:8px; margin-bottom:5px}
+.thh b{font-family:"Nanum Myeongjo",serif; font-size:15.5px}
+.thb{margin-left:auto; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:99px;
+  background:var(--paper-2); color:var(--ink-3)}
+.thc.on .thb{background:rgba(168,50,42,.13); color:var(--seal)}
+.thc p{margin:0; font-size:13px; color:var(--ink-2); line-height:1.65}
+.thc .pk{display:block; margin-top:7px; font-size:12px; color:var(--ink-3)}
 .lkl{margin-top:16px; border-top:1px dashed var(--rule); padding-top:12px}
 .lki{display:grid; grid-template-columns:86px 1fr; gap:12px; padding:6px 0; font-size:13px}
 .lkn{font-family:"Nanum Myeongjo",serif; font-weight:700; color:var(--ink)}
@@ -343,8 +361,9 @@ dd b{font-weight:500; color:var(--ink)}
 
   <div class="card" id="cmpcard">
     <h2>예정일 앞뒤로 견줘 보기</h2>
+    <p style="margin:-8px 0 12px;font-size:12.5px;color:var(--ink-3)">제왕절개처럼 날짜를 고를 수 있다면 참고하세요</p>
     <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
-      아직 태어나지 않았다면 <b>하루 차이로 사주가 달라집니다.</b> 앞뒤 날짜를 같은 시각으로 놓고 견줬습니다.
+      아직 태어나지 않았다면 <b>하루 차이로 사주가 달라집니다.</b> 예정일 앞뒤 <b>7일씩 15일</b>을 같은 시각으로 놓고 견줬습니다.
       <b>고른 정도</b>는 다섯 기운이 얼마나 치우치지 않았는지를 본 값입니다.</p>
     <div id="compare"></div>
   </div>
@@ -352,6 +371,13 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="card">
     <h2>한눈에 읽는 풀이</h2>
     <div id="story"></div>
+  </div>
+
+  <div class="card">
+    <h2>테마별로 보면</h2>
+    <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
+      여덟 글자에 어느 자리가 몇 개나 있는지로 봅니다. <b>강하다고 좋고 약하다고 나쁜 것은 아닙니다.</b></p>
+    <div id="theme"></div>
   </div>
 
   <div class="card">
@@ -366,9 +392,9 @@ dd b{font-weight:500; color:var(--ink)}
     <p style="margin:0 0 10px;font-size:13px;color:var(--ink-2);padding:10px 12px;
        background:var(--paper-2);border-radius:2px">
       타고난 여덟 글자가 <b>그릇</b>이라면, 이 10년 구간은 <b>그 그릇을 채우거나 비우는 계절</b>입니다.
-      전통 용어로 <b>대운(大運)</b>이라 하는데, <b>‘대’는 “큰 복”이 아니라 “큰 단위”</b>를 뜻합니다.
+      전통 용어로는 <b>대운(大運)</b>이라 하는데, <b>‘대’는 “큰 복”이 아니라 “큰 단위”</b>를 뜻합니다. 이 글에서는 헷갈리지 않게 <b>10년운</b>이라 부르겠습니다.
       <span style="display:inline-block;margin-top:6px">
-      <b>대운</b> 10년 · 계절 &nbsp;|&nbsp; <b>세운</b> 1년 · 그해 날씨 &nbsp;|&nbsp; <b>월운</b> 한 달 · 기온</span>
+      <b>10년운</b> 계절 &nbsp;|&nbsp; <b>1년운</b> 그해 날씨 &nbsp;|&nbsp; <b>한달운</b> 기온</span>
       <span style="display:block;margin-top:6px;color:var(--ink-3)">
       봄여름가을겨울에 좋고 나쁨이 없듯, 어느 계절이 나에게 잘 맞는지를 볼 뿐입니다.</span></p>
     <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)" id="daeun-lead"></p>
@@ -379,6 +405,23 @@ dd b{font-weight:500; color:var(--ink)}
     <h2>작명에 쓰는 방향</h2>
     <p style="margin:0 0 14px;font-size:14px;color:var(--ink-2)">같은 사주를 두고도 작명소마다 이름이 다른 이유입니다. <b>어느 쪽이 맞다고 정해 드리지 않습니다.</b></p>
     <div class="ways" id="ways"></div>
+  </div>
+
+  <div class="card">
+    <h2>사주가 정하는 것, 이름이 바꾸는 것</h2>
+    <div class="split">
+      <div class="sp1"><h4>사주(생년월일시)가 정합니다</h4>
+        <p>이름을 무엇으로 짓든 <b>한 글자도 바뀌지 않습니다.</b></p>
+        <ul><li>사주 여덟 글자</li><li><b>타고난 적성</b>과 성향</li><li><b>귀인과 살</b></li>
+        <li><b>10년운</b>의 흐름과 순풍·조심</li><li><b>테마별 운의 강약과 절정 시기</b></li></ul></div>
+      <div class="sp2"><h4>이름이 바꿉니다</h4>
+        <p>여기가 <b>부모가 고를 수 있는 자리</b>입니다.</p>
+        <ul><li>어느 <b>기운을 보태는가</b> (한자의 오행)</li><li><b>소리 배열</b>의 상생·상극</li>
+        <li><b>획수 수리</b> 4격의 길흉</li><li>그래서 <b>어느 테마를 북돋는가</b></li></ul></div>
+    </div>
+    <p style="margin:14px 0 0;font-size:12.5px;color:var(--ink-3)">
+      옛 성명학은 <b>타고난 것을 바꾸는 게 아니라, 모자란 자리를 보태는 것</b>으로 봤습니다.
+      아래 추천에서 이름을 펼치면 그 이름이 무엇을 보태는지 보실 수 있습니다.</p>
   </div>
 
   <div class="card">
@@ -483,10 +526,44 @@ const OH_FIX=["가까운 산책과 잎 넓은 화분","햇빛 드는 자리와 �
  "정리정돈과 금속 소품","물가 나들이와 충분한 수분"];
 const OH_LACKM=["밖으로 뻗어 나가는 힘","밝게 드러내는 힘","품고 버티는 힘","끊고 맺는 힘","깊이 스며드는 힘"];
 const OH_OVERM=["뻗으려는 기운","달아오르는 기운","쌓이는 기운","날카로운 기운","가라앉는 기운"];
+const AGEWIN={"애정운":[20,50],"재물운":[25,60],"사업운":[28,58],
+              "직업운":[22,60],"학업운":[7,26],"인간관계":[13,60]};
+const THEME=[
+ {k:"애정운",  i:"💞", desc:"사랑과 인연"},
+ {k:"재물운",  i:"💰", desc:"돈이 들어오고 나가는 자리"},
+ {k:"사업운",  i:"🚀", desc:"만들어 파는 힘"},
+ {k:"직업운",  i:"💼", desc:"일과 자리"},
+ {k:"학업운",  i:"📚", desc:"배움과 문서"},
+ {k:"인간관계", i:"🤝", desc:"사람과 경쟁"},
+ {k:"건강운",  i:"🔥", desc:"기운의 균형"}];
+const THEME_TXT={
+ "애정운강":"인연의 자리가 넉넉합니다. 사람이 먼저 다가오는 편이라 고르는 눈이 더 중요합니다.",
+ "애정운보":"무난합니다. 때가 되면 자연스럽게 인연이 닿는 흐름입니다.",
+ "애정운약":"인연의 자리가 옅습니다. 늦더라도 깊게 가는 편이라고 봤습니다.",
+ "재물운강":"재물 자리가 셉니다. 돈이 크게 오가니 씀씀이 관리가 관건입니다.",
+ "재물운보":"들어오고 나가는 게 균형입니다. 꾸준히 모으는 쪽이 맞습니다.",
+ "재물운약":"재물 자리가 옅습니다. 한 번에 크게 벌기보다 쌓아 가는 편이 낫습니다.",
+ "사업운강":"만들어서 파는 힘이 함께 있습니다. 제 사업을 벌여도 굴러가는 구조입니다.",
+ "사업운보":"가능은 하지만 혼자보다 함께 하는 쪽이 안전합니다.",
+ "사업운약":"벌이기보다 맡은 자리에서 실력을 쌓는 편이 유리합니다.",
+ "직업운강":"조직과 책임의 자리가 셉니다. 자리를 맡을수록 단단해집니다.",
+ "직업운보":"무난합니다. 맞는 자리를 찾으면 오래 갑니다.",
+ "직업운약":"매인 자리보다 제 일을 하는 쪽이 편할 수 있습니다.",
+ "학업운강":"배움의 자리가 셉니다. 파고드는 공부에 인연이 있습니다.",
+ "학업운보":"평범합니다. 하는 만큼 나오는 흐름입니다.",
+ "학업운약":"책상보다 몸으로 익히는 쪽이 빠를 수 있습니다.",
+ "인간관계강":"사람이 많이 붙습니다. 도움도 경쟁도 함께 옵니다.",
+ "인간관계보":"적당합니다. 넓게보다 깊게 사귀는 쪽입니다.",
+ "인간관계약":"혼자 있는 시간이 편한 편입니다. 소수와 깊게 갑니다.",
+ "건강운강":"다섯 기운이 고르게 있어 타고난 바탕이 튼튼한 편입니다.",
+ "건강운보":"무난합니다. 무리만 하지 않으면 큰 탈은 없다고 봤습니다.",
+ "건강운약":"기운이 한쪽으로 쏠려 있습니다. 모자란 쪽을 채우는 생활을 권합니다."};
 const SIP_JOB={
  "비견":"내 힘으로 서는 자리","겁재":"경쟁하고 밀어붙이는 자리","식신":"만들어 내놓는 자리",
  "상관":"재능을 드러내는 자리","편재":"판을 벌이는 자리","정재":"꾸준히 쌓는 자리",
  "편관":"책임을 짊어지는 자리","정관":"질서를 지키는 자리","편인":"파고드는 자리","정인":"배우고 가르치는 자리"};
+const GRP_KO={비겁:"스스로 서는 힘",식상:"내놓는 힘",재성:"거두는 힘",
+              관성:"다스리는 힘",인성:"받쳐 주는 힘"};
 const GROUP_JOB={
  "비겁":["전문직 개업","프리랜서","운동선수","자영업","동업·팀 리더"],
  "식상":["교육·강의","요리·제과","디자인·창작","방송·콘텐츠","상담·서비스"],
@@ -748,10 +825,10 @@ function calc(){
   const [g1,g1n]=gsort[0], [g2,g2n]=gsort[1];
   let ohTop=0; for(let i=1;i<5;i++) if(cnt[i]>cnt[ohTop]) ohTop=i;
   document.getElementById("jeok").innerHTML=`
-    <div class="jk"><h4>${g1} 이 가장 셉니다 <span style="font-weight:400;font-size:12.5px;color:var(--ink-3)">(여덟 글자 중 ${g1n}자)</span></h4>
+    <div class="jk"><h4>${GRP_KO[g1]}이 가장 셉니다 <span style="font-weight:400;font-size:12.5px;color:var(--ink-3)">(여덟 글자 중 ${g1n}자 · ${g1})</span></h4>
       <p>${GROUP_DESC[g1]}</p>
       <div class="jobs">${GROUP_JOB[g1].map(j=>`<span class="job">${j}</span>`).join("")}</div></div>
-    ${g2n>0?`<div class="jk"><h4>다음은 ${g2} <span style="font-weight:400;font-size:12.5px;color:var(--ink-3)">(${g2n}자)</span></h4>
+    ${g2n>0?`<div class="jk"><h4>다음은 ${GRP_KO[g2]} <span style="font-weight:400;font-size:12.5px;color:var(--ink-3)">(${g2n}자 · ${g2})</span></h4>
       <p>${GROUP_DESC[g2]}</p>
       <div class="jobs">${GROUP_JOB[g2].map(j=>`<span class="job">${j}</span>`).join("")}</div></div>`:""}
     <div class="jk"><h4>기운으로 보면 ${OH_HAN[ohTop]} ${OH[ohTop]}</h4>
@@ -839,27 +916,69 @@ function calc(){
     card.classList.toggle("hidden", !future);          // 이미 태어난 사주면 숨긴다
     if(future){
       const rows=[];
-      for(let off=-3; off<=3; off++){
+      for(let off=-7; off<=7; off++){
         const t=new Date(Date.UTC(Y,M-1,D)); t.setUTCDate(t.getUTCDate()+off);
         const yy=t.getUTCFullYear(), mm=t.getUTCMonth()+1, dd=t.getUTCDate();
         const c=chartOf(yy,mm,dd,hh,mi,lon,useEot,yaja);
         rows.push({off,mm,dd,c});
       }
       const bestB=Math.max(...rows.map(r=>r.c.balance));
+      // 라벨이 곧 판정 기준이 되게 한다 (없는 기운 → 치우침 정도 순)
+      const TIER=[["b","치우침"],["m","조금 치우침"],["m","고른 편"],["g","아주 고름"]];
       box.innerHTML=`<div class="cmp">`+rows.map(r=>{
         const best=r.c.balance===bestB, self=(r.off===0);
         const none=r.c.cnt.map((v,i)=>v===0?OH[i]:null).filter(Boolean);
-        return `<div class="cmc${self?" self":""}${best&&!self?" best":""}">
-          ${self?`<span class="mk">예정일</span>`:(best?`<span class="mk">고름</span>`:"")}
+        const tier = none.length ? 0 : (r.c.spread<=1 ? 3 : r.c.spread<=2 ? 2 : 1);
+        const lab = none.length ? `${none.join("·")} 없음` : TIER[tier][1];
+        return `<div class="cmc${self?" self":""}${tier===3?" best":""}">
+          ${self?`<span class="mk">예정일</span>`:""}
           <div class="dt">${M===r.mm?"":r.mm+"월 "}${r.dd}일${r.off?` (${r.off>0?"+":""}${r.off})`:""}</div>
           <div class="ilj"><span class="${OH_CLS[GAN_OH[r.c.dayGan]]}">${GAN[r.c.dayGan]}</span><span class="${OH_CLS[JI_OH[r.c.dayJi]]}">${JI[r.c.dayJi]}</span></div>
           <div class="oh5">${r.c.cnt.map((v,i)=>`<span class="${v?OH_CLS[i]:""}">${v}</span>`).join("·")}</div>
-          <span class="bal">${none.length?none.join("·")+" 없음":"다섯 다 있음"}</span>
+          <span class="bal ${TIER[tier][0]}">${lab}</span>
         </div>`;}).join("")+`</div>
         <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
           숫자는 <b class="m-mok">나무</b>·<b class="m-hwa">불</b>·<b class="m-to">흙</b>·<b class="m-geum">쇠</b>·<b class="m-su">물</b> 순서의 개수입니다.
+          다섯이 다 있고 <b>가장 많은 것과 적은 것의 차이가 1 이하</b>면 아주 고른 것으로 보고 초록으로 표시했습니다.
           시각을 바꾸면 시주가 달라져 결과도 달라집니다. <b>고르다고 반드시 좋은 사주는 아니며</b>, 태어나는 날을 사람이 고르는 일에는 신중하시길 권해 드립니다.</p>`;
     }
+  }
+
+  // ── 테마별 운 + 세운으로 절정 시기
+  const themeGrp={"애정운":(sex0==="F"?"관성":"재성"),"재물운":"재성","사업운":"식상",
+                  "직업운":"관성","학업운":"인성","인간관계":"비겁"};
+  {
+    // 세운(1년운): 나이별 그 해 천간의 십신 그룹
+    const G2={비견:"비겁",겁재:"비겁",식신:"식상",상관:"식상",편재:"재성",정재:"재성",
+              편관:"관성",정관:"관성",편인:"인성",정인:"인성"};
+    const yearGrp=a=>{const yr=yearForPillar+a, k=((yr-4)%60+60)%60;
+      return G2[sipsin(dOh,dYY,GAN_OH[k%10],GAN_YY[k%10])];};
+    // 테마마다 의미 있는 나이대 안에서만 찾는다 (5세 인간관계, 74세 학업운 같은 결과 방지)
+    const peakOf=(g,win)=>{
+      const [lo,hi]=win, hit=[], sub=[];
+      for(let a=lo;a<=hi;a++){
+        if(yearGrp(a)!==g) continue;
+        const d=dus.find(x=>a>=x.from&&a<=x.to);
+        (d&&G2[d.sp]===g ? hit : sub).push({age:a,yr:yearForPillar+a});
+      }
+      return (hit.length?hit:sub).slice(0,3);          // 10년운까지 겹치면 우선, 없으면 그해만
+    };
+    document.getElementById("theme").innerHTML=`<div class="thm">`+THEME.map(t=>{
+      let lv,n=0;
+      if(t.k==="건강운"){ const z=cnt.filter(v=>v===0).length, sp=Math.max(...cnt)-Math.min(...cnt);
+        lv = (z===0&&sp<=2)?"강":(z>=2||sp>=4)?"약":"보"; }
+      else if(t.k==="사업운"){ n=grp["식상"]+grp["재성"]; lv=n>=4?"강":n>=2?"보":"약"; }
+      else { n=grp[themeGrp[t.k]]; lv=n>=3?"강":n>=1?"보":"약"; }
+      const pk = (t.k==="건강운")?[]:peakOf(t.k==="사업운"?"재성":themeGrp[t.k], AGEWIN[t.k]);
+      return `<div class="thc${lv==="강"?" on":""}">
+        <div class="thh"><span>${t.i}</span><b>${t.k}</b>
+          <span class="thb">${lv==="강"?"강한 편":lv==="약"?"옅은 편":"보통"}</span></div>
+        <p>${THEME_TXT[t.k+lv]}</p>
+        ${pk.length?`<span class="pk">${AGEWIN[t.k][0]}~${AGEWIN[t.k][1]}세 중 도드라지는 때 — <b>${pk.map(x=>x.age+"세("+x.yr+"년)").join(", ")}</b></span>`:(t.k==="건강운"?"":`<span class="pk">${AGEWIN[t.k][0]}~${AGEWIN[t.k][1]}세 사이에는 특별히 몰리는 해가 없습니다.</span>`)}
+      </div>`;}).join("")+`</div>
+      <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
+        테마마다 <b>의미 있는 나이대 안에서만</b> 찾았습니다. 그 안에서 <b>10년운과 그해 1년운이 같은 자리로 겹치는 해</b>를 도드라지는 때로 봤습니다.
+        정해진 일이 아니라 <b>그 무렵 그 방면에 관심과 사건이 몰리기 쉽다</b>는 정도로 읽어 주세요.</p>`;
   }
 
   // ── 한눈에 읽는 풀이 (서술형)
@@ -874,13 +993,13 @@ function calc(){
       + ` ${OH_OVERM[ohTop]}은 넉넉한데 <b>${OH_LACKM[lack0]}</b>이 모자란 형국입니다.`
       + ` 그래서 작명에서도 이 자리를 메우는 쪽을 봅니다.`);
     story.push(
-      `기질로 보면 <b>${g1}</b>이 ${g1n}자로 가장 셉니다. ${GROUP_DESC[g1]} `
+      `기질로 보면 <b>${GRP_KO[g1]}</b>이 ${g1n}자로 가장 셉니다. ${GROUP_DESC[g1]} `
       + `그래서 ${GROUP_JOB[g1].slice(0,3).join("·")} 같은 자리와 결이 맞습니다.`
       + (found.length ? ` 여기에 <b>${found.map(f=>f[0]).join("·")}</b>까지 있어, ${SINSAL_M[found[0][0]].replace(/봅니다\.$/,"보는 자리입니다.")}`
                       : ` 널리 보는 귀인·살에는 걸리는 자리가 없어, 타고난 여덟 글자 자체로 읽습니다.`));
     story.push(
       (preDaeun
-        ? `10년 단위 흐름은 <b>${dus[0].from}세</b>부터 시작합니다. 첫 계절은 <b>${LUCK[dus[0].sp]}</b>이 들어오는 <b>${dus[0].from}~${dus[0].to}세</b>이고, ${LUCK_M[dus[0].sp]}`
+        ? `10년운은 <b>${dus[0].from}세</b>부터 시작합니다. 첫 계절은 <b>${LUCK[dus[0].sp]}</b>이 들어오는 <b>${dus[0].from}~${dus[0].to}세</b>이고, ${LUCK_M[dus[0].sp]}`
         : `지금은 <b>${nowD?nowD.from+"~"+nowD.to+"세":"첫 계절 전"}</b> 구간으로 <b>${nowD?LUCK[nowD.sp]:"-"}</b>이 들어와 있습니다. ${nowD?LUCK_M[nowD.sp]:""}`)
       + ` 이어지는 <b>${nextD.from}~${nextD.to}세</b>에는 <b>${LUCK[nextD.sp]}</b>이 들어오고, `
       + `모자란 ${OH[lack0]} 기운이 채워지는 <b>${(dus.filter(d=>d.score>0&&(preDaeun||d.to>=age)).slice(0,2).map(d=>d.from+"세").join(", "))||"뒷 구간"}</b> 무렵을 순풍으로 봅니다.`);
@@ -1047,6 +1166,33 @@ function calc(){
             <b class="bt">${c.h1[2]===c.h2[2]
               ? `두 글자가 모두 ‘${c.h1[2]}’ 뜻을 담아 의미가 또렷합니다.`
               : `‘${c.h1[2]}’${jo(c.h1[2],"과","와")} ‘${c.h2[2]}’${jo(c.h2[2],"을","를")} 함께 담은 이름입니다.`}</b></span></div>
+          <div class="bl"><span class="bk">이 이름이<br>북돋는 운</span><span>
+            ${(()=>{
+              const G3={비견:"비겁",겁재:"비겁",식신:"식상",상관:"식상",편재:"재성",정재:"재성",
+                        편관:"관성",정관:"관성",편인:"인성",정인:"인성"};
+              const T={비겁:["🤝 인간관계"],식상:["🚀 사업운","📚 학업운"],재성:["💰 재물운","🚀 사업운"],
+                       관성:(sex0==="F"?["💼 직업운","💞 애정운"]:["💼 직업운"]),인성:["📚 학업운"]};
+              const gs=[...new Set([c.h1[4],c.h2[4]].map(o=>G3[sipsin(dOh,dYY,o,1)]))];
+              const ts=[...new Set(gs.flatMap(g=>T[g]||[]))];
+              return `${c.h1[0]}·${c.h2[0]}의 기운은 아이에게 <b>${gs.map(g=>GRP_KO[g]).join("·")}</b>이 됩니다.
+                <b class="bt">이 이름은 ${ts.map(t=>`<b>${t}</b>`).join(", ")} 쪽을 북돋는다고 봅니다.</b>`;})()}
+            </span></div>
+          <div class="bl"><span class="bk">타고난 적성</span><span>
+            <b class="${OH_CLS[dOh]}">${OH[dOh]}</b>의 기질에 <b>${GRP_KO[g1]}</b>이 가장 셉니다 — ${GROUP_JOB[g1].slice(0,3).join("·")} 방면.
+            ${(()=>{const u=[...new Set([c.h1[4],c.h2[4]])];
+              const same=u.some(o=>OH_JOB[o].some(j=>GROUP_JOB[g1].includes(j)));
+              return `<b class="bt">이 이름은 ${u.map(o=>OH[o]).join("·")} 기운을 더해 ${same?"타고난 방면을 <b>같은 쪽으로 밀어 줍니다</b>":"<b>다른 쪽 문을 하나 더 열어 줍니다</b>"}.</b>`;})()}
+            </span></div>
+          ${found.length?`<div class="bl"><span class="bk">귀인과 살</span><span>
+            <b>${found.map(f=>f[0]).join(" · ")}</b>가 사주에 있습니다. ${SINSAL_M[found[0][0]]}
+            <b class="bt">이름과는 별개로 타고난 자리입니다.</b></span></div>`:""}
+          <div class="bl"><span class="bk">10년운과<br>맞물림</span><span>
+            ${(()=>{const u=[...new Set([c.h1[4],c.h2[4]])];
+              const w=dus.filter(d=>u.includes(GAN_OH[d.g])||u.includes(JI_OH[d.j]));
+              const g=dus.filter(d=>d.score>0);
+              return (w.length?`이 이름의 기운은 <b>${w.slice(0,3).map(d=>d.from+"~"+d.to+"세").join(", ")}</b>에 겹칩니다. `:`앞으로 오는 여덟 구간에는 이 이름의 기운이 직접 겹치지 않습니다. `)
+                + (g.length?`<b class="bt">순풍으로 보는 때는 ${g.slice(0,3).map(d=>d.from+"세("+LUCK[d.sp]+")").join(", ")}입니다.</b>`:"");})()}
+            </span></div>
           <div class="bl"><span class="bk">사주 풀이</span><span>
             아이는 <b class="${OH_CLS[dOh]}">${OH[dOh]}</b>의 기질을 타고났고 그 힘이
             ${strong?"<b>센</b>":"<b>여린</b>"} 편입니다. 여덟 글자에 <b class="${OH_CLS[lack]}">${OH[lack]}</b>가 ${cnt[lack]}개로 가장 적습니다.
