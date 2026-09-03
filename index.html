@@ -202,6 +202,17 @@ dd b{font-weight:500; color:var(--ink)}
 .story b{color:var(--ink); font-weight:500}
 .story .fix{display:block; margin-top:6px; padding:13px 15px; line-height:1.8; background:var(--paper-2);
   border-left:3px solid var(--seal); border-radius:0 2px 2px 0; font-size:14px}
+.shu{font-size:12.5px; color:var(--ink-2); background:var(--paper-2); border:1px solid var(--rule);
+  border-radius:2px; padding:11px 13px; word-break:break-all; font-family:ui-monospace,Menlo,monospace; line-height:1.6}
+.shb{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+.sh{margin:0; width:auto; flex:0 1 auto; padding:11px 16px; font-size:13.5px; font-weight:500;
+  font-family:"Noto Sans KR",sans-serif; letter-spacing:0;
+  color:var(--ink); background:var(--paper); border:1px solid var(--rule); border-radius:2px; cursor:pointer}
+.sh:hover{background:var(--paper-2)}
+.sh-main{color:var(--paper); background:var(--ink); border-color:var(--ink); font-weight:700}
+.sh-main:hover{background:var(--seal); border-color:var(--seal); color:var(--paper)}
+.shmsg{margin:12px 0 0; padding:10px 13px; font-size:13px; border-radius:2px;
+  background:rgba(62,124,89,.14); color:var(--mok); border-left:3px solid var(--mok)}
 .split{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px}
 .split>div{border:1px solid var(--rule); border-radius:2px; padding:15px 17px; background:var(--paper)}
 .split .sp2{border-color:var(--seal)}
@@ -431,6 +442,25 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
 
   <div class="card">
+    <h2>결과 공유하기</h2>
+    <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
+      아래 주소에는 <b>지금 입력한 내용이 그대로 담겨</b> 있습니다. 남편·아내·지인에게 보내면
+      <b>같은 결과가 그대로 열립니다.</b></p>
+    <div class="shu" id="shareurl"></div>
+    <div class="shb">
+      <button type="button" class="sh sh-main" id="shNative">📤 공유하기</button>
+      <button type="button" class="sh" id="shCopy">🔗 주소 복사</button>
+      <button type="button" class="sh" id="shSms">💬 문자로</button>
+      <button type="button" class="sh" id="shX">𝕏 에 올리기</button>
+      <button type="button" class="sh" id="shFb">f 페이스북</button>
+    </div>
+    <p id="shMsg" class="shmsg hidden"></p>
+    <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
+      휴대폰에서 <b>공유하기</b>를 누르면 카카오톡·문자 등 평소 쓰시는 앱 목록이 뜹니다.
+      컴퓨터에서는 <b>주소 복사</b>를 쓰시면 됩니다.</p>
+  </div>
+
+  <div class="card">
     <h2>계산 근거</h2>
     <dl id="why"></dl>
   </div>
@@ -598,7 +628,7 @@ const SURHAN=new Set(Object.values(SUR).map(v=>v[0]));
 const GOOD=/밝|빛|아름|클|어질|착|슬기|지혜|복|상서|기쁠|즐|귀할|옥|구슬|보배|맑|깨끗|높|빼어|향기|꽃|별|해|달|하늘|봄|사랑|은혜|편안|화할|이룰|성할|넉넉|도울|곧을|굳|온화|영화|아리따|고울|평안|기릴|우거|무성|순할|미쁠|정성|믿을|너그|맺을|이룰/;
 const BAD=/죽|병|앓|슬플|잃|도둑|벌레|어두|흉|재앙|근심|괴로|미워|성낼|두려|무덤|시체|귀신|늙|가난|천할|더러|밧줄|동이|책상|개펄|똥|오줌|뼈|가죽|창자|화살|덫|그물|올가미|허물|죄|벌할|꾸짖|나쁠|악할|어리석|게으|취할|싸울|다툴|찌를|무너|망할|굶주|주릴|아플|의심|속일|훔칠|막을|좁을|낮을|잠길|빠질/;
 
-let reroll=0;                                   // 다시 뽑기 횟수
+let reroll=0, shareURL=location.href, shareText="사주와 이름 궁합";                                   // 다시 뽑기 횟수
 const jo=(w,a,b)=>{const c=String(w).charCodeAt(String(w).length-1)-0xAC00;
   return (c>=0&&c<11172&&c%28!==0)?a:b;};       // 받침 있으면 a, 없으면 b
 const rad=Math.PI/180;
@@ -1235,6 +1265,17 @@ function calc(){
     nb.innerHTML=html;
   }
 
+  // ── 공유용 주소 만들기 (입력값을 주소에 실어 보낸다)
+  {
+    const q=new URLSearchParams({d:dv,t:(noTime?"":tv),c:String(lon),s:sur,g:given,
+                                x:sex0,n:String(topN),e:useEot?"1":"0",y:yaja?"1":"0"});
+    shareURL=location.origin+location.pathname+"?"+q.toString();
+    shareText=`${dv} 태생 사주 — ${GAN[yGan]}${JI[yJi]} ${GAN[monGan]}${JI[monJi]} ${GAN[dayGan]}${JI[dayJi]}`
+      +`${noTime?"":" "+GAN[hourGan]+JI[hourJi]}, ${OH[dOh]}의 기질`;
+    try{ history.replaceState(null,"","?"+q.toString()); }catch(e){}
+    document.getElementById("shareurl").textContent=shareURL;
+  }
+
   const jdA=jdA0;
   const why=[
     ["입력한 시각",`${dv} ${noTime?"(시각 모름 → 정오 가정)":tv}`],
@@ -1257,6 +1298,47 @@ function calc(){
 
   document.getElementById("out").classList.remove("hidden");
 }
+
+// 공유 주소로 들어오면 입력값을 그대로 되살린다
+(()=>{const q=new URLSearchParams(location.search); if(!q.get("d")) return;
+  const set=(id,v)=>{if(v!==null&&v!=="")document.getElementById(id).value=v;};
+  set("d",q.get("d")); set("t",q.get("t")); set("city",q.get("c"));
+  set("surname",q.get("s")); set("given",q.get("g")); set("sex",q.get("x")); set("topn",q.get("n"));
+  if(q.get("e")!==null) document.getElementById("eot").checked=q.get("e")==="1";
+  if(q.get("y")!==null) document.getElementById("yaja").checked=q.get("y")==="1";
+  if(!q.get("t")) document.getElementById("unknown").checked=true;
+})();
+
+const shMsg=(m)=>{const e=document.getElementById("shMsg");
+  e.textContent=m; e.classList.remove("hidden");
+  clearTimeout(shMsg._t); shMsg._t=setTimeout(()=>e.classList.add("hidden"),3200);};
+const enc=encodeURIComponent;
+document.getElementById("shNative").addEventListener("click",async()=>{
+  if(navigator.share){
+    try{ await navigator.share({title:"진태양시 만세력",text:shareText,url:shareURL}); }
+    catch(e){}                                   // 사용자가 취소한 경우
+  }else{
+    try{ await navigator.clipboard.writeText(shareURL); shMsg("이 기기에서는 공유창을 열 수 없어 주소를 복사했습니다."); }
+    catch(e){ shMsg("주소를 직접 복사해 주세요."); }
+  }
+});
+document.getElementById("shCopy").addEventListener("click",async()=>{
+  try{ await navigator.clipboard.writeText(shareURL); shMsg("주소를 복사했습니다. 붙여넣기로 보내세요."); }
+  catch(e){
+    const t=document.createElement("textarea"); t.value=shareURL; document.body.appendChild(t);
+    t.select(); try{document.execCommand("copy"); shMsg("주소를 복사했습니다.");}catch(_){shMsg("복사가 막혀 있습니다. 주소창을 그대로 보내 주세요.");}
+    document.body.removeChild(t);
+  }
+});
+document.getElementById("shSms").addEventListener("click",()=>{
+  location.href=`sms:?&body=${enc(shareText+" — "+shareURL)}`;
+});
+document.getElementById("shX").addEventListener("click",()=>{
+  window.open(`https://twitter.com/intent/tweet?text=${enc(shareText)}&url=${enc(shareURL)}`,"_blank","noopener");
+});
+document.getElementById("shFb").addEventListener("click",()=>{
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${enc(shareURL)}`,"_blank","noopener");
+});
 
 document.getElementById("reroll").addEventListener("click",()=>{
   reroll++; calc();
