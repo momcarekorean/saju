@@ -1749,14 +1749,14 @@ function scorePick(ch, ctx){
   let dw=0;
   if(ctx.dw){
     ctx.dw.list.forEach(d=>{
-      if(d.from>=28&&d.from<=58){
+      if(d.from>=18&&d.from<=58){
         if(GAN_OH[d.g]===y.yong||JI_OH[d.j]===y.yong) dw+=2;
         else if(GAN_OH[d.g]===y.hui||JI_OH[d.j]===y.hui) dw+=1.2;
         if(chungJi(d.j,ch.dayJi)) dw-=1.2;
       }
     });
   }
-  D.dw=Math.max(0,Math.min(10,Math.round(dw)));
+  D.dw=Math.max(0,Math.min(10,Math.round(dw*1.25)));
 
   // ⑦ 현실적인 시간 10
   // 계획 제왕절개는 오전 첫 수술이 8시 반~9시, 오후 타임까지가 현실적이다
