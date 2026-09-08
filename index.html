@@ -369,7 +369,7 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="grid">
     <div>
       <label for="d">생년월일 (양력)</label>
-      <input type="date" id="d" value="2027-01-01" min="1900-01-01" max="2100-12-31">
+      <input type="text" id="d" value="2027-01-01" placeholder="2027-02-26" inputmode="numeric" autocomplete="off">
     </div>
     <div>
       <label for="t">태어난 시각 <span class="hint">24시간 · 예 09:30, 22:14</span></label>
@@ -572,10 +572,10 @@ dd b{font-weight:500; color:var(--ink)}
   시각을 모르시면 체크해 주세요 — 시주를 빼고 나머지 여섯 글자로만 봅니다.</p>
   <div class="grid">
     <div><label for="pfD">아빠 생년월일 (양력)</label>
-      <input type="date" id="pfD" value="1989-07-22" min="1900-01-01" max="2030-12-31"></div>
+      <input type="text" id="pfD" value="1989-07-22" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
     <div><label for="pfT">아빠 태어난 시각 <span class="hint">24시간</span></label><input type="text" id="pfT" value="20:25" inputmode="numeric" maxlength="5" placeholder="12:00" autocomplete="off"></div>
     <div><label for="pmD">엄마 생년월일 (양력)</label>
-      <input type="date" id="pmD" value="1990-12-05" min="1900-01-01" max="2030-12-31"></div>
+      <input type="text" id="pmD" value="1990-12-05" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
     <div><label for="pmT">엄마 태어난 시각 <span class="hint">24시간</span></label><input type="text" id="pmT" value="10:14" inputmode="numeric" maxlength="5" placeholder="12:00" autocomplete="off"></div>
   </div>
   <label class="ck"><input type="checkbox" id="pfNo"> 아빠 시각 모름</label>
@@ -586,7 +586,7 @@ dd b{font-weight:500; color:var(--ink)}
   <h2>출산 정보</h2>
   <div class="grid">
     <div><label for="edd">출산 예정일</label>
-      <input type="date" id="edd" value="2027-02-26" min="2020-01-01" max="2035-12-31"></div>
+      <input type="text" id="edd" value="2027-02-26" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
     <div><label for="bsex">아기 성별</label>
       <select id="bsex"><option value="F">여아</option><option value="M">남아</option></select></div>
     <div><label for="pcity">태어날 지역</label><select id="pcity">
@@ -604,8 +604,8 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
   <h3 style="margin:22px 0 8px;font-size:15px">병원에서 가능하다고 한 날짜 범위</h3>
   <div class="grid">
-    <div><label for="rng1">첫날</label><input type="date" id="rng1" min="2020-01-01" max="2035-12-31"></div>
-    <div><label for="rng2">마지막 날</label><input type="date" id="rng2" min="2020-01-01" max="2035-12-31"></div>
+    <div><label for="rng1">첫날</label><input type="text" id="rng1" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
+    <div><label for="rng2">마지막 날</label><input type="text" id="rng2" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
   </div>
   <p class="warn"><b>날짜는 의료진이 정합니다.</b> 이 도구는 병원에서 가능하다고 한 날짜들의
   <b>순서만</b> 매깁니다. 범위를 비워 두면 <b>예정일 2주 전부터 예정일 6일 뒤까지</b>를 후보로 봅니다.
@@ -949,7 +949,8 @@ function chartOf(Y,M,D,hh,mi,lon,useEot,yaja){
 }
 
 function calc(){
-  const dv=document.getElementById("d").value;
+  const dEl=document.getElementById("d"); if(dEl.value) dEl.value=normDate(dEl.value)||dEl.value;
+  const dv=dEl.value;
   const tEl=document.getElementById("t"); if(tEl.value) tEl.value=normTime(tEl.value);
   const tv=tEl.value;
   const err=document.getElementById("err");
@@ -1763,14 +1764,20 @@ function pickCalc(){
   const fail=m=>{err.innerHTML=m;err.classList.remove("hidden");return null;};
   err.classList.add("hidden");
 
-  const eddV=document.getElementById("edd").value;
+  const eddEl=document.getElementById("edd"); eddEl.value=normDate(eddEl.value)||eddEl.value;
+  const eddV=eddEl.value;
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(eddV)) return fail("출산 예정일을 <b>2027-02-26</b> 처럼 적어 주세요.");
+  const eY=+eddV.slice(0,4);
+  if(eY<2020||eY>2035) return fail("출산 예정일 연도가 이상합니다. <b>2020~2035년</b> 사이로 적어 주세요.");
   if(!eddV) return fail("출산 예정일을 입력해 주세요.");
   const lon=+document.getElementById("pcity").value;
   const sex=document.getElementById("bsex").value;
 
   const mk=(dId,tId,noId)=>{
-    const dv=document.getElementById(dId).value;
-    if(!dv) return null;
+    const el=document.getElementById(dId); el.value=normDate(el.value)||el.value;
+    const dv=el.value;
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(dv)) return null;
+    const pY=+dv.slice(0,4); if(pY<1900||pY>2030) return null;
     const no=document.getElementById(noId).checked;
     const tv=no?"12:00":(normTime(document.getElementById(tId).value)||"12:00");
     const d=dOf(dv), t=tv.split(":").map(Number);
@@ -1779,9 +1786,9 @@ function pickCalc(){
     return c;
   };
   const dad=mk("pfD","pfT","pfNo"), mom=mk("pmD","pmT","pmNo");
-  if(!dad||!mom) return fail("아빠와 엄마의 생년월일을 모두 입력해 주세요.");
+  if(!dad||!mom) return fail("아빠와 엄마의 생년월일을 <b>1990-12-05</b> 처럼, <b>1900~2030년</b> 사이로 적어 주세요.");
 
-  let a=document.getElementById("rng1").value, b=document.getElementById("rng2").value;
+  let a=normDate(document.getElementById("rng1").value), b=normDate(document.getElementById("rng2").value);
   if(!a) a=dayAdd(eddV,-14);
   if(!b) b=dayAdd(eddV,6);
   if(dayDiff(a,b)<0) return fail("범위의 첫날이 마지막 날보다 뒤입니다.");
@@ -1960,40 +1967,39 @@ function bindTime(el){
   el.addEventListener("keydown", e=>{ if(e.key==="Enter") fix(); });
 }
 
-// 날짜: 형식·범위를 벗어나면 직전 값으로 되돌린다
-function bindDate(el){
-  if(!el) return;
-  let last=el.value;
-  const fix=()=>{
-    const v=el.value;
-    if(!v){ last=""; return; }
-    const ok=/^\d{4}-\d{2}-\d{2}$/.test(v) && +v.slice(0,4)>=1900 && +v.slice(0,4)<=2100;
-    if(!ok){ el.value=last; return; }
-    if(el.min && v<el.min) el.value=el.min;
-    else if(el.max && v>el.max) el.value=el.max;
-    last=el.value;
-  };
-  el.addEventListener("change", fix);
-  el.addEventListener("blur", fix);
-}
 
 (function(){
   ["t","pfT","pmT"].forEach(id=>bindTime(document.getElementById(id)));
-  document.querySelectorAll('input[type="date"]').forEach(bindDate);
 })();
 
-// 예정일을 넣으면 범위를 자동으로 채운다 (직접 칠 일을 없앤다)
+
+/* 날짜칸을 텍스트로 바꾼 이유
+   네이티브 date 칸은 연도 자리를 0으로 채워 둬서 "20"만 쳐도 0020이 된다.
+   자리 이동도 브라우저마다 달라, 그냥 자유롭게 치게 하고 우리가 정리한다. */
+function normDate(v){
+  if(v==null) return "";
+  const p=String(v).split(/[^\d]+/).filter(x=>x!=="");
+  let y,m,d;
+  if(p.length>=3){ y=+p[0]; m=+p[1]; d=+p[2]; }
+  else if(p.length===1 && p[0].length===8){
+    y=+p[0].slice(0,4); m=+p[0].slice(4,6); d=+p[0].slice(6,8);
+  } else return "";
+  if(!(y>=1900 && y<=2100)) return "";
+  m=Math.max(1,Math.min(12,m));
+  const last=new Date(Date.UTC(y,m,0)).getUTCDate();
+  d=Math.max(1,Math.min(last,d));
+  return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+}
+
+function bindDateText(el){
+  if(!el) return;
+  const fix=()=>{ const n=normDate(el.value); if(n) el.value=n; };
+  el.addEventListener("blur", fix);
+  el.addEventListener("change", fix);
+  el.addEventListener("keydown", e=>{ if(e.key==="Enter") fix(); });
+}
 (function(){
-  const edd=document.getElementById("edd"), r1=document.getElementById("rng1"), r2=document.getElementById("rng2");
-  if(!edd||!r1||!r2) return;
-  const fill=force=>{
-    const v=edd.value;
-    if(!/^\d{4}-\d{2}-\d{2}$/.test(v)) return;
-    if(force||!r1.value) r1.value=dayAdd(v,-14);
-    if(force||!r2.value) r2.value=dayAdd(v,6);
-  };
-  edd.addEventListener("change",()=>fill(true));
-  fill(false);
+  ["d","edd","rng1","rng2","pfD","pmD"].forEach(id=>bindDateText(document.getElementById(id)));
 })();
 
 </script>
