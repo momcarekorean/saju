@@ -600,8 +600,8 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
   <h3 style="margin:22px 0 8px;font-size:15px">병원에서 가능하다고 한 날짜 범위</h3>
   <div class="grid">
-    <div><label for="rng1">첫날</label><input type="date" id="rng1"></div>
-    <div><label for="rng2">마지막 날</label><input type="date" id="rng2"></div>
+    <div><label for="rng1">첫날</label><input type="date" id="rng1" min="2020-01-01" max="2035-12-31"></div>
+    <div><label for="rng2">마지막 날</label><input type="date" id="rng2" min="2020-01-01" max="2035-12-31"></div>
   </div>
   <p class="warn"><b>날짜는 의료진이 정합니다.</b> 이 도구는 병원에서 가능하다고 한 날짜들의
   <b>순서만</b> 매깁니다. 범위를 비워 두면 <b>예정일 2주 전부터 예정일 6일 뒤까지</b>를 후보로 봅니다.
@@ -1917,6 +1917,20 @@ function bindDate(el){
 (function(){
   ["t","pfT","pmT"].forEach(id=>bindTime(document.getElementById(id)));
   document.querySelectorAll('input[type="date"]').forEach(bindDate);
+})();
+
+// 예정일을 넣으면 범위를 자동으로 채운다 (직접 칠 일을 없앤다)
+(function(){
+  const edd=document.getElementById("edd"), r1=document.getElementById("rng1"), r2=document.getElementById("rng2");
+  if(!edd||!r1||!r2) return;
+  const fill=force=>{
+    const v=edd.value;
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(v)) return;
+    if(force||!r1.value) r1.value=dayAdd(v,-14);
+    if(force||!r2.value) r2.value=dayAdd(v,6);
+  };
+  edd.addEventListener("change",()=>fill(true));
+  fill(false);
 })();
 
 </script>
