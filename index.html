@@ -279,13 +279,23 @@ dd b{font-weight:500; color:var(--ink)}
   dt{margin-top:8px}
 }
 
-/* 탭 */
-.tabs{display:flex;gap:6px;margin:0 0 18px;border-bottom:2px solid var(--rule);flex-wrap:wrap}
-.tb{appearance:none;border:none;background:none;cursor:pointer;padding:11px 16px;
-    font:inherit;font-size:15px;font-weight:600;color:var(--ink-3);
-    border-bottom:3px solid transparent;margin-bottom:-2px;border-radius:8px 8px 0 0}
-.tb:hover{color:var(--ink-2);background:var(--paper-2)}
-.tb.on{color:var(--seal);border-bottom-color:var(--seal)}
+/* 탭 — 그림을 눌러 고른다 */
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 26px}
+.tb{appearance:none;padding:0;border:3px solid transparent;border-radius:16px;
+  background:none;cursor:pointer;overflow:hidden;position:relative;display:block;
+  transition:border-color .15s, box-shadow .15s, transform .12s, filter .15s}
+.tb img{display:block;width:100%;height:auto;aspect-ratio:800/597;background:var(--paper-2)}
+.tb:not(.on){filter:grayscale(.42) opacity(.62)}
+.tb:not(.on):hover{filter:none;transform:translateY(-3px);
+  border-color:var(--rule);box-shadow:0 6px 18px rgba(33,29,23,.14)}
+.tb:focus-visible{outline:3px solid var(--seal);outline-offset:3px}
+.tb.on{border-color:var(--seal);box-shadow:0 6px 20px rgba(168,50,42,.22)}
+.tbnow{display:none}
+.tb.on .tbnow{display:inline-block;position:absolute;top:10px;right:10px;
+  background:var(--seal);color:#fff;font-size:11.5px;font-weight:700;
+  padding:5px 11px;border-radius:999px;letter-spacing:.02em;
+  box-shadow:0 2px 6px rgba(0,0,0,.18)}
+@media(max-width:600px){ .tabs{grid-template-columns:1fr;gap:10px} }
 .ck{display:inline-flex;align-items:center;gap:7px;margin:8px 14px 0 0;font-size:14px;color:var(--ink-2)}
 .warn{background:var(--paper-2);border-left:3px solid var(--seal);padding:11px 14px;
       border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-2);margin:14px 0 0}
@@ -357,9 +367,17 @@ dd b{font-weight:500; color:var(--ink)}
   <p class="sub">생년월일과 태어난 시각으로 사주 여덟 글자를 계산합니다. 절기와 진태양시를 적용하고, <b>무엇을 어떻게 보정했는지 전부 아래에 표시</b>합니다.</p>
 </header>
 
-<nav class="tabs">
-  <button type="button" class="tb on" data-tab="tab-saju">만세력 · 이름 짓기</button>
-  <button type="button" class="tb" data-tab="tab-pick">출산 택일 · 아기 사주</button>
+<nav class="tabs" role="tablist" aria-label="도구 선택">
+  <button type="button" class="tb on" role="tab" aria-selected="true" data-tab="tab-saju">
+    <img src="tab-name.jpg" width="800" height="597" decoding="async"
+         alt="이름 짓기 — 만세력과 사주 풀이로 아기 이름을 지어 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-pick">
+    <img src="tab-pick.jpg" width="800" height="597" decoding="async"
+         alt="출산 택일 — 부모 사주로 제왕절개 날짜와 시간을 견줘 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
 </nav>
 
 <div id="tab-saju">
@@ -1587,7 +1605,9 @@ calc();
    ══════════════════════════════════════════════════════════════ */
 
 document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".tb").forEach(x=>x.classList.toggle("on",x===b));
+  document.querySelectorAll(".tb").forEach(x=>{
+    const on=(x===b); x.classList.toggle("on",on); x.setAttribute("aria-selected",on?"true":"false");
+  });
   ["tab-saju","tab-pick"].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.classList.toggle("hidden", id!==b.dataset.tab);
