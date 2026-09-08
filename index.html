@@ -278,6 +278,72 @@ dd b{font-weight:500; color:var(--ink)}
   dl{grid-template-columns:1fr; gap:2px 0}
   dt{margin-top:8px}
 }
+
+/* 탭 */
+.tabs{display:flex;gap:6px;margin:0 0 18px;border-bottom:2px solid var(--rule);flex-wrap:wrap}
+.tb{appearance:none;border:none;background:none;cursor:pointer;padding:11px 16px;
+    font:inherit;font-size:15px;font-weight:600;color:var(--ink-3);
+    border-bottom:3px solid transparent;margin-bottom:-2px;border-radius:8px 8px 0 0}
+.tb:hover{color:var(--ink-2);background:var(--paper-2)}
+.tb.on{color:var(--seal);border-bottom-color:var(--seal)}
+.ck{display:inline-flex;align-items:center;gap:7px;margin:8px 14px 0 0;font-size:14px;color:var(--ink-2)}
+.warn{background:var(--paper-2);border-left:3px solid var(--seal);padding:11px 14px;
+      border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-2);margin:14px 0 0}
+.blogs{display:grid;gap:9px;margin-top:12px}
+.blogs a{display:block;padding:12px 14px;background:var(--paper-2);border:1px solid var(--rule);
+         border-radius:10px;text-decoration:none;color:var(--ink);font-size:14.5px;line-height:1.45}
+.blogs a:hover{border-color:var(--seal)}
+.blogs b{color:var(--seal);font-size:12px;display:block;margin-bottom:3px;letter-spacing:.04em}
+
+/* ── 출산 택일 탭 */
+.btns{margin-top:18px}
+.pblk{padding:14px 0;border-bottom:1px solid var(--rule)}
+.pblk:last-child{border-bottom:none}
+.pblk h3{margin:0 0 10px;font-size:15px;color:var(--seal)}
+.gzrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.gzrow>*{flex:1 1 68px;min-width:68px;text-align:center;padding:10px 6px;
+  background:var(--paper-2);border:1px solid var(--rule);border-radius:10px;
+  font-family:"Nanum Myeongjo",serif;font-size:21px;line-height:1.2;color:var(--ink)}
+.gzrow small{display:block;font-family:"Noto Sans KR",sans-serif;font-size:11.5px;
+  color:var(--ink-3);margin-top:3px;letter-spacing:.02em}
+.gzq{font-size:13px!important;color:var(--ink-3)!important;display:flex;
+  align-items:center;justify-content:center}
+.ohrow{display:flex;gap:6px;margin:10px 0 4px;flex-wrap:wrap}
+.ohc{flex:1 1 54px;text-align:center;padding:7px 4px;border-radius:8px;
+  background:var(--paper-2);font-size:15px;font-weight:700;color:var(--ink)}
+.ohc b{display:block;font-size:11.5px;font-weight:500;color:var(--ink-3);margin-bottom:2px}
+.tb2{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+.tb2 th{background:var(--paper-2);color:var(--ink-2);font-weight:600;font-size:12.5px;
+  padding:9px 7px;text-align:left;border-bottom:2px solid var(--rule);white-space:nowrap}
+.tb2 td{padding:9px 7px;border-bottom:1px solid var(--rule);color:var(--ink);vertical-align:top}
+.tb2 tbody tr:last-child td{border-bottom:none}
+.tb2 small{color:var(--ink-3);font-size:11px}
+.sm{color:var(--ink-3);font-size:12.5px}
+.dl{margin:8px 0 0;padding-left:18px;color:var(--ink-2);font-size:13.5px;line-height:1.75}
+.pcand{padding:20px 0;border-bottom:2px solid var(--rule)}
+.pcand:last-child{border-bottom:none}
+.pcand h3{margin:6px 0 2px;font-size:19px}
+.pcand h3 small{font-size:13px;color:var(--ink-3);font-weight:400}
+.rank{display:inline-block;padding:4px 11px;border-radius:999px;background:var(--seal);
+  color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.03em}
+.rank b{font-weight:800}
+.pd{margin:14px 0 0;font-size:14px}
+.pd dt{font-weight:700;color:var(--seal);font-size:12.5px;letter-spacing:.03em;margin-top:12px}
+.pd dd{margin:4px 0 0;color:var(--ink-2);line-height:1.7}
+.sbar{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.sbi{flex:1 1 92px;text-align:center;padding:9px 5px;border-radius:9px;
+  background:var(--paper-2);border:1px solid var(--rule)}
+.sbi i{display:block;font-style:normal;font-size:11px;color:var(--ink-3);margin-bottom:3px}
+.sbi b{font-size:17px;color:var(--ink)}
+.sbi em{font-style:normal;font-size:11.5px;color:var(--ink-3)}
+@media(max-width:520px){
+  .tb2{font-size:12.5px}
+  .tb2 th,.tb2 td{padding:7px 5px}
+  .gzrow>*{font-size:18px}
+}
+
+
+.hint{font-weight:400;font-size:11.5px;color:var(--ink-3);margin-left:6px;letter-spacing:0}
 </style>
 
 <div class="wrap">
@@ -287,6 +353,13 @@ dd b{font-weight:500; color:var(--ink)}
   <p class="sub">생년월일과 태어난 시각으로 사주 여덟 글자를 계산합니다. 절기와 진태양시를 적용하고, <b>무엇을 어떻게 보정했는지 전부 아래에 표시</b>합니다.</p>
 </header>
 
+<nav class="tabs">
+  <button type="button" class="tb on" data-tab="tab-saju">만세력 · 이름 짓기</button>
+  <button type="button" class="tb" data-tab="tab-pick">출산 택일 · 아기 사주</button>
+</nav>
+
+<div id="tab-saju">
+
 <div class="card">
   <h2>태어난 때</h2>
   <div class="grid">
@@ -295,8 +368,8 @@ dd b{font-weight:500; color:var(--ink)}
       <input type="date" id="d" value="2027-01-01" min="1900-01-01" max="2100-12-31">
     </div>
     <div>
-      <label for="t">태어난 시각</label>
-      <input type="time" id="t" value="09:30">
+      <label for="t">태어난 시각 <span class="hint">24시간 · 예 09:30, 22:14</span></label>
+      <input type="text" id="t" value="09:30" inputmode="numeric" maxlength="5" placeholder="09:30" autocomplete="off">
     </div>
     <div>
       <label for="city">태어난 지역</label>
@@ -477,6 +550,97 @@ dd b{font-weight:500; color:var(--ink)}
 절기 시각은 <b>수 분 이내 오차</b>로 계산합니다(공개된 만세력끼리도 몇 분씩 다릅니다). 절입 경계 30분 안에 걸치면 경고를 띄우니, 그때는 한국천문연구원 역서와 대조해 보시길 권합니다.<br><br>
 사주와 명리는 <b>과학적으로 검증된 것이 아닌 전통 문화</b>입니다. 이 도구는 그 계산 과정을 투명하게 보여주기 위한 것이며, 결과로 사람을 판단하는 데 쓰지 않으시길 바랍니다.
 </p>
+
+<div class="card">
+  <h2>함께 보면 좋은 글</h2>
+  <div class="blogs">
+    <a href="https://blog.naver.com/momcare_/224399366895" target="_blank" rel="noopener"><b>작명</b>아기이름 작명, 작명소 없이 직접 — 사주로 뭘 계산하는지 전부 공개</a>
+    <a href="https://blog.naver.com/momcare_/224403853237" target="_blank" rel="noopener"><b>성별</b>초음파 성별, AI 3개한테 물어봤더니 전부 딸 — 각도법 프롬프트 공개</a>
+    <a href="https://blog.naver.com/momcare_/224400620778" target="_blank" rel="noopener"><b>검사</b>니프티 검사 결과 언제 나오나 — 용혈로 재채혈까지 갔지만 8일</a>
+  </div>
+</div>
+</div>
+<div id="tab-pick" class="hidden">
+
+<div class="card">
+  <h2>부모 사주</h2>
+  <p class="sub" style="margin-top:0">아기 사주가 부모와 어떻게 어울리는지 보려면 두 분의 생년월일시가 필요합니다.
+  시각을 모르시면 체크해 주세요 — 시주를 빼고 나머지 여섯 글자로만 봅니다.</p>
+  <div class="grid">
+    <div><label for="pfD">아빠 생년월일 (양력)</label>
+      <input type="date" id="pfD" value="1989-07-22" min="1900-01-01" max="2030-12-31"></div>
+    <div><label for="pfT">아빠 태어난 시각 <span class="hint">24시간</span></label><input type="text" id="pfT" value="20:25" inputmode="numeric" maxlength="5" placeholder="12:00" autocomplete="off"></div>
+    <div><label for="pmD">엄마 생년월일 (양력)</label>
+      <input type="date" id="pmD" value="1990-12-05" min="1900-01-01" max="2030-12-31"></div>
+    <div><label for="pmT">엄마 태어난 시각 <span class="hint">24시간</span></label><input type="text" id="pmT" value="10:14" inputmode="numeric" maxlength="5" placeholder="12:00" autocomplete="off"></div>
+  </div>
+  <label class="ck"><input type="checkbox" id="pfNo"> 아빠 시각 모름</label>
+  <label class="ck"><input type="checkbox" id="pmNo"> 엄마 시각 모름</label>
+</div>
+
+<div class="card">
+  <h2>출산 정보</h2>
+  <div class="grid">
+    <div><label for="edd">출산 예정일</label>
+      <input type="date" id="edd" value="2027-02-26" min="2020-01-01" max="2035-12-31"></div>
+    <div><label for="bsex">아기 성별</label>
+      <select id="bsex"><option value="F">여아</option><option value="M">남아</option></select></div>
+    <div><label for="pcity">태어날 지역</label><select id="pcity">
+        <option value="126.978">서울 · 인천 · 경기</option>
+        <option value="129.075">부산</option>
+        <option value="128.601">대구</option>
+        <option value="126.851">광주</option>
+        <option value="127.385">대전 · 세종</option>
+        <option value="129.311">울산</option>
+        <option value="127.729">강원 (춘천)</option>
+        <option value="127.148">전주</option>
+        <option value="126.531">제주</option>
+        <option value="135">보정 안 함 (동경 135°)</option>
+      </select></div>
+  </div>
+  <h3 style="margin:22px 0 8px;font-size:15px">병원에서 가능하다고 한 날짜 범위</h3>
+  <div class="grid">
+    <div><label for="rng1">첫날</label><input type="date" id="rng1"></div>
+    <div><label for="rng2">마지막 날</label><input type="date" id="rng2"></div>
+  </div>
+  <p class="warn"><b>날짜는 의료진이 정합니다.</b> 이 도구는 병원에서 가능하다고 한 날짜들의
+  <b>순서만</b> 매깁니다. 범위를 비워 두면 <b>예정일 2주 전부터 예정일 6일 뒤까지</b>를 후보로 봅니다.
+  계획 제왕절개는 <b>38주 무렵에 잡는 경우가 많아</b> 그 구간을 기본으로 잡았습니다.
+  후보마다 <b>임신 주수를 함께 표시</b>하니, 병원에서 받은 날짜와 맞춰 보세요.</p>
+  <div class="btns"><button id="pickBtn" type="button">택일 계산</button></div>
+  <p id="pErr" class="err hidden"></p>
+</div>
+
+<div id="pickOut" class="hidden">
+  <div class="card"><h2>부모 사주</h2><div id="pParent"></div></div>
+  <div class="card"><h2>후보를 전부 훑어봤습니다</h2>
+    <p class="sub" style="margin-top:0">가능한 날짜 × 12시진을 모두 계산한 뒤, 아래 기준으로 걸러냈습니다.</p>
+    <div id="pAll"></div></div>
+  <div class="card"><h2>상위 세 후보</h2><div id="pTop3"></div></div>
+  <div class="card"><h2>한눈에 비교</h2><div id="pCmp"></div></div>
+  <div class="card"><h2>어떻게 점수를 매겼나</h2><div id="pHow"></div></div>
+</div>
+
+<p class="note">
+<b>이 탭이 하는 일과 하지 않는 일.</b> 여덟 글자와 절기·진태양시는 천문 계산이라 만세력과 일치합니다.
+반면 <b>용신을 무엇으로 잡을지, 어떤 살을 얼마나 무겁게 볼지</b>는 유파마다 다릅니다.
+이 도구는 널리 쓰이는 한 가지 방식을 골라 <b>계산 과정을 전부 보여줄 뿐</b>이며, 그것이 정답이라고 주장하지 않습니다.<br><br>
+<b>⚠️ 수술 날짜는 반드시 의료진이 정합니다.</b> 산모와 아기의 상태, 태반 위치, 이전 수술 이력 등
+사주가 알 수 없는 것들이 날짜를 정합니다. 이 도구는 <b>의학적으로 가능하다고 확인받은 날짜들 사이에서만</b>
+전통 명리의 관점을 보조로 얹는 것입니다. 사주가 좋다는 이유로 의료진의 판단을 바꾸지 마세요.<br><br>
+사주와 명리는 <b>과학적으로 검증된 것이 아닌 전통 문화</b>입니다. 재미와 참고로만 보시길 바랍니다.
+</p>
+
+<div class="card">
+  <h2>함께 보면 좋은 글</h2>
+  <div class="blogs">
+    <a href="https://blog.naver.com/momcare_/224404474441" target="_blank" rel="noopener"><b>제왕절개·무통</b>무통주사 아기한테 안 좋을까 — 허리 통증은 정말 무통 때문일까</a>
+    <a href="https://blog.naver.com/momcare_/224404492213" target="_blank" rel="noopener"><b>진통</b>진통 간격 몇 분에 병원 가야 하나 — 5분·10분·15분 기준</a>
+    <a href="https://blog.naver.com/momcare_/224384751103" target="_blank" rel="noopener"><b>준비물</b>출산가방 완전정리 — 병원용·조리원용 따로, 수량까지</a>
+    <a href="https://blog.naver.com/momcare_/224399366895" target="_blank" rel="noopener"><b>작명</b>아기이름 작명, 작명소 없이 직접 — 사주로 뭘 계산하는지 전부 공개</a>
+  </div>
+</div>
+</div>
 </div>
 
 <script>
@@ -725,7 +889,9 @@ function chartOf(Y,M,D,hh,mi,lon,useEot,yaja){
 }
 
 function calc(){
-  const dv=document.getElementById("d").value, tv=document.getElementById("t").value;
+  const dv=document.getElementById("d").value;
+  const tEl=document.getElementById("t"); if(tEl.value) tEl.value=normTime(tEl.value);
+  const tv=tEl.value;
   const err=document.getElementById("err");
   const fail=m=>{err.textContent=m; err.classList.remove("hidden"); return true;};
   err.classList.add("hidden");
@@ -1354,4 +1520,403 @@ document.getElementById("unknown").addEventListener("change",e=>{
   document.getElementById("t").disabled=e.target.checked;
 });
 calc();
+/* ══════════════════════════════════════════════════════════════
+   출산 택일 · 아기 사주  (탭 2)
+   ─ 날짜는 의료진이 정한다. 이 코드는 '허용된 날짜들의 순서'만 매긴다.
+   ══════════════════════════════════════════════════════════════ */
+
+document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".tb").forEach(x=>x.classList.toggle("on",x===b));
+  ["tab-saju","tab-pick"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.toggle("hidden", id!==b.dataset.tab);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+}));
+
+// ── 지지 관계 (0子 1丑 2寅 3卯 4辰 5巳 6午 7未 8申 9酉 10戌 11亥)
+const chungJi=(a,b)=>((a-b)%12+12)%12===6;
+const YUKHAP={0:1,1:0,2:11,11:2,3:10,10:3,4:9,9:4,5:8,8:5,6:7,7:6};
+const HAEJI ={0:7,7:0,1:6,6:1,2:5,5:2,3:4,4:3,8:11,11:8,9:10,10:9};
+const PAJI  ={0:9,9:0,1:4,4:1,2:11,11:2,3:6,6:3,5:8,8:5,7:10,10:7};
+const HYUNG3=[[2,5,8],[1,7,10]];
+const HYUNGSELF=[4,6,9,11];
+const hyungJi=(a,b)=>(a===b&&HYUNGSELF.indexOf(a)>=0)
+  ||(a===0&&b===3)||(a===3&&b===0)
+  ||HYUNG3.some(g=>g.indexOf(a)>=0&&g.indexOf(b)>=0&&a!==b);
+const haeJi=(a,b)=>HAEJI[a]===b, paJi=(a,b)=>PAJI[a]===b, hapJi=(a,b)=>YUKHAP[a]===b;
+
+// ── 조후: 태어난 달의 계절이 무엇을 아쉬워하는가
+function johuOf(monJi){
+  if([11,0,1].indexOf(monJi)>=0) return {need:1,ss:"겨울",msg:"찬 계절이라 <b>따뜻한 기운(불)</b>이 있으면 숨통이 트입니다"};
+  if([5,6,7].indexOf(monJi)>=0)  return {need:4,ss:"여름",msg:"더운 계절이라 <b>식혀 주는 기운(물)</b>이 있으면 좋습니다"};
+  if([8,9,10].indexOf(monJi)>=0) return {need:1,ss:"가을",msg:"서늘해지는 때라 <b>온기(불)</b>가 받쳐 주면 좋습니다"};
+  return {need:1,ss:"봄",msg:"싹이 트는 때라 <b>볕(불)</b>이 조금 있으면 잘 자랍니다"};
+}
+
+// ── 신강·신약: 월령이 일간을 돕는지
+function strengthOf(ch){
+  const me=GAN_OH[ch.dayGan], mo=JI_OH[ch.monJi];
+  let sc=0;
+  if(mo===me) sc+=3; else if(KEUK[mo]!==me && KEUK[me]!==mo) sc+=2; // 생하는 관계
+  if(KEUK[me]===mo) sc-=1;                                          // 내가 극 → 설기
+  if(KEUK[mo]===me) sc-=3;                                          // 나를 극
+  [ch.yJi,ch.dayJi,ch.hourJi].forEach(j=>{ if(JI_OH[j]===me) sc+=1; });
+  [ch.yGan,ch.monGan,ch.hourGan].forEach(g=>{ if(GAN_OH[g]===me) sc+=1; });
+  return {sc, strong:sc>=3, label:sc>=3?"신강":"신약"};
+}
+
+// ── 용신·희신
+function yongOf(ch){
+  const me=GAN_OH[ch.dayGan], st=strengthOf(ch), jo=johuOf(ch.monJi);
+  let yong, hui, why;
+  if(st.strong){
+    yong=KEUK[me];                       // 내가 극하는 것 = 재성
+    hui=[0,1,2,3,4].filter(o=>KEUK[o]===me)[0];  // 나를 극하는 것 = 관성
+    why="기운이 넉넉한 편이라, <b>내보내고 다스리는 쪽</b>을 용신으로 봅니다";
+  }else{
+    yong=[0,1,2,3,4].filter(o=>KEUK[o]!==me && KEUK[me]!==o && o!==me)[0]; // 생해 주는 것
+    hui=me;
+    why="기운이 여린 편이라, <b>받쳐 주고 힘을 보태는 쪽</b>을 용신으로 봅니다";
+  }
+  return {yong,hui,st,jo,why};
+}
+
+// ── 대운
+function daewoonOf(ch, Y,M,D, sex){
+  const yang=ch.yGan%2===0, forward=((sex==="M")===yang);
+  const jd0=toJD(Y,M,D,12), lam=sunLon(jd0);
+  const mIdx=Math.floor((((lam-315)%360)+360)%360/30);
+  const tgt=forward?(315+(mIdx+1)*30)%360:(315+mIdx*30)%360;
+  const jdT=findTerm(tgt, jd0+(forward?15:-15));
+  const start=Math.max(1,Math.round(Math.abs(jdT-jd0)/3));
+  const list=[];
+  for(let i=1;i<=8;i++){
+    const g=((ch.monGan+(forward?i:-i))%10+10)%10;
+    const j=((ch.monJi+(forward?i:-i))%12+12)%12;
+    list.push({from:start+(i-1)*10, g, j});
+  }
+  return {start, forward, list};
+}
+
+// ── 후보 하나 채점
+function scorePick(ch, ctx){
+  const {dad,mom,hourReal,wk} = ctx;
+  const y=yongOf(ch), me=GAN_OH[ch.dayGan];
+  const D={};
+
+  // ① 오행 균형 20
+  D.oh = Math.max(0, Math.min(20, Math.round((ch.balance+6)*1.7)));
+
+  // ② 조후·용희신 20
+  let a=0;
+  if(ch.cnt[y.jo.need]>0) a+=8;
+  if(ch.cnt[y.jo.need]>=2) a+=2;
+  if(ch.cnt[y.yong]>0) a+=6;
+  if(ch.cnt[y.hui]>0) a+=4;
+  D.jo=Math.min(20,a);
+
+  // ③ 부모와의 조화 15
+  let pm=0, good=[], bad2=[];
+  [dad,mom].forEach(p=>{
+    if(!p) return;
+    const po=GAN_OH[p.dayGan];
+    if(KEUK[po]===me||KEUK[me]===po){ pm-=1.5; bad2.push("일간 상극"); }
+    else if(po!==me){ pm+=2; good.push("일간 상생"); }
+    else { pm+=1; }
+    const jis=[p.yJi,p.monJi,p.dayJi].concat(p.hourJi>=0?[p.hourJi]:[]);
+    jis.forEach(pj=>{
+      [ch.dayJi,ch.monJi].forEach(bj=>{
+        if(chungJi(pj,bj)){ pm-=1.6; bad2.push("지지 "+JI[pj]+JI[bj]+" 충"); }
+        else if(hyungJi(pj,bj)){ pm-=1.0; bad2.push("지지 "+JI[pj]+JI[bj]+" 형"); }
+        else if(hapJi(pj,bj)){ pm+=1.4; good.push("지지 "+JI[pj]+JI[bj]+" 육합"); }
+        else if(SAM[pj]!==undefined&&SAM[pj]===SAM[bj]&&pj!==bj){ pm+=1.0; good.push("지지 "+JI[pj]+JI[bj]+" 삼합"); }
+      });
+    });
+    const lack=p.cnt.indexOf(Math.min.apply(null,p.cnt));
+    if(ch.cnt[lack]>0){ pm+=1.2; good.push("부모에게 모자란 "+OH[lack]+jo(OH[lack],"을","를")+" 채움"); }
+    const most=p.cnt.indexOf(Math.max.apply(null,p.cnt));
+    if(ch.cnt[most]>=3){ pm-=1.0; bad2.push("이미 많은 "+OH[most]+jo(OH[most],"을","를")+" 더 보탬"); }
+  });
+  D.par=Math.max(0,Math.min(15, Math.round(7.5+pm*0.62)));
+  const uniq=a=>a.filter((v,i)=>a.indexOf(v)===i);
+  D.parGood=uniq(good); D.parBad=uniq(bad2);
+
+  // ④ 충·형·해 안정성 15
+  let bad=[], pen=0;
+  const pairs=[[ch.dayJi,ch.monJi,"일지-월지"],[ch.dayJi,ch.hourJi,"일지-시지"],
+               [ch.monJi,ch.hourJi,"월지-시지"],[ch.yJi,ch.dayJi,"연지-일지"]];
+  pairs.forEach(([x,z,nm])=>{
+    if(chungJi(x,z)){ pen+=4; bad.push(nm+" "+JI[x]+JI[z]+" 충"); }
+    else if(hyungJi(x,z)){ pen+=2.5; bad.push(nm+" "+JI[x]+JI[z]+" 형"); }
+    else if(haeJi(x,z)){ pen+=1.5; bad.push(nm+" "+JI[x]+JI[z]+" 해"); }
+    else if(paJi(x,z)){ pen+=1; bad.push(nm+" "+JI[x]+JI[z]+" 파"); }
+  });
+  D.stab=Math.max(0,Math.round(15-pen));
+  D.stabNote=bad;
+
+  // ⑤ 귀인·길신 10
+  let g=0, gn=[];
+  const ce=CHEONEUL[ch.dayGan]||[];
+  [ch.yJi,ch.monJi,ch.dayJi,ch.hourJi].forEach(j=>{
+    if(ce.indexOf(j)>=0 && gn.indexOf("천을귀인")<0){ g+=6; gn.push("천을귀인"); }
+    if(MUNCHANG[ch.dayGan]===j && gn.indexOf("문창귀인")<0){ g+=4; gn.push("문창귀인"); }
+  });
+  D.gui=Math.min(10,g); D.guiNote=gn;
+
+  // ⑥ 10년운 10 (30~50대)
+  let dw=0;
+  if(ctx.dw){
+    ctx.dw.list.forEach(d=>{
+      if(d.from>=28&&d.from<=58){
+        if(GAN_OH[d.g]===y.yong||JI_OH[d.j]===y.yong) dw+=2;
+        else if(GAN_OH[d.g]===y.hui||JI_OH[d.j]===y.hui) dw+=1.2;
+        if(chungJi(d.j,ch.dayJi)) dw-=1.2;
+      }
+    });
+  }
+  D.dw=Math.max(0,Math.min(10,Math.round(dw)));
+
+  // ⑦ 현실적인 시간 10
+  D.real = hourReal ? 10 : 3;
+
+  D.total = D.oh+D.jo+D.par+D.stab+D.gui+D.dw+D.real;
+  D.yong=y;
+  return D;
+}
+
+// ── 유틸
+const P2=n=>String(n).padStart(2,"0");
+const dOf=v=>{const a=v.split("-").map(Number);return {Y:a[0],M:a[1],D:a[2]};};
+const dayAdd=(v,n)=>{const t=new Date(v+"T00:00:00Z");t.setUTCDate(t.getUTCDate()+n);
+  return t.toISOString().slice(0,10);};
+const dayDiff=(a,b)=>Math.round((new Date(b+"T00:00:00Z")-new Date(a+"T00:00:00Z"))/86400000);
+const gzp=(g,j)=>GAN[g]+JI[j]+"<small>"+GAN_K[g]+JI_K[j]+"</small>";
+const SIJIN=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+const mn=a=>Math.min.apply(null,a), mx=a=>Math.max.apply(null,a);
+
+function pickCalc(){
+  const err=document.getElementById("pErr");
+  const fail=m=>{err.innerHTML=m;err.classList.remove("hidden");return null;};
+  err.classList.add("hidden");
+
+  const eddV=document.getElementById("edd").value;
+  if(!eddV) return fail("출산 예정일을 입력해 주세요.");
+  const lon=+document.getElementById("pcity").value;
+  const sex=document.getElementById("bsex").value;
+
+  const mk=(dId,tId,noId)=>{
+    const dv=document.getElementById(dId).value;
+    if(!dv) return null;
+    const no=document.getElementById(noId).checked;
+    const tv=no?"12:00":(normTime(document.getElementById(tId).value)||"12:00");
+    const d=dOf(dv), t=tv.split(":").map(Number);
+    const c=chartOf(d.Y,d.M,d.D,t[0],t[1],lon,true,false);
+    c.noHour=no;
+    return c;
+  };
+  const dad=mk("pfD","pfT","pfNo"), mom=mk("pmD","pmT","pmNo");
+  if(!dad||!mom) return fail("아빠와 엄마의 생년월일을 모두 입력해 주세요.");
+
+  let a=document.getElementById("rng1").value, b=document.getElementById("rng2").value;
+  if(!a) a=dayAdd(eddV,-14);
+  if(!b) b=dayAdd(eddV,6);
+  if(dayDiff(a,b)<0) return fail("범위의 첫날이 마지막 날보다 뒤입니다.");
+  if(dayDiff(a,b)>45) return fail("범위가 너무 넓습니다. 45일 이내로 좁혀 주세요.");
+
+  const rows=[];
+  for(let k=0;k<=dayDiff(a,b);k++){
+    const dv=dayAdd(a,k), d=dOf(dv);
+    const gestD=280-dayDiff(dv,eddV);
+    const wk=Math.floor(gestD/7), wd=((gestD%7)+7)%7;
+    for(let h=0;h<12;h++){
+      const hh=(h*2+1)%24;
+      const ch=chartOf(d.Y,d.M,d.D,hh,0,lon,true,false);
+      const real=(hh>=7&&hh<=19);
+      const dw=daewoonOf(ch,d.Y,d.M,d.D,sex);
+      const sc=scorePick(ch,{dad:dad,mom:mom,hourReal:real,wk:wk,dw:dw});
+      rows.push({dv:dv,wk:wk,wd:wd,hh:hh,ch:ch,dw:dw,sc:sc,real:real,ji:h});
+    }
+  }
+  if(!rows.length) return fail("후보 날짜가 없습니다. 범위를 다시 확인해 주세요.");
+  rows.sort((x,z)=>(z.sc.total-x.sc.total)
+    || (z.sc.real-x.sc.real) || (z.sc.stab-x.sc.stab)
+    || (z.sc.oh-x.sc.oh) || (x.dv<z.dv?-1:1));
+  return {rows:rows,dad:dad,mom:mom};
+}
+
+function ohBar(cnt){
+  return '<div class="ohrow">'+cnt.map((v,i)=>
+    '<span class="ohc"><b>'+OH[i]+'</b>'+v+'</span>').join("")+'</div>';
+}
+function chartLine(ch,noHour){
+  return '<div class="gzrow">'+gzp(ch.yGan,ch.yJi)+gzp(ch.monGan,ch.monJi)
+       + gzp(ch.dayGan,ch.dayJi)+(noHour?'<span class="gzq">시주 없음</span>':gzp(ch.hourGan,ch.hourJi))+'</div>';
+}
+
+function pickRender(){
+  const R=pickCalc(); if(!R) return;
+  const rows=R.rows, dad=R.dad, mom=R.mom;
+
+  document.getElementById("pParent").innerHTML =
+    [["아빠",dad],["엄마",mom]].map(function(p){
+      const nm=p[0], c=p[1];
+      return '<div class="pblk"><h3>'+nm+'</h3>'+chartLine(c,c.noHour)+ohBar(c.cnt)
+        +'<p class="sub">일간 <b>'+GAN[c.dayGan]+GAN_K[c.dayGan]+'</b> · '
+        +strengthOf(c).label+' · 부족한 기운 <b>'+OH[c.cnt.indexOf(mn(c.cnt))]+'</b></p></div>';
+    }).join("");
+
+  const byDay={};
+  rows.forEach(r=>{ (byDay[r.dv]=byDay[r.dv]||[]).push(r); });
+  let all='<table class="tb2"><thead><tr><th>날짜</th><th>주수</th><th>가장 좋은 시각</th>'
+        + '<th>점수</th><th>걸리는 것</th></tr></thead><tbody>';
+  Object.keys(byDay).sort().forEach(function(dv){
+    const best=byDay[dv].slice().sort((x,z)=>z.sc.total-x.sc.total)[0];
+    all+='<tr><td>'+dv.slice(5).replace("-","/")+'</td><td>'+best.wk+'주 '+best.wd+'일</td>'
+      +'<td>'+P2(best.hh)+'시 <small>'+SIJIN[best.ji]+'시</small></td>'
+      +'<td><b>'+best.sc.total+'</b></td>'
+      +'<td class="sm">'+(best.sc.stabNote.length?best.sc.stabNote.join(", "):"—")+'</td></tr>';
+  });
+  all+='</tbody></table>';
+  document.getElementById("pAll").innerHTML=all;
+
+  const top=[], seen={};
+  for(let i=0;i<rows.length;i++){
+    const r=rows[i];
+    if(seen[r.dv]) continue;
+    seen[r.dv]=1; top.push(r);
+    if(top.length===3) break;
+  }
+
+  document.getElementById("pTop3").innerHTML = top.map(function(r,i){
+    const y=r.sc.yong, st=y.st;
+    const realBest=rows.filter(x=>x.dv===r.dv&&x.real).sort((p,q)=>q.sc.total-p.sc.total)[0];
+    const dwRows=r.dw.list.filter(d=>d.from>=18&&d.from<=58).map(function(d){
+      const tag=(GAN_OH[d.g]===y.yong||JI_OH[d.j]===y.yong)?"용신이 들어옵니다"
+               :((GAN_OH[d.g]===y.hui||JI_OH[d.j]===y.hui)?"희신이 들어옵니다":"—");
+      return '<tr><td>'+d.from+'세~</td><td>'+gzp(d.g,d.j)+'</td><td class="sm">'+tag+'</td></tr>';
+    }).join("");
+    const timeNote = (realBest&&realBest.hh!==r.hh)
+      ? ' · 병원에서 잡기 쉬운 시간으로는 <b>'+P2(realBest.hh)+'시</b>('+realBest.sc.total+'점)'
+      : (r.real?' · 낮 시간이라 병원에서도 잡기 좋습니다':'');
+    const johuHas = r.ch.cnt[y.jo.need]>0
+      ? '<b>이 사주엔 '+OH[y.jo.need]+'이 '+r.ch.cnt[y.jo.need]+'개 있습니다.</b>'
+      : '<b>아쉽게도 '+OH[y.jo.need]+'이 없습니다.</b>';
+    const bars=[["오행 균형",r.sc.oh,20],["계절·용신",r.sc.jo,20],["부모 조화",r.sc.par,15],
+                ["충형해 안정",r.sc.stab,15],["귀인",r.sc.gui,10],["10년운",r.sc.dw,10],
+                ["현실 시간",r.sc.real,10]].map(b=>
+      '<span class="sbi"><i>'+b[0]+'</i><b>'+b[1]+'</b><em>/'+b[2]+'</em></span>').join("");
+    return '<div class="pcand">'
+      +'<div class="rank">'+(i+1)+'순위 <b>'+r.sc.total+'점</b></div>'
+      +'<h3>'+r.dv.replace(/-/g,".")+' · '+P2(r.hh)+'시 <small>'+SIJIN[r.ji]+'시</small></h3>'
+      +'<p class="sub">임신 <b>'+r.wk+'주 '+r.wd+'일</b>'+timeNote+'</p>'
+      +chartLine(r.ch)+ohBar(r.ch.cnt)
+      +'<dl class="pd">'
+      +'<dt>기운의 세기</dt><dd>'+st.label+' — '+y.why+'</dd>'
+      +'<dt>계절이 아쉬워하는 것</dt><dd>'+y.jo.ss+'에 태어납니다. '+y.jo.msg+' '+johuHas+'</dd>'
+      +'<dt>용신 · 희신</dt><dd>용신 <b>'+OH[y.yong]+'</b> · 희신 <b>'+OH[y.hui]
+        +'</b> <span class="sm">(유파에 따라 다르게 볼 수 있습니다)</span></dd>'
+      +'<dt>귀인</dt><dd>'+(r.sc.guiNote.length?r.sc.guiNote.join(" · ")
+        :"걸리는 자리 없음 — 없다고 나쁜 것은 아닙니다")+'</dd>'
+      +'<dt>부모와의 관계</dt><dd>'+r.sc.par+'/15점.'
+        +(r.sc.parGood.length?' 좋은 쪽 — '+r.sc.parGood.slice(0,4).join(", ")+'.':'')
+        +(r.sc.parBad.length?' 걸리는 쪽 — '+r.sc.parBad.slice(0,4).join(", ")+'.':'')
+        +(!r.sc.parGood.length&&!r.sc.parBad.length?' 두드러진 합·충이 없습니다.':'')+'</dd>'
+      +'<dt>충·형·해</dt><dd>'+(r.sc.stabNote.length
+        ?'<b>'+r.sc.stabNote.join(", ")+'</b> — 그래서 '+(15-r.sc.stab)+'점 깎였습니다'
+        :'여덟 글자 안에 부딪히는 자리가 없습니다')+'</dd>'
+      +'</dl>'
+      +'<h4 style="margin:16px 0 6px;font-size:14px">10년마다 바뀌는 흐름</h4>'
+      +'<table class="tb2"><thead><tr><th>나이</th><th>간지</th><th>보는 점</th></tr></thead><tbody>'
+      +dwRows+'</tbody></table>'
+      +'<div class="sbar">'+bars+'</div></div>';
+  }).join("");
+
+  document.getElementById("pCmp").innerHTML =
+    '<table class="tb2"><thead><tr><th>순위</th><th>날짜</th><th>주수</th><th>시각</th>'
+    +'<th>오행</th><th>계절</th><th>부모</th><th>충형해</th><th>귀인</th><th>10년운</th>'
+    +'<th>현실</th><th>총점</th></tr></thead><tbody>'
+    + top.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+r.dv.slice(5).replace("-","/")+'</td>'
+      +'<td>'+r.wk+'주'+r.wd+'일</td><td>'+P2(r.hh)+'시</td>'
+      +'<td>'+r.sc.oh+'</td><td>'+r.sc.jo+'</td><td>'+r.sc.par+'</td><td>'+r.sc.stab+'</td>'
+      +'<td>'+r.sc.gui+'</td><td>'+r.sc.dw+'</td><td>'+r.sc.real+'</td>'
+      +'<td><b>'+r.sc.total+'</b></td></tr>').join("")+'</tbody></table>';
+
+  document.getElementById("pHow").innerHTML=
+    '<p class="sub" style="margin-top:0">100점을 이렇게 나눠 매겼습니다. 왜 이 날짜가 위로 왔는지 항목별로 따라가실 수 있습니다.</p>'
+    +'<table class="tb2"><thead><tr><th>항목</th><th>배점</th><th>무엇을 보나</th></tr></thead><tbody>'
+    +'<tr><td>오행 균형</td><td>20</td><td>다섯 기운이 고르게 퍼져 있는지, 빠진 기운이 몇 개인지</td></tr>'
+    +'<tr><td>계절 · 용신</td><td>20</td><td>태어난 달이 아쉬워하는 기운을 갖췄는지</td></tr>'
+    +'<tr><td>부모 조화</td><td>15</td><td>부모 일간·지지와의 합·충, 부모에게 부족한 기운을 채우는지</td></tr>'
+    +'<tr><td>충 · 형 · 해</td><td>15</td><td>여덟 글자 안에서 부딪히는 자리가 있는지</td></tr>'
+    +'<tr><td>귀인</td><td>10</td><td>천을귀인 · 문창귀인이 앉아 있는지</td></tr>'
+    +'<tr><td>10년운</td><td>10</td><td>30~50대 흐름에 용신·희신이 들어오는지</td></tr>'
+    +'<tr><td>현실 시간</td><td>10</td><td>07~19시 사이라 병원에서 실제로 잡기 좋은지</td></tr>'
+    +'</tbody></table>'
+    +'<p class="warn" style="margin-top:14px"><b>점수가 높다고 좋은 날이 되는 것은 아닙니다.</b> '
+    +'이 배점은 이 도구가 정한 한 가지 방식일 뿐이고, 명리 유파마다 무엇을 중히 보는지가 다릅니다. '
+    +'날짜는 <b>담당 의료진</b>이 정합니다.</p>';
+
+  document.getElementById("pickOut").classList.remove("hidden");
+  document.getElementById("pickOut").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+(function(){
+  const b=document.getElementById("pickBtn");
+  if(b) b.addEventListener("click", pickRender);
+})();
+
+/* ── 입력칸 다듬기 ─────────────────────────────────────────
+   시각: 24시간으로 적으면 그대로 받는다. "930", "2214", "22시 14" 다 됩니다.
+   날짜: 연 4자리·월일 2자리를 벗어나면 되돌립니다.
+   ───────────────────────────────────────────────────────── */
+
+// "22시 14" · "2214" · "9:30" · "930" → "22:14" / "09:30"
+function normTime(v){
+  if(v==null) return "";
+  const parts=String(v).split(/[^\d]+/).filter(x=>x!=="");
+  if(!parts.length) return "";
+  let h,m;
+  if(parts.length>=2){ h=+parts[0]; m=+parts[1]; }   // 9:5 · 22시 14 → 구분자를 살린다
+  else {
+    const g=parts[0];
+    if(g.length<=2){ h=+g; m=0; }
+    else if(g.length===3){ h=+g.slice(0,1); m=+g.slice(1); }
+    else { h=+g.slice(0,2); m=+g.slice(2,4); }
+  }
+  if(!isFinite(h)||!isFinite(m)) return "";
+  h=Math.max(0,Math.min(23,h)); m=Math.max(0,Math.min(59,m));
+  return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0");
+}
+
+function bindTime(el){
+  if(!el) return;
+  const fix=()=>{ const n=normTime(el.value); if(n) el.value=n; };
+  el.addEventListener("blur", fix);
+  el.addEventListener("change", fix);
+  el.addEventListener("keydown", e=>{ if(e.key==="Enter") fix(); });
+}
+
+// 날짜: 형식·범위를 벗어나면 직전 값으로 되돌린다
+function bindDate(el){
+  if(!el) return;
+  let last=el.value;
+  const fix=()=>{
+    const v=el.value;
+    if(!v){ last=""; return; }
+    const ok=/^\d{4}-\d{2}-\d{2}$/.test(v) && +v.slice(0,4)>=1900 && +v.slice(0,4)<=2100;
+    if(!ok){ el.value=last; return; }
+    if(el.min && v<el.min) el.value=el.min;
+    else if(el.max && v>el.max) el.value=el.max;
+    last=el.value;
+  };
+  el.addEventListener("change", fix);
+  el.addEventListener("blur", fix);
+}
+
+(function(){
+  ["t","pfT","pmT"].forEach(id=>bindTime(document.getElementById(id)));
+  document.querySelectorAll('input[type="date"]').forEach(bindDate);
+})();
+
 </script>
