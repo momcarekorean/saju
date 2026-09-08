@@ -344,6 +344,10 @@ dd b{font-weight:500; color:var(--ink)}
 
 
 .hint{font-weight:400;font-size:11.5px;color:var(--ink-3);margin-left:6px;letter-spacing:0}
+
+.gloss dt{margin-top:18px}
+.gloss dt:first-child{margin-top:0}
+.gloss dd{margin-bottom:2px}
 </style>
 
 <div class="wrap">
@@ -616,6 +620,62 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="card"><h2>후보를 전부 훑어봤습니다</h2>
     <p class="sub" style="margin-top:0">가능한 날짜 × 12시진을 모두 계산한 뒤, 아래 기준으로 걸러냈습니다.</p>
     <div id="pAll"></div></div>
+  <div class="card">
+    <h2>여기 나오는 말들, 짧게 풀어 드립니다</h2>
+    <p class="sub" style="margin-top:0">아래 결과에 낯선 한자말이 나옵니다. 뜻만 알고 보시면 훨씬 읽기 쉽습니다.</p>
+    <dl class="pd gloss">
+      <dt>신강 · 신약 <span class="hint">기운의 세기</span></dt>
+      <dd>사주에서 <b>나를 뜻하는 글자</b>가 얼마나 힘이 있는지를 봅니다.
+        태어난 달이 나를 밀어주고 같은 편 글자가 많으면 <b>신강</b>(기운이 넉넉함),
+        반대면 <b>신약</b>(기운이 여림)이라 부릅니다.
+        <b>둘 중 어느 쪽이 좋고 나쁜 게 아닙니다.</b> 넘치면 덜어내고 모자라면 채우는 식으로,
+        <b>어느 쪽으로 손을 봐야 하는지</b>가 달라질 뿐입니다.</dd>
+
+      <dt>용신 <span class="hint">用神 · 이 사주에 제일 아쉬운 기운</span></dt>
+      <dd>약에 비유하면 <b>주된 약</b>입니다. 더위를 타는 사람에게 시원한 것,
+        추위를 타는 사람에게 따뜻한 것이 필요하듯 —
+        <b>기운이 넘치면 덜어내 주는 쪽</b>이, <b>여리면 채워 주는 쪽</b>이 용신이 됩니다.
+        이 글자가 사주 안에 들어 있으면 균형이 잡힌다고 봅니다.</dd>
+
+      <dt>희신 <span class="hint">喜神 · 용신을 거드는 기운</span></dt>
+      <dd><b>주된 약을 돕는 보조약</b>쯤 됩니다. 용신만큼 결정적이진 않지만,
+        곁에 있으면 용신이 제 역할을 하기 수월해진다고 봅니다.
+        <b>⚠️ 용신·희신을 무엇으로 잡을지는 명리 유파마다 다릅니다.</b>
+        이 도구는 널리 쓰이는 한 가지 방식을 골라 쓸 뿐, 그것이 정답이라고 주장하지 않습니다.</dd>
+
+      <dt>조후 <span class="hint">계절이 아쉬워하는 것</span></dt>
+      <dd>태어난 <b>계절</b>을 보고 무엇이 필요한지 따집니다.
+        겨울에 태어나면 따뜻한 기운, 여름에 태어나면 식혀 주는 기운이 있으면 좋다고 보는 식이에요.
+        <b>날씨에 옷을 맞춰 입는 것</b>과 같은 발상입니다.</dd>
+
+      <dt>천을귀인 <span class="hint">天乙貴人</span></dt>
+      <dd>옛사람들이 <b>가장 좋게 친 자리</b>입니다.
+        어려울 때 <b>손 내밀어 주는 사람이 따른다</b>고 봤습니다.
+        다만 <b>이게 있다고 다 좋은 사주가 되는 건 아닙니다.</b>
+        부딪히는 자리가 많으면 그만큼 상쇄된다고 보고, 이 도구도 그렇게 계산합니다.</dd>
+
+      <dt>문창귀인 <span class="hint">文昌貴人</span></dt>
+      <dd><b>글재주와 배움에 인연이 있다</b>고 보는 자리입니다.
+        공부를 잘한다는 뜻이라기보다, <b>읽고 쓰는 쪽과 결이 맞는다</b>고 읽으시면 됩니다.</dd>
+
+      <dt>충 · 형 · 해 · 파 <span class="hint">글자끼리 부딪히는 관계</span></dt>
+      <dd>사주 아래 네 글자(지지)끼리 서로 <b>맞부딪히는 짝</b>이 정해져 있습니다.
+        가장 센 것이 <b>충</b>(정면으로 맞섬), 다음이 <b>형</b>·<b>해</b>·<b>파</b> 순입니다.
+        <b>있다고 해서 나쁜 사주는 아닙니다.</b> 변화가 크다는 뜻으로도 읽고,
+        이 도구는 <b>많을수록 점수를 조금씩 깎는</b> 정도로만 씁니다.</dd>
+
+      <dt>육합 · 삼합 <span class="hint">글자끼리 어울리는 관계</span></dt>
+      <dd>반대로 <b>서로 잘 붙는 짝</b>도 있습니다. 둘이 맞으면 <b>육합</b>,
+        셋이 모여 한 기운을 이루면 <b>삼합</b>이라 합니다.
+        부모 글자와 아기 글자 사이에 이런 짝이 생기면 <b>어울림이 좋다</b>고 봅니다.</dd>
+
+      <dt>10년운 <span class="hint">대운 · 10년마다 바뀌는 흐름</span></dt>
+      <dd>사주는 태어난 순간 고정되지만, <b>10년마다 바뀌는 기운</b>이 그 위에 얹힌다고 봅니다.
+        <b>큰 복이 온다는 뜻이 아니라 계절이 바뀌는 것</b>에 가깝습니다.
+        이 흐름에 <b>용신·희신이 들어오는 시기</b>를 좋게 봅니다.
+        시작 나이는 태어난 날에서 <b>절기까지 며칠 남았는지</b>로 정해져서, 날짜마다 달라집니다.</dd>
+    </dl>
+  </div>
   <div class="card"><h2>상위 세 후보</h2><div id="pTop3"></div></div>
   <div class="card"><h2>한눈에 비교</h2><div id="pCmp"></div></div>
   <div class="card"><h2>어떻게 점수를 매겼나</h2><div id="pHow"></div></div>
@@ -1678,7 +1738,10 @@ function scorePick(ch, ctx){
   D.dw=Math.max(0,Math.min(10,Math.round(dw)));
 
   // ⑦ 현실적인 시간 10
-  D.real = hourReal ? 10 : 3;
+  // 계획 제왕절개는 오전 첫 수술이 8시 반~9시, 오후 타임까지가 현실적이다
+  D.real = (ctx.hh>=10&&ctx.hh<=16) ? 10
+         : (ctx.hh===8) ? 8
+         : (ctx.hh===18) ? 4 : 1;
 
   D.total = D.oh+D.jo+D.par+D.stab+D.gui+D.dw+D.real;
   D.yong=y;
@@ -1730,11 +1793,11 @@ function pickCalc(){
     const gestD=280-dayDiff(dv,eddV);
     const wk=Math.floor(gestD/7), wd=((gestD%7)+7)%7;
     for(let h=0;h<12;h++){
-      const hh=(h*2+1)%24;
+      const hh=h*2;
       const ch=chartOf(d.Y,d.M,d.D,hh,0,lon,true,false);
-      const real=(hh>=7&&hh<=19);
+      const real=(hh>=8&&hh<=16);
       const dw=daewoonOf(ch,d.Y,d.M,d.D,sex);
-      const sc=scorePick(ch,{dad:dad,mom:mom,hourReal:real,wk:wk,dw:dw});
+      const sc=scorePick(ch,{dad:dad,mom:mom,hourReal:real,hh:hh,wk:wk,dw:dw});
       rows.push({dv:dv,wk:wk,wd:wd,hh:hh,ch:ch,dw:dw,sc:sc,real:real,ji:h});
     }
   }
@@ -1773,7 +1836,7 @@ function pickRender(){
   Object.keys(byDay).sort().forEach(function(dv){
     const best=byDay[dv].slice().sort((x,z)=>z.sc.total-x.sc.total)[0];
     all+='<tr><td>'+dv.slice(5).replace("-","/")+'</td><td>'+best.wk+'주 '+best.wd+'일</td>'
-      +'<td>'+P2(best.hh)+'시 <small>'+SIJIN[best.ji]+'시</small></td>'
+      +'<td>'+P2(best.hh)+'시 <small>'+JI[best.ch.hourJi]+'시</small></td>'
       +'<td><b>'+best.sc.total+'</b></td>'
       +'<td class="sm">'+(best.sc.stabNote.length?best.sc.stabNote.join(", "):"—")+'</td></tr>';
   });
@@ -1798,7 +1861,7 @@ function pickRender(){
     }).join("");
     const timeNote = (realBest&&realBest.hh!==r.hh)
       ? ' · 병원에서 잡기 쉬운 시간으로는 <b>'+P2(realBest.hh)+'시</b>('+realBest.sc.total+'점)'
-      : (r.real?' · 낮 시간이라 병원에서도 잡기 좋습니다':'');
+      : (r.real?' · 병원 수술 일정에 잡기 좋은 시간대입니다':'');
     const johuHas = r.ch.cnt[y.jo.need]>0
       ? '<b>이 사주엔 '+OH[y.jo.need]+'이 '+r.ch.cnt[y.jo.need]+'개 있습니다.</b>'
       : '<b>아쉽게도 '+OH[y.jo.need]+'이 없습니다.</b>';
@@ -1808,21 +1871,21 @@ function pickRender(){
       '<span class="sbi"><i>'+b[0]+'</i><b>'+b[1]+'</b><em>/'+b[2]+'</em></span>').join("");
     return '<div class="pcand">'
       +'<div class="rank">'+(i+1)+'순위 <b>'+r.sc.total+'점</b></div>'
-      +'<h3>'+r.dv.replace(/-/g,".")+' · '+P2(r.hh)+'시 <small>'+SIJIN[r.ji]+'시</small></h3>'
+      +'<h3>'+r.dv.replace(/-/g,".")+' · '+P2(r.hh)+'시 <small>'+JI[r.ch.hourJi]+'시</small></h3>'
       +'<p class="sub">임신 <b>'+r.wk+'주 '+r.wd+'일</b>'+timeNote+'</p>'
       +chartLine(r.ch)+ohBar(r.ch.cnt)
       +'<dl class="pd">'
-      +'<dt>기운의 세기</dt><dd>'+st.label+' — '+y.why+'</dd>'
+      +'<dt>기운의 세기 <span class="hint">신강·신약</span></dt><dd>'+st.label+' — '+y.why+'</dd>'
       +'<dt>계절이 아쉬워하는 것</dt><dd>'+y.jo.ss+'에 태어납니다. '+y.jo.msg+' '+johuHas+'</dd>'
-      +'<dt>용신 · 희신</dt><dd>용신 <b>'+OH[y.yong]+'</b> · 희신 <b>'+OH[y.hui]
+      +'<dt>용신 · 희신 <span class="hint">제일 아쉬운 기운 · 그걸 거드는 기운</span></dt><dd>용신 <b>'+OH[y.yong]+'</b> · 희신 <b>'+OH[y.hui]
         +'</b> <span class="sm">(유파에 따라 다르게 볼 수 있습니다)</span></dd>'
-      +'<dt>귀인</dt><dd>'+(r.sc.guiNote.length?r.sc.guiNote.join(" · ")
+      +'<dt>귀인 <span class="hint">옛사람들이 좋게 본 자리</span></dt><dd>'+(r.sc.guiNote.length?r.sc.guiNote.join(" · ")
         :"걸리는 자리 없음 — 없다고 나쁜 것은 아닙니다")+'</dd>'
       +'<dt>부모와의 관계</dt><dd>'+r.sc.par+'/15점.'
         +(r.sc.parGood.length?' 좋은 쪽 — '+r.sc.parGood.slice(0,4).join(", ")+'.':'')
         +(r.sc.parBad.length?' 걸리는 쪽 — '+r.sc.parBad.slice(0,4).join(", ")+'.':'')
         +(!r.sc.parGood.length&&!r.sc.parBad.length?' 두드러진 합·충이 없습니다.':'')+'</dd>'
-      +'<dt>충·형·해</dt><dd>'+(r.sc.stabNote.length
+      +'<dt>충·형·해 <span class="hint">글자끼리 부딪히는 자리</span></dt><dd>'+(r.sc.stabNote.length
         ?'<b>'+r.sc.stabNote.join(", ")+'</b> — 그래서 '+(15-r.sc.stab)+'점 깎였습니다'
         :'여덟 글자 안에 부딪히는 자리가 없습니다')+'</dd>'
       +'</dl>'
@@ -1851,7 +1914,7 @@ function pickRender(){
     +'<tr><td>충 · 형 · 해</td><td>15</td><td>여덟 글자 안에서 부딪히는 자리가 있는지</td></tr>'
     +'<tr><td>귀인</td><td>10</td><td>천을귀인 · 문창귀인이 앉아 있는지</td></tr>'
     +'<tr><td>10년운</td><td>10</td><td>30~50대 흐름에 용신·희신이 들어오는지</td></tr>'
-    +'<tr><td>현실 시간</td><td>10</td><td>07~19시 사이라 병원에서 실제로 잡기 좋은지</td></tr>'
+    +'<tr><td>현실 시간</td><td>10</td><td>계획 제왕절개는 대개 <b>오전 9시~오후 5시</b>에 잡힙니다. 그 안이면 만점, 새벽·심야는 낮게</td></tr>'
     +'</tbody></table>'
     +'<p class="warn" style="margin-top:14px"><b>점수가 높다고 좋은 날이 되는 것은 아닙니다.</b> '
     +'이 배점은 이 도구가 정한 한 가지 방식일 뿐이고, 명리 유파마다 무엇을 중히 보는지가 다릅니다. '
