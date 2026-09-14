@@ -722,6 +722,8 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 
 <script>
+// 만세력 탭이 자동 계산하며 주소를 덮어쓰기 전에, 탭 지정부터 잡아 둔다
+const INIT_TAB=new URLSearchParams(location.search).get("tab");
 const GAN=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
 const GAN_K=["갑","을","병","정","무","기","경","신","임","계"];
 const JI=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
@@ -1619,8 +1621,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
 
 // 블로그 글에서 ?tab=pick 으로 들어오면 택일 탭을 바로 연다
 (function(){
-  const t=new URLSearchParams(location.search).get("tab");
-  if(t!=="pick") return;
+  if(INIT_TAB!=="pick") return;
   const b=document.querySelector('.tb[data-tab="tab-pick"]');
   if(b){ b.click(); window.scrollTo(0,0); }
 })();
