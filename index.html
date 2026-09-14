@@ -537,10 +537,10 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
 
   <div class="card">
-    <h2>결과 공유하기</h2>
+    <h2>이 도구 알려주기</h2>
     <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
-      아래 주소에는 <b>지금 입력한 내용이 그대로 담겨</b> 있습니다. 남편·아내·지인에게 보내면
-      <b>같은 결과가 그대로 열립니다.</b></p>
+      아래 주소는 <b>이 도구를 어떻게 만들었고 사주로 무엇을 계산하는지 정리한 블로그 글</b>입니다.
+      남편·아내·지인에게 보내면 글을 읽고 <b>글 안에서 바로 도구로 들어올 수 있습니다.</b></p>
     <div class="shu" id="shareurl"></div>
     <div class="shb">
       <button type="button" class="sh sh-main" id="shNative">📤 공유하기</button>
@@ -870,7 +870,8 @@ const SURHAN=new Set(Object.values(SUR).map(v=>v[0]));
 const GOOD=/밝|빛|아름|클|어질|착|슬기|지혜|복|상서|기쁠|즐|귀할|옥|구슬|보배|맑|깨끗|높|빼어|향기|꽃|별|해|달|하늘|봄|사랑|은혜|편안|화할|이룰|성할|넉넉|도울|곧을|굳|온화|영화|아리따|고울|평안|기릴|우거|무성|순할|미쁠|정성|믿을|너그|맺을|이룰/;
 const BAD=/죽|병|앓|슬플|잃|도둑|벌레|어두|흉|재앙|근심|괴로|미워|성낼|두려|무덤|시체|귀신|늙|가난|천할|더러|밧줄|동이|책상|개펄|똥|오줌|뼈|가죽|창자|화살|덫|그물|올가미|허물|죄|벌할|꾸짖|나쁠|악할|어리석|게으|취할|싸울|다툴|찌를|무너|망할|굶주|주릴|아플|의심|속일|훔칠|막을|좁을|낮을|잠길|빠질/;
 
-let reroll=0, shareURL=location.href, shareText="사주와 이름 궁합";                                   // 다시 뽑기 횟수
+const BLOG_NAME_URL="https://blog.naver.com/momcare_/224399366895";
+let reroll=0, shareURL=BLOG_NAME_URL, shareText="아기 이름, 작명소 없이 사주로 직접 지어 볼 수 있어요";                                   // 다시 뽑기 횟수
 const jo=(w,a,b)=>{const c=String(w).charCodeAt(String(w).length-1)-0xAC00;
   return (c>=0&&c<11172&&c%28!==0)?a:b;};       // 받침 있으면 a, 없으면 b
 const rad=Math.PI/180;
@@ -1514,9 +1515,10 @@ function calc(){
   {
     const q=new URLSearchParams({d:dv,t:(noTime?"":tv),c:String(lon),s:sur,g:given,
                                 x:sex0,n:String(topN),e:useEot?"1":"0",y:yaja?"1":"0"});
-    shareURL=location.origin+location.pathname+"?"+q.toString();
-    shareText=`${dv} 태생 사주 — ${GAN[yGan]}${JI[yJi]} ${GAN[monGan]}${JI[monJi]} ${GAN[dayGan]}${JI[dayJi]}`
-      +`${noTime?"":" "+GAN[hourGan]+JI[hourJi]}, ${OH[dOh]}의 기질`;
+    // 공유는 블로그 글로 보낸다 — 글 안에서 이 도구로 바로 들어올 수 있다.
+    // 내 입력값은 주소창에만 남겨 둔다(새로고침·즐겨찾기용).
+    shareURL=BLOG_NAME_URL;
+    shareText="아기 이름, 작명소 없이 사주로 직접 지어 볼 수 있어요 — 무료 도구와 계산 방법 정리";
     try{ history.replaceState(null,"","?"+q.toString()); }catch(e){}
     document.getElementById("shareurl").textContent=shareURL;
   }
@@ -1560,7 +1562,7 @@ const shMsg=(m)=>{const e=document.getElementById("shMsg");
 const enc=encodeURIComponent;
 document.getElementById("shNative").addEventListener("click",async()=>{
   if(navigator.share){
-    try{ await navigator.share({title:"진태양시 만세력",text:shareText,url:shareURL}); }
+    try{ await navigator.share({title:"아기이름 작명, 작명소 없이 직접",text:shareText,url:shareURL}); }
     catch(e){}                                   // 사용자가 취소한 경우
   }else{
     try{ await navigator.clipboard.writeText(shareURL); shMsg("이 기기에서는 공유창을 열 수 없어 주소를 복사했습니다."); }
