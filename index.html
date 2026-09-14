@@ -1617,6 +1617,14 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   window.scrollTo({top:0,behavior:"smooth"});
 }));
 
+// 블로그 글에서 ?tab=pick 으로 들어오면 택일 탭을 바로 연다
+(function(){
+  const t=new URLSearchParams(location.search).get("tab");
+  if(t!=="pick") return;
+  const b=document.querySelector('.tb[data-tab="tab-pick"]');
+  if(b){ b.click(); window.scrollTo(0,0); }
+})();
+
 // ── 지지 관계 (0子 1丑 2寅 3卯 4辰 5巳 6午 7未 8申 9酉 10戌 11亥)
 const chungJi=(a,b)=>((a-b)%12+12)%12===6;
 const YUKHAP={0:1,1:0,2:11,11:2,3:10,10:3,4:9,9:4,5:8,8:5,6:7,7:6};
@@ -1812,7 +1820,7 @@ function pickCalc(){
 
   let a=normDate(document.getElementById("rng1").value), b=normDate(document.getElementById("rng2").value);
   if(!a) a=dayAdd(eddV,-14);
-  if(!b) b=dayAdd(eddV,6);
+  if(!b) b=eddV;   // 계획 제왕절개는 예정일 뒤로 잡는 일이 거의 없다
   if(dayDiff(a,b)<0) return fail("범위의 첫날이 마지막 날보다 뒤입니다.");
   if(dayDiff(a,b)>45) return fail("범위가 너무 넓습니다. 45일 이내로 좁혀 주세요.");
 
