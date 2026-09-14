@@ -579,6 +579,7 @@ dd b{font-weight:500; color:var(--ink)}
     <a href="https://blog.naver.com/momcare_/224399366895" target="_blank" rel="noopener"><b>작명</b>아기이름 작명, 작명소 없이 직접 — 사주로 뭘 계산하는지 전부 공개</a>
     <a href="https://blog.naver.com/momcare_/224403853237" target="_blank" rel="noopener"><b>성별</b>초음파 성별, AI 3개한테 물어봤더니 전부 딸 — 각도법 프롬프트 공개</a>
     <a href="https://blog.naver.com/momcare_/224400620778" target="_blank" rel="noopener"><b>검사</b>니프티 검사 결과 언제 나오나 — 용혈로 재채혈까지 갔지만 8일</a>
+    <a href="https://blog.naver.com/momcare_/224410891254" target="_blank" rel="noopener"><b>택일</b>무료 출산택일, AI 활용해 제왕절개 날짜·시간을 부모 사주로 직접</a>
   </div>
 </div>
 </div>
@@ -626,8 +627,8 @@ dd b{font-weight:500; color:var(--ink)}
     <div><label for="rng2">마지막 날</label><input type="text" id="rng2" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
   </div>
   <p class="warn"><b>날짜는 의료진이 정합니다.</b> 이 도구는 병원에서 가능하다고 한 날짜들의
-  <b>순서만</b> 매깁니다. 범위를 비워 두면 <b>예정일 2주 전부터 예정일 6일 뒤까지</b>를 후보로 봅니다.
-  계획 제왕절개는 <b>38주 무렵에 잡는 경우가 많아</b> 그 구간을 기본으로 잡았습니다.
+  <b>순서만</b> 매깁니다. 범위를 비워 두면 <b>예정일 2주 전부터 예정일 당일까지</b>를 후보로 봅니다.
+  계획 제왕절개는 <b>예정일보다 2주쯤 앞서 잡는 경우가 많아</b> 그 구간을 기본으로 잡았습니다.
   후보마다 <b>임신 주수를 함께 표시</b>하니, 병원에서 받은 날짜와 맞춰 보세요.</p>
   <div class="btns"><button id="pickBtn" type="button">택일 계산</button></div>
   <p id="pErr" class="err hidden"></p>
@@ -699,6 +700,25 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="card"><h2>어떻게 점수를 매겼나</h2><div id="pHow"></div></div>
 </div>
 
+<div class="card">
+  <h2>이 도구 알려주기</h2>
+  <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
+    아래 주소는 <b>이 택일 도구를 왜 만들었고 무엇을 어떻게 채점하는지 정리한 블로그 글</b>입니다.
+    남편·아내·지인에게 보내면 글을 읽고 <b>글 안에서 바로 이 탭으로 들어올 수 있습니다.</b></p>
+  <div class="shu" id="pkUrl"></div>
+  <div class="shb">
+    <button type="button" class="sh sh-main" id="pkNative">📤 공유하기</button>
+    <button type="button" class="sh" id="pkCopy">🔗 주소 복사</button>
+    <button type="button" class="sh" id="pkSms">💬 문자로</button>
+    <button type="button" class="sh" id="pkX">𝕏 에 올리기</button>
+    <button type="button" class="sh" id="pkFb">f 페이스북</button>
+  </div>
+  <p id="pkMsg" class="shmsg hidden"></p>
+  <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
+    휴대폰에서 <b>공유하기</b>를 누르면 카카오톡·문자 등 평소 쓰시는 앱 목록이 뜹니다.
+    컴퓨터에서는 <b>주소 복사</b>를 쓰시면 됩니다.</p>
+</div>
+
 <p class="note">
 <b>이 탭이 하는 일과 하지 않는 일.</b> 여덟 글자와 절기·진태양시는 천문 계산이라 만세력과 일치합니다.
 반면 <b>용신을 무엇으로 잡을지, 어떤 살을 얼마나 무겁게 볼지</b>는 유파마다 다릅니다.
@@ -712,6 +732,7 @@ dd b{font-weight:500; color:var(--ink)}
 <div class="card">
   <h2>함께 보면 좋은 글</h2>
   <div class="blogs">
+    <a href="https://blog.naver.com/momcare_/224410891254" target="_blank" rel="noopener"><b>택일</b>무료 출산택일, AI 활용해 제왕절개 날짜·시간을 부모 사주로 직접</a>
     <a href="https://blog.naver.com/momcare_/224404474441" target="_blank" rel="noopener"><b>제왕절개·무통</b>무통주사 아기한테 안 좋을까 — 허리 통증은 정말 무통 때문일까</a>
     <a href="https://blog.naver.com/momcare_/224404492213" target="_blank" rel="noopener"><b>진통</b>진통 간격 몇 분에 병원 가야 하나 — 5분·10분·15분 기준</a>
     <a href="https://blog.naver.com/momcare_/224384751103" target="_blank" rel="noopener"><b>준비물</b>출산가방 완전정리 — 병원용·조리원용 따로, 수량까지</a>
@@ -1625,6 +1646,38 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   const b=document.querySelector('.tb[data-tab="tab-pick"]');
   if(b){ b.click(); window.scrollTo(0,0); }
 })();
+
+// 택일 탭 공유 — 이 탭을 어떻게 만들었는지 정리한 블로그 글로 보낸다
+const BLOG_PICK_URL="https://blog.naver.com/momcare_/224410891254";
+const PICK_SHARE_TEXT="제왕절개 날짜·시간, 부모 사주로 직접 골라 볼 수 있어요 — 무료 출산택일 도구와 계산 방법 정리";
+document.getElementById("pkUrl").textContent=BLOG_PICK_URL;
+const pkMsg=(m)=>{const e=document.getElementById("pkMsg");
+  e.textContent=m; e.classList.remove("hidden");
+  clearTimeout(pkMsg._t); pkMsg._t=setTimeout(()=>e.classList.add("hidden"),3200);};
+const pkCopy=async(ok)=>{
+  try{ await navigator.clipboard.writeText(BLOG_PICK_URL); pkMsg(ok); }
+  catch(e){
+    const t=document.createElement("textarea"); t.value=BLOG_PICK_URL; document.body.appendChild(t);
+    t.select(); try{document.execCommand("copy"); pkMsg(ok);}catch(_){pkMsg("복사가 막혀 있습니다. 위 주소를 길게 눌러 복사해 주세요.");}
+    document.body.removeChild(t);
+  }
+};
+document.getElementById("pkNative").addEventListener("click",async()=>{
+  if(navigator.share){
+    try{ await navigator.share({title:"무료 출산택일, 제왕절개 날짜·시간 직접",text:PICK_SHARE_TEXT,url:BLOG_PICK_URL}); }
+    catch(e){}                                   // 사용자가 취소한 경우
+  }else pkCopy("이 기기에서는 공유창을 열 수 없어 주소를 복사했습니다.");
+});
+document.getElementById("pkCopy").addEventListener("click",()=>pkCopy("주소를 복사했습니다. 붙여넣기로 보내세요."));
+document.getElementById("pkSms").addEventListener("click",()=>{
+  location.href=`sms:?&body=${enc(PICK_SHARE_TEXT+" — "+BLOG_PICK_URL)}`;
+});
+document.getElementById("pkX").addEventListener("click",()=>{
+  window.open(`https://twitter.com/intent/tweet?text=${enc(PICK_SHARE_TEXT)}&url=${enc(BLOG_PICK_URL)}`,"_blank","noopener");
+});
+document.getElementById("pkFb").addEventListener("click",()=>{
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${enc(BLOG_PICK_URL)}`,"_blank","noopener");
+});
 
 // ── 지지 관계 (0子 1丑 2寅 3卯 4辰 5巳 6午 7未 8申 9酉 10戌 11亥)
 const chungJi=(a,b)=>((a-b)%12+12)%12===6;
