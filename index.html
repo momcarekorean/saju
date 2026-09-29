@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>진태양시 만세력</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -280,7 +282,7 @@ dd b{font-weight:500; color:var(--ink)}
 }
 
 /* 탭 — 그림을 눌러 고른다 */
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 26px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 26px}
 .tb{appearance:none;padding:0;border:3px solid transparent;border-radius:16px;
   background:none;cursor:pointer;overflow:hidden;position:relative;display:block;
   transition:border-color .15s, box-shadow .15s, transform .12s, filter .15s}
@@ -295,7 +297,7 @@ dd b{font-weight:500; color:var(--ink)}
   background:var(--seal);color:#fff;font-size:11.5px;font-weight:700;
   padding:5px 11px;border-radius:999px;letter-spacing:.02em;
   box-shadow:0 2px 6px rgba(0,0,0,.18)}
-@media(max-width:600px){ .tabs{grid-template-columns:1fr;gap:10px} }
+@media(max-width:600px){ .tabs{grid-template-columns:repeat(3,1fr);gap:7px} .tb{border-width:2px;border-radius:10px} .tb.on .tbnow{display:none} }
 .ck{display:inline-flex;align-items:center;gap:7px;margin:8px 14px 0 0;font-size:14px;color:var(--ink-2)}
 .warn{background:var(--paper-2);border-left:3px solid var(--seal);padding:11px 14px;
       border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-2);margin:14px 0 0}
@@ -358,6 +360,42 @@ dd b{font-weight:500; color:var(--ink)}
 .gloss dt{margin-top:18px}
 .gloss dt:first-child{margin-top:0}
 .gloss dd{margin-bottom:2px}
+/* ── 성장분석 탭 ── */
+.gmodal{position:fixed;inset:0;background:rgba(20,17,12,.55);display:flex;align-items:center;justify-content:center;z-index:50;padding:18px}
+.gmodal.hidden{display:none}
+.gbox{background:var(--card);border:1px solid var(--rule);border-radius:10px;max-width:460px;width:100%;padding:22px;box-shadow:var(--shadow);max-height:90vh;overflow:auto}
+.gbox h2{margin-top:0}
+.gbox ul{margin:0 0 16px;padding-left:18px;font-size:14px;color:var(--ink-2);line-height:1.65}
+.gbox li{margin-bottom:6px}
+.gbtns{display:grid;gap:8px}
+.gbtns button{margin-top:0}
+.gbtn2{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.gbtn2:hover{background:var(--paper-2);color:var(--ink)}
+.gga{padding:11px 12px;border:1px dashed var(--rule);border-radius:2px;font-size:15px;color:var(--ink-2);background:var(--paper-2)}
+.gnote{font-size:12.5px;color:var(--ink-3);margin:10px 0 14px;line-height:1.6}
+.gbar{padding:12px 0;border-bottom:1px solid var(--rule)}
+.gbar:last-child{border-bottom:0}
+.gb-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:15px}
+.gtag{font-size:11.5px;padding:2px 8px;border-radius:999px;background:var(--paper-2);color:var(--ink-2);border:1px solid var(--rule)}
+.gtag.in{color:var(--mok);border-color:var(--mok)}
+.gtag.lt,.gtag.gt{color:var(--to);border-color:var(--to)}
+.gtrack{position:relative;height:12px;border-radius:6px;background:var(--paper-2);margin:10px 0 6px;border:1px solid var(--rule)}
+.gband{position:absolute;left:5%;right:5%;top:0;bottom:0;background:rgba(62,124,89,.16)}
+.gdot{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:var(--seal);border:2px solid var(--card);transform:translate(-50%,-50%);box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.gb-sub{font-size:13px;color:var(--ink-2)}
+.gscale{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3)}
+.gchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.gchip{margin:0;width:auto;padding:7px 12px;font-size:13px;font-weight:500;letter-spacing:0;font-family:inherit;background:var(--paper-2);color:var(--ink-2);border:1px solid var(--rule);border-radius:999px}
+.gchip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.gchart svg{width:100%;max-width:560px;height:auto;display:block;margin:0 auto}
+#tab-growth .ck input{width:auto;margin:0}
+.gtw{overflow-x:auto}
+.gtbl{width:100%;border-collapse:collapse;font-size:13.5px;white-space:nowrap}
+.gtbl th,.gtbl td{padding:8px 6px;border-bottom:1px solid var(--rule);text-align:left}
+.gtbl th{font-size:12px;color:var(--ink-3);font-weight:500}
+.gdel{margin:0;width:auto;padding:5px 9px;font-size:12px;font-weight:500;letter-spacing:0;font-family:inherit;background:transparent;color:var(--ink-3);border:1px solid var(--rule)}
+.gdel:hover{background:var(--paper-2);color:var(--seal)}
+.gp{margin:0 0 10px;font-size:14px;color:var(--ink-2);line-height:1.7}
 </style>
 
 <div class="wrap">
@@ -376,6 +414,11 @@ dd b{font-weight:500; color:var(--ink)}
   <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-pick">
     <img src="tab-pick.jpg" width="800" height="597" decoding="async"
          alt="출산 택일 — 부모 사주로 제왕절개 날짜와 시간을 견줘 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-growth">
+    <img src="tab-growth.jpg" width="800" height="597" decoding="async"
+         alt="성장 분석 — 초음파 수치로 우리 아기가 같은 주수에서 어디쯤인지 봅니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
 </nav>
@@ -740,11 +783,201 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
 </div>
 </div>
+
+<div id="tab-growth" class="hidden">
+<div class="card">
+  <h2 id="gTitle">우리 아기 성장분석</h2>
+  <p class="sub" style="margin-top:0">초음파 사진에 적힌 BPD·HC·AC·FL·EFW 값을 넣으면, 같은 주수 아기들 사이에서 어디쯤인지 WHO 태아성장표 기준으로 보여 드려요.</p>
+  <div class="grid" style="margin-top:14px">
+    <div><label for="gEdd">출산 예정일</label>
+      <input type="text" id="gEdd" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
+    <div><label for="gNick">태명 <span class="hint">선택</span></label>
+      <input type="text" id="gNick" maxlength="20" placeholder="콩떡이" autocomplete="off"></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>초음파 기록 추가</h2>
+  <div class="grid">
+    <div><label for="gDate">초음파 본 날</label>
+      <input type="text" id="gDate" placeholder="2026-09-19" inputmode="numeric" autocomplete="off"></div>
+    <div><label>그날 주수</label><div class="gga" id="gGa">예정일과 날짜를 넣으면 계산돼요</div></div>
+  </div>
+  <label class="ck"><input type="checkbox" id="gManual"> 예정일을 몰라서 주수를 직접 넣을게요</label>
+  <div class="grid hidden" id="gManualBox" style="margin-top:10px">
+    <div><label for="gW">주</label><input type="number" id="gW" min="14" max="40" inputmode="numeric" placeholder="17"></div>
+    <div><label for="gD">일</label><input type="number" id="gD" min="0" max="6" inputmode="numeric" placeholder="1"></div>
+  </div>
+  <div class="grid" style="margin-top:16px">
+    <div><label for="gBpd">BPD <span class="hint">머리 좌우 폭 · cm</span></label><input type="number" id="gBpd" step="0.01" inputmode="decimal" placeholder="4.06"></div>
+    <div><label for="gHc">HC <span class="hint">머리둘레 · cm</span></label><input type="number" id="gHc" step="0.01" inputmode="decimal" placeholder="14.5"></div>
+    <div><label for="gAc">AC <span class="hint">배둘레 · cm</span></label><input type="number" id="gAc" step="0.01" inputmode="decimal" placeholder="12.3"></div>
+    <div><label for="gFl">FL <span class="hint">허벅지뼈 · cm</span></label><input type="number" id="gFl" step="0.01" inputmode="decimal" placeholder="2.45"></div>
+    <div><label for="gEfw">EFW <span class="hint">추정체중 · g</span></label><input type="number" id="gEfw" step="1" inputmode="numeric" placeholder="195"></div>
+  </div>
+  <p class="gnote">사진에 있는 것만 넣으면 돼요. mm로 적어 주는 병원도 있어서, 그럴 땐 10으로 나눠 cm로 넣어 주세요.</p>
+  <button type="button" id="gSave">저장하고 보기</button>
+  <p id="gMsg" class="shmsg hidden"></p>
+</div>
+
+<div class="card hidden" id="gResultCard">
+  <h2 id="gResTitle">이번 결과</h2>
+  <div id="gResult"></div>
+  <p class="gnote">색칠된 5~95백분위는 WHO가 흔히 쓰는 참고 구간이에요. 이 밖이라고 문제가 있다는 뜻이 아니고, 이 안이라고 다 괜찮다는 뜻도 아니에요. 판단은 담당 선생님이 여러 번의 검사를 함께 보고 해요.</p>
+</div>
+
+<div class="card hidden" id="gTrendCard">
+  <h2>주수별 추세</h2>
+  <div class="gchips" id="gChips"></div>
+  <div class="gchart" id="gChart"></div>
+  <p class="gnote">옅은 띠는 WHO 5~95백분위, 가운데 선은 50백분위예요. 점이 선을 따라 비슷한 높이로 이어지면 꾸준히 크고 있다는 뜻이에요.</p>
+</div>
+
+<div class="card hidden" id="gListCard">
+  <h2>저장한 기록</h2>
+  <div class="gtw" id="gList"></div>
+</div>
+
+<div class="card">
+  <h2>내 기록 링크</h2>
+  <p class="gp">기록은 지금 쓰는 브라우저에만 저장돼요. 네이버 앱으로 열었다가 크롬으로 열면 안 보일 수 있어요. 링크를 만들어 카톡 '나에게 보내기'로 보내 두면 어디서든 그 링크로 다시 불러올 수 있어요.</p>
+  <button type="button" id="gLink">링크 만들기</button>
+  <div class="shu hidden" id="gLinkUrl" style="margin-top:12px;word-break:break-all"></div>
+  <div class="shb hidden" id="gLinkBtns">
+    <button type="button" class="sh sh-main" id="gLinkShare">📤 보내기</button>
+    <button type="button" class="sh" id="gLinkCopy">🔗 복사</button>
+  </div>
+  <p class="gnote">링크를 가진 사람은 이 기록을 볼 수 있어요. 나에게만 보내 주세요.</p>
+  <button type="button" class="gbtn2" id="gWipe">동의 철회·기록 전체 삭제</button>
+</div>
+
+<div class="card">
+  <h2>이 숫자, 이렇게 읽어요</h2>
+  <p class="gp">백분위 67이면 같은 주수 아기 100명 중 67번째쯤, 그러니까 67명보다 크다는 뜻이에요. 50이 딱 가운데고요.</p>
+  <p class="gp">초음파 수치는 재는 각도에 따라 몇 mm씩 달라져요. 한 번의 숫자보다 검진 때마다 비슷한 높이로 이어지는지가 더 중요해요.</p>
+  <p class="gp">이 도구는 참고용이에요. 진단이 아니고, 담당 선생님 판단이 항상 먼저예요.</p>
+  <p class="gnote">기준: WHO 태아성장표(Kiserud 외, PLOS Medicine 2017, CC BY 4.0) 표 6·7·8·9·11. 주 사이 날짜와 백분위 사이 값은 보간해서 계산해요.</p>
+  <div class="blogs">
+    <a href="https://blog.naver.com/momcare_/224418384346" target="_blank" rel="noopener"><b>초음파</b>초음파 BPD·FL·EFW 뜻 — 태아 몸무게와 출산예정일이 화면마다 다르게 뜨는 이유</a>
+  </div>
+</div>
+
+<div class="card">
+  <h2>이 도구 알려주기</h2>
+  <div class="shu" id="grUrl"></div>
+  <div class="shb">
+    <button type="button" class="sh sh-main" id="grNative">📤 공유하기</button>
+    <button type="button" class="sh" id="grCopy">🔗 주소 복사</button>
+  </div>
+  <p id="grMsg" class="shmsg hidden"></p>
+</div>
+</div>
+</div>
+
+<div id="gConsent" class="gmodal hidden" role="dialog" aria-modal="true" aria-labelledby="gcT">
+  <div class="gbox">
+    <h2 id="gcT">기록을 이 폰에 저장해도 될까요?</h2>
+    <ul>
+      <li><b>저장하는 것</b> 예정일, 태명(넣은 경우), 초음파 본 날과 수치예요.</li>
+      <li><b>쓰는 곳</b> 아기 성장 백분위를 계산하고 기록을 보관하는 데만 써요. 다른 용도로는 쓰지 않아요.</li>
+      <li><b>저장 위치</b> 이 기기의 브라우저 안에만 저장돼요. 맘케어나 다른 곳으로 보내지 않아요.</li>
+      <li><b>보관 기간</b> 직접 지우거나 브라우저 데이터를 지울 때까지예요.</li>
+      <li><b>동의하지 않아도 돼요</b> 그러면 저장 없이 한 번 계산만 할 수 있어요.</li>
+    </ul>
+    <div class="gbtns">
+      <button type="button" id="gcYes">동의하고 시작</button>
+      <button type="button" id="gcNo" class="gbtn2">저장 없이 계산만</button>
+    </div>
+  </div>
 </div>
 
 <script>
+/* === GROWTH-CORE START === */
+/* WHO 태아성장표 — Kiserud T. et al., PLOS Medicine 2017;14(1):e1002220, CC BY 4.0
+   표 6 BPD · 7 HC · 8 AC · 9 FL (mm) · 11 EFW (g), 14~40주, 분위 2.5·5·10·25·50·75·90·95·97.5 */
+const WHO_FGC={"bpd":{"14":[23,24,24,26,27,28,29,30,31],"15":[26,27,27,29,30,31,32,33,34],"16":[29,30,30,32,33,35,36,37,38],"17":[32,33,33,35,36,38,39,40,41],"18":[35,36,37,38,40,41,43,44,45],"19":[38,39,40,42,43,45,46,47,48],"20":[41,42,43,45,47,48,50,51,52],"21":[44,45,46,48,50,52,53,54,55],"22":[47,48,50,51,53,55,57,58,59],"23":[50,52,53,55,57,59,60,61,62],"24":[53,55,56,58,60,62,64,65,66],"25":[56,58,59,61,63,65,67,68,69],"26":[59,60,62,64,66,68,70,71,72],"27":[62,63,65,67,69,71,73,74,75],"28":[64,66,67,69,72,74,76,77,78],"29":[67,68,70,72,74,76,78,80,81],"30":[69,71,72,74,77,79,81,82,83],"31":[71,73,74,76,79,81,83,85,86],"32":[73,75,76,79,81,83,86,87,88],"33":[75,77,78,81,83,86,88,89,90],"34":[77,79,80,83,85,88,90,91,92],"35":[79,80,82,84,87,89,92,93,94],"36":[80,82,84,86,89,91,93,95,96],"37":[82,84,85,88,90,93,95,96,97],"38":[84,85,87,90,92,95,97,98,99],"39":[85,87,89,92,94,96,99,100,101],"40":[87,88,90,93,96,98,100,101,102]},"hc":{"14":[86,88,91,95,100,104,107,110,112],"15":[97,99,102,106,111,115,119,122,124],"16":[108,111,114,118,123,128,132,134,137],"17":[120,123,126,130,135,140,144,147,149],"18":[132,135,138,143,148,153,157,160,162],"19":[145,147,150,155,161,166,170,173,175],"20":[157,159,163,168,173,179,183,186,188],"21":[169,172,175,180,186,191,196,199,201],"22":[181,184,187,193,198,204,209,212,214],"23":[193,196,199,205,210,216,221,224,227],"24":[204,207,211,216,222,228,233,236,239],"25":[215,218,222,227,233,239,245,248,251],"26":[225,228,232,238,244,250,256,259,262],"27":[234,238,242,248,254,261,267,270,273],"28":[243,247,251,257,264,270,277,280,283],"29":[251,256,260,266,273,280,286,290,293],"30":[259,264,268,274,281,288,295,299,302],"31":[266,271,275,282,289,296,303,307,311],"32":[273,278,282,289,296,304,311,315,318],"33":[279,284,289,295,303,311,318,322,326],"34":[285,290,295,302,309,317,324,328,332],"35":[291,296,300,307,315,323,330,335,338],"36":[296,301,306,313,321,329,336,340,344],"37":[302,306,311,318,326,334,341,345,349],"38":[307,311,315,324,332,339,347,350,354],"39":[313,316,320,329,337,344,352,355,359],"40":[319,321,325,334,342,350,357,360,363]},"ac":{"14":[69,71,73,77,81,86,89,92,95],"15":[79,81,83,87,92,96,100,103,106],"16":[89,91,93,98,103,108,112,115,118],"17":[99,102,104,109,114,119,124,127,130],"18":[110,113,116,121,126,131,136,139,142],"19":[121,124,127,132,138,143,148,152,155],"20":[132,136,139,144,150,155,161,164,167],"21":[143,147,150,156,162,168,173,177,180],"22":[154,159,162,167,173,180,186,189,193],"23":[165,170,173,179,185,192,198,202,205],"24":[176,181,184,190,197,203,210,214,217],"25":[186,191,195,201,208,215,222,226,229],"26":[196,201,205,212,219,226,233,238,241],"27":[206,211,215,222,230,237,245,249,253],"28":[215,220,225,232,240,248,256,260,264],"29":[224,229,234,242,250,258,266,271,276],"30":[233,238,243,251,260,269,277,282,287],"31":[241,246,252,260,269,279,287,292,298],"32":[249,254,260,269,279,288,298,303,308],"33":[257,262,269,278,288,298,308,313,319],"34":[265,270,277,287,298,308,318,324,330],"35":[273,279,286,297,307,318,329,335,342],"36":[282,287,294,306,317,329,340,346,353],"37":[290,296,304,316,328,340,352,358,365],"38":[299,306,313,326,338,351,364,371,378],"39":[309,316,324,337,350,363,377,384,392],"40":[319,327,335,349,363,377,391,399,406]},"fl":{"14":[10,10,11,12,13,14,15,16,17],"15":[12,13,14,15,16,17,18,19,20],"16":[15,16,17,18,19,20,22,22,23],"17":[19,19,20,21,22,24,25,26,26],"18":[22,22,23,24,26,27,28,29,30],"19":[25,26,26,28,29,30,31,32,33],"20":[28,29,30,31,32,33,35,35,36],"21":[31,32,33,34,35,36,38,38,39],"22":[34,35,35,37,38,39,40,41,42],"23":[36,37,38,39,41,42,43,44,45],"24":[39,40,41,42,43,45,46,47,47],"25":[41,42,43,44,46,47,48,49,50],"26":[43,44,45,46,48,49,51,51,52],"27":[46,46,47,49,50,52,53,54,55],"28":[48,48,49,51,52,54,55,56,57],"29":[50,50,51,53,54,56,57,58,59],"30":[51,52,53,55,56,58,60,60,61],"31":[53,54,55,57,59,60,62,63,64],"32":[55,56,57,59,61,62,64,65,66],"33":[57,58,60,61,63,65,66,67,68],"34":[59,60,61,63,65,67,68,69,70],"35":[61,62,63,65,67,69,70,71,73],"36":[63,64,65,67,69,70,72,73,75],"37":[65,66,67,68,70,72,74,75,76],"38":[66,67,68,70,72,74,75,77,78],"39":[67,68,69,70,73,75,76,78,79],"40":[68,68,69,70,73,75,77,78,79]},"efw":{"14":[70,73,78,83,90,98,104,109,113],"15":[89,93,99,106,114,124,132,138,144],"16":[113,117,124,133,144,155,166,174,181],"17":[141,146,155,166,179,193,207,217,225],"18":[174,181,192,206,222,239,255,268,278],"19":[214,223,235,252,272,292,313,328,340],"20":[260,271,286,307,330,355,380,399,413],"21":[314,327,345,370,398,428,458,481,497],"22":[375,392,412,443,476,512,548,575,595],"23":[445,465,489,525,565,608,650,682,705],"24":[523,548,576,618,665,715,765,803,830],"25":[611,641,673,723,778,836,894,938,970],"26":[707,743,780,838,902,971,1038,1087,1125],"27":[813,855,898,964,1039,1118,1196,1251,1295],"28":[929,977,1026,1102,1189,1279,1368,1429,1481],"29":[1053,1108,1165,1251,1350,1453,1554,1622,1682],"30":[1185,1247,1313,1410,1523,1640,1753,1828,1897],"31":[1326,1394,1470,1579,1707,1838,1964,2046,2126],"32":[1473,1548,1635,1757,1901,2047,2187,2276,2367],"33":[1626,1708,1807,1942,2103,2266,2419,2516,2619],"34":[1785,1872,1985,2134,2312,2492,2659,2764,2880],"35":[1948,2038,2167,2330,2527,2723,2904,3018,3148],"36":[2113,2205,2352,2531,2745,2959,3153,3277,3422],"37":[2280,2372,2537,2733,2966,3195,3403,3538,3697],"38":[2446,2536,2723,2935,3186,3432,3652,3799,3973],"39":[2612,2696,2905,3135,3403,3664,3897,4058,4247],"40":[2775,2849,3084,3333,3617,3892,4135,4312,4515]}};
+const FGC_Q=[2.5,5,10,25,50,75,90,95,97.5];
+const FGC_Z=[-1.959964,-1.644854,-1.281552,-0.67449,0,0.67449,1.281552,1.644854,1.959964];
+const FGC_MIN=98, FGC_MAX=286;
+function gcNormCdf(z){
+  const x=Math.abs(z)/Math.SQRT2, t=1/(1+0.3275911*x);
+  const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);
+  return z>=0?0.5*(1+y):0.5*(1-y);
+}
+function gcParse(s){
+  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s||"").trim()); if(!m) return null;
+  const t=Date.UTC(+m[1],+m[2]-1,+m[3]), d=new Date(t);
+  return (d.getUTCMonth()===+m[2]-1 && d.getUTCDate()===+m[3]) ? t : null;
+}
+function gcGaDays(edd,date){
+  const a=gcParse(edd), b=gcParse(date); if(a==null||b==null) return null;
+  return 280-Math.round((a-b)/86400000);
+}
+function gcFmtGa(days){ return Math.floor(days/7)+"주 "+(days%7)+"일"; }
+function gcToTable(key,ui){ return key==="efw"?ui:ui*10; }
+function gcQuantiles(key,days){
+  if(!(days>=FGC_MIN && days<=FGC_MAX) || !WHO_FGC[key]) return null;
+  const w=Math.floor(days/7), f=(days%7)/7, a=WHO_FGC[key][w], b=WHO_FGC[key][w+1]||a;
+  return a.map((x,i)=>x+(b[i]-x)*f);
+}
+function gcPercentile(key,days,ui){
+  const q=gcQuantiles(key,days), v=gcToTable(key,Number(ui));
+  if(!q || !(v>0)) return null;
+  if(v<q[0]) return {pct:null, band:"lt", edge:"low"};
+  if(v>q[8]) return {pct:null, band:"gt", edge:"high"};
+  let z=FGC_Z[8];
+  for(let i=0;i<8;i++){
+    if(v<=q[i+1]){
+      z = q[i+1]>q[i] ? FGC_Z[i]+(FGC_Z[i+1]-FGC_Z[i])*(v-q[i])/(q[i+1]-q[i]) : FGC_Z[i+1];
+      break;
+    }
+  }
+  const pct=Math.round(gcNormCdf(z)*1000)/10;
+  return {pct, band: pct<5?"lt":pct>95?"gt":"in", edge:""};
+}
+function gcSizeDays(key,ui){
+  const v=gcToTable(key,Number(ui)); if(!(v>0) || !WHO_FGC[key]) return null;
+  const med=d=>gcQuantiles(key,d)[4];
+  if(v<med(FGC_MIN)) return {days:null, edge:"low"};
+  if(v>med(FGC_MAX)) return {days:null, edge:"high"};
+  for(let d=FGC_MIN; d<FGC_MAX; d++){
+    const a=med(d), b=med(d+1);
+    if(v>=a && v<=b) return {days: (b>a && v-a>b-v) ? d+1 : d, edge:""};
+  }
+  return {days:FGC_MAX, edge:""};
+}
+function gcLooksLikeMm(key,days,ui){
+  if(key==="efw") return false;
+  const q=gcQuantiles(key,days); return !!q && Number(ui)*10 > q[8]*5;
+}
+function gcNum(x){ const n=Number(x); return (x!==null && x!=="" && isFinite(n) && n>0) ? n : null; }
+function gcValidate(o){
+  if(!o || o.v!==1 || !Array.isArray(o.records)) return null;
+  const recs=o.records.filter(r=>r && typeof r.gaDays==="number" && r.gaDays>=0 && r.gaDays<=320).slice(0,60)
+    .map(r=>({id:String(r.id||Date.now().toString(36)), date: gcParse(r.date)!=null?r.date:"",
+      gaDays:Math.round(r.gaDays), manual:!!r.manual,
+      bpd:gcNum(r.bpd), hc:gcNum(r.hc), ac:gcNum(r.ac), fl:gcNum(r.fl), efw:gcNum(r.efw)}));
+  return {v:1, edd: gcParse(o.edd)!=null?o.edd:"", nickname:String(o.nickname||"").slice(0,20), records:recs};
+}
+function gcEncode(obj){
+  const bytes=new TextEncoder().encode(JSON.stringify(obj)); let bin="";
+  bytes.forEach(b=>{ bin+=String.fromCharCode(b); });
+  return btoa(bin).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+function gcDecode(str){
+  try{
+    let b=String(str).replace(/-/g,"+").replace(/_/g,"/"); while(b.length%4) b+="=";
+    const bin=atob(b), bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+    return gcValidate(JSON.parse(new TextDecoder().decode(bytes)));
+  }catch(e){ return null; }
+}
+/* === GROWTH-CORE END === */
+</script>
+<script>
 // 만세력 탭이 자동 계산하며 주소를 덮어쓰기 전에, 탭 지정부터 잡아 둔다
 const INIT_TAB=new URLSearchParams(location.search).get("tab");
+// 성장분석 기록 링크(#g=…)도 주소가 바뀌기 전에 잡아 둔다
+const INIT_HASH=location.hash;
 const GAN=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
 const GAN_K=["갑","을","병","정","무","기","경","신","임","계"];
 const JI=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
@@ -1633,17 +1866,25 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".tb").forEach(x=>{
     const on=(x===b); x.classList.toggle("on",on); x.setAttribute("aria-selected",on?"true":"false");
   });
-  ["tab-saju","tab-pick"].forEach(id=>{
+  ["tab-saju","tab-pick","tab-growth"].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.classList.toggle("hidden", id!==b.dataset.tab);
   });
   window.scrollTo({top:0,behavior:"smooth"});
+  if(b.dataset.tab==="tab-growth" && typeof gOnOpen==="function") gOnOpen();
 }));
 
 // 블로그 글에서 ?tab=pick 으로 들어오면 택일 탭을 바로 연다
 (function(){
   if(INIT_TAB!=="pick") return;
   const b=document.querySelector('.tb[data-tab="tab-pick"]');
+  if(b){ b.click(); window.scrollTo(0,0); }
+})();
+
+// ?tab=growth 로 들어오면 성장분석 탭을 바로 연다
+(function(){
+  if(INIT_TAB!=="growth") return;
+  const b=document.querySelector('.tb[data-tab="tab-growth"]');
   if(b){ b.click(); window.scrollTo(0,0); }
 })();
 
@@ -2086,4 +2327,246 @@ function bindDateText(el){
   ["d","edd","rng1","rng2","pfD","pmD"].forEach(id=>bindDateText(document.getElementById(id)));
 })();
 
+
+/* ══════════════════════════════════════════════════════════════
+   성장분석 (탭 3) — 기록은 이 기기 브라우저에만. 서버로 보내지 않는다.
+   계산은 위 GROWTH-CORE(WHO 태아성장표) 함수를 쓴다.
+   ══════════════════════════════════════════════════════════════ */
+const GS_KEY="momcare_growth_v1", GS_EDD="momcare_edd";
+const gs={
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); return true; }catch(e){ return false; } },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+const G={consent:false, consentAt:"", sessionOnly:false, nickname:"", records:[], pendingImport:null, lastId:null, trendKey:"efw"};
+const $g=id=>document.getElementById(id);
+const G_ITEMS=[
+  {key:"efw", id:"gEfw", name:"체중(EFW)", short:"체중", unit:"g"},
+  {key:"bpd", id:"gBpd", name:"머리직경(BPD)", short:"BPD", unit:"cm"},
+  {key:"hc",  id:"gHc",  name:"머리둘레(HC)", short:"HC", unit:"cm"},
+  {key:"ac",  id:"gAc",  name:"배둘레(AC)", short:"AC", unit:"cm"},
+  {key:"fl",  id:"gFl",  name:"허벅지뼈(FL)", short:"FL", unit:"cm"}
+];
+const G_BAND={lt:"작은 편", in:"표준 범위", gt:"큰 편"};
+const G_TOOL_URL="https://momcarekorean.github.io/saju/?tab=growth";
+
+function gLoad(){
+  const raw=gs.get(GS_KEY);
+  if(raw){ try{
+    const o=JSON.parse(raw);
+    if(o && o.v===1 && o.consentAt){
+      const v=gcValidate({v:1, nickname:o.nickname, records:o.records||[]});
+      G.consent=true; G.consentAt=o.consentAt; G.nickname=v?v.nickname:""; G.records=v?v.records:[];
+    }
+  }catch(e){} }
+  const edd=gs.get(GS_EDD);
+  if(G.consent && edd && gcParse(edd)!=null){ $g("gEdd").value=edd; const pe=$g("edd"); if(pe) pe.value=edd; }
+  $g("gNick").value=G.nickname;
+}
+function gPersist(){
+  if(!G.consent) return true;
+  const ok=gs.set(GS_KEY, JSON.stringify({v:1, consentAt:G.consentAt, nickname:G.nickname, records:G.records}));
+  const e=$g("gEdd").value.trim();
+  if(gcParse(e)!=null){ gs.set(GS_EDD,e); const pe=$g("edd"); if(pe) pe.value=e; }
+  if(!ok) gMsg("이 브라우저에선 저장이 안 돼요. 계산은 그대로 할 수 있어요.");
+  return ok;
+}
+function gMsg(m){ const e=$g("gMsg"); e.textContent=m; e.classList.remove("hidden");
+  clearTimeout(gMsg._t); gMsg._t=setTimeout(()=>e.classList.add("hidden"),4200); }
+function gAskConsent(){ $g("gConsent").classList.remove("hidden"); $g("gcYes").focus(); }
+window.gOnOpen=function(){ if(!G.consent && !G.sessionOnly) gAskConsent(); };
+
+function gApplyImport(){
+  const o=G.pendingImport; G.pendingImport=null; if(!o) return;
+  G.records=o.records; G.nickname=o.nickname; $g("gNick").value=o.nickname;
+  if(o.edd) $g("gEdd").value=o.edd;
+  G.lastId=null; gPersist(); gShowGa();
+  gMsg(`기록 ${o.records.length}개를 불러왔어요.`);
+}
+function gWipe(){
+  if(!confirm("저장된 성장 기록과 예정일을 이 기기에서 모두 지울까요? 되돌릴 수 없어요.")) return;
+  gs.del(GS_KEY); gs.del(GS_EDD);
+  Object.assign(G,{consent:false, consentAt:"", sessionOnly:false, nickname:"", records:[], lastId:null});
+  $g("gEdd").value=""; $g("gNick").value="";
+  $g("gLinkUrl").classList.add("hidden"); $g("gLinkBtns").classList.add("hidden");
+  gShowGa(); gRenderAll(); gMsg("모두 지웠어요. 다시 저장하려면 동의 창에서 다시 골라 주세요.");
+}
+
+function gCurrentGa(){
+  if($g("gManual").checked){
+    const w=parseInt($g("gW").value,10), d=parseInt($g("gD").value||"0",10);
+    return (w>=0 && d>=0 && d<=6) ? w*7+d : null;
+  }
+  return gcGaDays($g("gEdd").value.trim(), $g("gDate").value.trim());
+}
+function gShowGa(){
+  const ga=gCurrentGa(), el=$g("gGa");
+  if(ga==null){ el.textContent= $g("gManual").checked ? "주·일을 넣어 주세요" : "예정일과 날짜를 넣으면 계산돼요"; return; }
+  el.textContent = (ga<98||ga>286) ? gcFmtGa(ga)+" · 14~40주만 계산돼요" : gcFmtGa(ga);
+}
+function gFmtVal(it,v){ return it.unit==="g" ? `${Math.round(v)}g` : `${v}cm`; }
+
+function gRenderResult(rec){
+  const rows=[];
+  for(const it of G_ITEMS){
+    const v=rec[it.key]; if(!(v>0)) continue;
+    const r=gcPercentile(it.key,rec.gaDays,v), s=gcSizeDays(it.key,v);
+    if(!r) continue;
+    const pos = r.pct==null ? (r.edge==="low"?1:99) : Math.min(99,Math.max(1,r.pct));
+    const pctTxt = r.pct==null ? (r.edge==="low"?"2.5 미만":"97.5 초과") : String(r.pct);
+    const sizeTxt = !s ? "" : s.days!=null ? `${gcFmtGa(s.days)} 크기` : (s.edge==="low"?"14주보다 작은 크기":"40주보다 큰 크기");
+    rows.push(`<div class="gbar"><div class="gb-top"><b>${it.name}</b> ${gFmtVal(it,v)} <span class="gtag ${r.band}">${G_BAND[r.band]}</span></div>
+      <div class="gtrack"><div class="gband"></div><div class="gdot" style="left:${pos}%"></div></div>
+      <div class="gscale"><span>작은 편</span><span>큰 편</span></div>
+      <div class="gb-sub">백분위 ${pctTxt}${sizeTxt?" · "+sizeTxt:""}</div></div>`);
+  }
+  $g("gResult").innerHTML = rows.join("") || `<p class="gnote">계산할 값이 없어요.</p>`;
+  $g("gResTitle").textContent = `${G.nickname?G.nickname+" ":""}${gcFmtGa(rec.gaDays)} 결과`;
+}
+
+function gRenderTrend(){
+  const card=$g("gTrendCard"), has=G.records.length>0;
+  card.classList.toggle("hidden",!has); if(!has) return;
+  $g("gChips").innerHTML=G_ITEMS.map(it=>`<button type="button" class="gchip${it.key===G.trendKey?" on":""}" data-k="${it.key}">${it.name}</button>`).join("");
+  $g("gChips").querySelectorAll(".gchip").forEach(b=>b.addEventListener("click",()=>{ G.trendKey=b.dataset.k; gRenderTrend(); }));
+  const it=G_ITEMS.find(x=>x.key===G.trendKey), k=it.key;
+  const pts=G.records.filter(r=>r[k]>0 && r.gaDays>=98 && r.gaDays<=286).map(r=>({x:r.gaDays, y: k==="efw"?r[k]:r[k]*10}));
+  if(!pts.length){ $g("gChart").innerHTML=`<p class="gnote">${it.name} 기록이 아직 없어요.</p>`; return; }
+  const xs=pts.map(p=>p.x);
+  const d0=Math.max(98, Math.min(...xs)-14), d1=Math.min(286, Math.max(...xs)+28);
+  const days=[]; for(let d=d0; d<=d1; d++) days.push(d);
+  const Q=days.map(d=>gcQuantiles(k,d));
+  let ymin=Math.min(...Q.map(q=>q[1]), ...pts.map(p=>p.y)), ymax=Math.max(...Q.map(q=>q[7]), ...pts.map(p=>p.y));
+  const pad=(ymax-ymin)*0.08 || 1; ymin-=pad; ymax+=pad;
+  const W=340,H=220,L=42,R=10,T=10,B=28;
+  const X=d=>L+(d-d0)/((d1-d0)||1)*(W-L-R), Y=v=>T+(1-(v-ymin)/((ymax-ymin)||1))*(H-T-B);
+  const line=i=>days.map((d,j)=>`${X(d).toFixed(1)},${Y(Q[j][i]).toFixed(1)}`).join(" ");
+  const area=days.map((d,j)=>`${X(d).toFixed(1)},${Y(Q[j][7]).toFixed(1)}`).concat(
+             days.map((d,j)=>`${X(d).toFixed(1)},${Y(Q[j][1]).toFixed(1)}`).reverse()).join(" ");
+  const fmtY=v=> k==="efw" ? Math.round(v)+"g" : (v/10).toFixed(1)+"cm";
+  const yt=[ymin+pad, (ymin+ymax)/2, ymax-pad];
+  const xt=[]; for(let w=Math.ceil(d0/7); w*7<=d1; w+=2) xt.push(w);
+  const pl=pts.map(p=>`${X(p.x).toFixed(1)},${Y(p.y).toFixed(1)}`).join(" ");
+  $g("gChart").innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${it.name} 주수별 추세">
+    <polygon points="${area}" fill="rgba(62,124,89,.14)"/>
+    <polyline points="${line(4)}" fill="none" stroke="var(--mok)" stroke-width="1.5"/>
+    <polyline points="${line(1)}" fill="none" stroke="var(--mok)" stroke-width=".8" stroke-dasharray="3 3"/>
+    <polyline points="${line(7)}" fill="none" stroke="var(--mok)" stroke-width=".8" stroke-dasharray="3 3"/>
+    ${yt.map(v=>`<text x="${L-4}" y="${(Y(v)+4).toFixed(1)}" font-size="10" text-anchor="end" fill="var(--ink-3)">${fmtY(v)}</text>`).join("")}
+    ${xt.map(w=>`<text x="${X(w*7).toFixed(1)}" y="${H-10}" font-size="10" text-anchor="middle" fill="var(--ink-3)">${w}주</text>`).join("")}
+    ${pts.length>1?`<polyline points="${pl}" fill="none" stroke="var(--seal)" stroke-width="2"/>`:""}
+    ${pts.map(p=>`<circle cx="${X(p.x).toFixed(1)}" cy="${Y(p.y).toFixed(1)}" r="4.5" fill="var(--seal)" stroke="var(--card)" stroke-width="2"/>`).join("")}
+  </svg>`;
+}
+
+function gRenderList(){
+  const card=$g("gListCard"), has=G.records.length>0;
+  card.classList.toggle("hidden",!has); if(!has) return;
+  const head=`<tr><th>날짜</th><th>주수</th>${G_ITEMS.map(it=>`<th>${it.short}</th>`).join("")}<th></th></tr>`;
+  const rows=G.records.map(r=>`<tr><td>${r.date||"-"}</td><td>${gcFmtGa(r.gaDays)}</td>${G_ITEMS.map(it=>`<td>${r[it.key]>0?gFmtVal(it,r[it.key]):"-"}</td>`).join("")}<td><button type="button" class="gdel" data-id="${r.id}">지우기</button></td></tr>`).join("");
+  $g("gList").innerHTML=`<table class="gtbl">${head}${rows}</table>`;
+  $g("gList").querySelectorAll(".gdel").forEach(b=>b.addEventListener("click",()=>{
+    if(!confirm("이 기록을 지울까요?")) return;
+    G.records=G.records.filter(r=>r.id!==b.dataset.id); if(G.lastId===b.dataset.id) G.lastId=null;
+    gPersist(); gRenderAll();
+  }));
+}
+
+function gRenderAll(){
+  $g("gTitle").textContent = `${G.nickname?G.nickname+" ":"우리 아기 "}성장분석`;
+  const last = G.records.find(r=>r.id===G.lastId) || G.records[G.records.length-1];
+  $g("gResultCard").classList.toggle("hidden", !last);
+  if(last) gRenderResult(last);
+  gRenderTrend(); gRenderList();
+}
+
+function gLinkUrl(){
+  const code=gcEncode({v:1, edd:$g("gEdd").value.trim(), nickname:G.nickname, records:G.records});
+  return `${G_TOOL_URL}#g=${code}`;
+}
+async function gCopyText(txt, msgFn){
+  try{ await navigator.clipboard.writeText(txt); msgFn("복사했어요. 카톡 '나에게 보내기'에 붙여 넣으세요."); }
+  catch(e){
+    const t=document.createElement("textarea"); t.value=txt; document.body.appendChild(t); t.select();
+    try{ document.execCommand("copy"); msgFn("복사했어요."); }catch(_){ msgFn("복사가 막혀 있어요. 위 주소를 길게 눌러 복사해 주세요."); }
+    document.body.removeChild(t);
+  }
+}
+function gCheckImport(){
+  const h=INIT_HASH; if(!h.startsWith("#g=")) return false;
+  const o=gcDecode(h.slice(3));
+  history.replaceState(null,"",location.pathname+location.search);
+  if(!o){ gMsg("링크에 담긴 기록을 읽지 못했어요."); return false; }
+  if(!confirm(`기록 ${o.records.length}개를 불러올까요? 지금 이 기기에 저장된 성장 기록은 이 내용으로 바뀌어요.`)) return false;
+  G.pendingImport=o;
+  if(G.consent || G.sessionOnly){ gApplyImport(); gRenderAll(); } else gAskConsent();
+  return true;
+}
+
+/* 이벤트 */
+$g("gcYes").addEventListener("click",()=>{
+  G.consent=true; G.sessionOnly=false; G.consentAt=new Date().toISOString();
+  $g("gConsent").classList.add("hidden");
+  if(G.pendingImport) gApplyImport(); else gPersist();
+  gRenderAll();
+});
+$g("gcNo").addEventListener("click",()=>{
+  G.sessionOnly=true; $g("gConsent").classList.add("hidden");
+  if(G.pendingImport) gApplyImport();
+  gRenderAll();
+});
+["gEdd","gDate","gW","gD"].forEach(id=>$g(id).addEventListener("input",gShowGa));
+$g("gManual").addEventListener("change",e=>{ $g("gManualBox").classList.toggle("hidden",!e.target.checked); gShowGa(); });
+$g("gEdd").addEventListener("change",()=>gPersist());
+$g("gNick").addEventListener("change",()=>{ G.nickname=$g("gNick").value.trim().slice(0,20); gPersist(); gRenderAll(); });
+$g("gSave").addEventListener("click",()=>{
+  if(!G.consent && !G.sessionOnly){ gAskConsent(); return; }
+  const ga=gCurrentGa();
+  if(ga==null){ gMsg($g("gManual").checked ? "주수를 숫자로 넣어 주세요." : "예정일과 초음파 본 날을 2026-09-19처럼 넣어 주세요."); return; }
+  if(ga<98 || ga>286){ gMsg("WHO 표는 14주 0일부터 40주 6일까지만 있어서, 이 주수("+gcFmtGa(ga)+")는 계산할 수 없어요."); return; }
+  const rec={id:Date.now().toString(36), date: $g("gManual").checked ? "" : $g("gDate").value.trim(),
+             gaDays:ga, manual:$g("gManual").checked, bpd:null, hc:null, ac:null, fl:null, efw:null};
+  let any=false;
+  for(const it of G_ITEMS){
+    let v=parseFloat($g(it.id).value);
+    if(!(v>0)) continue;
+    if(gcLooksLikeMm(it.key,ga,v) && confirm(`${it.name} ${v}는 mm로 적힌 값 같아요. ${(v/10).toFixed(2)}cm로 바꿔서 계산할까요?`)) v=Math.round(v*10)/100;
+    rec[it.key]=v; any=true;
+  }
+  if(!any){ gMsg("값을 하나 이상 넣어 주세요."); return; }
+  G.records.push(rec); G.records.sort((a,b)=>a.gaDays-b.gaDays);
+  G.lastId=rec.id; gPersist();
+  G_ITEMS.forEach(it=>{ $g(it.id).value=""; });
+  gRenderAll();
+  $g("gResultCard").scrollIntoView({behavior:"smooth",block:"start"});
+});
+$g("gLink").addEventListener("click",()=>{
+  if(!G.records.length){ gMsg("아직 저장한 기록이 없어요."); return; }
+  $g("gLinkUrl").textContent=gLinkUrl();
+  $g("gLinkUrl").classList.remove("hidden"); $g("gLinkBtns").classList.remove("hidden");
+});
+$g("gLinkCopy").addEventListener("click",()=>gCopyText($g("gLinkUrl").textContent,gMsg));
+$g("gLinkShare").addEventListener("click",async()=>{
+  const u=$g("gLinkUrl").textContent;
+  if(navigator.share){ try{ await navigator.share({title:"우리 아기 성장 기록", url:u}); }catch(e){} }
+  else gCopyText(u,gMsg);
+});
+$g("gWipe").addEventListener("click",gWipe);
+$g("grUrl").textContent=G_TOOL_URL;
+const grMsg=(m)=>{ const e=$g("grMsg"); e.textContent=m; e.classList.remove("hidden");
+  clearTimeout(grMsg._t); grMsg._t=setTimeout(()=>e.classList.add("hidden"),3200); };
+$g("grNative").addEventListener("click",async()=>{
+  if(navigator.share){ try{ await navigator.share({title:"무료 태아 성장분석", text:"초음파 BPD·FL·EFW를 넣으면 같은 주수 아기들 중 어디쯤인지 보여 줘요", url:G_TOOL_URL}); }catch(e){} }
+  else gCopyText(G_TOOL_URL,grMsg);
+});
+$g("grCopy").addEventListener("click",()=>gCopyText(G_TOOL_URL,grMsg));
+
+/* 초기화: 기본 측정일=오늘 → 저장 기록 불러오기 → 링크 가져오기 → 딥링크면 동의 확인 */
+(function(){
+  const t=new Date(), p=n=>String(n).padStart(2,"0");
+  $g("gDate").value=`${t.getFullYear()}-${p(t.getMonth()+1)}-${p(t.getDate())}`;
+  gLoad(); gShowGa(); gRenderAll();
+  const imported=gCheckImport();
+  if(!imported && INIT_TAB==="growth") window.gOnOpen();
+})();
 </script>
