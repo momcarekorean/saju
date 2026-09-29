@@ -318,6 +318,7 @@ dd b{font-weight:500; color:var(--ink)}
 .nev .ng{color:var(--seal);font-weight:700}
 .nev .sum{margin:0 0 4px;color:var(--ink)}
 .nev-msg{margin:10px 0 0;font-size:13px;color:var(--ink-3)}
+.nev-btn{width:auto;margin:8px 0 0;padding:7px 14px;font-size:13px;letter-spacing:.02em}
 .ck{display:inline-flex;align-items:center;gap:7px;margin:8px 14px 0 0;font-size:14px;color:var(--ink-2)}
 .warn{background:var(--paper-2);border-left:3px solid var(--seal);padding:11px 14px;
       border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-2);margin:14px 0 0}
@@ -482,7 +483,7 @@ dd b{font-weight:500; color:var(--ink)}
     </div>
     <div>
       <label for="given">미리 지어둔 이름이 있다면 (선택)</label>
-      <input type="text" id="given" maxlength="3" value="길동" placeholder="예: 길동 — 사주와 맞는지 봐 드립니다">
+      <input type="text" id="given" maxlength="3" value="" placeholder="예: 서윤 — 사주와 맞는지 봐 드려요">
     </div>
     <div>
       <label for="topn">추천 이름 개수</label>
@@ -1092,11 +1093,23 @@ function nmSync(){
 }
 (function(){
   const nb=document.getElementById("naming"); if(!nb) return;
-  nb.addEventListener("click",e=>{const t=e.target.closest(".hj[data-c]"); if(!t) return;
+  nb.addEventListener("click",e=>{
+    const nb2=e.target.closest(".nev-btn[data-name]");
+    if(nb2){ document.getElementById("given").value=nb2.dataset.name; calc();
+      document.getElementById("naming").scrollIntoView({behavior:"smooth",block:"start"}); return; }
+    const t=e.target.closest(".hj[data-c]"); if(!t) return;
     const i=+t.dataset.i; NM_SEL.cs[i]=(NM_SEL.cs[i]===t.dataset.c)?undefined:t.dataset.c; nmSync();});
   nb.addEventListener("keydown",e=>{const t=e.target.closest(".hj[data-c]"); if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault(); t.click();}});
   nb.addEventListener("input",e=>{ if(e.target.id!=="gHanja") return;
-    NM_SEL.cs=[...e.target.value].filter(c=>c==="□"||/\p{Script=Han}/u.test(c)).map(c=>c==="□"?undefined:c).slice(0,4); nmRender();});
+    const v=e.target.value, kor=(v.match(/[가-힣]/g)||[]).join("");
+    NM_SEL.cs=[...v].filter(c=>c==="□"||/\p{Script=Han}/u.test(c)).map(c=>c==="□"?undefined:c).slice(0,4);
+    if(!NM_SEL.cs.some(Boolean)&&kor){
+      document.getElementById("nmEval").innerHTML=`<p class="nev-msg">이 칸에는 <b>한자</b>를 넣어요.
+        한글로 쓴 뒤 키보드의 [한자] 키로 바꾸거나, 아래 목록에서 눌러 고르면 돼요.
+        ${kor.length<=3?`<br>‘${kor}’ 이름을 보려던 거라면 <button type="button" class="nev-btn" data-name="${kor}">‘${kor}’${ro(kor).slice(kor.length)} 바꿔서 보기</button>`:""}</p>`;
+      return;
+    }
+    nmRender();});
 })();
 const eul=w=>w+jo(w,"을","를"), iga=w=>w+jo(w,"이","가"), eun=w=>w+jo(w,"은","는"), wa=w=>w+jo(w,"과","와");
 // 천을귀인 — 일간별 지지
@@ -1723,7 +1736,7 @@ function calc(){
           :`다만 사주에 아쉬운 <b style="color:var(--ink)">${needNm}</b> 기운은 소리에는 없어요. 한자를 고를 때 그 기운의 한자(자원오행)로 넣을 수 있어요.`}
         </p>
         <div class="nevin"><label for="gHanja">한자로 풀이해 보기 <span class="hint">한자를 붙여 넣거나, 아래 목록에서 눌러 고르세요</span></label>
-          <input type="text" id="gHanja" placeholder="예: 怡浚" autocomplete="off"></div>
+          <input type="text" id="gHanja" placeholder="한자만, 예: 怡浚" autocomplete="off"></div>
         <div id="nmEval"></div>
         ${gs.map((g,gi)=>{
           const L=HANJA.filter(x=>x[1]===g.c&&!BAD.test(x[2])&&!SURHAN.has(x[0]))
