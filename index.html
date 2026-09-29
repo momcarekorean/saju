@@ -483,7 +483,7 @@ dd b{font-weight:500; color:var(--ink)}
     </div>
     <div>
       <label for="given">미리 지어둔 이름이 있다면 (선택)</label>
-      <input type="text" id="given" maxlength="3" value="" placeholder="예: 서윤 — 사주와 맞는지 봐 드려요">
+      <input type="text" id="given" maxlength="3" value="" placeholder="예: 서윤 — 사주와 맞는지 봐 드려요" autocomplete="off">
     </div>
     <div>
       <label for="topn">추천 이름 개수</label>
@@ -1989,7 +1989,8 @@ function calc(){
 (()=>{const q=new URLSearchParams(location.search); if(!q.get("d")) return;
   const set=(id,v)=>{if(v!==null&&v!=="")document.getElementById(id).value=v;};
   set("d",q.get("d")); set("t",q.get("t")); set("city",q.get("c"));
-  set("surname",q.get("s")); set("given",q.get("g")); set("sex",q.get("x")); set("topn",q.get("n"));
+  // 예전 기본값 "길동"이 주소에 남아 있어도 되살리지 않는다(이제 기본은 빈칸)
+  set("surname",q.get("s")); if(q.get("g")!=="길동") set("given",q.get("g")); set("sex",q.get("x")); set("topn",q.get("n"));
   if(q.get("e")!==null) document.getElementById("eot").checked=q.get("e")==="1";
   if(q.get("y")!==null) document.getElementById("yaja").checked=q.get("y")==="1";
   if(!q.get("t")) document.getElementById("unknown").checked=true;
