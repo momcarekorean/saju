@@ -306,6 +306,18 @@ dd b{font-weight:500; color:var(--ink)}
 .hj{font-size:12px;padding:4px 8px;border:1px solid var(--rule);border-radius:2px;background:var(--paper);color:var(--ink-2)}
 .hj b{font-size:15px;margin-right:4px;color:var(--ink);font-weight:500}
 .hj.fit{border-color:var(--seal)}
+.hj[data-c]{cursor:pointer}
+.hj.on{background:var(--seal);border-color:var(--seal);color:#fff}
+.hj.on b{color:#fff}
+.nevin{margin-top:14px}
+.nev{margin-top:10px;border:1px solid var(--rule);background:var(--paper);padding:12px 14px;border-radius:2px;font-size:13.5px;color:var(--ink-2)}
+.nev h4{margin:0 0 6px;font-size:15px;color:var(--ink)}
+.nev .r{padding:9px 0 2px;border-top:1px dashed var(--rule);margin-top:8px}
+.nev .k{display:block;color:var(--ink);font-weight:700;font-size:13.5px;margin-bottom:3px}
+.nev .ok{color:var(--mok);font-weight:700}
+.nev .ng{color:var(--seal);font-weight:700}
+.nev .sum{margin:0 0 4px;color:var(--ink)}
+.nev-msg{margin:10px 0 0;font-size:13px;color:var(--ink-3)}
 .ck{display:inline-flex;align-items:center;gap:7px;margin:8px 14px 0 0;font-size:14px;color:var(--ink-2)}
 .warn{background:var(--paper-2);border-left:3px solid var(--seal);padding:11px 14px;
       border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-2);margin:14px 0 0}
@@ -434,7 +446,7 @@ dd b{font-weight:500; color:var(--ink)}
 
 <div id="tab-saju">
 
-<p class="upd"><b>업데이트 9/29</b> 인명용 한자 대폭 추가 · 풀이를 쉬운 말로 · 오류 수정</p>
+<p class="upd"><b>업데이트 9/29</b> 인명용 한자 대폭 추가 · 한자 이름 풀이 · 풀이를 쉬운 말로 · 오류 수정</p>
 
 <div class="card">
   <h2>태어난 때</h2>
@@ -1011,6 +1023,81 @@ const OH_PLAIN=["새로 시작하고 쑥쑥 자라려는 힘","밝게 드러내�
 // 조사: 을를(w) → "나무를" / "불을"
 // 로/으로 — 받침이 없거나 ㄹ이면 '로'
 const ro=w=>{const k=(String(w).charCodeAt(String(w).length-1)-0xAC00)%28; return w+(k===0||k===8?"로":"으로");};
+
+// ── 지어 둔 한자 이름 풀이: 획수 4격 · 획수 홀짝 · 사주 보완 · 소리 오행(첫소리 / 성씨 받침 포함)
+let NM_CTX=null, NM_SEL={given:"",cs:[]};
+const JONG=["","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+const JONG_BASE={"ㄳ":"ㄱ","ㄵ":"ㄴ","ㄶ":"ㄴ","ㄺ":"ㄹ","ㄻ":"ㄹ","ㄼ":"ㄹ","ㄽ":"ㄹ","ㄾ":"ㄹ","ㄿ":"ㄹ","ㅀ":"ㄹ","ㅄ":"ㅂ"};
+const jongOf=ch=>{const c=ch.charCodeAt(0)-0xAC00; if(c<0||c>11171) return null; const j=JONG[c%28]; return j?(JONG_BASE[j]||j):null;};
+// 두 기운 사이: same 같음 / gen 한쪽이 다른 쪽을 살려 줌(상생) / keuk 한쪽이 다른 쪽을 누름(상극)
+const ohRel=(a,b)=>a===b?"same":((a+1)%5===b||(b+1)%5===a)?"gen":"keuk";
+function nmChain(ch){
+  const rel=[ohRel(ch[0],ch[1]),ohRel(ch[1],ch[2])], k=rel.filter(r=>r==="keuk").length;
+  return {ok:k===0, txt:ch.map(o=>OH_HAN[o]).join(" → "),
+    say:k?`<span class="ng">기운이 누르는 곳 ${k}군데</span>`
+      :rel.every(r=>r==="gen")?`<span class="ok">서로 살려 주는 순서</span>`:`<span class="ok">누르는 곳 없음</span>`};
+}
+function nmRender(){
+  const box=document.getElementById("nmEval"); if(!box||!NM_CTX) return;
+  const X=NM_CTX, g=[...X.given], cs=NM_SEL.cs;
+  document.querySelectorAll("#naming .hj[data-c]").forEach(el=>el.classList.toggle("on",cs[+el.dataset.i]===el.dataset.c));
+  if(!cs.some(Boolean)){ box.innerHTML=""; return; }
+  if(g.length!==2){ box.innerHTML='<p class="nev-msg">한자 풀이는 지금 두 글자 이름만 돼요.</p>'; return; }
+  if(!cs[0]||!cs[1]){ box.innerHTML=`<p class="nev-msg">‘${g[cs[0]?1:0]}’ 한자도 골라 주세요.</p>`; return; }
+  const R=[0,1].map(i=>{const all=HANJA.filter(x=>x[0]===cs[i]); return {c:cs[i],h:all.find(x=>x[1]===g[i])||all[0]};});
+  const miss=R.filter(r=>!r.h);
+  if(miss.length){ box.innerHTML=`<p class="nev-msg">${miss.map(r=>r.c).join("·")}${jo(miss[miss.length-1].c,"은","는")} 여기 담은 인명용 한자 표에 없어서 풀 수 없어요.</p>`; return; }
+  const h1=R[0].h, h2=R[1].h, a=h1[3], b=h2[3], s=X.surStroke;
+  const warn=R.map((r,i)=>r.h[1]!==g[i]?`${r.c}${jo(r.h[1],"은","는")} ‘${g[i]}’가 아니라 ‘${r.h[1]}’${ro(r.h[1]).slice(r.h[1].length)} 읽는 글자예요. `:"").join("");
+  const out=[], good=[];
+  // ① 획수 풀이 · ② 획수 홀짝
+  if(X.surHan){
+    const L=[["이름 두 글자","초년",`${a}+${b}`,a+b],["성+첫 글자","청장년",`${s}+${a}`,s+a],
+             ["성+끝 글자","말년",`${s}+${b}`,s+b],["세 글자 모두","평생",`${s}+${a}+${b}`,s+a+b]]
+      .map(([k,age,ex,v])=>{const n=g81(v); return {k,age,ex,n,gil:GIL.has(n)};});
+    const gil=L.filter(x=>x.gil).length; good.push(gil===4);
+    out.push(`<div class="r"><span class="k">획수 풀이 (수리 4격) · ${gil===4?'<span class="ok">넷 다 좋은 수</span>':`<span class="${gil>=3?"ok":"ng"}">넷 중 ${gil}개 좋은 수</span>`}</span>
+      ${L.map(x=>`${x.k}(${x.age}) ${x.ex} = <b>${x.n}</b> ${x.gil?"좋은 수":'<span class="ng">아쉬운 수</span>'}`).join("<br>")}</div>`);
+    const par=[s,a,b].map(v=>v%2?"홀":"짝"), mixed=new Set(par).size>1; good.push(mixed);
+    out.push(`<div class="r"><span class="k">획수 홀짝 (음양) · ${mixed?'<span class="ok">섞여 있음</span>':'<span class="ng">한쪽으로 쏠림</span>'}</span>
+      ${s}·${a}·${b}획 → ${par.join("·")}. ${mixed?"홀수와 짝수가 섞여 있어서 균형이 맞다고 봐요.":`셋 다 ${par[0]}수라 한쪽으로 쏠렸어요. 홀짝이 섞여야 좋다고 봐요.`}</div>`);
+  }else{
+    out.push(`<div class="r"><span class="k">획수 풀이</span>성씨 한자를 몰라서 획수 풀이와 홀짝은 못 봤어요.</div>`);
+  }
+  // ③ 사주에 아쉬운 기운 채우기
+  const need=X.need, fill=[h1,h2].filter(x=>need.includes(x[4])), needKo=need.map(o=>OH[o]).join("·");
+  good.push(fill.length>0);
+  out.push(`<div class="r"><span class="k">사주에 아쉬운 기운 채우기 · ${fill.length?`<span class="ok">${fill.length===2?"두 글자 모두":"한 글자"} 채움</span>`:'<span class="ng">못 채움</span>'}</span>
+    한자 오행은 ${h1[0]} ${OH[h1[4]]}, ${h2[0]} ${OH[h2[4]]}${jo(OH[h2[4]],"이에요","예요")}. ${fill.length
+      ?`사주에 아쉬운 ${needKo} 기운을 ${fill.map(x=>x[0]).join("·")}${jo(fill[fill.length-1][1],"이","가")} 채워 줘요.`
+      :`사주에 아쉬운 ${needKo} 기운은 한자로 채우지 못해요.`}</div>`);
+  // ④ 소리 오행 — 첫소리만 / 성씨 받침 포함(성씨는 받침 소리, 이름은 첫소리)
+  const o1=CHO_OH[choOf(g[0])], o2=CHO_OH[choOf(g[1])];
+  const c1=nmChain([X.sOh,o1,o2]), jg=jongOf(X.sur), c2=jg?nmChain([CHO_OH[jg],o1,o2]):null;
+  const sOk=c1.ok||(c2&&c2.ok); good.push(sOk);
+  out.push(`<div class="r"><span class="k">소리 오행 · ${sOk?'<span class="ok">걸리는 곳 없음</span>':'<span class="ng">기운이 누르는 곳 있음</span>'}</span>
+    첫소리만 보면 ${c1.txt}, ${c1.say}.<br>
+    ${c2?`성씨 받침(${jg})까지 넣어 보면 ${c2.txt}, ${c2.say}.`:"성씨에 받침이 없어서 첫소리만 보면 돼요."}
+    <span style="color:var(--ink-3)">두 방식 중 하나만 걸리지 않아도 좋다고 보는 곳이 많아요.</span></div>`);
+  const nGood=good.filter(Boolean).length;
+  box.innerHTML=`<div class="nev"><h4>${X.sur}${X.given} ${X.surHan?X.surHan[0]:""}${h1[0]}${h2[0]} 풀이</h4>
+    <p class="sum">${good.length}가지 중 <b>${nGood}가지</b>가 좋아요.${warn?` <span class="ng">${warn}</span>`:""}</p>
+    ${out.join("")}
+    <p class="nev-msg">획수는 원획(氵=水 4획 식)으로 셌고, 한자 오행은 부수로 정했어요. 작명소마다 획수 길흉표나 한자 오행이 조금씩 달라서 결과가 다를 수 있어요.</p></div>`;
+}
+function nmSync(){
+  const inp=document.getElementById("gHanja"); if(!inp) return;
+  inp.value=NM_SEL.cs.some(Boolean)?NM_SEL.cs.map(c=>c||"□").join(""):"";
+  nmRender();
+}
+(function(){
+  const nb=document.getElementById("naming"); if(!nb) return;
+  nb.addEventListener("click",e=>{const t=e.target.closest(".hj[data-c]"); if(!t) return;
+    const i=+t.dataset.i; NM_SEL.cs[i]=(NM_SEL.cs[i]===t.dataset.c)?undefined:t.dataset.c; nmSync();});
+  nb.addEventListener("keydown",e=>{const t=e.target.closest(".hj[data-c]"); if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault(); t.click();}});
+  nb.addEventListener("input",e=>{ if(e.target.id!=="gHanja") return;
+    NM_SEL.cs=[...e.target.value].filter(c=>c==="□"||/\p{Script=Han}/u.test(c)).map(c=>c==="□"?undefined:c).slice(0,4); nmRender();});
+})();
 const eul=w=>w+jo(w,"을","를"), iga=w=>w+jo(w,"이","가"), eun=w=>w+jo(w,"은","는"), wa=w=>w+jo(w,"과","와");
 // 천을귀인 — 일간별 지지
 const CHEONEUL={0:[1,7],4:[1,7],6:[1,7],1:[0,8],5:[0,8],2:[11,9],3:[11,9],7:[2,6],8:[5,3],9:[5,3]};
@@ -1635,14 +1722,17 @@ function calc(){
         ${hits.length?`이름 소리 중 ${hits.map(g=>`<b style="color:var(--ink)">‘${g.c}’</b>${jo(g.c,"은","는")} ${OH[g.o]}`).join(", ")} 기운이라, 소리로 사주에 아쉬운 기운을 채워 줘요.`
           :`다만 사주에 아쉬운 <b style="color:var(--ink)">${needNm}</b> 기운은 소리에는 없어요. 한자를 고를 때 그 기운의 한자(자원오행)로 넣을 수 있어요.`}
         </p>
-        ${gs.map(g=>{
+        <div class="nevin"><label for="gHanja">한자로 풀이해 보기 <span class="hint">한자를 붙여 넣거나, 아래 목록에서 눌러 고르세요</span></label>
+          <input type="text" id="gHanja" placeholder="예: 怡浚" autocomplete="off"></div>
+        <div id="nmEval"></div>
+        ${gs.map((g,gi)=>{
           const L=HANJA.filter(x=>x[1]===g.c&&!BAD.test(x[2])&&!SURHAN.has(x[0]))
             .map(x=>({x,fit:x[4]===lack||x[4]===eokPick,s:((x[4]===lack||x[4]===eokPick)?8:0)+(GOOD.test(x[2])?2:0)+[-4,2,4][x[5]]}))
             .sort((a,b)=>b.s-a.s);
           if(!L.length) return `<p class="hjx">‘${g.c}’${ro(g.c).slice(g.c.length)} 쓰는 인명용 한자는 여기 없어요.</p>`;
           return `<details class="hjx"><summary>‘${g.c}’${ro(g.c).slice(g.c.length)} 쓸 수 있는 인명용 한자 <b>${new Set(L.map(v=>v.x[0])).size}자</b> 보기
             <span style="color:var(--ink-3)">(사주에 아쉬운 기운이 먼저, 빨간 테두리)</span></summary>
-            <div class="hjl">${L.map(v=>`<span class="hj${v.fit?" fit":""}"><b>${v.x[0]}</b>${v.x[2]} · ${OH_HAN[v.x[4]]} · ${v.x[3]}획</span>`).join("")}</div></details>`;
+            <div class="hjl">${L.map(v=>`<span class="hj${v.fit?" fit":""}" data-i="${gi}" data-c="${v.x[0]}" role="button" tabindex="0"><b>${v.x[0]}</b>${v.x[2]} · ${OH_HAN[v.x[4]]} · ${v.x[3]}획</span>`).join("")}</div></details>`;
         }).join("")}</div>`;
     }
 
@@ -1841,6 +1931,9 @@ function calc(){
       위 '미리 지어둔 이름' 칸에 이름을 넣으면 음마다 쓸 수 있는 한자를 전부 보여 드려요.
       <b>출생신고 전에는 대법원 전자가족관계등록시스템(efamily.scourt.go.kr)에서 꼭 한 번 조회</b>해 보세요.</p>`;
     nb.innerHTML=html;
+    NM_CTX={sur:sur[0],surHan,surStroke,sOh,given,need:[...new Set([lack,eokPick])]};
+    if(NM_SEL.given!==given) NM_SEL={given,cs:[]};
+    nmSync();
   }
 
   // ── 공유용 주소 만들기 (입력값을 주소에 실어 보낸다)
