@@ -699,7 +699,14 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="card"><h2>부모 사주</h2><div id="pParent"></div></div>
   <div class="card"><h2>후보를 전부 훑어봤어요</h2>
     <p class="sub" id="pAllSub" style="margin-top:0">가능한 날짜와 시각을 전부 계산했어요.</p>
-    <div id="pAll"></div></div>
+    <div id="pAll"></div>
+    <p class="sub" style="margin-top:12px"><b>'걸리는 것' 읽는 법.</b> 사주는 태어난 해·달·날·시 네 칸이고,
+    옛사람들은 칸마다 인생의 자리를 하나씩 맡겼어요. <b>해</b>는 어린 시절, <b>달</b>은 부모·형제, <b>날</b>은 배우자·가정, <b>시</b>는 자녀·노년이에요.
+    두 자리의 글자가 서로 안 맞으면 그 사이에 일이 생기기 쉽다고 읽어요.<br>
+    <b>크게 부딪힘(충)</b> 변화나 이동이 많다 · <b>서로 긁힘(형)</b> 마찰이나 다툼이 생기기 쉽다 ·
+    <b>서로 방해함(해)</b> 서운한 일이 생기기 쉽다 · <b>살짝 틀어짐(파)</b> 작게 어긋난다<br>
+    예를 들어 '부모↔배우자 자리 크게 부딪힘'은 커서 부모 곁을 일찍 떠나 따로 산다는 식으로 풀어요.
+    있다고 나쁜 사주는 아니고, 이 도구는 점수를 조금 빼는 데만 썼어요.</p></div>
   <div class="card">
     <h2>여기 나오는 말들, 짧게 풀어 드릴게요</h2>
     <p class="sub" style="margin-top:0">아래 결과에 낯선 한자말이 좀 나와요. 뜻만 알고 보면 훨씬 읽기 쉬워요.</p>
@@ -734,7 +741,8 @@ dd b{font-weight:500; color:var(--ink)}
 
       <dt>충 · 형 · 해 · 파 <span class="hint">글자끼리 부딪히는 관계</span></dt>
       <dd>사주의 아래쪽 네 글자(해·달·날·시의 아랫글자)끼리는 서로 <b>부딪히는 짝</b>이 정해져 있어요.
-        제일 센 게 <b>충</b>(정면으로 부딪힘)이고, 그다음이 <b>형</b>(서로 긁힘)·<b>해</b>(서로 방해함)·<b>파</b>(살짝 금이 감) 순이에요.
+        제일 센 게 <b>충</b>(크게 부딪힘)이고, 그다음이 <b>형</b>(서로 긁힘)·<b>해</b>(서로 방해함)·<b>파</b>(살짝 틀어짐) 순이에요.
+        네 칸은 각각 어린 시절·부모·배우자·자녀 자리를 맡는다고 봐서, 어느 자리끼리 안 맞는지를 같이 적었어요.
         있다고 나쁜 사주는 아니에요. 변화가 많다는 뜻으로도 읽고, 이 도구는 많을수록 점수를 조금씩 빼는 정도로만 써요.</dd>
 
       <dt>육합 · 삼합 <span class="hint">글자끼리 어울리는 관계</span></dt>
@@ -1496,7 +1504,11 @@ function calc(){
         <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
           숫자는 <b class="m-mok">나무</b>·<b class="m-hwa">불</b>·<b class="m-to">흙</b>·<b class="m-geum">쇠</b>·<b class="m-su">물</b>이 각각 몇 개인지예요.
           다섯 가지가 다 있고 제일 많은 것과 적은 것 차이가 1개 이하면 '아주 고름'으로 보고 초록색으로 칠했어요.
-          시각을 바꾸면 결과도 달라져요. 고르다고 꼭 좋은 사주인 건 아니니까, 날짜는 병원과 먼저 이야기해 보세요.</p>`;
+          시각을 바꾸면 결과도 달라져요. 고르다고 꼭 좋은 사주인 건 아니니까, 날짜는 병원과 먼저 이야기해 보세요.</p>
+        <p style="margin:8px 0 0;font-size:12.5px;color:var(--ink-2)">여기서는 <b>다섯 기운이 고른지 하나만</b> 봐요.
+          부모 사주와의 궁합, 계절에 필요한 기운, 글자끼리 부딪히는 곳, 수술 가능한 시간까지 따져서 날짜를 고르려면
+          <a href="?tab=pick" onclick="document.querySelector('.tb[data-tab=tab-pick]').click();scrollTo(0,0);return false">출산택일 탭</a>을 써 주세요.
+          그래서 두 탭의 추천 날짜가 다를 수 있어요.</p>`;
     }
   }
 
@@ -1993,6 +2005,14 @@ const hyungJi=(a,b)=>(a===b&&HYUNGSELF.indexOf(a)>=0)
   ||(a===0&&b===3)||(a===3&&b===0)
   ||HYUNG3.some(g=>g.indexOf(a)>=0&&g.indexOf(b)>=0&&a!==b);
 const haeJi=(a,b)=>HAEJI[a]===b, paJi=(a,b)=>PAJI[a]===b, hapJi=(a,b)=>YUKHAP[a]===b;
+// 해·달·날·시 아랫글자가 맡은 자리(옛 풀이) — 표에는 짧게, 설명에는 길게
+const JARI_S={해:"어린 시절",달:"부모",날:"배우자",시:"자녀"};
+const JARI_L={해:"어린 시절",달:"부모·형제",날:"배우자·가정",시:"자녀·노년"};
+// 충·형·해·파 → [표에 쓰는 말, 문장에 쓰는 말, 옛 풀이]
+const CLASH_KO={충:["크게 부딪힘","크게 부딪혀요","변화나 이동이 많다"],
+                형:["서로 긁힘","서로 긁혀요","마찰이나 다툼이 생기기 쉽다"],
+                해:["서로 방해함","서로 방해해요","서운한 일이나 오해가 생기기 쉽다"],
+                파:["살짝 틀어짐","살짝 틀어져요","작게 어긋나는 일이 있다"]};
 
 // ── 조후: 태어난 달의 계절이 무엇을 아쉬워하는가
 function johuOf(monJi){
@@ -2054,7 +2074,9 @@ function scorePick(ch, ctx){
   const D={};
 
   // ① 오행 균형 20
-  D.oh = Math.max(0, Math.min(20, Math.round((ch.balance+6)*1.7)));
+  // balance(10-없는 기운×2-최다·최소 차이)는 가장 고를 때 9. 거기서 1 떨어질 때마다 2.5점씩 뺀다.
+  // (예전 식은 20점에서 잘려서, 기운 하나가 아예 없어도 만점이 나왔다)
+  D.oh = Math.max(0, Math.min(20, Math.round(20-(9-ch.balance)*2.5)));
 
   // ② 조후·용희신 20
   let a=0;
@@ -2069,19 +2091,23 @@ function scorePick(ch, ctx){
   [["아빠",dad],["엄마",mom]].forEach(([who,p])=>{
     if(!p) return;
     const po=GAN_OH[p.dayGan];
-    if(KEUK[po]===me||KEUK[me]===po){ pm-=1.5; bad2.push(who+"와 아기의 중심 글자가 서로 누르는 사이(상극)"); }
-    else if(po!==me){ pm+=2; good.push(who+"와 아기의 중심 글자가 서로 살려 주는 사이(상생)"); }
+    if(KEUK[po]===me||KEUK[me]===po){ pm-=1.5; bad2.push(who+"와 아기의 대표 글자가 서로 누르는 사이(상극)"); }
+    else if(po!==me){ pm+=2; good.push(who+"와 아기의 대표 글자가 서로 살려 주는 사이(상생)"); }
     else { pm+=1; }
+    // 부모 사주의 아랫글자와 아기의 달·날 아랫글자를 하나씩 맞대 보고, 종류별로 몇 쌍인지 센다
     const jis=[p.yJi,p.monJi,p.dayJi].concat(p.hourJi>=0?[p.hourJi]:[]);
+    const n={hap:0,chung:0,hyung:0};
     jis.forEach(pj=>{
       [ch.dayJi,ch.monJi].forEach(bj=>{
-        const pr=who+" "+JI[pj]+"·아기 "+JI[bj];
-        if(chungJi(pj,bj)){ pm-=1.6; bad2.push(pr+" 정면으로 부딪힘(충)"); }
-        else if(hyungJi(pj,bj)){ pm-=1.0; bad2.push(pr+" 서로 긁힘(형)"); }
-        else if(hapJi(pj,bj)){ pm+=1.4; good.push(pr+" 짝이 맞음(육합)"); }
-        else if(SAM[pj]!==undefined&&SAM[pj]===SAM[bj]&&pj!==bj){ pm+=1.0; good.push(pr+" 한편이 됨(삼합)"); }
+        if(chungJi(pj,bj)){ pm-=1.6; n.chung++; }
+        else if(hyungJi(pj,bj)){ pm-=1.0; n.hyung++; }
+        else if(hapJi(pj,bj)){ pm+=1.4; n.hap++; }
+        else if(SAM[pj]!==undefined&&SAM[pj]===SAM[bj]&&pj!==bj){ pm+=1.0; n.hap++; }
       });
     });
+    if(n.hap) good.push(who+"와 잘 어울리는 글자 "+n.hap+"쌍(합)");
+    if(n.chung) bad2.push(who+"와 크게 부딪히는 글자 "+n.chung+"쌍(충)");
+    if(n.hyung) bad2.push(who+"와 서로 긁히는 글자 "+n.hyung+"쌍(형)");
     const lack=p.cnt.indexOf(Math.min.apply(null,p.cnt));
     if(ch.cnt[lack]>0){ pm+=1.2; good.push(who+"에게 모자란 "+OH[lack]+jo(OH[lack],"을","를")+" 아기가 채워 줌"); }
     const most=p.cnt.indexOf(Math.max.apply(null,p.cnt));
@@ -2093,18 +2119,19 @@ function scorePick(ch, ctx){
 
   // ④ 충·형·해 안정성 15
   let bad=[], pen=0;
-  // 일지·월지 같은 말 대신 "날·달" 처럼 적는다
-  const pairs=[[ch.dayJi,ch.monJi,"날·달"],[ch.dayJi,ch.hourJi,"날·시"],
-               [ch.monJi,ch.hourJi,"달·시"],[ch.yJi,ch.dayJi,"해·날"]];
-  pairs.forEach(([x,z,nm])=>{
-    const g=nm+" 글자 "+JI[x]+JI[z];
-    if(chungJi(x,z)){ pen+=4; bad.push(g+" 정면으로 부딪힘(충)"); }
-    else if(hyungJi(x,z)){ pen+=2.5; bad.push(g+" 서로 긁힘(형)"); }
-    else if(haeJi(x,z)){ pen+=1.5; bad.push(g+" 서로 방해함(해)"); }
-    else if(paJi(x,z)){ pen+=1; bad.push(g+" 살짝 금이 감(파)"); }
+  // 해·달·날·시의 아랫글자는 인생의 자리를 하나씩 맡는다고 본다(옛 풀이). 어느 자리끼리 안 맞는지로 적는다.
+  const pairs=[[ch.monJi,ch.dayJi,"달","날"],[ch.dayJi,ch.hourJi,"날","시"],
+               [ch.monJi,ch.hourJi,"달","시"],[ch.yJi,ch.dayJi,"해","날"]];
+  pairs.forEach(([x,z,a,b])=>{
+    if(chungJi(x,z)){ pen+=4; bad.push({a,b,t:"충"}); }
+    else if(hyungJi(x,z)){ pen+=2.5; bad.push({a,b,t:"형"}); }
+    else if(haeJi(x,z)){ pen+=1.5; bad.push({a,b,t:"해"}); }
+    else if(paJi(x,z)){ pen+=1; bad.push({a,b,t:"파"}); }
   });
   D.stab=Math.max(0,Math.round(15-pen));
-  D.stabNote=bad;
+  D.stabNote=bad.map(o=>JARI_S[o.a]+"↔"+JARI_S[o.b]+" 자리 "+CLASH_KO[o.t][0]);
+  D.stabLong=bad.map(o=>JARI_L[o.a]+" 자리(태어난 "+o.a+")와 "+JARI_L[o.b]+" 자리(태어난 "+o.b+")가 "
+    +CLASH_KO[o.t][1]+"("+o.t+"). 옛 풀이로는 이 사이에 "+CLASH_KO[o.t][2]+"고 봐요.");
 
   // ⑤ 귀인·길신 10
   let g=0, gn=[];
@@ -2318,11 +2345,12 @@ function pickRender(){
         ?r.sc.guiNote.map((k,j)=>'<b>'+k+'</b>'+(j?'도':'이')+' 있어요. '+SINSAL_M[k]).join(' ')
         :"따로 걸리는 귀인은 없어요. 없다고 나쁜 건 아니에요.")+'</dd>'
       +'<dt>부모와의 관계</dt><dd>15점 만점에 <b>'+r.sc.par+'점</b>이에요.'
+        +' <span class="sm">(부모 사주 글자와 아기 글자를 하나씩 맞대 봤어요)</span>'
         +(r.sc.parGood.length?'<br>잘 맞는 점: '+r.sc.parGood.slice(0,4).join(", "):'')
         +(r.sc.parBad.length?'<br>걸리는 점: '+r.sc.parBad.slice(0,4).join(", "):'')
         +(!r.sc.parGood.length&&!r.sc.parBad.length?' 부모 글자와 특별히 붙거나 부딪히는 곳은 없어요.':'')+'</dd>'
       +'<dt>충·형·해 <span class="hint">글자끼리 부딪히는 자리</span></dt><dd>'+(r.sc.stabNote.length
-        ?r.sc.stabNote.join(", ")+'. 그래서 15점에서 <b>'+(15-r.sc.stab)+'점</b> 뺐어요.'
+        ?r.sc.stabLong.join(" ")+' 그래서 15점에서 <b>'+(15-r.sc.stab)+'점</b> 뺐어요.'
         :'여덟 글자끼리 부딪히는 곳이 없어요.')+'</dd>'
       +'</dl>'
       +'<h4 style="margin:16px 0 6px;font-size:14px">10년마다 바뀌는 흐름</h4>'
