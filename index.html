@@ -1086,6 +1086,11 @@ function nmRender(){
     ${out.join("")}
     <p class="nev-msg">획수는 원획(氵=水 4획 식)으로 셌고, 한자 오행은 부수로 정했어요. 작명소마다 획수 길흉표나 한자 오행이 조금씩 달라서 결과가 다를 수 있어요.</p></div>`;
 }
+// 이름 만들기 카드 안에서 넣은 이름을 위쪽 '미리 지어둔 이름' 칸에 옮기고 다시 계산
+function nmUseGiven(v){
+  document.getElementById("given").value=(v||"").replace(/[^가-힣]/g,"").slice(0,3);
+  calc(); document.getElementById("naming").scrollIntoView({behavior:"smooth",block:"start"});
+}
 function nmSync(){
   const inp=document.getElementById("gHanja"); if(!inp) return;
   inp.value=NM_SEL.cs.some(Boolean)?NM_SEL.cs.map(c=>c||"□").join(""):"";
@@ -1094,12 +1099,14 @@ function nmSync(){
 (function(){
   const nb=document.getElementById("naming"); if(!nb) return;
   nb.addEventListener("click",e=>{
+    if(e.target.closest('.nev-btn[data-act="given"]')){ nmUseGiven(document.getElementById("gGiven").value); return; }
     const nb2=e.target.closest(".nev-btn[data-name]");
     if(nb2){ document.getElementById("given").value=nb2.dataset.name; calc();
       document.getElementById("naming").scrollIntoView({behavior:"smooth",block:"start"}); return; }
     const t=e.target.closest(".hj[data-c]"); if(!t) return;
     const i=+t.dataset.i; NM_SEL.cs[i]=(NM_SEL.cs[i]===t.dataset.c)?undefined:t.dataset.c; nmSync();});
-  nb.addEventListener("keydown",e=>{const t=e.target.closest(".hj[data-c]"); if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault(); t.click();}});
+  nb.addEventListener("keydown",e=>{ if(e.target.id==="gGiven"&&e.key==="Enter"){ e.preventDefault(); nmUseGiven(e.target.value); return; }
+    const t=e.target.closest(".hj[data-c]"); if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault(); t.click();}});
   nb.addEventListener("input",e=>{ if(e.target.id!=="gHanja") return;
     const v=e.target.value, kor=(v.match(/[가-힣]/g)||[]).join("");
     NM_SEL.cs=[...v].filter(c=>c==="□"||/\p{Script=Han}/u.test(c)).map(c=>c==="□"?undefined:c).slice(0,4);
@@ -1718,7 +1725,12 @@ function calc(){
     const surHan=SUR[sur[0]], surStroke=surHan?surHan[1]:0;
     let html="";
 
-    // (1) 가진 이름 확인
+    // (1) 가진 이름 확인 — 이름 칸은 늘 보이게 두고, 이름이 있으면 풀이까지
+    const nameRow=`<div class="nevin" style="display:flex;gap:8px;align-items:center">
+      <input type="text" id="gGiven" value="${given}" maxlength="3" placeholder="지어 둔 이름, 예: 서윤" autocomplete="off" style="flex:1">
+      <button type="button" class="nev-btn" data-act="given" style="margin:0">${given?"다른 이름으로":"풀어 보기"}</button></div>`;
+    if(!given) html+=`<div class="chk-box"><div class="t">지어 둔 이름 풀어 보기</div>
+      <p>이름을 미리 정해 두셨다면 넣어 보세요. 소리 오행을 보고, 한자까지 고르면 획수·홀짝·사주 보완을 풀어 드려요.</p>${nameRow}</div>`;
     if(given.length>=1){
       const gs=[...given].map(c=>({c,o:CHO_OH[choOf(c)]}));
       const chain=[sOh,...gs.map(g=>g.o)];
@@ -1746,7 +1758,7 @@ function calc(){
           return `<details class="hjx"><summary>‘${g.c}’${ro(g.c).slice(g.c.length)} 쓸 수 있는 인명용 한자 <b>${new Set(L.map(v=>v.x[0])).size}자</b> 보기
             <span style="color:var(--ink-3)">(사주에 아쉬운 기운이 먼저, 빨간 테두리)</span></summary>
             <div class="hjl">${L.map(v=>`<span class="hj${v.fit?" fit":""}" data-i="${gi}" data-c="${v.x[0]}" role="button" tabindex="0"><b>${v.x[0]}</b>${v.x[2]} · ${OH_HAN[v.x[4]]} · ${v.x[3]}획</span>`).join("")}</div></details>`;
-        }).join("")}</div>`;
+        }).join("")}${nameRow}</div>`;
     }
 
     // (2) 추천 — 2025년 인기 이름 풀에서 사주에 맞는 것을 고른다
