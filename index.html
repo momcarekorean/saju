@@ -450,6 +450,8 @@ dd b{font-weight:500; color:var(--ink)}
 .wksrc li{font-size:13px;color:var(--ink-3);padding-bottom:5px}
 .wksrc a{color:var(--ink-2)}
 .wkpost a{color:var(--ink)}
+.visits{margin:10px 0 0;font-size:13px;color:var(--ink-3)}
+.visits b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
 </style>
 
 <div class="wrap">
@@ -457,6 +459,7 @@ dd b{font-weight:500; color:var(--ink)}
   <p class="eyebrow">맘케어 · 임신부터 출산까지</p>
   <h1>임신·출산 무료 도구</h1>
   <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보를 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
+  <p class="visits" id="visitBox" hidden></p>
 </header>
 
 <nav class="tabs" role="tablist" aria-label="도구 선택">
@@ -3094,4 +3097,40 @@ window.wOnOpen=function(){ if(!WK.auto){ WK.auto=true; if(wkCurrent()) wkAuto();
   if(INIT_TAB==="week"){ const b=document.querySelector('.tb[data-tab="tab-week"]'); if(b){ b.click(); window.scrollTo(0,0); } }
 })();
 /* === WEEKLY-UI END === */
+</script>
+<script>
+/* === VISITS START === */
+/* 방문 수 집계: abacus.jasoncameron.dev (가입 없는 무료 카운터). 키는 total(누적)과 d날짜(하루).
+   같은 브라우저는 한국 날짜 기준 하루에 한 번만 센다. 실제 주소에서만 올리고, 로컬·검색봇은 숫자만 읽는다.
+   보내는 것은 방문 1회뿐이고 입력값·주소(참조 정보)는 보내지 않는다. 서버가 안 되면 조용히 숨긴다. */
+(function(){
+  const HOST="momcarekorean.github.io", API="https://abacus.jasoncameron.dev", NS="momcarekorean-saju", KEY="momcare_visit_day";
+  const box=document.getElementById("visitBox"); if(!box) return;
+  const bot = navigator.webdriver || /bot|crawl|spider|slurp|headless|lighthouse/i.test(navigator.userAgent||"");
+  const day = new Date(Date.now()+9*3600*1000).toISOString().slice(0,10).replace(/-/g,"");
+  const seen = ()=>{ try{ return localStorage.getItem(KEY)===day; }catch(e){ return false; } };
+  const mark = ()=>{ try{ localStorage.setItem(KEY,day); }catch(e){} };
+  async function call(op,key){
+    const ctl=new AbortController(), t=setTimeout(()=>ctl.abort(),5000);
+    try{
+      const r=await fetch(API+"/"+op+"/"+NS+"/"+key,{signal:ctl.signal,cache:"no-store",referrerPolicy:"no-referrer"});
+      if(r.status===404) return 0;
+      if(!r.ok) return null;
+      const j=await r.json();
+      return Number.isFinite(j.value) ? j.value : null;
+    }catch(e){ return null; }
+    finally{ clearTimeout(t); }
+  }
+  (async function(){
+    const count = location.hostname===HOST && !bot && !seen();
+    const op = count ? "hit" : "get";
+    const [total,today] = await Promise.all([call(op,"total"), call(op,"d"+day)]);
+    if(count && (total!=null || today!=null)) mark();
+    if(total==null || today==null) return;
+    const f = n=>n.toLocaleString("ko-KR");
+    box.innerHTML = "오늘 <b>"+f(today)+"</b> · 누적 <b>"+f(total)+"</b> 방문 <span>(방문 수만 익명으로 세요)</span>";
+    box.hidden = false;
+  })();
+})();
+/* === VISITS END === */
 </script>
