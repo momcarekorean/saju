@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>진태양시 만세력</title>
+<title>임신·출산 무료 도구 | 맘케어</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
@@ -434,6 +434,7 @@ dd b{font-weight:500; color:var(--ink)}
 .wkk.chk{color:var(--seal);border-color:var(--seal)}
 .wkfruit{margin:0 0 4px;font-size:22px;color:var(--ink)}
 .wkfruit small{font-size:13px;color:var(--ink-3)}
+.wkrange{margin:0 0 4px;font-size:15px;color:var(--ink-2)}
 .wkdet{margin-top:12px;border-top:1px dashed var(--rule);padding-top:10px}
 .wkdet summary{cursor:pointer;font-size:14px;color:var(--ink-2)}
 .wkdet .wkl{margin-top:10px}
@@ -445,9 +446,9 @@ dd b{font-weight:500; color:var(--ink)}
 
 <div class="wrap">
 <header>
-  <p class="eyebrow">경도 · 균시차 · 절기 보정</p>
-  <h1>진태양시 만세력</h1>
-  <p class="sub">생년월일과 태어난 시각으로 사주 여덟 글자를 계산합니다. 절기와 진태양시를 적용하고, <b>무엇을 어떻게 보정했는지 전부 아래에 표시</b>합니다.</p>
+  <p class="eyebrow">맘케어 · 임신부터 출산까지</p>
+  <h1>임신·출산 무료 도구</h1>
+  <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보를 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
 </header>
 
 <nav class="tabs" role="tablist" aria-label="도구 선택">
@@ -476,6 +477,8 @@ dd b{font-weight:500; color:var(--ink)}
 <div id="tab-saju">
 
 <p class="upd"><b>업데이트 9/29</b> 인명용 한자 대폭 추가 · 한자 이름 풀이 · 풀이를 쉬운 말로 · 오류 수정</p>
+
+<p class="sub" style="margin:0 0 18px">생년월일과 태어난 시각으로 사주 여덟 글자를 계산합니다. 절기와 진태양시를 적용하고, <b>무엇을 어떻게 보정했는지 전부 아래에 표시</b>합니다.</p>
 
 <div class="card">
   <h2>태어난 때</h2>
@@ -1072,9 +1075,12 @@ function wkSize(w){
     const text = w<6 ? "2mm 안팎이에요" : "머리에서 엉덩이까지 약 "+Math.round(mm)+"mm";
     return {kind:"len", fruit:wkNearest(WK_FRUIT_LEN,mm)[0], mm, text};
   }
-  const efw=WHO_FGC.efw[w][4], hc=WHO_FGC.hc[w][4], fl=WHO_FGC.fl[w][4];
-  const kg = efw>=1000 ? (efw/1000).toFixed(2)+"kg" : efw+"g";
-  return {kind:"wt", fruit:wkNearest(WK_FRUIT_WT,efw)[0], efw, hc, fl, text:"몸무게 평균 약 "+kg};
+  const q=k=>WHO_FGC[k][w];                       // [2.5,5,10,25,50,75,90,95,97.5] 분위 값(가운데 [4]=50, 범위 [1]=5 ~ [7]=95)
+  const efw=q("efw")[4], hc=q("hc")[4], fl=q("fl")[4];
+  const fg=g=>g>=1000 ? (g/1000).toFixed(2)+"kg" : g+"g";
+  return {kind:"wt", fruit:wkNearest(WK_FRUIT_WT,efw)[0], efw, hc, fl,
+          hcLo:q("hc")[1], hcHi:q("hc")[7], flLo:q("fl")[1], flHi:q("fl")[7],
+          text:"몸무게 평균 약 "+fg(efw), range:fg(q("efw")[1])+"~"+fg(q("efw")[7])};
 }
 // 임신 며칠째(ga) → 보여 줄 주차. 범위 밖이면 가까운 끝 주차와 안내
 function wkPick(ga){
@@ -2972,17 +2978,22 @@ function wkSizeCard(w){
         <span class="gtag ${r.band}">${G_BAND[r.band]}</span><br><button type="button" class="gchip" id="wkTrend">추세선 보기</button></div>`;
     }
   }
+  const cm=v=>(v/10).toFixed(1);
   const lines = s.kind==="len"
     ? `<li>${wkEsc(s.text)}</li>`
-    : `<li>${wkEsc(s.text)}</li><li>머리둘레 평균 약 ${(s.hc/10).toFixed(1)}cm</li><li>허벅지뼈 길이 평균 약 ${(s.fl/10).toFixed(1)}cm</li>`;
+    : `<li>${wkEsc(s.text)} <span class="hint">범위 ${s.range}</span></li>`
+      +`<li>머리둘레 평균 약 ${cm(s.hc)}cm <span class="hint">범위 ${cm(s.hcLo)}~${cm(s.hcHi)}cm</span></li>`
+      +`<li>허벅지뼈 길이 평균 약 ${cm(s.fl)}cm <span class="hint">범위 ${cm(s.flLo)}~${cm(s.flHi)}cm</span></li>`;
+  const sub = s.kind==="wt" ? `몸무게는 대개 ${s.range} 사이예요` : s.text;
   const why = s.kind==="len"
     ? "초음파로 잰 머리에서 엉덩이까지 길이(CRL)로 임신 주수를 정하는 식(Robinson 1975)을 거꾸로 풀어 그 주의 평균 길이를 구했고, 비슷한 크기의 과일을 골랐어요."
-    : "WHO 태아성장표의 50백분위(같은 주수 아기들의 한가운데) 값이고, 그 무게와 가장 비슷한 과일을 골랐어요.";
+    : "WHO 태아성장표에서 평균은 50백분위(같은 주수 아기들의 한가운데), 범위는 5~95백분위(10명 중 9명쯤이 들어가는 구간)예요. 평균 무게와 가장 비슷한 과일을 골랐어요.";
   const go = w>=14
     ? `<button type="button" id="wkGo">내 초음파 수치로 확인하기</button>`
     : `<p class="gnote" style="margin-bottom:0">성장 백분위는 14주부터 계산돼요. 지금은 평균 크기만 봐 주세요.</p>`;
   return `<div class="card"><h2>아기 크기 <span class="wktri">${wkTri(w)}</span></h2>${mine}
-    <p class="wkfruit"><b>${s.fruit}</b> 정도 크기예요 <small>대략이에요</small></p>
+    <p class="wkfruit"><b>${s.fruit}</b> 정도 크기예요</p>
+    <p class="wkrange">${wkEsc(sub)}</p>
     <details class="wkdet"><summary>실측 기준이 궁금하다면?</summary>
       <ul class="wkl">${lines}</ul>
       <p class="gnote">${why} 과일 비유는 공식 기준이 없어서 사이트마다 달라요.</p>${go}</details></div>`;
