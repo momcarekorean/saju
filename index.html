@@ -907,6 +907,8 @@ dd b{font-weight:500; color:var(--ink)}
   <p class="gnote">옅은 띠는 WHO 5~95백분위, 가운데 선은 50백분위예요. 점이 선을 따라 비슷한 높이로 이어지면 꾸준히 크고 있다는 뜻이에요.</p>
 </div>
 
+<div id="gShop"></div>
+
 <div class="card hidden" id="gListCard">
   <h2>저장한 기록</h2>
   <div class="gtw" id="gList"></div>
@@ -2779,8 +2781,18 @@ function gCurrentGa(){
 }
 function gShowGa(){
   const ga=gCurrentGa(), el=$g("gGa");
-  if(ga==null){ el.textContent= $g("gManual").checked ? "주·일을 넣어 주세요" : "예정일과 날짜를 넣으면 계산돼요"; return; }
+  if(ga==null){ el.textContent= $g("gManual").checked ? "주·일을 넣어 주세요" : "예정일과 날짜를 넣으면 계산돼요"; gRenderShop(); return; }
   el.textContent = (ga<98||ga>286) ? gcFmtGa(ga)+" · 14~40주만 계산돼요" : gcFmtGa(ga);
+  gRenderShop();
+}
+// 입력한 주차에 맞는 상품: 저장한 기록이 있으면 가장 최근(방금 저장한) 기록의 주차, 없으면 지금 입력한 주차
+function gRenderShop(){
+  const box=$g("gShop"); if(!box) return;
+  const last = G.records.find(r=>r.id===G.lastId) || G.records[G.records.length-1];
+  const ga = last ? last.gaDays : gCurrentGa();
+  const w = (ga==null || ga<28) ? null : Math.floor(ga/7);
+  const d = (w!=null && typeof WK_DATA!=="undefined") ? WK_DATA[w] : null;
+  box.innerHTML = (d && d.shop && d.shop.length) ? wkShopCard(d.shop, `${w}주에 챙기면 좋은 것`) : "";
 }
 function gFmtVal(it,v){ return it.unit==="g" ? `${Math.round(v)}g` : `${v}cm`; }
 
@@ -2855,7 +2867,7 @@ function gRenderAll(){
   const last = G.records.find(r=>r.id===G.lastId) || G.records[G.records.length-1];
   $g("gResultCard").classList.toggle("hidden", !last);
   if(last) gRenderResult(last);
-  gRenderTrend(); gRenderList();
+  gRenderTrend(); gRenderList(); gRenderShop();
 }
 
 function gLinkUrl(){
@@ -2953,7 +2965,7 @@ $g("grCopy").addEventListener("click",()=>gCopyText(G_TOOL_URL,grMsg));
    주차별 (탭 4) — 내용은 WEEKLY-DATA, 크기는 WEEKLY-CORE, 저장은 하지 않는다
    ══════════════════════════════════════════════════════════════ */
 const WK={w:18, auto:false};
-const wkEsc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function wkEsc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 const wkToday=()=>{ const t=new Date(), p=n=>String(n).padStart(2,"0"); return `${t.getFullYear()}-${p(t.getMonth()+1)}-${p(t.getDate())}`; };
 const wkTri=w=>w<=13?"임신 초기":w<=27?"임신 중기":"임신 후기";
 // 예정일: 이 탭에 넣은 값 > 성장분석에 동의하고 저장한 값 > 택일 탭에 넣어 둔 값(저장되지 않는 값)
@@ -3011,15 +3023,21 @@ function wkEmergency(w){
   if(w>=20) a.push("아기 움직임이 눈에 띄게 줄었을 때");
   return "어느 주차든 "+a.join(", ")+"는 기다리지 말고 병원이나 분만실에 바로 연락해 주세요.";
 }
+// 쿠팡 파트너스 상품 카드: 주차별 탭과 성장분석 탭이 같은 자료(WK_DATA[주].shop)를 쓴다.
+// 파트너스 문구는 상품명 바로 위에 크게 둔다. 가격은 적지 않는다(링크에서 확인).
+function wkShopCard(shop,title){
+  if(!shop||!shop.length) return "";
+  return `<div class="card wkshopcard"><h2>${wkEsc(title)}</h2>`
+    +`<p class="wkad">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.`
+    +`<small>상품 선택에는 영향을 주지 않으며, 안전 기준을 우선해 소개합니다. 제품의 효능을 보증하지 않으니 구매 전에 성분과 사용법을 확인해 주세요.</small></p>`
+    +`<ul class="wkshop">${shop.map(s=>`<li><a class="wkbuy" href="${wkEsc(s.url)}" target="_blank" rel="sponsored nofollow noopener">${wkEsc(s.label)}<span>쿠팡에서 보기</span></a><p class="wkwhy">${wkEsc(s.why)}</p></li>`).join("")}</ul></div>`;
+}
 function wkRender(w){
   const d=WK_DATA[w], box=$g("wkBody");
   if(!d){ box.innerHTML=`<div class="card"><p class="sub" style="margin:0">${w}주 내용은 준비 중이에요.</p></div>`; return; }
   const ul=(a,cls)=>`<ul class="wkl ${cls||""}">${a.map(x=>`<li>${wkEsc(x)}</li>`).join("")}</ul>`;
   const todo=`<ul class="wkl">${d.todo.map(x=>`<li><span class="wkk ${x.k==="검사"?"chk":""}">${x.k}</span>${wkEsc(x.t)}</li>`).join("")}</ul>`;
-  const shop=(d.shop&&d.shop.length) ? `<div class="card wkshopcard"><h2>이번 주에 챙기면 좋은 것</h2>`
-    +`<p class="wkad">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.`
-    +`<small>상품 선택에는 영향을 주지 않으며, 안전 기준을 우선해 소개합니다. 제품의 효능을 보증하지 않으니 구매 전에 성분과 사용법을 확인해 주세요.</small></p>`
-    +`<ul class="wkshop">${d.shop.map(s=>`<li><a class="wkbuy" href="${wkEsc(s.url)}" target="_blank" rel="sponsored nofollow noopener">${wkEsc(s.label)}<span>쿠팡에서 보기</span></a><p class="wkwhy">${wkEsc(s.why)}</p></li>`).join("")}</ul></div>` : "";
+  const shop=wkShopCard(d.shop, "이번 주에 챙기면 좋은 것");
   const posts=d.posts.length ? `<div class="card wkpost"><h2>이 주와 이어지는 글</h2><ul class="wkl">${d.posts.map(p=>`<li><a href="${wkEsc(p.url)}" target="_blank" rel="noopener">${wkEsc(p.label)}</a></li>`).join("")}</ul></div>` : "";
   const keys=[...new Set(d.src.concat(w<14?["robinson"]:["who"]))];
   const srcs=keys.map(k=>WK_SRC[k]).filter(Boolean)
