@@ -653,7 +653,7 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 <div id="tab-pick" class="hidden">
 
-<p class="upd"><b>업데이트 9/30</b> 주말·공휴일·야간 제외 선택 · 풀이를 쉬운 말로 · 기운 세기 판정 오류 수정</p>
+<p class="upd"><b>업데이트 9/30</b> 주말·공휴일·야간 제외 선택 · 계절·더위추위 판단 보강 · 원진 추가 · 오류 수정</p>
 
 <div class="card">
   <h2>부모 사주</h2>
@@ -716,8 +716,8 @@ dd b{font-weight:500; color:var(--ink)}
     <div id="pAll"></div>
     <p class="sub" style="margin-top:12px"><b>'걸리는 것' 읽는 법.</b> 사주는 태어난 해·달·날·시 네 칸이고,
     옛사람들은 칸마다 인생의 자리를 하나씩 맡겼어요. <b>해</b>는 어린 시절, <b>달</b>은 부모·형제, <b>날</b>은 배우자·가정, <b>시</b>는 자녀·노년이에요.
-    두 자리의 글자가 서로 안 맞으면 그 사이에 일이 생기기 쉽다고 읽고, 안 맞는 정도에 따라 네 가지로 나눠요.<br>
-    <b>변화·이동이 많음</b>(충, 제일 셈) · <b>마찰이 잦음</b>(형) · <b>서운한 일이 생기기 쉬움</b>(해) · <b>작게 어긋남</b>(파, 제일 약함)<br>
+    두 자리의 글자가 서로 안 맞으면 그 사이에 일이 생기기 쉽다고 읽고, 안 맞는 정도에 따라 다섯 가지로 나눠요.<br>
+    <b>변화·이동이 많음</b>(충, 제일 셈) · <b>마찰이 잦음</b>(형) · <b>서운한 일이 생기기 쉬움</b>(해) · <b>괜히 서먹해지기 쉬움</b>(원진) · <b>작게 어긋남</b>(파, 제일 약함)<br>
     예를 들어 '부모↔배우자 사이 변화·이동이 많음'은 커서 부모 곁을 일찍 떠나 따로 산다는 식으로 풀어요.
     있다고 나쁜 사주는 아니고, 이 도구는 점수를 조금 빼는 데만 썼어요.</p></div>
   <div class="card">
@@ -742,7 +742,9 @@ dd b{font-weight:500; color:var(--ink)}
       <dt>조후 <span class="hint">계절이 아쉬워하는 것</span></dt>
       <dd>태어난 <b>계절</b>을 보고 뭐가 필요한지 따져요.
         겨울에 태어나면 따뜻한 기운이, 여름에 태어나면 식혀 주는 기운이 있으면 좋다고 보는 식이에요.
-        날씨에 맞춰 옷을 입는 것과 같은 생각이에요.</dd>
+        날씨에 맞춰 옷을 입는 것과 같은 생각이에요.
+        봄·가을은 볕(불)과 비(물)가 둘 다 조금씩 있으면 좋다고 보고, 사주 안에 불이 셋 이상이면 더운 사주라 물이,
+        물이 셋 이상이면 차가운 사주라 불이 꼭 있어야 한다고 봐요.</dd>
 
       <dt>천을귀인 <span class="hint">天乙貴人</span></dt>
       <dd>옛사람들이 <b>제일 좋게 친 자리</b>예요. 힘들 때 손 내밀어 주는 사람이 곁에 생긴다고 봤어요.
@@ -752,10 +754,10 @@ dd b{font-weight:500; color:var(--ink)}
       <dd>글재주와 배움에 인연이 있다고 보는 자리예요.
         공부를 잘한다는 뜻이라기보다, 읽고 쓰는 일과 잘 맞는다고 보면 돼요.</dd>
 
-      <dt>충 · 형 · 해 · 파 <span class="hint">서로 안 맞는 글자 짝</span></dt>
+      <dt>충 · 형 · 해 · 원진 · 파 <span class="hint">서로 안 맞는 글자 짝</span></dt>
       <dd>사주의 아래쪽 네 글자(해·달·날·시의 아랫글자) 가운데 <b>서로 안 맞는 짝</b>이 정해져 있어요.
         옛 풀이로는 <b>충</b>이면 변화나 이동이 많고, <b>형</b>이면 마찰이나 다툼이 잦고,
-        <b>해</b>면 서운한 일이 생기기 쉽고, <b>파</b>면 작게 어긋나는 일이 있다고 봐요. 충이 제일 세고 파가 제일 약해요.
+        <b>해</b>면 서운한 일이 생기기 쉽고, <b>원진</b>이면 까닭 없이 서로 서먹해지기 쉽고, <b>파</b>면 작게 어긋나는 일이 있다고 봐요. 충이 제일 세고 파가 제일 약해요.
         네 칸은 각각 어린 시절·부모·배우자·자녀 자리를 맡는다고 봐서, 어느 자리 사이의 일인지도 같이 적었어요.
         있다고 나쁜 사주는 아니고, 이 도구는 많을수록 점수를 조금씩 빼는 정도로만 써요.</dd>
 
@@ -2127,6 +2129,8 @@ const hyungJi=(a,b)=>(a===b&&HYUNGSELF.indexOf(a)>=0)
   ||(a===0&&b===3)||(a===3&&b===0)
   ||HYUNG3.some(g=>g.indexOf(a)>=0&&g.indexOf(b)>=0&&a!==b);
 const haeJi=(a,b)=>HAEJI[a]===b, paJi=(a,b)=>PAJI[a]===b, hapJi=(a,b)=>YUKHAP[a]===b;
+const WONJIN={0:7,7:0,1:6,6:1,2:9,9:2,3:8,8:3,4:11,11:4,5:10,10:5};   // 원진: 子未 丑午 寅酉 卯申 辰亥 巳戌
+const wonJi=(a,b)=>WONJIN[a]===b;
 // 해·달·날·시 아랫글자가 맡은 자리(옛 풀이) — 표에는 짧게, 설명에는 길게
 const JARI_S={해:"어린 시절",달:"부모",날:"배우자",시:"자녀"};
 const JARI_L={해:"어린 시절",달:"부모·형제",날:"배우자·가정",시:"자녀·노년"};
@@ -2134,6 +2138,7 @@ const JARI_L={해:"어린 시절",달:"부모·형제",날:"배우자·가정",�
 const CLASH_KO={충:["변화·이동이 많음","변화나 이동이 많다"],
                 형:["마찰이 잦음","마찰이나 다툼이 잦다"],
                 해:["서운한 일이 생기기 쉬움","서운한 일이나 오해가 생기기 쉽다"],
+                원진:["괜히 서먹해지기 쉬움","까닭 없이 서로 서먹해지기 쉽다"],
                 파:["작게 어긋남","작게 어긋나는 일이 있다"]};
 
 // ── 조후: 태어난 달의 계절이 무엇을 아쉬워하는가
@@ -2142,6 +2147,17 @@ function johuOf(monJi){
   if([5,6,7].indexOf(monJi)>=0)  return {need:4,ss:"여름",msg:"더운 때라 <b>식혀 주는 기운(물)</b>이 있으면 좋다고 봐요"};
   if([8,9,10].indexOf(monJi)>=0) return {need:1,ss:"가을",msg:"서늘해지는 때라 <b>온기(불)</b>가 받쳐 주면 좋다고 봐요"};
   return {need:1,ss:"봄",msg:"싹이 트는 때라 <b>볕(불)</b>이 조금 있으면 잘 자란다고 봐요"};
+}
+
+// 조후를 사주 전체로 다시 본다. 겨울이 아닌데 불이 셋 이상이면 더운 사주라 물이,
+// 여름이 아닌데 물이 셋 이상이면 차가운 사주라 불이 꼭 있어야 한다.
+// 그 밖엔 겨울·여름은 달로 정하고, 봄·가을은 볕(불)과 비(물)가 둘 다 조금씩 있으면 좋다고 본다.
+function johuNow(ch,jo){
+  const c=ch.cnt;
+  if(c[1]>=3&&jo.ss!=="겨울") return {need:[4],w:8,msg:"불 기운이 "+c[1]+"개나 돼서 사주가 더운 편이에요. <b>식혀 주는 기운(물)</b>이 꼭 있어야 한다고 봐요"};
+  if(c[4]>=3&&jo.ss!=="여름") return {need:[1],w:8,msg:"물 기운이 "+c[4]+"개나 돼서 사주가 차가운 편이에요. <b>따뜻한 기운(불)</b>이 꼭 있어야 한다고 봐요"};
+  if(jo.ss==="봄"||jo.ss==="가을") return {need:[1,4],w:5,msg:jo.ss+"은 춥지도 덥지도 않은 때라 <b>볕(불)</b>과 <b>비(물)</b>가 둘 다 조금씩 있으면 좋다고 봐요"};
+  return {need:[jo.need],w:8,msg:jo.msg};
 }
 
 // ── 신강·신약: 월령이 일간을 돕는지
@@ -2203,12 +2219,13 @@ function scorePick(ch, ctx){
   D.oh = Math.max(0, Math.min(20, Math.round(20-(9-ch.balance)*2.5)));
 
   // ② 조후·용희신 20
+  const jn=johuNow(ch,y.jo);
   let a=0;
-  if(ch.cnt[y.jo.need]>0) a+=8;
-  if(ch.cnt[y.jo.need]>=2) a+=2;
+  jn.need.forEach(o=>{ if(ch.cnt[o]>0) a+=jn.w; });
+  if(jn.need.length===1&&ch.cnt[jn.need[0]]>=2) a+=2;
   if(ch.cnt[y.yong]>0) a+=6;
   if(ch.cnt[y.hui]>0) a+=4;
-  D.jo=Math.min(20,a);
+  D.jo=Math.min(20,a); D.johu=jn;
 
   // ③ 부모와의 조화 15
   let pm=0, good=[], bad2=[];
@@ -2250,6 +2267,7 @@ function scorePick(ch, ctx){
     if(chungJi(x,z)){ pen+=4; bad.push({a,b,t:"충"}); }
     else if(hyungJi(x,z)){ pen+=2.5; bad.push({a,b,t:"형"}); }
     else if(haeJi(x,z)){ pen+=1.5; bad.push({a,b,t:"해"}); }
+    else if(wonJi(x,z)){ pen+=2; bad.push({a,b,t:"원진"}); }
     else if(paJi(x,z)){ pen+=1; bad.push({a,b,t:"파"}); }
   });
   D.stab=Math.max(0,Math.round(15-pen));
@@ -2442,9 +2460,10 @@ function pickRender(){
     const timeNote = (realBest&&realBest.hh!==r.hh)
       ? ' · 병원에서 잡기 쉬운 낮 시간으로 보면 <b>'+P2(realBest.hh)+'시</b>('+realBest.sc.total+'점)'
       : (r.real?' · 병원 수술 일정에 잡기 좋은 시간대예요':'');
-    const johuHas = r.ch.cnt[y.jo.need]>0
-      ? '이 사주엔 '+iga(OH[y.jo.need])+' '+r.ch.cnt[y.jo.need]+'개 있어서 <b>그 조건을 갖췄어요.</b>'
-      : '<b>아쉽게도 '+iga(OH[y.jo.need])+' 하나도 없어요.</b>';
+    const jn=r.sc.johu, jLack=jn.need.filter(o=>r.ch.cnt[o]===0);
+    const johuHas = !jLack.length
+      ? '이 사주엔 '+jn.need.map(o=>OH[o]+' '+r.ch.cnt[o]+'개').join('·')+'가 있어서 <b>그 조건을 갖췄어요.</b>'
+      : '<b>아쉽게도 '+jLack.map(o=>OH[o]).join('·')+jo(OH[jLack[jLack.length-1]],'이','가')+' 하나도 없어요.</b>';
     const yongN=r.ch.cnt[y.yong], ye=w=>w+jo(w,"이에요","예요");
     const bars=[["오행 균형",r.sc.oh,20],["계절·용신",r.sc.jo,20],["부모 조화",r.sc.par,15],
                 ["안 맞는 짝 적음",r.sc.stab,15],["귀인",r.sc.gui,10],["10년운",r.sc.dw,10],
@@ -2458,11 +2477,12 @@ function pickRender(){
       +chartLine(r.ch)+ohBar(r.ch.cnt)
       +'<dl class="pd">'
       +'<dt>기운의 세기 <span class="hint">신강·신약</span></dt><dd><b>'+(st.strong?'넉넉한 편(신강)':'여린 편(신약)')+'</b>이에요. '+y.why+'.</dd>'
-      +'<dt>계절이 아쉬워하는 것</dt><dd>'+y.jo.ss+'에 태어나요. '+y.jo.msg+'. '+johuHas+'</dd>'
+      +'<dt>계절이 아쉬워하는 것</dt><dd>'+y.jo.ss+'에 태어나요. '+jn.msg+'. '+johuHas+'</dd>'
       +'<dt>용신 · 희신 <span class="hint">제일 필요한 기운 · 그걸 거드는 기운</span></dt><dd>'
         +'제일 필요한 기운(용신)은 <b>'+OH[y.yong]+'</b>, 거드는 기운(희신)은 <b>'+ye(OH[y.hui])+'</b>. '
         +eun(OH[y.yong])+' '+OH_PLAIN[y.yong]+'이에요. '
-        +(yongN>0?'이 사주엔 '+iga(OH[y.yong])+' '+yongN+'개 들어 있어요.'
+        +(yongN>=3?'이 사주엔 '+iga(OH[y.yong])+' 벌써 '+yongN+'개나 있어서 더 채울 필요는 없어요.'
+         :yongN>0?'이 사주엔 '+iga(OH[y.yong])+' '+yongN+'개 들어 있어요.'
                  :'이 사주엔 '+iga(OH[y.yong])+' 없어서, 이름 한자로 채워 주면 좋다고 봐요.')
         +' <span class="sm">(무엇을 용신으로 볼지는 유파마다 달라요)</span></dd>'
       +'<dt>귀인 <span class="hint">옛사람들이 좋게 본 자리</span></dt><dd>'+(r.sc.guiNote.length
