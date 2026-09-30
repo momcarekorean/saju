@@ -653,7 +653,7 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 <div id="tab-pick" class="hidden">
 
-<p class="upd"><b>업데이트 9/29</b> 주말·공휴일·야간 제외 선택 · 풀이를 쉬운 말로 · 오류 수정</p>
+<p class="upd"><b>업데이트 9/30</b> 주말·공휴일·야간 제외 선택 · 풀이를 쉬운 말로 · 기운 세기 판정 오류 수정</p>
 
 <div class="card">
   <h2>부모 사주</h2>
@@ -2148,11 +2148,12 @@ function johuOf(monJi){
 function strengthOf(ch){
   const me=GAN_OH[ch.dayGan], mo=JI_OH[ch.monJi];
   let sc=0;
-  if(mo===me) sc+=3; else if(KEUK[mo]!==me && KEUK[me]!==mo) sc+=2; // 생하는 관계
-  if(KEUK[me]===mo) sc-=1;                                          // 내가 극 → 설기
-  if(KEUK[mo]===me) sc-=3;                                          // 나를 극
-  [ch.yJi,ch.dayJi,ch.hourJi].forEach(j=>{ if(JI_OH[j]===me) sc+=1; });
-  [ch.yGan,ch.monGan,ch.hourGan].forEach(g=>{ if(GAN_OH[g]===me) sc+=1; });
+  // 달이 같은 기운(비겁)이면 +3, 나를 낳아 주면(인성) +2, 나를 누르면(관성) -3, 내가 낳거나 누르면(식상·재성) 힘이 빠져 -1
+  // (예전엔 '내가 낳는 달'도 +2로 쳐서, 봄에 태어난 물·겨울에 태어난 쇠 같은 여린 사주가 신강으로 나왔다)
+  const help=o=>o===me||(o+1)%5===me;   // 같은 편 = 같은 기운 + 나를 낳아 주는 기운
+  if(mo===me) sc+=3; else if((mo+1)%5===me) sc+=2; else if(KEUK[mo]===me) sc-=3; else sc-=1;
+  [ch.yJi,ch.dayJi,ch.hourJi].forEach(j=>{ if(help(JI_OH[j])) sc+=1; });
+  [ch.yGan,ch.monGan,ch.hourGan].forEach(g=>{ if(help(GAN_OH[g])) sc+=1; });
   return {sc, strong:sc>=3, label:sc>=3?"신강":"신약"};
 }
 
