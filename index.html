@@ -448,7 +448,7 @@ dd b{font-weight:500; color:var(--ink)}
 .wkdet .wkl{margin-top:10px}
 .wkmine{padding:12px 14px;margin-bottom:12px;background:var(--paper-2);border-radius:2px;font-size:14.5px;color:var(--ink-2);line-height:1.8}
 .wkad{margin:0 0 16px;padding:16px 18px;border:2px solid var(--seal);border-radius:4px;background:var(--paper);color:var(--ink);font-size:19px;font-weight:700;line-height:1.55}
-.wkbanner{display:block;margin:0 0 14px}
+.wkbanner{display:block;margin:34px 0 0}
 .wkbanner img{display:block;width:100%;max-width:728px;height:auto;margin:0 auto;border-radius:3px}
 .wkad small{display:block;margin-top:8px;font-size:13.5px;font-weight:400;color:var(--ink-2);line-height:1.65}
 .wkshop{margin:0;padding:0;list-style:none}
@@ -3092,7 +3092,7 @@ function wkEmergency(w){
 }
 // 쿠팡 파트너스 상품 카드: 주차별 탭과 성장분석 탭이 같은 자료(WK_DATA[주].shop)를 쓴다.
 // 파트너스 문구는 상품명 바로 위에 크게 둔다. 가격은 적지 않는다(링크에서 확인).
-// 쿠팡 파트너스 배너(이미지+링크): 상품 목록 바로 위, 파트너스 문구 아래에 둔다.
+// 쿠팡 파트너스 배너(이미지+링크): 파트너스 문구 → 상품 링크 → 몇 줄 띄우고 맨 아래(2026-10-02 사용자 요청, 위에 두면 너무 튄다).
 // referrerpolicy="unsafe-url" 은 쿠팡이 준 코드 그대로(수익·증빙용 전체 주소). 대신 누르는 순간 주소의 입력값(?d= ?s= ?g= 등)을
 // 지워서 개인 정보가 같이 넘어가지 않게 한다(아래 click 핸들러).
 // ※ 상수를 함수 안에 둔다: 성장분석 탭이 페이지를 여는 중에(이 줄보다 먼저 실행) 상품 카드를 그리므로, 바깥 const 로 두면
@@ -3126,8 +3126,8 @@ function wkShopCard(shop,title,tab){
   return `<div class="card wkshopcard"><h2>${wkEsc(title)}</h2>`
     +`<p class="wkad">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.`
     +`<small>상품 선택에는 영향을 주지 않으며, 안전 기준을 우선해 소개합니다. 제품의 효능을 보증하지 않으니 구매 전에 성분과 사용법을 확인해 주세요.</small></p>`
-    +wkBannerHtml(tab||"week")
-    +`<ul class="wkshop">${shop.map(s=>`<li><a class="wkbuy" data-tab="${tab||"week"}" href="${wkEsc(s.url)}" target="_blank" rel="sponsored nofollow noopener" referrerpolicy="unsafe-url">${wkEsc(s.label)}<span>쿠팡에서 보기</span></a><p class="wkwhy">${wkEsc(s.why)}</p></li>`).join("")}</ul></div>`;
+    +`<ul class="wkshop">${shop.map(s=>`<li><a class="wkbuy" data-tab="${tab||"week"}" href="${wkEsc(s.url)}" target="_blank" rel="sponsored nofollow noopener" referrerpolicy="unsafe-url">${wkEsc(s.label)}<span>쿠팡에서 보기</span></a><p class="wkwhy">${wkEsc(s.why)}</p></li>`).join("")}</ul>`
+    +wkBannerHtml(tab||"week")+`</div>`;
 }
 // 엄마 몸 카드 맨 아래: 임신 전과 비교한 체중 증가
 function wkGainHtml(w){
