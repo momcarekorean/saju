@@ -3121,7 +3121,10 @@ function wkStripUrl(tab,ms){
 document.addEventListener("contextmenu",e=>{
   const a=e.target.closest&&e.target.closest("a.wkbanner,a.wkbuy"); if(a) wkStripUrl(a.dataset.tab||"week",10000);
 },true);
-function wkShopCard(shop,title,tab){
+// 상품 카드·체중 줄에서 오류가 나도 탭 전체가 비지 않게 감싼다(2026-10-02 초기화 순서 오류로 주차별 탭이 통째로 비었던 일 뒤).
+function wkShopCard(shop,title,tab){ try{ return wkShopCardRaw(shop,title,tab); }catch(e){ return ""; } }
+function wkGainSafe(w){ try{ return wkGainHtml(w); }catch(e){ return ""; } }
+function wkShopCardRaw(shop,title,tab){
   if(!shop||!shop.length) return "";
   return `<div class="card wkshopcard"><h2>${wkEsc(title)}</h2>`
     +`<p class="wkad">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.`
@@ -3153,7 +3156,7 @@ function wkRender(w){
   box.innerHTML =
     wkSizeCard(w)
     +`<div class="card"><h2>아기는 이렇게 자라요</h2>${ul(d.baby)}</div>`
-    +`<div class="card"><h2>엄마 몸은 이래요</h2>${ul(d.mom)}${wkGainHtml(w)}</div>`
+    +`<div class="card"><h2>엄마 몸은 이래요</h2>${ul(d.mom)}${wkGainSafe(w)}</div>`
     +`<div class="card"><h2>이번 주 검사와 할 일</h2>${todo}</div>`
     +`<div class="card"><h2>이런 신호가 있으면 병원에 가세요</h2>${ul(d.warn,"wkwarn")}<p class="gnote" style="margin-bottom:0">${wkEsc(wkEmergency(w))}</p></div>`
     +shop
