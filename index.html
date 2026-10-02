@@ -3095,11 +3095,13 @@ function wkEmergency(w){
 // 쿠팡 파트너스 배너(이미지+링크): 상품 목록 바로 위, 파트너스 문구 아래에 둔다.
 // referrerpolicy="unsafe-url" 은 쿠팡이 준 코드 그대로(수익·증빙용 전체 주소). 대신 누르는 순간 주소의 입력값(?d= ?s= ?g= 등)을
 // 지워서 개인 정보가 같이 넘어가지 않게 한다(아래 click 핸들러).
-const WK_BANNER={href:"https://link.coupang.com/a/hvQVMB4OAK",
-  img:"https://ads-partners.coupang.com/banners/1035230?trackingCode=AF7958231&subId=&traceId=V0-301-5f4982b43e2b4522-I1035230&w=728&h=90"};
+// ※ 상수를 함수 안에 둔다: 성장분석 탭이 페이지를 여는 중에(이 줄보다 먼저 실행) 상품 카드를 그리므로, 바깥 const 로 두면
+//   초기화 전에 읽어 스크립트 전체가 멈췄다(2026-10-02, 저장된 기록이 있는 브라우저에서 주차별 탭이 비어 보였던 사고).
 function wkBannerHtml(tab){
-  return `<a class="wkbanner" data-tab="${tab}" href="${WK_BANNER.href}" target="_blank" rel="sponsored nofollow noopener" referrerpolicy="unsafe-url">`
-    +`<img src="${wkEsc(WK_BANNER.img)}" width="728" height="90" loading="lazy" decoding="async" alt="쿠팡 파트너스 육아용품 배너"></a>`;
+  const href="https://link.coupang.com/a/hvQVMB4OAK";
+  const img="https://ads-partners.coupang.com/banners/1035230?trackingCode=AF7958231&subId=&traceId=V0-301-5f4982b43e2b4522-I1035230&w=728&h=90";
+  return `<a class="wkbanner" data-tab="${tab}" href="${href}" target="_blank" rel="sponsored nofollow noopener" referrerpolicy="unsafe-url">`
+    +`<img src="${wkEsc(img)}" width="728" height="90" loading="lazy" decoding="async" alt="쿠팡 파트너스 육아용품 배너"></a>`;
 }
 // 쿠팡 링크(배너·상품)는 쿠팡이 준 대로 referrerpolicy="unsafe-url"(전체 주소 전달). 이름짓기 탭이 입력값을 주소에 싣기 때문에
 // 링크를 누르거나(클릭·가운데 클릭·길게 눌러 새 탭) 열려는 순간에만 주소를 ?tab=… 로 줄였다가 되돌린다.
