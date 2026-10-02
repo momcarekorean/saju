@@ -3106,7 +3106,7 @@ function wkGainHtml(w){
   const n=g.normal;
   return `<div class="wkgain"><p class="wkgl"><b>임신 전보다 보통 약 +${wkKg(n.mid)}kg</b> 늘어요 <span>임신 전 체중이 정상(BMI ${n.bmi})일 때 ${wkKg(n.lo)}~${wkKg(n.hi)}kg</span></p>`
     +`<p class="wkgs">저체중(BMI ${g.low.bmi})이었다면 약 +${wkKg(g.low.mid)}kg · 과체중(BMI ${g.over.bmi})이었다면 약 +${wkKg(g.over.mid)}kg · 비만(BMI ${g.obese.bmi})이었다면 약 +${wkKg(g.obese.mid)}kg</p>`
-    +`<p class="gnote">임신 전 체중과 키로 계산한 BMI에 따라 권장 증가량이 달라요. 미국 의학한림원(IOM) 권장 총 증가량을 주수에 따라 나눠 맘케어가 계산한 값이라 정해진 정상 곡선은 아니고, 쌍둥이 임신은 더 늘어요. 내 목표는 담당 선생님과 정해요.</p></div>`;
+    +`<p class="gnote">임신 전 체중과 키로 계산한 BMI에 따라 권장 증가량이 달라요. 미국 의학한림원(IOM) 권장 총 증가량을 주수에 따라 나눠 계산한 값이라 정해진 정상 곡선은 아니고, 쌍둥이 임신은 더 늘어요. 내 목표는 담당 선생님과 정해요.</p></div>`;
 }
 function wkRender(w){
   const d=WK_DATA[w], box=$g("wkBody");
