@@ -448,6 +448,8 @@ dd b{font-weight:500; color:var(--ink)}
 .wkdet .wkl{margin-top:10px}
 .wkmine{padding:12px 14px;margin-bottom:12px;background:var(--paper-2);border-radius:2px;font-size:14.5px;color:var(--ink-2);line-height:1.8}
 .wkad{margin:0 0 16px;padding:16px 18px;border:2px solid var(--seal);border-radius:4px;background:var(--paper);color:var(--ink);font-size:19px;font-weight:700;line-height:1.55}
+.wkbanner{display:block;margin:0 0 14px}
+.wkbanner img{display:block;width:100%;max-width:728px;height:auto;margin:0 auto;border-radius:3px}
 .wkad small{display:block;margin-top:8px;font-size:13.5px;font-weight:400;color:var(--ink-2);line-height:1.65}
 .wkshop{margin:0;padding:0;list-style:none}
 .wkshop li{padding:14px 0;border-top:1px dashed var(--rule)}
@@ -2857,7 +2859,7 @@ function gRenderShop(){
   const ga = last ? last.gaDays : gCurrentGa();
   const w = (ga==null || ga<28) ? null : Math.floor(ga/7);
   const d = (w!=null && typeof WK_DATA!=="undefined") ? WK_DATA[w] : null;
-  box.innerHTML = (d && d.shop && d.shop.length) ? wkShopCard(d.shop, `${w}주에 챙기면 좋은 것`) : "";
+  box.innerHTML = (d && d.shop && d.shop.length) ? wkShopCard(d.shop, `${w}주에 챙기면 좋은 것`, "growth") : "";
 }
 function gFmtVal(it,v){ return it.unit==="g" ? `${Math.round(v)}g` : `${v}cm`; }
 
@@ -3090,12 +3092,40 @@ function wkEmergency(w){
 }
 // 쿠팡 파트너스 상품 카드: 주차별 탭과 성장분석 탭이 같은 자료(WK_DATA[주].shop)를 쓴다.
 // 파트너스 문구는 상품명 바로 위에 크게 둔다. 가격은 적지 않는다(링크에서 확인).
-function wkShopCard(shop,title){
+// 쿠팡 파트너스 배너(이미지+링크): 상품 목록 바로 위, 파트너스 문구 아래에 둔다.
+// referrerpolicy="unsafe-url" 은 쿠팡이 준 코드 그대로(수익·증빙용 전체 주소). 대신 누르는 순간 주소의 입력값(?d= ?s= ?g= 등)을
+// 지워서 개인 정보가 같이 넘어가지 않게 한다(아래 click 핸들러).
+const WK_BANNER={href:"https://link.coupang.com/a/hvQVMB4OAK",
+  img:"https://ads-partners.coupang.com/banners/1035230?trackingCode=AF7958231&subId=&traceId=V0-301-5f4982b43e2b4522-I1035230&w=728&h=90"};
+function wkBannerHtml(tab){
+  return `<a class="wkbanner" data-tab="${tab}" href="${WK_BANNER.href}" target="_blank" rel="sponsored nofollow noopener" referrerpolicy="unsafe-url">`
+    +`<img src="${wkEsc(WK_BANNER.img)}" width="728" height="90" loading="lazy" decoding="async" alt="쿠팡 파트너스 육아용품 배너"></a>`;
+}
+// 쿠팡 링크(배너·상품)는 쿠팡이 준 대로 referrerpolicy="unsafe-url"(전체 주소 전달). 이름짓기 탭이 입력값을 주소에 싣기 때문에
+// 링크를 누르거나(클릭·가운데 클릭·길게 눌러 새 탭) 열려는 순간에만 주소를 ?tab=… 로 줄였다가 되돌린다.
+let WK_STRIP=null;
+function wkStripUrl(tab,ms){
+  if(!WK_STRIP) WK_STRIP={search:location.search,timer:0};
+  clearTimeout(WK_STRIP.timer);
+  try{ history.replaceState(null,"",location.pathname+"?tab="+tab+location.hash); }catch(_){}
+  WK_STRIP.timer=setTimeout(()=>{
+    try{ history.replaceState(null,"",location.pathname+WK_STRIP.search+location.hash); }catch(_){}
+    WK_STRIP=null;
+  },ms);
+}
+["click","auxclick"].forEach(ev=>document.addEventListener(ev,e=>{
+  const a=e.target.closest&&e.target.closest("a.wkbanner,a.wkbuy"); if(a) wkStripUrl(a.dataset.tab||"week",600);
+},true));
+document.addEventListener("contextmenu",e=>{
+  const a=e.target.closest&&e.target.closest("a.wkbanner,a.wkbuy"); if(a) wkStripUrl(a.dataset.tab||"week",10000);
+},true);
+function wkShopCard(shop,title,tab){
   if(!shop||!shop.length) return "";
   return `<div class="card wkshopcard"><h2>${wkEsc(title)}</h2>`
     +`<p class="wkad">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.`
     +`<small>상품 선택에는 영향을 주지 않으며, 안전 기준을 우선해 소개합니다. 제품의 효능을 보증하지 않으니 구매 전에 성분과 사용법을 확인해 주세요.</small></p>`
-    +`<ul class="wkshop">${shop.map(s=>`<li><a class="wkbuy" href="${wkEsc(s.url)}" target="_blank" rel="sponsored nofollow noopener">${wkEsc(s.label)}<span>쿠팡에서 보기</span></a><p class="wkwhy">${wkEsc(s.why)}</p></li>`).join("")}</ul></div>`;
+    +wkBannerHtml(tab||"week")
+    +`<ul class="wkshop">${shop.map(s=>`<li><a class="wkbuy" data-tab="${tab||"week"}" href="${wkEsc(s.url)}" target="_blank" rel="sponsored nofollow noopener" referrerpolicy="unsafe-url">${wkEsc(s.label)}<span>쿠팡에서 보기</span></a><p class="wkwhy">${wkEsc(s.why)}</p></li>`).join("")}</ul></div>`;
 }
 // 엄마 몸 카드 맨 아래: 임신 전과 비교한 체중 증가
 function wkGainHtml(w){
@@ -3113,7 +3143,7 @@ function wkRender(w){
   if(!d){ box.innerHTML=`<div class="card"><p class="sub" style="margin:0">${w}주 내용은 준비 중이에요.</p></div>`; return; }
   const ul=(a,cls)=>`<ul class="wkl ${cls||""}">${a.map(x=>`<li>${wkEsc(x)}</li>`).join("")}</ul>`;
   const todo=`<ul class="wkl">${d.todo.map(x=>`<li><span class="wkk ${x.k==="검사"?"chk":""}">${x.k}</span>${wkEsc(x.t)}</li>`).join("")}</ul>`;
-  const shop=wkShopCard(d.shop, "이번 주에 챙기면 좋은 것");
+  const shop=wkShopCard(d.shop, "이번 주에 챙기면 좋은 것", "week");
   const posts=d.posts.length ? `<div class="card wkpost"><h2>이 주와 이어지는 글</h2><ul class="wkl">${d.posts.map(p=>`<li><a href="${wkEsc(p.url)}" target="_blank" rel="noopener">${wkEsc(p.label)}</a></li>`).join("")}</ul></div>` : "";
   const keys=[...new Set(d.src.concat(w<14?["robinson"]:["who"], ["iom_msd","iom_nc"]))];
   const srcs=keys.map(k=>WK_SRC[k]).filter(Boolean)
