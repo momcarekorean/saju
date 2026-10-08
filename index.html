@@ -431,6 +431,21 @@ dd b{font-weight:500; color:var(--ink)}
 .ckit:first-child,.ckbuy:first-child{border-top:0;padding-top:0}
 .ckh{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
 .ckt{font-size:17px;font-weight:800;color:var(--ink)}
+/* 완료 체크: 네모를 누르면 항목이 흐려지고 제목에 줄이 그어진다 */
+.ckdone{-webkit-appearance:none;appearance:none;position:relative;flex:none;width:24px;height:24px;margin:0;border:2px solid var(--ink-3);border-radius:7px;background:var(--card);cursor:pointer}
+.ckdone::before{content:"";position:absolute;inset:-10px}
+.ckdone:checked{background:var(--seal);border-color:var(--seal)}
+.ckdone:checked::after{content:"";position:absolute;left:7px;top:2px;width:6px;height:12px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg)}
+.ckdone:focus-visible{outline:3px solid color-mix(in srgb,var(--seal) 40%,transparent);outline-offset:2px}
+.ckit.done .ckt,.ckrow.done .ckt{text-decoration:line-through;color:var(--ink-3)}
+.ckit.done .ckn,.ckit.done .ckw,.ckit.done .ckp,.ckrow.done .ckn,.ckrow.done .ckprodcol{opacity:.5}
+.ckprog h2{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.ckprogn{font-size:14px;font-weight:600;color:var(--ink-2)}
+.ckprogn b{color:var(--seal);font-size:17px}
+.ckmeter{height:10px;border-radius:999px;background:var(--paper-2);overflow:hidden}
+.ckmeter i{display:block;height:100%;border-radius:999px;background:var(--seal);transition:width .2s}
+.ckclear{width:auto;margin:10px 0 0}
+.ckclear:disabled{opacity:.4;cursor:default}
 .cktg{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--paper-2);color:var(--ink-2)}
 .cktg.tg-end{background:var(--seal);color:#fff}
 .cktg.tg-mid{color:var(--ink-3)}
@@ -1302,6 +1317,16 @@ function ckPlan(items,slotId){
   }
   return out;
 }
+/* 완료 체크: 저장 값 {v:1, done:[id…]} ↔ 집합. 모르는 id·잘못된 값은 버린다(저장소가 망가져도 화면이 안 깨지게) */
+function ckdParse(raw,valid){
+  const out=new Set(); if(!raw) return out;
+  let o; try{ o=JSON.parse(raw); }catch(e){ return out; }
+  if(!o || o.v!==1 || !Array.isArray(o.done)) return out;
+  for(const id of o.done) if(typeof id==="string" && valid.has(id)) out.add(id);
+  return out;
+}
+function ckdStringify(set){ return JSON.stringify({v:1,done:Array.from(set)}); }
+function ckdCount(ids,set){ let n=0; for(const id of ids) if(set.has(id)) n++; return n; }
 /* === CHECK-CORE END === */
 /* === CHECK-DATA START === */
 var CK_SRC={"mohw":{"name":"보건복지부","url":"https://www.mohw.go.kr","checked":"2026-10-08"},"bokjiro":{"name":"복지로","url":"https://www.bokjiro.go.kr","checked":"2026-10-08"},"gov24":{"name":"정부24","url":"https://www.gov.kr","checked":"2026-10-08"},"ehealth":{"name":"e보건소(공공보건포털)","url":"https://www.e-health.go.kr","checked":"2026-10-08"},"moel":{"name":"고용노동부","url":"https://www.moel.go.kr","checked":"2026-10-08"},"work24":{"name":"고용24(고용보험)","url":"https://www.work24.go.kr","checked":"2026-10-08"},"law":{"name":"국가법령정보센터","url":"https://www.law.go.kr","checked":"2026-10-08"},"kdca":{"name":"질병관리청","url":"https://www.kdca.go.kr","checked":"2026-10-08"},"nhis":{"name":"국민건강보험공단","url":"https://www.nhis.or.kr","checked":"2026-10-08"},"kepco":{"name":"한국전력","url":"https://online.kepco.co.kr","checked":"2026-10-08"},"hometax":{"name":"국세청 홈택스","url":"https://www.hometax.go.kr","checked":"2026-10-08"},"epost":{"name":"우체국보험","url":"https://www.epostlife.go.kr","checked":"2026-10-08"},"samsungfire":{"name":"삼성화재 자녀할인 특약 안내","url":"https://www.samsungfire.com","checked":"2026-10-08"},"kbinsure":{"name":"KB손해보험 자녀할인 특약 안내","url":"https://www.kbinsure.co.kr","checked":"2026-10-08"},"directdb":{"name":"DB손해보험 자녀할인 특약 안내","url":"https://www.directdb.co.kr","checked":"2026-10-08"},"aap_sleep":{"name":"미국 소아과학회(AAP), 아기 안전 수면 안내","url":"https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/a-parents-guide-to-safe-sleep.aspx","checked":"2026-10-08"},"aap_car":{"name":"미국 소아과학회(AAP), 카시트 안내","url":"https://www.healthychildren.org/English/safety-prevention/on-the-go/Pages/Car-Safety-Seats-Information-for-Families.aspx","checked":"2026-10-08"},"nhs_moves":{"name":"영국 NHS, 아기 움직임 안내","url":"https://www.nhs.uk/pregnancy/keeping-well/your-babys-movements/","checked":"2026-10-08"},"aap_gerd":{"name":"미국 소아과학회(AAP), 영아 역류 관리(비약물 방법)","url":"https://eqipp.aap.org/courses/gerd2/mn/clinical-guide/popups/nonpharmacological-strategies","checked":"2026-10-08"},"ksog":{"name":"대한산부인과학회","url":"https://www.ksog.org","checked":"2026-10-08"},"amc":{"name":"서울아산병원 산전검사 안내","url":"https://www.amc.seoul.kr","checked":"2026-10-08"},"kspd":{"name":"대한소아청소년과학회","url":"https://www.pediatrics.or.kr","checked":"2026-10-08"},"nip":{"name":"질병관리청 예방접종도우미","url":"https://nip.kdca.go.kr","checked":"2026-10-08"},"acog":{"name":"미국산부인과학회(ACOG)","url":"https://www.acog.org","checked":"2026-10-08"},"mfds":{"name":"식품의약품안전처","url":"https://www.mfds.go.kr","checked":"2026-10-08"}};
@@ -3286,7 +3311,7 @@ function wkRowHtml(r){
     return `<div class="ckprod"><a class="wkbuy" data-tab="${r.tab}" href="${wkEsc(s.url)}" target="_blank" rel="${rel}"${ref}>${r.hideLabel?"":wkEsc(s.label)}<span><b class="${cls}">${nm}</b>에서 보기</span></a>${rk}</div>`;
   }).join("");
   const how=r.how ? `<span class="ckhow hw-${r.how==="새 제품 권장"?"new":r.how==="소량 먼저"?"small":"used"}">${wkEsc(r.how)}</span>` : "";
-  return `<div class="ckrow"><div class="ckinfo"><div class="ckh"><b class="ckt">${wkEsc(r.title)}</b>${r.qty?`<span class="ckq">${wkEsc(r.qty)}</span>`:""}${how}${r.tag||""}</div>`
+  return `<div class="ckrow${r.done?" done":""}"${r.id?` data-ckrow="${wkEsc(r.id)}"`:""}><div class="ckinfo"><div class="ckh">${r.cb||""}<b class="ckt">${wkEsc(r.title)}</b>${r.qty?`<span class="ckq">${wkEsc(r.qty)}</span>`:""}${how}${r.tag||""}</div>`
     +(r.note?`<p class="ckn">${wkEsc(r.note)}${r.tip?" <b>"+wkEsc(r.tip)+"</b>":""}</p>`:"")+(r.extra||"")
     +`</div><div class="ckprodcol">${prods||`<span class="ckw">상품 링크가 없는 품목이에요</span>`}</div></div>`;
 }
@@ -3392,7 +3417,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="92c7a79e";
+var APP_BUILD="8aee1b3b";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -3450,9 +3475,32 @@ function ckPosts(it){
   if(!a.length) return "";
   return `<p class="ckp">${a.map((p,i)=>`<a href="${wkEsc(p.url)}" target="_blank" rel="noopener" title="${wkEsc(p.title)}">자세한 글 보기${a.length>1?" "+(i+1):""}</a>`).join(" · ")}</p>`;
 }
+/* 완료 체크: 이 기기 브라우저(localStorage)에만 저장하고 서버로 보내지 않는다. 항목 id 기준이라 어느 시기 화면에서 눌러도 같이 표시된다. */
+const CKD_KEY="momcare_check_done_v1";
+var CKD={set:new Set(), ok:true};
+function ckdLoad(){
+  let raw=null; try{ raw=localStorage.getItem(CKD_KEY); }catch(e){ CKD.ok=false; }
+  CKD.set=ckdParse(raw,new Set(CK_ITEMS.map(i=>i.id)));
+}
+function ckdSave(){
+  try{
+    if(CKD.set.size) localStorage.setItem(CKD_KEY,ckdStringify(CKD.set)); else localStorage.removeItem(CKD_KEY);
+    CKD.ok=true;
+  }catch(e){ CKD.ok=false; }
+}
+function ckdBox(it){ return `<input type="checkbox" class="ckdone" data-ck="${wkEsc(it.id)}" aria-label="${wkEsc(it.title)} 완료 표시"${CKD.set.has(it.id)?" checked":""}>`; }
+function ckdProgHtml(){
+  const ids=CK.view||[], n=ids.length, d=ckdCount(ids,CKD.set), all=CK_ITEMS.length, da=CKD.set.size;
+  const pct=n?Math.round(d*100/n):0;
+  return `<h2>내가 챙긴 것 <span class="ckprogn">이 시기 <b>${d}</b> / ${n}가지 완료</span></h2>`
+    +`<div class="ckmeter" role="progressbar" aria-label="이 시기 완료 비율" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${d}"><i style="width:${pct}%"></i></div>`
+    +`<p class="gnote" style="margin:8px 0 0">전체 ${all}가지 중 ${da}가지를 챙겼어요. 항목 앞의 네모를 누르면 완료로 표시돼요. 표시는 이 기기의 브라우저에만 저장되고 서버로 보내지 않아요.${CKD.ok?"":" 이 브라우저에서는 저장이 안 돼서 창을 닫으면 사라져요."}</p>`
+    +`<button type="button" class="gbtn2 ckclear" data-ckclear${da?"":" disabled"}>체크 모두 지우기</button>`;
+}
+function ckdProgress(){ const el=$g("ckProg"); if(el) el.innerHTML=ckdProgHtml(); }
 function ckItemLi(it,mode){
   const tag = mode==="end" ? `<span class="cktg tg-end">이 시기까지</span>` : mode==="mid" ? `<span class="cktg tg-mid">진행 중</span>` : "";
-  return `<li class="ckit"><div class="ckh"><b class="ckt">${wkEsc(it.title)}</b><span class="cktg tg-${wkEsc(it.kind)}">${wkEsc(it.kind==="검사"?"검사·접종":it.kind)}</span>${tag}</div>`
+  return `<li class="ckit${CKD.set.has(it.id)?" done":""}" data-ckrow="${wkEsc(it.id)}"><div class="ckh">${ckdBox(it)}<b class="ckt">${wkEsc(it.title)}</b><span class="cktg tg-${wkEsc(it.kind)}">${wkEsc(it.kind==="검사"?"검사·접종":it.kind)}</span>${tag}</div>`
     +`<p class="ckw">${wkEsc(ckWhen(it))}${it.where?" · "+wkEsc(it.where):""}</p>`
     +`<p class="ckn">${wkEsc(it.note)}</p>${ckPosts(it)}</li>`;
 }
@@ -3466,7 +3514,7 @@ function ckProdHtml(it){
 }
 function ckBuyRow(it,mode){
   const arr=it.cat && CK_PROD[it.cat] ? CK_PROD[it.cat] : [];
-  return wkRowHtml({tab:"check",title:it.title,qty:it.qty,how:it.how,note:it.note,tip:it.tip,prods:arr,
+  return wkRowHtml({tab:"check",id:it.id,done:CKD.set.has(it.id),cb:ckdBox(it),title:it.title,qty:it.qty,how:it.how,note:it.note,tip:it.tip,prods:arr,
     tag:mode && mode!=="start" ? `<span class="cktg tg-mid">아직이라면 지금</span>` : "", extra:ckPosts(it)});
 }
 function ckRender(slotId){
@@ -3519,6 +3567,8 @@ function ckRender(slotId){
     .map(s=>`<li><a href="${wkEsc(s.url)}" target="_blank" rel="noopener">${wkEsc(s.name)}</a> <span class="hint">${wkEsc(s.checked.replace(/-/g,"."))} 확인</span></li>`).join("");
   h+=`<div class="card wksrc"><h2>이 시기 내용의 출처</h2>${srcs?`<ul class="wkl">${srcs}</ul>`:""}`
     +`<p class="gnote" style="margin-bottom:0">제도와 금액은 바뀔 수 있어요. 신청 전에 해당 기관에서 한 번 더 확인해 주세요. 지역마다 다른 지원은 사는 곳 보건소나 복지로에서 확인하세요. 살 것의 필수와 선택은 맘케어가 실사용 후기와 병원·조리원 안내를 바탕으로 정한 참고 기준이에요.</p></div>`;
+  CK.view=Array.from(new Set([].concat(pl.end,pl.act,pl.always,pl.cont,pl.safety,buyAll,contAll).map(x=>x.id)));
+  if(CK.view.length) h=`<div class="card ckcard ckprog" id="ckProg">${ckdProgHtml()}</div>`+h;
   box.innerHTML=h;
 }
 function ckShow(id){
@@ -3562,6 +3612,23 @@ function ckApplyProd(cats){
 /* 초기화 */
 (function(){
   const sel=$g("ckSel");
+  ckdLoad();
+  const body=$g("ckBody");
+  body.addEventListener("change",e=>{
+    const t=e.target; if(!t || !t.classList || !t.classList.contains("ckdone")) return;
+    const id=t.getAttribute("data-ck");
+    if(t.checked) CKD.set.add(id); else CKD.set.delete(id);
+    ckdSave();
+    body.querySelectorAll("[data-ckrow]").forEach(el=>{ if(el.getAttribute("data-ckrow")===id) el.classList.toggle("done",t.checked); });
+    body.querySelectorAll("input.ckdone").forEach(el=>{ if(el.getAttribute("data-ck")===id) el.checked=t.checked; });
+    ckdProgress();
+  });
+  body.addEventListener("click",e=>{
+    const b=e.target.closest ? e.target.closest("[data-ckclear]") : null;
+    if(!b || b.disabled) return;
+    if(!confirm("체크한 표시를 모두 지울까요? 되돌릴 수 없어요.")) return;
+    CKD.set.clear(); ckdSave(); ckRender(CK.id);
+  });
   for(const s of CK_SLOTS){ const o=document.createElement("option"); o.value=s.id; o.textContent=ckOptLabel(s); sel.appendChild(o); }
   sel.addEventListener("change",()=>{ ckShow(sel.value); ckNote(); });
   $g("ckPrev").addEventListener("click",()=>{ const i=CK_SLOTS.findIndex(s=>s.id===CK.id); if(i>0){ ckShow(CK_SLOTS[i-1].id); ckNote(); } });
