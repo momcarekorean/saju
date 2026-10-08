@@ -1,5 +1,5 @@
 {
- "v": "2026-10-08 14:49",
+ "v": "2026-10-08 15:15",
  "weeks": {
   "4": [
    {
@@ -1344,9 +1344,9 @@
     "url": "https://link.coupang.com/a/hFNZJIpnYO"
    },
    {
-    "label": "브라운 귀 체온계 IRT6030",
-    "why": "맘카페 최근 글에서 체온계 중 언급이 가장 많았던 제품이에요 (글 24건).",
-    "url": "https://naver.me/FJOY3Qu7"
+    "label": "하기스 네이처메이드 밤부 밴드형 기저귀 신생아용, 1단계, 204매",
+    "why": "맘카페 최근 글에서 신생아 기저귀 중 언급이 가장 많았던 제품이에요 (글 25건).",
+    "url": "https://link.coupang.com/a/hFUXRc8RUq"
    }
   ],
   "33": [
@@ -1396,9 +1396,9 @@
     "url": "https://link.coupang.com/a/hFNZJIpnYO"
    },
    {
-    "label": "브라운 귀 체온계 IRT6030",
-    "why": "맘카페 최근 글에서 체온계 중 언급이 가장 많았던 제품이에요 (글 24건).",
-    "url": "https://naver.me/FJOY3Qu7"
+    "label": "하기스 네이처메이드 밤부 밴드형 기저귀 신생아용, 1단계, 204매",
+    "why": "맘카페 최근 글에서 신생아 기저귀 중 언급이 가장 많았던 제품이에요 (글 25건).",
+    "url": "https://link.coupang.com/a/hFUXRc8RUq"
    }
   ],
   "34": [
@@ -1935,6 +1935,12 @@
     "url": "https://link.coupang.com/a/hFDLrY0NUG"
    }
   ],
+  "식탁의자(하이체어)": [
+   {
+    "label": "스토케 트립트랩 하이체어",
+    "url": "https://link.coupang.com/a/hFEiWQ52US"
+   }
+  ],
   "유모차": [
    {
     "label": "부가부 버터플라이 휴대용 유모차",
@@ -2007,6 +2013,12 @@
    {
     "label": "킨도 프리미엄 오슬림 베베가드 밴드형 기저귀 소형 유아용, 2단계, 90매",
     "url": "https://link.coupang.com/a/hFUD8BmrN6"
+   }
+  ],
+  "기저귀 신생아용": [
+   {
+    "label": "하기스 네이처메이드 밤부 밴드형 기저귀 신생아용, 1단계, 204매",
+    "url": "https://link.coupang.com/a/hFUXRc8RUq"
    }
   ],
   "체온계": [
@@ -2147,6 +2159,16 @@
     "url": "https://link.coupang.com/a/hFEePxFzfo"
    }
   ],
+  "이유식 용기": [
+   {
+    "label": "글라스락 베이비 눈금이유식 용기 스마일캡 270ml",
+    "url": "https://link.coupang.com/a/hFEkT6YuKi"
+   },
+   {
+    "label": "락앤락 바로한끼 원형 이유식용기 230ml",
+    "url": "https://link.coupang.com/a/hFEl441jQy"
+   }
+  ],
   "아기침대": [
    {
     "label": "에이원 리안 드림콧 아기침대",
@@ -2192,7 +2214,57 @@
     "label": "알집매트 트윈매트",
     "url": "https://link.coupang.com/a/hFDOfPCGia"
    }
+  ],
+  "온습도계": [
+   {
+    "label": "휴비딕 디지털 시계 온습도계, 1개, 화이트",
+    "url": "https://link.coupang.com/a/hFU0IvBAwm"
+   }
+  ],
+  "손수건": [
+   {
+    "label": "밤부베베 시그니처 거즈손수건 2종 x 3p 세트 행복한말랑이",
+    "url": "https://link.coupang.com/a/hFU2JiRD2W"
+   },
+   {
+    "label": "밤부베베 스테이블 엠보손수건 부드러운 말랑이 2종 x 3p 세트",
+    "url": "https://link.coupang.com/a/hFU36E0c2K"
+   }
+  ],
+  "손톱가위": [
+   {
+    "label": "마더케이 신생아 손톱가위, 흰색, 1개",
+    "url": "https://link.coupang.com/a/hFU5Baw1im"
+   }
+  ],
+  "기저귀 갈이대": [
+   {
+    "label": "소베맘 3세대 솔리드 원터치 기저귀갈이대 기저귀교환대, CREAM BEIGE",
+    "url": "https://link.coupang.com/a/hFU7y6oABE"
+   }
+  ],
+  "손목보호대": [
+   {
+    "label": "아나파 2중 압박 손목보호대 1개",
+    "url": "https://link.coupang.com/a/hFU9btS32G"
+   },
+   {
+    "label": "프라하우스 임산부 더 뉴 손목 보호대 2p",
+    "url": "https://link.coupang.com/a/hFVEfjAz7Y"
+   }
+  ],
+  "수유쿠션": [
+   {
+    "label": "알프레미오 유아 수유시트 VER.2, 아이보리, 메쉬",
+    "url": "https://link.coupang.com/a/hFVSEywbwy"
+   }
+  ],
+  "아기체육관": [
+   {
+    "label": "하베브릭스 유아용 바람개비 아기체육관, 혼합색상, 1개",
+    "url": "https://link.coupang.com/a/hFVYEHbHMa"
+   }
   ]
  },
- "html": "0e71179d"
+ "html": "e9ebee44"
 }
