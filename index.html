@@ -427,7 +427,7 @@ dd b{font-weight:500; color:var(--ink)}
 .wkbtn:disabled{opacity:.35;cursor:default}
 /* 체크리스트 탭 */
 .ckl{margin:0;padding:0;list-style:none}
-.ckit,.ckbuy{padding:12px 0;border-top:1px dashed var(--rule)}
+.ckit,.ckbuy{padding:9px 0;border-top:1px dashed var(--rule)}
 .ckit:first-child,.ckbuy:first-child{border-top:0;padding-top:0}
 .ckh{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
 .ckt{font-size:16px;color:var(--ink)}
@@ -435,9 +435,9 @@ dd b{font-weight:500; color:var(--ink)}
 .cktg.tg-end{background:var(--seal);color:#fff}
 .cktg.tg-mid{color:var(--ink-3)}
 .ckw{margin:3px 0 0;font-size:12.5px;color:var(--ink-3)}
-.ckn{margin:6px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+.ckn{margin:4px 0 0;font-size:14px;line-height:1.6;color:var(--ink-2)}
 .ckn b{color:var(--ink);font-weight:600}
-.ckp{margin:6px 0 0;font-size:13px}
+.ckp{margin:4px 0 0;font-size:13px}
 .ckp a{color:var(--seal)}
 .ckq{font-size:12.5px;color:var(--ink-3)}
 .ckhow{font-size:11.5px;font-weight:700;padding:1px 8px;border-radius:999px;border:1.5px solid currentColor}
@@ -445,8 +445,8 @@ dd b{font-weight:500; color:var(--ink)}
 .ckneed{margin:18px 0 8px;font-size:15px;letter-spacing:0}
 .ckneed:first-of-type{margin-top:0}
 .nd-must{color:var(--seal)}.nd-opt{color:var(--to)}.nd-late{color:var(--ink-3)}
-.ckprods{margin-top:8px;display:grid;gap:6px}
-.ckprods .wkbuy{font-size:14px;line-height:1.45;padding:8px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--paper)}
+.ckprods{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
+.ckprods .wkbuy{flex:1 1 230px;font-size:13px;line-height:1.4;padding:6px 9px;border:1px solid var(--rule);border-radius:8px;background:var(--paper)}
 .ckprods .wkbuy span{margin-left:8px}
 .ckcard.ckend{border-color:var(--seal)}
 .ckcard.cksafe{border-color:var(--mok)}
@@ -3344,7 +3344,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="d88bd68f";
+var APP_BUILD="20fdd90b";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -3422,17 +3422,6 @@ function ckBuyLi(it,mode){
   return `<li class="ckbuy"><div class="ckh"><b class="ckt">${wkEsc(it.title)}</b>${it.qty?`<span class="ckq">${wkEsc(it.qty)}</span>`:""}${how}${again}</div>`
     +`<p class="ckn">${wkEsc(it.note)}${it.tip?" <b>"+wkEsc(it.tip)+"</b>":""}</p>${ckProdHtml(it)}${ckPosts(it)}</li>`;
 }
-function ckMidLi(it){
-  return `<li class="ckit ckmid"><div class="ckh"><b class="ckt">${wkEsc(it.title)}</b><span class="cktg tg-${wkEsc(it.kind)}">${wkEsc(it.kind==="검사"?"검사·접종":it.kind)}</span></div>`
-    +`<p class="ckw">${wkEsc(ckWhen(it))}${it.where?" · "+wkEsc(it.where):""}</p>`
-    +`<details class="ckdet"><summary>자세히 보기</summary><p class="ckn">${wkEsc(it.note)}</p>${ckPosts(it)}</details></li>`;
-}
-function ckBuyMidLi(it){
-  const how=it.how ? `<span class="ckhow hw-${it.how==="새 제품 권장"?"new":it.how==="소량 먼저"?"small":"used"}">${wkEsc(it.how)}</span>` : "";
-  const hasProd=!!(it.cat && CK_PROD[it.cat] && CK_PROD[it.cat].length);
-  return `<li class="ckbuy ckmid"><div class="ckh"><b class="ckt">${wkEsc(it.title)}</b>${it.qty?`<span class="ckq">${wkEsc(it.qty)}</span>`:""}${how}</div>`
-    +`<details class="ckdet"><summary>${hasProd?"설명과 상품 보기":"자세히 보기"}</summary><p class="ckn">${wkEsc(it.note)}${it.tip?" <b>"+wkEsc(it.tip)+"</b>":""}</p>${ckProdHtml(it)}${ckPosts(it)}</details></li>`;
-}
 function ckRender(slotId){
   const box=$g("ckBody"); if(!box) return;
   const pl=ckPlan(CK_ITEMS,slotId);
@@ -3454,8 +3443,8 @@ function ckRender(slotId){
   if(gl.length>=2) h+=`<div class="card ckcard ckglance"><h2>이 시기 한눈에</h2><ul class="ckl">${gl.join("")}</ul></div>`;
   if(pl.end.length) h+=card("ckend","이 시기까지 해야 해요", ul(pl.end,it=>ckItemLi(it,"end")));
   if(pl.act.length) h+=card("","이 시기에 새로 챙길 것", ul(pl.act,it=>ckItemLi(it,"start")));
-  if(pl.always.length) h+=card("ckalways","임신 내내 기억할 것", `<details class="ckgrp"><summary class="ckneed2">${pl.always.length}가지 보기 <span class="hint">${wkEsc(pl.always.slice(0,3).map(x=>x.title).join(", "))} …</span></summary>`+ul(pl.always,ckMidLi)+`</details>`);
-  if(pl.cont.length) h+=card("ckcont","이어서 챙길 것", `<p class="gnote" style="margin-top:0">앞 시기부터 아직 기간이 남아 있는 것들이에요. 놓쳤다면 지금 확인해요.</p>`+ul(pl.cont,ckMidLi));
+  if(pl.always.length) h+=card("ckalways","임신 내내 기억할 것", ul(pl.always,it=>ckItemLi(it,"mid")));
+  if(pl.cont.length) h+=card("ckcont","이어서 챙길 것", `<p class="gnote" style="margin-top:0">앞 시기부터 아직 기간이 남아 있는 것들이에요. 놓쳤다면 지금 확인해요.</p>`+ul(pl.cont,it=>ckItemLi(it,"mid")));
   const buyAll=NEEDS.flatMap(n=>pl.buy[n]), contAll=NEEDS.flatMap(n=>pl.buyCont[n]);
   if(buyAll.length||contAll.length){
     const links=buyAll.concat(contAll).flatMap(it=>it.cat&&CK_PROD[it.cat]?CK_PROD[it.cat]:[]);
@@ -3469,7 +3458,7 @@ function ckRender(slotId){
       inner+=`<h3 class="ckneed nd-cont">이어서 준비할 것 <span class="hint">앞 시기부터 계속 필요한 것</span></h3>`;
       for(const need of NEEDS){
         const a=pl.buyCont[need]; if(!a.length) continue;
-        inner+=`<details class="ckgrp"${need==="필수"&&a.length<=10?" open":""}><summary class="ckneed2 nd-${needCls(need)}">${needName(need)} ${a.length}가지</summary>`+ul(a,ckBuyMidLi)+`</details>`;
+        inner+=`<p class="ckneed2 nd-${needCls(need)}">${needName(need)}</p>`+ul(a,it=>ckBuyLi(it,"mid"));
       }
     }
     h+=card("ckshop", buyAll.length?"이 시기에 살 것":"계속 준비할 것", inner);
