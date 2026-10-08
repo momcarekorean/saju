@@ -1,5 +1,5 @@
 {
- "v": "2026-10-08 13:39",
+ "v": "2026-10-08 14:13",
  "weeks": {
   "4": [
    {
@@ -1766,5 +1766,437 @@
    }
   ]
  },
- "html": "432f3047"
+ "cats": {
+  "유두보호크림": [
+   {
+    "label": "란시노 HPA 라놀린 유두보호 크림 40ml",
+    "url": "https://link.coupang.com/a/hFOrYCfzuS"
+   },
+   {
+    "label": "카보크림 모유수유 가슴 마사지 양배추 크림 60ml",
+    "url": "https://link.coupang.com/a/hFOueoyJKC"
+   },
+   {
+    "label": "메델라 퓨어렌 유두크림 37g",
+    "url": "https://link.coupang.com/a/hFOvUmxcI0"
+   }
+  ],
+  "속싸개·스와들": [
+   {
+    "label": "스와들업 오리지널",
+    "url": "https://link.coupang.com/a/hFDo6lPKQC"
+   },
+   {
+    "label": "머미쿨쿨 스와들",
+    "url": "https://link.coupang.com/a/hFDqyMuF2W"
+   },
+   {
+    "label": "스칸디맘 스와들 슈프림 텐셀 라이트",
+    "url": "https://link.coupang.com/a/hFDsvZaTKe"
+   }
+  ],
+  "분유제조기": [
+   {
+    "label": "베이비브레짜 포뮬러 프로 어드밴스드 분유제조기",
+    "url": "https://link.coupang.com/a/hFyfTPS3r2"
+   },
+   {
+    "label": "위마망 분유 제조기 자동 분유쉐이커 CLP-CNJ005",
+    "url": "https://naver.me/FSvb1YL6"
+   }
+  ],
+  "산후복대·산후거들": [
+   {
+    "label": "아나파 산후복대",
+    "url": "https://naver.me/GvWtNzjx"
+   },
+   {
+    "label": "맘바디 산후복대",
+    "url": "https://naver.me/xXnOkxJs"
+   },
+   {
+    "label": "에르고바디 핏유어코어 허리보호대 산후복대",
+    "url": "https://link.coupang.com/a/hFOLczBw5I"
+   }
+  ],
+  "아기띠·힙시트": [
+   {
+    "label": "포그내 맥스 플로우 올인원 아기띠 (메쉬)",
+    "url": "https://link.coupang.com/a/hFwLDwBscu"
+   },
+   {
+    "label": "베이비뵨 베이비 캐리어 미니 3D 메쉬",
+    "url": "https://link.coupang.com/a/hFwNma5g7M"
+   },
+   {
+    "label": "허그파파 다이얼핏 프로 올인원 아기띠",
+    "url": "https://link.coupang.com/a/hFwO1uvqlE"
+   }
+  ],
+  "분유포트": [
+   {
+    "label": "꿈비 배터리 분리형 휴대용 분유포트",
+    "url": "https://link.coupang.com/a/hFx8y83GCW"
+   },
+   {
+    "label": "나리몽 프로 올인원 분유포트",
+    "url": "https://link.coupang.com/a/hFyabRkPDw"
+   },
+   {
+    "label": "릴리브 듀얼저울 분유포트 PRO RV-005",
+    "url": "https://link.coupang.com/a/hFydRoxa7U"
+   }
+  ],
+  "산모패드·산모팬티": [
+   {
+    "label": "디펜드 맘스 안심 패드 28매",
+    "url": "https://link.coupang.com/a/hFOcpY2pps"
+   }
+  ],
+  "바디필로우": [
+   {
+    "label": "해피테일즈 임산부 바디필로우",
+    "url": "https://link.coupang.com/a/hFN5SLK64y"
+   }
+  ],
+  "모유저장팩": [
+   {
+    "label": "마더케이 일회용 변온 모유저장팩 30매",
+    "url": "https://link.coupang.com/a/hFOz4lP5Nc"
+   },
+   {
+    "label": "스펙트라 클린 모유저장팩 180ml 30매",
+    "url": "https://link.coupang.com/a/hFOB4DAFSC"
+   },
+   {
+    "label": "란시노 모유저장팩",
+    "url": "https://link.coupang.com/a/hFOD8Bgw3w"
+   }
+  ],
+  "수유패드": [
+   {
+    "label": "란시노 일회용 수유패드 60매",
+    "url": "https://link.coupang.com/a/hFOh4YusVw"
+   },
+   {
+    "label": "마더케이 프리미엄 밤부 수유패드 108매",
+    "url": "https://link.coupang.com/a/hFOjmij46C"
+   },
+   {
+    "label": "스펙트라 프리미엄 수유패드 130mm 60매",
+    "url": "https://link.coupang.com/a/hFOlp9v6u4"
+   }
+  ],
+  "유축기": [
+   {
+    "label": "메델라 스윙 전동식 유축기",
+    "url": "https://link.coupang.com/a/hFx5Gzm3Ma"
+   },
+   {
+    "label": "스펙트라 S1 Pro 유축기",
+    "url": "https://link.coupang.com/a/hFx7i825ds"
+   }
+  ],
+  "튼살크림·오일": [
+   {
+    "label": "프라이웰 임산부 마사지 크림 125ml",
+    "url": "https://link.coupang.com/a/hFNZJIpnYO"
+   },
+   {
+    "label": "나투라비타 임산부 튼살크림",
+    "url": "https://link.coupang.com/a/hFN09WRaAS"
+   },
+   {
+    "label": "일리윤 튼살크림 200ml",
+    "url": "https://link.coupang.com/a/hFN2Fh2Ywe"
+   }
+  ],
+  "카시트": [
+   {
+    "label": "브라이텍스 듀얼픽스 프로 회전형 카시트",
+    "url": "https://link.coupang.com/a/hFwCCWiSDk"
+   },
+   {
+    "label": "레카로 RECARO 액시언 아이사이즈 주니어 카시트",
+    "url": "https://link.coupang.com/a/hFwFQAVfEa"
+   },
+   {
+    "label": "맥시코시 미카 360 프로 회전형 카시트",
+    "url": "https://link.coupang.com/a/hFwJL5fTpI"
+   }
+  ],
+  "모빌": [
+   {
+    "label": "타이니러브 테일즈 모빌+홀더",
+    "url": "https://link.coupang.com/a/hFDJw1xPIi"
+   },
+   {
+    "label": "하베브릭스 모빌 풀세트",
+    "url": "https://link.coupang.com/a/hFDLrY0NUG"
+   }
+  ],
+  "유모차": [
+   {
+    "label": "부가부 버터플라이 휴대용 유모차",
+    "url": "https://link.coupang.com/a/hFwrOxzUse"
+   },
+   {
+    "label": "오이스터4 유모차",
+    "url": "https://link.coupang.com/a/hFwuuhcAlo"
+   },
+   {
+    "label": "줄즈 에어2 휴대용 유모차",
+    "url": "https://link.coupang.com/a/hFwv85ptCu"
+   }
+  ],
+  "세탁세제": [
+   {
+    "label": "마더케이 디아 세탁세제 1L",
+    "url": "https://link.coupang.com/a/hFDmo49t7s"
+   },
+   {
+    "label": "마이비 피부에 순한 유아세제 용기 1500ml",
+    "url": "https://link.coupang.com/a/hFDnH49S2e"
+   }
+  ],
+  "젖병소독기": [
+   {
+    "label": "유팡 시그니처2 플러스 젖병소독기",
+    "url": "https://link.coupang.com/a/hFyku5CZ76"
+   },
+   {
+    "label": "폴레드 픽셀 슬림업 UVC LED 젖병소독기",
+    "url": "https://link.coupang.com/a/hFyl3pGPoO"
+   }
+  ],
+  "입덧 사탕": [
+   {
+    "label": "포지타노 카스텔크램 레몬 캔디 750g",
+    "url": "https://link.coupang.com/a/hFItuAjU8O"
+   }
+  ],
+  "콧물흡입기": [
+   {
+    "label": "노시부 프로 전동 콧물흡입기",
+    "url": "https://link.coupang.com/a/hFyCIk8mMC"
+   },
+   {
+    "label": "코니케어 콧물흡입기",
+    "url": "https://link.coupang.com/a/hFyFz2vPLo"
+   }
+  ],
+  "오메가3·DHA": [
+   {
+    "label": "프리솔라 초임계 식물성 rTG 오메가3 DHA 임산부용",
+    "url": "https://link.coupang.com/a/hFNH5XTFUy"
+   },
+   {
+    "label": "지엠팜 임산부 초임계 식물성 rTG DHA 오메가3 60정",
+    "url": "https://naver.me/GlRoU5k0"
+   },
+   {
+    "label": "맘스포뮬러 식물성 초임계 알티지 rTG 오메가3 미니캡슐",
+    "url": "https://link.coupang.com/a/hFNO0kFiQm"
+   }
+  ],
+  "기저귀": [
+   {
+    "label": "하기스 네이처메이드 밤부 팬티형 기저귀",
+    "url": "https://link.coupang.com/a/hFynq3rkxE"
+   },
+   {
+    "label": "페넬로페 밤새굿잠 기저귀",
+    "url": "https://link.coupang.com/a/hFytLyTE28"
+   },
+   {
+    "label": "킨도 올데이 팬티형 기저귀",
+    "url": "https://link.coupang.com/a/hFyxSowf3Q"
+   }
+  ],
+  "체온계": [
+   {
+    "label": "브라운 귀 체온계 IRT6030",
+    "url": "https://naver.me/FJOY3Qu7"
+   }
+  ],
+  "엽산·임산부 영양제": [
+   {
+    "label": "맘스포뮬러 임산부 영양제",
+    "url": "https://link.coupang.com/a/hFImKrLksu"
+   },
+   {
+    "label": "이지맘 임산부 영양제 스텝2 (임신 중기~출산 전) 1개월",
+    "url": "https://link.coupang.com/a/hFIn4XyD5U"
+   },
+   {
+    "label": "락티브 맘스 온리원 임산부 종합 영양제 30개입",
+    "url": "https://link.coupang.com/a/hFIqLZVuNM"
+   }
+  ],
+  "철분제": [
+   {
+    "label": "맘스포뮬러 임산부 철분제",
+    "url": "https://link.coupang.com/a/hFNkzSgqQK"
+   },
+   {
+    "label": "프리솔라 LC 철분 60캡슐",
+    "url": "https://naver.me/FlBkvzfu"
+   },
+   {
+    "label": "락티브 임산부 리포퍼 액상 철분 30포",
+    "url": "https://link.coupang.com/a/hFNFyXal3Y"
+   }
+  ],
+  "임산부 바지·레깅스": [
+   {
+    "label": "안다르 릴레어 임부 와이드 레깅스 AOPPT-53",
+    "url": "https://link.coupang.com/a/hFNQMf0xJ6"
+   },
+   {
+    "label": "유니클로 임부용 레깅스",
+    "url": "https://link.coupang.com/a/hFNSzGHuAm"
+   }
+  ],
+  "로션·크림": [
+   {
+    "label": "궁중비책 키즈 모이스처 페이스 로션 80ml",
+    "url": "https://link.coupang.com/a/hFyJHP1aRo"
+   },
+   {
+    "label": "아토팜 MLE 로션 펌프형 300ml",
+    "url": "https://link.coupang.com/a/hFBWuttjQy"
+   }
+  ],
+  "바운서": [
+   {
+    "label": "베이비뵨 블리스 메쉬 바운서",
+    "url": "https://link.coupang.com/a/hFDw0ORr2a"
+   },
+   {
+    "label": "두리 하이브리드 하이체어",
+    "url": "https://link.coupang.com/a/hFDyAb7fb2"
+   }
+  ],
+  "공갈젖꼭지(쪽쪽이)": [
+   {
+    "label": "필립스 아벤트 울트라에어 노리개 젖꼭지 SCF376 (2개입)",
+    "url": "https://link.coupang.com/a/hFxP0Uh7L2"
+   },
+   {
+    "label": "모윰 소프트윙 올실리콘 쪽쪽이",
+    "url": "https://link.coupang.com/a/hFxYcBJmb6"
+   },
+   {
+    "label": "누비 쪽쪽본능 올실리콘 쪽쪽이 2P",
+    "url": "https://link.coupang.com/a/hFx0gS8fAa"
+   }
+  ],
+  "샴푸·바디워시": [
+   {
+    "label": "궁중비책 프리뮨 샴푸 앤 바스 350ml",
+    "url": "https://link.coupang.com/a/hFBXGVrRe0"
+   },
+   {
+    "label": "아토팜 탑투토 워시 460ml",
+    "url": "https://link.coupang.com/a/hFCb7T7MoS"
+   }
+  ],
+  "신생아 옷": [
+   {
+    "label": "유니클로 베이비 에어리즘 메쉬 바디수트",
+    "url": "https://link.coupang.com/a/hFDunAVQjI"
+   }
+  ],
+  "임산부 브라·속옷": [
+   {
+    "label": "더파자마 수유나시 모달 임산부속옷",
+    "url": "https://link.coupang.com/a/hFIxuSpMl2"
+   }
+  ],
+  "아기욕조": [
+   {
+    "label": "슈너글 국민 아기욕조(온도감지 배수플러그)",
+    "url": "https://link.coupang.com/a/hFDTHhQX3Q"
+   },
+   {
+    "label": "오케이베이비 온다베이비 플러스 아기욕조",
+    "url": "https://link.coupang.com/a/hFDU97TFlY"
+   },
+   {
+    "label": "폴레드 허그베어 입식 아기비데 목욕 핸들 기저귀갈이대",
+    "url": "https://link.coupang.com/a/hFDXgPcaNo"
+   }
+  ],
+  "홈캠": [
+   {
+    "label": "헤이홈 홈캠 Pro 5MP",
+    "url": "https://link.coupang.com/a/hFDZwiMqPc"
+   },
+   {
+    "label": "트루엔 이글루캠 S8",
+    "url": "https://link.coupang.com/a/hFD1B49EZ2"
+   },
+   {
+    "label": "TP-LINK Tapo C210",
+    "url": "https://link.coupang.com/a/hFD9XEH9JA"
+   }
+  ],
+  "가습기": [
+   {
+    "label": "조지루시 가열식 가습기 EE-DVH35K",
+    "url": "https://link.coupang.com/a/hFEdkD8WOG"
+   },
+   {
+    "label": "에어메이드 THE 위대한가습기 2.0 AMH-4502",
+    "url": "https://link.coupang.com/a/hFEePxFzfo"
+   }
+  ],
+  "아기침대": [
+   {
+    "label": "에이원 리안 드림콧 아기침대",
+    "url": "https://link.coupang.com/a/hFDPJt4vdI"
+   },
+   {
+    "label": "다이치 리우 신생아 이동식 아기침대 (타프베이지)",
+    "url": "https://link.coupang.com/a/hFDRsnsX92"
+   }
+  ],
+  "젖병": [
+   {
+    "label": "더블하트 모유실감 3세대 PPSU 젖병 160ml",
+    "url": "https://link.coupang.com/a/hFxgWz4YbQ"
+   },
+   {
+    "label": "닥터브라운 내로우넥 젖병 PP 250ml",
+    "url": "https://link.coupang.com/a/hFxL9ULVka"
+   },
+   {
+    "label": "란시노 유리젖병 160ml",
+    "url": "https://link.coupang.com/a/hFxNPJfPe8"
+   }
+  ],
+  "물티슈": [
+   {
+    "label": "블루나 더퍼스트 프리미엄 물티슈 캡형 70매",
+    "url": "https://link.coupang.com/a/hFyzTQzoEm"
+   }
+  ],
+  "수유브라·수유복": [
+   {
+    "label": "프라하우스 리베 수유브라",
+    "url": "https://link.coupang.com/a/hFOqFh3kuO"
+   }
+  ],
+  "놀이방 매트": [
+   {
+    "label": "리코코 클린 롤매트 프리미엄 양면 2중코팅",
+    "url": "https://link.coupang.com/a/hFDMNx3xCe"
+   },
+   {
+    "label": "알집매트 트윈매트",
+    "url": "https://link.coupang.com/a/hFDOfPCGia"
+   }
+  ]
+ },
+ "html": "9c26c54f"
 }
