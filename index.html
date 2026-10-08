@@ -3223,6 +3223,8 @@ function wkApplyShop(j){
   }
   return changed;
 }
+// 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
+var APP_BUILD="432f3047";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -3230,6 +3232,12 @@ function wkLoadShop(){
         try{ wkRender(WK.w); }catch(_){}
         try{ if(typeof gRenderShop==="function") gRenderShop(); }catch(_){}
       }
+      try{
+        if(j && typeof j.html==="string" && /^[0-9a-f]{8}$/.test(j.html) && APP_BUILD && j.html!==APP_BUILD){
+          const ae=document.activeElement, typing=ae&&/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName);
+          if(!typing && sessionStorage.getItem("momcare_build_try")!==j.html){ sessionStorage.setItem("momcare_build_try", j.html); location.reload(); }
+        }
+      }catch(_){}
     }).catch(()=>{});
   }catch(_){}
 }
