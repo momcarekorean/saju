@@ -451,6 +451,8 @@ dd b{font-weight:500; color:var(--ink)}
 .wkbanner{display:block;margin:34px 0 0}
 .wkbanner img{display:block;width:100%;max-width:728px;height:auto;margin:0 auto;border-radius:3px}
 .wkadline{display:block}.wkadline+.wkadline{margin-top:6px}
+.bcp,.bnv{font-weight:800}.bcp{color:#E52528}.bnv{color:#03C75A}   /* 쿠팡 로고 빨강·네이버 로고 초록 */
+.wkbuy span .bcp,.wkbuy span .bnv{font-weight:800}
 .wkad small{display:block;margin-top:8px;font-size:13.5px;font-weight:400;color:var(--ink-2);line-height:1.65}
 .wkshop{margin:0;padding:0;list-style:none}
 .wkshop li{padding:14px 0;border-top:1px dashed var(--rule)}
@@ -3134,11 +3136,11 @@ function wkShopCardRaw(shop,title,tab){
   if(!shop||!shop.length) return "";
   const t=tab||"week";
   const hasN=shop.some(s=>wkIsNaver(s.url)), hasC=shop.some(s=>!wkIsNaver(s.url));
-  const ad=(hasC?`<span class="wkadline">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</span>`:"")
-    +(hasN?`<span class="wkadline">이 페이지는 네이버 쇼핑 커넥트 활동의 일환으로, 판매 발생 시 수수료를 제공받습니다.</span>`:"");
+  const ad=(hasC?`<span class="wkadline">이 페이지는 <b class="bcp">쿠팡</b> 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</span>`:"")
+    +(hasN?`<span class="wkadline">이 페이지는 <b class="bnv">네이버</b> 쇼핑 커넥트 활동의 일환으로, 판매 발생 시 수수료를 제공받습니다.</span>`:"");
   const li=s=>{
     const n=wkIsNaver(s.url);
-    return `<li><a class="wkbuy" data-tab="${t}" href="${wkEsc(s.url)}" target="_blank" rel="sponsored nofollow noopener"${n?"":' referrerpolicy="unsafe-url"'}>${wkEsc(s.label)}<span>${n?"네이버":"쿠팡"}에서 보기</span></a><p class="wkwhy">${wkEsc(s.why)}</p></li>`;
+    return `<li><a class="wkbuy" data-tab="${t}" href="${wkEsc(s.url)}" target="_blank" rel="sponsored nofollow noopener"${n?"":' referrerpolicy="unsafe-url"'}>${wkEsc(s.label)}<span><b class="${n?"bnv":"bcp"}">${n?"네이버":"쿠팡"}</b>에서 보기</span></a><p class="wkwhy">${wkEsc(s.why)}</p></li>`;
   };
   return `<div class="card wkshopcard"><h2>${wkEsc(title)}</h2>`
     +`<p class="wkad">${ad}`
