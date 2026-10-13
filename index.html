@@ -475,6 +475,11 @@ dd b{font-weight:500; color:var(--ink)}
 .ckrow:first-child{border-top:0}
 .ckprodcol{display:flex;flex-direction:column;gap:6px;align-self:start}
 .ckprod{padding:7px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--paper)}
+.ckmore{display:flex;flex-direction:column;gap:6px}
+.ckmore>summary{cursor:pointer;list-style:none;padding:8px 10px;border:1px dashed var(--rule);border-radius:8px;text-align:center;font-size:13px;font-weight:600;color:var(--seal);background:transparent}
+.ckmore>summary::-webkit-details-marker{display:none}
+.ckmore .mc{display:none}.ckmore[open]>summary .mo{display:none}.ckmore[open]>summary .mc{display:inline}
+.ckmore[open]>summary{margin-bottom:0}
 .ckprodcol .wkbuy{font-size:13px;line-height:1.4;padding:0}
 .ckrk{margin:3px 0 0;font-size:12px;color:var(--ink-3);line-height:1.4}
 .ckdesc{margin:3px 0 0;font-size:12.5px;color:var(--ink-2);line-height:1.45}
@@ -3410,13 +3415,17 @@ function wkAdHtml(hasC,hasN){
 }
 // 표 한 줄: 왼쪽에 품목 이름·태그·설명, 오른쪽에 상품을 세로로 나열 (체크리스트·주차별·성장분석 탭 공통)
 function wkRowHtml(r){
-  const prods=(r.prods||[]).map(s=>{
+  const one=s=>{
     const k=wkKind(s.url), cls=k==="naver"?"bnv":k==="danawa"?"bdn":"bcp", nm=k==="naver"?"네이버":k==="danawa"?"다나와":"쿠팡";
     const ds=s.desc ? `<p class="ckdesc">${wkEsc(s.desc)}</p>` : "";
     const rk=s.posts>0 && s.rank>0 ? `<p class="ckrk">맘카페 최근 글 언급 ${s.rank}번째 · 글 ${s.posts}건</p>` : "";
     const rel=k==="danawa"?"nofollow noopener":"sponsored nofollow noopener", ref=k==="coupang"?' referrerpolicy="unsafe-url"':"";
     return `<div class="ckprod"><a class="wkbuy" data-tab="${r.tab}" href="${wkEsc(s.url)}" target="_blank" rel="${rel}"${ref}>${r.hideLabel?"":wkEsc(s.label)}<span><b class="${cls}">${nm}</b>에서 보기</span></a>${ds}${rk}</div>`;
-  }).join("");
+  };
+  // 한 품목의 상품이 5개를 넘으면 처음 5개만 보이고 나머지는 '펼치기'로 연다(주차별·체크리스트). 순위 탭은 처음부터 전부 보여 준다.
+  const plist=r.prods||[], cap=r.tab==="rank" ? plist.length : 5;
+  const prods=plist.slice(0,cap).map(one).join("")
+    +(plist.length>cap ? `<details class="ckmore"><summary><span class="mo">나머지 ${plist.length-cap}개 펼치기 ▾</span><span class="mc">접기 ▴</span></summary>${plist.slice(cap).map(one).join("")}</details>` : "");
   const how=r.how ? `<span class="ckhow hw-${r.how==="새 제품 권장"?"new":r.how==="소량 먼저"?"small":"used"}">${wkEsc(r.how)}</span>` : "";
   return `<div class="ckrow${r.done?" done":""}"${r.id?` data-ckrow="${wkEsc(r.id)}"`:""}><div class="ckinfo"><div class="ckh">${r.cb||""}<b class="ckt">${wkEsc(r.title)}</b>${r.qty?`<span class="ckq">${wkEsc(r.qty)}</span>`:""}${how}${r.tag||""}</div>`
     +(r.note?`<p class="ckn">${wkEsc(r.note)}${r.tip?" <b>"+wkEsc(r.tip)+"</b>":""}</p>`:"")+(r.extra||"")
@@ -3539,7 +3548,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="d0733362";
+var APP_BUILD="877704c6";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
