@@ -574,9 +574,9 @@ dd b{font-weight:500; color:var(--ink)}
 .rkgrp small{display:block;margin-top:2px;font-size:12.5px;font-weight:400;color:var(--ink-3);line-height:1.5}
 .rkempty{padding:18px 4px;color:var(--ink-3);font-size:14px}/*JP:CSS:BEGIN*/
 .jpbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;margin-top:16px}
-.jprate{flex:1 1 100%;font-size:15px;line-height:1.6}
-.jprate b{font-size:19px;font-weight:700;color:var(--seal)}
-.jprate small{display:block;font-size:12.5px;color:var(--ink-3)}
+.jprate{flex:1 1 100%;font-size:19px;line-height:1.55}
+.jprate b{font-size:30px;font-weight:800;color:var(--seal);letter-spacing:-.01em}
+.jprate small{display:block;margin-top:2px;font-size:14.5px;line-height:1.55;color:var(--ink-3)}
 .jpf{display:flex;flex-direction:column;gap:4px;min-width:0}
 .jpf label{font-size:13px;color:var(--ink-2)}
 .jpf select,.jpf input{font:inherit;font-size:14.5px;padding:8px 10px;border:1.5px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);max-width:100%}
@@ -4007,7 +4007,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="ca30020c";
+var APP_BUILD="13117f9b";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
