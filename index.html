@@ -1085,6 +1085,7 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 </div>
 <div id="tab-week" class="hidden">
+<p class="upd"><b>업데이트 10/19</b> 마지막 생리 시작일만 넣어도 출산 예정일과 오늘 몇 주 며칠인지 계산해요</p>
 <div class="card">
   <h2>주차별 우리 아기</h2>
   <p class="sub" style="margin-top:0">주차를 고르면 아기와 엄마 몸에 일어나는 일, 이번 주 검사와 챙길 것을 한 화면에서 볼 수 있어요. 임신 주수는 마지막 생리 시작일 기준이에요.</p>
@@ -1096,7 +1097,12 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
   <p class="gnote" id="wkNow" style="margin-bottom:0"></p>
   <div style="margin-top:14px">
-    <label for="wkEdd">출산 예정일 <span class="hint">넣으면 오늘 기준 이번 주를 찾아 드려요 · 저장은 안 해요</span></label>
+    <label for="wkLmp">마지막 생리 시작일 <span class="hint">예정일을 모르면 이 날짜로 계산해요 · 저장은 안 해요</span></label>
+    <input type="text" id="wkLmp" placeholder="2026-05-20" inputmode="numeric" autocomplete="off">
+    <p class="gnote" id="wkLmpMsg" style="margin-bottom:0"></p>
+  </div>
+  <div style="margin-top:14px">
+    <label for="wkEdd">출산 예정일 <span class="hint">병원이 정해 준 예정일이 있으면 이 칸에 넣어 주세요 · 오늘 기준 이번 주를 찾아 드려요 · 저장은 안 해요</span></label>
     <input type="text" id="wkEdd" placeholder="2027-02-26" inputmode="numeric" autocomplete="off">
   </div>
 </div>
@@ -1338,6 +1344,13 @@ function wkPickShop(pool,dayNo,n){
   const start=(((Math.floor(dayNo)||0)*k)%rest.length+rest.length)%rest.length, pick=new Set();
   for(let i=0;i<k;i++) pick.add(rest[(start+i)%rest.length]);
   return pool.filter(s=>pins.indexOf(s)>=0 || pick.has(s));
+}
+// 마지막 생리 시작일 → 출산 예정일. 질병관리청: 임신 기간은 마지막 월경 첫날부터 약 280일(40주).
+// 손으로 하는 네겔레 법칙(달 -3, 일 +7)은 달마다 날수가 달라 이 값과 며칠 어긋날 수 있다. 여기서는 280일을 그대로 더한다.
+function wkLmpToEdd(lmp){
+  const t=gcParse(lmp); if(t==null) return null;
+  const d=new Date(t+280*86400000), p=n=>String(n).padStart(2,"0");
+  return d.getUTCFullYear()+"-"+p(d.getUTCMonth()+1)+"-"+p(d.getUTCDate());
 }
 /* === WEEKLY-CORE END === */
 /* === WEEKLY-DATA START === */
@@ -3558,6 +3571,17 @@ function wkNote(cur){
   el.textContent = cur.note ? cur.note
     : `오늘은 ${gcFmtGa(cur.ga)}이에요.` + (cur.w===WK.w ? "" : ` 지금 보는 건 ${WK.w}주예요.`);
 }
+function wkFromLmp(){                             // 마지막 생리 시작일로 예정일을 채우고 이번 주를 찾는다
+  const msg=$g("wkLmpMsg"), v=$g("wkLmp").value.trim();
+  if(!v){ msg.textContent=""; return; }
+  const e=wkLmpToEdd(v);
+  if(!e){ msg.textContent="2026-05-20 처럼 숫자로 적어 주세요."; return; }
+  const ga=gcGaDays(e, wkToday());
+  if(ga<0){ msg.textContent="오늘보다 뒤 날짜예요. 마지막 생리가 시작된 날을 적어 주세요."; return; }
+  if(ga>294){ msg.textContent="임신 기간(42주)이 지난 날짜예요. 날짜를 다시 확인해 주세요."; return; }
+  $g("wkEdd").value=e; wkAuto();
+  msg.textContent=`출산 예정일은 ${e}예요. 마지막 생리 시작일에서 280일(40주) 뒤로 계산했어요. 병원에서 초음파로 정한 예정일이 다르면 그 날짜가 기준이에요.`;
+}
 function wkAuto(){                                // 예정일이 있으면 이번 주로 맞춘다
   const cur=wkCurrent();
   if(cur) wkShow(cur.w);
@@ -3595,7 +3619,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="9ec1abc5";
+var APP_BUILD="eb8a24d5";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -3629,7 +3653,10 @@ window.wOnOpen=function(){ if(!WK.auto){ WK.auto=true; if(wkCurrent()) wkAuto();
     else if(e.target.closest("#wkTrend")){ const b=document.querySelector('.tb[data-tab="tab-growth"]'); if(b) b.click(); }
   });
   bindDateText($g("wkEdd"));
-  $g("wkEdd").addEventListener("change",()=>{ wkAuto(); });
+  $g("wkEdd").addEventListener("change",()=>{ $g("wkLmpMsg").textContent=""; wkAuto(); });
+  bindDateText($g("wkLmp"));
+  $g("wkLmp").addEventListener("change",wkFromLmp);
+  $g("wkLmp").addEventListener("keydown",e=>{ if(e.key==="Enter") wkFromLmp(); });
   const q=wkQuery(INIT_W);
   if(q!=null){ wkShow(q); WK.auto=true; wkNote(wkCurrent()); }
   else { wkShow(WK.w); }
