@@ -1349,6 +1349,16 @@ dd b{font-weight:500; color:var(--ink)}
   <h2>알아둘 점</h2>
   <ul class="jpnotes" id="jpNotes"></ul>
 </div>
+<div class="card" id="jpposts">
+  <h2>함께 보면 좋은 글</h2>
+  <div class="blogs">
+    <a href="https://blog.naver.com/momcare_/224446854361" target="_blank" rel="noopener"><b>일본 가격</b>후쿠오카 아카짱혼포 추천템과 일본 트립트랩 가격, 한국 정발가보다 얼마나 싼지 오늘 환율로 계산해 봤어요</a>
+    <a href="https://blog.naver.com/momcare_/224359290707" target="_blank" rel="noopener"><b>유모차</b>유모차 고르는 법, 디럭스·절충형·휴대용 종류별 특징과 추천 모델 (2026)</a>
+    <a href="https://blog.naver.com/momcare_/224353368148" target="_blank" rel="noopener"><b>카시트</b>카시트 고르는 법, 신생아부터 6세까지 KC인증·후향 장착·돈 아끼는 기준 (2026)</a>
+    <a href="https://blog.naver.com/momcare_/224442491564" target="_blank" rel="noopener"><b>준비물</b>출산용품 리스트 2026 무료엑셀, 브랜드·가격·당근권장까지 표시</a>
+  </div>
+  <p class="fbk">써 보시고 불편한 점이나 바라는 기능이 있으면 블로그 글에 댓글로 남겨 주세요. 최대한 반영해 볼게요.</p>
+</div>
 <p class="jpalert" role="note"><b>일본 면세 제도는 2026-11-01 이후 출국부터 공항 환급 방식으로 바뀌어요. 그 뒤 구매는 5% 게스트카드·환급 처리를 다시 확인하세요.</b></p>
 </div>
 <!--JP:HTML:END-->
@@ -4114,7 +4124,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="ff813958";
+var APP_BUILD="ea905910";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
