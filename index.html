@@ -357,6 +357,15 @@ dd b{font-weight:500; color:var(--ink)}
 .fbk{margin:14px 0 0;padding:10px 12px;border-left:4px solid var(--seal);background:var(--paper-2);border-radius:0 8px 8px 0;font-size:14px;line-height:1.6;color:var(--ink)}
 .fbk a{color:var(--seal);font-weight:700}
 #pCmp,#pAll{overflow-x:auto}
+.nh{margin:14px 0 0;padding:12px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--card)}
+.nhh{font-size:14.5px;line-height:1.55}
+.nhh small{display:block;font-size:12px;color:var(--ink-3);margin-top:1px}
+.nhp{margin:6px 0 0;font-size:13px;color:var(--ink-2)}
+.nhn,.nhall{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.nhc{display:inline-flex;align-items:baseline;gap:4px;padding:3px 10px;border:1px solid var(--rule);border-radius:999px;background:var(--paper);font-size:14px}
+.nhc small{font-size:11px;color:var(--ink-3)}.nhc em{font-style:normal;font-size:11px;color:var(--seal)}
+.nhd{margin-top:8px;font-size:13px}.nhd summary{cursor:pointer;color:var(--ink-2)}
+.nhb{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.nhb .rebtn{margin:0;width:auto;padding:7px 14px;font-size:13px}
 .slday{border:1px solid var(--rule);border-radius:12px;margin:10px 0;background:var(--card)}
 .slday>summary{cursor:pointer;padding:12px 14px;font-size:15px;line-height:1.5;list-style:none}
 .slday>summary::-webkit-details-marker{display:none}
@@ -824,7 +833,7 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="grid" style="margin-top:16px">
     <div>
       <label for="surname">성씨 (한글) — 이름 추천에 씁니다</label>
-      <input type="text" id="surname" value="홍" maxlength="2" placeholder="예: 홍, 남궁">
+      <input type="text" id="surname" value="" maxlength="2" placeholder="성씨만 한글로" autocomplete="off">
     </div>
     <div>
       <label for="given">미리 지어둔 이름이 있다면 (선택)</label>
@@ -947,6 +956,18 @@ dd b{font-weight:500; color:var(--ink)}
     <h2>이름 만들기</h2>
     <div id="naming"></div>
     <button id="reroll" type="button" class="rebtn">다른 이름 다시 뽑기</button>
+  </div>
+
+  <div class="card" id="nhCard">
+    <h2>내 작명 기록</h2>
+    <p class="sub" style="margin-top:0">사주를 뽑고 이름을 추천받을 때마다 입력한 값과 추천 이름을 이 기기에 남겨 둘 수 있어요. 휴대폰과 컴퓨터는 각각 따로 저장돼요.</p>
+    <label class="chk" style="margin-top:12px"><input type="checkbox" id="nhOn"> 이 기기에 작명 기록 저장하기</label>
+    <p class="gnote" style="margin:8px 0 0"><b>저장하는 것</b> 생년월일·태어난 시각·성씨·성별과 추천된 이름이에요.
+      <b>저장 위치</b> 이 기기의 브라우저 안에만 저장되고 서버로 보내지 않아요.
+      <b>보관</b> 최근 30번까지 남기고, 직접 지우거나 브라우저 데이터를 지울 때까지 있어요. 체크를 풀면 새 기록은 저장하지 않아요.</p>
+    <p id="nhMsg" class="shmsg hidden"></p>
+    <div id="nhList"></div>
+    <button id="nhClear" type="button" class="rebtn hidden">기록 전부 지우기</button>
   </div>
 
   <div class="card">
@@ -2035,7 +2056,9 @@ function chartOf(Y,M,D,hh,mi,lon,useEot,yaja){
           balance:10-zero*2-spread};                    // 높을수록 고르다
 }
 
+let NH_LAST=null;   // 작명 기록 저장용: 마지막으로 계산한 입력값과 추천 이름
 function calc(){
+  NH_LAST=null;
   const dEl=document.getElementById("d"); if(dEl.value) dEl.value=normDate(dEl.value)||dEl.value;
   const dv=dEl.value;
   const tEl=document.getElementById("t"); if(tEl.value) tEl.value=normTime(tEl.value);
@@ -2632,6 +2655,10 @@ function calc(){
       위 '미리 지어둔 이름' 칸에 이름을 넣으면 음마다 쓸 수 있는 한자를 전부 보여 드려요.
       <b>출생신고 전에는 대법원 전자가족관계등록시스템(efamily.scourt.go.kr)에서 꼭 한 번 조회</b>해 보세요.</p>`;
     nb.innerHTML=html;
+    NH_LAST={d:dv,t:(noTime?"":tv),nt:noTime,c:String(lon),s:sur,g:given,x:sex0,n:topN,e:useEot,y:yaja,
+      pil:cols.map(([h,g,j])=>GAN_K[g]+JI_K[j]).join("·"),
+      need:[...new Set([lack,eokPick])].map(o=>OH[o]),
+      names:list.map(c=>[sur[0]+c.nm,c.h1[0]+c.h2[0],c.sc].join("|"))};
     NM_CTX={sur:sur[0],surHan,surStroke,sOh,given,need:[...new Set([lack,eokPick])]};
     if(NM_SEL.given!==given) NM_SEL={given,cs:[]};
     nmSync();
@@ -2715,12 +2742,114 @@ document.getElementById("shFb").addEventListener("click",()=>{
   window.open(`https://www.facebook.com/sharer/sharer.php?u=${enc(shareURL)}`,"_blank","noopener");
 });
 
+/* === NAMEHIST-CORE START === */
+// 작명 기록: 이 기기 브라우저(localStorage)에만 저장한다. 서버로 보내지 않는다.
+const NH_KEY="momcare_naming_hist_v1", NH_MAX=30, NH_NAMES_MAX=30;
+const NH_SEX={F:"여아",M:"남아",A:"성별 둘 다"};
+function nhStr(v,n){ return String(v==null?"":v).slice(0,n); }
+// 저장된 값이나 새 값을 안전한 모양으로 다듬는다(깨진 값은 null)
+function nhClean(r){
+  if(!r||typeof r!=="object") return null;
+  const d=nhStr(r.d,10); if(!/^\d{4}-\d{2}-\d{2}$/.test(d)) return null;
+  const names=(Array.isArray(r.names)?r.names:[]).slice(0,NH_NAMES_MAX).map(x=>nhStr(x,40)).filter(x=>x.length>0);
+  return {at:nhStr(r.at,30), d:d, t:/^\d{2}:\d{2}$/.test(nhStr(r.t,5))?r.t:"", nt:!!r.nt, c:nhStr(r.c,8),
+    s:nhStr(r.s,2), g:nhStr(r.g,3), x:NH_SEX[r.x]?r.x:"A", n:Math.max(0,Math.min(99,parseInt(r.n,10)||0)), e:!!r.e, y:!!r.y,
+    pil:nhStr(r.pil,40), need:(Array.isArray(r.need)?r.need:[]).slice(0,5).map(x=>nhStr(x,4)), names:names};
+}
+function nhSig(r){ return [r.d,r.t,r.nt?1:0,r.c,r.s,r.g,r.x,r.e?1:0,r.y?1:0,r.names.join("/")].join("|"); }
+// 맨 앞에 넣고 NH_MAX 개까지만 남긴다. 바로 앞 기록과 입력·결과가 똑같으면 또 넣지 않는다.
+function nhAdd(recs,rec){
+  const c=nhClean(rec); if(!c||!c.names.length) return recs;
+  if(recs.length&&nhSig(recs[0])===nhSig(c)) return recs;
+  return [c].concat(recs).slice(0,NH_MAX);
+}
+function nhParse(raw){
+  try{
+    const o=JSON.parse(raw); if(!o||o.v!==1||!Array.isArray(o.recs)) return null;
+    return {on:!!o.on, recs:o.recs.map(nhClean).filter(Boolean).slice(0,NH_MAX)};
+  }catch(e){ return null; }
+}
+function nhStringify(st){ return JSON.stringify({v:1,on:!!st.on,recs:st.recs}); }
+function nhName(s){ const a=String(s).split("|"); return {n:a[0]||"", h:a[1]||"", sc:a[2]||""}; }
+/* === NAMEHIST-CORE END === */
+
+const NH={on:false, recs:[], ok:true};
+function nhSave(){
+  try{ localStorage.setItem(NH_KEY, nhStringify(NH)); return true; }catch(e){ NH.ok=false; return false; }
+}
+function nhMsgShow(m){
+  const e=document.getElementById("nhMsg"); e.textContent=m; e.classList.remove("hidden");
+  clearTimeout(nhMsgShow._t); nhMsgShow._t=setTimeout(()=>e.classList.add("hidden"),4200);
+}
+function nhRender(){
+  const box=document.getElementById("nhList");
+  const city=document.getElementById("city");
+  const cityName=v=>{ const o=[...city.options].find(x=>x.value===v); return o?o.textContent.trim():""; };
+  document.getElementById("nhOn").checked=NH.on;
+  document.getElementById("nhClear").classList.toggle("hidden",!NH.recs.length);
+  if(!NH.recs.length){
+    box.innerHTML='<p class="gnote" style="margin:14px 0 0">'+(NH.on?"아직 저장된 기록이 없어요. 위에서 <b>사주 뽑기</b>나 <b>다른 이름 다시 뽑기</b>를 누르면 여기에 쌓여요."
+      :"저장을 켜 두면 사주를 뽑을 때마다 이곳에 기록이 쌓여요.")+'</p>';
+    return;
+  }
+  box.innerHTML=NH.recs.map((r,i)=>{
+    const nm=r.names.map(nhName);
+    const head=nm.slice(0,8).map(x=>'<span class="nhc">'+nhEsc(x.n)+(x.h?'<small>'+nhEsc(x.h)+'</small>':'')+'</span>').join("");
+    const rest=nm.length>8?'<details class="nhd"><summary>추천 이름 '+nm.length+'개 모두 보기</summary><div class="nhall">'
+      +nm.map(x=>'<span class="nhc">'+nhEsc(x.n)+(x.h?'<small>'+nhEsc(x.h)+'</small>':'')+(x.sc?'<em>'+nhEsc(x.sc)+'점</em>':'')+'</span>').join("")+'</div></details>':"";
+    const when=r.at?new Date(r.at):null, wl=when&&!isNaN(when)?when.toLocaleString("ko-KR",{year:"numeric",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"";
+    return '<div class="nh"><div class="nhh"><b>'+nhEsc(r.d+(r.nt?" (시각 모름)":" "+r.t))+'</b> · '+nhEsc(r.s||"성씨 없음")+' · '+NH_SEX[r.x]
+      +(cityName(r.c)?' · '+nhEsc(cityName(r.c)):'')+(r.g?' · 지어 둔 이름 '+nhEsc(r.g):'')+(wl?'<small>'+nhEsc(wl)+' 저장</small>':'')+'</div>'
+      +'<p class="nhp">사주 '+nhEsc(r.pil)+(r.need.length?' · 아쉬운 기운 '+r.need.map(nhEsc).join("·"):'')+'</p>'
+      +'<div class="nhn">'+head+'</div>'+rest
+      +'<div class="nhb"><button type="button" class="rebtn" data-nh="load" data-i="'+i+'">이 입력값 다시 불러오기</button>'
+      +'<button type="button" class="rebtn" data-nh="del" data-i="'+i+'">이 기록 지우기</button></div></div>';
+  }).join("");
+}
+function nhEsc(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+// 사주 뽑기·다른 이름 다시 뽑기를 눌렀을 때만 저장한다(페이지를 열 때 자동으로 도는 계산은 저장하지 않는다)
+function nhSaveLast(){
+  if(!NH.on||!NH_LAST) return;
+  const before=NH.recs.length?nhSig(NH.recs[0]):"";
+  NH.recs=nhAdd(NH.recs,Object.assign({at:new Date().toISOString()},NH_LAST));
+  if(NH.recs.length&&nhSig(NH.recs[0])!==before){
+    if(!nhSave()) nhMsgShow("이 브라우저에서는 저장이 막혀 있어요. 사생활 보호 모드이거나 저장 공간이 꺼져 있을 수 있어요.");
+  }
+  nhRender();
+}
+(function(){
+  try{ const st=nhParse(localStorage.getItem(NH_KEY)); if(st){ NH.on=st.on; NH.recs=st.recs; } }catch(e){ NH.ok=false; }
+  nhRender();
+  document.getElementById("nhOn").addEventListener("change",e=>{
+    NH.on=e.target.checked;
+    if(!nhSave()){ NH.on=false; e.target.checked=false; nhMsgShow("이 브라우저에서는 저장이 막혀 있어서 켤 수 없어요."); return; }
+    nhMsgShow(NH.on?"이제부터 사주를 뽑을 때마다 이 기기에 기록해 둘게요.":"새 기록은 저장하지 않아요. 이미 저장된 기록은 아래에 그대로 남아 있어요.");
+    nhRender();
+  });
+  document.getElementById("nhClear").addEventListener("click",()=>{
+    if(!confirm("이 기기에 저장된 작명 기록을 전부 지울까요? 되돌릴 수 없어요.")) return;
+    NH.recs=[]; nhSave(); nhRender(); nhMsgShow("저장된 기록을 모두 지웠어요.");
+  });
+  document.getElementById("nhList").addEventListener("click",e=>{
+    const b=e.target.closest("[data-nh]"); if(!b) return;
+    const i=+b.dataset.i, r=NH.recs[i]; if(!r) return;
+    if(b.dataset.nh==="del"){ NH.recs.splice(i,1); nhSave(); nhRender(); return; }
+    const set=(id,v)=>{ document.getElementById(id).value=v; };
+    set("d",r.d); set("t",r.t||"09:30"); set("city",r.c); set("surname",r.s); set("given",r.g); set("sex",r.x);
+    if(r.n) set("topn",String(r.n));
+    document.getElementById("eot").checked=r.e; document.getElementById("yaja").checked=r.y;
+    document.getElementById("unknown").checked=r.nt; document.getElementById("t").disabled=r.nt;
+    calc();
+    document.getElementById("out").scrollIntoView({behavior:"smooth",block:"start"});
+  });
+})();
+
 document.getElementById("reroll").addEventListener("click",()=>{
-  reroll++; calc();
+  reroll++; calc(); nhSaveLast();
   document.getElementById("naming").scrollIntoView({behavior:"smooth",block:"start"});
 });
 document.getElementById("go").addEventListener("click",()=>{
-  calc();
+  calc(); nhSaveLast();
   // 결과가 화면 밖에 있으면 눌러도 아무 일 없어 보인다 → 결과로 데려간다
   const o=document.getElementById("out");
   if(o && !o.classList.contains("hidden")) o.scrollIntoView({behavior:"smooth",block:"start"});
@@ -4123,7 +4252,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="78e44864";
+var APP_BUILD="124c395c";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
