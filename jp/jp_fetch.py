@@ -201,6 +201,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=os.path.join(HERE, "..", "jp_prices.json"))
     ap.add_argument("--only", default="")
+    ap.add_argument("--min-ok", type=int, default=0, help="자동 확인된 품목이 이보다 적으면 파일을 쓰지 않고 실패(종료코드 1)")
     a = ap.parse_args()
     out = os.path.abspath(a.out)
     prev = {}
@@ -251,6 +252,9 @@ def main():
                 base["fallback_note"] = fb.get("note", "자동 수집이 안 돼 마지막으로 확인한 값이에요")
         base["sources"] = srcs
         items.append(base)
+    if ok_n < a.min_ok:
+        print("자동 확인 %d개 < 기준 %d개 — 파일을 쓰지 않아요(이전 값 유지)" % (ok_n, a.min_ok))
+        sys.exit(1)
     rate = fetch_rate() or prev.get("rate")
     data = dict(generated_at=now.isoformat(timespec="minutes"), rate=rate, items=items, stores=D.STORES, notes=D.NOTES, ok_items=sum(1 for x in items if not x.get("stale")), total_items=len(D.ITEMS))
     io.open(out, "w", encoding="utf-8").write(json.dumps(data, ensure_ascii=False, indent=1))
