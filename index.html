@@ -282,7 +282,7 @@ dd b{font-weight:500; color:var(--ink)}
 }
 
 /* 탭 — 그림을 눌러 고른다 */
-.tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:0 0 26px}
+.tabs{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin:0 0 26px}
 .tb{appearance:none;padding:0;border:3px solid transparent;border-radius:16px;
   background:none;cursor:pointer;overflow:hidden;position:relative;display:block;
   transition:border-color .15s, box-shadow .15s, transform .12s, filter .15s}
@@ -572,7 +572,69 @@ dd b{font-weight:500; color:var(--ink)}
 .rklink a{color:var(--seal);font-weight:600}
 .rkgrp{margin:20px 0 8px;font-size:16px;color:var(--ink)}
 .rkgrp small{display:block;margin-top:2px;font-size:12.5px;font-weight:400;color:var(--ink-3);line-height:1.5}
-.rkempty{padding:18px 4px;color:var(--ink-3);font-size:14px}
+.rkempty{padding:18px 4px;color:var(--ink-3);font-size:14px}/*JP:CSS:BEGIN*/
+.jpbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;margin-top:16px}
+.jprate{flex:1 1 100%;font-size:15px;line-height:1.6}
+.jprate b{font-size:19px;font-weight:700;color:var(--seal)}
+.jprate small{display:block;font-size:12.5px;color:var(--ink-3)}
+.jpf{display:flex;flex-direction:column;gap:4px;min-width:0}
+.jpf label{font-size:13px;color:var(--ink-2)}
+.jpf select,.jpf input{font:inherit;font-size:14.5px;padding:8px 10px;border:1.5px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);max-width:100%}
+.jpf input{width:150px}
+.jpchips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.jpchip{appearance:none;font:inherit;font-size:14px;padding:6px 14px;border:1.5px solid var(--rule);border-radius:999px;background:var(--card);color:var(--ink-2);cursor:pointer}
+.jpchip.on{background:var(--seal);border-color:var(--seal);color:#fff;font-weight:700}
+.jpchip:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+.jpitem{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:16px 18px;margin:0 0 12px;box-shadow:var(--shadow)}
+.jphd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.jphd b{font-size:17px;font-weight:700;color:var(--ink)}
+.jpbrand{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--paper-2);color:var(--ink-2)}
+.jpstock{font-size:12.5px;font-weight:700;padding:2px 10px;border-radius:999px;margin-left:auto}
+.jpstock.in{background:#dcefe3;color:#1f6b3a}
+.jpstock.part{background:#fbeccb;color:#8a5a00}
+.jpstock.out{background:#f6d9d6;color:#9a2a22}
+.jpstock.unknown{background:var(--paper-2);color:var(--ink-3)}
+:root[data-theme="dark"] .jpstock.in{background:#1d3a28;color:#8fd6a8}
+:root[data-theme="dark"] .jpstock.part{background:#3d3015;color:#e8c374}
+:root[data-theme="dark"] .jpstock.out{background:#442220;color:#f0a39c}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .jpstock.in{background:#1d3a28;color:#8fd6a8}
+  :root:not([data-theme="light"]) .jpstock.part{background:#3d3015;color:#e8c374}
+  :root:not([data-theme="light"]) .jpstock.out{background:#442220;color:#f0a39c}
+}
+.jpdesc{margin:6px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.jpnums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 0}
+.jpnums div{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:8px 10px;min-width:0}
+.jpnums small{display:block;font-size:11.5px;color:var(--ink-3);line-height:1.4}
+.jpnums b{display:block;font-size:16.5px;font-weight:700;color:var(--ink);margin-top:2px;word-break:keep-all}
+.jpnums div.hi b{color:var(--seal)}
+@media(max-width:520px){.jpnums{grid-template-columns:1fr 1fr}.jpnums div.hi{grid-column:1/-1}.jpstock{margin-left:0}}
+.jpkr{margin:10px 0 0;font-size:13.5px;color:var(--ink-2)}
+.jpkr b{color:var(--mok)}
+.jpwarn{margin:8px 0 0;font-size:12.5px;color:#8a5a00}
+.jpvar{margin-top:10px;font-size:13.5px}
+.jpvar summary{cursor:pointer;color:var(--ink-2)}
+.jpvl{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px 12px}
+.jpvl li{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--ink-2);border-bottom:1px dashed var(--rule);padding:3px 0}
+.jpvl .y{color:#1f6b3a;font-weight:700}.jpvl .n{color:#9a2a22;font-weight:700}.jpvl .u{color:var(--ink-3)}
+.jpsrc{margin:10px 0 0;font-size:12px;color:var(--ink-3)}
+.jpsrc a{color:var(--ink-3)}
+.jpstore{border:1px solid var(--rule);border-radius:10px;background:var(--card);margin:0 0 10px;overflow:hidden}
+.jpstore>summary{cursor:pointer;padding:12px 16px;font-weight:700;font-size:16px;list-style:none;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.jpstore>summary::-webkit-details-marker{display:none}
+.jpstore>summary small{font-weight:400;font-size:13px;color:var(--ink-3)}
+.jpsb{padding:0 16px 14px;font-size:14px;color:var(--ink-2);line-height:1.65}
+.jpsb h4{margin:12px 0 4px;font-size:13.5px;color:var(--ink);font-weight:700}
+.jpsb ul{margin:0;padding-left:18px}
+.jpsb li{margin:3px 0}
+.jpmeta{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:8px 0 0;font-size:13.5px}
+.jpmeta dt{color:var(--ink-3);margin:0}.jpmeta dd{margin:0;color:var(--ink)}
+.jpmap{display:inline-block;margin:10px 0 0;padding:7px 14px;border:1.5px solid var(--seal);border-radius:999px;color:var(--seal);font-size:14px;font-weight:700;text-decoration:none}
+.jpmap:hover,.jpmap:focus-visible{background:var(--seal);color:#fff}
+.jpnotes{margin:12px 0 0;padding-left:20px;font-size:14px;color:var(--ink-2);line-height:1.7}
+.jpnotes li{margin:4px 0}
+/*JP:CSS:END*/
+
 </style>
 
 <div class="wrap">
@@ -612,6 +674,11 @@ dd b{font-weight:500; color:var(--ink)}
   <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-rank">
     <img src="tab-rank.jpg" width="800" height="597" decoding="async"
          alt="용품 순위 — 유모차·카시트·분유포트 같은 용품을 맘카페 글에서 많이 나온 제품 순서로 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-jp">
+    <img src="tab-jp.jpg" width="800" height="597" decoding="async"
+         alt="일본 가격 — 일본에서 많이 사 오는 유모차·카시트·하이체어의 오늘 가격과 재고, 구매처 찾아가는 법을 봅니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
 </nav>
@@ -1128,6 +1195,42 @@ dd b{font-weight:500; color:var(--ink)}
 <div id="ckBody"></div>
 </div>
 
+<!--JP:HTML:BEGIN-->
+<div id="tab-jp" class="hidden">
+<div class="card">
+  <h2>일본 인기용품 가격</h2>
+  <p class="sub" style="margin-top:0">일본에서 많이 사 오는 스토케·부가부·싸이벡스 제품의 일본 쇼핑몰 가격과 온라인 재고를 매일 아침 확인해서, 오늘 환율로 바꿔 보여 드려요. 아래에서 구매처 위치와 예약 방법도 볼 수 있어요.</p>
+  <div class="jpbar">
+    <div class="jprate" id="jpRate">환율을 불러오고 있어요…</div>
+    <div class="jpf">
+      <label for="jpMode">계산 방식</label>
+      <select id="jpMode" aria-label="계산 방식">
+        <option value="dept">백화점 (게스트카드 5% + 면세 환급)</option>
+        <option value="aka">아카짱혼포 (면세 환급만)</option>
+        <option value="none">면세 없이 표시가 그대로</option>
+      </select>
+    </div>
+    <div class="jpf">
+      <label for="jpMyRate">내 환율 <span class="hint">1엔당 원 · 비우면 오늘 환율</span></label>
+      <input type="text" id="jpMyRate" placeholder="예: 9.0" inputmode="decimal" autocomplete="off">
+    </div>
+  </div>
+  <p class="gnote" id="jpStamp" style="margin-bottom:0"></p>
+</div>
+<div class="jpchips" id="jpGroups" role="group" aria-label="종류 고르기"></div>
+<div id="jpList"></div>
+<div class="card" id="jpGuide">
+  <h2>사러 가는 곳 · 예약 · 찾아가는 법</h2>
+  <p class="sub" style="margin-top:0">후기와 공식 안내, 구글 지도로 확인한 내용이에요. 매장 정책은 바뀔 수 있으니 가기 전에 한 번 더 확인하세요.</p>
+  <div class="jpchips" id="jpRegions" role="group" aria-label="지역 고르기" style="margin-top:14px"></div>
+  <div id="jpStores"></div>
+</div>
+<div class="card">
+  <h2>알아둘 점</h2>
+  <ul class="jpnotes" id="jpNotes"></ul>
+</div>
+</div>
+<!--JP:HTML:END-->
 <div id="tab-rank" class="hidden">
 <div class="card">
   <h2>용품별 순위</h2>
@@ -2503,7 +2606,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".tb").forEach(x=>{
     const on=(x===b); x.classList.toggle("on",on); x.setAttribute("aria-selected",on?"true":"false");
   });
-  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank"].forEach(id=>{
+  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp"].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.classList.toggle("hidden", id!==b.dataset.tab);
   });
@@ -2512,8 +2615,152 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   if(b.dataset.tab==="tab-week" && typeof wOnOpen==="function") wOnOpen();
   if(b.dataset.tab==="tab-check" && typeof cOnOpen==="function") cOnOpen();
   if(b.dataset.tab==="tab-rank" && typeof rOnOpen==="function") rOnOpen();
+  if(b.dataset.tab==="tab-jp" && typeof jpOnOpen==="function") jpOnOpen();
 }));
 
+/*JP:JS:BEGIN*/
+/* === JP-CORE START === */
+const JP_GUEST=0.05, JP_FEE={dept:0.0155,aka:0.011};
+const JP_RATE_API="https://open.er-api.com/v6/latest/JPY";
+function jpEsc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function jpYen(n){return "¥"+Math.round(n).toLocaleString("en-US");}
+function jpWon(n){return Math.round(n).toLocaleString("en-US")+"원";}
+function jpMan(n){const m=Math.round(Math.abs(n)/1000)/10; return (Number.isInteger(m)?m:m.toFixed(1))+"만원";}
+function jpNet(incl,mode){
+  const pre=incl/1.1;
+  if(mode==="dept") return pre*(1-JP_GUEST)*(1+JP_FEE.dept);
+  if(mode==="aka") return pre*(1+JP_FEE.aka);
+  return incl;
+}
+function jpStamp(iso){
+  if(!iso) return "";
+  const d=new Date(iso);
+  if(isNaN(d.getTime())) return String(iso).slice(0,16).replace("T"," ");
+  return new Date(d.getTime()+9*3600000).toISOString().slice(0,16).replace("T"," ");
+}
+function jpStock(it){
+  const a=it.avail, n=it.n_in, t=it.n_total;
+  if(a==="in") return {cls:"in",text:"온라인 재고 있음"+(t>1?` (${n}/${t})`:"")};
+  if(a==="part") return {cls:"part",text:`일부만 재고 있음 (${n}/${t})`};
+  if(a==="out") return {cls:"out",text:"온라인 재고 없음"};
+  return {cls:"unknown",text:"재고 확인 안 됨"};
+}
+function jpVarHtml(it,mode,rate){
+  const vs=(it.variants||[]).filter(v=>v.n);
+  if(vs.length<2) return "";
+  const rows=vs.map(v=>{
+    const st=v.a==="in"?'<span class="y">재고 있음</span>':v.a==="out"?'<span class="n">재고 없음</span>':'<span class="u">확인 안 됨</span>';
+    const p=(v.p!==it.price||v.acc)?` · ${jpYen(v.p)}`:"";
+    return `<li><span>${jpEsc(v.n)}${p}</span>${st}</li>`;
+  }).join("");
+  return `<details class="jpvar"><summary>색상·구성별 재고 보기 (${vs.length}가지)</summary><ul class="jpvl">${rows}</ul></details>`;
+}
+function jpItemHtml(it,rate,mode){
+  const rng=it.price_max>it.price;
+  const yen=rng?`${jpYen(it.price)} ~ ${jpYen(it.price_max)}`:jpYen(it.price);
+  const w1=jpWon(it.price*rate)+(rng?" ~ "+jpWon(it.price_max*rate):"");
+  const nets=[jpNet(it.price,mode)*rate, jpNet(it.price_max,mode)*rate];
+  const w2=jpWon(nets[0])+(rng?" ~ "+jpWon(nets[1]):"");
+  const sk=jpStock(it);
+  let kr="";
+  if(it.kr && !rng){
+    const diff=it.kr.price-nets[0];
+    kr=`<p class="jpkr">${jpEsc(it.kr.label)} <b>${jpWon(it.kr.price)}</b> → ${diff>0?`일본에서 사면 약 <b>${jpMan(diff)}</b> 낮아요`:"일본 가격과 비슷하거나 더 낮아요"} <span class="hint">구성·색상이 다를 수 있어요</span></p>`;
+  } else if(it.kr && rng){
+    kr=`<p class="jpkr">${jpEsc(it.kr.label)} <b>${jpWon(it.kr.price)}</b> <span class="hint">일본 가격대와 견줘 보세요</span></p>`;
+  } else if(it.kr_text){
+    kr=`<p class="jpkr">${jpEsc(it.kr_text)}</p>`;
+  }
+  const stamp=it.stale?jpStamp(it.checked).slice(0,10)+" 기준":jpStamp(it.checked);
+  const warn=it.stale?`<p class="jpwarn">${jpEsc(it.fallback_note||"자동 확인이 안 돼 마지막으로 확인한 값이에요")} (${jpEsc(jpStamp(it.checked).slice(0,10))})</p>`:"";
+  const src=(it.sources||[]).map(s=>`<a href="${jpEsc(s.url)}" target="_blank" rel="noopener nofollow">${jpEsc(s.label)}</a>`).join(" · ");
+  const modeLbl=mode==="dept"?"백화점 5%+환급":mode==="aka"?"환급만":"면세 없이";
+  return `<div class="jpitem" data-g="${jpEsc(it.group)}">
+  <div class="jphd"><span class="jpbrand">${jpEsc(it.brand)}</span><b>${jpEsc(it.name)}</b><span class="jpstock ${sk.cls}">${sk.text}</span></div>
+  <p class="jpdesc">${jpEsc(it.desc)}</p>
+  <div class="jpnums">
+    <div><small>일본 가격 (세금 포함)</small><b>${yen}</b></div>
+    <div><small>오늘 환율로 원화</small><b>${w1}</b></div>
+    <div class="hi"><small>실부담 추정 (${modeLbl})</small><b>${w2}</b></div>
+  </div>
+  ${kr}${warn}${jpVarHtml(it,mode,rate)}
+  <p class="jpsrc">출처: ${src} · 확인 ${jpEsc(stamp)}</p>
+</div>`;
+}
+function jpStoreHtml(st,open){
+  const li=a=>(a||[]).map(x=>`<li>${jpEsc(x)}</li>`).join("");
+  return `<details class="jpstore"${open?" open":""}><summary>${jpEsc(st.name)} <small>${jpEsc(st.brands)}</small></summary>
+  <div class="jpsb">
+    <dl class="jpmeta"><dt>위치</dt><dd>${jpEsc(st.floor)}</dd><dt>주소</dt><dd>${jpEsc(st.addr)}</dd><dt>영업</dt><dd>${jpEsc(st.hours)}</dd><dt>전화</dt><dd>${jpEsc(st.tel)}</dd></dl>
+    <a class="jpmap" href="${jpEsc(st.map)}" target="_blank" rel="noopener nofollow">구글 지도에서 열기</a>
+    <h4>찾아가는 법</h4><ul>${li(st.route)}</ul>
+    <h4>예약·구매 방법</h4><ul>${li(st.reserve)}</ul>
+    ${st.tip?`<h4>참고</h4><ul><li>${jpEsc(st.tip)}</li></ul>`:""}
+  </div></details>`;
+}
+function jpParseRate(s){const v=parseFloat(String(s||"").replace(/,/g,"."));return v>0&&v<30?v:null;}
+/* === JP-CORE END === */
+
+(function(){
+  let DATA=null, LIVE=null, group="전체", region="후쿠오카", loading=false;
+  const $=id=>document.getElementById(id);
+  function rate(){
+    const my=jpParseRate($("jpMyRate").value);
+    if(my) return {v:my,my:true};
+    if(LIVE) return {v:LIVE.v,at:LIVE.at,src:"open.er-api.com(중간환율)",live:true};
+    if(DATA&&DATA.rate) return {v:DATA.rate.jpy_krw,at:DATA.rate.at,src:DATA.rate.src,live:false};
+    return null;
+  }
+  function renderRate(){
+    const r=rate(), el=$("jpRate");
+    if(!r){ el.textContent="환율을 불러오지 못했어요. 아래 '내 환율'에 직접 넣어 주세요."; return; }
+    const note=r.my?"내가 넣은 환율로 계산 중이에요":(r.live?`오늘 환율(${jpEsc(r.src)})${r.at?" · 갱신 "+jpEsc(jpStamp(r.at)):""}`:`저장된 환율(${jpEsc(jpStamp(r.at))}) — 실시간 조회가 안 됐어요`);
+    el.innerHTML=`1엔 = <b>${r.v.toFixed(4)}원</b> <small>${note}. 중간환율이라 실제 환전·카드 환율과 달라요.</small>`;
+  }
+  function renderList(){
+    if(!DATA) return;
+    const r=rate(), mode=$("jpMode").value;
+    const groups=["전체"].concat([...new Set(DATA.items.map(i=>i.group))]);
+    $("jpGroups").innerHTML=groups.map(g=>`<button type="button" class="jpchip${g===group?" on":""}" data-g="${jpEsc(g)}">${jpEsc(g)}</button>`).join("");
+    const its=DATA.items.filter(i=>group==="전체"||i.group===group);
+    $("jpList").innerHTML=r?its.map(i=>jpItemHtml(i,r.v,mode)).join(""):'<div class="card"><p class="sub" style="margin:0">환율을 넣으면 가격이 보여요.</p></div>';
+    $("jpStamp").textContent=`가격·재고 확인: ${jpStamp(DATA.generated_at)} (매일 오전 10시 전후 갱신, ${DATA.ok_items}/${DATA.total_items}개 자동 확인). 공식 쇼핑몰 표시가이고 매장 가격·재고와 다를 수 있어요.`;
+  }
+  function renderGuide(){
+    if(!DATA) return;
+    const regs=[...new Set(DATA.stores.map(s=>s.region))];
+    if(regs.indexOf(region)<0) region=regs[0];
+    $("jpRegions").innerHTML=regs.map(g=>`<button type="button" class="jpchip${g===region?" on":""}" data-r="${jpEsc(g)}">${jpEsc(g)}</button>`).join("");
+    $("jpStores").innerHTML=DATA.stores.filter(s=>s.region===region).map((s,i)=>jpStoreHtml(s,i===0)).join("");
+    $("jpNotes").innerHTML=(DATA.notes||[]).map(n=>`<li>${jpEsc(n)}</li>`).join("");
+  }
+  function liveRate(){
+    try{
+      const c=sessionStorage.getItem("jpRate");
+      if(c){ const o=JSON.parse(c); if(Date.now()-o.t<600000){ LIVE=o; renderRate(); renderList(); return; } }
+    }catch(e){}
+    fetch(JP_RATE_API,{cache:"no-store"}).then(r=>r.json()).then(d=>{
+      const v=d&&d.rates&&d.rates.KRW; if(!(v>0)) throw 0;
+      LIVE={v:v,at:d.time_last_update_utc?new Date(d.time_last_update_utc).toISOString().replace("Z","+00:00"):"",t:Date.now()};
+      try{sessionStorage.setItem("jpRate",JSON.stringify(LIVE));}catch(e){}
+    }).catch(()=>{}).then(()=>{renderRate();renderList();});
+  }
+  function load(){
+    if(DATA||loading) return; loading=true;
+    fetch("jp_prices.json?t="+Math.floor(Date.now()/600000)).then(r=>r.json()).then(d=>{
+      DATA=d; renderRate(); renderList(); renderGuide();
+    }).catch(()=>{
+      $("jpList").innerHTML='<div class="card"><p class="sub" style="margin:0">가격 자료를 불러오지 못했어요. 잠시 뒤 다시 열어 주세요.</p></div>';
+    }).then(()=>{loading=false;});
+  }
+  window.jpOnOpen=function(){ load(); liveRate(); };
+  $("jpMode").addEventListener("change",renderList);
+  $("jpMyRate").addEventListener("input",()=>{renderRate();renderList();});
+  $("jpGroups").addEventListener("click",e=>{const b=e.target.closest("[data-g]"); if(b){group=b.dataset.g;renderList();}});
+  $("jpRegions").addEventListener("click",e=>{const b=e.target.closest("[data-r]"); if(b){region=b.dataset.r;renderGuide();}});
+  if(INIT_TAB==="jp"){ const b=document.querySelector('.tb[data-tab="tab-jp"]'); if(b){ b.click(); window.scrollTo(0,0); } }
+})();
+/*JP:JS:END*/
 // 블로그 글에서 ?tab=pick 으로 들어오면 택일 탭을 바로 연다
 (function(){
   if(INIT_TAB!=="pick") return;
@@ -3619,7 +3866,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="6ebaf604";
+var APP_BUILD="78857494";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
