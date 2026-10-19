@@ -7,6 +7,9 @@ BG = "https://www.bugaboo.com/jp-ja/"
 AK = "https://shop.akachan.jp/shop/"
 
 COLOR_KO = {
+    "ホワイトウォッシュ": "화이트워시", "バニラホワイト": "바닐라 화이트", "ウォームブラウン": "웜 브라운", "ナチュラル": "내추럴", "セレーヌピンク": "세렌 핑크",
+    "テラコッタ": "테라코타", "レモンイエロー": "레몬 옐로", "グレイシアグリーン": "글레이셔 그린", "ヘザーモーヴ": "헤더 모브", "オークナチュラル": "오크 내추럴",
+    "カシミアグレー": "캐시미어 그레이", "ブラック": "블랙", "【お取り寄せ】": "(주문 입고) ",
     "マジックブラック": "매직 블랙", "デューン": "듄", "アーモンドベージュ": "아몬드 베이지", "シナモンイエロー": "시나몬 옐로", "モスグリーン": "모스 그린",
     "ストーミーブルー": "스토미 블루", "ソルテブラック": "솔테 블랙", "ソルテベージュ": "솔테 베이지",
     "サンドホワイト2": "샌드 화이트", "パールピンク": "펄 핑크", "ストーンブルー": "스톤 블루", "スタニングブラック": "스태닝 블랙", "スウェードグレー": "스웨이드 그레이",
@@ -14,52 +17,88 @@ COLOR_KO = {
     "forest green": "포레스트 그린", "grey melange": "그레이 멜란지", "grey mélange": "그레이 멜란지", "heritage black": "헤리티지 블랙", "desert taupe": "데저트 토프", "deep indigo": "딥 인디고", "dusty pink": "더스티 핑크",
 }
 
-# 품목: id, 브랜드, 이름, 묶음, 설명, 한국 참고가(정적, 날짜 표기), 수집처 목록, 수집 실패 때 쓸 마지막 확인값(정적)
+def _ld(label, url):
+    return dict(kind="ld", label=label, url=url)
+
+
+def _ak_list(label, url, name_re, strip=r"$^"):
+    return dict(kind="akachan_list", label=label, url=url, name_re=name_re, strip=strip)
+
+
+AK_SEARCH = AK + "goods/search.aspx?q=%s&search=x"
+Q_TRIPP = AK_SEARCH % "%E3%83%88%E3%83%AA%E3%83%83%E3%83%97%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+Q_CLOUD = AK_SEARCH % "%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89"
+Q_SIRONA = AK_SEARCH % "%E3%82%B7%E3%83%AD%E3%83%BC%E3%83%8A"
+SEAT_STRIP = r"^\[ISOFIX取付[^\]]*\]|\s*チャイルドシート\s*CYBEX\(サイベックス\)\s*$"
+KR_ST = "https://www.stokke.com/KOR/ko-kr/"
+KR_BG = "https://www.bugaboo.com/kr-ko/%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC/"
+TRIPP_STRIP = r"^【お取り寄せ】|ストッケ\s*|トリップトラップ(?:専用)?\s*|\(本体別売り\)\s*|\(ベビーセット用テーブル\)\s*|\s*ハイチェア\s*$"
+
+# 한국 정발가(kr): auto=공식몰 상품 페이지(ld+json)에서 매일 읽음 / static=공식몰이 가격을 안 보여 줘서 정식 판매처·후기 값(수동, 날짜 표기)
 ITEMS = [
     dict(id="stokke-chair", brand="스토케", name="트립트랩 체어(본체)", group="하이체어", desc="성장형 나무 하이체어. 베이비세트·뉴본세트·트레이는 따로 팔아요.",
-         kr=dict(price=408500, label="한국 단품 참고가(다나와 2026-10-12, 국내 공식 43만)", date="2026-10-12"),
-         sources=[dict(kind="ld", label="스토케 일본 공식몰", url=ST + "%E3%83%8F%E3%82%A4%E3%83%81%E3%82%A7%E3%82%A2/%E3%83%88%E3%83%AA%E3%83%83%E3%83%97-%E3%83%88%E3%83%A9%E3%83%83%E3%83%97/1001.html")],
+         kr=dict(kind="ld", label="한국 정발가 (스토케 한국 공식몰)", url=KR_ST + "%ED%95%98%EC%9D%B4%EC%B2%B4%EC%96%B4/%ED%8A%B8%EB%A6%BD-%ED%8A%B8%EB%9E%A9/1001.html", fallback=430000, date="2026-10-19"),
+         sources=[_ld("스토케 일본 공식몰", ST + "%E3%83%8F%E3%82%A4%E3%83%81%E3%82%A7%E3%82%A2/%E3%83%88%E3%83%AA%E3%83%83%E3%83%97-%E3%83%88%E3%83%A9%E3%83%83%E3%83%97/1001.html")],
+         stock=[_ak_list("아카짱혼포 온라인", Q_TRIPP, r"トリップトラップチェア", TRIPP_STRIP)],
          fallback=dict(price=37730, date="2026-10-19")),
     dict(id="stokke-babyset", brand="스토케", name="트립트랩 베이비세트²", group="하이체어", desc="6개월부터 쓰는 안전바·발받침 세트.",
-         kr=None, sources=[dict(kind="ld", label="스토케 일본 공식몰", url=ST + "%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/tripp-trapp-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/6500.html")],
+         kr=dict(kind="ld", label="한국 정발가 (스토케 한국 공식몰)", url=KR_ST + "%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/tripp-trapp-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/6500.html", fallback=90000, date="2026-10-19"),
+         sources=[_ld("스토케 일본 공식몰", ST + "%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/tripp-trapp-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/6500.html")],
+         stock=[_ak_list("아카짱혼포 온라인", Q_TRIPP, r"ベビーセット2", TRIPP_STRIP)],
          fallback=dict(price=10560, date="2026-10-19")),
     dict(id="stokke-newborn", brand="스토케", name="트립트랩 뉴본세트", group="하이체어", desc="신생아부터 쓰는 바운서형 세트(체어에 끼워 써요).",
-         kr=dict(price=213900, label="한국 참고가(다나와 2026-10-19)", date="2026-10-19"),
-         sources=[dict(kind="ld", label="스토케 일본 공식몰", url=ST + "%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/tripp-trapp-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/5261.html")],
+         kr=dict(kind="ld", label="한국 정발가 (스토케 한국 공식몰)", url=KR_ST + "%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/tripp-trapp-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/5261.html", fallback=230000, date="2026-10-19"),
+         sources=[_ld("스토케 일본 공식몰", ST + "%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/tripp-trapp-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/5261.html")],
+         stock=[_ak_list("아카짱혼포 온라인", Q_TRIPP, r"ニューボーンセット", TRIPP_STRIP)],
          fallback=dict(price=21340, date="2026-10-19")),
     dict(id="stokke-tray", brand="스토케", name="트립트랩 트레이", group="하이체어", desc="베이비세트에 끼우는 식사 트레이.",
-         kr=None, sources=[dict(kind="ld", label="스토케 일본 공식몰", url=ST + "%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/tripp-trapp-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/4285.html")],
+         kr=dict(kind="ld", label="한국 정발가 (스토케 한국 공식몰)", url=KR_ST + "%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/tripp-trapp-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/4285.html", fallback=90000, date="2026-10-19"),
+         sources=[_ld("스토케 일본 공식몰", ST + "%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/tripp-trapp-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC/4285.html")],
+         stock=[_ak_list("아카짱혼포 온라인", Q_TRIPP, r"専用\s*トレイ", TRIPP_STRIP)],
          fallback=dict(price=9240, date="2026-10-19")),
     dict(id="stokke-xplory", brand="스토케", name="엑스플로리 X 유모차", group="유모차", desc="디럭스형 유모차. 신생아용 캐리코트는 별매.",
-         kr=None, sources=[dict(kind="ld", label="스토케 일본 공식몰", url=ST + "%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC/%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%AA%E3%83%BC/5714.html")],
+         kr=None, kr_text="한국 정발가는 이번에 공식몰에서 못 찾았어요",
+         sources=[_ld("스토케 일본 공식몰", ST + "%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC/%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%AA%E3%83%BC/5714.html")],
          fallback=dict(price=169180, date="2026-10-19", note="공식 페이지 가격 표시가 흔들려 마지막 확인값(가격.com 표시가)을 보여요")),
-    dict(id="bugaboo-butterfly2", brand="부가부", name="버터플라이2 휴대용 유모차", group="유모차", desc="기내 반입 가능한 접이식. 범퍼바·레인커버는 따로예요. 일본 정규품은 한국 공식 AS가 안 돼요.",
-         kr=None, kr_text="한국 가격은 판매처마다 달라요(후기 실거래 약 95만원·범퍼바 포함, 부가부 페어 77만원대 사례)",
-         sources=[dict(kind="ld", label="부가부 일본 공식몰", url=BG + "%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC/bugaboo-butterfly-2/%E3%83%90%E3%82%AC%E3%83%96%E3%83%BC-%E3%83%90%E3%82%BF%E3%83%95%E3%83%A9%E3%82%A42-%E8%B6%85%E3%82%B3%E3%83%B3%E3%83%91%E3%82%AF%E3%83%88%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-PM007651.html")],
+    dict(id="bugaboo-butterfly2", brand="부가부", name="버터플라이2 휴대용 유모차 (범퍼바 포함)", group="유모차",
+         desc="기내 반입 가능한 접이식. 한국 공식몰 구성이 범퍼바 포함이라 일본은 범퍼바(후기 기준 약 5,500엔)를 더해 계산했어요. 일본 정규품은 한국 공식 AS가 안 돼요.",
+         jp_add=dict(price=5500, label="범퍼바 약 5,500엔(후기 기준)"),
+         kr=dict(kind="ld", label="한국 정발가 (부가부 한국 공식몰)", url=KR_BG + "bugaboo-butterfly-2/%EB%B6%80%EA%B0%80%EB%B6%80-%EB%B2%84%ED%84%B0%ED%94%8C%EB%9D%BC%EC%9D%B4-2-%ED%9C%B4%EB%8C%80%EC%9A%A9-%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC-%EB%B2%94%ED%8D%BC%EB%B0%94-%ED%8F%AC%ED%95%A8-PM007649.html", fallback=950000, date="2026-10-19"),
+         sources=[_ld("부가부 일본 공식몰", BG + "%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC/bugaboo-butterfly-2/%E3%83%90%E3%82%AC%E3%83%96%E3%83%BC-%E3%83%90%E3%82%BF%E3%83%95%E3%83%A9%E3%82%A42-%E8%B6%85%E3%82%B3%E3%83%B3%E3%83%91%E3%82%AF%E3%83%88%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-PM007651.html")],
          fallback=dict(price=83600, date="2026-10-19")),
     dict(id="bugaboo-dragonfly", brand="부가부", name="드래곤플라이 플러스 시트 스트롤러", group="유모차", desc="도시형 소형 디럭스 유모차(시트 스트롤러 구성).",
-         kr=None, sources=[dict(kind="ld", label="부가부 일본 공식몰", url=BG + "%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC/bugaboo-dragonfly-plus-seat/%E3%83%90%E3%82%AC%E3%83%96%E3%83%BC-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%95%E3%83%A9%E3%82%A4-%E3%83%97%E3%83%A9%E3%82%B9-%E3%82%B7%E3%83%BC%E3%83%88%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-PM007943.html")],
+         kr=dict(kind="ld", label="한국 정발가 (부가부 한국 공식몰)", url=KR_BG + "bugaboo-dragonfly-plus-seat/%EB%B6%80%EA%B0%80%EB%B6%80-%EB%93%9C%EB%9E%98%EA%B3%A4%ED%94%8C%EB%9D%BC%EC%9D%B4-%ED%94%8C%EB%9F%AC%EC%8A%A4-%EC%A0%88%EC%B6%A9%ED%98%95-%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC-PM007941.html", fallback=1650000, date="2026-10-19"),
+         sources=[_ld("부가부 일본 공식몰", BG + "%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC/bugaboo-dragonfly-plus-seat/%E3%83%90%E3%82%AC%E3%83%96%E3%83%BC-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%95%E3%83%A9%E3%82%A4-%E3%83%97%E3%83%A9%E3%82%B9-%E3%82%B7%E3%83%BC%E3%83%88%E3%82%B9%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-PM007943.html")],
          fallback=dict(price=138600, date="2026-10-19")),
     dict(id="cybex-libelle", brand="싸이벡스", name="리베르 2026 휴대용 유모차", group="유모차", desc="6kg대 접이식. 기내 반입 가능. 일본 한정 색상이 있어요.",
-         kr=dict(price=460000, label="한국 참고가(후기 2026-09, 직구 등록가는 38만원대)", date="2026-09-21"),
-         sources=[dict(kind="akachan_list", label="아카짱혼포 온라인", url=AK + "r/rclbls26/", name_re=r"リベル", strip=r"^リベル\s*|\s*ベビーカー\s*CYBEX\(サイベックス\)\s*$")],
+         kr=dict(kind="static", price=460000, label="한국 정식 판매가 (후기 2026-09, 싸이벡스 한국 공식몰은 가격 비공개)", date="2026-09-21"),
+         sources=[_ak_list("아카짱혼포 온라인", AK + "r/rclbls26/", r"リベル", r"^リベル\s*|\s*ベビーカー\s*CYBEX\(サイベックス\)\s*$")],
          fallback=dict(price=29975, date="2026-10-19")),
     dict(id="cybex-cloud-t", brand="싸이벡스", name="클라우드 T i-Size 바구니형 카시트", group="카시트", desc="신생아용 바구니형. 회전식 베이스 T가 따로 필요해요.",
-         kr=None, sources=[dict(kind="akachan_list", label="아카짱혼포 온라인", url=AK + "goods/search.aspx?q=%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89&search=x", name_re=r"\]クラウドT", strip=r"^\[ISOFIX取付[^\]]*\]|\s*チャイルドシート\s*CYBEX\(サイベックス\)\s*$")],
+         kr=None, kr_text="싸이벡스 한국 공식몰은 가격을 보여 주지 않아요",
+         sources=[_ak_list("아카짱혼포 온라인", Q_CLOUD, r"\]クラウドT", SEAT_STRIP)],
          fallback=dict(price=44000, date="2026-10-19")),
     dict(id="cybex-base-t", brand="싸이벡스", name="베이스 T (회전식 ISOFIX 베이스)", group="카시트", desc="클라우드 T·시로나 T 전용 베이스. 한국에선 단독으로 사기 어려워요.",
-         kr=dict(price=422400, label="한국 참고가(다나와 해외 등록가, 직구 후기 45만원 이상)", date="2026-10-12"),
-         sources=[dict(kind="ld", label="아카짱혼포 온라인", url=AK + "g/g230528300/")],
+         kr=None, kr_text="한국은 베이스 단독 정식 판매가 없고 직구 후기 45만원 이상이에요",
+         sources=[dict(kind="akachan_page", label="아카짱혼포 온라인", url=AK + "g/g230528300/")],
          fallback=dict(price=31900, date="2026-10-19")),
     dict(id="cybex-g3", brand="싸이벡스", name="클라우드 G3 · 시로나 G3 카시트", group="카시트", desc="신형 G3 시리즈(분리형). 베이스 G3는 따로예요.",
-         kr=None, sources=[dict(kind="akachan_list", label="아카짱혼포 온라인(시로나·베이스 G3)", url=AK + "goods/search.aspx?q=%E3%82%B7%E3%83%AD%E3%83%BC%E3%83%8A&search=x", name_re=r"(シローナG3|ベースG3)", strip=r"^\[ISOFIX取付[^\]]*\]|\s*チャイルドシート\s*CYBEX\(サイベックス\)\s*$"),
-                           dict(kind="akachan_list", label="아카짱혼포 온라인(클라우드 G3)", url=AK + "goods/search.aspx?q=%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89&search=x", name_re=r"クラウドG3", strip=r"^\[ISOFIX取付[^\]]*\]|\s*チャイルドシート\s*CYBEX\(サイベックス\)\s*$")],
+         kr=None, kr_text="싸이벡스 한국 공식몰은 가격을 보여 주지 않아요",
+         sources=[_ak_list("아카짱혼포 온라인(시로나·베이스 G3)", Q_SIRONA, r"(シローナG3|ベースG3)", SEAT_STRIP),
+                  _ak_list("아카짱혼포 온라인(클라우드 G3)", Q_CLOUD, r"クラウドG3", SEAT_STRIP)],
          fallback=dict(price=50600, date="2026-10-19")),
-    dict(id="cybex-lemo", brand="싸이벡스", name="레모 3-in-1 하이체어", group="하이체어", desc="바운서→하이체어로 쓰는 3-in-1. 한국 정식가와 차이가 커서 후기가 많아요.",
-         kr=dict(price=710000, label="한국 참고가(다나와 2026-10-19, 직구 47~52만원)", date="2026-10-19"),
-         sources=[dict(kind="akachan_list", label="아카짱혼포 온라인", url=AK + "r/rcybxlemo/", name_re=r"レモ3-IN-1", strip=r"^レモ3-IN-1\s*|\s*CYBEX\(サイベックス\)\s*$")],
+    dict(id="cybex-lemo", brand="싸이벡스", name="레모 3-in-1 하이체어", group="하이체어", desc="바운서→하이체어로 쓰는 3-in-1.",
+         kr=dict(kind="static", price=710000, label="한국 정식 판매가 (다나와 정식 유통 2026-10-19, 싸이벡스 한국 공식몰은 가격 비공개)", date="2026-10-19"),
+         sources=[_ak_list("아카짱혼포 온라인", AK + "r/rcybxlemo/", r"レモ3-IN-1", r"^レモ3-IN-1\s*|\s*CYBEX\(サイベックス\)\s*$")],
          fallback=dict(price=41250, date="2026-10-19")),
 ]
+
+# 아카짱혼포 매장별 재고(참고 재고)로 보여 줄 점포: 점포번호 → (한국어 이름, 지역)
+STORE_STOCK = {
+    282: ("라라포트 후쿠오카점", "후쿠오카"), 132: ("후쿠오카 마리나타운점", "후쿠오카"), 247: ("리버워크 키타큐슈점", "후쿠오카"),
+    317: ("아베노점(이토요카도 아베노)", "오사카"), 275: ("라라포트 도요스점", "도쿄"),
+    605: ("한비타운점(오키나와)", "오키나와"), 602: ("우라소에 니시카이간 파르코시티점(오키나와)", "오키나와"),
+}
 
 # 구매처·예약·찾아가는 법 (후기·공식 안내·구글 지도 2026-10-19). 매장 정책은 바뀔 수 있어요.
 STORES = [
@@ -117,9 +156,9 @@ STORES = [
 ]
 
 NOTES = [
-    "가격은 일본 쇼핑몰 공식 상품 페이지 표시가(세금 포함)예요. 백화점·매장 가격은 이와 다를 수 있고, 세일·재고에 따라 매일 바뀌어요.",
-    "재고는 '온라인몰 표시'예요. 후기에는 온라인엔 있는데 매장엔 없는 경우가 많았어요. 방문 전에 매장에 꼭 확인하세요.",
-    "실부담은 세전가×(1−게스트카드 5%)×(1+환급 수수료)로 계산한 추정값이에요. 환급 수수료는 후기 기준(백화점 약 1.55%, 아카짱혼포 약 1.1%)이에요.",
+    "한국 정발가는 스토케·부가부 한국 공식몰 가격이에요(매일 확인). 싸이벡스 한국 공식몰은 가격을 보여 주지 않아서 정식 판매처·후기 값(날짜 표기)을 썼어요. 구성·색상이 같은지는 직접 확인하세요.",
+    "일본 구매가는 일본 쇼핑몰 공식 표시가(세금 포함)를 오늘 환율로 바꾼 뒤, 선택한 방식(백화점 5%+환급 / 환급만)으로 계산한 추정값이에요. 환급 수수료는 후기 기준(백화점 약 1.55%, 아카짱혼포 약 1.1%)이에요.",
+    "매장 재고는 아카짱혼포 공식몰이 보여 주는 매장별 '참고 재고'예요. 실제와 다를 수 있고 매장 예약 보관(取り置き)은 안 받아요. 한큐·블라썸39는 매장 재고를 공개하지 않아 문의로만 알 수 있어요.",
     "일본에서 산 유모차·카시트는 한국 공식 AS·보증이 안 될 수 있어요. 한국 입국 면세 한도(보통 US$800)도 확인하세요.",
     "일본 면세 제도는 2026-11-01 이후 출국부터 공항 환급 방식으로 바뀌어요. 그 뒤 구매는 5% 게스트카드·환급 처리를 다시 확인하세요.",
 ]

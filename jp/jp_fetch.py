@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""일본 인기 육아용품 가격·재고 수집 (표준 라이브러리만 사용). 매일 1회 실행 → ../jp_prices.json
+"""일본 인기 육아용품 가격·한국 정발가·아카짱혼포 매장별 재고 수집 (표준 라이브러리만 사용). 매일 1회 실행 → ../jp_prices.json
 
-    python jp_fetch.py            # ../jp_prices.json 갱신(이전 값은 수집 실패 때 '마지막 확인값'으로 유지)
+    python jp_fetch.py            # ../jp_prices.json 갱신(수집 실패한 값은 '마지막 확인값'으로 유지)
     python jp_fetch.py --out x.json --only stokke-chair,cybex-lemo
 
-예의: 같은 사이트에 요청 사이 1.5초 이상, 하루 1회, 각 상품 페이지(robots.txt 허용 범위)만 읽는다.
-수집처 = 스토케·부가부 일본 공식몰, 아카짱혼포 온라인. (가격 비교 사이트는 약관 때문에 자동 수집하지 않는다.)"""
+예의: 같은 사이트에 요청 사이 1.6초 이상, 하루 1회, 각 상품 페이지(robots.txt 허용 범위)만 읽는다.
+수집처 = 스토케·부가부 일본/한국 공식몰, 아카짱혼포 온라인(가격 + 매장별 참고 재고). AI·유료 API는 쓰지 않는다."""
 import argparse, datetime, html, io, json, os, re, sys, time, urllib.parse, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -13,10 +13,13 @@ sys.path.insert(0, HERE)
 import jp_data as D  # noqa: E402
 
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36",
-      "Accept-Language": "ja,en;q=0.8"}
+      "Accept-Language": "ja,ko;q=0.8,en;q=0.7"}
 KST = datetime.timezone(datetime.timedelta(hours=9))
 DELAY = 1.6
+MAX_PAGES = 14
 _last = [0.0]
+MARK = {"〇": "in", "○": "in", "△": "low", "✕": "out", "×": "out", "－": "none", "-": "none", "―": "none"}
+RANK = {"none": 0, "out": 1, "low": 2, "in": 3}
 
 
 def get(url, tries=2):
@@ -64,8 +67,9 @@ def ld_blocks(h):
             d = json.loads(m.group(1).strip())
         except Exception:  # noqa: BLE001
             continue
-        out.extend(d if isinstance(d, list) else [d])
-        for x in (d if isinstance(d, list) else [d]):
+        items = d if isinstance(d, list) else [d]
+        out.extend(items)
+        for x in items:
             if isinstance(x, dict) and isinstance(x.get("@graph"), list):
                 out.extend(x["@graph"])
     return out
@@ -84,9 +88,19 @@ def ko_color(s):
     s = re.sub(r"\s*\(対応モデル[^)]*\)", "", s)
     s = re.sub(r"\s*CYBEX\(サイベックス\)\s*$", "", s)
     for a, b in (("年モデル", "년형"), ("プラス", " 플러스"), ("チャイルドシート", ""), ("[ISOFIX取付×回転式]", ""), ("[ISOFIX取付x回転式]", ""),
-                 ("(セパレートモデル)", " 분리형 "), ("シローナ", "시로나 "), ("クラウド", "클라우드 "), ("ベース", "베이스 "), ("ブラック", "블랙"), ("ベージュ", "베이지")):
+                 ("(セパレートモデル)", " 분리형 "), ("シローナ", "시로나 "), ("クラウド", "클라우드 "), ("ベース", "베이스 ")):
         s = s.replace(a, b)
     return re.sub(r"\s+", " ", s).strip(" -")
+
+
+def parse_stores(h):
+    """아카짱혼포 상품 페이지에 들어 있는 점포별 참고 재고 → {점포번호: in/low/out/none}"""
+    out = {}
+    for sid, txt in re.findall(r'shop_name_"[^>]*href="https://stores\.akachan\.jp/(\d+)"[^>]*>[^<]+</a>\s*<div class="shop_stock_">([^<]*)</div>', h):
+        t = html.unescape(txt).strip()
+        if t:
+            out[sid] = MARK.get(t[0], "none")
+    return out
 
 
 def src_ld(s):
@@ -125,42 +139,61 @@ def parse_list(h):
     return out
 
 
+def akachan_page(href, name, price, strip):
+    h = get("https://shop.akachan.jp" + href)
+    a, pr = "unknown", price
+    for x in ld_blocks(h):
+        if str(x.get("@type", "")).lower() == "product":
+            o = offer_of(x.get("offers"))
+            a = avail_of(o.get("availability"))
+            pr = price_of(o.get("price")) or price
+            break
+    nm = re.sub(strip, "", name) if strip else name
+    return dict(n=ko_color(nm), p=pr, a=a, u="https://shop.akachan.jp" + href, stores=parse_stores(h))
+
+
 def src_akachan_list(s):
     rows = [r for r in parse_list(get(s["url"])) if re.search(s["name_re"], r[1])]
     vs = []
-    for href, name, price in rows[:14]:
+    for href, name, price in rows[:MAX_PAGES]:
         try:
-            h = get("https://shop.akachan.jp" + href)
-            a, pr = "unknown", price
-            for x in ld_blocks(h):
-                if str(x.get("@type", "")).lower() == "product":
-                    o = offer_of(x.get("offers"))
-                    a = avail_of(o.get("availability"))
-                    pr = price_of(o.get("price")) or price
-                    break
+            v = akachan_page(href, name, price, s.get("strip"))
         except Exception:  # noqa: BLE001
-            a, pr = "unknown", price
-        if pr:
-            nm = re.sub(s.get("strip", "$^"), "", name) if s.get("strip") else name
-            vs.append(dict(n=ko_color(nm), p=pr, a=a, u="https://shop.akachan.jp" + href))
+            continue
+        if v["p"]:
+            vs.append(v)
     if not vs:
         raise RuntimeError("목록에서 상품을 못 찾음")
     return vs
 
 
-RUN = {"ld": src_ld, "akachan_list": src_akachan_list}
+def src_akachan_page(s):
+    href = s["url"].replace("https://shop.akachan.jp", "")
+    v = akachan_page(href, "", None, None)
+    if not v["p"]:
+        raise RuntimeError("가격을 못 읽음")
+    v["n"] = ""
+    return [v]
+
+
+RUN = {"ld": src_ld, "akachan_list": src_akachan_list, "akachan_page": src_akachan_page}
 
 
 def dedupe(vs):
-    """같은 이름은 하나로(재고는 하나라도 있으면 있음). 액세서리(베이스)는 acc 표시."""
+    """같은 이름·가격은 하나로(점포별 재고는 가장 좋은 값). 베이스는 acc 표시."""
     order, seen = [], {}
     for v in vs:
         k = (v["n"], v["p"])
         if k not in seen:
             seen[k] = dict(v)
             order.append(k)
-        elif v["a"] == "in" or (seen[k]["a"] == "unknown" and v["a"] != "unknown"):
-            seen[k]["a"] = v["a"]
+        else:
+            if v["a"] == "in" or (seen[k]["a"] == "unknown" and v["a"] != "unknown"):
+                seen[k]["a"] = v["a"]
+            st = seen[k].setdefault("stores", {})
+            for sid, m in (v.get("stores") or {}).items():
+                if RANK.get(m, 0) > RANK.get(st.get(sid, "none"), 0):
+                    st[sid] = m
     out = [seen[k] for k in order]
     for v in out:
         if "베이스" in v["n"]:
@@ -172,18 +205,41 @@ def summarize(vs):
     main = [v for v in vs if not v.get("acc")]
     vs = main or vs
     prices = [v["p"] for v in vs]
-    av = [v["a"] for v in vs]
-    n_in = sum(1 for a in av if a == "in")
-    known = [a for a in av if a != "unknown"]
-    if not known:
-        st = "unknown"
-    elif n_in == len(av):
-        st = "in"
-    elif n_in == 0:
-        st = "out"
-    else:
-        st = "part"
-    return dict(price=min(prices), price_max=max(prices), avail=st, n_in=n_in, n_total=len(vs))
+    return dict(price=min(prices), price_max=max(prices))
+
+
+def build_store_stock(vs):
+    out = {}
+    for sid, (name, region) in D.STORE_STOCK.items():
+        by, best = [], None
+        for v in vs:
+            m = (v.get("stores") or {}).get(str(sid))
+            if m is None:
+                continue
+            by.append(dict(n=v["n"], m=m))
+            if best is None or RANK[m] > RANK[best]:
+                best = m
+        if by:
+            out[str(sid)] = dict(name=name, region=region, mark=best, by=by[:MAX_PAGES])
+    return out
+
+
+def fetch_kr(kr, prev):
+    """한국 정발가: kind=ld 면 공식몰 상품 페이지에서 매일 읽고, 실패하면 이전 값(또는 fallback). static 은 사람이 넣은 값."""
+    if not kr:
+        return None
+    now = datetime.datetime.now(KST).isoformat(timespec="minutes")
+    base = dict(label=kr["label"], url=kr.get("url"))
+    if kr["kind"] == "static":
+        return dict(base, price=kr["price"], checked=kr["date"] + "T00:00+09:00", auto=False)
+    try:
+        vs = src_ld(kr)
+        return dict(base, price=min(v["p"] for v in vs), checked=now, auto=True)
+    except Exception as e:  # noqa: BLE001
+        print("한국 정발가 실패", kr["label"], str(e)[:60])
+        if prev and prev.get("price"):
+            return dict(prev, auto=True, stale=True)
+        return dict(base, price=kr["fallback"], checked=kr["date"] + "T00:00+09:00", auto=True, stale=True)
 
 
 def fetch_rate():
@@ -215,18 +271,19 @@ def main():
     now = datetime.datetime.now(KST)
     items, ok_n = [], 0
     for it in D.ITEMS:
-        base = {k: it[k] for k in ("id", "brand", "name", "group", "desc")}
-        base["kr"] = it.get("kr")
-        base["kr_text"] = it.get("kr_text")
         if only and it["id"] not in only and it["id"] in pitems:
             items.append(pitems[it["id"]])
+            ok_n += 0 if pitems[it["id"]].get("stale") else 1
             continue
+        old = pitems.get(it["id"]) or {}
+        base = {k: it[k] for k in ("id", "brand", "name", "group", "desc")}
+        base["kr_text"] = it.get("kr_text")
+        base["jp_add"] = it.get("jp_add")
         vs, srcs = [], []
         for s in it["sources"]:
-            rec = dict(label=s["label"], url=s["url"].replace("shop.akachan.jp/shop/goods/search.aspx", "shop.akachan.jp/shop/goods/search.aspx"))
+            rec = dict(label=s["label"], url=s["url"])
             try:
-                got = RUN[s["kind"]](s)
-                vs.extend(got)
+                vs.extend(RUN[s["kind"]](s))
                 rec["ok"] = True
             except Exception as e:  # noqa: BLE001
                 rec["ok"] = False
@@ -234,33 +291,53 @@ def main():
                 print("실패", it["id"], s["label"], e)
             srcs.append(rec)
         vs = dedupe(vs)
+        sv = []
+        for s in it.get("stock", []):
+            try:
+                sv.extend(RUN[s["kind"]](s))
+            except Exception as e:  # noqa: BLE001
+                print("재고 실패", it["id"], s["label"], str(e)[:60])
+        sv = dedupe(sv) if sv else []
         if vs:
             base.update(summarize(vs))
             base["variants"] = vs
             base["checked"] = now.isoformat(timespec="minutes")
             base["stale"] = False
             ok_n += 1
+        elif old.get("price"):
+            base.update({k: old.get(k) for k in ("price", "price_max", "variants", "checked")})
+            base["stale"] = True
         else:
-            old = pitems.get(it["id"])
-            if old and old.get("price"):
-                base.update({k: old.get(k) for k in ("price", "price_max", "avail", "n_in", "n_total", "variants", "checked")})
-                base["stale"] = True
-            else:
-                fb = it["fallback"]
-                base.update(price=fb["price"], price_max=fb["price"], avail="unknown", n_in=0, n_total=0, variants=[], checked=fb["date"] + "T00:00+09:00")
-                base["stale"] = True
-                base["fallback_note"] = fb.get("note", "자동 수집이 안 돼 마지막으로 확인한 값이에요")
+            fb = it["fallback"]
+            base.update(price=fb["price"], price_max=fb["price"], variants=[], checked=fb["date"] + "T00:00+09:00", stale=True,
+                        fallback_note=fb.get("note", "자동 수집이 안 돼 마지막으로 확인한 값이에요"))
+        # 아카짱혼포 매장별 재고: 가격 수집처가 아카짱혼포면 같은 페이지에서, 아니면 stock 수집처에서
+        ss = build_store_stock(sv or [v for v in vs if v.get("stores")])
+        if ss:
+            base["store_stock"] = ss
+            base["store_checked"] = now.isoformat(timespec="minutes")
+        elif old.get("store_stock"):
+            base["store_stock"] = old["store_stock"]
+            base["store_checked"] = old.get("store_checked")
+            base["store_stale"] = True
+        base["kr"] = fetch_kr(it.get("kr"), old.get("kr"))
+        for v in base.get("variants", []):
+            v.pop("stores", None)
         base["sources"] = srcs
         items.append(base)
     if ok_n < a.min_ok:
         print("자동 확인 %d개 < 기준 %d개 — 파일을 쓰지 않아요(이전 값 유지)" % (ok_n, a.min_ok))
         sys.exit(1)
     rate = fetch_rate() or prev.get("rate")
-    data = dict(generated_at=now.isoformat(timespec="minutes"), rate=rate, items=items, stores=D.STORES, notes=D.NOTES, ok_items=sum(1 for x in items if not x.get("stale")), total_items=len(D.ITEMS))
+    data = dict(generated_at=now.isoformat(timespec="minutes"), rate=rate, items=items, stores=D.STORES, notes=D.NOTES,
+                ok_items=sum(1 for x in items if not x.get("stale")), total_items=len(D.ITEMS))
     io.open(out, "w", encoding="utf-8").write(json.dumps(data, ensure_ascii=False, indent=1))
-    print("저장:", out, "| 성공 %d/%d" % (ok_n, len(D.ITEMS)), "| 환율", rate and rate["jpy_krw"])
+    print("저장:", out, "| 성공 %d/%d" % (data["ok_items"], len(D.ITEMS)), "| 환율", rate and rate["jpy_krw"])
     for x in items:
-        print("%-20s %-8s %7s %s/%s %s" % (x["id"], x["avail"], x["price"], x.get("n_in"), x.get("n_total"), "(마지막 확인값)" if x["stale"] else ""))
+        kr = x.get("kr")
+        ss = x.get("store_stock") or {}
+        print("%-20s ¥%7s %s KR %s | 점포재고 %s" % (x["id"], x["price"], "(마지막 확인값)" if x["stale"] else "", kr and kr["price"],
+                                                 {k: v["mark"] for k, v in ss.items()}))
 
 
 if __name__ == "__main__":

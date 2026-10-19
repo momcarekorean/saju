@@ -633,6 +633,49 @@ dd b{font-weight:500; color:var(--ink)}
 .jpmap:hover,.jpmap:focus-visible{background:var(--seal);color:#fff}
 .jpnotes{margin:12px 0 0;padding-left:20px;font-size:14px;color:var(--ink-2);line-height:1.7}
 .jpnotes li{margin:4px 0}
+
+.jphd b{font-size:17px;font-weight:700;color:var(--ink)}
+.jpsave{margin:12px 0 0;border:1px solid var(--rule);border-radius:10px;background:var(--paper);overflow:hidden}
+.jprow{display:grid;grid-template-columns:96px 1fr;gap:2px 10px;align-items:baseline;padding:9px 12px;border-bottom:1px solid var(--rule)}
+.jprow span{font-size:13px;color:var(--ink-3)}
+.jprow b{font-size:18px;font-weight:700;color:var(--ink)}
+.jprow small{grid-column:2;font-size:12px;color:var(--ink-3);line-height:1.5}
+.jpdiff{padding:11px 12px;font-size:15px;background:#e4f2e9;color:#1f6b3a}
+.jpdiff b{font-size:20px;font-weight:700}
+.jpdiff small{margin-left:6px;font-size:12.5px;font-weight:400;opacity:.85}
+.jpdiff.loss{background:#f6e3e0;color:#9a2a22}
+:root[data-theme="dark"] .jpdiff{background:#1d3a28;color:#8fd6a8}
+:root[data-theme="dark"] .jpdiff.loss{background:#442220;color:#f0a39c}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .jpdiff{background:#1d3a28;color:#8fd6a8}
+  :root:not([data-theme="light"]) .jpdiff.loss{background:#442220;color:#f0a39c}
+}
+.jpkrno{margin:0;padding:9px 12px;font-size:13px;color:var(--ink-2)}
+.jpss{margin:12px 0 0}
+.jpss-h{font-size:14px;font-weight:700;color:var(--ink)}
+.jpss-h small{font-weight:400;font-size:12px;color:var(--ink-3);margin-left:6px}
+.jpssl{list-style:none;margin:6px 0 0;padding:0}
+.jpssl li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;padding:5px 0;border-bottom:1px dashed var(--rule);font-size:13.5px}
+.jpssl small{font-size:12px;color:var(--ink-3)}
+.jpm{display:inline-block;min-width:76px;font-size:12.5px;font-weight:700;padding:1px 8px;border-radius:999px;text-align:center;background:var(--paper-2);color:var(--ink-3)}
+.jpm.in{background:#dcefe3;color:#1f6b3a}.jpm.low{background:#fbeccb;color:#8a5a00}.jpm.out{background:#f6d9d6;color:#9a2a22}
+:root[data-theme="dark"] .jpm.in{background:#1d3a28;color:#8fd6a8}
+:root[data-theme="dark"] .jpm.low{background:#3d3015;color:#e8c374}
+:root[data-theme="dark"] .jpm.out{background:#442220;color:#f0a39c}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .jpm.in{background:#1d3a28;color:#8fd6a8}
+  :root:not([data-theme="light"]) .jpm.low{background:#3d3015;color:#e8c374}
+  :root:not([data-theme="light"]) .jpm.out{background:#442220;color:#f0a39c}
+}
+.jpsn{font-weight:500;color:var(--ink)}
+.jpssd{width:100%;font-size:12.5px}
+.jpssd summary{cursor:pointer;color:var(--ink-3)}
+.jpssd ul{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:2px 10px}
+.jpssd li{border:0;padding:1px 0;font-size:12.5px}
+.jpsso{margin-top:6px;font-size:13.5px}
+.jpsso summary{cursor:pointer;color:var(--ink-2)}
+.jpssn,.jpnostock{margin:8px 0 0;font-size:12.5px;color:var(--ink-3);line-height:1.6}
+@media(max-width:520px){.jprow{grid-template-columns:1fr}.jprow small{grid-column:1}}
 /*JP:CSS:END*/
 
 </style>
@@ -1199,7 +1242,7 @@ dd b{font-weight:500; color:var(--ink)}
 <div id="tab-jp" class="hidden">
 <div class="card">
   <h2>일본 인기용품 가격</h2>
-  <p class="sub" style="margin-top:0">일본에서 많이 사 오는 스토케·부가부·싸이벡스 제품의 일본 쇼핑몰 가격과 온라인 재고를 매일 아침 확인해서, 오늘 환율로 바꿔 보여 드려요. 아래에서 구매처 위치와 예약 방법도 볼 수 있어요.</p>
+  <p class="sub" style="margin-top:0">일본에서 많이 사 오는 스토케·부가부·싸이벡스 제품을 <b>한국 정발가</b>와 <b>일본 구매가(오늘 환율로 환산)</b>로 견줘서 얼마 이득인지 보여 드려요. 일본 쇼핑몰 가격과 아카짱혼포 매장별 재고는 매일 아침 확인해요. 아래에서 구매처 위치와 예약 방법도 볼 수 있어요.</p>
   <div class="jpbar">
     <div class="jprate" id="jpRate">환율을 불러오고 있어요…</div>
     <div class="jpf">
@@ -2622,6 +2665,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
 /* === JP-CORE START === */
 const JP_GUEST=0.05, JP_FEE={dept:0.0155,aka:0.011};
 const JP_RATE_API="https://open.er-api.com/v6/latest/JPY";
+const JP_MARK={in:["○","재고 있음"],low:["△","소량"],out:["✕","재고 없음"],none:["－","취급 안 함"]};
 function jpEsc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function jpYen(n){return "¥"+Math.round(n).toLocaleString("en-US");}
 function jpWon(n){return Math.round(n).toLocaleString("en-US")+"원";}
@@ -2638,53 +2682,61 @@ function jpStamp(iso){
   if(isNaN(d.getTime())) return String(iso).slice(0,16).replace("T"," ");
   return new Date(d.getTime()+9*3600000).toISOString().slice(0,16).replace("T"," ");
 }
-function jpStock(it){
-  const a=it.avail, n=it.n_in, t=it.n_total;
-  if(a==="in") return {cls:"in",text:"온라인 재고 있음"+(t>1?` (${n}/${t})`:"")};
-  if(a==="part") return {cls:"part",text:`일부만 재고 있음 (${n}/${t})`};
-  if(a==="out") return {cls:"out",text:"온라인 재고 없음"};
-  return {cls:"unknown",text:"재고 확인 안 됨"};
+function jpModeLbl(mode){return mode==="dept"?"백화점 5%+환급":mode==="aka"?"환급만":"면세 없이";}
+/* 일본 구매가(원)와 한국 정발가 차액. 일본 엔 금액은 세금 포함 표시가(+ 별도 구성품) 기준 */
+function jpCalc(it,rate,mode){
+  const add=it.jp_add?it.jp_add.price:0;
+  const yenIncl=it.price+add;
+  const net=jpNet(yenIncl,mode), won=net*rate;
+  const out={yenIncl:yenIncl,net:net,won:won,full:yenIncl*rate,rng:it.price_max>it.price,kr:null,diff:null,pct:null};
+  if(it.kr&&it.kr.price){ out.kr=it.kr.price; out.diff=it.kr.price-won; out.pct=Math.round(out.diff/it.kr.price*100); }
+  return out;
 }
-function jpVarHtml(it,mode,rate){
-  const vs=(it.variants||[]).filter(v=>v.n);
-  if(vs.length<2) return "";
-  const rows=vs.map(v=>{
-    const st=v.a==="in"?'<span class="y">재고 있음</span>':v.a==="out"?'<span class="n">재고 없음</span>':'<span class="u">확인 안 됨</span>';
-    const p=(v.p!==it.price||v.acc)?` · ${jpYen(v.p)}`:"";
-    return `<li><span>${jpEsc(v.n)}${p}</span>${st}</li>`;
-  }).join("");
-  return `<details class="jpvar"><summary>색상·구성별 재고 보기 (${vs.length}가지)</summary><ul class="jpvl">${rows}</ul></details>`;
+function jpSaveHtml(it,rate,mode){
+  const c=jpCalc(it,rate,mode);
+  const stale=it.stale?`<p class="jpwarn">${jpEsc(it.fallback_note||"자동 확인이 안 돼 마지막으로 확인한 값이에요")} (${jpEsc(jpStamp(it.checked).slice(0,10))} 기준)</p>`:"";
+  const jpNote=`${jpYen(c.yenIncl)} · 환율 ${rate.toFixed(4)} · ${jpModeLbl(mode)}${it.jp_add?` · ${jpEsc(it.jp_add.label)} 포함`:""}${c.rng?" · 가장 싼 색 기준":""}`;
+  if(!c.kr){
+    return `<div class="jpsave"><div class="jprow"><span>일본 구매가</span><b>${jpWon(c.won)}</b><small>${jpNote}</small></div>
+    <p class="jpkrno">${jpEsc(it.kr_text||"한국 정발가를 확인하지 못했어요")}</p></div>${stale}`;
+  }
+  const krSrc=`${jpEsc(it.kr.label)} · 확인 ${jpEsc(jpStamp(it.kr.checked).slice(0,10))}${it.kr.stale?" (마지막 확인값)":""}`;
+  const gain=c.diff>0;
+  const diffHtml=gain
+    ?`<div class="jpdiff gain">차액 <b>${jpWon(c.diff)} 이득</b> <small>한국 정발가의 ${c.pct}%</small></div>`
+    :`<div class="jpdiff loss">일본이 <b>${jpWon(-c.diff)} 더 비싸요</b> <small>한국 정발가 기준</small></div>`;
+  return `<div class="jpsave"><div class="jprow"><span>한국 정발가</span><b>${jpWon(c.kr)}</b><small>${krSrc}</small></div>
+    <div class="jprow"><span>일본 구매가</span><b>${jpWon(c.won)}</b><small>${jpNote}</small></div>${diffHtml}</div>${stale}`;
+}
+function jpStockHtml(it){
+  const ss=it.store_stock;
+  if(!ss||!Object.keys(ss).length)
+    return `<p class="jpnostock">매장 재고: 아카짱혼포에서 팔지 않는 제품이라 공개된 매장 재고가 없어요. 한큐·블라썸39는 LINE·예약 폼으로 문의해야 알 수 있어요.</p>`;
+  const rows=Object.keys(ss).map(k=>Object.assign({id:k},ss[k]));
+  const line=r=>{
+    const m=JP_MARK[r.mark]||JP_MARK.none;
+    const cnt={in:0,low:0,out:0,none:0}; (r.by||[]).forEach(b=>{cnt[b.m]=(cnt[b.m]||0)+1;});
+    const multi=(r.by||[]).length>1;
+    const sum=multi?`<small>색상·구성 ${r.by.length}가지 중 있음 ${cnt.in} · 소량 ${cnt.low} · 없음 ${cnt.out}</small>`:"";
+    const det=multi?`<details class="jpssd"><summary>색상별</summary><ul>${r.by.map(b=>{const mm=JP_MARK[b.m]||JP_MARK.none;return `<li><span class="jpm ${b.m}">${mm[0]}</span> ${jpEsc(b.n)}</li>`;}).join("")}</ul></details>`:"";
+    return `<li><span class="jpm ${r.mark}">${m[0]} ${m[1]}</span><span class="jpsn">${jpEsc(r.name)}</span>${sum}${det}</li>`;
+  };
+  const fuk=rows.filter(r=>r.region==="후쿠오카"), oth=rows.filter(r=>r.region!=="후쿠오카");
+  const stale=it.store_stale?` · 수집이 안 돼 이전 값`:"";
+  return `<div class="jpss"><div class="jpss-h">아카짱혼포 매장 재고 <small>참고 재고 · 확인 ${jpEsc(jpStamp(it.store_checked))}${stale}</small></div>
+    <ul class="jpssl">${fuk.map(line).join("")}</ul>
+    ${oth.length?`<details class="jpsso"><summary>오사카·도쿄·오키나와 매장 보기</summary><ul class="jpssl">${oth.map(line).join("")}</ul></details>`:""}
+    <p class="jpssn">아카짱혼포가 공식몰에 보여 주는 매장별 참고 재고예요. 실제와 다를 수 있고 매장 예약 보관(取り置き)은 안 받아요. 한큐·블라썸39는 매장 재고를 공개하지 않아요.</p></div>`;
 }
 function jpItemHtml(it,rate,mode){
-  const rng=it.price_max>it.price;
-  const yen=rng?`${jpYen(it.price)} ~ ${jpYen(it.price_max)}`:jpYen(it.price);
-  const w1=jpWon(it.price*rate)+(rng?" ~ "+jpWon(it.price_max*rate):"");
-  const nets=[jpNet(it.price,mode)*rate, jpNet(it.price_max,mode)*rate];
-  const w2=jpWon(nets[0])+(rng?" ~ "+jpWon(nets[1]):"");
-  const sk=jpStock(it);
-  let kr="";
-  if(it.kr && !rng){
-    const diff=it.kr.price-nets[0];
-    kr=`<p class="jpkr">${jpEsc(it.kr.label)} <b>${jpWon(it.kr.price)}</b> → ${diff>0?`일본에서 사면 약 <b>${jpMan(diff)}</b> 낮아요`:"일본 가격과 비슷하거나 더 낮아요"} <span class="hint">구성·색상이 다를 수 있어요</span></p>`;
-  } else if(it.kr && rng){
-    kr=`<p class="jpkr">${jpEsc(it.kr.label)} <b>${jpWon(it.kr.price)}</b> <span class="hint">일본 가격대와 견줘 보세요</span></p>`;
-  } else if(it.kr_text){
-    kr=`<p class="jpkr">${jpEsc(it.kr_text)}</p>`;
-  }
-  const stamp=it.stale?jpStamp(it.checked).slice(0,10)+" 기준":jpStamp(it.checked);
-  const warn=it.stale?`<p class="jpwarn">${jpEsc(it.fallback_note||"자동 확인이 안 돼 마지막으로 확인한 값이에요")} (${jpEsc(jpStamp(it.checked).slice(0,10))})</p>`:"";
   const src=(it.sources||[]).map(s=>`<a href="${jpEsc(s.url)}" target="_blank" rel="noopener nofollow">${jpEsc(s.label)}</a>`).join(" · ");
-  const modeLbl=mode==="dept"?"백화점 5%+환급":mode==="aka"?"환급만":"면세 없이";
+  const krl=it.kr&&it.kr.url?` · <a href="${jpEsc(it.kr.url)}" target="_blank" rel="noopener nofollow">한국 공식몰</a>`:"";
   return `<div class="jpitem" data-g="${jpEsc(it.group)}">
-  <div class="jphd"><span class="jpbrand">${jpEsc(it.brand)}</span><b>${jpEsc(it.name)}</b><span class="jpstock ${sk.cls}">${sk.text}</span></div>
+  <div class="jphd"><b>[${jpEsc(it.brand)}] ${jpEsc(it.name)}</b></div>
   <p class="jpdesc">${jpEsc(it.desc)}</p>
-  <div class="jpnums">
-    <div><small>일본 가격 (세금 포함)</small><b>${yen}</b></div>
-    <div><small>오늘 환율로 원화</small><b>${w1}</b></div>
-    <div class="hi"><small>실부담 추정 (${modeLbl})</small><b>${w2}</b></div>
-  </div>
-  ${kr}${warn}${jpVarHtml(it,mode,rate)}
-  <p class="jpsrc">출처: ${src} · 확인 ${jpEsc(stamp)}</p>
+  ${jpSaveHtml(it,rate,mode)}
+  ${jpStockHtml(it)}
+  <p class="jpsrc">출처: ${src}${krl} · 일본 가격 확인 ${jpEsc(jpStamp(it.checked))}</p>
 </div>`;
 }
 function jpStoreHtml(st,open){
@@ -2724,7 +2776,7 @@ function jpParseRate(s){const v=parseFloat(String(s||"").replace(/,/g,"."));retu
     $("jpGroups").innerHTML=groups.map(g=>`<button type="button" class="jpchip${g===group?" on":""}" data-g="${jpEsc(g)}">${jpEsc(g)}</button>`).join("");
     const its=DATA.items.filter(i=>group==="전체"||i.group===group);
     $("jpList").innerHTML=r?its.map(i=>jpItemHtml(i,r.v,mode)).join(""):'<div class="card"><p class="sub" style="margin:0">환율을 넣으면 가격이 보여요.</p></div>';
-    $("jpStamp").textContent=`가격·재고 확인: ${jpStamp(DATA.generated_at)} (매일 오전 10시 전후 갱신, ${DATA.ok_items}/${DATA.total_items}개 자동 확인). 공식 쇼핑몰 표시가이고 매장 가격·재고와 다를 수 있어요.`;
+    $("jpStamp").textContent=`가격·재고 확인: ${jpStamp(DATA.generated_at)} (매일 오전 10시 전후 갱신, ${DATA.ok_items}/${DATA.total_items}개 자동 확인). 일본 가격은 공식 쇼핑몰 표시가이고 매장 가격과 다를 수 있어요.`;
   }
   function renderGuide(){
     if(!DATA) return;
@@ -3866,7 +3918,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="78857494";
+var APP_BUILD="55ffc36e";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
