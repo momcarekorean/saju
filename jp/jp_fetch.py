@@ -224,6 +224,16 @@ def build_store_stock(vs):
     return out
 
 
+def src_godo(kr):
+    """싸이벡스 한국 공식몰(고도몰) 상품 페이지의 판매가(set_goods_price)"""
+    h = get(kr["url"])
+    m = re.search(r'name="set_goods_price"\s+value="(\d+)"', h)
+    p = price_of(m.group(1)) if m else None
+    if not p:
+        raise RuntimeError("판매가를 못 읽음")
+    return [dict(n="", p=p, a="unknown")]
+
+
 def fetch_kr(kr, prev):
     """한국 정발가: kind=ld 면 공식몰 상품 페이지에서 매일 읽고, 실패하면 이전 값(또는 fallback). static 은 사람이 넣은 값."""
     if not kr:
@@ -233,7 +243,7 @@ def fetch_kr(kr, prev):
     if kr["kind"] == "static":
         return dict(base, price=kr["price"], checked=kr["date"] + "T00:00+09:00", auto=False)
     try:
-        vs = src_ld(kr)
+        vs = src_godo(kr) if kr["kind"] == "godo" else src_ld(kr)
         return dict(base, price=min(v["p"] for v in vs), checked=now, auto=True)
     except Exception as e:  # noqa: BLE001
         print("한국 정발가 실패", kr["label"], str(e)[:60])
@@ -251,6 +261,41 @@ def fetch_rate():
     except Exception as e:  # noqa: BLE001
         print("환율 실패:", e)
         return None
+
+
+def rec_page(url):
+    """추천 소품 상품 페이지에서 가격(세금 포함)·사진·일본어 상품명을 읽는다."""
+    h = get(url)
+    for x in ld_blocks(h):
+        if str(x.get("@type", "")).lower() == "product":
+            o = offer_of(x.get("offers"))
+            p = price_of(o.get("price"))
+            im = x.get("image")
+            im = im[0] if isinstance(im, list) and im else im
+            if p:
+                return dict(price=p, image=im if isinstance(im, str) and im.startswith("https://") else None, ja=str(x.get("name", ""))[:80])
+    raise RuntimeError("가격을 못 읽음")
+
+
+def fetch_recs(prev_recs, now):
+    prev = {x["id"]: x for x in prev_recs or []}
+    out, ok = [], 0
+    for r in D.RECS:
+        base = {k: r[k] for k in ("id", "brand", "name", "group", "desc", "why", "mentions", "url")}
+        old = prev.get(r["id"]) or {}
+        try:
+            v = rec_page(r["url"])
+            base.update(price=v["price"], image=v["image"] or old.get("image"), ja=v["ja"], checked=now.isoformat(timespec="minutes"), stale=False)
+            ok += 1
+        except Exception as e:  # noqa: BLE001
+            print("추천 소품 실패", r["id"], str(e)[:60])
+            if old.get("price"):
+                base.update({k: old.get(k) for k in ("price", "image", "ja", "checked")})
+            else:
+                base.update(price=r["fallback"], image=None, ja="", checked="2026-10-19T00:00+09:00")
+            base["stale"] = True
+        out.append(base)
+    return out, ok
 
 
 def main():
@@ -328,11 +373,13 @@ def main():
     if ok_n < a.min_ok:
         print("자동 확인 %d개 < 기준 %d개 — 파일을 쓰지 않아요(이전 값 유지)" % (ok_n, a.min_ok))
         sys.exit(1)
+    recs, rec_ok = fetch_recs(prev.get("recs"), now)
     rate = fetch_rate() or prev.get("rate")
     data = dict(generated_at=now.isoformat(timespec="minutes"), rate=rate, items=items, stores=D.STORES, notes=D.NOTES,
+                recs=recs, recs_groups=D.RECS_GROUPS, recs_basis=D.RECS_BASIS, recs_tips=D.RECS_TIPS,
                 ok_items=sum(1 for x in items if not x.get("stale")), total_items=len(D.ITEMS))
     io.open(out, "w", encoding="utf-8").write(json.dumps(data, ensure_ascii=False, indent=1))
-    print("저장:", out, "| 성공 %d/%d" % (data["ok_items"], len(D.ITEMS)), "| 환율", rate and rate["jpy_krw"])
+    print("저장:", out, "| 성공 %d/%d" % (data["ok_items"], len(D.ITEMS)), "| 추천 소품 %d/%d" % (rec_ok, len(recs)), "| 환율", rate and rate["jpy_krw"])
     for x in items:
         kr = x.get("kr")
         ss = x.get("store_stock") or {}

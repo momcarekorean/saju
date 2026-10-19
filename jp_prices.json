@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-19T16:22+09:00",
+ "generated_at": "2026-10-19T16:43+09:00",
  "rate": {
   "jpy_krw": 8.4456,
   "at": "2026-10-19T09:02+09:00",
@@ -23,7 +23,7 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -216,12 +216,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-19T16:22+09:00",
+   "store_checked": "2026-10-19T16:43+09:00",
    "kr": {
     "label": "한국 정발가 (스토케 한국 공식몰)",
     "url": "https://www.stokke.com/KOR/ko-kr/%ED%95%98%EC%9D%B4%EC%B2%B4%EC%96%B4/%ED%8A%B8%EB%A6%BD-%ED%8A%B8%EB%9E%A9/1001.html",
     "price": 430000,
-    "checked": "2026-10-19T16:22+09:00",
+    "checked": "2026-10-19T16:44+09:00",
     "auto": true
    },
    "sources": [
@@ -249,7 +249,7 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -498,12 +498,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-19T16:22+09:00",
+   "store_checked": "2026-10-19T16:43+09:00",
    "kr": {
     "label": "한국 정발가 (스토케 한국 공식몰)",
     "url": "https://www.stokke.com/KOR/ko-kr/%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/tripp-trapp-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/6500.html",
     "price": 90000,
-    "checked": "2026-10-19T16:23+09:00",
+    "checked": "2026-10-19T16:44+09:00",
     "auto": true
    },
    "sources": [
@@ -531,7 +531,7 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -668,12 +668,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-19T16:22+09:00",
+   "store_checked": "2026-10-19T16:43+09:00",
    "kr": {
     "label": "한국 정발가 (스토케 한국 공식몰)",
     "url": "https://www.stokke.com/KOR/ko-kr/%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/tripp-trapp-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/5261.html",
     "price": 230000,
-    "checked": "2026-10-19T16:23+09:00",
+    "checked": "2026-10-19T16:45+09:00",
     "auto": true
    },
    "sources": [
@@ -701,7 +701,7 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -810,12 +810,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-19T16:22+09:00",
+   "store_checked": "2026-10-19T16:43+09:00",
    "kr": {
     "label": "한국 정발가 (스토케 한국 공식몰)",
     "url": "https://www.stokke.com/KOR/ko-kr/%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/tripp-trapp-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/4285.html",
     "price": 90000,
-    "checked": "2026-10-19T16:24+09:00",
+    "checked": "2026-10-19T16:45+09:00",
     "auto": true
    },
    "sources": [
@@ -889,13 +889,13 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "kr": {
     "label": "한국 정발가 (부가부 한국 공식몰)",
     "url": "https://www.bugaboo.com/kr-ko/%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC/bugaboo-butterfly-2/%EB%B6%80%EA%B0%80%EB%B6%80-%EB%B2%84%ED%84%B0%ED%94%8C%EB%9D%BC%EC%9D%B4-2-%ED%9C%B4%EB%8C%80%EC%9A%A9-%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC-%EB%B2%94%ED%8D%BC%EB%B0%94-%ED%8F%AC%ED%95%A8-PM007649.html",
     "price": 950000,
-    "checked": "2026-10-19T16:24+09:00",
+    "checked": "2026-10-19T16:45+09:00",
     "auto": true
    },
    "sources": [
@@ -933,13 +933,13 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "kr": {
     "label": "한국 정발가 (부가부 한국 공식몰)",
     "url": "https://www.bugaboo.com/kr-ko/%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC/bugaboo-dragonfly-plus-seat/%EB%B6%80%EA%B0%80%EB%B6%80-%EB%93%9C%EB%9E%98%EA%B3%A4%ED%94%8C%EB%9D%BC%EC%9D%B4-%ED%94%8C%EB%9F%AC%EC%8A%A4-%EC%A0%88%EC%B6%A9%ED%98%95-%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC-PM007941.html",
     "price": 1650000,
-    "checked": "2026-10-19T16:24+09:00",
+    "checked": "2026-10-19T16:45+09:00",
     "auto": true
    },
    "sources": [
@@ -1010,7 +1010,7 @@
      "u": "https://shop.akachan.jp/shop/g/g264008500/"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -1287,13 +1287,13 @@
      ]
     }
    },
-   "store_checked": "2026-10-19T16:22+09:00",
+   "store_checked": "2026-10-19T16:43+09:00",
    "kr": {
-    "label": "한국 정식 판매가 (후기 2026-09, 싸이벡스 한국 공식몰은 가격 비공개)",
-    "url": null,
-    "price": 460000,
-    "checked": "2026-09-21T00:00+09:00",
-    "auto": false
+    "label": "한국 정발가 (싸이벡스 한국 공식몰)",
+    "url": "https://www.cybex-shop.co.kr/goods/goods_view.php?goodsNo=1000000547",
+    "price": 412000,
+    "checked": "2026-10-19T16:46+09:00",
+    "auto": true
    },
    "sources": [
     {
@@ -1309,7 +1309,7 @@
    "name": "클라우드 T i-Size 바구니형 카시트",
    "group": "카시트",
    "desc": "신생아용 바구니형. 회전식 베이스 T가 따로 필요해요.",
-   "kr_text": "싸이벡스 한국 공식몰은 가격을 보여 주지 않아요",
+   "kr_text": null,
    "jp_add": null,
    "price": 44000,
    "price_max": 44000,
@@ -1321,7 +1321,7 @@
      "u": "https://shop.akachan.jp/shop/g/g230546900/"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -1402,8 +1402,14 @@
      ]
     }
    },
-   "store_checked": "2026-10-19T16:22+09:00",
-   "kr": null,
+   "store_checked": "2026-10-19T16:43+09:00",
+   "kr": {
+    "label": "한국 정발가 (싸이벡스 한국 공식몰)",
+    "url": "https://www.cybex-shop.co.kr/goods/goods_view.php?goodsNo=1000000446",
+    "price": 790000,
+    "checked": "2026-10-19T16:46+09:00",
+    "auto": true
+   },
    "sources": [
     {
      "label": "아카짱혼포 온라인",
@@ -1418,7 +1424,7 @@
    "name": "베이스 T (회전식 ISOFIX 베이스)",
    "group": "카시트",
    "desc": "클라우드 T·시로나 T 전용 베이스. 한국에선 단독으로 사기 어려워요.",
-   "kr_text": "한국은 베이스 단독 정식 판매가 없고 직구 후기 45만원 이상이에요",
+   "kr_text": null,
    "jp_add": null,
    "price": 31900,
    "price_max": 31900,
@@ -1430,7 +1436,7 @@
      "u": "https://shop.akachan.jp/shop/g/g230528300/"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -1511,8 +1517,14 @@
      ]
     }
    },
-   "store_checked": "2026-10-19T16:22+09:00",
-   "kr": null,
+   "store_checked": "2026-10-19T16:43+09:00",
+   "kr": {
+    "label": "한국 정발가 (싸이벡스 한국 공식몰)",
+    "url": "https://www.cybex-shop.co.kr/goods/goods_view.php?goodsNo=1000000450",
+    "price": 340000,
+    "checked": "2026-10-19T16:46+09:00",
+    "auto": true
+   },
    "sources": [
     {
      "label": "아카짱혼포 온라인",
@@ -1527,7 +1539,7 @@
    "name": "클라우드 G3 · 시로나 G3 카시트",
    "group": "카시트",
    "desc": "신형 G3 시리즈(분리형). 베이스 G3는 따로예요.",
-   "kr_text": "싸이벡스 한국 공식몰은 가격을 보여 주지 않아요",
+   "kr_text": "싸이벡스 한국 공식몰 목록(2026-10-19)에서 G3 시리즈를 찾지 못했어요",
    "jp_add": null,
    "price": 39600,
    "price_max": 50600,
@@ -1564,7 +1576,7 @@
      "u": "https://shop.akachan.jp/shop/g/g264369800/"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -1757,7 +1769,7 @@
      ]
     }
    },
-   "store_checked": "2026-10-19T16:22+09:00",
+   "store_checked": "2026-10-19T16:43+09:00",
    "kr": null,
    "sources": [
     {
@@ -1814,7 +1826,7 @@
      "u": "https://shop.akachan.jp/shop/g/g220115800/"
     }
    ],
-   "checked": "2026-10-19T16:22+09:00",
+   "checked": "2026-10-19T16:43+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -2007,13 +2019,13 @@
      ]
     }
    },
-   "store_checked": "2026-10-19T16:22+09:00",
+   "store_checked": "2026-10-19T16:43+09:00",
    "kr": {
-    "label": "한국 정식 판매가 (다나와 정식 유통 2026-10-19, 싸이벡스 한국 공식몰은 가격 비공개)",
-    "url": null,
-    "price": 710000,
-    "checked": "2026-10-19T00:00+09:00",
-    "auto": false
+    "label": "한국 정발가 (싸이벡스 한국 공식몰)",
+    "url": "https://www.cybex-shop.co.kr/goods/goods_view.php?goodsNo=1000000415",
+    "price": 680000,
+    "checked": "2026-10-19T16:47+09:00",
+    "auto": true
    },
    "sources": [
     {
@@ -2172,11 +2184,329 @@
   }
  ],
  "notes": [
-  "한국 정발가는 스토케·부가부 한국 공식몰 가격이에요(매일 확인). 싸이벡스 한국 공식몰은 가격을 보여 주지 않아서 정식 판매처·후기 값(날짜 표기)을 썼어요. 구성·색상이 같은지는 직접 확인하세요.",
+  "한국 정발가는 스토케·부가부·싸이벡스 한국 공식몰 판매가예요(매일 확인). 구성·색상이 일본 제품과 같은지는 직접 확인하세요.",
   "일본 구매가는 일본 쇼핑몰 공식 표시가(세금 포함)를 오늘 환율로 바꾼 뒤, 선택한 방식(백화점 5%+환급 / 환급만)으로 계산한 추정값이에요. 환급 수수료는 후기 기준(백화점 약 1.55%, 아카짱혼포 약 1.1%)이에요.",
   "매장 재고는 아카짱혼포 공식몰이 보여 주는 매장별 '참고 재고'예요. 실제와 다를 수 있고 매장 예약 보관(取り置き)은 안 받아요. 한큐·블라썸39는 매장 재고를 공개하지 않아 문의로만 알 수 있어요.",
-  "일본에서 산 유모차·카시트는 한국 공식 AS·보증이 안 될 수 있어요. 한국 입국 면세 한도(보통 US$800)도 확인하세요.",
-  "일본 면세 제도는 2026-11-01 이후 출국부터 공항 환급 방식으로 바뀌어요. 그 뒤 구매는 5% 게스트카드·환급 처리를 다시 확인하세요."
+  "일본에서 산 유모차·카시트는 한국 공식 AS·보증이 안 될 수 있어요. 한국 입국 면세 한도(보통 US$800)도 확인하세요."
+ ],
+ "recs": [
+  {
+   "id": "rec-anpanman-rattle",
+   "brand": "호빵맨",
+   "name": "딸랑이",
+   "group": "장난감·놀이",
+   "desc": "신생아부터 쓰는 가벼운 딸랑이. 한국 사람들이 가장 많이 사 오는 장난감이에요.",
+   "why": "소리가 맑고 청아해서 인기라는 후기가 많아요. 빅카메라·요도바시가 더 싸다는 후기도 있어요(아래 구매 팁).",
+   "mentions": {
+    "blog": 42,
+    "cafe": 10
+   },
+   "url": "https://shop.akachan.jp/shop/g/g395006700/",
+   "price": 990,
+   "image": "https://shop.akachan.jp/img/goods/S/395006700_2886b5451792465cb6f093a796c3d2db.jpg",
+   "ja": "ベビラボ アンパンマン らくらくにぎれるはじめてラトル",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-edison-banana",
+   "brand": "에디슨",
+   "name": "바나나 치발기",
+   "group": "장난감·놀이",
+   "desc": "이가 나기 시작할 때 쓰는 바나나 모양 치발기. 세워 둘 수 있어요.",
+   "why": "바나나 끝 돌기가 잇몸을 자극해요. 아직 안 쓴다는 후기도 있어서 이가 나는 시기에 맞춰 쓰면 돼요.",
+   "mentions": {
+    "blog": 42,
+    "cafe": 7
+   },
+   "url": "https://shop.akachan.jp/shop/g/g210534500/",
+   "price": 748,
+   "image": "https://shop.akachan.jp/img/goods/S/130_210534500.jpg",
+   "ja": "カミカミBaby バナナプラス",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-edison-ring",
+   "brand": "에디슨",
+   "name": "바나나 링 치발기(고리형)",
+   "group": "장난감·놀이",
+   "desc": "손에 쥐기 쉬운 고리 모양 치발기.",
+   "why": "물건을 잡기 시작하면 고리형이 더 편하다는 후기가 있어요.",
+   "mentions": {
+    "blog": 42,
+    "cafe": 7
+   },
+   "url": "https://shop.akachan.jp/shop/g/g535007800/",
+   "price": 877,
+   "image": "https://shop.akachan.jp/img/goods/S/130_535007800.jpg",
+   "ja": "カミカミBaby バナナリング",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-anpanman-cup",
+   "brand": "호빵맨",
+   "name": "컵쌓기(천재뇌 쌓기컵)",
+   "group": "장난감·놀이",
+   "desc": "컵을 쌓고 무너뜨리는 놀이 장난감.",
+   "why": "호빵맨 장난감 쇼핑 후기에서 딸랑이와 함께 자주 나와요.",
+   "mentions": {
+    "blog": 7,
+    "cafe": 0
+   },
+   "url": "https://shop.akachan.jp/shop/g/g210851600/",
+   "price": 1650,
+   "image": "https://shop.akachan.jp/img/goods/S/210851600_aa1bd725ba6e48b3827ad68d2861522e.JPG",
+   "ja": "アンパンマン天才脳つみかさねカップ",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-anpanman-merry",
+   "brand": "호빵맨",
+   "name": "유모차·침대 모빌(2WAY 메리)",
+   "group": "장난감·놀이",
+   "desc": "유모차나 침대에 달아 아기 시선을 끄는 모빌.",
+   "why": "유모차 모빌은 소리와 촉감 덕에 외출 때 아기 달래기에 좋다는 후기가 있어요.",
+   "mentions": {
+    "blog": 17,
+    "cafe": 3
+   },
+   "url": "https://shop.akachan.jp/shop/g/g393027300/",
+   "price": 1815,
+   "image": "https://shop.akachan.jp/img/goods/S/393027300_c8b5594faaba43c5ba6a37e918e8fe19.jpg",
+   "ja": "ベビラボ アンパンマンとおでかけ！2WAYメリー",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-pooh-clothbook",
+   "brand": "곰돌이 푸",
+   "name": "헝겊책",
+   "group": "장난감·놀이",
+   "desc": "바스락 소리가 나는 헝겊책. 고리가 달려 있어요.",
+   "why": "유모차나 아기띠에 걸어 두기 좋고 촉감 놀이에 쓴다는 후기가 많아요.",
+   "mentions": {
+    "blog": 12,
+    "cafe": 2
+   },
+   "url": "https://shop.akachan.jp/shop/g/g204130500/",
+   "price": 1980,
+   "image": "https://shop.akachan.jp/img/goods/S/204130500_6bfc5b4a27a14f81af2a2e225e027be3.jpg",
+   "ja": "Dear Little Hands めくってパリパリいないいないばあ布えほん くまのプーさん",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-pigeon-oil-swab",
+   "brand": "피죤",
+   "name": "오일 면봉",
+   "group": "케어·위생",
+   "desc": "오일이 묻은 아기 면봉. 귀지와 코, 배꼽 주변을 닦아요.",
+   "why": "아카짱혼포에서 사 온 것 중 가장 자주 쓴다는 후기가 있어요. 한국보다 싸다는 말이 많아요.",
+   "mentions": {
+    "blog": 17,
+    "cafe": 1
+   },
+   "url": "https://shop.akachan.jp/shop/g/g532016800/",
+   "price": 327,
+   "image": "https://shop.akachan.jp/img/goods/S/130_532016800.jpg",
+   "ja": "オイルがついているベビー綿棒 50本",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-pigeon-sticky-swab",
+   "brand": "피죤",
+   "name": "접착 면봉",
+   "group": "케어·위생",
+   "desc": "끝이 끈끈한 분홍색 면봉. 코딱지 빼는 용도예요.",
+   "why": "분홍색 쪽만 쓰게 된다는 후기가 있어요.",
+   "mentions": {
+    "blog": 17,
+    "cafe": 1
+   },
+   "url": "https://shop.akachan.jp/shop/g/g221163400/",
+   "price": 308,
+   "image": "https://shop.akachan.jp/img/goods/S/221163400_14db1be84add4bcbbda0c2119556e877.JPG",
+   "ja": "ベビー粘着綿棒 細軸 50本入",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-skinabeve",
+   "brand": "스키나베브",
+   "name": "목욕제(헹구지 않는 타입)",
+   "group": "케어·위생",
+   "desc": "물에 풀어 쓰는 아기 목욕제. 헹구지 않아도 돼요.",
+   "why": "신생아 때 쓰기 좋다고 추천이 많아요. 안 헹궈도 되는지 묻는 글도 많으니 유통기한과 사용법을 확인하세요.",
+   "mentions": {
+    "blog": 22,
+    "cafe": 5
+   },
+   "url": "https://shop.akachan.jp/shop/g/g704027900/",
+   "price": 1958,
+   "image": "https://shop.akachan.jp/img/goods/S/704027900_f215fc10cf3c4d3fa43227c6d5db1af7.jpg",
+   "ja": "沐浴剤 スキナベーブ",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-netsusama",
+   "brand": "열사마시트",
+   "name": "아기용 열패치(0~2세)",
+   "group": "케어·위생",
+   "desc": "열이 날 때 이마에 붙이는 시트.",
+   "why": "한국에서도 살 수 있지만 싸서 사 온다는 후기가 있어요.",
+   "mentions": {
+    "blog": 19,
+    "cafe": 0
+   },
+   "url": "https://shop.akachan.jp/shop/g/g565005400/",
+   "price": 547,
+   "image": "https://shop.akachan.jp/img/goods/S/565005400_07306441127e4404aae85bf7df8ac528.jpg",
+   "ja": "熱さまシート 赤ちゃん用 0～2才向け 12枚入",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-hamico",
+   "brand": "하미코",
+   "name": "아기 칫솔",
+   "group": "케어·위생",
+   "desc": "캐릭터 모양 아기 칫솔.",
+   "why": "무늬가 다양하고 많이들 사 온다는 후기가 있어요.",
+   "mentions": {
+    "blog": 18,
+    "cafe": 0
+   },
+   "url": "https://shop.akachan.jp/shop/g/g230513900/",
+   "price": 847,
+   "image": "https://shop.akachan.jp/img/goods/S/230513900_81d91246eea249068da323554f63a553.JPG",
+   "ja": "ベビーハブラシ HAMICO ハローキティりんご",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-richell-spoon",
+   "brand": "리첼",
+   "name": "온도 감지 이유식 스푼(2개입)",
+   "group": "쪽쪽이·이유식",
+   "desc": "음식이 뜨거우면 색이 변하는 스푼. 이유식 시작할 때 써요.",
+   "why": "한국에서는 비슷한 걸 못 봤다는 후기가 있어요. 1개입은 ¥1,430이라 2개입이 개당 더 싸요.",
+   "mentions": {
+    "blog": 32,
+    "cafe": 6
+   },
+   "url": "https://shop.akachan.jp/shop/g/g250424000/",
+   "price": 2310,
+   "image": "https://shop.akachan.jp/img/goods/S/250424000_8bd200de70984cdba10cce459b244229.jpg",
+   "ja": "[アカチャンホンポ限定商品]あちちが分かる 離乳食スプーンセット ペースト用・スープ用",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-pacifier",
+   "brand": "아카짱혼포",
+   "name": "쪽쪽이 S(0~3개월, 캐릭터)",
+   "group": "쪽쪽이·이유식",
+   "desc": "미니·스누피 등 캐릭터 디자인 쪽쪽이.",
+   "why": "아기마다 취향을 타서 한 개만 사 봤다는 후기가 있어요.",
+   "mentions": {
+    "blog": 36,
+    "cafe": 2
+   },
+   "url": "https://shop.akachan.jp/shop/g/g204137100/",
+   "price": 767,
+   "image": "https://shop.akachan.jp/img/goods/S/204137100_b0efed76d91546909ed8eff9d6bea3da.JPG",
+   "ja": "おしゃぶり FunFriends 0-3ヵ月 S ミニー",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-pacifier-clip",
+   "brand": "미피",
+   "name": "쪽쪽이 클립(홀더)",
+   "group": "쪽쪽이·이유식",
+   "desc": "쪽쪽이를 옷에 고정해 떨어뜨리지 않게 하는 클립.",
+   "why": "아카짱혼포 한정 디자인이에요. 외출할 때 쪽쪽이 분실을 줄여 준다는 후기가 있어요.",
+   "mentions": {
+    "blog": 21,
+    "cafe": 1
+   },
+   "url": "https://shop.akachan.jp/shop/g/g264071500/",
+   "price": 877,
+   "image": "https://shop.akachan.jp/img/goods/S/264071500_2b0d6fcf7b5f490da35ff10dca304753.jpg",
+   "ja": "[アカチャンホンポ限定デザイン] おしゃぶりホルダー ミッフィー",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-angelette-feeder",
+   "brand": "안젤레테",
+   "name": "프레시 푸드 피더",
+   "group": "쪽쪽이·이유식",
+   "desc": "과일이나 부드러운 음식을 넣어 먹이는 도구.",
+   "why": "이유식을 시작한 뒤 새로운 식감을 경험하게 할 때 쓴다고 해요.",
+   "mentions": {
+    "blog": 15,
+    "cafe": 1
+   },
+   "url": "https://shop.akachan.jp/shop/g/g251344500/",
+   "price": 1210,
+   "image": "https://shop.akachan.jp/img/goods/S/251344500_c70198bdcf10458f8fb68af20cae3583.jpg",
+   "ja": "アンジェレッテ フレッシュフードフィーダー ライトイエロー",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-bjorn-bib",
+   "brand": "베이비뵨",
+   "name": "피딩 스타이 세트(턱받이)",
+   "group": "쪽쪽이·이유식",
+   "desc": "이유식 때 쓰는 베이비뵨 턱받이 세트.",
+   "why": "인스타에서 많이 보여서 사 간다는 후기가 있어요.",
+   "mentions": {
+    "blog": 19,
+    "cafe": 2
+   },
+   "url": "https://shop.akachan.jp/shop/g/g204382400/",
+   "price": 2970,
+   "image": "https://shop.akachan.jp/img/goods/S/204382400_777d407c420b4a9b825ac9be178e210b.jpg",
+   "ja": "ベビービョルン フィーディングスタイセット パウダーピンク",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  },
+  {
+   "id": "rec-anpanman-boro",
+   "brand": "호빵맨",
+   "name": "보로컵",
+   "group": "쪽쪽이·이유식",
+   "desc": "호빵맨 얼굴 모양의 간식 컵.",
+   "why": "가격 부담이 없어 담아 왔다는 후기가 있어요.",
+   "mentions": {
+    "blog": 7,
+    "cafe": 0
+   },
+   "url": "https://shop.akachan.jp/shop/g/g527011700/",
+   "price": 822,
+   "image": "https://shop.akachan.jp/img/goods/S/527011700_cd50d5d140b847c4920369758896fb3e.jpg",
+   "ja": "ボーロカップ アンパンマン",
+   "checked": "2026-10-19T16:43+09:00",
+   "stale": false
+  }
+ ],
+ "recs_groups": [
+  "장난감·놀이",
+  "케어·위생",
+  "쪽쪽이·이유식"
+ ],
+ "recs_basis": "2026-10-19 기준 아카짱혼포 후기 블로그 170건과 맘스홀릭 카페 글 189건(제목·요약)에서 많이 언급된 순서예요. 카페 본문은 회원 전용이라 제목·요약만 셌어요.",
+ "recs_tips": [
+  "호빵맨 장난감은 빅카메라·요도바시카메라가 아카짱혼포보다 싸다는 후기가 있어요(딸랑이 ¥721 대 ¥980). 대신 재고가 적어서, 먼저 들르고 없는 것만 아카짱혼포에서 사라는 조언이었어요.",
+  "아카짱혼포 면세는 세전 5,000엔 이상 구매할 때 받을 수 있다는 후기가 많아요(오사카·삿포로).",
+  "아기 옷은 니시마츠야가 400엔대부터라 싸다는 후기가 많지만 면세가 안 되는 매장이에요."
  ],
  "ok_items": 11,
  "total_items": 12

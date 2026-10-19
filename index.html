@@ -672,10 +672,32 @@ dd b{font-weight:500; color:var(--ink)}
 .jpssd summary{cursor:pointer;color:var(--ink-3)}
 .jpssd ul{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:2px 10px}
 .jpssd li{border:0;padding:1px 0;font-size:12.5px}
-.jpsso{margin-top:6px;font-size:13.5px}
-.jpsso summary{cursor:pointer;color:var(--ink-2)}
+.jpreg{margin-top:14px}
+.jpreg-h{margin:0;padding:0 0 4px;font-size:19px;font-weight:800;color:var(--seal);letter-spacing:-.01em;border-bottom:2px solid var(--seal)}
+.jpreg .jpssl{margin-top:2px}
 .jpssn,.jpnostock{margin:8px 0 0;font-size:12.5px;color:var(--ink-3);line-height:1.6}
 @media(max-width:520px){.jprow{grid-template-columns:1fr}.jprow small{grid-column:1}}
+.jpalert{margin:0;padding:14px 16px;border:2px solid #c0392b;border-left-width:8px;border-radius:12px;background:#fdecea;color:#a3271b;font-size:16px;line-height:1.65}
+.jpalert b{font-weight:800}
+:root[data-theme="dark"] .jpalert{background:#3d1f1c;border-color:#e0675c;color:#ffb3aa}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .jpalert{background:#3d1f1c;border-color:#e0675c;color:#ffb3aa}}
+.jprecs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:10px}
+.jprec{display:flex;gap:12px;padding:12px;border:1px solid var(--rule);border-radius:12px;background:var(--paper)}
+.jprec-img{flex:0 0 92px;width:92px;height:92px;border-radius:10px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.jprec-img img{width:100%;height:100%;object-fit:contain;display:block}
+.jprec-img.noimg{background:var(--paper-2)}
+.jprec-b{min-width:0;flex:1}
+.jprec-n{font-size:15px;color:var(--ink);line-height:1.4}
+.jprec-d{margin:3px 0 0;font-size:13px;color:var(--ink-2);line-height:1.55}
+.jprec-p{margin:6px 0 0}
+.jprec-p b{font-size:17px;color:var(--ink)}
+.jprec-p small{display:block;font-size:12px;color:var(--ink-3);margin-top:1px}
+.jprec-w{margin:6px 0 0;font-size:13px;color:var(--ink-2);line-height:1.55}
+.jprec-m{margin:6px 0 0;font-size:12px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:2px 10px}
+.jprec-m span{font-weight:700;color:var(--seal)}
+.jprec-m a{color:var(--ink-3)}
+.jptip-h{margin-top:18px}
+@media (max-width:420px){.jprecs{grid-template-columns:1fr}.jprec-img{flex-basis:76px;width:76px;height:76px}}
 /*JP:CSS:END*/
 
 </style>
@@ -1254,14 +1276,19 @@ dd b{font-weight:500; color:var(--ink)}
       </select>
     </div>
     <div class="jpf">
-      <label for="jpMyRate">내 환율 <span class="hint">1엔당 원 · 비우면 오늘 환율</span></label>
-      <input type="text" id="jpMyRate" placeholder="예: 9.0" inputmode="decimal" autocomplete="off">
+      <label for="jpMyRate">내 환율 <span class="hint">100엔당 원 · 비우면 오늘 환율</span></label>
+      <input type="text" id="jpMyRate" placeholder="예: 900" inputmode="decimal" autocomplete="off">
     </div>
   </div>
   <p class="gnote" id="jpStamp" style="margin-bottom:0"></p>
 </div>
 <div class="jpchips" id="jpGroups" role="group" aria-label="종류 고르기"></div>
 <div id="jpList"></div>
+<div class="card" id="jpRecsCard" style="display:none">
+  <h2>아카짱혼포에서 사 올 만한 소품</h2>
+  <p class="sub" style="margin-top:0">후기에서 많이 사 온 소품이에요. 가격은 아카짱혼포 온라인 표시가(세금 포함)를 오늘 환율로 바꾼 값이고, 아카짱혼포는 게스트카드 할인이 없어서 면세 환급만 계산해요. 매장 재고는 확인하지 않아요.</p>
+  <div id="jpRecs"></div>
+</div>
 <div class="card" id="jpGuide">
   <h2>사러 가는 곳 · 예약 · 찾아가는 법</h2>
   <p class="sub" style="margin-top:0">후기와 공식 안내, 구글 지도로 확인한 내용이에요. 매장 정책은 바뀔 수 있으니 가기 전에 한 번 더 확인하세요.</p>
@@ -1272,6 +1299,7 @@ dd b{font-weight:500; color:var(--ink)}
   <h2>알아둘 점</h2>
   <ul class="jpnotes" id="jpNotes"></ul>
 </div>
+<p class="jpalert" role="note"><b>일본 면세 제도는 2026-11-01 이후 출국부터 공항 환급 방식으로 바뀌어요. 그 뒤 구매는 5% 게스트카드·환급 처리를 다시 확인하세요.</b></p>
 </div>
 <!--JP:HTML:END-->
 <div id="tab-rank" class="hidden">
@@ -2667,6 +2695,7 @@ const JP_GUEST=0.05, JP_FEE={dept:0.0155,aka:0.011};
 const JP_RATE_API="https://open.er-api.com/v6/latest/JPY";
 const JP_MARK={in:["○","재고 있음"],low:["△","소량"],out:["✕","재고 없음"],none:["－","취급 안 함"]};
 function jpEsc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function jpRate100(r){return (Math.round(r*10000)/100).toFixed(2);}
 function jpYen(n){return "¥"+Math.round(n).toLocaleString("en-US");}
 function jpWon(n){return Math.round(n).toLocaleString("en-US")+"원";}
 function jpMan(n){const m=Math.round(Math.abs(n)/1000)/10; return (Number.isInteger(m)?m:m.toFixed(1))+"만원";}
@@ -2695,7 +2724,7 @@ function jpCalc(it,rate,mode){
 function jpSaveHtml(it,rate,mode){
   const c=jpCalc(it,rate,mode);
   const stale=it.stale?`<p class="jpwarn">${jpEsc(it.fallback_note||"자동 확인이 안 돼 마지막으로 확인한 값이에요")} (${jpEsc(jpStamp(it.checked).slice(0,10))} 기준)</p>`:"";
-  const jpNote=`${jpYen(c.yenIncl)} · 환율 ${rate.toFixed(4)} · ${jpModeLbl(mode)}${it.jp_add?` · ${jpEsc(it.jp_add.label)} 포함`:""}${c.rng?" · 가장 싼 색 기준":""}`;
+  const jpNote=`${jpYen(c.yenIncl)} · 100엔 = ${jpRate100(rate)}원 · ${jpModeLbl(mode)}${it.jp_add?` · ${jpEsc(it.jp_add.label)} 포함`:""}${c.rng?" · 가장 싼 색 기준":""}`;
   if(!c.kr){
     return `<div class="jpsave"><div class="jprow"><span>일본 구매가</span><b>${jpWon(c.won)}</b><small>${jpNote}</small></div>
     <p class="jpkrno">${jpEsc(it.kr_text||"한국 정발가를 확인하지 못했어요")}</p></div>${stale}`;
@@ -2721,11 +2750,12 @@ function jpStockHtml(it){
     const det=multi?`<details class="jpssd"><summary>색상별</summary><ul>${r.by.map(b=>{const mm=JP_MARK[b.m]||JP_MARK.none;return `<li><span class="jpm ${b.m}">${mm[0]}</span> ${jpEsc(b.n)}</li>`;}).join("")}</ul></details>`:"";
     return `<li><span class="jpm ${r.mark}">${m[0]} ${m[1]}</span><span class="jpsn">${jpEsc(r.name)}</span>${sum}${det}</li>`;
   };
-  const fuk=rows.filter(r=>r.region==="후쿠오카"), oth=rows.filter(r=>r.region!=="후쿠오카");
+  const order=["후쿠오카","오사카","도쿄","오키나와"];
+  const regs=order.filter(g=>rows.some(r=>r.region===g)).concat([...new Set(rows.map(r=>r.region))].filter(g=>order.indexOf(g)<0));
   const stale=it.store_stale?` · 수집이 안 돼 이전 값`:"";
+  const body=regs.map(g=>`<div class="jpreg"><h4 class="jpreg-h">${jpEsc(g)} 지역</h4><ul class="jpssl">${rows.filter(r=>r.region===g).map(line).join("")}</ul></div>`).join("");
   return `<div class="jpss"><div class="jpss-h">아카짱혼포 매장 재고 <small>참고 재고 · 확인 ${jpEsc(jpStamp(it.store_checked))}${stale}</small></div>
-    <ul class="jpssl">${fuk.map(line).join("")}</ul>
-    ${oth.length?`<details class="jpsso"><summary>오사카·도쿄·오키나와 매장 보기</summary><ul class="jpssl">${oth.map(line).join("")}</ul></details>`:""}
+    ${body}
     <p class="jpssn">아카짱혼포가 공식몰에 보여 주는 매장별 참고 재고예요. 실제와 다를 수 있고 매장 예약 보관(取り置き)은 안 받아요. 한큐·블라썸39는 매장 재고를 공개하지 않아요.</p></div>`;
 }
 function jpItemHtml(it,rate,mode){
@@ -2739,6 +2769,33 @@ function jpItemHtml(it,rate,mode){
   <p class="jpsrc">출처: ${src}${krl} · 일본 가격 확인 ${jpEsc(jpStamp(it.checked))}</p>
 </div>`;
 }
+/* 아카짱혼포 사 올 만한 소품: 재고 없이 가격·사진·후기 언급 수만 보여 준다. 아카짱혼포는 게스트카드 할인이 없어 환급만 계산 */
+function jpRecWon(r,rate,mode){return jpNet(r.price,mode==="none"?"none":"aka")*rate;}
+function jpRecHtml(r,rate,mode){
+  const mn=r.mentions||{}, link=jpEsc(r.url);
+  const img=r.image
+    ?`<a class="jprec-img" href="${link}" target="_blank" rel="noopener nofollow"><img src="${jpEsc(r.image)}" alt="${jpEsc(r.brand+" "+r.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"></a>`
+    :`<span class="jprec-img noimg"></span>`;
+  const men=`후기 ${mn.blog||0}건${mn.cafe?` · 맘스홀릭 ${mn.cafe}건`:""} 언급`;
+  const stale=r.stale?` · 마지막 확인값(${jpEsc(jpStamp(r.checked).slice(0,10))})`:"";
+  return `<div class="jprec">${img}<div class="jprec-b">
+    <b class="jprec-n">[${jpEsc(r.brand)}] ${jpEsc(r.name)}</b>
+    <p class="jprec-d">${jpEsc(r.desc)}</p>
+    <div class="jprec-p"><b>약 ${jpWon(jpRecWon(r,rate,mode))}</b> <small>${jpYen(r.price)} · 100엔 = ${jpRate100(rate)}원${mode==="none"?"":" · 면세 환급 기준"}${stale}</small></div>
+    <p class="jprec-w">${jpEsc(r.why)}</p>
+    <p class="jprec-m"><span>${men}</span> <a href="${link}" target="_blank" rel="noopener nofollow">아카짱혼포 온라인에서 보기</a></p>
+  </div></div>`;
+}
+function jpRecsHtml(D,rate,mode){
+  const recs=D.recs||[]; if(!recs.length) return "";
+  const groups=D.recs_groups||[...new Set(recs.map(r=>r.group))];
+  const body=groups.map(g=>{
+    const rs=recs.filter(r=>r.group===g).sort((a,b)=>((b.mentions||{}).blog||0)-((a.mentions||{}).blog||0));
+    return rs.length?`<div class="jpreg"><h4 class="jpreg-h">${jpEsc(g)}</h4><div class="jprecs">${rs.map(r=>jpRecHtml(r,rate,mode)).join("")}</div></div>`:"";
+  }).join("");
+  const tips=(D.recs_tips||[]).map(t=>`<li>${jpEsc(t)}</li>`).join("");
+  return `${body}<p class="jpssn">${jpEsc(D.recs_basis||"")}</p>${tips?`<h4 class="jpreg-h jptip-h">구매 팁</h4><ul class="jpnotes">${tips}</ul>`:""}`;
+}
 function jpStoreHtml(st,open){
   const li=a=>(a||[]).map(x=>`<li>${jpEsc(x)}</li>`).join("");
   return `<details class="jpstore"${open?" open":""}><summary>${jpEsc(st.name)} <small>${jpEsc(st.brands)}</small></summary>
@@ -2750,7 +2807,16 @@ function jpStoreHtml(st,open){
     ${st.tip?`<h4>참고</h4><ul><li>${jpEsc(st.tip)}</li></ul>`:""}
   </div></details>`;
 }
-function jpParseRate(s){const v=parseFloat(String(s||"").replace(/,/g,"."));return v>0&&v<30?v:null;}
+/* 내 환율 입력은 한국에서 쓰는 100엔당 원(예: 845). 1엔당 값(예: 8.45)을 넣어도 받아 준다. 돌려주는 값은 1엔당 원 */
+function jpParseRate(s){
+  let t=String(s||"").trim();
+  t=/^\d+,\d{1,2}$/.test(t)?t.replace(",","."):t.replace(/,/g,"");
+  const v=parseFloat(t);
+  if(!(v>0)) return null;
+  if(v>=300&&v<=1500) return v/100;
+  if(v>=3&&v<=15) return v;
+  return null;
+}
 /* === JP-CORE END === */
 
 (function(){
@@ -2767,7 +2833,7 @@ function jpParseRate(s){const v=parseFloat(String(s||"").replace(/,/g,"."));retu
     const r=rate(), el=$("jpRate");
     if(!r){ el.textContent="환율을 불러오지 못했어요. 아래 '내 환율'에 직접 넣어 주세요."; return; }
     const note=r.my?"내가 넣은 환율로 계산 중이에요":(r.live?`오늘 환율(${jpEsc(r.src)})${r.at?" · 갱신 "+jpEsc(jpStamp(r.at)):""}`:`저장된 환율(${jpEsc(jpStamp(r.at))}) — 실시간 조회가 안 됐어요`);
-    el.innerHTML=`1엔 = <b>${r.v.toFixed(4)}원</b> <small>${note}. 중간환율이라 실제 환전·카드 환율과 달라요.</small>`;
+    el.innerHTML=`100엔 = <b>${jpRate100(r.v)}원</b> <small>${note}. 중간환율이라 실제 환전·카드 환율과 달라요.</small>`;
   }
   function renderList(){
     if(!DATA) return;
@@ -2776,6 +2842,8 @@ function jpParseRate(s){const v=parseFloat(String(s||"").replace(/,/g,"."));retu
     $("jpGroups").innerHTML=groups.map(g=>`<button type="button" class="jpchip${g===group?" on":""}" data-g="${jpEsc(g)}">${jpEsc(g)}</button>`).join("");
     const its=DATA.items.filter(i=>group==="전체"||i.group===group);
     $("jpList").innerHTML=r?its.map(i=>jpItemHtml(i,r.v,mode)).join(""):'<div class="card"><p class="sub" style="margin:0">환율을 넣으면 가격이 보여요.</p></div>';
+    $("jpRecs").innerHTML=r?jpRecsHtml(DATA,r.v,mode):"";
+    $("jpRecsCard").style.display=(DATA.recs&&DATA.recs.length)?"":"none";
     $("jpStamp").textContent=`가격·재고 확인: ${jpStamp(DATA.generated_at)} (매일 오전 10시 전후 갱신, ${DATA.ok_items}/${DATA.total_items}개 자동 확인). 일본 가격은 공식 쇼핑몰 표시가이고 매장 가격과 다를 수 있어요.`;
   }
   function renderGuide(){
@@ -3918,7 +3986,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="55ffc36e";
+var APP_BUILD="ae190882";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
