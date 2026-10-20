@@ -1,6 +1,16 @@
+<!doctype html>
+<html lang="ko">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>임신·출산 무료 도구 | 맘케어</title>
+<meta name="description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격을 계산 기준과 함께 보여 드려요.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="맘케어">
+<meta property="og:title" content="임신·출산 무료 도구 | 맘케어">
+<meta property="og:description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격을 계산 기준과 함께 보여 드려요.">
+<meta property="og:url" content="https://momcarekorean.github.io/saju/">
+<meta property="og:image" content="https://momcarekorean.github.io/saju/tab-name.jpg">
+<link rel="canonical" href="https://momcarekorean.github.io/saju/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
@@ -755,7 +765,7 @@ dd b{font-weight:500; color:var(--ink)}
 <header>
   <p class="eyebrow">맘케어 · 임신부터 출산까지</p>
   <h1>임신·출산 무료 도구</h1>
-  <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위를 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
+  <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격을 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
   <p class="visits" id="visitBox" hidden></p>
 </header>
 
@@ -4212,6 +4222,7 @@ function wkFromLmp(){                             // 마지막 생리 시작일�
   const e=wkLmpToEdd(v);
   if(!e){ msg.textContent="2026-05-20 처럼 숫자로 적어 주세요."; return; }
   const ga=gcGaDays(e, wkToday());
+  if(ga==null){ msg.textContent="날짜를 다시 확인해 주세요. 마지막 생리가 시작된 날을 적어 주세요."; return; }
   if(ga<0){ msg.textContent="오늘보다 뒤 날짜예요. 마지막 생리가 시작된 날을 적어 주세요."; return; }
   if(ga>294){ msg.textContent="임신 기간(42주)이 지난 날짜예요. 날짜를 다시 확인해 주세요."; return; }
   $g("wkEdd").value=e; wkAuto();
@@ -4254,7 +4265,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="f7a73530";
+var APP_BUILD="0c0b1116";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
