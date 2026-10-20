@@ -2413,8 +2413,8 @@ function calc(){
       ${lack===eokPick?"이 사주는 방향 1과 결론이 같아서 고민할 게 없어요.":"방향 1과 결론이 달라서, 어느 쪽을 따를지는 부모가 정하시면 돼요."}</p></div>`;
 
   // ── 이름 분석 + 추천
-  const sur=(document.getElementById("surname").value||"").trim();
-  const given=(document.getElementById("given").value||"").trim();
+  const sur=nameClean(document.getElementById("surname").value,2);      // 한글만: 주소로 들어온 값이 화면 HTML 에 섞이지 않게
+  const given=nameClean(document.getElementById("given").value,3);
   const topN=parseInt(document.getElementById("topn").value,10);
   const nb=document.getElementById("naming");
   const ch=sur?choOf(sur[0]):null;
@@ -2706,7 +2706,7 @@ function calc(){
   const set=(id,v)=>{if(v!==null&&v!=="")document.getElementById(id).value=v;};
   set("d",q.get("d")); set("t",q.get("t")); set("city",q.get("c"));
   // 예전 기본값 "길동"이 주소에 남아 있어도 되살리지 않는다(이제 기본은 빈칸)
-  set("surname",q.get("s")); if(q.get("g")!=="길동") set("given",q.get("g")); set("sex",q.get("x")); set("topn",q.get("n"));
+  set("surname",nameClean(q.get("s"),2)); if(q.get("g")!=="길동") set("given",nameClean(q.get("g"),3)); set("sex",q.get("x")); set("topn",q.get("n"));
   if(q.get("e")!==null) document.getElementById("eot").checked=q.get("e")==="1";
   if(q.get("y")!==null) document.getElementById("yaja").checked=q.get("y")==="1";
   if(!q.get("t")) document.getElementById("unknown").checked=true;
@@ -2745,6 +2745,7 @@ document.getElementById("shFb").addEventListener("click",()=>{
 
 /* === NAMEHIST-CORE START === */
 // 작명 기록: 이 기기 브라우저(localStorage)에만 저장한다. 서버로 보내지 않는다.
+function nameClean(v,n){ return String(v==null?"":v).replace(/[^가-힣]/g,"").slice(0,n); }
 const NH_KEY="momcare_naming_hist_v1", NH_MAX=30, NH_NAMES_MAX=30;
 const NH_SEX={F:"여아",M:"남아",A:"성별 둘 다"};
 function nhStr(v,n){ return String(v==null?"":v).slice(0,n); }
@@ -4253,7 +4254,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="d6dd2805";
+var APP_BUILD="f7a73530";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
