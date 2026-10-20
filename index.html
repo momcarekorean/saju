@@ -4299,7 +4299,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="f36ca9f4";
+var APP_BUILD="9b42d6ec";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -4436,6 +4436,7 @@ function ckRender(slotId){
       inner+=`<div class="ckbar bar-${needCls(need)}"><b>${needName(need)}</b><span>${rows.length}가지</span></div>`
         +`<div class="cktable">${rows.map(r=>ckBuyRow(r[0],r[1])).join("")}</div>`;
     }
+    if(links.length&&hasC) inner+=wkBannerHtml("check");   // 쿠팡 상품이 있으면 맨 아래에 쿠팡 파트너스 배너(주차별·성장분석·순위 탭과 같게)
     h+=card("ckshop","이 시기에 살 것", inner);
   }
   if(pl.safety.length) h+=card("cksafe","안전 안내", ul(pl.safety,it=>ckItemLi(it,"")));
