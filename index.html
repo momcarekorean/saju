@@ -376,6 +376,11 @@ dd b{font-weight:500; color:var(--ink)}
 .nhc small{font-size:11px;color:var(--ink-3)}.nhc em{font-style:normal;font-size:11px;color:var(--seal)}
 .nhd{margin-top:8px;font-size:13px}.nhd summary{cursor:pointer;color:var(--ink-2)}
 .nhb{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.nhb .rebtn{margin:0;width:auto;padding:7px 14px;font-size:13px}
+.edsave{display:block;margin-top:10px;line-height:1.5}
+.edsave input{display:inline-block;vertical-align:-2px;margin-right:6px}
+.edsave .hint{display:block;margin:2px 0 0 22px;font-size:12px;color:var(--ink-3)}
+.phtop{margin:8px 0 0;padding-left:20px;font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+.phtop b{color:var(--ink)}
 .slday{border:1px solid var(--rule);border-radius:12px;margin:10px 0;background:var(--card)}
 .slday>summary{cursor:pointer;padding:12px 14px;font-size:15px;line-height:1.5;list-style:none}
 .slday>summary::-webkit-details-marker{display:none}
@@ -819,11 +824,11 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="grid">
     <div>
       <label for="d">생년월일 (양력)</label>
-      <input type="text" id="d" value="2027-01-01" placeholder="2027-02-26" inputmode="numeric" autocomplete="off">
+      <input type="text" id="d" value="2027-03-18" placeholder="2027-03-18" inputmode="numeric" autocomplete="off">
     </div>
     <div>
       <label for="t">태어난 시각 <span class="hint">24시간 · 예 09:30, 22:14</span></label>
-      <input type="text" id="t" value="09:30" inputmode="numeric" maxlength="5" placeholder="09:30" autocomplete="off">
+      <input type="text" id="t" value="14:25" inputmode="numeric" maxlength="5" placeholder="14:25" autocomplete="off">
     </div>
     <div>
       <label for="city">태어난 지역</label>
@@ -1031,6 +1036,7 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 <div id="tab-pick" class="hidden">
 
+<p class="upd"><b>업데이트 10/20</b> 택일 기록을 이 기기에 저장할 수 있어요(선택) · 예정일을 한 번만 넣으면 모든 탭에 들어가요</p>
 <p class="upd"><b>업데이트 10/19</b> 같은 날짜의 여러 시간대를 순위로 비교하는 옵션 추가</p>
 <p class="upd"><b>업데이트 9/30</b> 주말·공휴일·야간 제외 선택 및 오류 수정</p>
 
@@ -1040,11 +1046,11 @@ dd b{font-weight:500; color:var(--ink)}
   태어난 시각을 모르면 체크해 주세요. 시각 두 글자를 빼고 나머지 여섯 글자로만 볼게요.</p>
   <div class="grid">
     <div><label for="pfD">아빠 생년월일 (양력)</label>
-      <input type="text" id="pfD" value="1989-07-22" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
-    <div><label for="pfT">아빠 태어난 시각 <span class="hint">24시간</span></label><input type="text" id="pfT" value="20:25" inputmode="numeric" maxlength="5" placeholder="12:00" autocomplete="off"></div>
+      <input type="text" id="pfD" value="1991-03-14" placeholder="1991-03-14" inputmode="numeric" autocomplete="off"></div>
+    <div><label for="pfT">아빠 태어난 시각 <span class="hint">24시간</span></label><input type="text" id="pfT" value="08:40" inputmode="numeric" maxlength="5" placeholder="12:00" autocomplete="off"></div>
     <div><label for="pmD">엄마 생년월일 (양력)</label>
-      <input type="text" id="pmD" value="1990-12-05" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
-    <div><label for="pmT">엄마 태어난 시각 <span class="hint">24시간</span></label><input type="text" id="pmT" value="10:14" inputmode="numeric" maxlength="5" placeholder="12:00" autocomplete="off"></div>
+      <input type="text" id="pmD" value="1993-08-27" placeholder="1993-08-27" inputmode="numeric" autocomplete="off"></div>
+    <div><label for="pmT">엄마 태어난 시각 <span class="hint">24시간</span></label><input type="text" id="pmT" value="15:10" inputmode="numeric" maxlength="5" placeholder="12:00" autocomplete="off"></div>
   </div>
   <label class="ck"><input type="checkbox" id="pfNo"> 아빠 시각 모름</label>
   <label class="ck"><input type="checkbox" id="pmNo"> 엄마 시각 모름</label>
@@ -1054,7 +1060,7 @@ dd b{font-weight:500; color:var(--ink)}
   <h2>출산 정보</h2>
   <div class="grid">
     <div><label for="edd">출산 예정일</label>
-      <input type="text" id="edd" value="2027-02-26" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
+      <input type="text" id="edd" value="2027-04-09" placeholder="2027-04-09" inputmode="numeric" autocomplete="off"><label class="ck edsave"><input type="checkbox" class="edOn"> 이 기기에 예정일 저장 <span class="hint">모든 탭에 같은 예정일이 들어가요 · 서버로 보내지 않아요</span><span class="edmsg gnote" style="display:block;margin:2px 0 0"></span></label></div>
     <div><label for="bsex">아기 성별</label>
       <select id="bsex"><option value="F">여아</option><option value="M">남아</option></select></div>
     <div><label for="pcity">태어날 지역</label><select id="pcity">
@@ -1072,8 +1078,8 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
   <h3 style="margin:22px 0 8px;font-size:15px">병원에서 가능하다고 한 날짜 범위</h3>
   <div class="grid">
-    <div><label for="rng1">첫날</label><input type="text" id="rng1" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
-    <div><label for="rng2">마지막 날</label><input type="text" id="rng2" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
+    <div><label for="rng1">첫날</label><input type="text" id="rng1" placeholder="2027-03-26" inputmode="numeric" autocomplete="off"></div>
+    <div><label for="rng2">마지막 날</label><input type="text" id="rng2" placeholder="2027-04-09" inputmode="numeric" autocomplete="off"></div>
   </div>
   <h3 style="margin:22px 0 2px;font-size:15px">병원에서 안 된다고 한 날·시간</h3>
   <label class="ck"><input type="checkbox" id="pNoHol" checked> 주말·공휴일은 빼기</label>
@@ -1161,6 +1167,18 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="card"><h2>어떻게 점수를 매겼나</h2><div id="pHow"></div></div>
 </div>
 
+<div class="card" id="phCard">
+  <h2>내 택일 기록</h2>
+  <p class="sub" style="margin-top:0">택일 계산을 할 때마다 입력한 값과 상위 후보를 이 기기에 남겨 둘 수 있어요. 휴대폰과 컴퓨터는 각각 따로 저장돼요.</p>
+  <label class="ck" style="margin-top:12px"><input type="checkbox" id="phOn"> 이 기기에 택일 기록 저장하기</label>
+  <p class="gnote" style="margin:8px 0 0"><b>저장하는 것</b> 부모 생년월일·태어난 시각, 예정일, 날짜 범위와 상위 후보 세 개예요.
+    <b>저장 위치</b> 이 기기의 브라우저 안에만 저장되고 서버로 보내지 않아요.
+    <b>보관</b> 최근 20번까지 남기고, 직접 지우거나 브라우저 데이터를 지울 때까지 있어요. 체크를 풀면 새 기록은 저장하지 않아요.</p>
+  <p id="phMsg" class="shmsg hidden"></p>
+  <div id="phList"></div>
+  <button id="phClear" type="button" class="rebtn hidden">기록 전부 지우기</button>
+</div>
+
 <div class="card">
   <h2>이 도구 알려주기</h2>
   <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
@@ -1204,12 +1222,13 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 
 <div id="tab-growth" class="hidden">
+<p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
 <div class="card">
   <h2 id="gTitle">우리 아기 성장분석</h2>
   <p class="sub" style="margin-top:0">초음파 사진에 적힌 BPD·HC·AC·FL·EFW 값을 넣으면, 같은 주수 아기들 사이에서 어디쯤인지 WHO 태아성장표 기준으로 보여 드려요.</p>
   <div class="grid" style="margin-top:14px">
     <div><label for="gEdd">출산 예정일</label>
-      <input type="text" id="gEdd" placeholder="2027-02-26" inputmode="numeric" autocomplete="off"></div>
+      <input type="text" id="gEdd" placeholder="2027-04-09" inputmode="numeric" autocomplete="off"><label class="ck edsave"><input type="checkbox" class="edOn"> 이 기기에 예정일 저장 <span class="hint">모든 탭에 같은 예정일이 들어가요 · 서버로 보내지 않아요</span><span class="edmsg gnote" style="display:block;margin:2px 0 0"></span></label></div>
     <div><label for="gNick">태명 <span class="hint">선택</span></label>
       <input type="text" id="gNick" maxlength="20" placeholder="콩떡이" autocomplete="off"></div>
   </div>
@@ -1297,6 +1316,7 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 </div>
 <div id="tab-week" class="hidden">
+<p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
 <p class="upd"><b>업데이트 10/19</b> 마지막 생리 시작일만 넣어도 출산 예정일과 오늘 몇 주 며칠인지 계산해요</p>
 <div class="card">
   <h2>주차별 우리 아기</h2>
@@ -1309,19 +1329,21 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
   <p class="gnote" id="wkNow" style="margin-bottom:0"></p>
   <div style="margin-top:14px">
-    <label for="wkLmp">마지막 생리 시작일 <span class="hint">예정일을 모르면 이 날짜로 계산해요 · 저장은 안 해요</span></label>
-    <input type="text" id="wkLmp" placeholder="2026-05-20" inputmode="numeric" autocomplete="off">
+    <label for="wkLmp">마지막 생리 시작일 <span class="hint">예정일을 모르면 이 날짜로 계산해요 · 이 날짜 자체는 저장하지 않아요</span></label>
+    <input type="text" id="wkLmp" placeholder="2026-07-03" inputmode="numeric" autocomplete="off">
     <p class="gnote" id="wkLmpMsg" style="margin-bottom:0"></p>
   </div>
   <div style="margin-top:14px">
-    <label for="wkEdd">출산 예정일 <span class="hint">병원이 정해 준 예정일이 있으면 이 칸에 넣어 주세요 · 오늘 기준 이번 주를 찾아 드려요 · 저장은 안 해요</span></label>
-    <input type="text" id="wkEdd" placeholder="2027-02-26" inputmode="numeric" autocomplete="off">
+    <label for="wkEdd">출산 예정일 <span class="hint">병원이 정해 준 예정일이 있으면 이 칸에 넣어 주세요 · 오늘 기준 이번 주를 찾아 드려요</span></label>
+    <input type="text" id="wkEdd" placeholder="2027-04-09" inputmode="numeric" autocomplete="off">
+    <label class="ck edsave"><input type="checkbox" class="edOn"> 이 기기에 예정일 저장 <span class="hint">모든 탭에 같은 예정일이 들어가요 · 서버로 보내지 않아요</span><span class="edmsg gnote" style="display:block;margin:2px 0 0"></span></label>
   </div>
 </div>
 <div id="wkBody"></div>
 </div>
 
 <div id="tab-check" class="hidden">
+<p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
 <div class="card">
   <h2>시기별 신청 체크리스트</h2>
   <p class="sub" style="margin-top:0">시기를 고르면 그때 신청할 것, 검사와 휴가, 살 것(필수와 선택), 안전 수칙을 한 화면에서 볼 수 있어요. 예정일을 몰라도 시기만 넘겨 보면 돼요. 제도는 바뀔 수 있으니 신청 전에 기관에서 한 번 더 확인해 주세요.</p>
@@ -1333,8 +1355,9 @@ dd b{font-weight:500; color:var(--ink)}
   </div>
   <p class="gnote" id="ckNow" style="margin-bottom:0"></p>
   <div style="margin-top:14px">
-    <label for="ckEdd">출산 예정일 <span class="hint">넣으면 오늘 시기로 찾아 드려요 · 저장은 안 해요</span></label>
-    <input type="text" id="ckEdd" placeholder="2027-02-26" inputmode="numeric" autocomplete="off">
+    <label for="ckEdd">출산 예정일 <span class="hint">넣으면 오늘 시기로 찾아 드려요</span></label>
+    <input type="text" id="ckEdd" placeholder="2027-04-09" inputmode="numeric" autocomplete="off">
+    <label class="ck edsave"><input type="checkbox" class="edOn"> 이 기기에 예정일 저장 <span class="hint">모든 탭에 같은 예정일이 들어가요 · 서버로 보내지 않아요</span><span class="edmsg gnote" style="display:block;margin:2px 0 0"></span></label>
   </div>
 </div>
 <div id="ckBody"></div>
@@ -2847,7 +2870,7 @@ function nhSaveLast(){
     const i=+b.dataset.i, r=NH.recs[i]; if(!r) return;
     if(b.dataset.nh==="del"){ NH.recs.splice(i,1); nhSave(); nhRender(); return; }
     const set=(id,v)=>{ document.getElementById(id).value=v; };
-    set("d",r.d); set("t",r.t||"09:30"); set("city",r.c); set("surname",r.s); set("given",r.g); set("sex",r.x);
+    set("d",r.d); set("t",r.t||"14:25"); set("city",r.c); set("surname",r.s); set("given",r.g); set("sex",r.x);
     if(r.n) set("topn",String(r.n));
     document.getElementById("eot").checked=r.e; document.getElementById("yaja").checked=r.y;
     document.getElementById("unknown").checked=r.nt; document.getElementById("t").disabled=r.nt;
@@ -3353,7 +3376,7 @@ function pickCalc(){
 
   const eddEl=document.getElementById("edd"); eddEl.value=normDate(eddEl.value)||eddEl.value;
   const eddV=eddEl.value;
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(eddV)) return fail("출산 예정일을 <b>2027-02-26</b> 처럼 적어 주세요.");
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(eddV)) return fail("출산 예정일을 <b>2027-04-09</b> 처럼 적어 주세요.");
   const eY=+eddV.slice(0,4);
   if(eY<2020||eY>2035) return fail("출산 예정일 연도가 이상합니다. <b>2020~2035년</b> 사이로 적어 주세요.");
   if(!eddV) return fail("출산 예정일을 입력해 주세요.");
@@ -3373,7 +3396,7 @@ function pickCalc(){
     return c;
   };
   const dad=mk("pfD","pfT","pfNo"), mom=mk("pmD","pmT","pmNo");
-  if(!dad||!mom) return fail("아빠와 엄마의 생년월일을 <b>1990-12-05</b> 처럼, <b>1900~2030년</b> 사이로 적어 주세요.");
+  if(!dad||!mom) return fail("아빠와 엄마의 생년월일을 <b>1993-08-27</b> 처럼, <b>1900~2030년</b> 사이로 적어 주세요.");
 
   let a=normDate(document.getElementById("rng1").value), b=normDate(document.getElementById("rng2").value);
   if(!a) a=dayAdd(eddV,-14);
@@ -3493,7 +3516,9 @@ function pickSlotsHtml(R){
   }).join("");
 }
 
+let PH_LAST=null;   // 택일 기록 저장용: 마지막으로 계산한 입력값과 상위 후보
 function pickRender(){
+  PH_LAST=null;
   const R=pickCalc(); if(!R) return;
   const rows=R.rows, dad=R.dad, mom=R.mom;
 
@@ -3624,6 +3649,12 @@ function pickRender(){
     +'날짜는 <b>담당 의료진</b>이 정해요.</p>';
 
   const multi=document.getElementById("pMulti")&&document.getElementById("pMulti").checked;
+  {
+    const v=id=>document.getElementById(id).value.trim(), ck=id=>document.getElementById(id).checked;
+    PH_LAST={edd:v("edd"), pf:{d:v("pfD"),t:v("pfT"),no:ck("pfNo")}, pm:{d:v("pmD"),t:v("pmT"),no:ck("pmNo")}, c:document.getElementById("pcity").value,
+      x:document.getElementById("bsex").value, a:v("rng1"), b:v("rng2"), hol:R.noHol, night:R.noNight, multi:!!multi,
+      top:top.map(r=>({dv:r.dv, lab:jiRangeLab(r), sc:r.sc.total, wk:r.wk, wd:r.wd}))};
+  }
   document.getElementById("pSlotsCard").classList.toggle("hidden",!multi);
   if(multi){
     document.getElementById("pSlotsSub").innerHTML='날짜마다 시간대(시진)별 점수를 매겨 <b>순위</b>를 냈어요. 처음 세 날짜는 펼쳐 놨고, 나머지는 눌러서 볼 수 있어요. '
@@ -3637,7 +3668,7 @@ function pickRender(){
 
 (function(){
   const b=document.getElementById("pickBtn");
-  if(b) b.addEventListener("click", pickRender);
+  if(b) b.addEventListener("click", ()=>{ pickRender(); if(typeof phSaveLast==="function") phSaveLast(); });
 })();
 
 /* ── 입력칸 다듬기 ─────────────────────────────────────────
@@ -3759,6 +3790,7 @@ function gApplyImport(){
   const o=G.pendingImport; G.pendingImport=null; if(!o) return;
   G.records=o.records; G.nickname=o.nickname; $g("gNick").value=o.nickname;
   if(o.edd) $g("gEdd").value=o.edd;
+  if(o.edd && typeof edSet==="function") edSet(o.edd,"gEdd");
   G.lastId=null; gPersist(); gShowGa();
   gMsg(`기록 ${o.records.length}개를 불러왔어요.`);
 }
@@ -3767,6 +3799,7 @@ function gWipe(){
   gs.del(GS_KEY); gs.del(GS_EDD);
   Object.assign(G,{consent:false, consentAt:"", sessionOnly:false, nickname:"", records:[], lastId:null});
   $g("gEdd").value=""; $g("gNick").value="";
+  if(typeof edReset==="function") edReset();
   $g("gLinkUrl").classList.add("hidden"); $g("gLinkBtns").classList.add("hidden");
   gShowGa(); gRenderAll(); gMsg("모두 지웠어요. 다시 저장하려면 동의 창에서 다시 골라 주세요.");
 }
@@ -3899,6 +3932,7 @@ $g("gcYes").addEventListener("click",()=>{
   $g("gConsent").classList.add("hidden");
   if(G.pendingImport) gApplyImport(); else gPersist();
   gRenderAll();
+  if(typeof edRenderChecks==="function") edRenderChecks();
 });
 $g("gcNo").addEventListener("click",()=>{
   G.sessionOnly=true; $g("gConsent").classList.add("hidden");
@@ -4220,12 +4254,12 @@ function wkFromLmp(){                             // 마지막 생리 시작일�
   const msg=$g("wkLmpMsg"), v=$g("wkLmp").value.trim();
   if(!v){ msg.textContent=""; return; }
   const e=wkLmpToEdd(v);
-  if(!e){ msg.textContent="2026-05-20 처럼 숫자로 적어 주세요."; return; }
+  if(!e){ msg.textContent="2026-07-03 처럼 숫자로 적어 주세요."; return; }
   const ga=gcGaDays(e, wkToday());
   if(ga==null){ msg.textContent="날짜를 다시 확인해 주세요. 마지막 생리가 시작된 날을 적어 주세요."; return; }
   if(ga<0){ msg.textContent="오늘보다 뒤 날짜예요. 마지막 생리가 시작된 날을 적어 주세요."; return; }
   if(ga>294){ msg.textContent="임신 기간(42주)이 지난 날짜예요. 날짜를 다시 확인해 주세요."; return; }
-  $g("wkEdd").value=e; wkAuto();
+  $g("wkEdd").value=e; wkAuto(); if(typeof edSet==="function") edSet(e,"wkEdd");
   msg.textContent=`출산 예정일은 ${e}예요. 마지막 생리 시작일에서 280일(40주) 뒤로 계산했어요. 병원에서 초음파로 정한 예정일이 다르면 그 날짜가 기준이에요.`;
 }
 function wkAuto(){                                // 예정일이 있으면 이번 주로 맞춘다
@@ -4265,7 +4299,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="0c0b1116";
+var APP_BUILD="f36ca9f4";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -4633,3 +4667,177 @@ window.rOnOpen=function(){};
 })();
 /* === VISITS END === */
 </script>
+<script>
+/* === EDD-CORE START === */
+// 예정일 통일 저장: 이 기기 브라우저(localStorage)에만. 서버로 보내지 않는다.
+const ED_KEY="momcare_edd", ED_ON="momcare_edd_on", ED_IDS=["edd","gEdd","wkEdd","ckEdd"];
+// 예정일로 쓸 수 있는 날짜인지: YYYY-MM-DD, 달력에 있는 날, 2000~2100년
+function edValid(v){
+  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(v==null?"":v).trim()); if(!m) return false;
+  const y=+m[1], mo=+m[2], d=+m[3]; if(y<2000||y>2100||mo<1||mo>12||d<1) return false;
+  const t=new Date(Date.UTC(y,mo-1,d)); return t.getUTCMonth()===mo-1&&t.getUTCDate()===d;
+}
+/* === EDD-CORE END === */
+
+const ED={flag:false, v:"", busy:false};
+const edGrowthOn=()=>typeof G!=="undefined"&&!!G.consent;       // 성장분석 저장에 동의했으면 예정일도 함께 저장 중
+const edOn=()=>ED.flag||edGrowthOn();
+function edPersist(){
+  try{
+    if(edOn()&&edValid(ED.v)) localStorage.setItem(ED_KEY,ED.v); else localStorage.removeItem(ED_KEY);
+    if(ED.flag) localStorage.setItem(ED_ON,"1"); else localStorage.removeItem(ED_ON);
+    return true;
+  }catch(e){ return false; }
+}
+function edMsg(m){
+  document.querySelectorAll(".edmsg").forEach(e=>{ e.textContent=m; });
+  clearTimeout(edMsg._t); edMsg._t=setTimeout(()=>document.querySelectorAll(".edmsg").forEach(e=>{ e.textContent=""; }),4200);
+}
+function edRenderChecks(){
+  const gOn=edGrowthOn();
+  document.querySelectorAll(".edOn").forEach(cb=>{ cb.checked=ED.flag||gOn; cb.disabled=gOn; cb.title=gOn?"성장분석 기록 저장에 동의해서 예정일도 함께 저장돼요":""; });
+}
+// 다른 탭의 예정일 칸을 같은 값으로 맞추고, 각 탭 화면(주차·시기·성장 주수)을 새로 그린다
+function edApply(v,src){
+  ED.busy=true;
+  try{ ED_IDS.forEach(id=>{ if(id===src) return; const el=document.getElementById(id); if(el&&el.value!==v) el.value=v; }); } finally{ ED.busy=false; }
+  try{ wkAuto(); }catch(e){}
+  try{ ckAuto(); }catch(e){}
+  try{ gShowGa(); }catch(e){}
+}
+function edSet(v,src){
+  ED.v=v; edApply(v,src);
+  if(!edPersist() && edOn()) edMsg("이 브라우저에서는 저장이 막혀 있어요. 이 화면 안에서만 같이 써요.");
+}
+function edReset(){
+  ED.flag=false; ED.v="";
+  try{ localStorage.removeItem(ED_KEY); localStorage.removeItem(ED_ON); }catch(e){}
+  ED_IDS.forEach(id=>{ const el=document.getElementById(id); if(el) el.value=(id==="edd"?el.defaultValue:""); });
+  edRenderChecks(); try{ wkAuto(); }catch(e){} try{ ckAuto(); }catch(e){} try{ gShowGa(); }catch(e){}
+}
+(function(){
+  try{ ED.flag=localStorage.getItem(ED_ON)==="1"; }catch(e){}
+  let saved=""; try{ saved=localStorage.getItem(ED_KEY)||""; }catch(e){}
+  if(edOn()&&edValid(saved)){ ED.v=saved; edApply(saved,""); }
+  edRenderChecks();
+  ED_IDS.forEach(id=>{
+    const el=document.getElementById(id); if(!el) return;
+    el.addEventListener("change",()=>{
+      if(ED.busy) return;
+      const raw=el.value.trim(), n=(typeof normDate==="function"&&normDate(raw))||raw;
+      if(raw===""){ edSet("",id); return; }
+      if(edValid(n)) edSet(n,id);
+    });
+  });
+  document.addEventListener("change",e=>{
+    const cb=e.target&&e.target.closest?e.target.closest(".edOn"):null; if(!cb) return;
+    if(edGrowthOn()){ cb.checked=true; return; }
+    ED.flag=cb.checked;
+    if(ED.flag){
+      const box=cb.closest("div"), inp=box?box.querySelector('input[type="text"]'):null;
+      const v=inp?((typeof normDate==="function"&&normDate(inp.value.trim()))||inp.value.trim()):"";
+      if(edValid(v)){ ED.v=v; edApply(v,inp.id); }
+    }
+    if(!edPersist() && ED.flag){ ED.flag=false; edPersist(); edRenderChecks(); edMsg("이 브라우저에서는 저장이 막혀 있어서 켤 수 없어요."); return; }
+    edRenderChecks();
+    edMsg(ED.flag?(edValid(ED.v)?"예정일을 이 기기에 저장했어요. 모든 탭에 같이 들어가요.":"이제부터 예정일을 넣으면 이 기기에 저장해요."):"저장을 껐어요. 저장해 둔 예정일도 지웠어요.");
+  });
+})();
+
+/* === PICKHIST-CORE START === */
+// 택일 기록: 이 기기 브라우저(localStorage)에만 저장한다. 서버로 보내지 않는다.
+const PH_KEY="momcare_pick_hist_v1", PH_MAX=20;
+const PH_SEX={F:"여아",M:"남아"};
+function phStr(v,n){ return String(v==null?"":v).slice(0,n); }
+const phDate=v=>/^\d{4}-\d{2}-\d{2}$/.test(String(v||""))?String(v):"";
+const phTime=v=>/^\d{2}:\d{2}$/.test(String(v||""))?String(v):"";
+function phParent(p){ p=(p&&typeof p==="object")?p:{}; return {d:phDate(p.d), t:phTime(p.t), no:!!p.no}; }
+function phClean(r){
+  if(!r||typeof r!=="object") return null;
+  const edd=phDate(r.edd); if(!edd) return null;
+  const pf=phParent(r.pf), pm=phParent(r.pm); if(!pf.d||!pm.d) return null;
+  const top=(Array.isArray(r.top)?r.top:[]).slice(0,10).map(x=>(x&&typeof x==="object")?{dv:phDate(x.dv), lab:phStr(x.lab,40),
+    sc:Math.max(0,Math.min(100,parseInt(x.sc,10)||0)), wk:Math.max(0,Math.min(45,parseInt(x.wk,10)||0)), wd:Math.max(0,Math.min(6,parseInt(x.wd,10)||0))}:null).filter(x=>x&&x.dv).slice(0,3);
+  return {at:phStr(r.at,30), edd:edd, pf:pf, pm:pm, c:phStr(r.c,8), x:PH_SEX[r.x]?r.x:"F", a:phDate(r.a), b:phDate(r.b),
+    hol:!!r.hol, night:!!r.night, multi:!!r.multi, top:top};
+}
+function phSig(r){ return [r.edd,r.pf.d,r.pf.t,r.pf.no?1:0,r.pm.d,r.pm.t,r.pm.no?1:0,r.c,r.x,r.a,r.b,r.hol?1:0,r.night?1:0,r.multi?1:0,
+  r.top.map(t=>t.dv+t.lab+t.sc).join("/")].join("|"); }
+// 맨 앞에 넣고 PH_MAX 개까지만 남긴다. 바로 앞 기록과 입력·결과가 똑같으면 또 넣지 않는다.
+function phAdd(recs,rec){
+  const c=phClean(rec); if(!c||!c.top.length) return recs;
+  if(recs.length&&phSig(recs[0])===phSig(c)) return recs;
+  return [c].concat(recs).slice(0,PH_MAX);
+}
+function phParse(raw){
+  try{
+    const o=JSON.parse(raw); if(!o||o.v!==1||!Array.isArray(o.recs)) return null;
+    return {on:!!o.on, recs:o.recs.map(phClean).filter(Boolean).slice(0,PH_MAX)};
+  }catch(e){ return null; }
+}
+function phStringify(st){ return JSON.stringify({v:1,on:!!st.on,recs:st.recs}); }
+/* === PICKHIST-CORE END === */
+
+const PH={on:false, recs:[]};
+function phEsc(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function phSave(){ try{ localStorage.setItem(PH_KEY, phStringify(PH)); return true; }catch(e){ return false; } }
+function phMsgShow(m){
+  const e=document.getElementById("phMsg"); e.textContent=m; e.classList.remove("hidden");
+  clearTimeout(phMsgShow._t); phMsgShow._t=setTimeout(()=>e.classList.add("hidden"),4200);
+}
+function phRender(){
+  const box=document.getElementById("phList"), city=document.getElementById("pcity");
+  const cityName=v=>{ const o=[...city.options].find(x=>x.value===v); return o?o.textContent.trim():""; };
+  document.getElementById("phOn").checked=PH.on;
+  document.getElementById("phClear").classList.toggle("hidden",!PH.recs.length);
+  if(!PH.recs.length){
+    box.innerHTML='<p class="gnote" style="margin:14px 0 0">'+(PH.on?"아직 저장된 기록이 없어요. 위에서 <b>택일 계산</b>을 누르면 여기에 쌓여요.":"저장을 켜 두면 택일 계산을 할 때마다 이곳에 기록이 쌓여요.")+'</p>';
+    return;
+  }
+  const par=(p)=>phEsc(p.d)+(p.no?" (시각 모름)":" "+phEsc(p.t));
+  box.innerHTML=PH.recs.map((r,i)=>{
+    const when=r.at?new Date(r.at):null, wl=when&&!isNaN(when)?when.toLocaleString("ko-KR",{year:"numeric",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"";
+    const opts=[r.hol?"주말·공휴일 제외":"주말·공휴일 포함", r.night?"야간·새벽 제외":"야간·새벽 포함"].concat(r.multi?["여러 시간대 순위"]:[]).join(" · ");
+    const tops=r.top.map((t,k)=>'<li><b>'+(k+1)+'순위</b> '+phEsc(t.dv)+'('+WD_K[wdOf(t.dv)]+') · '+phEsc(t.lab)+' · <b>'+t.sc+'점</b> · 임신 '+t.wk+'주 '+t.wd+'일</li>').join("");
+    return '<div class="nh"><div class="nhh"><b>예정일 '+phEsc(r.edd)+'</b> · '+PH_SEX[r.x]+(cityName(r.c)?' · '+phEsc(cityName(r.c)):'')+(wl?'<small>'+phEsc(wl)+' 저장</small>':'')+'</div>'
+      +'<p class="nhp">아빠 '+par(r.pf)+' · 엄마 '+par(r.pm)+'</p>'
+      +'<p class="nhp">'+(r.a||r.b?'날짜 범위 '+phEsc(r.a||"예정일 2주 전")+' ~ '+phEsc(r.b||"예정일")+' · ':'날짜 범위 기본값 · ')+opts+'</p>'
+      +'<ol class="phtop">'+tops+'</ol>'
+      +'<div class="nhb"><button type="button" class="rebtn" data-ph="load" data-i="'+i+'">이 입력값 다시 불러오기</button>'
+      +'<button type="button" class="rebtn" data-ph="del" data-i="'+i+'">이 기록 지우기</button></div></div>';
+  }).join("");
+}
+// 택일 계산 버튼을 눌렀을 때만 저장한다
+function phSaveLast(){
+  if(!PH.on||!PH_LAST) return;
+  const before=PH.recs.length?phSig(PH.recs[0]):"";
+  PH.recs=phAdd(PH.recs,Object.assign({at:new Date().toISOString()},PH_LAST));
+  if(PH.recs.length&&phSig(PH.recs[0])!==before && !phSave()) phMsgShow("이 브라우저에서는 저장이 막혀 있어요. 사생활 보호 모드이거나 저장 공간이 꺼져 있을 수 있어요.");
+  phRender();
+}
+(function(){
+  try{ const st=phParse(localStorage.getItem(PH_KEY)); if(st){ PH.on=st.on; PH.recs=st.recs; } }catch(e){}
+  phRender();
+  document.getElementById("phOn").addEventListener("change",e=>{
+    PH.on=e.target.checked;
+    if(!phSave()){ PH.on=false; e.target.checked=false; phMsgShow("이 브라우저에서는 저장이 막혀 있어서 켤 수 없어요."); return; }
+    phMsgShow(PH.on?"이제부터 택일 계산을 할 때마다 이 기기에 기록해 둘게요.":"새 기록은 저장하지 않아요. 이미 저장된 기록은 아래에 그대로 남아 있어요.");
+    phRender();
+  });
+  document.getElementById("phClear").addEventListener("click",()=>{
+    if(!confirm("이 기기에 저장된 택일 기록을 전부 지울까요? 되돌릴 수 없어요.")) return;
+    PH.recs=[]; phSave(); phRender(); phMsgShow("저장된 기록을 모두 지웠어요.");
+  });
+  document.getElementById("phList").addEventListener("click",e=>{
+    const b=e.target.closest("[data-ph]"); if(!b) return;
+    const i=+b.dataset.i, r=PH.recs[i]; if(!r) return;
+    if(b.dataset.ph==="del"){ PH.recs.splice(i,1); phSave(); phRender(); return; }
+    const set=(id,v)=>{ document.getElementById(id).value=v; }, chk=(id,v)=>{ document.getElementById(id).checked=!!v; };
+    set("edd",r.edd); set("pfD",r.pf.d); set("pfT",r.pf.t||"12:00"); set("pmD",r.pm.d); set("pmT",r.pm.t||"12:00");
+    chk("pfNo",r.pf.no); chk("pmNo",r.pm.no); set("pcity",r.c); set("bsex",r.x); set("rng1",r.a); set("rng2",r.b);
+    chk("pNoHol",r.hol); chk("pNoNight",r.night); chk("pMulti",r.multi);
+    pickRender();
+  });
+})();
+</script>
+
