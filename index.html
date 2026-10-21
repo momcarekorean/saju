@@ -3,11 +3,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>임신·출산 무료 도구 | 맘케어</title>
-<meta name="description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격을 계산 기준과 함께 보여 드려요.">
+<meta name="description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드를 계산 기준과 함께 보여 드려요.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="맘케어">
 <meta property="og:title" content="임신·출산 무료 도구 | 맘케어">
-<meta property="og:description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격을 계산 기준과 함께 보여 드려요.">
+<meta property="og:description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드를 계산 기준과 함께 보여 드려요.">
 <meta property="og:url" content="https://momcarekorean.github.io/saju/">
 <meta property="og:image" content="https://momcarekorean.github.io/saju/tab-name.jpg">
 <link rel="canonical" href="https://momcarekorean.github.io/saju/">
@@ -292,7 +292,7 @@ dd b{font-weight:500; color:var(--ink)}
 }
 
 /* 탭 — 그림을 눌러 고른다 */
-.tabs{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin:0 0 26px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 26px}
 .tb{appearance:none;padding:0;border:3px solid transparent;border-radius:16px;
   background:none;cursor:pointer;overflow:hidden;position:relative;display:block;
   transition:border-color .15s, box-shadow .15s, transform .12s, filter .15s}
@@ -780,6 +780,124 @@ dd b{font-weight:500; color:var(--ink)}
 .jpnotice-c a{color:inherit;text-decoration:underline}
 @media (max-width:420px){.jpnotice-a{font-size:18px}.jpnotice-b,.jpnotice-c{font-size:14.5px}}
 /*JP:CSS:END*/
+/*BF:CSS:BEGIN*/
+/* 이유식 가이드 탭 */
+.bf-lead{margin:0 0 18px}
+.bf-seg{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.bf-seg .sg{flex:1 1 0;min-width:72px;text-align:center;padding:10px 6px;border:1px solid var(--rule);border-radius:2px;background:var(--card);font-size:14px;color:var(--ink-2);cursor:default}
+.bf-seg .sg b{display:block;font-family:"Nanum Myeongjo",serif;font-size:16px;color:var(--ink)}
+.bf-seg .sg small{display:block;font-size:11px;color:var(--ink-3)}
+.bf-seg .sg.on{background:var(--seal);border-color:var(--seal);color:#fff}
+.bf-seg .sg.on b,.bf-seg .sg.on small{color:#fff}
+.bf-seg .sg.off{opacity:.55;border-style:dashed}
+.bf-seg .sg.pick{cursor:pointer}
+.bf-rows{display:grid;gap:10px;margin-top:6px}
+.bf-row{display:grid;grid-template-columns:34px 1fr 18px;gap:12px;align-items:center;padding:14px;border:1px solid var(--rule);border-radius:3px;background:var(--paper);text-decoration:none;color:var(--ink)}
+.bf-row:hover{border-color:var(--seal)}
+.bf-row .n{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--paper);font-family:"Nanum Myeongjo",serif;font-weight:800;display:flex;align-items:center;justify-content:center}
+.bf-row .t{font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:16.5px;line-height:1.3}
+.bf-row .d{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.5}
+.bf-row .m{margin-top:7px;display:flex;flex-wrap:wrap;gap:5px}
+.bf-row .ar{color:var(--ink-3);font-size:20px}
+.bf-pill{font-size:11.5px;padding:2px 9px;border-radius:99px;border:1px solid var(--rule);background:var(--card);color:var(--ink-2)}
+.bf-pill.red{border-color:var(--seal);color:var(--seal)}
+.bf-pill.grn{border-color:var(--mok);color:var(--mok)}
+.bfs{display:inline-block;font-size:7px;font-weight:700;padding:0 3px;margin-left:2px;border-radius:2px;vertical-align:1px;line-height:10px;white-space:nowrap}
+.bfsl{font-size:10px;font-weight:400;color:var(--ink-3);margin-left:3px;white-space:nowrap}
+.bfs.s1{background:#2C4A6E;color:#fff}
+.bfs.s2{background:#3E7C59;color:#fff}
+.bfs.s3{background:#B8862B;color:#fff}
+.bfs.s4{background:#8B8070;color:#fff}
+.bf-legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12.5px;color:var(--ink-2);margin-top:12px}
+.bf-call{margin:12px 0 0;padding:12px 14px;border-left:4px solid var(--mok);background:rgba(62,124,89,.10);border-radius:0 3px 3px 0;font-size:14px;line-height:1.7;color:var(--ink)}
+.bf-call.red{border-left-color:var(--seal);background:rgba(168,50,42,.07)}
+.bf-call b{font-weight:700}
+.bf-back{display:inline-block;margin:0 0 14px;font-size:13.5px;color:var(--ink-2);text-decoration:none}
+.bf-title{font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:23px;line-height:1.25;margin:0}
+.bf-tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.bf-mat{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+.bf-mat td,.bf-mat th{padding:10px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.bf-mat th{font-size:12px;color:var(--ink-3);font-weight:500}
+.bf-mat td:first-child{white-space:nowrap;padding-right:6px}
+.bf-mat td.q{font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:17px;white-space:nowrap}
+.bf-cap{margin:0 0 10px;font-size:12.5px;color:var(--ink-3)}
+.bf-steps{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:12px;counter-reset:s}
+.bf-steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:12px;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.bf-steps li::before{content:counter(s);width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:14px;margin-top:1px}
+.bf-steps li.key::before{background:var(--seal);border-color:var(--seal);color:#fff}
+.bf-steps b,.bf-call b,.bf-chk b,.bf-tl b{font-weight:700}
+.bf-steps b{background:linear-gradient(transparent 62%,rgba(168,50,42,.22) 62%)}
+.bf-chk{display:grid;gap:8px;margin-top:10px}
+.bf-chk div{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--rule);border-radius:3px;background:var(--paper);font-size:14px;line-height:1.65}
+.bf-chk i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--mok);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700}
+.bf-acc{display:grid;gap:8px;margin-top:10px}
+.bf-acc details{border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+.bf-acc summary{cursor:pointer;padding:12px 14px;font-size:14.5px;font-weight:500;list-style:none}
+.bf-acc summary::-webkit-details-marker{display:none}
+.bf-acc summary::before{content:"▸ ";color:var(--seal)}
+.bf-acc details[open] summary::before{content:"▾ "}
+.bf-acc .bd{padding:0 14px 14px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.bf-acc .bd b{color:var(--ink)}
+.bf-acc .ar{display:block;margin-top:4px;color:var(--seal);font-weight:700}
+.bf-gear{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.bf-gear a,.bf-gear span.g{padding:9px 13px;border:1px solid var(--rule);border-radius:99px;background:var(--paper-2);color:var(--ink);text-decoration:none;font-size:13.5px}
+.bf-gear a{border-color:var(--seal)}
+.bf-gear span.g{color:var(--ink-2)}
+.bf-tl{list-style:none;margin:10px 0 0;padding:0}
+.bf-tl li{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:12px 0;border-bottom:1px dashed var(--rule);font-size:14px;line-height:1.7}
+.bf-tl li:last-child{border-bottom:none}
+.bf-tl .k{font-family:"Nanum Myeongjo",serif;font-weight:800;color:var(--seal);font-size:15px}
+.bf-sub{margin:16px 0 6px;font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:15.5px}
+.bf-vg{margin-top:12px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+.bf-vg h4{margin:0;padding:10px 14px;font-family:"Nanum Myeongjo",serif;font-size:16px;border-bottom:1px solid var(--rule)}
+.bf-vg dl{margin:0;padding:6px 14px 10px}
+.bf-vg dt{margin-top:8px;font-size:12px;font-weight:500;color:var(--ink-3)}
+.bf-vg dd{margin:2px 0 0;font-size:14px;line-height:1.65;color:var(--ink)}
+.bf-nav{display:flex;gap:10px;margin:0 0 26px}
+.bf-nav a{flex:1;text-align:center;padding:12px 8px;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink);text-decoration:none;font-size:14px}
+.bf-nav a.off{visibility:hidden}
+.bf-basics details{border-bottom:1px dashed var(--rule);padding:2px 0}
+.bf-basics details:last-child{border-bottom:none}
+.bf-basics summary{cursor:pointer;padding:10px 0;font-weight:500;font-size:14.5px}
+.bf-basics .bd{padding:0 0 12px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.bf-basics .bd b{color:var(--ink)}
+@media(max-width:600px){.tabs{grid-template-columns:repeat(2,1fr)}}
+/* 문장마다 한 줄, 박스 우측 상단 기호 설명, 맨 위 기호 보는 법 */
+.bfl{display:block}
+.bfl+.bfl{margin-top:7px}
+.bf-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:4px 12px;flex-wrap:wrap}
+.bf-hd h2{flex:1 1 auto;min-width:0}
+.bf-hd .bf-cap{margin:0 0 10px}
+.bf-key{flex:none;margin:4px 0 0 auto;font-size:10px;line-height:1.7;color:var(--ink-3);text-align:right;max-width:100%}
+.bf-key .bfs{margin:0 1px 0 0}
+.bf-note{margin:10px 0 0;font-size:13px;line-height:1.7;color:var(--ink-2)}
+.bf-lg .bf-lgrow{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;padding:9px 0;border-top:1px dashed var(--rule)}
+.bf-lg .bf-cap+.bf-lgrow{border-top:none}
+.bf-lgrow .bfs{margin:3px 0 0;font-size:9px;padding:0;line-height:14px;width:20px;text-align:center;border-radius:3px}
+.bf-lgrow b{display:block;font-size:14px}
+.bf-lgrow small{display:block;font-size:12px;color:var(--ink-2);line-height:1.6;margin-top:1px}
+.bf-lgs{padding:12px 16px;margin-bottom:16px}
+.bf-lgc{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink-2)}
+.bf-lgc .bfs{margin:0 2px 0 0}
+.bf-keynote{margin:0 0 2px}
+.bf-kdot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--seal);margin-right:5px;vertical-align:-1px}
+.bf-tools{display:grid;gap:8px;margin-top:6px}
+.bf-tool{padding:10px 12px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+.bf-tool .bt{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.bf-tool b{font-size:14.5px}
+.bf-tool small{display:block;margin-top:3px;font-size:13px;line-height:1.6;color:var(--ink-2)}
+.bf-golink{color:var(--seal);font-weight:700}
+.bf-gp{margin:18px 0 6px;padding-top:14px;border-top:2px solid var(--ink)}
+.bf-gp:first-of-type{border-top:none;padding-top:0;margin-top:10px}
+.bf-gph{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-bottom:8px}
+.bf-gph b{font-family:"Nanum Myeongjo",serif;font-size:17px}
+.bf-gph small{flex-basis:100%;font-size:13px;color:var(--ink-2);line-height:1.6}
+.bf-ptabs{display:flex;gap:6px;margin:4px 0 10px}
+.bf-pt{flex:1 1 0;padding:9px 10px;border:1px solid var(--rule);border-radius:10px;background:var(--paper-2);color:var(--ink-2);font:inherit;font-size:14px;cursor:pointer}
+.bf-pt.on{border-color:var(--seal);color:var(--ink);font-weight:700;background:var(--paper)}
+.bf-pp[hidden]{display:none}
+.bf-pick{margin-top:6px}
+/*BF:CSS:END*/
 
 </style>
 
@@ -787,7 +905,7 @@ dd b{font-weight:500; color:var(--ink)}
 <header>
   <p class="eyebrow">맘케어 · 임신부터 출산까지</p>
   <h1>임신·출산 무료 도구</h1>
-  <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격을 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
+  <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드를 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
   <p class="visits" id="visitBox" hidden></p>
 </header>
 
@@ -825,6 +943,11 @@ dd b{font-weight:500; color:var(--ink)}
   <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-jp">
     <img src="tab-jp.jpg" width="800" height="597" decoding="async"
          alt="일본 가격 — 일본에서 많이 사 오는 유모차·카시트·하이체어의 오늘 가격과 재고, 구매처 찾아가는 법을 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-bf">
+    <img src="tab-bf.jpg" width="800" height="597" decoding="async"
+         alt="이유식 가이드 — 시기별 레시피와 보관·해동, 막혔을 때 해결법을 숫자로 봅니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
 </nav>
@@ -1446,6 +1569,12 @@ dd b{font-weight:500; color:var(--ink)}
 <p class="jpalert" role="note"><b>일본 면세 제도는 2026-11-01 이후 출국부터 공항 환급 방식으로 바뀌어요. 그 뒤 구매는 5% 게스트카드·환급 처리를 다시 확인하세요.</b></p>
 </div>
 <!--JP:HTML:END-->
+<!--BF:HTML:BEGIN-->
+<div id="tab-bf" class="hidden">
+<p class="upd"><b>업데이트 10/21</b> 이유식 가이드 탭이 생겼어요. 초기 레시피 4개부터 시작해요</p>
+<div id="bfBody"></div>
+</div>
+<!--BF:HTML:END-->
 <div id="tab-rank" class="hidden">
 <div class="card">
   <h2>용품별 순위</h2>
@@ -1769,6 +1898,7 @@ function rkMatch(it,q){
 const INIT_TAB=new URLSearchParams(location.search).get("tab");
 const INIT_W=new URLSearchParams(location.search).get("w");
 const INIT_I=new URLSearchParams(location.search).get("i");
+const INIT_BF=new URLSearchParams(location.search).get("bf");
 // 성장분석 기록 링크(#g=…)도 주소가 바뀌기 전에 잡아 둔다
 const INIT_HASH=location.hash;
 const GAN=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
@@ -3024,7 +3154,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".tb").forEach(x=>{
     const on=(x===b); x.classList.toggle("on",on); x.setAttribute("aria-selected",on?"true":"false");
   });
-  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp"].forEach(id=>{
+  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp","tab-bf"].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.classList.toggle("hidden", id!==b.dataset.tab);
   });
@@ -3034,6 +3164,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   if(b.dataset.tab==="tab-check" && typeof cOnOpen==="function") cOnOpen();
   if(b.dataset.tab==="tab-rank" && typeof rOnOpen==="function") rOnOpen();
   if(b.dataset.tab==="tab-jp" && typeof jpOnOpen==="function") jpOnOpen();
+  if(b.dataset.tab==="tab-bf" && typeof bfOnOpen==="function") bfOnOpen();
 }));
 
 /*JP:JS:BEGIN*/
@@ -3232,6 +3363,224 @@ function jpParseRate(s){
   if(INIT_TAB==="jp"){ const b=document.querySelector('.tb[data-tab="tab-jp"]'); if(b){ b.click(); window.scrollTo(0,0); } }
 })();
 /*JP:JS:END*/
+/*BF:JS:BEGIN*/
+/* === BF-CORE START === */
+// 이유식 가이드: 자료(BF)는 bf/bf_data.json 을 inject_bf.py 가 검사한 뒤 아래에 넣는다. 화면은 이 자료만으로 그린다.
+const BF={"v":1,"updated":"2026-10-21","periods":[{"id":"early","label":"초기","sub":"6개월 무렵 · 10배 미음","ready":true},{"id":"mid","label":"중기","sub":"준비 중","ready":false},{"id":"late","label":"후기","sub":"준비 중","ready":false},{"id":"done","label":"완료기","sub":"준비 중","ready":false}],"lead":"이유식을 처음 시작하는 때(초기)에 쓰는 레시피예요. **시간과 양을 숫자로 적었고**, 막히기 쉬운 곳과 바로 할 일을 같이 넣었어요. 진단이 아니고, 담당 선생님 안내가 항상 먼저예요.","call":"**초기 이유식은 하루 30~80g**이 공식 범위예요{★} 첫날은 **티스푼 하나 분량**부터 시작해요{★} 새 음식은 먹이고 **3~7일** 반응을 본 뒤 다음 재료를 더해요{★}","listNote":"위에서부터 순서대로 따라가면 돼요. 소고기를 언제 시작할지는 담당 선생님 안내를 따라요.","basics":[{"h":"하루 양과 횟수","t":"초기 이유식은 하루 30~80g이 공식 범위예요(하루 1회, 복지부 2014){★} 식약처 지침서는 초기 이유식을 하루 2회 간식 개념으로 적어서 자료마다 달라요. 새 음식은 오전에 먹여요{◎}"},{"h":"첫날 양","t":"**티스푼 하나 분량으로 시작해요**{★} 질병관리청은 6~8개월에 한 끼 2~3숟가락부터라고 적었어요{★}"},{"h":"새 음식 간격","t":"새 음식은 먹이고 **3~7일** 동안 반응을 봐요{★ 질병관리청} 복지부는 실천 요령에 일주일 간격, Q&A에 2~7일, 식약처는 쇠고기·두부 등을 5~7일 간격으로 하나씩이라고 적어서 2~7일 사이로 자료마다 달라요{★} 담당 선생님 안내가 있으면 그걸 따라요."},{"h":"먹이는 순서","t":"공식 자료는 첫 이유식으로 **쌀미음**을 권하고, 이후 쌀 + 한 가지 식품으로 하나씩 늘려요{★} 식약처는 곡류, 채소·과일, 육류 순서로 적었고, 복지부는 쇠고기를 **이유식 시작 2~4주부터 적극 활용**하라고 해요{★} 철분 때문에 6개월이 넘었으면 쌀 다음에 바로 소고기를 넣자는 소아과·영양사 의견도 있어요{◎} 그래서 이 가이드는 **쌀미음, 채소 큐브, 소고기 큐브, 소고기 미음** 순서로 정리했고, 소고기를 먼저 시작할지는 담당 선생님 안내를 따라요."}],"cards":[{"id":"rice","no":1,"title":"쌀미음 10배죽","short":"쌀가루 15g + 찬물 150ml · 끓기 시작하면 약불로 줄이고 5분","pills":[{"t":"첫 이유식","c":"red"},{"t":"쌀가루·불린 쌀 2가지 방법"}],"tags":[{"t":"첫 이유식{★}","c":"red"},{"t":"초기 · 하루 30~80g{★}"},{"t":"소분 30g씩{○}"}],"calls":[{"c":"red","t":"**첫날 먹이는 양: 티스푼 하나 분량**{★} 쌀미음을 30g씩 소분해 두고, 아기가 먹는 만큼만 꺼내 써요{◇}"},{"t":"쌀가루 포장에 조리법이 있으면 **포장대로** 해요. 첫 이유식으로 쌀미음을 권해요{★}"}],"methods":[{"id":"A","label":"A. 쌀가루","sub":"제조사 순서 그대로","materials":[{"n":"쌀가루","q":"15g","s":"파파루 초기 포장 안내{★}"},{"n":"찬물","q":"150ml","s":"물이 쌀가루 무게의 10배{★}"}],"mnote":"쌀가루 20g + 물 200ml도 같은 10배예요{○} 한 번에 한 가지 기준만 써요.","steps":[{"t":"**찬물 150ml를 먼저** 붓고 쌀가루 15g을 넣어요. 덩어리가 보이지 않을 때까지 숟가락으로 풀어요. 따뜻한 물에 풀면 뭉쳐요{★}"},{"t":"중불에 올리고 **끓기 시작할 때까지 계속 저어요**{★}"},{"t":"끓기 시작하면 **약불로 줄이고, 그때부터 5분** 동안 저어요{★}","key":true},{"t":"불을 끄고 숟가락을 기울여 **주르륵 흘러내리는지** 확인해요"},{"t":"쌀알이 빠지지 않는 고운 체에 숟가락 뒷면으로 눌러 내려요(선택){○}"},{"t":"깊이 3cm 이하의 얕은 용기에 옮겨 식혀요. 줄 때는 **체온 정도**가 될 때 먹여요{★}"}]},{"id":"B","label":"B. 불린 쌀","sub":"직접 갈아서","materials":[{"n":"불린 쌀","q":"20g","s":"복지부 표의 10배 미음, 불린쌀 : 물 = 1 : 10 비율로 계산{★}"},{"n":"물","q":"200ml","s":"간다고 50ml + 끓인다고 150ml"}],"mnote":"불린 쌀 20g은 생쌀 14~16g에 해당해요. 생쌀은 불리면 1.25~1.4배 무거워져요{○} 생쌀 무게로 물을 재면 같은 10배라도 더 되직해져요.","steps":[{"t":"쌀을 씻어 찬물에 **30분** 불려요{○}"},{"t":"불린 쌀 20g과 물 50ml를 믹서나 핸드블렌더에 넣고 곱게 갈아요."},{"t":"냄비에 간 쌀물과 **남은 물 150ml**를 넣고 중불에 올려, 바닥을 긁듯이 저으며 끓여요."},{"t":"끓기 시작하면 **약불로 줄이고, 그때부터 10분** 동안 계속 저어요{○}","key":true},{"t":"10분이 되면 숟가락으로 떠서 알갱이가 보이는지 봐요. 보이면 **2분씩 더** 끓이고, 끓기 시작한 뒤 15분을 넘기지 않아요{◇}"},{"t":"방법 A의 5·6번처럼 체에 내리고 식혀요. 이유식 마스터기(두유제조기 등)는 제품 설명서의 물 조건을 따라요."}]}],"checks":["숟가락을 기울이면 **주르륵 흘러내려요**. 툭 떨어지면 7배죽 농도라 더 되직한 거예요{○}","숟가락으로 떠서 **알갱이가 보이지 않아요**","**덩어리**가 없어요"],"troubles":[{"q":"덩어리가 생겨요","why":"찬물에 풀기 전에 불을 올렸거나 따뜻한 물에 풀었을 때 생겨요.","fix":"불을 끄고 체에 눌러 내려요","hot":true},{"q":"바닥이 눌어붙어요","why":"약불인지 확인해요.","fix":"바닥을 긁듯이 멈추지 않고 저어요. 눌은 부분이 섞이면 탄 맛이 나서, 윗부분만 다른 냄비로 옮기고 눌은 부분은 버려요{◇}","hot":true},{"q":"다 끓였더니 너무 되직해요","why":"끓는 동안 물이 줄어요{○}","fix":"따뜻한 물을 1큰술(15ml)씩 넣고 주르륵 흐를 때까지 저어요. 먹이기 직전에 물로 농도를 맞춰도 돼요{◎}","hot":true},{"q":"너무 묽어요","why":"밥솥이나 마스터기(두유제조기 등)는 증발이 적어서 같은 비율에서도 더 묽게 나와요{○}","fix":"약불에서 1분씩 더 끓여요. 다음에는 물을 20ml 줄여서 시작해요{◇}","hot":true},{"q":"책마다 블로그마다 숫자가 달라요","why":"기준 재료가 달라서예요. 쌀가루 1 : 물 10(파파루)과 1 : 20(불린 쌀 10배와 비슷)이 둘 다 돌아다녀요.","fix":"위 방법 중 하나만 골라 쓰고, 마지막은 숫자가 아니라 농도로 확인해요"}],"opinions":["미음으로 시작하면 질감을 올리기 어려우니 약간 질감 있는 죽으로 빨리 가자는 소아과 의견이 있어요{◎} 복지부 표와 책은 10배 미음부터예요."],"gear":[{"t":"이유식 쌀가루","need":"필수","use":"방법 A에 써요. 쌀가루 포장에 조리법이 있으면 포장대로 해요.","cat":"이유식 쌀가루","pnote":"브랜드는 취향에 따라 골라요. 백미 제품과 현미 제품이 있어요. 구매 페이지의 입자 옵션에서 초기용 '가루입자' 또는 '고운입자'를 골라요. 이 레시피의 분량은 파파루 초기 포장 안내 기준이라, 다른 제품은 포장에 적힌 조리법을 먼저 따라요."},{"t":"주방 저울","need":"필수","use":"쌀가루 15g, 불린 쌀 20g을 정확히 재요.","cat":"이유식 저울"},{"t":"이유식 냄비","need":"필수","use":"미음을 끓이고 저어요.","cat":"이유식 냄비·찜기","types":["이유식 냄비"]},{"t":"이유식 큐브틀","cat":"이유식 큐브틀","need":"필수","use":"쌀미음 30g씩 나눠 얼려 둘 때 써요.","only":["모윰 이중밀폐 이유식 큐브 6구","엘파"],"pnote":"30g이 들어가려면 한 칸이 30ml 이상이어야 해요. 한 칸이 30ml로 확인된 틀과, 구매 페이지에서 용량 옵션을 고를 수 있는 엘파 큐브를 보여 줘요. 엘파는 30ml 이상 옵션을 골라요."},{"t":"고운 체","need":"선택","use":"알갱이가 남을 때 눌러 내려요.","cat":"이유식 조리 소도구"},{"t":"핸드블렌더·초퍼","need":"선택","use":"방법 B에서 불린 쌀을 갈 때 써요.","cat":"핸드블렌더·초퍼"},{"t":"이유식 마스터기(두유제조기 등)","need":"선택","use":"냄비 대신 쓸 수 있어요. 제품 설명서의 물 조건을 따라요.","cat":"이유식 마스터기","subtabs":{"이유식 마스터기(조리기)":"마스터기","두유제조기(죽·미음 겸용)":"두유제조기"}},{"t":"이유식 용기","need":"선택","use":"냉장 보관하거나 해동할 때 담아 둬요.","cat":"이유식 용기"}]},{"id":"veg","no":2,"title":"채소 큐브","short":"애호박·단호박·브로콜리 · 찌고, 갈고, 10g 큐브로 얼리기","pills":[{"t":"쌀미음 3~7일 뒤","c":"grn"},{"t":"한 번에 한 가지씩"}],"tags":[{"t":"초기 · 애호박·단호박·브로콜리"},{"t":"큐브 5g·10g{○}"}],"calls":[{"t":"**언제**: 쌀미음을 먹이고 **3~7일 동안 이상 반응이 없을 때**예요{★} 채소 첫 도입에는 줄기나 껍질처럼 섬유질이 많은 부분을 빼고 부드러운 부분을 써요{★}"},{"t":"**양**: 한 끼에 **5~10g**으로 시작해요{○} 큐브는 5g, 10g, 15g으로 만들고 **처음 먹이는 재료는 5g 큐브**부터예요{○} 알레르기가 걱정되는 식품은 적은 양부터 시작해 늘려요{★} 새 채소는 한 번에 하나씩, 3~7일 간격으로 더해요."}],"stepsTitle":"공통 순서","steps":[{"t":"흐르는 물에 문질러 씻어요{★}"},{"t":"아래 채소별 손질대로 껍질과 씨를 정리하고 **3cm 크기**로 썰어요{◇}"},{"t":"찜기에 올리고 **김 오른 뒤** 정해진 시간이 지나면 젓가락으로 찔러 봐요. 걸림 없이 들어가고 포크로 눌러 쉽게 으깨지면 푹 익은 거예요. 아니면 **3분씩** 더 쪄요{◇} 전자레인지 찜기는 아래 채소별 표의 '전자레인지' 줄 시간을 따라요{◇} 딱딱한 채소는 푹 익혀야 기도를 막지 않아요{★}","key":true},{"t":"식힌 뒤 핸드블렌더나 초퍼로 **곱게** 갈아요."},{"t":"큐브틀에 **저울로 10g씩**(또는 5g) 담아요. 큐브 한 칸 용량은 ml라서 가득 채워도 g과 달라요{○}"},{"t":"냉동실에 넣고 **5~12시간** 지나 완전히 얼면(눌러 봐도 말랑한 곳이 없으면) 꺼내자마자 지퍼백에 옮기고 공기를 빼서 재료 이름과 날짜를 적어요{○} 틀째 오래 두면 큐브끼리 붙고 가장자리가 말라요{○}"}],"groups":[{"title":"채소별 손질{○}","items":[{"n":"애호박","rows":[["손질","꼭지와 아랫부분을 자르고 껍질을 벗겨요. 씨가 크고 단단하면 빼요{★}"],["찌는 시간","김 오른 뒤 10분에 확인, 안 익었으면 3분씩 더"],["전자레인지","**1cm 두께** 반달로 썰어 전용 찜기에 담고 물을 조금 넣어요. 돌리기 시작한 뒤 700W는 **4분**, 1000W는 **3분**에 확인해요{○}{◇}"],["메모","수분이 많아서 물을 넣지 않고 갈아요. 먹는 부분 120g으로 10g 큐브가 약 12개 나와요"]]},{"n":"단호박","rows":[["손질","전자레인지에 통째 또는 반쪽을 위아래 뒤집어 1분씩 돌려 말랑하게 한 뒤 잘라서 씨와 섬유질을 숟가락으로 긁고 껍질을 벗겨요"],["찌는 시간","김 오른 뒤 20분에 확인, 안 익었으면 3분씩 더(출처 20~25분)"],["전자레인지","**3cm 크기**로 썰어 전용 찜기에 담고 물을 조금 넣어요. 돌리기 시작한 뒤 700W는 **4분**, 1000W는 **3분**에 확인해요{○}{◇}"],["메모","물은 마지막에 갈면서 1큰술씩 넣어 농도를 봐요. 너무 달면 쌀미음과 섞어 먹여요{◎} 냉동하면 해동 후 퍽퍽해질 수 있어요{◎} 초기에는 체에 걸러 쓸 수 있어요{★}"]]},{"n":"브로콜리","rows":[["손질","꽃송이만 쓰고 굵은 줄기는 빼요. 흐르는 물 아래에서 꽃송이 사이를 손으로 벌려 씻어요"],["찌는 시간","김 오른 뒤 10분에 확인, 안 익었으면 5분씩 더, 20분을 넘기지 않아요(5~7분은 덜 익었다는 후기)"],["전자레인지","꽃송이를 **3cm 크기**로 잘라 전용 찜기에 담고 물을 조금 넣어요. 돌리기 시작한 뒤 700W는 **3분**, 1000W는 **2분**에 확인해요{○}{◇}"],["메모","갈아서 5g, 10g 큐브로 만들어요"]]}],"note":"초기용은 손질 전 **100~150g**이면 10g 큐브가 10~15개 나와요{○} 채소는 갈면 양이 확 줄어요. 정상이에요.","note2":"**전자레인지로 찔 때**: 위 표의 시간은 한 번에 100~150g 정도 찔 때 기준이에요{◇} 뚜껑은 밀폐하지 않아요{○} 정한 시간이 되면 젓가락으로 확인하고, 덜 익었으면 **30초씩** 더 돌려요{○} 1000W 시간은 700W 시간에 0.7을 곱해 30초 단위로 맞춘 값이에요{◇} 와트(W)는 전자레인지 문 안쪽이나 뒷면 표기를 확인해요{○} 꺼낼 때 뚜껑 틈에서 뜨거운 김이 나와요{◇}"}],"checks":["숟가락으로 떠서 기울였을 때 **알갱이가 보이지 않고 매끈해요**"],"troubles":[{"q":"갈았더니 묽어요","why":"애호박처럼 수분이 많은 채소는 물이 많이 나와요.","fix":"물을 넣지 않고 갈고, 찐 뒤 접시에 고인 물은 따라 버려요"},{"q":"큐브가 서로 붙어요","why":"틀에 오래 두면 붙어요.","fix":"완전히 얼면 꺼내자마자 지퍼백으로 옮겨요{○}","hot":true},{"q":"큐브 가장자리가 하얗게 마르고 서리가 껴요","why":"공기가 닿아서 생겨요.","fix":"지퍼백의 공기를 손으로 눌러 빼고 밀봉해요{○}"},{"q":"뜨거운 채로 냉동실에 넣었어요","why":"주변 음식 온도까지 올라가요{○}","fix":"손으로 만져 뜨겁지 않을 때까지 식힌 뒤에 넣어요. 식히는 시간까지 합쳐 조리 후 2시간을 넘기지 않아요{★}"},{"q":"해동했더니 퍽퍽해요(단호박·감자)","why":"전분이 많은 재료는 해동 후 퍽퍽해져요{◎}","fix":"물 1큰술(15ml)씩 넣고 저어서 풀어요","hot":true},{"q":"양이 너무 적게 나와요","why":"정상이에요. 채소는 갈면 양이 줄어요.","fix":"초기용은 손질 전 100~150g부터 만들고, 한 번에 7일 안에 먹을 양만 만들어요{★}"}],"opinions":["시금치, 배추, 당근, 비트, 청경채처럼 질산염이 많다고 분류되는 채소는 이 가이드에 일부러 안 넣었어요. 미국소아과학회(AAP) 2005 보고서는 집에서 만든 채소 이유식을 생후 3개월 전에는 피하라고 해서(요약 문장 확인, 보고서 원문은 미확인) 6개월 시작이면 해당이 안 되지만, 데치면 질산염이 확실히 줄어든다는 근거는 못 찾았어요."],"gear":[{"t":"이유식 큐브틀","need":"필수","use":"10g씩, 5g씩 나눠 얼려요.","cat":"이유식 큐브틀"},{"t":"주방 저울","need":"필수","use":"큐브틀에 10g, 5g씩 정확히 담아요.","cat":"이유식 저울"},{"t":"이유식 도마","cat":"이유식 도마","need":"필수","use":"채소용 도마를 따로 써요. 육류용과 채소용을 나눠 써요.","pnote":"육류용과 채소용 도마를 따로 써야 해서 최소 2개는 두는 걸 권해요. 한 장짜리 제품은 2개를 사거나, 여러 장이 든 세트를 골라요."},{"t":"이유식 가위·칼","cat":"이유식 가위·칼","need":"필수","use":"채소를 3cm 크기로 썰어요."},{"t":"찜기","need":"필수","use":"채소를 푹 쪄요.","cat":"이유식 냄비·찜기","types":["찜기"]},{"t":"핸드블렌더·초퍼","need":"필수","use":"쪄 낸 채소를 곱게 갈아요.","cat":"핸드블렌더·초퍼"},{"t":"이유식 용기","need":"선택","use":"얼린 큐브를 지퍼백 대신 담아 둘 수 있어요.","cat":"이유식 용기"}]},{"id":"beefcube","no":3,"title":"소고기 큐브","short":"생고기 100g → 10g 큐브 9~12개 · 고기 한가운데 74℃ 이상","pills":[{"t":"시작 시점은 선생님 안내","c":"grn"},{"t":"온도계 권장"}],"tags":[{"t":"초기 · 소고기"},{"t":"큐브 5g·10g{○}"}],"calls":[{"t":"**언제**: 복지부는 쇠고기 살코기를 이유식 시작 2~4주부터 적극 활용하라고 해요{★} 철분 때문에 6개월이 넘었으면 쌀 다음에 바로 시작하자는 소아과·영양사 의견도 있어요{◎} 어느 쪽이든 담당 선생님 안내가 있으면 따라요. 시작하기 전에 쌀미음을 먹이고 3~7일 동안 이상 반응이 없었는지 확인해요{★} 쇠고기는 알레르기에 주의가 필요한 식품이라 **하나씩, 적은 양부터** 시작해요{★}"},{"c":"red","t":"**사 온 다짐육은 냉장 2일 이내에 조리해요**{★ 식약처 매뉴얼, 3℃ 보관 기준}"}],"materials":[{"n":"생소고기","q":"100g","s":"우둔 또는 안심 살코기. 기름기 있는 부분은 발라내요{★}"},{"n":"식힌 물","q":"30ml","s":"갈기용. 안 갈리면 10ml씩 늘려요(최대 60ml){○}"}],"mnote":"생고기 100g + 물 30~60ml로 **10g 큐브 9~12개**가 나와요. 익히면 무게가 3분의 1 넘게 줄어드는 걸 반영한 계산이에요{◇} 큐브 10g 1개에 익힌 고기가 5~7g 들어가요. 우둔(홍두깨)은 지방이 적고 담백하고, 안심은 가장 부드럽지만 비싸요. 사태·설도는 질겨서 중기 이후에 써요{○} 한우일 필요가 없고 수입산·냉동도 괜찮다고 해요{◎} 시판 다짐육은 지방이 섞이기 쉬워서 살코기를 사서 직접 다져요{○}","stepsTitle":"순서","steps":[{"t":"냉동 고기는 **전날 저녁** 냉장실로 옮겨 천천히 해동해요{★}"},{"t":"지방과 힘줄을 떼어내요{★}"},{"t":"**찬물에 10분** 담갔다가 건져서 키친타월로 핏물과 물기를 닦아요{★} 10분은 후기 10~15분 중 이 가이드가 정했어요{◇} 소아과·영양사는 핏물을 빼지 말고 키친타월로만 눌러 닦으라고 해요{◎} 둘 중 한 가지만 골라요."},{"t":"칼로 **가로세로 0.5cm 이하**로 다져요{◇}"},{"t":"냄비에 물 500ml를 붓고 **중불에서 끓여요**. 끓기 시작하면 다진 고기를 넣어요."},{"t":"고기를 넣고 **다시 끓기 시작한 뒤 5분** 삶아요{○}","key":true},{"t":"**익었는지 확인**: 조리용 온도계가 있으면 고기 한가운데가 **74℃ 이상**인지 재요{★} CDC는 다진 고기 기준을 160°F(약 71℃)로 적었어요{★} **색이나 질감으로는 익었는지 알 수 없어요**{★} 온도계가 없으면 앞 단계의 5분을 지키고, 이 5분은 블로그 방법이라 온도로 검증된 건 아니에요{○}","key":true},{"t":"체에 걸러 **고기와 삶은 물을 따로** 둬요. 삶은 물(육수)은 버리지 않아요{◎}"},{"t":"고기를 식혀요. 손으로 만졌을 때 뜨겁지 않고 김이 나지 않을 때까지예요."},{"t":"고기 전부와 **식힌 육수 30ml**를 믹서나 핸드블렌더에 넣고 곱게 갈아요. 안 갈리면 **10ml씩** 더해 가며 갈고, 합쳐서 **60ml를 넘기지 않아요**{○}"},{"t":"큐브틀에 **저울로 5g 또는 10g씩** 담아요. 처음 먹이는 날은 5g이에요{◇}"},{"t":"냉동실에 넣고 **5~12시간** 뒤 완전히 얼면(눌러 봐도 말랑한 곳이 없으면) 꺼내자마자 지퍼백에 옮겨 이름과 날짜를 적어요."}],"checks":["고기 한가운데가 **74℃ 이상**이에요(온도계 확인){★}","숟가락으로 떠서 **알갱이가 보이지 않아요**"],"extras":[{"h":"알아두면 헷갈리지 않아요","items":["갈 때 넣는 물이 많을수록 큐브 10g 안의 고기가 적어요. 물 양을 **매번 같게** 하고 저울로 g을 확인해요{○}","고기는 익히면 무게가 3분의 1 넘게 줄어요(35~40퍼센트){○} 블로그 숫자가 생고기 기준인지 익힌 무게인지 늘 확인해요.","하루 양은 5~10g으로 늘려 가는 후기가 있고{○} 육아서는 생고기 기준 하루 10g 이상(익히면 6~7g)이라고 해요{○} 공식 자료에는 g 기준이 없어요. 정해진 의무량은 아니에요."]}],"troubles":[{"q":"갈았는데 퍽퍽하고 뭉쳐요","why":"물이 모자라서예요.","fix":"식힌 육수를 10ml씩 더해 다시 갈아요. 육수를 버렸다면 식힌 물을 써요{◎}","hot":true},{"q":"큐브마다 고기 양이 들쭉날쭉해요","why":"갈 때 넣은 물 양이 달랐어요.","fix":"물 30ml로 정하고, 저울로 5g 또는 10g씩 담아요"},{"q":"질겨요","why":"사태·설도는 질겨요.","fix":"초기에는 우둔이나 안심을 써요{○}"},{"q":"잡내가 나요","why":"복지부는 처음 쓰는 육수를 쇠고기로만 만들고, 아기가 다른 채소를 잘 먹을 때 양파·대파를 더하라고 해요{★}","fix":"신선한 살코기를 쓰고 핏물은 위 방법 중 한 가지로 처리해요. 초기에는 양파·대파를 빼고 시작해요"},{"q":"큐브가 서로 붙어요","why":"틀에 오래 두면 붙어요.","fix":"완전히 얼면 꺼내자마자 지퍼백에 옮겨요"},{"q":"해동하다가 한쪽만 뜨거워요","why":"전자레인지는 고르게 데워지지 않아요.","fix":"15초 돌리고 꺼내 저어요. 덜 녹은 고기 큐브는 숟가락 뒷면으로 눌러 풀어요{○}"}],"opinions":["핏물: 복지부는 찬물에 담갔다가 닦기{★}, 소아과·영양사는 키친타월로만 닦기{◎}, 후기에는 찬물 10~15분 담그기{○}예요. 이 가이드는 복지부 방법으로 적었어요. 거품도 단백질이라 굳이 걷지 않아도 된다는 의견{◎}과, 복지부 육수 레시피처럼 거품을 걷는 방법{★}이 있어요."],"gear":[{"t":"조리용 온도계","need":"선택","use":"고기 한가운데가 74℃ 이상인지 재요. 없으면 5분 삶는 방법을 따르지만 온도로 확인한 건 아니에요."},{"t":"주방 저울","need":"필수","use":"고기 100g, 큐브 5g·10g을 정확히 재요.","cat":"이유식 저울"},{"t":"이유식 도마","cat":"이유식 도마","need":"필수","use":"고기용 도마를 따로 써요. 채소용과 나눠 써요.","pnote":"육류용과 채소용 도마를 따로 써야 해서 최소 2개는 두는 걸 권해요. 한 장짜리 제품은 2개를 사거나, 여러 장이 든 세트를 골라요."},{"t":"이유식 가위·칼","cat":"이유식 가위·칼","need":"필수","use":"고기의 지방과 힘줄을 떼고 0.5cm 이하로 다져요."},{"t":"이유식 냄비","need":"필수","use":"다진 고기를 삶아요.","cat":"이유식 냄비·찜기","types":["이유식 냄비"]},{"t":"핸드블렌더·초퍼","need":"필수","use":"삶은 고기를 육수와 곱게 갈아요.","cat":"핸드블렌더·초퍼"},{"t":"이유식 큐브틀","need":"필수","use":"5g, 10g씩 나눠 얼려요.","cat":"이유식 큐브틀"},{"t":"이유식 용기","need":"선택","use":"큐브를 지퍼백 대신 담아 둘 수 있어요.","cat":"이유식 용기"}]},{"id":"beefmieum","no":4,"title":"소고기 미음","short":"쌀미음 30g + 소고기 큐브 5~10g · 전자레인지 15초씩","pills":[{"t":"큐브 만든 뒤","c":"grn"}],"tags":[{"t":"초기 · 큐브 조합"}],"calls":[{"t":"**언제**: 소고기 큐브를 만든 뒤, 쌀미음을 먹이고 **3~7일 동안 이상 반응이 없을 때**예요{★} 소고기는 시작 시점이 자료마다 달라서 소고기 큐브 카드의 '언제'를 같이 봐요. 공식 순서는 쌀미음, 그다음 쌀 + 한 가지 식품이에요{★}"},{"c":"red","t":"**처음 먹이는 날**: 5g 큐브 1개를 쌀미음 30g에 섞어요{◇} 새 음식은 처음 적게 시작해요{★}"},{"t":"**하루 양**은 소고기 큐브 카드의 '하루 양'과 같아요(공식 g 없음). 소고기 큐브 10g 1개에는 **생고기 약 8~11g**이 들어가요(계산){◇}"}],"stepsTitle":"순서 (큐브가 있을 때)","steps":[{"t":"쌀미음 30g과 소고기 큐브 5g 또는 10g을 **공통 규칙의 해동 방법**으로 해동해요."},{"t":"둘을 한 그릇에 담고 **전자레인지에 15초 돌리고 꺼내 저어요**. 덜 녹았으면 15초를 더하는 걸 반복해요{○} 출력에 따라 시간이 달라서 15초씩 끊어요.","key":true},{"t":"**가운데까지 김이 올라오면** 멈춰요. 한쪽만 뜨거워질 수 있어서 저어서 확인해요."},{"t":"**체온 정도로 식혀서** 먹여요."}],"checks":["고기 알갱이가 **눈에 보이지 않아요**","쌀미음처럼 숟가락에서 **주르륵 흘러내려요**"],"extras":[{"h":"다른 재료를 더할 때","items":["다른 재료를 더할 때도 쌀미음에 한 가지씩, 3~7일 간격으로 더해요{★}"]}],"troubles":[{"q":"해동하니 되직해요","why":"쌀미음은 데우면 되직해져요{○}","fix":"물을 1큰술(15ml)씩 넣고 저어요"},{"q":"고기가 뭉쳐 있어요","why":"해동하면서 서로 붙었어요.","fix":"그릇에 물 1큰술을 넣고 숟가락 뒷면으로 눌러 풀어요{◇}"},{"q":"소고기와 채소가 둘 다 처음이에요","why":"한 번에 두 가지를 먹이면 반응을 구분하기 어려워요{★}","fix":"하나를 3~7일 먹여 본 뒤 다음을 더해요"},{"q":"양을 얼마나 늘릴지 모르겠어요","why":"공식 자료에 재료별 g이 없어요.","fix":"담당 선생님 안내를 따라요"}],"opinions":["한 냄비에 끓이는 방식은 이 가이드에서 뺐어요. 블로그마다 쌀가루 10~20g, 소고기·단호박 양이 제각각이고 공식 자료나 두 번째 출처로 비율을 확인하지 못했어요."],"gear":[{"t":"전자레인지용 그릇","need":"필수","use":"쌀미음과 소고기 큐브를 담아 15초씩 데워요."},{"t":"이유식 용기","need":"선택","use":"해동할 것을 전날 저녁 냉장실에 둬요.","cat":"이유식 용기"},{"t":"이유식 스푼","need":"선택","use":"처음 먹일 때 쓰는 부드러운 스푼이에요.","cat":"이유식 스푼"}]}],"rules":{"hygiene":["비누로 **30초 이상** 손을 씻고, 깨끗한 수건이나 종이타월로 물기를 닦아요{★}","칼과 도마는 **육류용과 채소용을 따로** 써요{★} 육류를 만진 뒤에는 비누로 손을 씻고 다른 재료를 만져요{★}","이유식은 **간을 하지 않아요**{★}","채소는 **흐르는 물**로 씻어요{★} 식초물에 담그는 방법은 공식 자료에 없어요{○}"],"cool":["조리를 끝낸 뒤 **2시간 안에** 냉장고나 냉동실에 넣어요. 실내 온도가 32도(90°F) 이상이면 **1시간 안**이에요{★ CDC}","냄비째 두지 말고 **얕은 용기**(깊이 3cm 이하{◇})에 나눠 담아 냉장해요. 뜨거운 음식도 적은 양으로 나누면 빨리 식어서 냉장고에 바로 넣어도 돼요{★ CDC}","1회분씩 나눠 담고 **이름과 날짜**를 적어요{★} 뚜껑이 있는 용기를 써요{★}"],"keep":[{"k":"냉장","t":"**1~2일 이내**{★ 복지부}"},{"k":"냉동","t":"**만든 날부터 7일 이내**{★ 복지부 1주} 2주까지 쓰는 후기가 있지만 이 가이드는 7일이에요"}],"thaw":[{"k":"기본","t":"**먹기 전날 저녁**에 그날 먹을 것만 뚜껑 있는 용기에 담아 냉장실 **안쪽**(문 쪽 말고)에 둬요{★ 식약처·서울시}{○}"},{"k":"흐르는 물","t":"밀봉해 **21℃ 이하 찬물**에 담그거나 흐르는 찬물에 둬요{★ 식약처}"},{"k":"급할 때","t":"전자레인지는 **양이 적을 때**만 쓰고 해동한 뒤 바로 가열해요{★ 식약처} 용기 뚜껑은 덮되 **한쪽을 열어 김이 빠지게** 하고, **15초 돌리고 꺼내 저어요**. 뚜껑을 꽉 닫고 2분 돌렸다가 터졌다는 후기가 있어요{○} 덜 녹았으면 15초를 더하는 걸 반복해요."}],"thawWarn":"**상온·따뜻한 물·물에 푹 담그기·오븐 해동은 하지 않아요**{★ 식약처}","reheat":["해동한 뒤 **한 번 더 끓이듯 가운데까지 김이 올라올 때까지** 데워요{★ 복지부} 온도계가 있으면 **74℃(165°F) 이상**이에요{★ 식약처·CDC}","**체온 정도**로 식혀서 먹여요. 복지부는 체온 정도의 온도로 중탕하여 데운다고 적었어요{★} 중탕은 이유식 용기를 따뜻한 물에 담가 데우는 방법이에요.","쌀미음은 데우면 되직해져요. **물 1큰술(15ml)씩** 넣고 저어 맞춰요{○}","준비한 뒤 **2시간 안에** 먹여요{★ 질병관리청}","맛을 본 숟가락으로 아기에게 그대로 먹이지 않아요{★}"],"leftover":["해동한 건 **그날 안에** 먹이고 다시 얼리지 않아요{★ 복지부·식약처}","아기가 먹다 남긴 건 침이 섞여서 보관하지 않고 **버려요**{★ 식약처}"]},"terms":[{"k":"곱게 갈기","v":"숟가락으로 떠서 기울였을 때 알갱이가 눈에 보이지 않는 상태예요{★}"},{"k":"푹 익힘","v":"젓가락으로 찔렀을 때 걸림 없이 들어가고 포크로 눌렀을 때 쉽게 으깨지는 상태예요{◇}"},{"k":"체온 정도","v":"손목 안쪽에 한 방울 떨어뜨렸을 때 뜨겁지도 차갑지도 않은 온도예요{★}"},{"k":"얕은 용기","v":"깊이 3cm 이하 용기예요. CDC는 얕은 용기(shallow)라고만 적었고 3cm는 이 가이드의 기준이에요{★}{◇}"},{"k":"1큰술","v":"계량스푼 1큰술, 15ml예요{◇}"},{"k":"소분 1회분","v":"쌀미음 30g, 소고기 5g 또는 10g, 채소 10g이에요{○} 공식 자료에는 재료별 g이 없어요."},{"k":"냉동 기간","v":"만든 날부터 7일 이내예요{★ 복지부 1주일 이내}"}],"legend":[{"s":"★","t":"공식·제조사 원문","d":"보건복지부·식약처·질병관리청·CDC 같은 공식 자료나 쌀가루 포장 안내처럼, 만든 곳이 직접 적은 내용이에요.","short":"공식·제조사"},{"s":"◎","t":"전문가","d":"소아과 전문의·영양사 같은 전문가가 글이나 영상으로 한 말이에요. 공식 지침은 아니에요.","short":"전문가"},{"s":"○","t":"카페·블로그 경험담","d":"카페·블로그에서 직접 해 본 사람들의 후기예요. 집마다 결과가 다를 수 있어요.","short":"경험담"},{"s":"◇","t":"이 가이드가 정한 기준","d":"출처가 시간이나 양을 정확히 안 적어서, 이 가이드가 한 가지 값으로 정한 기준이에요.","short":"가이드 기준"}],"limits":["재료별 g(소고기 5~10g, 채소 5~10g, 큐브 5·10g)은 공식 g 기준이 없어요.","찌는 시간·삶는 시간은 블로그 경험담이에요. 소고기는 온도계 확인을 우선으로 적었어요.","3cm·0.5cm 크기, 3분씩·10ml씩·60ml 한도, 얕은 용기 3cm는 이 가이드가 정한 기준이에요.","퍼기·아이보리 쌀가루의 제조사 배죽표는 확인하지 못했어요(파파루만 확인). 포장 뒷면을 먼저 봐요.","질산염 AAP 보고서 원문은 확인하지 못했어요(요약 문장만 확인)."],"products":{"이유식 마스터기":{"note":"","types":[{"n":"이유식 마스터기(조리기)","d":"이유식을 찌고 갈아 주는 기계예요.","k":"용량, 세척이 쉬운지, 직접 만들 계획인지","p":[{"l":"베이비브레짜 이유식 마스터기 BRZFDM-01D","u":"https://link.coupang.com/a/hNQrlWqDDN","x":"한글 매뉴얼이 들어 있어요."},{"l":"베이비무브 쿡마스터 플러스 이유식 조리기","u":"https://link.coupang.com/a/hZLfhZ8cx2","x":"스팀 1,500ml·믹서 700ml로 총 2,200ml예요. 믹서 속도를 3단계로 조절하고 자동 타이머가 있어요. 후기에서는 설거지가 많다는 말이 있어요."},{"l":"베아바 912772 베이비쿡 6 in 1 이유식 제조기 미드나잇 블루","u":"https://link.coupang.com/a/hZSkAdnFNk","x":"스팀과 믹서 단계가 나뉜 이유식 제조기예요. 후기에서는 소재가 믿을 만하다는 말과 설거지가 많다는 말이 함께 나와요."},{"l":"치코 스팀 이유식 마스터 레드","u":"https://link.coupang.com/a/hZSmlH1Y2C","x":"찜과 분쇄를 한 기계로 하는 이유식 마스터예요. 후기에서는 물탱크 세척이 개운치 않다는 말이 있어요."}]},{"n":"두유제조기(죽·미음 겸용)","d":"두유를 만드는 가전으로 쌀죽과 미음도 만들어요. 재료를 넣고 버튼을 누르면 끓이고 갈아 줘요.","k":"칼날이 분리돼 씻기 쉬운지, 한 번에 만들 수 있는 양, 뚜껑이 닫혀야 작동하는 안전장치","p":[{"l":"마이아 마이쿠커 두유제조기 크림","u":"https://link.coupang.com/a/hZSlowFmAC","x":"1L 두유제조기로 쌀죽·미음을 만드는 방식이에요. 눌러놓고 다른 일을 할 수 있어 편하다는 후기가 많고, 세척이 신경 쓰인다는 글이 있어요."},{"l":"쿠쿠 미식컬렉션 대용량 10중 칼날 두유 이유식 콩국수 제조기","u":"https://link.coupang.com/a/hZSnmmw0bI","x":"용량 1,000ml에 10중 스테인리스 칼날, 자동 세척 모드, 2~12시간 예약 기능이 있는 두유제조기예요. 후기에서는 칼날이 분리되지 않는다는 말이 있어요."}]}]},"이유식 스푼":{"note":"","types":[{"n":"초기 부드러운 스푼","d":"처음 먹일 때 쓰는 부드러운 실리콘 스푼이에요.","k":"입에 닿는 부분이 부드러운지, 단계에 맞는 크기인지","p":[{"l":"릿첼 TLI 소프트이유스푼 2종 + 케이스 세트","u":"https://link.coupang.com/a/hNQkQKdQuy","x":"스푼 2종과 케이스 세트예요."},{"l":"누비 실리콘 롱핸들 이유식 스푼&케이스","u":"https://link.coupang.com/a/hZKNOzhK3g","x":"납작한 모양이라 입에 넣고 빨기만 해도 음식이 잘 떨어진다는 후기가 있어요. 말랑한 실리콘 롱핸들 스푼과 케이스 구성이에요."},{"l":"피셔프라이스 온도 감지 이유식 스푼 2종 x 2p + 케이스 세트","u":"https://link.coupang.com/a/hZRPbZQIXA","x":"온도 감지 기능이 있는 스푼(2종×2개)과 케이스 세트예요. 후기에서는 이유식 초기에는 스푼 머리가 큰 편이라는 말이 있어요."},{"l":"더블하트 이유식 엄마가 먹여주는 피딩세트","u":"https://link.coupang.com/a/hZRRhYIrnM","x":"식기 2개와 스푼 2개로 된 피딩 세트예요. 후기에서는 플라스틱 소재라 뜨거운 이유식을 뜰 때 조심하라는 글이 있어요."},{"l":"모두아이 블루마마 유아용 실리콘 러블리 이유식 스푼 케이스 세트","u":"https://link.coupang.com/a/hZRLiK45GC","x":"동물 모양 실리콘 스푼과 케이스 세트예요. 같은 브랜드 식판·컵과 맞춰 쓰는 글이 있어요."}]}]},"이유식 용기":{"note":"","types":[{"n":"이유식 용기","d":"한 칸 200~270ml 용기라 초기 한 끼(쌀미음 30g 등)에는 커요. 양이 늘어나는 중기 이후에 더 잘 맞아요.","k":"","p":[{"l":"락앤락 바로한끼 원형 이유식용기 230ml","u":"https://link.coupang.com/a/hFEl441jQy","x":""},{"l":"글라스락 베이비 눈금이유식 용기 스마일캡 270ml","u":"https://link.coupang.com/a/hFEkT6YuKi","x":""},{"l":"락앤락 리틀럽 디어 실리콘캡 원형 이유식 용기","u":"https://link.coupang.com/a/hZKnFYFobc","x":"실리콘캡이 있는 원형 유리 용기 3개 세트(260ml)예요. 원형이라 모서리에 음식이 안 낀다는 후기가 있고, 원산지는 중국으로 표기돼요."},{"l":"마더케이 허그 접이식 용기 200ml x 2종 세트","u":"https://link.coupang.com/a/hZKpcbdMyG","x":"접어서 보관하는 실리콘 용기 200ml 2종 세트예요."}]}]},"이유식 큐브틀":{"note":"","types":[{"n":"12구 소분틀(초기)","d":"이유식 초기에 한 번 먹을 만큼씩 칸에 나눠 얼려 두는 틀이에요.","k":"칸 크기(ml)와 눈금, 뚜껑이 밀폐되는지, 얼린 뒤 꺼내기 쉬운지","p":[{"l":"퍼기 유아용 이중 밀폐 슬림 멀티 큐브 용기 12구","u":"https://link.coupang.com/a/hZJAO1uneK","x":"12구(한 칸 20ml, 234×74×40mm, 290g) 2개 구성이에요. 백금경화 실리콘, 국내 제조예요. 후기에서는 얼린 큐브가 잘 빠지고 불투명해 안이 안 보인다는 말이 나와요."}]},{"n":"6·12구 이중밀폐틀","d":"뚜껑이 이중으로 닫혀 냄새가 덜 배는 큐브틀이에요. 칸 수를 골라 쓸 수 있어요.","k":"냉동실에서 꺼내 뚜껑을 열기 쉬운지, 칸 크기","p":[{"l":"모윰 이중밀폐 이유식 큐브 6구","u":"https://link.coupang.com/a/hZJEuggtHg","x":"한 칸 30ml인 6구(254×60×38mm)로 뚜껑이 이중으로 닫혀요. 실리콘, 국내 위탁 제조예요. 후기에서는 냉동실에서 뚜껑을 열 때 힘이 든다는 글이 있어요."},{"l":"모윰 유아용 이중밀폐 이유식 큐브 20ml 12구","u":"https://link.coupang.com/a/hZJF9LRG5A","x":"한 칸 20ml인 12구(262×65×40mm, 약 287g) 구성이에요. 이중밀폐 뚜껑이고 실리콘이에요."},{"l":"베베락 엘파 실리콘 큐브 2P(냉동보관용기_뚜껑포함 13.5cm X 15cm)","u":"https://link.coupang.com/a/hZJT2KfAJg","x":"엘파 실리콘 큐브 2개 구성이에요(뚜껑 포함, 13.5×15cm 표기). 눈금이 있고 용량이 작다는 후기가 있어요. 구매 페이지에서 원하는 용량 옵션을 골라요."},{"l":"베베락 국산 엘파 실리콘 큐브 이유식 냉동용기 16구","u":"https://link.coupang.com/a/hZJZeuNGSq","x":"엘파 실리콘 큐브의 16구 구성이에요(국산 표기). 구매 페이지에서 원하는 용량 옵션을 골라요."}]}]},"이유식 저울":{"note":"","types":[{"n":"0.1g 주방저울","d":"재료를 0.1g 단위로 재는 주방 저울이에요. 이유식은 재료 양을 맞춰야 해서 쓰는 집이 많아요.","k":"0.1g 단위인지, 용기 무게를 빼는 기능(영점), 최대 무게","p":[{"l":"카스 디지털 저울","u":"https://link.coupang.com/a/hZKrJtFqWi","x":"카스 K-17(최대 1kg)이에요. 0.1g 단위로 재고 스테인리스 상판이 슬림하다는 후기가 많아요."},{"l":"카스 K18 (1kg 0.1g) 디지털 주방전자저울","u":"https://link.coupang.com/a/hZKsPZpl0K","x":"0.1g 단위·최대 1kg이고 영점(TARE) 버튼이 있어요. 계량판 118×118mm예요. 최대 용량을 넘겨 올리지 말라고 안내해요."},{"l":"드레텍 디지털 전자저울","u":"https://link.coupang.com/a/hZKMhwff2a","x":"드레텍 KS-171 아이보리(1kg)예요. 단위와 최대 무게는 상품 설명에서 확인해요."},{"l":"웰베이킹 쿠킹플러스 큰화면 정밀 전자저울 1kg / 요리 이유식 베이킹 계량 주방저울","u":"https://link.coupang.com/a/hZKAgimK8i","x":"화면이 크다고 소개되는 1kg 전자저울이에요."}]}]},"이유식 도마":{"note":"","types":[{"n":"TPU 도마","d":"칼자국이 잘 안 나는 얇은 도마예요. 색깔별로 재료를 나눠 쓰는 세트가 많아요.","k":"재료별로 나눠 쓸 수 있는지, 거치대가 있는지, 색이 물들지 않는지","p":[{"l":"도블레 칼집나지 않는 항균도마","u":"https://link.coupang.com/a/hZKO8l3G56","x":"의료용 TPU 도마로 국내 제조라고 안내해요. 크기가 대·중·소(287~398mm) 3가지인데 상품명에는 표기가 없어요. 칼 흠집이 잘 안 난다는 후기가 많아요."},{"l":"퍼기 유아용 이유식 TPU 도마 2p","u":"https://link.coupang.com/a/hZKSfkJKNw","x":"313×220×2.8mm 도마 2개 구성이에요(1개 226g). 국내 제조 TPU예요. 끓는 물 소독은 10초를 넘기지 말라고 안내해요."},{"l":"모도리 깔끔 야무진 도마세트","u":"https://link.coupang.com/a/hZRVA6FHdA","x":"TPU 도마 3장과 스텐 도마가 거치대와 함께 있는 세트예요(사진 기준). 후기에서는 얇아서 칼질이 흐물거리고 밝은 색은 물든다는 글이 있어요."},{"l":"샐마 TPU 클래식 도마","u":"https://link.coupang.com/a/hZRWMrqzfw","x":"38×25cm(두께 0.4cm)로 표기된 큰 TPU 도마예요. 후기에서는 칼자국이 거의 안 생겨 오래 쓴다는 말이 있어요."},{"l":"글라스락 베이비 TPU 도마 3P 세트 파스텔","u":"https://link.coupang.com/a/hZRTD9Juua","x":"슬림한 TPU 도마 3개 세트예요(파스텔 3색 사진 기준). 같은 브랜드 용기·칼과 맞춰 쓴다는 글이 있어요."},{"l":"VIVIDHADA 비비드하다 TPU 항균 이유식 인덱스 양면 도마 3종","u":"https://link.coupang.com/a/hZRUELORPw","x":"양면 인덱스 표시가 있는 TPU 도마 3종 세트예요."}]},{"n":"스테인리스 도마","d":"냄새와 색이 잘 안 배는 금속 도마예요.","k":"칼날이 상하는지, 크기","p":[{"l":"스텐딩 SUS304 향균 프리미엄 스테인레스도마 양면도마","u":"https://link.coupang.com/a/hZR0SyomOq","x":"냄새와 색이 잘 안 배고 씻기 쉬워 위생적이라는 후기가 있어요. 칼날이 무뎌지고 표면이 긁힌다는 글이 있어요."}]}]},"이유식 쌀가루":{"note":"이유식 초기에는 고운 입자로 시작해 중기·후기에 입자를 키워 가요. 제품 이름의 초기·중기·후기 표기를 확인해서 골라요.","types":[{"n":"쌀가루(백미·현미)","d":"이유식을 처음 시작할 때 쓰는 가루예요. 브랜드는 취향에 따라 골라요. 백미 제품과 현미 제품이 있고, 제품 이름에 표시돼요.","k":"백미인지 현미인지, 입자 옵션(가루입자·고운입자), 용량","p":[{"l":"퍼기 유기농 이유식 쌀가루 가루입자","u":"https://link.coupang.com/a/hZKWlJgZZ6","x":"원재료는 유기농 국산 백미 한 가지(200g)예요. 가루입자·작은입자·중간입자 3단계 중 가루입자예요. 계란·우유·대두·밀 제품과 같은 시설에서 만든다고 표기돼요."},{"l":"퍼기 유아용 유기농 현미가루 작은입자 중기","u":"https://link.coupang.com/a/hZK71iu9eu","x":"퍼기 현미가루예요(200g). 이름에는 작은입자 중기라고 적혀 있지만, 구매 페이지의 입자 옵션에서 초기용(가루입자 또는 고운입자)을 골라요. 원재료·알레르기 표기는 상품 설명에서 확인해요."},{"l":"파파루 간편레시피 유기농 쌀가루 백미 고운입자 이유식 초기","u":"https://link.coupang.com/a/hZKYTQOcSq","x":"백미 고운입자 초기용 350g이에요. 유기농 인증 쌀가루이고 국내(김포) 제조예요. 쌀을 세척해 만든다고 소개돼요."},{"l":"파파루 간편레시피 유기농 쌀가루 현미 고운입자 이유식 초기","u":"https://link.coupang.com/a/hZK1KvbpBY","x":"현미 고운입자 초기용 350g 구성이에요. 같은 유기농 인증 쌀가루 라인이에요."},{"l":"베리네이처 쌀가루 유기농 쌀가루 고운입자","u":"https://link.coupang.com/a/hZSiwcspmm","x":"유기농 고운입자 쌀가루 200g이에요(국산 표기)."}]}]},"핸드블렌더·초퍼":{"note":"","types":[{"n":"무선 초퍼","d":"채소·고기를 잘게 다지는 무선 믹서예요. 이유식 재료를 소량씩 다질 때 편해요. 초기에 건더기 없이 곱게 갈 때는 제품마다 갈리는 정도가 달라서 상품 설명을 확인해요.","k":"통 소재(유리·플라스틱)와 크기, 칼날 분리 세척, 소음","p":[{"l":"레꼴뜨 무선 캡슐 커터 본느 초퍼 RCP-7","u":"https://link.coupang.com/a/hZSvYMFlAG","x":"무선 캡슐 커터형 다지기예요(유리 용기, 500ml로 소개). 후기에서는 소음이 적고 냄새·착색 걱정이 적다는 말이 있어요."},{"l":"케어프린 무선 멀티 다지기 600ml","u":"https://link.coupang.com/a/hZSwNFGOlM","x":"유리 용기 600ml에 304·316 스테인리스 칼날이 달린 USB-C 충전 무선 다지기예요. 연속으로 쓰면 쉬어 가라고 안내해요."}]},{"n":"전기 초퍼(코드형)","d":"콘센트에 꽂아 쓰는 전기 다지기예요. 충전할 필요가 없어요. 초기에 건더기 없이 곱게 갈 때는 제품마다 갈리는 정도가 달라서 상품 설명을 확인해요.","k":"용량(보울 크기), 칼날 분리 세척, 식기세척기 사용 여부","p":[{"l":"닌자 프로페셔널 초퍼 핸드블렌더","u":"https://link.coupang.com/a/hZLgR46P6a","x":"콘센트에 꽂아 쓰는 200W 초퍼예요. 500ml 보울과 4중 칼날이 있고, 용기는 식기세척기 상단랙에 넣을 수 있어요(칼날·뚜껑은 분리)."}]},{"n":"핸드블렌더","d":"냄비에 직접 넣어 갈아 주는 막대형 블렌더예요.","k":"모터 힘, 속도 조절, 칼날 분리 세척, 용기가 함께 있는지","p":[{"l":"테팔 퀵쉐프베베 핸드블렌더","u":"https://link.coupang.com/a/hZLh1C8kr6","x":"1,000W에 20단계 속도·터보 기능이 있는 핸드블렌더예요. 500ml 다지기 통과 분리형 스테인리스 칼날이 있어요."},{"l":"BRAUN 핸드블렌더","u":"https://link.coupang.com/a/hZSpw5cXBY","x":"믹싱 컵·거품기·다지기 통이 보이는 구성의 핸드블렌더예요. 이 모델의 출력과 구성은 상품 설명에서 확인해요."}]}]},"이유식 냄비·찜기":{"note":"","types":[{"n":"이유식 냄비","d":"이유식을 소량 끓이는 작은 냄비예요. 14~16cm 크기가 많아요.","k":"인덕션 사용 여부, 뚜껑 포함 여부, 물코(주둥이)","p":[{"l":"릴리팟 이유식 냄비 1.4 / 통3중 스텐 편수냄비 인덕션 조리도구","u":"https://link.coupang.com/a/hZLrLUKgiy","x":"통3중 스텐 편수냄비예요(1.4 표기). 양쪽에 물코가 있어 옮겨 담기 편하고 눌어붙음이 적다는 후기가 많아요. 베트남산으로 표기돼요."},{"l":"키친아트 아이사랑 통삼중 스텐레스 이유식 스텐냄비 + 뚜껑","u":"https://link.coupang.com/a/hZLsPER380","x":"통삼중 스텐 이유식 냄비 14cm와 뚜껑 세트예요. 가볍다는 글이 있고, 뚜껑이 플라스틱인 점이 마음에 걸린다는 글이 있어요."},{"l":"AMT 316Ti 스텐 베이비웍","u":"https://link.coupang.com/a/hZXKc9QAp2","x":"통5중 316Ti 스테인리스 16cm 베이비 웍이에요. 열전도가 빠르고 저수분 조리가 된다는 후기가 있어요."},{"l":"루미낙 엠버 블루밍 유리 양수냄비 1.5L","u":"https://link.coupang.com/a/hZSLqxOBrg","x":"직화가 되는 내열유리 양수냄비(1.5L, 19cm)예요. 충격과 급격한 온도 변화에 주의하라는 글이 있어요."},{"l":"릴리팟 세라믹 코팅 이유식 냄비 / 통3중 스텐 편수냄비 인덕션 조리도구","u":"https://link.coupang.com/a/hZXZanfvpI","x":"세라믹 코팅을 한 이유식 냄비(16cm)예요. 위의 스텐 모델과 소재가 달라서 코팅 관리 방법을 상품 설명에서 확인해요."},{"l":"아이젠베르그 슈테른 통5중(5Ply) 인덕션 양수냄비 14cm (뚜껑미포함) 이유식냄비","u":"https://link.coupang.com/a/hZSyBs5w4G","x":"통5중 양수냄비 14cm예요. 뚜껑이 포함되지 않아 따로 사야 해요."}]},{"n":"찜기","d":"이유식 재료를 찌는 도구예요. 전자레인지용 실리콘 찜기와 냄비형 스텐 찜기가 있어요. 냄비 찜기는 '김 오른 뒤' 시간, 전자레인지용 실리콘 찜기는 채소별 표의 '전자레인지' 줄 시간을 따라요. 제품 설명서에 시간이 있으면 설명서를 먼저 봐요.","k":"쓰는 열원(전자레인지·가스·인덕션), 크기, 세척","p":[{"l":"퍼기 유아용 이중 스팀 촉촉 찜기 세트","u":"https://link.coupang.com/a/hZLuQPePFQ","x":"찜기·찜발이·3구 디바이더가 든 1,400ml 실리콘 찜기예요. 뚜껑에서 수분을 한 번 더 줘 촉촉하게 찌는 구조이고, 전자레인지·오븐·에어프라이어에 쓸 수 있다고 안내해요."},{"l":"퍼기 이유식 멀티 찜기 세트","u":"https://link.coupang.com/a/hZLxQNVTUW","x":"800ml(183×163×95mm)와 550ml(160×140×85mm) 실리콘 찜기 2개 세트예요. 뚜껑 틈에서 뜨거운 증기가 나와 화상에 주의해요."},{"l":"쉐프윈 304 통5중 스텐뚜껑 올인원 스마트쿠커 세트","u":"https://link.coupang.com/a/hZSMhxYBLF","x":"304 통5중 22cm 올인원 스마트쿠커예요(냄비·돔형 뚜껑·타공 채반 등 5 in 1). 인덕션·가스에 쓰고 전자레인지는 안 돼요."},{"l":"실리만 국내생산 이지웨이 실리콘 찜기 멀티 1100ml 허니옐로우 1개","u":"https://link.coupang.com/a/hZSOBHV11E","x":"1,100ml 실리콘 찜기와 받침대 구성이에요. 국산 플래티넘 실리콘이고 전자레인지·식기세척기를 쓸 수 있다고 소개돼요."}]}]},"이유식 조리 소도구":{"note":"","types":[{"n":"이유식 채망(체)","d":"초기 미음을 걸러 알갱이를 눌러 내리는 작은 체예요.","k":"망 눈이 쌀알이 빠지지 않을 만큼 고운지, 소재, 크기, 세척","p":[{"l":"퍼기 304 스테인리스 이유식 채망","u":"https://link.coupang.com/a/hZRzcoKcKa","x":"304 스텐 채망이에요(8cm·12cm 두 가지, 상품명에는 크기 표기가 없어요). 제조국은 중국이고, 쓰기 전에 연마제를 닦으라고 안내해요."}]}]},"이유식 가위·칼":{"note":"","types":[{"n":"가위·칼","d":"이유식 재료를 자르는 작은 가위와 칼이에요. 세라믹은 가볍고 오염 걱정이 적다고 소개돼요.","k":"열탕 소독 가능 여부, 칼날 보호, 손에 맞는 크기","p":[{"l":"마더케이 세라믹 이유식 가위세트","u":"https://link.coupang.com/a/hZREbKooDs","x":"지르코늄 세라믹 날 가위와 미니 집게, 보관 케이스가 든 세트예요. UV·스팀 소독기와 식기세척기는 쓰지 말라고 안내해요."},{"l":"글라스락 베이비 이유식 세라믹 칼 3종 세트","u":"https://link.coupang.com/a/hZSZfJ8uIe","x":"세라믹 칼 25cm·21.5cm와 필러 구성이에요. 아기 전용 미니 칼이 아니라 일반 식칼 크기예요. 열탕 소독은 2분 이내이고 손잡이·칼집은 안 돼요."}]}]}}};
+const BF_SRC={"★":["s1","공식·제조사 원문","공식·제조사"],"◎":["s2","전문가","전문가"],"○":["s3","카페·블로그 경험담","경험담"],"◇":["s4","이 가이드가 정한 기준","가이드 기준"]};
+const BF_BADGE=/\{[★◎○◇](?:\s[^}]*)?\}(?:\s*\{[★◎○◇](?:\s[^}]*)?\})*/g;   // 문장 끝 배지(붙어 있는 배지는 한 묶음)
+function bfEsc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+// 한 줄짜리 변환: **굵게**, {★ 라벨} 출처 배지만 받는다(그 밖의 글자는 전부 이스케이프)
+function bfInline(s){
+  return bfEsc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
+    .replace(/\{([★◎○◇])(?:\s([^}]*))?\}/g,(m,k,l)=>'<span class="bfs '+BF_SRC[k][0]+'" title="'+BF_SRC[k][1]+'">'+k+"</span>"+(l?'<span class="bfsl">'+l+"</span>":""));
+}
+// 문장 나누기: 배지가 붙은 문장마다 한 줄로 나눈다(배지 없는 꼬리 문장도 따로 한 줄)
+function bfClaims(s){
+  const out=[]; let last=0, m; BF_BADGE.lastIndex=0;
+  while((m=BF_BADGE.exec(s))){ out.push(s.slice(last,m.index+m[0].length)); last=m.index+m[0].length; }
+  if(s.slice(last).trim()) out.push(s.slice(last));
+  return out.map(x=>x.trim()).filter(Boolean);
+}
+function bfFmt(s){
+  const parts=bfClaims(String(s==null?"":s));
+  if(parts.length<=1 && !/\{[★◎○◇]/.test(String(s))) return bfInline(s);
+  return parts.map(p=>'<span class="bfl">'+bfInline(p)+"</span>").join("");
+}
+function bfPill(p){return '<span class="bf-pill'+(p.c?" "+bfEsc(p.c):"")+'">'+bfInline(p.t)+"</span>";}
+// 그 박스에 실제로 쓰인 기호만 우측 상단에 작게 뜻을 붙인다
+function bfKey(html){
+  const used=Object.keys(BF_SRC).filter(k=>html.indexOf('bfs '+BF_SRC[k][0]+'"')>=0);
+  return used.length?'<span class="bf-key">'+used.map(k=>'<span class="bfs '+BF_SRC[k][0]+'">'+k+"</span> "+BF_SRC[k][2]).join(" · ")+"</span>":"";
+}
+function bfBox(title,body,o){
+  o=o||{};
+  return '<div class="card'+(o.cls?" "+o.cls:"")+'"'+(o.id?' id="'+o.id+'"':"")+'><div class="bf-hd"><h2>'+title+"</h2>"+bfKey(title+body)+"</div>"+body+"</div>";
+}
+// 맨 위에서 먼저 읽는 기호 설명(목록 화면은 자세히, 카드·규칙 화면은 한 줄로)
+function bfLegendTop(full){
+  if(!full) return '<div class="card bf-lg bf-lgs"><div class="bf-lgc">'+BF.legend.map(x=>'<span><span class="bfs '+BF_SRC[x.s][0]+'">'+x.s+"</span> "+bfEsc(x.short)+"</span>").join("")+"</div></div>";
+  return '<div class="card bf-lg"><h2>문장 끝 기호 보는 법</h2><p class="bf-cap">문장 끝에 붙은 작은 기호가 그 문장의 근거를 알려 줘요. 먼저 읽어 두세요.</p>'
+    +BF.legend.map(x=>'<div class="bf-lgrow"><span class="bfs '+BF_SRC[x.s][0]+'">'+x.s+"</span><div><b>"+bfEsc(x.t)+"</b><small>"+bfEsc(x.d)+"</small></div></div>").join("")+"</div>";
+}
+function bfCallHtml(c){return '<div class="bf-call'+(c.c==="red"?" red":"")+'">'+bfFmt(c.t)+"</div>";}
+function bfMatHtml(mats){
+  return '<table class="bf-mat"><tr><th>재료</th><th>양</th><th>근거</th></tr>'
+    +mats.map(m=>"<tr><td>"+bfEsc(m.n)+'</td><td class="q">'+bfEsc(m.q)+"</td><td>"+bfFmt(m.s||"")+"</td></tr>").join("")+"</table>";
+}
+const BF_KEYNOTE='<p class="bf-cap bf-keynote"><i class="bf-kdot"></i>빨간 번호는 시간이나 온도를 놓치면 실패하거나 안전에 영향이 있는 단계예요.</p>';
+function bfStepsHtml(steps){return (steps.some(s=>s.key)?BF_KEYNOTE:"")+'<ol class="bf-steps">'+steps.map(s=>"<li"+(s.key?' class="key"':"")+"><span>"+bfFmt(s.t)+"</span></li>").join("")+"</ol>";}
+function bfCardNav(card){
+  const L=BF.cards, i=L.findIndex(c=>c.id===card.id), p=L[i-1], n=L[i+1];
+  const a=(c,txt)=>c?'<a href="?tab=bf&bf='+bfEsc(c.id)+'" data-bf="card:'+bfEsc(c.id)+'">'+txt+"</a>":'<a class="off">.</a>';
+  return '<div class="bf-nav">'+a(p,"‹ 이전 "+bfEsc(p?p.title:""))+a(n,"다음 "+bfEsc(n?n.title:"")+" ›")+"</div>";
+}
+// 준비물: 레시피 시작 전에 챙길 도구(필수·선택과 이 레시피에서의 용도). 체크리스트의 '나중에' 같은 표시는 이 탭에 가져오지 않는다.
+// 도구(gear)마다 보여 줄 제품: types(유형 이름)·only(제품 이름에 들어 있는 글자)로 카드에 맞게 거른다. 없으면 그 품목 전체
+function bfShown(g){
+  const c=g.cat && BF.products && BF.products[g.cat]; if(!c) return [];
+  return c.types.filter(t=>!g.types||g.types.indexOf(t.n)>=0)
+    .map(t=>({n:t.n,d:t.d,k:t.k,p:g.only?t.p.filter(p=>g.only.some(s=>p.l.indexOf(s)>=0)):t.p})).filter(t=>t.p.length);
+}
+const bfHasProd=x=>bfShown(x).length>0;
+function bfNeed(n){return '<span class="cknd nd-'+(n==="필수"?"must":"opt")+'">'+bfEsc(n)+"</span>";}
+function bfToolsHtml(card){
+  const g=card.gear||[]; if(!g.length) return "";
+  const any=g.some(bfHasProd);
+  return bfBox("준비물",'<p class="bf-cap">시작하기 전에 챙겨 두세요.'+(any?' 제품은 이 레시피 맨 아래에 있어요. <a class="bf-golink" href="#bfShop" data-bf="go:shop">제품 보기 ↓</a>':"")+"</p>"
+    +'<div class="bf-tools">'+g.map(x=>'<div class="bf-tool"><div class="bt"><b>'+bfEsc(x.t)+"</b>"+bfNeed(x.need)+"</div><small>"+bfEsc(x.use)+"</small></div>").join("")+"</div>");
+}
+// 제품: 순위 탭으로 보내지 않고 레시피 맨 아래에 바로 보여 준다. 제품 자료(BF.products)는 이 탭 전용이고 순위·체크리스트 탭 자료와 별개다.
+// 상품 줄·파트너스 고지문구·배너는 주차별 탭 쪽 함수(wkRowHtml·wkAdHtml·wkBannerHtml)를 쓴다. 그 코드가 이 코드보다 뒤에 실려 있어서 아직 없으면 페이지가 다 읽힌 뒤에 채운다.
+let BF_SHOP=[];
+function bfGearHtml(card){
+  BF_SHOP=(card.gear||[]).filter(bfHasProd);
+  return BF_SHOP.length?'<div id="bfShop"></div>':"";
+}
+function bfFillShop(){
+  const el=document.getElementById("bfShop"); if(!el||!BF_SHOP.length) return true;
+  if(typeof wkRowHtml!=="function"||typeof wkAdHtml!=="function"||typeof wkBannerHtml!=="function"||typeof wkKind!=="function") return false;
+  const all=[]; BF_SHOP.forEach(g=>bfShown(g).forEach(t=>t.p.forEach(p=>all.push(p))));
+  const hasC=all.some(p=>wkKind(p.u)==="coupang"), hasN=all.some(p=>wkKind(p.u)==="naver"), hasD=all.some(p=>wkKind(p.u)==="danawa");
+  let h='<div class="card wkshopcard"><h2>이 레시피에 쓰는 제품</h2>'+((hasC||hasN)?wkAdHtml(hasC,hasN):"")+(hasD&&typeof wkDanawaNote==="function"?wkDanawaNote():"")
+    +'<p class="gnote" style="margin-top:0">순위가 아니라 참고용이에요. 가격과 구성은 판매 페이지에서 확인해 주세요.</p>';
+  // "고를 때 확인:" 은 설명 문장 뒤에 이어 붙이지 않고 항상 새 줄(extra)로 내린다. 공용 wkRowHtml 은 건드리지 않는다.
+  const rowOf=t=>wkRowHtml({tab:"bf",title:t.n,note:t.d,extra:t.k?'<p class="ckn bf-pick"><b>고를 때 확인: '+bfEsc(t.k)+"</b></p>":"",prods:t.p.map(p=>({label:p.l,url:p.u,desc:p.x}))});
+  h+=BF_SHOP.map((g,gi)=>{
+    const c=BF.products[g.cat], note=g.pnote||c.note, ts=bfShown(g), tabs=g.subtabs&&ts.length>1;
+    // subtabs: 한 도구에 유형이 둘 이상이고 서로 다른 제품군일 때(마스터기·두유제조기) 탭으로 나눠 한 번에 하나만 보여 준다
+    const body=tabs
+      ? '<div class="bf-ptabs" role="tablist">'+ts.map((t,i)=>'<button type="button" role="tab" class="bf-pt'+(i?"":" on")+'" aria-selected="'+(i?"false":"true")+'" data-bfpt="'+i+'">'+bfEsc(g.subtabs[t.n]||t.n)+"</button>").join("")+"</div>"
+        +ts.map((t,i)=>'<div class="cktable ckfull bf-pp" role="tabpanel" data-bfpp="'+i+'"'+(i?" hidden":"")+">"+rowOf(t)+"</div>").join("")
+      : '<div class="cktable ckfull">'+ts.map(rowOf).join("")+"</div>";
+    return '<div class="bf-gp"><div class="bf-gph"><b>'+bfEsc(g.t)+"</b>"+bfNeed(g.need)+"<small>"+bfEsc(g.use)+"</small></div>"
+      +(note?'<p class="bf-cap" style="margin:0 0 8px">'+bfEsc(note)+"</p>":"")+body+"</div>";
+  }).join("");
+  h+=(hasC?wkBannerHtml("bf"):"")+"</div>";
+  el.innerHTML=h; return true;
+}
+function bfTroublesHtml(card,openIdx){
+  const T=card.troubles||[]; if(!T.length) return "";
+  return bfBox('막히기 쉬운 곳 <span class="hint">누르면 지금 할 일이 나와요</span>','<div class="bf-acc">'
+    +T.map((t,i)=>"<details"+(i===openIdx?" open":"")+' id="bfT'+i+'"><summary>'+bfEsc(t.q)+'</summary><div class="bd">'+bfFmt(t.why)+'<span class="ar">→ '+bfInline(t.fix)+"</span></div></details>").join("")+"</div>",{id:"bfTr"});
+}
+function bfGroupsHtml(card){
+  return (card.groups||[]).map(g=>bfBox(bfInline(g.title),
+    g.items.map(it=>'<div class="bf-vg"><h4>'+bfEsc(it.n)+"</h4><dl>"+it.rows.map(r=>"<dt>"+bfEsc(r[0])+"</dt><dd>"+bfFmt(r[1])+"</dd>").join("")+"</dl></div>").join("")
+    +(g.note?'<div class="bf-call">'+bfFmt(g.note)+"</div>":"")+(g.note2?'<div class="bf-call">'+bfFmt(g.note2)+"</div>":""))).join("");
+}
+function bfCardHtml(card,st){
+  const hasM=!!(card.methods&&card.methods.length), mid=hasM?(st.m[card.id]||card.methods[0].id):"";
+  const m=hasM?card.methods.find(x=>x.id===mid)||card.methods[0]:null;
+  let h='<a class="bf-back" href="?tab=bf" data-bf="list">‹ 초기 레시피 목록</a>'+bfLegendTop(false);
+  const head='<div class="bf-title">'+bfEsc(card.title)+"</div>"+'<div class="bf-tags">'+(card.tags||[]).map(bfPill).join("")+"</div>"+(card.calls||[]).map(bfCallHtml).join("");
+  h+='<div class="card"><div class="bf-hd"><p class="bf-cap">초기 레시피 '+card.no+" / "+BF.cards.length+"</p>"+bfKey(head)+"</div>"+head+"</div>";
+  if(hasM){
+    h+=bfBox("재료와 방법 고르기",'<div class="bf-seg">'
+      +card.methods.map(x=>'<div class="sg pick'+(x.id===m.id?" on":"")+'" role="button" tabindex="0" data-bf="m:'+bfEsc(card.id)+":"+bfEsc(x.id)+'"><b>'+bfEsc(x.label)+"</b><small>"+bfEsc(x.sub||"")+"</small></div>").join("")+"</div>"
+      +bfMatHtml(m.materials)+(m.mnote?'<div class="bf-note">'+bfFmt(m.mnote)+"</div>":""));
+    h+=bfToolsHtml(card);
+    h+=bfBox("순서",bfStepsHtml(m.steps));
+  }else{
+    if(card.materials) h+=bfBox("재료",bfMatHtml(card.materials)+(card.mnote?'<div class="bf-note">'+bfFmt(card.mnote)+"</div>":""));
+    h+=bfGroupsHtml(card);
+    h+=bfToolsHtml(card);
+    if(card.steps) h+=bfBox(bfEsc(card.stepsTitle||"순서"),bfStepsHtml(card.steps));
+  }
+  if(card.checks&&card.checks.length) h+=bfBox('다 됐는지 확인 <span class="hint">모두 맞아야 해요</span>','<div class="bf-chk">'+card.checks.map(c=>"<div><i>✓</i><span>"+bfFmt(c)+"</span></div>").join("")+"</div>");
+  (card.extras||[]).forEach(x=>{ h+=bfBox(bfEsc(x.h),'<div class="bf-chk">'+x.items.map(c=>"<div><i>·</i><span>"+bfFmt(c)+"</span></div>").join("")+"</div>"); });
+  h+=bfTroublesHtml(card,st.t!=null?st.t:0);
+  if(card.opinions&&card.opinions.length) h+=bfBox("의견이 갈려요",card.opinions.map(o=>'<div class="bf-call">'+bfFmt(o)+"</div>").join(""));
+  h+=bfBox("보관·해동",'<div class="bf-call"><span class="bfl">냉장 <b>1~2일</b>, 냉동 <b>만든 날부터 7일 이내</b>'+bfInline("{★ 복지부}")+'</span><span class="bfl">해동은 <b>전날 저녁 냉장실</b>이 기본이에요. 자세한 방법은 공통 규칙을 봐요.</span></div>'
+    +'<div class="bf-gear"><a href="?tab=bf&bf=rules" data-bf="rules" style="border-color:var(--rule)">보관·해동 공통 규칙 보기 ›</a></div>');
+  h+=bfGearHtml(card)+bfCardNav(card);
+  return h;
+}
+function bfListHtml(){
+  let h=bfLegendTop(true)+'<p class="sub bf-lead">'+bfInline(BF.lead)+"</p>";
+  h+=bfBox("시기 고르기",'<div class="bf-seg">'+BF.periods.map(p=>'<div class="sg '+(p.ready?"on":"off")+'"><b>'+bfEsc(p.label)+"</b><small>"+bfEsc(p.sub)+"</small></div>").join("")+"</div>"
+    +'<div class="bf-call">'+bfFmt(BF.call)+"</div>");
+  h+=bfBox("초기 레시피 "+BF.cards.length+"개",'<p class="bf-cap">'+bfEsc(BF.listNote)+'</p><div class="bf-rows">'
+    +BF.cards.map(c=>'<a class="bf-row" href="?tab=bf&bf='+bfEsc(c.id)+'" data-bf="card:'+bfEsc(c.id)+'"><span class="n">'+c.no+'</span><div><div class="t">'+bfEsc(c.title)+'</div><div class="d">'+bfEsc(c.short)+'</div><div class="m">'+(c.pills||[]).map(bfPill).join("")+'</div></div><span class="ar">›</span></a>').join("")+"</div>");
+  const hot=[]; BF.cards.forEach(c=>(c.troubles||[]).forEach((t,i)=>{ if(t.hot) hot.push({c:c.id,i:i,q:t.q}); }));
+  if(hot.length) h+=bfBox("막혔을 때",'<p class="bf-cap">증상을 누르면 그 레시피의 해결법으로 가요.</p><div class="bf-gear" style="margin-top:0">'
+    +hot.map(x=>'<a href="?tab=bf&bf='+bfEsc(x.c)+'" data-bf="t:'+bfEsc(x.c)+":"+x.i+'" style="border-color:var(--rule)">'+bfEsc(x.q)+"</a>").join("")+"</div>");
+  h+=bfBox("시작 전에 알아둘 것",BF.basics.map(b=>"<details><summary>"+bfEsc(b.h)+'</summary><div class="bd">'+bfFmt(b.t)+"</div></details>").join(""),{cls:"bf-basics"});
+  h+=bfBox("보관·해동, 시작 전 위생",'<div class="bf-gear" style="margin-top:0"><a href="?tab=bf&bf=rules" data-bf="rules" style="border-color:var(--rule)">보관·해동 공통 규칙 보기</a><a href="?tab=bf&bf=rules" data-bf="rules" style="border-color:var(--rule)">시작 전 위생 4가지</a></div>');
+  h+='<div class="card"><h2>의견 남기기</h2><p class="fbk" style="margin-top:0">써 보시고 불편한 점이나 바라는 기능이 있으면 블로그 글에 댓글로 남겨 주세요. 최대한 반영해 볼게요. <a href="https://blog.naver.com/momcare_" target="_blank" rel="noopener">맘케어 블로그 가기</a></p></div>';
+  return h;
+}
+function bfRulesHtml(){
+  const R=BF.rules, li=a=>a.map(t=>"<li><span>"+bfFmt(t)+"</span></li>").join(""), tl=a=>'<ul class="bf-tl">'+a.map(x=>'<li><span class="k">'+bfEsc(x.k)+"</span><span>"+bfFmt(x.t)+"</span></li>").join("")+"</ul>";
+  let h='<a class="bf-back" href="?tab=bf" data-bf="list">‹ 초기 레시피 목록</a>'+bfLegendTop(false);
+  h+=bfBox("시작 전 위생",'<div class="bf-chk">'+R.hygiene.map((t,i)=>"<div><i>"+(i+1)+"</i><span>"+bfFmt(t)+"</span></div>").join("")+"</div>");
+  h+=bfBox("보관·해동 공통 규칙",'<p class="bf-cap">모든 레시피에 똑같이 적용돼요.</p>'
+    +'<div class="bf-sub">식히고 소분하기</div>'+BF_KEYNOTE+'<ol class="bf-steps">'+li(R.cool).replace(/<li>/,'<li class="key">')+"</ol>"
+    +'<div class="bf-sub">얼마나 보관하나요</div>'+tl(R.keep)
+    +'<div class="bf-sub">해동하기</div>'+tl(R.thaw)+'<div class="bf-call red">'+bfFmt(R.thawWarn)+"</div>"
+    +'<div class="bf-sub">데워서 먹이기</div><ol class="bf-steps">'+li(R.reheat)+"</ol>"
+    +'<div class="bf-sub">남은 것</div><ol class="bf-steps">'+li(R.leftover)+"</ol>");
+  h+=bfBox("이 가이드에서 쓰는 말",'<table class="bf-mat">'+BF.terms.map(t=>"<tr><td><b>"+bfEsc(t.k)+"</b></td><td>"+bfFmt(t.v)+"</td></tr>").join("")+"</table>");
+  h+=bfBox("이 가이드의 한계",'<div class="bf-chk">'+BF.limits.map(t=>"<div><i>!</i><span>"+bfFmt(t)+"</span></div>").join("")+"</div>");
+  return h;
+}
+(function(){
+  const $=id=>document.getElementById(id);
+  const st={view:"list",card:null,m:{},t:null};
+  function show(opt){
+    const body=$("bfBody"); if(!body||!BF) return;
+    const card=opt.card?BF.cards.find(c=>c.id===opt.card):null;
+    if(opt.view==="card"&&card){ st.view="card"; st.card=card.id; st.t=opt.t!=null?opt.t:0; body.innerHTML=bfCardHtml(card,st); }
+    else if(opt.view==="rules"){ st.view="rules"; st.card=null; body.innerHTML=bfRulesHtml(); }
+    else { st.view="list"; st.card=null; body.innerHTML=bfListHtml(); }
+    if(!bfFillShop()) document.addEventListener("DOMContentLoaded",bfFillShop,{once:true});
+    if(opt.jump){ const el=(st.view==="card"&&opt.t!=null)?$("bfT"+opt.t):null; const top=el?el:$("bfBody");
+      setTimeout(()=>{ if(top) top.scrollIntoView({block:el?"center":"start"}); },30); }
+  }
+  function go(opt){
+    show(Object.assign({jump:true},opt));
+    try{ history.pushState({bf:1,view:st.view,card:st.card},"",location.href); }catch(e){}
+  }
+  function parse(a){
+    const p=String(a).split(":");
+    if(p[0]==="list") return {view:"list"};
+    if(p[0]==="rules") return {view:"rules"};
+    if(p[0]==="card") return {view:"card",card:p[1]};
+    if(p[0]==="t") return {view:"card",card:p[1],t:parseInt(p[2],10)};
+    if(p[0]==="go") return {view:"go",to:p[1]};
+    return null;
+  }
+  const root=$("tab-bf");
+  if(!root||!BF) return;
+  root.addEventListener("click",e=>{
+    const pt=e.target.closest?e.target.closest("[data-bfpt]"):null;
+    if(pt){ const gp=pt.closest(".bf-gp"), n=pt.getAttribute("data-bfpt");
+      if(gp){ gp.querySelectorAll("[data-bfpt]").forEach(b=>{ const on=b.getAttribute("data-bfpt")===n; b.classList.toggle("on",on); b.setAttribute("aria-selected",on?"true":"false"); });
+        gp.querySelectorAll("[data-bfpp]").forEach(p=>{ p.hidden=p.getAttribute("data-bfpp")!==n; }); }
+      return; }
+    const m=e.target.closest?e.target.closest("[data-bf^='m:']"):null;
+    if(m){ const p=m.getAttribute("data-bf").split(":"); st.m[p[1]]=p[2]; const y=window.scrollY; show({view:"card",card:p[1],t:st.t}); window.scrollTo(0,y); return; }
+    const a=e.target.closest?e.target.closest("[data-bf]"):null; if(!a) return;
+    const o=parse(a.getAttribute("data-bf")); if(!o) return;
+    e.preventDefault();
+    if(o.view==="go"){ const el=$("bfShop"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); return; }
+    go(o);
+  });
+  root.addEventListener("keydown",e=>{ if((e.key==="Enter"||e.key===" ")&&e.target.getAttribute&&String(e.target.getAttribute("data-bf")||"").indexOf("m:")===0){ e.preventDefault(); e.target.click(); } });
+  window.addEventListener("popstate",e=>{
+    if(!document.querySelector('.tb.on[data-tab="tab-bf"]')) return;
+    if(e.state&&e.state.bf) show({view:e.state.view,card:e.state.card,jump:true});
+    else if(st.view!=="list") show({view:"list",jump:true});
+  });
+  window.bfOnOpen=function(){ if(!$("bfBody").innerHTML) show({view:"list"}); };
+  show({view:"list"});
+  if(INIT_TAB==="bf"){
+    const b=document.querySelector('.tb[data-tab="tab-bf"]'); if(b){ b.click(); window.scrollTo(0,0); }
+    const q=INIT_BF; if(q==="rules") show({view:"rules"}); else if(q&&BF.cards.some(c=>c.id===q)) show({view:"card",card:q});
+  }
+})();
+/* === BF-CORE END === */
+/*BF:JS:END*/
 // 블로그 글에서 ?tab=pick 으로 들어오면 택일 탭을 바로 연다
 (function(){
   if(INIT_TAB!=="pick") return;
@@ -4304,7 +4653,7 @@ function wkShopCardRaw(shop,title,tab,extra){
   const rows=[], idx={};
   for(const s of shop){
     if(s.group){                                   // 같은 품목의 상품은 한 줄에 모은다
-      if(idx[s.group]==null){ idx[s.group]=rows.length; rows.push({tab:t,title:s.title||s.group,how:s.how,note:s.note,tip:s.tip,prods:[],group:s.group,extra:"",need:ckNeedOf(s.group),use:ckUseOf(s.group)}); }
+      if(idx[s.group]==null){ idx[s.group]=rows.length; rows.push({tab:t,title:s.title||s.group,how:s.how,note:s.note,tip:s.tip,prods:[],group:s.group,extra:"",need:(s.needx!=null?s.needx:ckNeedOf(s.group)),use:(s.usex!=null?s.usex:ckUseOf(s.group))}); }   // needx·usex: 이 항목을 쓰는 탭이 직접 정한 필수여부·용도(이유식 가이드). 없으면 체크리스트 값
       rows[idx[s.group]].prods.push(s);
     } else rows.push({tab:t,title:s.label,note:s.why,prods:[s],hideLabel:true});   // 옛 목록: 상품 이름이 곧 제목
   }
@@ -4421,7 +4770,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="9ccf0844";
+var APP_BUILD="5ddcc1f0";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
