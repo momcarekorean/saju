@@ -5,6 +5,8 @@ name: jp-prices
 on:
   schedule:
     - cron: "30 0 * * *"   # UTC 00:30 = 한국시간 09:30
+    - cron: "46 4 * * *"   # 실험용(예약 실행이 실제로 도는지 확인, 확인 뒤 삭제) UTC 04:46 = 한국시간 13:46
+    - cron: "58 4 * * *"   # 실험용(삭제 예정) UTC 04:58 = 한국시간 13:58
   workflow_dispatch: {}
   push:
     paths:
