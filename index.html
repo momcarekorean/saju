@@ -320,6 +320,21 @@ dd b{font-weight:500; color:var(--ink)}
 .hj[data-c]{cursor:pointer}
 .hj.on{background:var(--seal);border-color:var(--seal);color:#fff}
 .hj.on b{color:#fff}
+/* 성씨 한자 고르기 (눌러서 고르거나, 한자를 칠 수 있으면 직접 입력) */
+.sbox{margin-top:14px;padding:12px 14px;border:1px solid var(--rule);border-left:3px solid var(--seal);background:var(--paper);border-radius:0 2px 2px 0}
+.sbox .st{margin:0 0 4px;font-size:13px;font-weight:700;color:var(--ink)}
+.sbox .sbh{margin:0 0 10px;font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.shl{display:flex;flex-wrap:wrap;gap:6px}
+.shj{display:inline-block;box-sizing:border-box;min-height:40px;font-size:12px;padding:8px 11px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink-2);cursor:pointer;user-select:none}
+.shj b{font-family:"Nanum Myeongjo",serif;font-size:18px;margin-right:5px;color:var(--ink);font-weight:700}
+.shj.on{background:var(--seal);border-color:var(--seal);color:#fff}
+.shj.on b{color:#fff}
+.shj:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.shmore summary{cursor:pointer;margin-top:10px;font-size:12.5px;color:var(--ink-2)}
+.shmore .shl{margin-top:8px}
+.shx{margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.shx input{width:84px;padding:8px 10px;font-size:18px;text-align:center}
+.shx .msg{flex:1;min-width:150px;font-size:12.5px;color:var(--ink-3);line-height:1.5}
 .nevin{margin-top:14px}
 .nev{margin-top:10px;border:1px solid var(--rule);background:var(--paper);padding:12px 14px;border-radius:2px;font-size:13.5px;color:var(--ink-2)}
 .nev h4{margin:0 0 6px;font-size:15px;color:var(--ink)}
@@ -814,6 +829,7 @@ dd b{font-weight:500; color:var(--ink)}
 
 <div id="tab-saju">
 
+<p class="upd"><b>업데이트 10/21</b> 성씨 한자를 고르거나 직접 넣을 수 있어요(정씨의 鄭·丁·程 등). 한자에 따라 획수가 달라 추천 이름이 달라져요 · 방문자 의견을 반영했어요</p>
 <p class="upd"><b>업데이트 10/19</b> 작명 기록을 이 기기에 저장할 수 있어요(선택) · 성씨 칸의 예시 글자 삭제</p>
 <p class="upd"><b>업데이트 9/29</b> 인명용 한자 대폭 추가 · 한자 이름 풀이 · 풀이를 쉬운 말로 · 오류 수정</p>
 
@@ -863,6 +879,12 @@ dd b{font-weight:500; color:var(--ink)}
       <label for="sex">아이 성별</label>
       <select id="sex"><option value="F" selected>여아</option><option value="M">남아</option><option value="A">둘 다</option></select>
     </div>
+  </div>
+  <div class="sbox hidden" id="surBox">
+    <p class="st">성씨 한자</p>
+    <p class="sbh" id="surHint"></p>
+    <div id="surList"></div>
+    <div class="shx"><input type="text" id="surHan" maxlength="1" placeholder="한자" autocomplete="off" lang="zh-Hant" aria-label="성씨 한자 직접 입력"><span class="msg" id="surMsg">한자를 칠 수 있으면 여기에 직접 넣어도 돼요. 목록에서 눌러 골라도 돼요.</span></div>
   </div>
   <div class="opts">
     <label class="chk"><input type="checkbox" id="eot" checked> 균시차까지 보정</label>
@@ -1031,11 +1053,12 @@ dd b{font-weight:500; color:var(--ink)}
     <a href="https://blog.naver.com/momcare_/224400620778" target="_blank" rel="noopener"><b>검사</b>니프티 검사 결과 언제 나오나 — 용혈로 재채혈까지 갔지만 8일</a>
     <a href="https://blog.naver.com/momcare_/224410891254" target="_blank" rel="noopener"><b>택일</b>무료 출산택일, AI 활용해 제왕절개 날짜·시간을 부모 사주로 직접</a>
   </div>
-  <p class="fbk">써 보시고 불편한 점이나 바라는 기능이 있으면 블로그 글에 댓글로 남겨 주세요. 최대한 반영해 볼게요.</p>
+  <p class="fbk">써 보시고 불편한 점이나 바라는 기능이 있으면 <b>이 도구를 소개한 블로그 글</b>에 댓글로 남겨 주세요. 최대한 반영해 볼게요. <a href="https://blog.naver.com/momcare_/224399366895" target="_blank" rel="noopener">작명 도구 원문 글 보기</a></p>
 </div>
 </div>
 <div id="tab-pick" class="hidden">
 
+<p class="upd"><b>업데이트 10/21</b> 이 도구를 소개한 블로그 글(원문) 링크와 의견 남기는 곳을 맨 아래에 안내해요</p>
 <p class="upd"><b>업데이트 10/20</b> 택일 기록을 이 기기에 저장할 수 있어요(선택) · 예정일을 한 번만 넣으면 모든 탭에 들어가요</p>
 <p class="upd"><b>업데이트 10/19</b> 같은 날짜의 여러 시간대를 순위로 비교하는 옵션 추가</p>
 <p class="upd"><b>업데이트 9/30</b> 주말·공휴일·야간 제외 선택 및 오류 수정</p>
@@ -1217,7 +1240,7 @@ dd b{font-weight:500; color:var(--ink)}
     <a href="https://blog.naver.com/momcare_/224384751103" target="_blank" rel="noopener"><b>준비물</b>출산가방 완전정리 — 병원용·조리원용 따로, 수량까지</a>
     <a href="https://blog.naver.com/momcare_/224399366895" target="_blank" rel="noopener"><b>작명</b>아기이름 작명, 작명소 없이 직접 — 사주로 뭘 계산하는지 전부 공개</a>
   </div>
-  <p class="fbk">써 보시고 불편한 점이나 바라는 기능이 있으면 블로그 글에 댓글로 남겨 주세요. 최대한 반영해 볼게요.</p>
+  <p class="fbk">써 보시고 불편한 점이나 바라는 기능이 있으면 <b>이 도구를 소개한 블로그 글</b>에 댓글로 남겨 주세요. 최대한 반영해 볼게요. <a href="https://blog.naver.com/momcare_/224410891254" target="_blank" rel="noopener">출산택일 도구 원문 글 보기</a></p>
 </div>
 </div>
 
@@ -1987,6 +2010,67 @@ const SUR={"김":["金",8],"이":["李",7],"박":["朴",6],"최":["崔",11],"정
 "연":["延",7],"위":["魏",18],"표":["表",8],"명":["明",8],"기":["奇",8],"반":["潘",16],"왕":["王",4],
 "금":["琴",13],"옥":["玉",5],"육":["陸",16],"인":["印",6],"맹":["孟",8],"제":["諸",16],"모":["牟",6]};
 const SURHAN=new Set(Object.values(SUR).map(v=>v[0]));
+/* SURX-DATA START */const SURX="가:賈13,價15|간:簡18,間12|갈:葛15|감:甘5|강:姜9,康11,強11,江7,剛10,彊16|견:甄14,堅11|경:慶15,景12,京8,耿10|계:桂10,季8|고:高10,顧21|곡:曲6,谷7|공:孔4,公4|곽:郭15,廓14,槨15|관:關19,管14|교:橋16,喬12|구:具8,丘5,邱12,仇4|국:鞠17,鞫18,菊14,國11,麴19|궁:弓3,宮10|궉:鴌15|권:權22,勸20,券8|근:斤4|금:琴13,金8,芩10,禁13|기:奇8,寄11,箕14,紀9|길:吉6|김:金8|나:羅20,蘿25,邏26,那11|난:欒23|남:南9,男7|낭:浪11|내:乃2,奈8|노:盧16,魯15,蘆22,路13,虜13|뇌:雷13,賴16|다:多6|단:段9,單12,端14|담:譚19|당:唐10|대:大3,代5,戴17|도:都16,陶16,道16,到8,度9,桃10,覩16|독:獨17|돈:頓13,敦12|동:董15,蕫18,童12,東8,薫19|두:杜7,頭16|등:滕15,鄧19|라:羅20,蘿25,邏26|란:欒23|랑:浪11|려:呂7|로:路13,魯15,盧16|뢰:雷13|류:柳9,劉15|리:李7|림:林8|마:馬10,麻11|만:萬15|매:梅11|맹:孟8|명:明8|모:牟6,毛4,慕15|목:睦13,穆16|묘:苗11|무:武8|묵:墨15|문:文4,門8|미:米6|민:閔12,民5,敏11,珉10,悶12,旻8|박:朴6,博12|반:潘16,班11|방:方4,房8,龐19,邦11,防12,旁10,芳10|배:裵14,輩15,培11,背11,配10|백:白5,百6,伯7,柏9|번:樊15|범:范11,範15,凡3|변:卞4,邊22,變23|보:寶20,保9,甫7|복:卜2|봉:奉8,鳳14|부:夫4,付5,傅12,富12|비:丕5|빈:賓14,彬11,濱18,貧11|빙:氷5|사:史5,司5,謝17,舍8,沙8|산:山3|삼:森12,杉7|상:尙8,常11,商11|서:徐10,西6,書10,緖15|석:石5,昔8,釋20,席10|선:宣9,鮮17,善12|설:薛19,偰11,楔13,雪11,卨11|섭:葉15|성:成7,盛12,宬10,星9,城9|소:蘇22,邵12,肖9,蕭18,小3,卲7,所8,昭9,簫19|손:孫10,遜17,損14,蓀16|송:宋7,松8,送13|수:隋17,水4,洙10|순:荀12,筍12,舜12,淳12,順12,旬6|승:承8,昇8|시:施9,柴10,時10|신:申5,辛7,愼14,莘13,新13,信9,伸7|심:沈8,沁8,深12,心4|아:阿13|안:安6,顔18,案10|애:艾8|야:夜8|양:梁11,楊13,粱13,揚13,陽17,洋10,樑15,樣15,襄17|어:魚11,漁15|엄:嚴20,儼22|여:呂7,余7,黎15,汝7|연:延8,連14,燕16,涎11|염:廉13,閻16,簾19|엽:葉15|영:榮14,影15,永5|예:芮10,禮18,倪10,藝21,乂2|오:吳7,伍6,吾7,五5,晤11|옥:玉5|온:溫14|옹:邕10,雍13|완:阮12|왕:王4,汪8|요:姚9|용:龍16|우:禹9,于3,寓12,宇6,愚13,牛4,偶11,遇16,尤4|운:雲12,芸10|원:元4,袁10,原10,阮12,苑11,院15,圓13|위:魏18,韋9,衛15,偉11|유:柳9,劉15,兪9,庾12,枊8,杻8,有6,楡13,由5,裕13|육:陸16|윤:尹4,允4,潤16|은:殷10,銀14,恩10,慇14|음:陰16|이:李7,異11,伊6,利7,怡9|인:印6|임:林8,任6,壬4,恁10|자:慈14|장:張11,蔣17,章11,莊13,長8,將11,藏20,場12,裝13,臧14,葬15,壯7,庄6,漿15|전:全6,田5,錢16,戰16|점:占5|정:鄭19,丁2,程12,政9,桯11,定8,正5,情12|제:諸16,齊14|조:趙14,曺10,調15,造14,刁2,朝12|종:鍾17,宗8|좌:左5,佐7|주:朱6,周8,主5,珠11,株10|증:增15,曾12|지:池7,智12,地6,遲19|진:陳16,秦10,晋10,陣15,眞10,蔯17,進15,珍10|차:車7,次6|창:昌8,倉10|채:蔡17,菜14,采8|천:千3,天4,川3|초:楚13,初8,肖9|총:叢18|최:崔11,催13,最12|추:秋9,鄒17|탁:卓8|탄:彈15|탕:湯13|태:太4,泰10|판:判7|팽:彭12|편:片4,扁9|평:平5|포:包5|표:表9,俵10|풍:馮12|피:皮5|필:弼12,畢11|하:河9,夏10,何7,賀12,荷13|학:郝14|한:韓17,漢15,汗7,恨10|함:咸9|해:海11,解13|허:許11|현:玄5,賢15|형:邢11,刑6,形7|호:扈11,胡11,鎬18,虎8,湖13|홍:洪10,烘10,弘5,哄9,紅9|화:化4|황:黃12,皇9,潢16,荒12,晃10,煌13,簧18|후:侯9,候10,后6|저:邸12|준:俊9|흥:興16";/* SURX-DATA END */
+/* === SURNAME-CORE START === */
+// 성씨 한자 고르기. 후보는 SURX(통계청 2015 조사 순서). 눌러서 고르거나, 한자를 칠 수 있으면 직접 넣는다.
+// 모드: auto 가장 흔한(첫째) 한자로 자동 · pick 눌러서 고름 · type 직접 입력 · none 모름(획수 풀이를 뺀다)
+const SURX_MAP=(()=>{const m={}; SURX.split("|").forEach(p=>{const i=p.indexOf(":"); if(i>0) m[p.slice(0,i)]=p.slice(i+1).split(",").map(t=>[t.charAt(0),+t.slice(1)]);}); return m;})();
+const SUR_COMPOUND=new Set(["남궁","독고","동방","사공","서문","선우","제갈","황보","어금","황목","강전","장곡","소봉","등정","망절","고이","명림","부여","사마","소실","수미","을지","조미","중실","흑치"]);
+const SUR_ST=(()=>{const m={}; for(const k in SURX_MAP) SURX_MAP[k].forEach(([c,s])=>{ if(!(c in m)) m[c]=s; }); return m;})();
+const SUR_SEL={s:"",mode:"auto",han:"",st:0};
+const surCands=s0=>SURX_MAP[s0]||[];
+function surStrokeOf(c){                       // 후보 표 → 이름 한자 표 순서로 원획을 찾는다(없으면 0)
+  if(SUR_ST[c]) return SUR_ST[c];
+  const h=HANJA.find(x=>x[0]===c); return h?h[3]:0;
+}
+function surReset(s0){                          // 성씨가 바뀌면 그 성씨의 첫째(가장 흔한) 한자로 되돌린다
+  const L=surCands(s0); SUR_SEL.s=s0; SUR_SEL.mode="auto"; SUR_SEL.han=L.length?L[0][0]:""; SUR_SEL.st=L.length?L[0][1]:0;
+}
+function surCur(sur){                           // calc 가 쓰는 값: [한자, 원획] 또는 null(모름·두 글자 성씨)
+  const s0=sur?sur[0]:"";
+  if(!s0||SUR_COMPOUND.has(sur)) return null;
+  if(SUR_SEL.s!==s0) surReset(s0);
+  return (SUR_SEL.mode==="none"||!SUR_SEL.han)?null:[SUR_SEL.han,SUR_SEL.st];
+}
+// 한자 한 글자로 고르기(눌러 고름·직접 입력·주소/기록 복원). '-' 는 모름. 쓸 수 없는 값이면 false
+function surApply(s0,han){
+  if(!s0) return false;
+  if(SUR_SEL.s!==s0) surReset(s0);
+  if(han==="-"){ SUR_SEL.mode="none"; return true; }
+  if(!/^[一-鿿]$/.test(han||"")) return false;
+  const st=surStrokeOf(han); if(!st) return false;
+  SUR_SEL.han=han; SUR_SEL.st=st; SUR_SEL.mode=surCands(s0).some(x=>x[0]===han)?"pick":"type";
+  return true;
+}
+function surHintText(sur){
+  const s0=sur[0], L=surCands(s0), cur=surCur(sur);
+  if(SUR_COMPOUND.has(sur)) return sur+"은 두 글자 성씨라서 아직 획수 풀이(수리 4격)는 못 보고, 소리와 사주 기운으로만 추천해요.";
+  if(SUR_SEL.mode==="none") return "성씨 한자를 몰라서 획수 풀이(수리 4격)는 빼고, 소리와 사주 기운으로만 추천해요.";
+  if(!cur) return "이 성씨는 한자 후보를 준비하지 못했어요. 한자를 아시면 아래에 넣어 주세요. 모르면 획수 풀이(수리 4격)는 빼고 추천해요.";
+  const t=`${cur[0]}(${cur[1]}획)으로`;
+  if(SUR_SEL.mode==="auto") return L.length>1
+    ? `성씨 한자를 몰라서 가장 흔한 ${t} 계산하고 있어요. 다른 한자면 눌러서 바꿔 주세요. 한자마다 획수가 달라서 추천 이름과 획수 풀이가 달라져요.`
+    : `${t} 계산해요. 다른 한자를 쓰시면 아래에 직접 넣어 주세요.`;
+  return (SUR_SEL.mode==="type"?"입력한 ":"고른 ")+t+" 계산해요.";
+}
+function surRender(){
+  const box=document.getElementById("surBox"); if(!box) return;
+  const sur=nameClean(document.getElementById("surname").value,2), s0=sur[0]||"";
+  if(!s0){ box.classList.add("hidden"); return; }
+  box.classList.remove("hidden");
+  const list=document.getElementById("surList"), inp=document.getElementById("surHan");
+  if(SUR_SEL.s!==s0) surReset(s0);
+  document.getElementById("surHint").textContent=surHintText(sur);
+  if(SUR_COMPOUND.has(sur)){ list.innerHTML=""; inp.disabled=true; inp.value=""; return; }
+  inp.disabled=false;
+  const L=surCands(s0), cur=surCur(sur), curH=cur?cur[0]:"", none=SUR_SEL.mode==="none";
+  const chip=([h,s])=>{const on=!none&&curH===h; return `<span class="shj${on?" on":""}" role="radio" aria-checked="${on}" tabindex="0" data-h="${h}"><b>${h}</b>${s}획</span>`;};
+  const vis=L.slice(0,6), more=L.slice(6), moreOn=more.some(x=>x[0]===curH)&&!none;
+  list.innerHTML=`<div class="shl" role="radiogroup" aria-label="성씨 한자 고르기">${vis.map(chip).join("")}<span class="shj${none?" on":""}" role="radio" aria-checked="${none}" tabindex="0" data-h="-">잘 모르겠어요</span></div>`
+    +(more.length?`<details class="shmore"${moreOn?" open":""}><summary>다른 한자 ${more.length}개 더 보기</summary><div class="shl">${more.map(chip).join("")}</div></details>`:"");
+  if(SUR_SEL.mode==="type") inp.value=SUR_SEL.han; else if(document.activeElement!==inp) inp.value="";
+}
+/* === SURNAME-CORE END === */
 const GOOD=/밝|빛|아름|클|어질|착|슬기|지혜|복|상서|기쁠|즐|귀할|옥|구슬|보배|맑|깨끗|높|빼어|향기|꽃|별|해|달|하늘|봄|사랑|은혜|편안|화할|이룰|성할|넉넉|도울|곧을|굳|온화|영화|아리따|고울|평안|기릴|우거|무성|순할|미쁠|정성|믿을|너그|맺을|이룰/;
 // 이번에 새로 넣은 드문 한자(h[6])는 뜻이 이름에 어울리는 것만 추천에 쓴다. 이름 확인 목록에는 전부 보여 준다.
 const NAMEOK=/옥|구슬|꽃|(나무|산|물|강) ?이름|무성|우거|넓을|깊을|높을|굳셀|햇빛|기뻐|공경|난초|연꽃|향기|노래|거문고|봉황|기린|예쁠|고울/;
@@ -2455,7 +2539,8 @@ function calc(){
     nb.innerHTML='<p style="margin:0;font-size:14px;color:var(--ink-2)">성씨를 한글로 입력하시면 이름을 추천해 드립니다.</p>';
   } else {
     const sOh=CHO_OH[ch];
-    const surHan=SUR[sur[0]], surStroke=surHan?surHan[1]:0;
+    const surHan=surCur(sur), surStroke=surHan?surHan[1]:0;      // 고른(또는 가장 흔한) 성씨 한자와 원획. 모르면 null
+    const surX=h=>SURHAN.has(h)||(surHan&&surHan[0]===h);          // 이름에 쓰지 않을 성씨 한자
     let html="";
 
     // (1) 가진 이름 확인 — 이름 칸은 늘 보이게 두고, 이름이 있으면 풀이까지
@@ -2484,7 +2569,7 @@ function calc(){
           <input type="text" id="gHanja" placeholder="한자만, 예: 怡浚" autocomplete="off"></div>
         <div id="nmEval"></div>
         ${gs.map((g,gi)=>{
-          const L=HANJA.filter(x=>x[1]===g.c&&!BAD.test(x[2])&&!SURHAN.has(x[0]))
+          const L=HANJA.filter(x=>x[1]===g.c&&!BAD.test(x[2])&&!surX(x[0]))
             .map(x=>({x,fit:x[4]===lack||x[4]===eokPick,s:((x[4]===lack||x[4]===eokPick)?8:0)+(GOOD.test(x[2])?2:0)+[-4,2,4][x[5]]}))
             .sort((a,b)=>b.s-a.s);
           if(!L.length) return `<p class="hjx">‘${g.c}’${ro(g.c).slice(g.c.length)} 쓰는 인명용 한자는 여기 없어요.</p>`;
@@ -2503,7 +2588,7 @@ function calc(){
     const byEum={}, hasEum=new Set();
     for(const h of HANJA){
       hasEum.add(h[1]);
-      if(BAD.test(h[2])||SURHAN.has(h[0])||!nameOk(h)) continue;  // 뜻이 나쁜 글자·성씨 한자는 이름에 안 씀
+      if(BAD.test(h[2])||surX(h[0])||!nameOk(h)) continue;  // 뜻이 나쁜 글자·성씨 한자는 이름에 안 씀
       const oh=target.includes(h[4])?8:0, gd=GOOD.test(h[2])?2:0, fq=[-4,2,4][h[5]];
       (byEum[h[1]]=byEum[h[1]]||[]).push({h,oh,gd,fq,base:oh+gd+fq});
     }
@@ -2570,7 +2655,9 @@ function calc(){
       ${[...new Set([lack,eokPick])].map(o=>`<b class="${OH_CLS[o]}">${OH[o]}(${OH_HAN[o]})</b>`).join("·")} 기운을 한자로 담을 수 있는 이름을 골랐어요.
       한자는 그 이름에 쓸 수 있는 것 중 제일 잘 맞는 조합을 자동으로 붙였어요.</p>
     <p style="margin:0 0 14px;font-size:12.5px;color:var(--ink-3)">
-      조건을 통과한 ${cand.length}개 중 상위 ${topN}개 · ★가 점수 1등${surHan?"":" · 성씨 한자를 몰라 획수 풀이(수리 4격)는 뺐어요"}</p>`;
+      조건을 통과한 ${cand.length}개 중 상위 ${topN}개 · ★가 점수 1등${surHan
+        ?(SUR_SEL.mode==="auto"&&surCands(sur[0]).length>1?` · <b style="color:var(--seal)">성씨 한자는 가장 흔한 ${surHan[0]}(${surStroke}획)으로 계산했어요. 다르면 위 ‘성씨 한자’에서 바꿔 주세요</b>`:"")
+        :" · 성씨 한자를 몰라 획수 풀이(수리 4격)는 뺐어요"}</p>`;
 
     const FQ=["드묾","자주 씀","매우 자주"];
     const gz=(nm,v)=>`<span class="gz2">${nm} <b>${v}</b> <i class="${GIL.has(v)?"g":"h"}">${GIL.has(v)?"좋은 수":"아쉬운 수"}</i></span>`;
@@ -2689,7 +2776,7 @@ function calc(){
       위 '미리 지어둔 이름' 칸에 이름을 넣으면 음마다 쓸 수 있는 한자를 전부 보여 드려요.
       <b>출생신고 전에는 대법원 전자가족관계등록시스템(efamily.scourt.go.kr)에서 꼭 한 번 조회</b>해 보세요.</p>`;
     nb.innerHTML=html;
-    NH_LAST={d:dv,t:(noTime?"":tv),nt:noTime,c:String(lon),s:sur,g:given,x:sex0,n:topN,e:useEot,y:yaja,
+    NH_LAST={d:dv,t:(noTime?"":tv),nt:noTime,c:String(lon),s:sur,sh:surHan?surHan[0]:"-",g:given,x:sex0,n:topN,e:useEot,y:yaja,
       pil:cols.map(([h,g,j])=>GAN_K[g]+JI_K[j]).join("·"),
       need:[...new Set([lack,eokPick])].map(o=>OH[o]),
       names:list.map(c=>[sur[0]+c.nm,c.h1[0]+c.h2[0],c.sc].join("|"))};
@@ -2700,7 +2787,7 @@ function calc(){
 
   // ── 공유용 주소 만들기 (입력값을 주소에 실어 보낸다)
   {
-    const q=new URLSearchParams({d:dv,t:(noTime?"":tv),c:String(lon),s:sur,g:given,
+    const q=new URLSearchParams({d:dv,t:(noTime?"":tv),c:String(lon),s:sur,sh:(surCur(sur)||["-"])[0],g:given,
                                 x:sex0,n:String(topN),e:useEot?"1":"0",y:yaja?"1":"0"});
     // 공유는 블로그 글로 보낸다 — 글 안에서 이 도구로 바로 들어올 수 있다.
     // 내 입력값은 주소창에만 남겨 둔다(새로고침·즐겨찾기용).
@@ -2740,6 +2827,7 @@ function calc(){
   set("d",q.get("d")); set("t",q.get("t")); set("city",q.get("c"));
   // 예전 기본값 "길동"이 주소에 남아 있어도 되살리지 않는다(이제 기본은 빈칸)
   set("surname",nameClean(q.get("s"),2)); if(q.get("g")!=="길동") set("given",nameClean(q.get("g"),3)); set("sex",q.get("x")); set("topn",q.get("n"));
+  { const s0=nameClean(q.get("s"),2)[0], sh=q.get("sh"); if(s0&&sh) surApply(s0,sh); }      // 주소에 실린 성씨 한자(한자 한 글자 또는 '-'만 받는다)
   if(q.get("e")!==null) document.getElementById("eot").checked=q.get("e")==="1";
   if(q.get("y")!==null) document.getElementById("yaja").checked=q.get("y")==="1";
   if(!q.get("t")) document.getElementById("unknown").checked=true;
@@ -2788,10 +2876,10 @@ function nhClean(r){
   const d=nhStr(r.d,10); if(!/^\d{4}-\d{2}-\d{2}$/.test(d)) return null;
   const names=(Array.isArray(r.names)?r.names:[]).slice(0,NH_NAMES_MAX).map(x=>nhStr(x,40)).filter(x=>x.length>0);
   return {at:nhStr(r.at,30), d:d, t:/^\d{2}:\d{2}$/.test(nhStr(r.t,5))?r.t:"", nt:!!r.nt, c:nhStr(r.c,8),
-    s:nhStr(r.s,2), g:nhStr(r.g,3), x:NH_SEX[r.x]?r.x:"A", n:Math.max(0,Math.min(99,parseInt(r.n,10)||0)), e:!!r.e, y:!!r.y,
+    s:nhStr(r.s,2), sh:/^(?:[一-鿿]|-)$/.test(nhStr(r.sh,1))?r.sh:"", g:nhStr(r.g,3), x:NH_SEX[r.x]?r.x:"A", n:Math.max(0,Math.min(99,parseInt(r.n,10)||0)), e:!!r.e, y:!!r.y,
     pil:nhStr(r.pil,40), need:(Array.isArray(r.need)?r.need:[]).slice(0,5).map(x=>nhStr(x,4)), names:names};
 }
-function nhSig(r){ return [r.d,r.t,r.nt?1:0,r.c,r.s,r.g,r.x,r.e?1:0,r.y?1:0,r.names.join("/")].join("|"); }
+function nhSig(r){ return [r.d,r.t,r.nt?1:0,r.c,r.s,r.sh,r.g,r.x,r.e?1:0,r.y?1:0,r.names.join("/")].join("|"); }
 // 맨 앞에 넣고 NH_MAX 개까지만 남긴다. 바로 앞 기록과 입력·결과가 똑같으면 또 넣지 않는다.
 function nhAdd(recs,rec){
   const c=nhClean(rec); if(!c||!c.names.length) return recs;
@@ -2871,6 +2959,7 @@ function nhSaveLast(){
     if(b.dataset.nh==="del"){ NH.recs.splice(i,1); nhSave(); nhRender(); return; }
     const set=(id,v)=>{ document.getElementById(id).value=v; };
     set("d",r.d); set("t",r.t||"14:25"); set("city",r.c); set("surname",r.s); set("given",r.g); set("sex",r.x);
+    { const s0=nameClean(r.s,2)[0]; if(s0){ surReset(s0); if(r.sh) surApply(s0,r.sh); } surRender(); }       // 저장해 둔 성씨 한자(없으면 가장 흔한 한자)
     if(r.n) set("topn",String(r.n));
     document.getElementById("eot").checked=r.e; document.getElementById("yaja").checked=r.y;
     document.getElementById("unknown").checked=r.nt; document.getElementById("t").disabled=r.nt;
@@ -2892,6 +2981,29 @@ document.getElementById("go").addEventListener("click",()=>{
 document.getElementById("unknown").addEventListener("change",e=>{
   document.getElementById("t").disabled=e.target.checked;
 });
+// 성씨 한자 고르기: 성씨를 쓰면 후보가 나오고, 눌러 고르거나 한자를 직접 넣는다. 결과가 이미 떠 있으면 바로 다시 계산한다.
+(function(){
+  const nm=document.getElementById("surname"), hj=document.getElementById("surHan"), list=document.getElementById("surList"), msg=document.getElementById("surMsg");
+  const MSG0="한자를 칠 수 있으면 여기에 직접 넣어도 돼요. 목록에서 눌러 골라도 돼요.";
+  const s0=()=>nameClean(nm.value,2)[0]||"";
+  const redo=()=>{ const o=document.getElementById("out"); if(o&&!o.classList.contains("hidden")) calc(); };
+  nm.addEventListener("input",surRender);
+  nm.addEventListener("change",surRender);
+  function pickH(h){ const s=s0(); if(s&&surApply(s,h)){ hj.value=""; msg.textContent=MSG0; surRender(); redo(); } }
+  list.addEventListener("click",e=>{ const t=e.target.closest(".shj[data-h]"); if(t) pickH(t.dataset.h); });
+  list.addEventListener("keydown",e=>{ const t=e.target.closest(".shj[data-h]"); if(t&&(e.key==="Enter"||e.key===" ")){ e.preventDefault(); pickH(t.dataset.h); } });
+  function typed(){
+    const s=s0(), v=hj.value.trim(); if(!s) return;
+    if(!v){ if(SUR_SEL.mode==="type"){ surReset(s); surRender(); redo(); } msg.textContent=MSG0; return; }
+    if(!/^[一-鿿]$/.test(v)){ msg.textContent="한자 한 글자만 넣어 주세요."; return; }
+    if(surApply(s,v)){ msg.textContent=v+"("+SUR_SEL.st+"획)으로 계산해요."; surRender(); redo(); }
+    else msg.textContent=v+"은 획수 자료에 없어서 쓸 수 없어요. 목록에서 골라 주세요.";
+  }
+  hj.addEventListener("input",e=>{ if(!e.isComposing) typed(); });
+  hj.addEventListener("compositionend",typed);
+  hj.addEventListener("change",typed);
+})();
+surRender();
 calc();
 /* ══════════════════════════════════════════════════════════════
    출산 택일 · 아기 사주  (탭 2)
@@ -4299,7 +4411,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="d3c5168a";
+var APP_BUILD="9b61ea77";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
