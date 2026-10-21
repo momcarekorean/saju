@@ -897,6 +897,10 @@ dd b{font-weight:500; color:var(--ink)}
 .bf-pt.on{border-color:var(--seal);color:var(--ink);font-weight:700;background:var(--paper)}
 .bf-pp[hidden]{display:none}
 .bf-pick{margin-top:6px}
+.bf-disc{margin:0 0 18px;border-left:4px solid var(--seal);background:var(--paper-2)}
+.bf-disc p{margin:0;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.bf-disc p+p{margin-top:6px}
+.bf-disc b{color:var(--ink)}
 /*BF:CSS:END*/
 
 </style>
@@ -942,7 +946,7 @@ dd b{font-weight:500; color:var(--ink)}
   </button>
   <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-jp">
     <img src="tab-jp.jpg" width="800" height="597" decoding="async"
-         alt="일본 가격 — 일본에서 많이 사 오는 유모차·카시트·하이체어의 오늘 가격과 재고, 구매처 찾아가는 법을 봅니다">
+         alt="일본 추천구매 재고·가격(매일 갱신) — 일본에서 많이 사 오는 유모차·카시트·하이체어의 오늘 가격과 재고, 구매처 찾아가는 법을 봅니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
   <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-bf">
@@ -3414,6 +3418,11 @@ function bfStepsHtml(steps){return (steps.some(s=>s.key)?BF_KEYNOTE:"")+'<ol cla
 let BF_P=BF.periods[0].id;
 const bfPer=id=>BF.periods.find(p=>p.id===id)||BF.periods[0];
 const bfCardsOf=id=>BF.cards.filter(c=>(c.period||BF.periods[0].id)===id);
+// 참고용·상담 안내: 목록 맨 위, 카드·공통 규칙 맨 아래에 항상 보여 준다
+function bfDisc(){
+  return '<div class="card bf-disc" role="note"><p><b>참고용이에요.</b> 아기마다 성장과 건강 상태가 달라서, 이유식 시작 시기와 양, 알레르기 식품, 질식 위험 음식은 <b>담당 소아청소년과 의사나 영양 전문가와 상의해서</b> 정해 주세요.</p>'
+    +'<p>알레르기가 의심되거나 걱정되는 증상이 있으면 이 가이드보다 <b>진료가 먼저</b>예요. 문장 끝의 ★◎○◇는 근거가 어디서 왔는지 알려 주는 표시이고, 의학적 판단을 대신하지 않아요.</p></div>';
+}
 function bfCardNav(card){
   const L=bfCardsOf(card.period||BF.periods[0].id), i=L.findIndex(c=>c.id===card.id), p=L[i-1], n=L[i+1];
   const a=(c,txt)=>c?'<a href="?tab=bf&bf='+bfEsc(c.id)+'" data-bf="card:'+bfEsc(c.id)+'">'+txt+"</a>":'<a class="off">.</a>';
@@ -3497,12 +3506,12 @@ function bfCardHtml(card,st){
   if(card.opinions&&card.opinions.length) h+=bfBox("의견이 갈려요",card.opinions.map(o=>'<div class="bf-call">'+bfFmt(o)+"</div>").join(""));
   h+=bfBox("보관·해동",'<div class="bf-call"><span class="bfl">냉장 <b>1~2일</b>, 냉동 <b>만든 날부터 7일 이내</b>'+bfInline("{★ 복지부}")+'</span><span class="bfl">해동은 <b>전날 저녁 냉장실</b>이 기본이에요. 자세한 방법은 공통 규칙을 봐요.</span></div>'
     +'<div class="bf-gear"><a href="?tab=bf&bf=rules" data-bf="rules" style="border-color:var(--rule)">보관·해동 공통 규칙 보기 ›</a></div>');
-  h+=bfGearHtml(card)+bfCardNav(card);
+  h+=bfGearHtml(card)+bfDisc()+bfCardNav(card);
   return h;
 }
 function bfListHtml(pid){
   const per=bfPer(pid||BF_P), cards=bfCardsOf(per.id);
-  let h=bfLegendTop(true)+'<p class="sub bf-lead">'+bfInline(BF.lead)+"</p>";
+  let h=bfLegendTop(true)+'<p class="sub bf-lead">'+bfInline(BF.lead)+"</p>"+bfDisc();
   h+=bfBox("시기 고르기",'<div class="bf-seg">'+BF.periods.map(p=>p.ready
       ?'<div class="sg pick'+(p.id===per.id?" on":"")+'" role="button" tabindex="0" data-bf="p:'+bfEsc(p.id)+'"><b>'+bfEsc(p.label)+"</b><small>"+bfEsc(p.sub)+"</small></div>"
       :'<div class="sg off"><b>'+bfEsc(p.label)+"</b><small>"+bfEsc(p.sub)+"</small></div>").join("")+"</div>"
@@ -3529,6 +3538,7 @@ function bfRulesHtml(){
     +'<div class="bf-sub">남은 것</div><ol class="bf-steps">'+li(R.leftover)+"</ol>");
   h+=bfBox("이 가이드에서 쓰는 말",'<table class="bf-mat">'+BF.terms.map(t=>"<tr><td><b>"+bfEsc(t.k)+"</b></td><td>"+bfFmt(t.v)+"</td></tr>").join("")+"</table>");
   h+=bfBox("이 가이드의 한계",'<div class="bf-chk">'+BF.limits.map(t=>"<div><i>!</i><span>"+bfFmt(t)+"</span></div>").join("")+"</div>");
+  h+=bfDisc();
   return h;
 }
 (function(){
@@ -4778,7 +4788,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="8e96ce03";
+var APP_BUILD="73739ffd";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
