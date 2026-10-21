@@ -335,6 +335,8 @@ dd b{font-weight:500; color:var(--ink)}
 .shx{margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .shx input{width:84px;padding:8px 10px;font-size:18px;text-align:center}
 .shx .msg{flex:1;min-width:150px;font-size:12.5px;color:var(--ink-3);line-height:1.5}
+.hcnt{font-family:inherit;font-size:13px;font-weight:500;color:var(--ink-3);letter-spacing:0}
+.nhset{margin-top:10px;font-size:13px}.nhset summary{cursor:pointer;color:var(--ink-2)}
 .nevin{margin-top:14px}
 .nev{margin-top:10px;border:1px solid var(--rule);background:var(--paper);padding:12px 14px;border-radius:2px;font-size:13.5px;color:var(--ink-2)}
 .nev h4{margin:0 0 6px;font-size:15px;color:var(--ink)}
@@ -829,11 +831,25 @@ dd b{font-weight:500; color:var(--ink)}
 
 <div id="tab-saju">
 
+<p class="upd"><b>업데이트 10/21</b> 저장해 둔 작명 기록을 맨 위로 옮겼어요. 바로 불러올 수 있어요</p>
 <p class="upd"><b>업데이트 10/21</b> 성씨 한자를 고르거나 직접 넣을 수 있어요. 한자에 따라 획수가 달라 추천 이름이 달라져요 · 방문자 의견을 반영했어요</p>
 <p class="upd"><b>업데이트 10/19</b> 작명 기록을 이 기기에 저장할 수 있어요(선택) · 성씨 칸의 예시 글자 삭제</p>
 <p class="upd"><b>업데이트 9/29</b> 인명용 한자 대폭 추가 · 한자 이름 풀이 · 풀이를 쉬운 말로 · 오류 수정</p>
 
 <p class="sub" style="margin:0 0 18px">생년월일과 태어난 시각으로 사주 여덟 글자를 계산합니다. 절기와 진태양시를 적용하고, <b>무엇을 어떻게 보정했는지 전부 아래에 표시</b>합니다.</p>
+
+<div class="card" id="nhCard">
+  <h2>내 작명 기록 <span class="hcnt" id="nhCnt"></span></h2>
+  <div id="nhList"></div>
+  <p id="nhMsg" class="shmsg hidden"></p>
+  <label class="chk" style="margin-top:14px"><input type="checkbox" id="nhOn"> 이 기기에 작명 기록 저장하기</label>
+  <details class="nhset"><summary>저장 안내와 설정</summary>
+    <p class="sub" style="margin:8px 0 0">사주를 뽑고 이름을 추천받을 때마다 입력한 값과 추천 이름을 이 기기에 남겨 둘 수 있어요. 휴대폰과 컴퓨터는 각각 따로 저장돼요.</p>
+    <p class="gnote" style="margin:8px 0 0"><b>저장하는 것</b> 생년월일·태어난 시각·성씨·성별과 추천된 이름이에요.
+      <b>저장 위치</b> 이 기기의 브라우저 안에만 저장되고 서버로 보내지 않아요.
+      <b>보관</b> 최근 30번까지 남기고, 직접 지우거나 브라우저 데이터를 지울 때까지 있어요. 체크를 풀면 새 기록은 저장하지 않아요.</p>
+    <button id="nhClear" type="button" class="rebtn hidden">기록 전부 지우기</button></details>
+</div>
 
 <div class="card">
   <h2>태어난 때</h2>
@@ -996,18 +1012,6 @@ dd b{font-weight:500; color:var(--ink)}
     <button id="reroll" type="button" class="rebtn">다른 이름 다시 뽑기</button>
   </div>
 
-  <div class="card" id="nhCard">
-    <h2>내 작명 기록</h2>
-    <p class="sub" style="margin-top:0">사주를 뽑고 이름을 추천받을 때마다 입력한 값과 추천 이름을 이 기기에 남겨 둘 수 있어요. 휴대폰과 컴퓨터는 각각 따로 저장돼요.</p>
-    <label class="chk" style="margin-top:12px"><input type="checkbox" id="nhOn"> 이 기기에 작명 기록 저장하기</label>
-    <p class="gnote" style="margin:8px 0 0"><b>저장하는 것</b> 생년월일·태어난 시각·성씨·성별과 추천된 이름이에요.
-      <b>저장 위치</b> 이 기기의 브라우저 안에만 저장되고 서버로 보내지 않아요.
-      <b>보관</b> 최근 30번까지 남기고, 직접 지우거나 브라우저 데이터를 지울 때까지 있어요. 체크를 풀면 새 기록은 저장하지 않아요.</p>
-    <p id="nhMsg" class="shmsg hidden"></p>
-    <div id="nhList"></div>
-    <button id="nhClear" type="button" class="rebtn hidden">기록 전부 지우기</button>
-  </div>
-
   <div class="card">
     <h2>이 도구 알려주기</h2>
     <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
@@ -1058,10 +1062,23 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 <div id="tab-pick" class="hidden">
 
-<p class="upd"><b>업데이트 10/21</b> 이 도구를 소개한 블로그 글(원문) 링크와 의견 남기는 곳을 맨 아래에 안내해요</p>
+<p class="upd"><b>업데이트 10/21</b> 저장해 둔 택일 기록을 맨 위로 옮겼어요 · 이 도구를 소개한 블로그 글(원문) 링크와 의견 남기는 곳을 맨 아래에 안내해요</p>
 <p class="upd"><b>업데이트 10/20</b> 택일 기록을 이 기기에 저장할 수 있어요(선택) · 예정일을 한 번만 넣으면 모든 탭에 들어가요</p>
 <p class="upd"><b>업데이트 10/19</b> 같은 날짜의 여러 시간대를 순위로 비교하는 옵션 추가</p>
 <p class="upd"><b>업데이트 9/30</b> 주말·공휴일·야간 제외 선택 및 오류 수정</p>
+
+<div class="card" id="phCard">
+  <h2>내 택일 기록 <span class="hcnt" id="phCnt"></span></h2>
+  <div id="phList"></div>
+  <p id="phMsg" class="shmsg hidden"></p>
+  <label class="ck" style="margin-top:14px"><input type="checkbox" id="phOn"> 이 기기에 택일 기록 저장하기</label>
+  <details class="nhset"><summary>저장 안내와 설정</summary>
+    <p class="sub" style="margin:8px 0 0">택일 계산을 할 때마다 입력한 값과 상위 후보를 이 기기에 남겨 둘 수 있어요. 휴대폰과 컴퓨터는 각각 따로 저장돼요.</p>
+    <p class="gnote" style="margin:8px 0 0"><b>저장하는 것</b> 부모 생년월일·태어난 시각, 예정일, 날짜 범위와 상위 후보 세 개예요.
+    <b>저장 위치</b> 이 기기의 브라우저 안에만 저장되고 서버로 보내지 않아요.
+    <b>보관</b> 최근 20번까지 남기고, 직접 지우거나 브라우저 데이터를 지울 때까지 있어요. 체크를 풀면 새 기록은 저장하지 않아요.</p>
+    <button id="phClear" type="button" class="rebtn hidden">기록 전부 지우기</button></details>
+</div>
 
 <div class="card">
   <h2>부모 사주</h2>
@@ -1190,18 +1207,6 @@ dd b{font-weight:500; color:var(--ink)}
   <div class="card"><h2>어떻게 점수를 매겼나</h2><div id="pHow"></div></div>
 </div>
 
-<div class="card" id="phCard">
-  <h2>내 택일 기록</h2>
-  <p class="sub" style="margin-top:0">택일 계산을 할 때마다 입력한 값과 상위 후보를 이 기기에 남겨 둘 수 있어요. 휴대폰과 컴퓨터는 각각 따로 저장돼요.</p>
-  <label class="ck" style="margin-top:12px"><input type="checkbox" id="phOn"> 이 기기에 택일 기록 저장하기</label>
-  <p class="gnote" style="margin:8px 0 0"><b>저장하는 것</b> 부모 생년월일·태어난 시각, 예정일, 날짜 범위와 상위 후보 세 개예요.
-    <b>저장 위치</b> 이 기기의 브라우저 안에만 저장되고 서버로 보내지 않아요.
-    <b>보관</b> 최근 20번까지 남기고, 직접 지우거나 브라우저 데이터를 지울 때까지 있어요. 체크를 풀면 새 기록은 저장하지 않아요.</p>
-  <p id="phMsg" class="shmsg hidden"></p>
-  <div id="phList"></div>
-  <button id="phClear" type="button" class="rebtn hidden">기록 전부 지우기</button>
-</div>
-
 <div class="card">
   <h2>이 도구 알려주기</h2>
   <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-2)">
@@ -1245,7 +1250,13 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 
 <div id="tab-growth" class="hidden">
+<p class="upd"><b>업데이트 10/21</b> 저장한 초음파 기록을 맨 위로 옮겼어요</p>
 <p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
+<div class="card hidden" id="gListCard">
+  <h2>저장한 기록</h2>
+  <div class="gtw" id="gList"></div>
+</div>
+
 <div class="card">
   <h2 id="gTitle">우리 아기 성장분석</h2>
   <p class="sub" style="margin-top:0">초음파 사진에 적힌 BPD·HC·AC·FL·EFW 값을 넣으면, 같은 주수 아기들 사이에서 어디쯤인지 WHO 태아성장표 기준으로 보여 드려요.</p>
@@ -1295,11 +1306,6 @@ dd b{font-weight:500; color:var(--ink)}
 </div>
 
 <div id="gShop"></div>
-
-<div class="card hidden" id="gListCard">
-  <h2>저장한 기록</h2>
-  <div class="gtw" id="gList"></div>
-</div>
 
 <div class="card">
   <h2>내 기록 링크</h2>
@@ -2910,12 +2916,13 @@ function nhRender(){
   const cityName=v=>{ const o=[...city.options].find(x=>x.value===v); return o?o.textContent.trim():""; };
   document.getElementById("nhOn").checked=NH.on;
   document.getElementById("nhClear").classList.toggle("hidden",!NH.recs.length);
+  document.getElementById("nhCnt").textContent=NH.recs.length?"("+NH.recs.length+"개)":"";
   if(!NH.recs.length){
-    box.innerHTML='<p class="gnote" style="margin:14px 0 0">'+(NH.on?"아직 저장된 기록이 없어요. 위에서 <b>사주 뽑기</b>나 <b>다른 이름 다시 뽑기</b>를 누르면 여기에 쌓여요."
+    box.innerHTML='<p class="gnote" style="margin:0">'+(NH.on?"아직 저장된 기록이 없어요. 아래에서 <b>사주 뽑기</b>나 <b>다른 이름 다시 뽑기</b>를 누르면 여기에 쌓여요."
       :"저장을 켜 두면 사주를 뽑을 때마다 이곳에 기록이 쌓여요.")+'</p>';
     return;
   }
-  box.innerHTML=NH.recs.map((r,i)=>{
+  const item=(r,i)=>{
     const nm=r.names.map(nhName);
     const head=nm.slice(0,8).map(x=>'<span class="nhc">'+nhEsc(x.n)+(x.h?'<small>'+nhEsc(x.h)+'</small>':'')+'</span>').join("");
     const rest=nm.length>8?'<details class="nhd"><summary>추천 이름 '+nm.length+'개 모두 보기</summary><div class="nhall">'
@@ -2925,9 +2932,12 @@ function nhRender(){
       +(cityName(r.c)?' · '+nhEsc(cityName(r.c)):'')+(r.g?' · 지어 둔 이름 '+nhEsc(r.g):'')+(wl?'<small>'+nhEsc(wl)+' 저장</small>':'')+'</div>'
       +'<p class="nhp">사주 '+nhEsc(r.pil)+(r.need.length?' · 아쉬운 기운 '+r.need.map(nhEsc).join("·"):'')+'</p>'
       +'<div class="nhn">'+head+'</div>'+rest
-      +'<div class="nhb"><button type="button" class="rebtn" data-nh="load" data-i="'+i+'">이 입력값 다시 불러오기</button>'
+      +'<div class="nhb"><button type="button" class="rebtn" data-nh="load" data-i="'+i+'">이 기록 불러오기</button>'
       +'<button type="button" class="rebtn" data-nh="del" data-i="'+i+'">이 기록 지우기</button></div></div>';
-  }).join("");
+  };
+  const SHOW=1;                                      // 맨 위에서는 가장 최근 기록 하나만 펼치고 나머지는 접는다(입력칸이 너무 아래로 밀리지 않게)
+  box.innerHTML=NH.recs.slice(0,SHOW).map((r,i)=>item(r,i)).join("")
+    +(NH.recs.length>SHOW?'<details class="nhd"><summary>이전 기록 '+(NH.recs.length-SHOW)+'개 더 보기</summary>'+NH.recs.slice(SHOW).map((r,i)=>item(r,i+SHOW)).join("")+'</details>':"");
 }
 function nhEsc(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 // 사주 뽑기·다른 이름 다시 뽑기를 눌렀을 때만 저장한다(페이지를 열 때 자동으로 도는 계산은 저장하지 않는다)
@@ -2946,7 +2956,7 @@ function nhSaveLast(){
   document.getElementById("nhOn").addEventListener("change",e=>{
     NH.on=e.target.checked;
     if(!nhSave()){ NH.on=false; e.target.checked=false; nhMsgShow("이 브라우저에서는 저장이 막혀 있어서 켤 수 없어요."); return; }
-    nhMsgShow(NH.on?"이제부터 사주를 뽑을 때마다 이 기기에 기록해 둘게요.":"새 기록은 저장하지 않아요. 이미 저장된 기록은 아래에 그대로 남아 있어요.");
+    nhMsgShow(NH.on?"이제부터 사주를 뽑을 때마다 이 기기에 기록해 둘게요.":"새 기록은 저장하지 않아요. 이미 저장된 기록은 위에 그대로 남아 있어요.");
     nhRender();
   });
   document.getElementById("nhClear").addEventListener("click",()=>{
@@ -4411,7 +4421,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="be402138";
+var APP_BUILD="9ccf0844";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -4903,12 +4913,13 @@ function phRender(){
   const cityName=v=>{ const o=[...city.options].find(x=>x.value===v); return o?o.textContent.trim():""; };
   document.getElementById("phOn").checked=PH.on;
   document.getElementById("phClear").classList.toggle("hidden",!PH.recs.length);
+  document.getElementById("phCnt").textContent=PH.recs.length?"("+PH.recs.length+"개)":"";
   if(!PH.recs.length){
-    box.innerHTML='<p class="gnote" style="margin:14px 0 0">'+(PH.on?"아직 저장된 기록이 없어요. 위에서 <b>택일 계산</b>을 누르면 여기에 쌓여요.":"저장을 켜 두면 택일 계산을 할 때마다 이곳에 기록이 쌓여요.")+'</p>';
+    box.innerHTML='<p class="gnote" style="margin:0">'+(PH.on?"아직 저장된 기록이 없어요. 아래에서 <b>택일 계산</b>을 누르면 여기에 쌓여요.":"저장을 켜 두면 택일 계산을 할 때마다 이곳에 기록이 쌓여요.")+'</p>';
     return;
   }
   const par=(p)=>phEsc(p.d)+(p.no?" (시각 모름)":" "+phEsc(p.t));
-  box.innerHTML=PH.recs.map((r,i)=>{
+  const item=(r,i)=>{
     const when=r.at?new Date(r.at):null, wl=when&&!isNaN(when)?when.toLocaleString("ko-KR",{year:"numeric",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"";
     const opts=[r.hol?"주말·공휴일 제외":"주말·공휴일 포함", r.night?"야간·새벽 제외":"야간·새벽 포함"].concat(r.multi?["여러 시간대 순위"]:[]).join(" · ");
     const tops=r.top.map((t,k)=>'<li><b>'+(k+1)+'순위</b> '+phEsc(t.dv)+'('+WD_K[wdOf(t.dv)]+') · '+phEsc(t.lab)+' · <b>'+t.sc+'점</b> · 임신 '+t.wk+'주 '+t.wd+'일</li>').join("");
@@ -4916,9 +4927,12 @@ function phRender(){
       +'<p class="nhp">아빠 '+par(r.pf)+' · 엄마 '+par(r.pm)+'</p>'
       +'<p class="nhp">'+(r.a||r.b?'날짜 범위 '+phEsc(r.a||"예정일 2주 전")+' ~ '+phEsc(r.b||"예정일")+' · ':'날짜 범위 기본값 · ')+opts+'</p>'
       +'<ol class="phtop">'+tops+'</ol>'
-      +'<div class="nhb"><button type="button" class="rebtn" data-ph="load" data-i="'+i+'">이 입력값 다시 불러오기</button>'
+      +'<div class="nhb"><button type="button" class="rebtn" data-ph="load" data-i="'+i+'">이 기록 불러오기</button>'
       +'<button type="button" class="rebtn" data-ph="del" data-i="'+i+'">이 기록 지우기</button></div></div>';
-  }).join("");
+  };
+  const SHOW=1;                                      // 맨 위에서는 가장 최근 기록 하나만 펼치고 나머지는 접는다(입력칸이 너무 아래로 밀리지 않게)
+  box.innerHTML=PH.recs.slice(0,SHOW).map((r,i)=>item(r,i)).join("")
+    +(PH.recs.length>SHOW?'<details class="nhd"><summary>이전 기록 '+(PH.recs.length-SHOW)+'개 더 보기</summary>'+PH.recs.slice(SHOW).map((r,i)=>item(r,i+SHOW)).join("")+'</details>':"");
 }
 // 택일 계산 버튼을 눌렀을 때만 저장한다
 function phSaveLast(){
@@ -4934,7 +4948,7 @@ function phSaveLast(){
   document.getElementById("phOn").addEventListener("change",e=>{
     PH.on=e.target.checked;
     if(!phSave()){ PH.on=false; e.target.checked=false; phMsgShow("이 브라우저에서는 저장이 막혀 있어서 켤 수 없어요."); return; }
-    phMsgShow(PH.on?"이제부터 택일 계산을 할 때마다 이 기기에 기록해 둘게요.":"새 기록은 저장하지 않아요. 이미 저장된 기록은 아래에 그대로 남아 있어요.");
+    phMsgShow(PH.on?"이제부터 택일 계산을 할 때마다 이 기기에 기록해 둘게요.":"새 기록은 저장하지 않아요. 이미 저장된 기록은 위에 그대로 남아 있어요.");
     phRender();
   });
   document.getElementById("phClear").addEventListener("click",()=>{
