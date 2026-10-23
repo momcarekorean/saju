@@ -2222,8 +2222,8 @@ const NAMEOK=/옥|구슬|꽃|(나무|산|물|강) ?이름|무성|우거|넓을|�
 const nameOk=h=>!h[6]||GOOD.test(h[2])||NAMEOK.test(h[2]);
 const BAD=/죽|병|앓|슬플|잃|도둑|벌레|어두|흉|재앙|근심|괴로|미워|성낼|두려|무덤|시체|귀신|늙|가난|천할|더러|밧줄|동이|책상|개펄|똥|오줌|뼈|가죽|창자|화살|덫|그물|올가미|허물|죄|벌할|꾸짖|나쁠|악할|어리석|게으|취할|싸울|다툴|찌를|무너|망할|굶주|주릴|아플|의심|속일|훔칠|막을|좁을|낮을|잠길|빠질/;
 
-const BLOG_NAME_URL="https://blog.naver.com/momcare_/224399366895";
-let reroll=0, shareURL=BLOG_NAME_URL, shareText="아기 이름, 작명소 없이 사주로 직접 지어 볼 수 있어요";                                   // 다시 뽑기 횟수
+const SITE_URL="https://momcarekorean.github.io/saju/";   // 공유하기는 이 사이트로 보낸다(결과 링크 #g= 는 성장분석 탭 별도)
+let reroll=0, shareURL=SITE_URL, shareText="아기 이름, 작명소 없이 사주로 직접 지어 볼 수 있어요";                                   // 다시 뽑기 횟수
 const jo=(w,a,b)=>{const c=String(w).charCodeAt(String(w).length-1)-0xAC00;
   return (c>=0&&c<11172&&c%28!==0)?a:b;};       // 받침 있으면 a, 없으면 b
 const rad=Math.PI/180;
@@ -2934,10 +2934,9 @@ function calc(){
   {
     const q=new URLSearchParams({d:dv,t:(noTime?"":tv),c:String(lon),s:sur,sh:(surCur(sur)||["-"])[0],g:given,
                                 x:sex0,n:String(topN),e:useEot?"1":"0",y:yaja?"1":"0"});
-    // 공유는 블로그 글로 보낸다 — 글 안에서 이 도구로 바로 들어올 수 있다.
-    // 내 입력값은 주소창에만 남겨 둔다(새로고침·즐겨찾기용).
-    shareURL=BLOG_NAME_URL;
-    shareText="아기 이름, 작명소 없이 사주로 직접 지어 볼 수 있어요 — 무료 도구와 계산 방법 정리";
+    // 공유는 이 사이트 주소로 보낸다. 내 입력값은 주소창에만 남겨 둔다(새로고침·즐겨찾기용).
+    shareURL=SITE_URL;
+    shareText="아기 이름, 작명소 없이 사주로 직접 지어 볼 수 있어요 — 무료 도구";
     try{ history.replaceState(null,"","?"+q.toString()); }catch(e){}
     document.getElementById("shareurl").textContent=shareURL;
   }
@@ -3618,9 +3617,9 @@ function bfRulesHtml(){
   if(b){ b.click(); window.scrollTo(0,0); }
 })();
 
-// 택일 탭 공유 — 이 탭을 어떻게 만들었는지 정리한 블로그 글로 보낸다
-const BLOG_PICK_URL="https://blog.naver.com/momcare_/224410891254";
-const PICK_SHARE_TEXT="제왕절개 날짜·시간, 부모 사주로 직접 골라 볼 수 있어요 — 무료 출산택일 도구와 계산 방법 정리";
+// 택일 탭 공유 — 이 사이트 주소로 보낸다
+const BLOG_PICK_URL=SITE_URL;
+const PICK_SHARE_TEXT="제왕절개 날짜·시간, 부모 사주로 직접 골라 볼 수 있어요 — 무료 출산택일 도구";
 document.getElementById("pkUrl").textContent=BLOG_PICK_URL;
 const pkMsg=(m)=>{const e=document.getElementById("pkMsg");
   e.textContent=m; e.classList.remove("hidden");
