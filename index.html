@@ -3,11 +3,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>임신·출산 무료 도구 | 맘케어</title>
-<meta name="description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드를 계산 기준과 함께 보여 드려요.">
+<meta name="description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드, 우리동네 혜택을 계산 기준과 함께 보여 드려요.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="맘케어">
 <meta property="og:title" content="임신·출산 무료 도구 | 맘케어">
-<meta property="og:description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드를 계산 기준과 함께 보여 드려요.">
+<meta property="og:description" content="임신·출산 무료 도구 모음이에요. 아기 이름 짓기(사주), 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드, 우리동네 혜택을 계산 기준과 함께 보여 드려요.">
 <meta property="og:url" content="https://momcarekorean.github.io/saju/">
 <meta property="og:image" content="https://momcarekorean.github.io/saju/tab-name.jpg">
 <link rel="canonical" href="https://momcarekorean.github.io/saju/">
@@ -302,7 +302,7 @@ dd b{font-weight:500; color:var(--ink)}
 }
 
 /* 탭 — 그림을 눌러 고른다 */
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 26px}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:0 0 26px}
 .tb{appearance:none;padding:0;border:3px solid transparent;border-radius:16px;
   background:none;cursor:pointer;overflow:hidden;position:relative;display:block;
   transition:border-color .15s, box-shadow .15s, transform .12s, filter .15s}
@@ -917,6 +917,63 @@ dd b{font-weight:500; color:var(--ink)}
 body{word-break:keep-all; overflow-wrap:break-word; text-wrap:pretty}
 h1,h2,h3,h4,th{text-wrap:balance}
 /*TS:CSS:END*/
+/*BEN:CSS:BEGIN*/
+/* 우리동네 혜택 탭 */
+.ben-lead{margin:0 0 14px;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+.ben-call{margin:0 0 16px;padding:12px 14px;border-left:4px solid var(--to);background:rgba(184,134,43,.12);border-radius:0 3px 3px 0;font-size:13.5px;line-height:1.7;color:var(--ink)}
+.ben-ex{margin:0 0 14px}
+.ben-ex .cap{display:block;margin:0 0 6px;font-size:12.5px;color:var(--ink-3)}
+.ben-chips{display:flex;flex-wrap:wrap;gap:7px}
+.ben-chip,.ben-more,.ben-foot button,.ben-now button{margin:0;width:auto;letter-spacing:normal;font-family:inherit;font-weight:400;transition:none}
+.ben-chip{appearance:none;border:1px solid var(--rule);background:var(--card);color:var(--ink);padding:5px 12px;border-radius:99px;font-size:13.5px;cursor:pointer;line-height:1.4}
+.ben-chip:hover{background:var(--paper-2);border-color:var(--seal)}
+.ben-chip.on,.ben-chip.on:hover{background:var(--seal);border-color:var(--seal);color:#fff}
+.ben-chip.off,.ben-chip.off:hover{background:var(--to);border-color:var(--to);color:#fff}
+.ben-chip:focus-visible,.ben-sel:focus-visible,.ben-q:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+.ben-filters{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));padding:14px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+.ben-filters .fld{display:block;min-width:0}
+.ben-filters label.l{display:block;font-size:12px;color:var(--ink-3);margin:0 0 3px}
+.ben-q,.ben-sel{width:100%;padding:9px 10px;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink);font:inherit;font-size:15px;min-height:42px}
+.ben-filters .wide{grid-column:1/-1}
+.ben-checks{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13.5px}
+.ben-checks label{display:inline-flex;align-items:center;gap:6px;color:var(--ink);cursor:pointer;margin:0;font-size:13.5px;letter-spacing:normal}
+.ben-checks input{width:auto;min-height:0;padding:0;margin:0}
+.ben-hide{grid-column:1/-1;border-top:1px dashed var(--rule);padding-top:12px}
+.ben-hide .hd{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px;font-size:13.5px}
+.ben-hide .hd b{font-weight:700;margin-right:4px}
+.ben-hide .ben-chip.gen{border-color:var(--seal);color:var(--seal)}
+.ben-hide .ben-chip.gen:hover{background:var(--seal);color:#fff}
+.ben-bar{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 14px;margin:16px 0 8px;font-size:13.5px;color:var(--ink-2)}
+.ben-bar a{color:var(--seal)}
+.ben-now{display:inline-flex;align-items:center;gap:6px;margin:0 0 8px;padding:4px 10px;border:1px solid var(--seal);border-radius:99px;font-size:13px;color:var(--seal)}
+.ben-now button,.ben-now button:hover{appearance:none;border:0;background:none;color:inherit;font-size:inherit;cursor:pointer;padding:0 0 0 2px}
+.ben-list{display:grid;gap:10px}
+.ben-stage{margin:14px 0 0;padding:0 0 4px;border-bottom:2px solid var(--seal);font-family:"Nanum Myeongjo",serif;font-size:15px;font-weight:700;color:var(--seal);letter-spacing:normal}
+.ben-stage:first-child{margin-top:2px}
+.ben-card{padding:14px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+.ben-card h3{margin:0 0 4px;font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:16.5px;line-height:1.4}
+.ben-card .org{font-size:12.5px;color:var(--ink-3)}
+.ben-tags{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+.ben-tag{font-size:11.5px;padding:2px 9px;border-radius:99px;border:1px solid var(--rule);background:var(--card);color:var(--ink-2)}
+.ben-tag.cen{border-color:var(--su);color:var(--su)}
+.ben-tag.reg{border-color:var(--mok);color:var(--mok)}
+.ben-tag.sp{border-color:var(--to);color:var(--to)}
+.ben-brief{margin:6px 0 0;font-size:14px;line-height:1.7;color:var(--ink)}
+.ben-card details{margin-top:8px}
+.ben-card summary{cursor:pointer;color:var(--seal);font-size:13.5px}
+.ben-row{margin:7px 0 0;font-size:14px;line-height:1.7;white-space:pre-line}
+.ben-row b{display:block;font-size:12px;color:var(--ink-3);font-weight:500;margin-bottom:1px}
+.ben-links{display:flex;flex-wrap:wrap;gap:4px 16px}
+.ben-link{display:inline-block;margin-top:8px;font-size:13.5px;color:var(--seal)}
+.ben-tag.src{border-style:dashed;color:var(--ink-3)}
+.ben-more{display:block;margin:14px auto 4px;padding:10px 26px;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:3px;font-size:15px;cursor:pointer}
+.ben-more:hover{background:var(--paper-2)}
+.ben-empty{padding:26px 10px;text-align:center;color:var(--ink-2);font-size:14px;line-height:1.8}
+.ben-foot{margin:22px 0 0;padding-top:14px;border-top:1px solid var(--rule);font-size:12.5px;line-height:1.8;color:var(--ink-3)}
+.ben-foot button{appearance:none;border:1px solid var(--rule);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:3px;font-size:13px;cursor:pointer;margin-top:6px}
+.ben-foot button:hover{background:var(--paper-2)}
+@media (max-width:520px){.ben-filters{grid-template-columns:1fr 1fr}.ben-filters .wide{grid-column:1/-1}}
+/*BEN:CSS:END*/
 
 </style>
 
@@ -932,7 +989,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <header>
   <p class="eyebrow">맘케어 · 임신부터 출산까지</p>
   <h1>임신·출산 무료 도구</h1>
-  <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드를 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
+  <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드, 우리동네 혜택을 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
   <p class="visits" id="visitBox" hidden></p>
 </header>
 
@@ -975,6 +1032,11 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-bf">
     <img src="tab-bf.jpg" width="800" height="597" decoding="async"
          alt="이유식 가이드 — 시기별 레시피와 보관·해동, 막혔을 때 해결법을 숫자로 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-benefit">
+    <img src="tab-benefit.jpg" width="800" height="597" decoding="async"
+         alt="우리동네 혜택 — 사는 지역과 시기를 고르면 임신·출산·육아 지원 사업을 찾아 줍니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
 </nav>
@@ -1602,6 +1664,15 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <div id="bfBody"></div>
 </div>
 <!--BF:HTML:END-->
+<!--BEN:HTML:BEGIN-->
+<div id="tab-benefit" class="hidden">
+<p class="upd"><b>업데이트 10/23</b> 우리동네 혜택 탭이 생겼어요. 지역을 고르면 그 지역과 정부 혜택이 함께 나와요</p>
+<h2 class="ben-h">우리동네 임신·출산·육아 혜택 찾기</h2>
+<p class="ben-lead">사는 지역과 시기를 고르면 관련된 지원 사업을 찾아 줘요. 한부모, 기초수급, 장애처럼 특정 사유가 있어야 하는 혜택은 숨길 수 있어요.</p>
+<p class="ben-call">지자체가 직접 입력한 자료라 지역마다 양이 다르고, 빠진 혜택이나 오래된 내용이 있을 수 있어요. 신청 전에는 정부24나 해당 기관에서 꼭 확인하세요.</p>
+<div id="benBody"><p class="none">불러오는 중이에요…</p></div>
+</div>
+<!--BEN:HTML:END-->
 <div id="tab-rank" class="hidden">
 <div class="card">
   <h2>용품별 순위</h2>
@@ -3180,7 +3251,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".tb").forEach(x=>{
     const on=(x===b); x.classList.toggle("on",on); x.setAttribute("aria-selected",on?"true":"false");
   });
-  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp","tab-bf"].forEach(id=>{
+  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp","tab-bf","tab-benefit"].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.classList.toggle("hidden", id!==b.dataset.tab);
   });
@@ -3191,6 +3262,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   if(b.dataset.tab==="tab-rank" && typeof rOnOpen==="function") rOnOpen();
   if(b.dataset.tab==="tab-jp" && typeof jpOnOpen==="function") jpOnOpen();
   if(b.dataset.tab==="tab-bf" && typeof bfOnOpen==="function") bfOnOpen();
+  if(b.dataset.tab==="tab-benefit" && typeof benOnOpen==="function") benOnOpen();
 }));
 
 /*JP:JS:BEGIN*/
@@ -3621,6 +3693,189 @@ function bfRulesHtml(){
 })();
 /* === BF-CORE END === */
 /*BF:JS:END*/
+/*BEN:JS:BEGIN*/
+/* === BEN-CORE START === */
+// 우리동네 혜택: 자료(benefit.json)는 탭을 열 때 한 번 받아 오고, 아래 순수 함수로 걸러서 화면에 그린다.
+const BEN_VER=/*BEN:VER*/"20261024-2579"/*BEN:VER:END*/;
+const BEN_EX=[["첫만남이용권","첫만남이용권"],["아동수당","아동수당"],["육아휴직급여","육아휴직급여"],["산후조리비","산후조리"],["산후도우미","산모·신생아|산모신생아|산후도우미"],["출산지원금","출산지원금|출산장려금|출산축하금"],["가정양육수당","가정양육수당"],["영유아보육료","영유아보육료"],["난임 시술비","난임"],["국가예방접종","예방접종"]];   // 자료에 실제로 있고 많이 신청하는 것(검색어 | 는 '또는')
+const BEN_ORDER=["서울특별시","부산광역시","대구광역시","인천광역시","광주광역시","전남광주통합특별시","대전광역시","울산광역시","세종특별자치시","경기도","강원특별자치도","충청북도","충청남도","전북특별자치도","전라남도","경상북도","경상남도","제주특별자치도"];
+const BEN_TYPES=["현금","현물","이용권","서비스","서비스(의료)","서비스(돌봄)","현금(감면)","기타(교육)","기타"];
+function benEsc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function benTerms(q){return String(q||"").split("|").map(x=>x.trim().toLowerCase()).filter(Boolean);}
+// 검색: nameOnly 면 서비스명만, 아니면 서비스명·소관기관·지원대상·지원내용에서 찾는다
+function benMatch(r,q,nameOnly){
+  const ts=benTerms(q); if(!ts.length) return true;
+  const hay=(nameOnly?r.n:(r.n+" "+r.o+" "+r.tg+" "+r.ct)).toLowerCase();
+  return ts.some(t=>hay.indexOf(t)>=0);
+}
+// 걸러내기. o: {sd,gu,fd:""|"p"|"c",q,nameOnly,types:[..],hide:{사유:true},cen,wide}
+// 지역을 안 골랐으면 중앙부처 혜택만 보여 준다(지역 혜택을 전부 늘어놓으면 어느 지역 것인지 알 수 없다)
+function benFilter(rows,o){
+  const on=(o.types||[]).filter(Boolean), hide=o.hide||{};
+  return rows.filter(r=>{
+    const cen=r.sd==="(중앙부처)";
+    if(o.sd){
+      const inReg=r.sd===o.sd&&(!o.gu||r.gu===o.gu||(o.wide&&r.gu===""));
+      if(!(inReg||(o.cen&&cen))) return false;
+    }else if(!cen) return false;
+    if(o.fd&&r.s.indexOf(o.fd)<0) return false;
+    if(on.length&&!on.some(t=>r.ty.indexOf(t)>=0)) return false;
+    if(r.sp.some(t=>hide[t])) return false;
+    return benMatch(r,o.q,o.nameOnly);
+  });
+}
+// 시기순: 서비스명으로 임신 전 → 임신 초기 → 임신 중 → 출산 전후 → 육아 초기 → 유아 → 아동 순서를 정한다(먼저 맞는 규칙이 이긴다)
+const BEN_STAGES=[
+  [52,/육아휴직|육아기\s*근로|고용안정|아빠\s*육아|육아\s*시간/],
+  [99,/화장|장례|사망/],
+  [10,/난임|시술|사전\s*건강|가임|풍진|임신\s*전|예비\s*(부모|부부)/],
+  [21,/모자\s*보건\s*수첩/],
+  [20,/임신[·ㆍ\s]*출산\s*진료|국민행복카드|임산부\s*등록|임신\s*(축하|확인|등록)/],
+  [40,/출산\s*전후|배우자\s*출산|해산|유산|사산/],
+  [41,/산모[·ㆍ\s]*신생아|산후|유축|조리원|조리\s*(비|경비)/],
+  [30,/엽산|철분|영양제|영양\s*플러스|임산부|임신부|임신|산전|기형아|초음파|태아|고위험/],
+  [50,/출생아\s*건강보험료/],
+  [42,/출산|출생|첫\s*만남|분만|다태아|셋째|축하/],
+  [50,/부모급여|영아|신생아|발달|예방접종|선천성|대사이상|청각|영유아\s*(건강|영양)/],
+  [55,/양육|수당|돌봄|시간제\s*보육/],
+  [60,/보육|어린이집|누리|유치원|장난감|유아\s*(학비|교육)/],
+  [50,/영유아/],
+  [70,/아동|어린이|초등|방과후|급식|청소년|교육|학비|학자금/]
+];
+function benStage(r){
+  for(const [st,re] of BEN_STAGES) if(re.test(r.n)) return st;
+  return 90;   // 규칙에 안 걸리는 것은 맨 뒤 '그 밖의 지원'에 모은다(엉뚱한 시기에 끼지 않게)
+}
+function benStageLabel(st){return st<20?"임신 전·준비":st<30?"임신 확인·등록":st<40?"임신 중":st<50?"출산 전후":st<60?"출생 후 육아 초기":st<70?"어린이집·유아기":st<90?"아동기":"그 밖의 지원";}
+// 정렬: stage = 시기순(같은 시기에서는 특정 사유가 없는 혜택 먼저, 같으면 최근 수정순), md = 최근 수정순, n = 이름순
+function benSort(rows,key){
+  const a=rows.slice(), byMd=(x,y)=>x.md<y.md?1:x.md>y.md?-1:0;
+  if(key==="n") a.sort((x,y)=>x.n<y.n?-1:x.n>y.n?1:0);
+  else if(key==="md") a.sort(byMd);
+  else { const st=new Map(rows.map(r=>[r,benStage(r)])), sp=r=>r.sp.length?1:0; a.sort((x,y)=>st.get(x)-st.get(y)||sp(x)-sp(y)||byMd(x,y)); }
+  return a;
+}
+// 원문의 ○ 같은 항목 기호 앞에서 줄을 바꾼다(○○구처럼 기호가 연달아 붙은 것은 그대로)
+function benLines(v){return String(v==null?"":v).replace(/([^\n○◯●■□▶▪◦])[ \t]*([○◯●■□▶▪◦])(?![○◯●■□▶▪◦])/g,"$1\n$2");}
+function benSidos(rows){
+  const set=new Set(rows.map(r=>r.sd).filter(s=>s&&s.charAt(0)!=="("));
+  const first=BEN_ORDER.filter(s=>set.has(s));
+  return first.concat([...set].filter(s=>first.indexOf(s)<0).sort());
+}
+function benGus(rows,sd){return [...new Set(rows.filter(r=>r.sd===sd&&r.gu).map(r=>r.gu))].sort();}
+function benSafeUrl(u){return /^https:\/\/[^\s"'<>]+$/.test(u||"")?u:"";}
+function benMod(d){return d&&d.length>=8?d.slice(0,4)+"."+d.slice(4,6)+"."+d.slice(6,8):"";}
+function benBrief(t){const b=String(t||"").replace(/\s+/g," ").trim();return b.length>150?b.slice(0,150)+"…":b;}
+// 검색어 강조(첫 일치 한 곳). 이스케이프한 글에서 찾아 태그를 끼운다
+function benHl(s,q){
+  const e=benEsc(s), ts=benTerms(q); if(!ts.length) return e;
+  const low=e.toLowerCase();
+  for(const t of ts){const k=benEsc(t).toLowerCase(), i=low.indexOf(k); if(i>=0) return e.slice(0,i)+"<mark>"+e.slice(i,i+k.length)+"</mark>"+e.slice(i+k.length);}
+  return e;
+}
+function benCardHtml(r,q){
+  const cen=r.sd==="(중앙부처)";
+  const srcName=r.src==="b"?"복지로":r.src==="gb"?"정부24·복지로":"정부24";
+  const tags='<span class="ben-tag '+(cen?"cen":"reg")+'">'+benEsc(cen?"중앙부처":(r.t==="광역시도"?"시·도":r.t==="시군구"?"시·군·구":r.t))+"</span>"
+    +(r.f?'<span class="ben-tag">'+benEsc(r.f)+"</span>":"")
+    +r.ty.map(t=>'<span class="ben-tag">'+benEsc(t)+"</span>").join("")
+    +r.sp.map(t=>'<span class="ben-tag sp" title="이 사유가 필요한 혜택">조건: '+benEsc(t)+"</span>").join("")
+    +'<span class="ben-tag src" title="자료 출처">'+srcName+"</span>";
+  const row=(l,v)=>v?'<div class="ben-row"><b>'+benEsc(l)+"</b>"+benEsc(benLines(v))+"</div>":"";
+  const url=benSafeUrl(r.url), u2=benSafeUrl(r.u2);
+  const link=(u,t)=>'<a class="ben-link" href="'+benEsc(u)+'" target="_blank" rel="noopener noreferrer">'+t+"</a>";
+  return '<div class="ben-card"><h3>'+benHl(r.n,q)+'</h3><div class="org">'+benEsc(r.o)+(r.md?" · 수정 "+benMod(r.md):"")+'</div><div class="ben-tags">'+tags+"</div>"
+    +(r.ct?'<p class="ben-brief">'+benHl(benBrief(r.ct),q)+"</p>":"")
+    +"<details><summary>자세히 (원문)</summary>"+row("지원대상",r.tg)+row("선정기준",r.cr)+row("지원내용",r.ct)+row("신청방법",r.hw)+row("신청기한",r.wh)
+    +(r.ex||[]).map(e=>row(e[0],e[1])).join("")+row("전화문의",r.tel)+row("접수기관",r.ag)
+    +'<div class="ben-links">'+(url?link(url,(r.src==="b"?"복지로":"정부24")+"에서 보기"):"")+(u2?link(u2,"복지로에서도 보기"):"")+"</div></details></div>";
+}
+/* === BEN-CORE END === */
+(function(){
+  const $=id=>document.getElementById(id);
+  const root=$("tab-benefit"); if(!root) return;
+  const PAGE=40;
+  let DATA=null, loading=false, failed=false;
+  const S={sd:"",gu:"",fd:"",q:"",nameOnly:false,types:[],hide:{},cen:true,wide:true,sort:"stage",shown:PAGE,ex:""};
+  const store={get(){try{return JSON.parse(localStorage.getItem("momcare_ben_region")||"null");}catch(e){return null;}},
+    set(v){try{localStorage.setItem("momcare_ben_region",JSON.stringify(v));}catch(e){}}};
+
+  function shell(){
+    const body=$("benBody");
+    body.innerHTML=
+      '<div class="ben-ex"><span class="cap">많이 찾는 혜택 (눌러 보세요)</span><div class="ben-chips" id="benEx">'+BEN_EX.map((e,i)=>'<button type="button" class="ben-chip" data-ex="'+i+'">'+benEsc(e[0])+"</button>").join("")+"</div></div>"
+      +'<div class="ben-filters">'
+      +'<div class="fld wide"><label class="l" for="benQ">검색 (혜택 이름·내용)</label><input type="search" class="ben-q" id="benQ" placeholder="예: 산후조리, 난임, 양육수당" autocomplete="off"></div>'
+      +'<div class="fld"><label class="l" for="benSd">시도</label><select class="ben-sel" id="benSd"></select></div>'
+      +'<div class="fld"><label class="l" for="benGu">시군구</label><select class="ben-sel" id="benGu"></select></div>'
+      +'<div class="fld"><label class="l" for="benFd">시기</label><select class="ben-sel" id="benFd"><option value="">전체</option><option value="p">임신·출산</option><option value="c">영유아·아동</option></select></div>'
+      +'<div class="fld"><label class="l" for="benSo">정렬</label><select class="ben-sel" id="benSo"><option value="stage">시기순 (임신 → 육아)</option><option value="md">최근 수정순</option><option value="n">이름순</option></select></div>'
+      +'<div class="fld wide"><span class="l" style="display:block;font-size:12px;color:var(--ink-3);margin:0 0 3px">지원 형태</span><div class="ben-chips" id="benTy">'+BEN_TYPES.map(t=>'<button type="button" class="ben-chip" data-ty="'+benEsc(t)+'" aria-pressed="false">'+benEsc(t)+"</button>").join("")+"</div></div>"
+      +'<div class="fld wide"><div class="ben-checks"><label><input type="checkbox" id="benCen" checked> 중앙부처 혜택 포함</label><label><input type="checkbox" id="benWide" checked> 시·도 전체 사업 포함(시군구를 고를 때)</label></div></div>'
+      +'<div class="ben-hide"><div class="hd"><b>특정 사유가 있어야 받는 혜택 숨기기</b><button type="button" class="ben-chip gen" id="benGen">일반 혜택만 보기</button><button type="button" class="ben-chip" id="benGenOff">모두 보기</button></div><div class="ben-chips" id="benHide"></div></div>'
+      +"</div>"
+      +'<div id="benNow"></div><div class="ben-bar"><span id="benCnt"></span><span><a href="#" id="benReset">필터 초기화</a></span></div>'
+      +'<div class="ben-list" id="benList"></div><button type="button" class="ben-more" id="benMore" hidden>더 보기</button>'
+      +'<div class="ben-foot" id="benFoot"></div>';
+    const hide=$("benHide");
+    DATA.special.forEach(t=>{const n=DATA.rows.filter(r=>r.sp.indexOf(t)>=0).length; hide.insertAdjacentHTML("beforeend",'<button type="button" class="ben-chip" data-hide="'+benEsc(t)+'" aria-pressed="false">'+benEsc(t)+" ("+n+")</button>");});
+    const sd=$("benSd"); sd.innerHTML='<option value="">지역을 골라 주세요</option>'+benSidos(DATA.rows).map(s=>'<option value="'+benEsc(s)+'">'+benEsc(s)+"</option>").join("");
+    $("benFoot").innerHTML="출처: "+benEsc(DATA.src)+". 자료 기준일 "+benEsc(DATA.built)+" · 전국 "+DATA.count.toLocaleString("ko-KR")+"건. 이 사이트는 행정안전부와 관계가 없고, 자격 여부를 판정하지 않아요.<br>"
+      +"부모급여·임신·출산 진료비 같은 전국 공통 혜택 일부는 이 자료에 없을 수 있어요. 체크리스트 탭에서 함께 확인하세요.<br>"
+      +'<button type="button" id="benGoCheck">체크리스트 탭에서 보기</button>';
+    wire();
+  }
+  function gus(){const g=$("benGu"); g.innerHTML='<option value="">'+(S.sd?"전체 시군구":"시도를 먼저 골라 주세요")+"</option>"+(S.sd?benGus(DATA.rows,S.sd).map(x=>'<option value="'+benEsc(x)+'">'+benEsc(x)+"</option>").join(""):""); g.disabled=!S.sd; g.value=S.gu;}
+  function paint(){
+    document.querySelectorAll("#benHide .ben-chip").forEach(b=>{const on=!!S.hide[b.dataset.hide]; b.classList.toggle("off",on); b.setAttribute("aria-pressed",on?"true":"false");});
+    document.querySelectorAll("#benTy .ben-chip").forEach(b=>{const on=S.types.indexOf(b.dataset.ty)>=0; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false");});
+    document.querySelectorAll("#benEx .ben-chip").forEach((b,i)=>b.classList.toggle("on",S.nameOnly&&S.q===BEN_EX[i][1]));
+  }
+  function render(){
+    const res=benSort(benFilter(DATA.rows,S),S.sort);
+    const bits=[]; if(!S.sd) bits.push("지역을 고르면 그 지역 혜택이 함께 나와요. 지금은 중앙부처 혜택만 보여요.");
+    $("benNow").innerHTML=(S.nameOnly&&S.q?'<span class="ben-now">검색: '+benEsc(BEN_EX.filter(e=>e[1]===S.q).map(e=>e[0])[0]||S.q)+' <button type="button" id="benClearQ" aria-label="검색 지우기">✕</button></span>':"")+(bits.length?'<p class="ben-lead" style="margin:0 0 6px">'+bits[0]+"</p>":"");
+    $("benCnt").textContent=res.length+"건"+(res.length>S.shown?" (앞 "+S.shown+"건 표시)":"");
+    let grp="";   // 시기순일 때는 시기가 바뀔 때마다 작은 제목을 끼운다
+    $("benList").innerHTML=res.length?res.slice(0,S.shown).map(r=>{
+      let h=""; if(S.sort==="stage"){const g=benStageLabel(benStage(r)); if(g!==grp){grp=g; h='<h4 class="ben-stage">'+benEsc(g)+"</h4>";}}
+      return h+benCardHtml(r,S.nameOnly?"":S.q);}).join(""):'<div class="ben-empty">조건에 맞는 혜택을 찾지 못했어요.<br>필터를 줄이거나 시군구를 \'전체\'로 바꿔 보세요.<br>이 자료에 없다고 혜택이 없는 건 아니니, 구청에서도 확인해 보세요.</div>';
+    $("benMore").hidden=res.length<=S.shown;
+    paint();
+    const c=$("benClearQ"); if(c) c.onclick=()=>{S.q="";S.nameOnly=false;$("benQ").value="";S.shown=PAGE;render();};
+  }
+  function wire(){
+    const again=()=>{S.shown=PAGE;render();};
+    $("benQ").addEventListener("input",e=>{S.q=e.target.value;S.nameOnly=false;again();});
+    $("benSd").addEventListener("change",e=>{S.sd=e.target.value;S.gu="";gus();store.set({sd:S.sd,gu:S.gu});again();});
+    $("benGu").addEventListener("change",e=>{S.gu=e.target.value;store.set({sd:S.sd,gu:S.gu});again();});
+    $("benFd").addEventListener("change",e=>{S.fd=e.target.value;again();});
+    $("benSo").addEventListener("change",e=>{S.sort=e.target.value;again();});
+    $("benCen").addEventListener("change",e=>{S.cen=e.target.checked;again();});
+    $("benWide").addEventListener("change",e=>{S.wide=e.target.checked;again();});
+    $("benTy").addEventListener("click",e=>{const b=e.target.closest("[data-ty]"); if(!b) return; const t=b.dataset.ty, i=S.types.indexOf(t); if(i>=0) S.types.splice(i,1); else S.types.push(t); again();});
+    $("benHide").addEventListener("click",e=>{const b=e.target.closest("[data-hide]"); if(!b) return; const t=b.dataset.hide; S.hide[t]=!S.hide[t]; again();});
+    $("benGen").addEventListener("click",()=>{S.hide={}; DATA.general.forEach(t=>{S.hide[t]=true;}); again();});
+    $("benGenOff").addEventListener("click",()=>{S.hide={}; again();});
+    $("benEx").addEventListener("click",e=>{const b=e.target.closest("[data-ex]"); if(!b) return; const ex=BEN_EX[+b.dataset.ex]; if(S.nameOnly&&S.q===ex[1]){S.q="";S.nameOnly=false;} else {S.q=ex[1];S.nameOnly=true;} $("benQ").value=S.nameOnly?"":S.q; again();});
+    $("benMore").addEventListener("click",()=>{S.shown+=PAGE;render();});
+    $("benReset").addEventListener("click",e=>{e.preventDefault(); S.q="";S.nameOnly=false;S.fd="";S.types=[];S.hide={};S.cen=true;S.wide=true;S.sort="stage";
+      $("benQ").value="";$("benFd").value="";$("benSo").value="stage";$("benCen").checked=true;$("benWide").checked=true; again();});
+    $("benGoCheck").addEventListener("click",()=>{const b=document.querySelector('.tb[data-tab="tab-check"]'); if(b){b.click();window.scrollTo(0,0);}});
+    // 저장해 둔 지역(이 기기에서만, 실패해도 동작)
+    const sv=store.get(); if(sv&&sv.sd&&DATA.rows.some(r=>r.sd===sv.sd)){S.sd=sv.sd; S.gu=(sv.gu&&DATA.rows.some(r=>r.sd===sv.sd&&r.gu===sv.gu))?sv.gu:"";}
+    $("benSd").value=S.sd; gus();
+    render();
+  }
+  function load(){
+    if(DATA||loading) return; loading=true;
+    fetch("benefit.json?v="+BEN_VER).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();}).then(d=>{DATA=d; loading=false; failed=false; shell();})
+    .catch(()=>{loading=false; failed=true; $("benBody").innerHTML='<p class="none">자료를 불러오지 못했어요. 잠시 뒤 다시 열어 보시거나, <a href="https://www.gov.kr/portal/rcvfvrSvc/svcFind/svcSearchAll" target="_blank" rel="noopener noreferrer">정부24</a>에서 직접 찾아보세요.</p>';});
+  }
+  window.benOnOpen=function(){ if(!DATA||failed){ failed=false; load(); } };
+  if(INIT_TAB==="benefit"){ const b=document.querySelector('.tb[data-tab="tab-benefit"]'); if(b){ b.click(); window.scrollTo(0,0); } }
+})();
+/*BEN:JS:END*/
 // 블로그 글에서 ?tab=pick 으로 들어오면 택일 탭을 바로 연다
 (function(){
   if(INIT_TAB!=="pick") return;
@@ -4810,7 +5065,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="728a67db";
+var APP_BUILD="d501d398";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
