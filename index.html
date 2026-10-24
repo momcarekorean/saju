@@ -981,7 +981,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <aside class="sn" aria-label="준비 중인 서비스">
   <p class="sn-h"><b>준비 중인 서비스</b>아직 열리지 않았어요. 준비가 끝나면 아래 탭에 새로 생겨요.</p>
   <ul>
-    <li><span class="sn-tg">준비 중</span><span><strong>우리동네 혜택 찾기</strong> — 사는 지역과 아기 시기에 맞는 지원금·서비스를 한곳에 모아 보여 드려요.</span></li>
     <li><span class="sn-tg">준비 중</span><span><strong>달빛어린이병원·소아 응급실 찾기</strong> — 밤이나 주말에 아이가 아플 때 가까운 곳을 찾고, 전화나 지도로 바로 이어지게 만들고 있어요.</span></li>
     <li><span class="sn-tg">준비 중</span><span><strong>임신 중 약·화장품·영양제 확인</strong> — 먹거나 바르려는 제품이 임신 중 주의 목록에 있는지 찾아 줘요. 의사·약사 상담을 대신하지는 않아요.</span></li>
   </ul>
@@ -5065,7 +5064,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="d501d398";
+var APP_BUILD="56c96d1b";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
