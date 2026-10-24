@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T14:52+09:00",
+ "generated_at": "2026-10-24T09:22+09:00",
  "rate": {
   "jpy_krw": 8.4284,
   "at": "2026-10-23T09:02+09:00",
@@ -23,7 +23,7 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -33,7 +33,7 @@
      "by": [
       {
        "n": "チェア 캐시미어 그레이",
-       "m": "in"
+       "m": "low"
       },
       {
        "n": "チェア 화이트워시",
@@ -216,12 +216,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-23T14:52+09:00",
+   "store_checked": "2026-10-24T09:22+09:00",
    "kr": {
     "label": "한국 정발가 (스토케 한국 공식몰)",
     "url": "https://www.stokke.com/KOR/ko-kr/%ED%95%98%EC%9D%B4%EC%B2%B4%EC%96%B4/%ED%8A%B8%EB%A6%BD-%ED%8A%B8%EB%9E%A9/1001.html",
     "price": 430000,
-    "checked": "2026-10-23T14:52+09:00",
+    "checked": "2026-10-24T09:22+09:00",
     "auto": true
    },
    "sources": [
@@ -249,7 +249,7 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -349,7 +349,7 @@
       },
       {
        "n": "ベビーセット2ホワイト",
-       "m": "low"
+       "m": "out"
       },
       {
        "n": "ベビーセット2専用 ハーネス2",
@@ -498,12 +498,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-23T14:52+09:00",
+   "store_checked": "2026-10-24T09:22+09:00",
    "kr": {
     "label": "한국 정발가 (스토케 한국 공식몰)",
     "url": "https://www.stokke.com/KOR/ko-kr/%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/tripp-trapp-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/6500.html",
     "price": 90000,
-    "checked": "2026-10-23T14:52+09:00",
+    "checked": "2026-10-24T09:22+09:00",
     "auto": true
    },
    "sources": [
@@ -531,7 +531,7 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -668,12 +668,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-23T14:52+09:00",
+   "store_checked": "2026-10-24T09:22+09:00",
    "kr": {
     "label": "한국 정발가 (스토케 한국 공식몰)",
     "url": "https://www.stokke.com/KOR/ko-kr/%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/tripp-trapp-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/5261.html",
     "price": 230000,
-    "checked": "2026-10-23T14:53+09:00",
+    "checked": "2026-10-24T09:23+09:00",
     "auto": true
    },
    "sources": [
@@ -701,7 +701,7 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -810,12 +810,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-23T14:52+09:00",
+   "store_checked": "2026-10-24T09:22+09:00",
    "kr": {
     "label": "한국 정발가 (스토케 한국 공식몰)",
     "url": "https://www.stokke.com/KOR/ko-kr/%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/tripp-trapp-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC/4285.html",
     "price": 90000,
-    "checked": "2026-10-23T14:53+09:00",
+    "checked": "2026-10-24T09:23+09:00",
     "auto": true
    },
    "sources": [
@@ -889,13 +889,13 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "kr": {
     "label": "한국 정발가 (부가부 한국 공식몰)",
     "url": "https://www.bugaboo.com/kr-ko/%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC/bugaboo-butterfly-2/%EB%B6%80%EA%B0%80%EB%B6%80-%EB%B2%84%ED%84%B0%ED%94%8C%EB%9D%BC%EC%9D%B4-2-%ED%9C%B4%EB%8C%80%EC%9A%A9-%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC-%EB%B2%94%ED%8D%BC%EB%B0%94-%ED%8F%AC%ED%95%A8-PM007649.html",
     "price": 950000,
-    "checked": "2026-10-23T14:53+09:00",
+    "checked": "2026-10-24T09:23+09:00",
     "auto": true
    },
    "sources": [
@@ -933,13 +933,13 @@
      "a": "in"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "kr": {
     "label": "한국 정발가 (부가부 한국 공식몰)",
     "url": "https://www.bugaboo.com/kr-ko/%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC/bugaboo-dragonfly-plus-seat/%EB%B6%80%EA%B0%80%EB%B6%80-%EB%93%9C%EB%9E%98%EA%B3%A4%ED%94%8C%EB%9D%BC%EC%9D%B4-%ED%94%8C%EB%9F%AC%EC%8A%A4-%EC%A0%88%EC%B6%A9%ED%98%95-%EC%8A%A4%ED%8A%B8%EB%A1%A4%EB%9F%AC-PM007941.html",
     "price": 1650000,
-    "checked": "2026-10-23T14:53+09:00",
+    "checked": "2026-10-24T09:23+09:00",
     "auto": true
    },
    "sources": [
@@ -1010,7 +1010,7 @@
      "u": "https://shop.akachan.jp/shop/g/g264008500/"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -1067,7 +1067,7 @@
       },
       {
        "n": "매직 블랙JP2 2026년형",
-       "m": "in"
+       "m": "low"
       },
       {
        "n": "듄JP2 2026년형",
@@ -1266,7 +1266,7 @@
       },
       {
        "n": "듄JP2 2026년형",
-       "m": "in"
+       "m": "low"
       },
       {
        "n": "아몬드 베이지JP2 2026년형",
@@ -1287,12 +1287,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-23T14:52+09:00",
+   "store_checked": "2026-10-24T09:22+09:00",
    "kr": {
     "label": "한국 정발가 (싸이벡스 한국 공식몰)",
     "url": "https://www.cybex-shop.co.kr/goods/goods_view.php?goodsNo=1000000547",
     "price": 412000,
-    "checked": "2026-10-23T14:54+09:00",
+    "checked": "2026-10-24T09:24+09:00",
     "auto": true
    },
    "sources": [
@@ -1321,7 +1321,7 @@
      "u": "https://shop.akachan.jp/shop/g/g230546900/"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -1402,12 +1402,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-23T14:52+09:00",
+   "store_checked": "2026-10-24T09:22+09:00",
    "kr": {
     "label": "한국 정발가 (싸이벡스 한국 공식몰)",
     "url": "https://www.cybex-shop.co.kr/goods/goods_view.php?goodsNo=1000000446",
     "price": 790000,
-    "checked": "2026-10-23T14:54+09:00",
+    "checked": "2026-10-24T09:24+09:00",
     "auto": true
    },
    "sources": [
@@ -1436,7 +1436,7 @@
      "u": "https://shop.akachan.jp/shop/g/g230528300/"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -1517,12 +1517,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-23T14:52+09:00",
+   "store_checked": "2026-10-24T09:22+09:00",
    "kr": {
     "label": "한국 정발가 (싸이벡스 한국 공식몰)",
     "url": "https://www.cybex-shop.co.kr/goods/goods_view.php?goodsNo=1000000450",
     "price": 340000,
-    "checked": "2026-10-23T14:54+09:00",
+    "checked": "2026-10-24T09:24+09:00",
     "auto": true
    },
    "sources": [
@@ -1564,19 +1564,19 @@
      "acc": true
     },
     {
-     "n": "클라우드 G3 문 블랙 플러스",
+     "n": "클라우드 G3 문 블랙 플러스 CYBEX(サイベックス) 入荷案内受付中",
      "p": 39600,
      "a": "out",
      "u": "https://shop.akachan.jp/shop/g/g264369700/"
     },
     {
-     "n": "클라우드 G3 아몬드 베이지 플러스",
+     "n": "클라우드 G3 아몬드 베이지 플러스 CYBEX(サイベックス) 入荷案内受付中",
      "p": 39600,
      "a": "out",
      "u": "https://shop.akachan.jp/shop/g/g264369800/"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -1597,11 +1597,11 @@
        "m": "out"
       },
       {
-       "n": "클라우드 G3 문 블랙 플러스",
+       "n": "클라우드 G3 문 블랙 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "out"
       },
       {
-       "n": "클라우드 G3 아몬드 베이지 플러스",
+       "n": "클라우드 G3 아몬드 베이지 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "out"
       }
      ]
@@ -1624,11 +1624,11 @@
        "m": "none"
       },
       {
-       "n": "클라우드 G3 문 블랙 플러스",
+       "n": "클라우드 G3 문 블랙 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "none"
       },
       {
-       "n": "클라우드 G3 아몬드 베이지 플러스",
+       "n": "클라우드 G3 아몬드 베이지 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "none"
       }
      ]
@@ -1651,11 +1651,11 @@
        "m": "low"
       },
       {
-       "n": "클라우드 G3 문 블랙 플러스",
+       "n": "클라우드 G3 문 블랙 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "low"
       },
       {
-       "n": "클라우드 G3 아몬드 베이지 플러스",
+       "n": "클라우드 G3 아몬드 베이지 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "none"
       }
      ]
@@ -1678,11 +1678,11 @@
        "m": "none"
       },
       {
-       "n": "클라우드 G3 문 블랙 플러스",
+       "n": "클라우드 G3 문 블랙 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "out"
       },
       {
-       "n": "클라우드 G3 아몬드 베이지 플러스",
+       "n": "클라우드 G3 아몬드 베이지 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "out"
       }
      ]
@@ -1705,11 +1705,11 @@
        "m": "out"
       },
       {
-       "n": "클라우드 G3 문 블랙 플러스",
+       "n": "클라우드 G3 문 블랙 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "out"
       },
       {
-       "n": "클라우드 G3 아몬드 베이지 플러스",
+       "n": "클라우드 G3 아몬드 베이지 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "out"
       }
      ]
@@ -1732,11 +1732,11 @@
        "m": "low"
       },
       {
-       "n": "클라우드 G3 문 블랙 플러스",
+       "n": "클라우드 G3 문 블랙 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "low"
       },
       {
-       "n": "클라우드 G3 아몬드 베이지 플러스",
+       "n": "클라우드 G3 아몬드 베이지 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "out"
       }
      ]
@@ -1759,17 +1759,17 @@
        "m": "low"
       },
       {
-       "n": "클라우드 G3 문 블랙 플러스",
+       "n": "클라우드 G3 문 블랙 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "low"
       },
       {
-       "n": "클라우드 G3 아몬드 베이지 플러스",
+       "n": "클라우드 G3 아몬드 베이지 플러스 CYBEX(サイベックス) 入荷案内受付中",
        "m": "out"
       }
      ]
     }
    },
-   "store_checked": "2026-10-23T14:52+09:00",
+   "store_checked": "2026-10-24T09:22+09:00",
    "kr": null,
    "sources": [
     {
@@ -1826,7 +1826,7 @@
      "u": "https://shop.akachan.jp/shop/g/g220115800/"
     }
    ],
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false,
    "store_stock": {
     "282": {
@@ -1836,7 +1836,7 @@
      "by": [
       {
        "n": "샌드 화이트",
-       "m": "low"
+       "m": "out"
       },
       {
        "n": "펄 핑크",
@@ -2019,12 +2019,12 @@
      ]
     }
    },
-   "store_checked": "2026-10-23T14:52+09:00",
+   "store_checked": "2026-10-24T09:22+09:00",
    "kr": {
     "label": "한국 정발가 (싸이벡스 한국 공식몰)",
     "url": "https://www.cybex-shop.co.kr/goods/goods_view.php?goodsNo=1000000415",
     "price": 680000,
-    "checked": "2026-10-23T14:55+09:00",
+    "checked": "2026-10-24T09:25+09:00",
     "auto": true
    },
    "sources": [
@@ -2205,7 +2205,7 @@
    "price": 1078,
    "image": "https://shop.akachan.jp/img/goods/S/327000800_d434153aed994a1b954470a121bc6158.jpg",
    "ja": "ベビラボ アンパンマン やわらかポロンポロンチャイム",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2223,7 +2223,7 @@
    "price": 990,
    "image": "https://shop.akachan.jp/img/goods/S/395006700_2886b5451792465cb6f093a796c3d2db.jpg",
    "ja": "ベビラボ アンパンマン らくらくにぎれるはじめてラトル",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2241,7 +2241,7 @@
    "price": 1210,
    "image": "https://shop.akachan.jp/img/goods/S/240192900_fadc75f73ab14e2bab866ae2c71cfeb3.JPG",
    "ja": "やわらかにぎにぎラトル　くまのプーさん",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2259,7 +2259,7 @@
    "price": 748,
    "image": "https://shop.akachan.jp/img/goods/S/130_210534500.jpg",
    "ja": "カミカミBaby バナナプラス",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2277,7 +2277,7 @@
    "price": 877,
    "image": "https://shop.akachan.jp/img/goods/S/130_535007800.jpg",
    "ja": "カミカミBaby バナナリング",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2295,7 +2295,7 @@
    "price": 1650,
    "image": "https://shop.akachan.jp/img/goods/S/210851600_aa1bd725ba6e48b3827ad68d2861522e.JPG",
    "ja": "アンパンマン天才脳つみかさねカップ",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2313,7 +2313,7 @@
    "price": 1815,
    "image": "https://shop.akachan.jp/img/goods/S/393027300_c8b5594faaba43c5ba6a37e918e8fe19.jpg",
    "ja": "ベビラボ アンパンマンとおでかけ！2WAYメリー",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2331,7 +2331,7 @@
    "price": 1980,
    "image": "https://shop.akachan.jp/img/goods/S/204130500_6bfc5b4a27a14f81af2a2e225e027be3.jpg",
    "ja": "Dear Little Hands めくってパリパリいないいないばあ布えほん くまのプーさん",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2349,7 +2349,7 @@
    "price": 327,
    "image": "https://shop.akachan.jp/img/goods/S/130_532016800.jpg",
    "ja": "オイルがついているベビー綿棒 50本",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2367,7 +2367,7 @@
    "price": 308,
    "image": "https://shop.akachan.jp/img/goods/S/221163400_14db1be84add4bcbbda0c2119556e877.JPG",
    "ja": "ベビー粘着綿棒 細軸 50本入",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2385,7 +2385,7 @@
    "price": 1958,
    "image": "https://shop.akachan.jp/img/goods/S/704027900_f215fc10cf3c4d3fa43227c6d5db1af7.jpg",
    "ja": "沐浴剤 スキナベーブ",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2403,7 +2403,7 @@
    "price": 547,
    "image": "https://shop.akachan.jp/img/goods/S/565005400_07306441127e4404aae85bf7df8ac528.jpg",
    "ja": "熱さまシート 赤ちゃん用 0～2才向け 12枚入",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2421,7 +2421,7 @@
    "price": 847,
    "image": "https://shop.akachan.jp/img/goods/S/230513900_81d91246eea249068da323554f63a553.JPG",
    "ja": "ベビーハブラシ HAMICO ハローキティりんご",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2439,7 +2439,7 @@
    "price": 2310,
    "image": "https://shop.akachan.jp/img/goods/S/250424000_8bd200de70984cdba10cce459b244229.jpg",
    "ja": "[アカチャンホンポ限定商品]あちちが分かる 離乳食スプーンセット ペースト用・スープ用",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2457,7 +2457,7 @@
    "price": 767,
    "image": "https://shop.akachan.jp/img/goods/S/204137100_b0efed76d91546909ed8eff9d6bea3da.JPG",
    "ja": "おしゃぶり FunFriends 0-3ヵ月 S ミニー",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2475,7 +2475,7 @@
    "price": 877,
    "image": "https://shop.akachan.jp/img/goods/S/264071500_2b0d6fcf7b5f490da35ff10dca304753.jpg",
    "ja": "[アカチャンホンポ限定デザイン] おしゃぶりホルダー ミッフィー",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2493,7 +2493,7 @@
    "price": 1210,
    "image": "https://shop.akachan.jp/img/goods/S/251344500_c70198bdcf10458f8fb68af20cae3583.jpg",
    "ja": "アンジェレッテ フレッシュフードフィーダー ライトイエロー",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2511,7 +2511,7 @@
    "price": 2970,
    "image": "https://shop.akachan.jp/img/goods/S/204382400_777d407c420b4a9b825ac9be178e210b.jpg",
    "ja": "ベビービョルン フィーディングスタイセット パウダーピンク",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2529,7 +2529,7 @@
    "price": 822,
    "image": "https://shop.akachan.jp/img/goods/S/527011700_cd50d5d140b847c4920369758896fb3e.jpg",
    "ja": "ボーロカップ アンパンマン",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2547,7 +2547,7 @@
    "price": 2145,
    "image": "https://shop.akachan.jp/img/goods/S/250754600_babd1de426f14cdc959c9ca71b5d4e9d.JPG",
    "ja": "KIRBY カービィといっしょ♪おでかけ布えほん",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2565,7 +2565,7 @@
    "price": 1980,
    "image": "https://shop.akachan.jp/img/goods/S/230558300_48bd503d1c05444f8c75e78d50f0609a.JPG",
    "ja": "My First Bruna (マイファーストブルーナ) あそべて洗える布絵本 たべもの",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2583,7 +2583,7 @@
    "price": 2189,
    "image": "https://shop.akachan.jp/img/goods/S/264364500_43c205500037462cac62f53a61f1ffc7.jpg",
    "ja": "おやすみベスト　アンパンマン　ピンク",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2601,7 +2601,7 @@
    "price": 1529,
    "image": "https://shop.akachan.jp/img/goods/S/241411200_5659dde17ade4fafa652dd593fa293f8.JPG",
    "ja": "新生児 おていれセット",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2619,7 +2619,7 @@
    "price": 2662,
    "image": "https://shop.akachan.jp/img/goods/S/466008200_270882c1fec8431d83228e3f968a58c6.jpg",
    "ja": "ベビー こだわり おていれセット",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2637,7 +2637,7 @@
    "price": 3828,
    "image": "https://shop.akachan.jp/img/goods/S/240986200_5c5c7a039d434be5a67b6e3a06deaf93.jpg",
    "ja": "Drエジソン 電動 鼻水 吸引器 ハンディ アイボリー",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   },
   {
@@ -2655,7 +2655,7 @@
    "price": 2508,
    "image": "https://shop.akachan.jp/img/goods/S/220668000_78c98bac9f704f7398c850937594f3dd.JPG",
    "ja": "ベビーセーフティクッション みつばち ブラウン",
-   "checked": "2026-10-23T14:52+09:00",
+   "checked": "2026-10-24T09:22+09:00",
    "stale": false
   }
  ],
