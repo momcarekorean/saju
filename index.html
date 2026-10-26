@@ -1627,10 +1627,10 @@ h1,h2,h3,h4,th{text-wrap:balance}
 
 <!--JP:HTML:BEGIN-->
 <div id="tab-jp" class="hidden">
-<div class="jpnotice" role="note"><p class="jpnotice-a">매일 아침 10시 기준으로 갱신돼요. 하지만 실시간으로 반영되지는 않아서 실제 가격·재고와 다를 수 있어요.</p><p class="jpnotice-b">이 정보를 보고 구매하셔서 생긴 손해에 대해서는 책임질 수 없으니, 구매 전에 공식몰·매장에서 꼭 다시 확인하세요.</p><p class="jpnotice-c"><b>재고 정보 출처:</b> 아카짱혼포 공식 온라인몰(<a href="https://shop.akachan.jp/" target="_blank" rel="noopener nofollow">shop.akachan.jp</a>) 상품 페이지에 표시되는 매장별 참고 재고예요. 한큐·블라썸39는 재고를 공개하지 않아 표시하지 않아요.</p></div>
+<div class="jpnotice" role="note"><p class="jpnotice-a">매일 14~15시 기준으로 갱신돼요. 하지만 실시간으로 반영되지는 않아서 실제 가격·재고와 다를 수 있어요.</p><p class="jpnotice-b">이 정보를 보고 구매하셔서 생긴 손해에 대해서는 책임질 수 없으니, 구매 전에 공식몰·매장에서 꼭 다시 확인하세요.</p><p class="jpnotice-c"><b>재고 정보 출처:</b> 아카짱혼포 공식 온라인몰(<a href="https://shop.akachan.jp/" target="_blank" rel="noopener nofollow">shop.akachan.jp</a>) 상품 페이지에 표시되는 매장별 참고 재고예요. 한큐·블라썸39는 재고를 공개하지 않아 표시하지 않아요.</p></div>
 <div class="card">
   <h2>일본 인기용품 가격</h2>
-  <p class="sub" style="margin-top:0">일본에서 많이 사 오는 스토케·부가부·싸이벡스 제품을 <b>한국 정발가</b>와 <b>일본 구매가(오늘 환율로 환산)</b>로 견줘서 얼마 이득인지 보여 드려요. 일본 쇼핑몰 가격과 아카짱혼포 매장별 재고는 매일 아침 확인해요. 아래에서 구매처 위치와 예약 방법도 볼 수 있어요.</p>
+  <p class="sub" style="margin-top:0">일본에서 많이 사 오는 스토케·부가부·싸이벡스 제품을 <b>한국 정발가</b>와 <b>일본 구매가(오늘 환율로 환산)</b>로 견줘서 얼마 이득인지 보여 드려요. 일본 쇼핑몰 가격과 아카짱혼포 매장별 재고는 매일 14~15시쯤 확인해요. 아래에서 구매처 위치와 예약 방법도 볼 수 있어요.</p>
   <div class="jpbar">
     <div class="jprate" id="jpRate">환율을 불러오고 있어요…</div>
     <div class="jpf">
@@ -3446,7 +3446,7 @@ function jpParseRate(s){
     $("jpList").innerHTML=recMode?"":(r?its.map(i=>jpItemHtml(i,r.v,mode)).join(""):'<div class="card"><p class="sub" style="margin:0">환율을 넣으면 가격이 보여요.</p></div>');
     $("jpRecs").innerHTML=recMode&&r?jpRecsHtml(DATA,r.v,mode):"";
     $("jpRecsCard").style.display=recMode?"":"none";
-    $("jpStamp").textContent=`가격·재고 확인: ${jpStamp(DATA.generated_at)} (매일 오전 10시 전후 갱신, ${DATA.ok_items}/${DATA.total_items}개 자동 확인). 일본 가격은 공식 쇼핑몰 표시가이고 매장 가격과 다를 수 있어요.`;
+    $("jpStamp").textContent=`가격·재고 확인: ${jpStamp(DATA.generated_at)} (매일 14~15시 전후 갱신, ${DATA.ok_items}/${DATA.total_items}개 자동 확인). 일본 가격은 공식 쇼핑몰 표시가이고 매장 가격과 다를 수 있어요.`;
   }
   function renderGuide(){
     if(!DATA) return;
@@ -5123,7 +5123,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="293dc109";
+var APP_BUILD="2d4fa4e9";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
