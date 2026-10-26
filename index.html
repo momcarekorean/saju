@@ -1686,6 +1686,8 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <!--BF:HTML:END-->
 <!--BEN:HTML:BEGIN-->
 <div id="tab-benefit" class="hidden">
+<p class="upd"><b>업데이트 10/26</b> 소득 기준이 필요한 지원사업 카드마다 기준중위소득 금액표(2026년)와 건강보험료 기준표를 붙였어요 · 표 위에 가구원·태아·휴직 처리 기준도 적었어요</p>
+<p class="upd"><b>업데이트 10/26</b> 저소득층 기저귀·조제분유 카드에 누가 받을 수 있는지(수급·차상위·한부모, 장애인·다자녀 가구) 풀어 쓰고 조건 태그를 보강했어요</p>
 <p class="upd"><b>업데이트 10/23</b> 우리동네 혜택 탭이 생겼어요. 지역을 고르면 그 지역과 정부 혜택이 함께 나와요</p>
 <h2 class="ben-h">우리동네 임신·출산·육아 혜택 찾기</h2>
 <p class="ben-lead">사는 지역과 시기를 고르면 관련된 지원 사업을 찾아 줘요. 한부모, 기초수급, 장애처럼 특정 사유가 있어야 하는 혜택은 숨길 수 있어요.</p>
@@ -5121,7 +5123,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="e2e10254";
+var APP_BUILD="293dc109";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
