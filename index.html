@@ -959,6 +959,27 @@ h1,h2,h3,h4,th{text-wrap:balance}
 .ben-tag.reg{border-color:var(--mok);color:var(--mok)}
 .ben-tag.sp{border-color:var(--to);color:var(--to)}
 .ben-brief{margin:6px 0 0;font-size:14px;line-height:1.7;color:var(--ink)}
+.ben-note{margin:10px 0 0;padding:11px 13px;border:1px solid var(--rule);border-left:4px solid var(--seal);border-radius:0 3px 3px 0;background:var(--card);font-size:13.5px;line-height:1.7;color:var(--ink)}
+.ben-note>b{display:block;margin:0 0 4px;font-size:13.5px;color:var(--seal)}
+.ben-note ul{margin:0 0 8px;padding-left:18px}
+.ben-note li{margin:0 0 3px}
+.ben-note p{margin:6px 0 0}
+.ben-note p.src{font-size:12px;color:var(--ink-3)}
+.ben-d{margin:8px 0 6px;padding:8px 10px;border-radius:3px;background:var(--paper)}
+.ben-d>b{display:block;margin:0 0 3px;font-size:12.5px;color:var(--ink-2)}
+.ben-d ul{margin:0;padding-left:18px}
+.ben-d li{margin:0 0 4px;font-size:13px;line-height:1.65}
+.ben-d li.q{list-style:none;margin-left:-6px;padding-left:8px;border-left:3px solid var(--rule);color:var(--ink-2)}
+.ben-tbwrap{margin:8px 0 2px;overflow-x:auto}
+.ben-tb{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.5}
+.ben-tb caption{caption-side:top;text-align:left;margin:0 0 4px;font-size:12px;color:var(--ink-3)}
+.ben-tb th,.ben-tb td{padding:5px 7px;border:1px solid var(--rule);text-align:right;white-space:nowrap}
+.ben-tb thead th{background:var(--paper-2);text-align:center;font-weight:700;color:var(--ink)}
+.ben-tb tbody th{background:var(--paper-2);text-align:center;font-weight:700;color:var(--ink)}
+.ben-fold{margin:8px 0 0;padding:8px 12px;border:1px solid var(--rule);border-radius:3px;background:var(--card);font-size:13.5px;line-height:1.7}
+.ben-fold>summary{font-weight:700;color:var(--seal)}
+.ben-fold p{margin:6px 0 0}
+.ben-fold p.src{font-size:12px;color:var(--ink-3)}
 .ben-card details{margin-top:8px}
 .ben-card summary{cursor:pointer;color:var(--seal);font-size:13.5px}
 .ben-row{margin:7px 0 0;font-size:14px;line-height:1.7;white-space:pre-line}
@@ -3695,7 +3716,7 @@ function bfRulesHtml(){
 /*BEN:JS:BEGIN*/
 /* === BEN-CORE START === */
 // 우리동네 혜택: 자료(benefit.json)는 탭을 열 때 한 번 받아 오고, 아래 순수 함수로 걸러서 화면에 그린다.
-const BEN_VER=/*BEN:VER*/"20261024-2579"/*BEN:VER:END*/;
+const BEN_VER=/*BEN:VER*/"20261024-2579-ac54a3"/*BEN:VER:END*/;
 const BEN_EX=[["첫만남이용권","첫만남이용권"],["아동수당","아동수당"],["육아휴직급여","육아휴직급여"],["산후조리비","산후조리"],["산후도우미","산모·신생아|산모신생아|산후도우미"],["출산지원금","출산지원금|출산장려금|출산축하금"],["가정양육수당","가정양육수당"],["영유아보육료","영유아보육료"],["난임 시술비","난임"],["국가예방접종","예방접종"]];   // 자료에 실제로 있고 많이 신청하는 것(검색어 | 는 '또는')
 const BEN_ORDER=["서울특별시","부산광역시","대구광역시","인천광역시","광주광역시","전남광주통합특별시","대전광역시","울산광역시","세종특별자치시","경기도","강원특별자치도","충청북도","충청남도","전북특별자치도","전라남도","경상북도","경상남도","제주특별자치도"];
 const BEN_TYPES=["현금","현물","이용권","서비스","서비스(의료)","서비스(돌봄)","현금(감면)","기타(교육)","기타"];
@@ -3772,7 +3793,42 @@ function benHl(s,q){
   for(const t of ts){const k=benEsc(t).toLowerCase(), i=low.indexOf(k); if(i>=0) return e.slice(0,i)+"<mark>"+e.slice(i,i+k.length)+"</mark>"+e.slice(i+k.length);}
   return e;
 }
-function benCardHtml(r,q){
+// 소득 기준표를 카드에 같이 보인다. 손으로 쓴 풀이(nt)는 펼쳐 두고, 원문에 '기준중위소득 N%'가 있으면 표(hi·mi)를 접어서 붙인다.
+// 표 위에는 가구원 범위·휴직·태아 처리 같은 상세 기준(d)을 먼저 적는다
+function benTableHtml(tb){
+  return '<div class="ben-tbwrap"><table class="ben-tb"><caption>'+benEsc(tb.cap)+"</caption><thead><tr>"+(tb.th||[]).map(h=>"<th>"+benEsc(h)+"</th>").join("")+"</tr></thead><tbody>"
+    +(tb.rows||[]).map(rw=>"<tr>"+rw.map((c,i)=>i?"<td>"+benEsc(c)+"</td>":'<th scope="row">'+benEsc(c)+"</th>").join("")+"</tr>").join("")+"</tbody></table></div>";
+}
+function benDetailHtml(title,items,quotes){
+  const li=(items||[]).map(t=>"<li>"+benEsc(t)+"</li>").join("")+(quotes||[]).map(t=>'<li class="q">'+benEsc(t)+"</li>").join("");
+  return li?'<div class="ben-d"><b>'+benEsc(title)+"</b><ul>"+li+"</ul></div>":"";
+}
+function benNoteHtml(n){
+  if(!n) return "";
+  const li=(n.l||[]).map(t=>"<li>"+benEsc(t)+"</li>").join("");
+  const ft=(n.ft||[]).map(t=>"<p>"+benEsc(t)+"</p>").join("");
+  return '<div class="ben-note"><b>'+benEsc(n.h)+"</b>"+(li?"<ul>"+li+"</ul>":"")+benDetailHtml("표 보는 법 (가구원·휴직·태아·기준 시점)",n.d)+(n.tb?benTableHtml(n.tb):"")+ft+(n.sc?'<p class="src">'+benEsc(n.sc)+"</p>":"")+"</div>";
+}
+function benMoney(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",")+"원";}
+function benMedAmt(base,pct){return Math.round(base*pct/100);}
+function benRefHtml(r,ref){
+  if(!ref) return "";
+  let out="";
+  const hi=r.hi&&ref.hi&&ref.hi[String(r.hi)];
+  if(hi) out+='<details class="ben-fold"><summary>기준중위소득 '+benEsc(r.hi)+"% 건강보험료 기준표 (2026)</summary>"+benDetailHtml("표 보는 법 (가구원·휴직·태아·기준 시점)",hi.d)+benTableHtml(hi.tb)+(hi.ft||[]).map(t=>"<p>"+benEsc(t)+"</p>").join("")+(hi.sc?'<p class="src">'+benEsc(hi.sc)+"</p>":"")+"</details>";
+  const med=ref.med;
+  if(r.mi&&r.mi.length&&med&&med.b){
+    const pc=r.mi.map(p=>p+"%").join("·");
+    const tb={cap:"기준중위소득 "+pc+" 월 금액 ("+med.y+"년)",th:["가구원 수"].concat(r.mi.map(p=>p+"%")),
+      rows:Object.keys(med.b).sort((a,b)=>a-b).map(k=>[k+"인"].concat(r.mi.map(p=>benMoney(benMedAmt(med.b[k],p)))))};
+    const warn=r.hb?"안내에 건강보험료 기준이 함께 적혀 있어요. 건강보험료로 따지는 부분은 이 금액표가 아니라 사업 안내의 건강보험료 표로 비교해요.":"소득인정액(소득에 재산을 월 소득으로 바꿔 더한 금액)이나 건강보험료로 따지는 사업은 이 금액과 바로 비교하지 말고 사업 안내를 따르세요.";
+    const kx=r.kx&&r.kx.length;
+    const det=benDetailHtml("표 보는 법 (가구원·휴직·태아)",(med.d||[]).concat(kx?["이 카드 원문에서 찾은 소득 판정 관련 문장:"]:[med.dn||""]),r.kx);
+    out+='<details class="ben-fold"><summary>기준중위소득 '+benEsc(pc)+" 월 금액표 ("+med.y+"년)</summary>"+det+benTableHtml(tb)+"<p>"+benEsc(warn+" 오래된 안내는 그해 기준 금액을 썼을 수 있어요.")+"</p><p>"+benEsc(med.nx||"")+'</p><p class="src">출처: '+benEsc(med.src||"")+"</p></details>";
+  }
+  return out;
+}
+function benCardHtml(r,q,ref){
   const cen=r.sd==="(중앙부처)";
   const srcName=r.src==="b"?"복지로":r.src==="gb"?"정부24·복지로":"정부24";
   const tags='<span class="ben-tag '+(cen?"cen":"reg")+'">'+benEsc(cen?"중앙부처":(r.t==="광역시도"?"시·도":r.t==="시군구"?"시·군·구":r.t))+"</span>"
@@ -3785,6 +3841,7 @@ function benCardHtml(r,q){
   const link=(u,t)=>'<a class="ben-link" href="'+benEsc(u)+'" target="_blank" rel="noopener noreferrer">'+t+"</a>";
   return '<div class="ben-card"><h3>'+benHl(r.n,q)+'</h3><div class="org">'+benEsc(r.o)+(r.md?" · 수정 "+benMod(r.md):"")+'</div><div class="ben-tags">'+tags+"</div>"
     +(r.ct?'<p class="ben-brief">'+benHl(benBrief(r.ct),q)+"</p>":"")
+    +benNoteHtml(r.nt)+benRefHtml(r,ref)
     +"<details><summary>자세히 (원문)</summary>"+row("지원대상",r.tg)+row("선정기준",r.cr)+row("지원내용",r.ct)+row("신청방법",r.hw)+row("신청기한",r.wh)
     +(r.ex||[]).map(e=>row(e[0],e[1])).join("")+row("전화문의",r.tel)+row("접수기관",r.ag)
     +'<div class="ben-links">'+(url?link(url,(r.src==="b"?"복지로":"정부24")+"에서 보기"):"")+(u2?link(u2,"복지로에서도 보기"):"")+"</div></details></div>";
@@ -3838,7 +3895,7 @@ function benCardHtml(r,q){
     let grp="";   // 시기순일 때는 시기가 바뀔 때마다 작은 제목을 끼운다
     $("benList").innerHTML=res.length?res.slice(0,S.shown).map(r=>{
       let h=""; if(S.sort==="stage"){const g=benStageLabel(benStage(r)); if(g!==grp){grp=g; h='<h4 class="ben-stage">'+benEsc(g)+"</h4>";}}
-      return h+benCardHtml(r,S.nameOnly?"":S.q);}).join(""):'<div class="ben-empty">조건에 맞는 혜택을 찾지 못했어요.<br>필터를 줄이거나 시군구를 \'전체\'로 바꿔 보세요.<br>이 자료에 없다고 혜택이 없는 건 아니니, 구청에서도 확인해 보세요.</div>';
+      return h+benCardHtml(r,S.nameOnly?"":S.q,DATA.ref);}).join(""):'<div class="ben-empty">조건에 맞는 혜택을 찾지 못했어요.<br>필터를 줄이거나 시군구를 \'전체\'로 바꿔 보세요.<br>이 자료에 없다고 혜택이 없는 건 아니니, 구청에서도 확인해 보세요.</div>';
     $("benMore").hidden=res.length<=S.shown;
     paint();
     const c=$("benClearQ"); if(c) c.onclick=()=>{S.q="";S.nameOnly=false;$("benQ").value="";S.shown=PAGE;render();};
@@ -5064,7 +5121,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="56c96d1b";
+var APP_BUILD="e2e10254";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
