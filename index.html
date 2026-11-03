@@ -1650,6 +1650,8 @@ h1,h2,h3,h4,th{text-wrap:balance}
 
 <!--JP:HTML:BEGIN-->
 <div id="tab-jp" class="hidden">
+<p class="upd"><b>업데이트 11/3</b> 일본 면세가 11월 1일 구매분부터 환급 방식으로 바뀐 내용을 정리했어요. 절차와 공항별 처리는 '면세(환급) 방식 안내'에서 볼 수 있어요</p>
+<p class="upd"><b>업데이트 11/3</b> 가격 계산을 새 방식으로 바꿨어요. 계산대에서 먼저 낼 돈과 출국 때 돌려받을 돈이 따로 나오고, 환급 수수료를 직접 넣을 수 있어요</p>
 <div class="jpnotice" role="note"><p class="jpnotice-a">매일 14~15시 기준으로 갱신돼요. 하지만 실시간으로 반영되지는 않아서 실제 가격·재고와 다를 수 있어요.</p><p class="jpnotice-b">이 정보를 보고 구매하셔서 생긴 손해에 대해서는 책임질 수 없으니, 구매 전에 공식몰·매장에서 꼭 다시 확인하세요.</p><p class="jpnotice-c"><b>재고 정보 출처:</b> 아카짱혼포 공식 온라인몰(<a href="https://shop.akachan.jp/" target="_blank" rel="noopener nofollow">shop.akachan.jp</a>) 상품 페이지에 표시되는 매장별 참고 재고예요. 한큐·블라썸39는 재고를 공개하지 않아 표시하지 않아요.</p></div>
 <p class="jpalert" role="note"><b>일본 면세 제도가 2026년 11월 1일 구매분부터 '환급 방식'으로 바뀌었어요.</b> 계산대에서는 세금 포함 가격을 내고, 출국할 때 세관 확인을 받은 뒤 소비세를 돌려받아요. 아래 가격 계산도 이 방식으로 바꿨어요. 백화점 게스트카드 5%가 11월 1일 이후에도 그대로인지는 매장별로 다를 수 있어서 구매 전에 확인하세요. 절차와 공항별 처리는 <a href="#jpRefund">면세(환급) 방식 안내</a>에 정리했어요.</p>
 <div class="card">
@@ -5225,7 +5227,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="b89d24dd";
+var APP_BUILD="281e7a25";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
