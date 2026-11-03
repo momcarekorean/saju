@@ -1781,12 +1781,11 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <div class="cm-lens">
     <b>폰에서는 구글 렌즈로 읽어 복사하는 게 가장 정확해요</b>
     <ol>
-      <li>'구글 앱에서 렌즈 열기'를 누르거나, 구글 앱을 열어 검색창 오른쪽의 카메라(렌즈) 아이콘을 눌러요. 제품 뒷면의 전성분을 가까이 비추거나 사진을 골라요.</li>
+      <li>구글 앱을 열어 검색창 오른쪽의 카메라(렌즈) 아이콘을 눌러요. 제품 뒷면의 전성분을 가까이 비추거나 사진을 골라요. 갤러리나 구글 포토에서 사진을 열고 '렌즈' 또는 글자 아이콘을 눌러도 돼요(기종마다 달라요).</li>
       <li>'텍스트'를 고르고 전성분 글자를 길게 눌러 선택한 뒤 '복사'를 눌러요.</li>
       <li>이 화면으로 돌아와 '복사한 글자 붙여 넣기'를 눌러요.</li>
     </ol>
     <div class="cm-acts">
-      <a class="cm-btn2 cm-lbtn" href="googleapp://lens">구글 앱에서 렌즈 열기</a>
       <a class="cm-btn2 cm-lbtn" href="https://lens.google.com/" target="_blank" rel="noopener noreferrer">PC는 렌즈 웹으로 열기</a>
       <button type="button" id="cmPaste" class="cm-btn2 cm-pastebtn">복사한 글자 붙여 넣기</button>
     </div>
@@ -5547,7 +5546,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="ba3b0563";
+var APP_BUILD="6cadd8a6";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
