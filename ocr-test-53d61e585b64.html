@@ -1052,6 +1052,16 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cosm .cm-more li{margin:0 0 6px}
 #tab-cosm .cm-foot{margin:18px 0 0;padding-top:12px;border-top:1px solid var(--rule);font-size:12.5px;line-height:1.8;color:var(--ink-3)}
 #tab-cosm .cm-q:focus-visible,#tab-cosm .cm-btn:focus-visible,#tab-cosm .cm-btn2:focus-visible,#tab-cosm .cm-fold>summary:focus-visible,#tab-cosm .cm-more>summary:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+#tab-cosm .cm-what{margin:0 0 6px;font-size:13.5px;line-height:1.7;color:var(--ink)}
+#tab-cosm .cm-src{margin:6px 0 0;font-size:13px;line-height:1.7;color:var(--ink-2)}
+#tab-cosm .cm-src b{color:var(--ink)}
+#tab-cosm .cm-src a{color:var(--seal);word-break:break-all}
+#tab-cosm .cm-preginfo{margin:0 0 14px}
+#tab-cosm .cm-tbwrap{margin:8px 0;overflow-x:auto}
+#tab-cosm .cm-tb{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.6}
+#tab-cosm .cm-tb th,#tab-cosm .cm-tb td{padding:6px 8px;border:1px solid var(--rule);text-align:left;vertical-align:top}
+#tab-cosm .cm-tb thead th{background:var(--paper-2);font-weight:700}
+#tab-cosm .cm-tb tbody th{background:var(--card);font-weight:700;min-width:110px}
 /*COSM:CSS:END*/
 
 </style>
@@ -1764,6 +1774,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <h2 class="cm-h">화장품 전성분, 식약처 원료 목록과 맞춰 보기</h2>
 <p class="cm-lead">쓰고 있거나 쓰려는 화장품의 전성분을 붙여 넣으면, 식품의약품안전처 화장품 원료 자료의 사용금지·사용한도 목록에 올라 있는 성분이 있는지 하나씩 찾아 줘요.</p>
 <p class="cm-call"><b>임신 중에 써도 되는지 판단하는 화면이 아니에요.</b> 공식 목록에 올라 있는지 찾아서 보여 줄 뿐, 제품을 권하거나 말리지 않아요. 사용 여부는 담당 의사·약사와 상의하세요. 전문의의 판단이 항상 최우선이에요. 붙여 넣은 내용은 서버로 보내지 않고 이 기기에서만 처리해요.</p>
+<div id="cmPregInfo"></div>
 <div class="cm-card cm-step">
   <h3>전성분 넣기</h3>
   <p>전성분을 복사해서 아래 칸에 붙여 넣고 '성분 확인하기'를 누르세요. 복사하는 곳은 아래 세 가지예요.</p>
@@ -4125,6 +4136,7 @@ function cosmCheck(D,IX,text){
   items.forEach(it=>g[it.kind].push(it));
   return {items,g,n:items.length,cut:tk.cut};
 }
+const COSM_WHAT={"한도":"화장품에 넣을 수 있는 최대량이 정해진 성분이에요. 한도 안에서 들어 있는 건 정상이고, 쓰면 안 된다는 뜻이 아니에요.","금지":"화장품에 넣을 수 없는 원료로 올라 있어요. 조건이 붙은 경우는 아래 단서를 보세요.","한도/금지":"사용량을 제한하거나, 조건에 따라 쓸 수 없는 원료로 올라 있어요. 아래 조건과 단서를 보세요."};
 const COSM_TYPE_LABEL={"금지":"사용금지 원료","한도":"사용한도 원료","한도/금지":"사용한도·사용금지 원료"};
 function cosmOthersText(e,D){
   const by={};
@@ -4137,9 +4149,10 @@ function cosmCardHtml(it,D){
       const badges=e.k.map(k=>'<span class="cm-badge '+(k[0]==="금지"?"ban":"lim")+'">식약처 '+cosmEsc(COSM_TYPE_LABEL[k[0]]||k[0])+"</span>").join("");
       const as=(cosmKey(it.raw)!==cosmKey(e.n))?'<p class="cm-as">붙여 넣은 이름: '+cosmEsc(it.raw)+"</p>":"";
       const en=e.e?'<p class="cm-as">영문명 '+cosmEsc(e.e)+"</p>":"";
+      const what=e.k.map(k=>COSM_WHAT[k[0]]||"").filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).map(t=>'<p class="cm-what">'+cosmEsc(t)+"</p>").join("");
       const body=e.k.map(k=>(k[1]?'<p class="cm-cond"><b>한국 배합 한도·조건 (식약처 자료 그대로)</b>'+cosmEsc(k[1])+"</p>":"")+(k[2]?'<p class="cm-cond"><b>단서 (식약처 자료 그대로)</b>'+cosmEsc(k[2])+"</p>":"")).join("");
       const o=cosmOthersText(e,D);
-      return '<div class="cm-item"><h4>'+cosmEsc(e.n)+badges+"</h4>"+as+en+body+(o?'<p class="cm-oth">다른 나라 목록: '+cosmEsc(o)+"</p>":"")+"</div>";
+      return '<div class="cm-item"><h4>'+cosmEsc(e.n)+badges+"</h4>"+what+as+en+body+(o?'<p class="cm-oth">다른 나라에서도 정해 둔 곳: '+cosmEsc(o)+"</p>":"")+"</div>";
     }).join("");
   }
   if(it.kind==="other"){
@@ -4222,15 +4235,80 @@ function cosmUnknownHtml(items,sug){
       +"</div>";
   }).join("")+"</div>";
 }
+// 임신 중 주의 안내가 있는 성분: 한국 식약처·학회 자료에는 '임신 중 사용 금지 화장품 성분' 목록이 없어(2026-11 확인) 해외 보건기관 두 곳의 안내를 그대로 옮긴다.
+// MotherToBaby(미국 OTIS, 2021-06-22): 레티노이드·고용량 살리실산·포름알데하이드·하이드로퀴논·화학적 자외선차단제는 "should be used with caution when pregnant and nursing".
+// MotherSafe(호주 NSW 왕립여성병원, 2021-04 갱신): 하이드로퀴논은 피하고, 처방 트레티노인·미녹시딜은 쓰지 않으며, 화장품 속 레티놀·살리실산·글라이콜산·벤조일퍼옥사이드·자외선차단제는 쓸 수 있다고 안내.
+const COSM_PREG=[
+  {n:"하이드로퀴논 (피부 미백 성분)",names:["하이드로퀴논"],
+   mtb:"주의해서 사용해야 하는 성분으로 꼽았어요.",ms:"피부로 많이 흡수되기 때문에 임신 중에는 피하라고 했어요."},
+  {n:"레티노이드 (비타민 A 계열: 레티놀, 레티닐팔미테이트 등)",names:["레티놀","레티닐팔미테이트","레티닐아세테이트","레티닐프로피오네이트","레티닐리놀리에이트","레티날","레틴알","레티노익애씨드","트라이테노인","트레티노인","아다팔렌","하이드록시피나콜론레티노에이트"],
+   mtb:"주의해서 사용해야 하는 성분으로 꼽았어요.",ms:"처방이 필요한 트레티노인은 쓰지 말라고 했어요. 화장품에 든 비타민 A(레티놀)는 양이 아주 적고 피부로 흡수도 적어서 일반 제품은 쓸 수 있다고 했어요."},
+  {n:"살리실릭애씨드",names:["살리실릭애씨드"],
+   mtb:"고용량일 때 주의해서 사용해야 한다고 했어요.",ms:"안내대로 쓰면 임신 중에도 쓸 수 있다고 했어요. 다만 흡수가 많아지는 경우에는 의료진에게 확인하라고 했어요."},
+  {n:"포름알데하이드 (화장품 방부제로도 쓰여요)",names:["포름알데하이드","폼알데하이드","포름알데히드"],
+   mtb:"주의해서 사용해야 하는 성분으로 꼽았어요.",ms:""},
+  {n:"화학적 자외선차단 성분 (벤조페논-3, 옥토크릴렌 등)",names:["벤조페논-3","옥토크릴렌","에칠헥실살리실레이트","에칠헥실메톡시신나메이트","부틸메톡시디벤조일메탄","호모살레이트","에칠헥실트리아존","4-메칠벤질리덴캠퍼","디에칠아미노하이드록시벤조일헥실벤조에이트"],
+   mtb:"화학적 자외선차단제는 주의해서 사용해야 한다고 했어요.",ms:"옥시벤존·옥토크릴렌·옥티살레이트 같은 성분도 피부로 흡수가 적어 임신·수유 중 위험이 없다고 하고, 임신 중에도 자외선 차단은 필요하다고 했어요."}
+];
+const COSM_PREG_SRC=[
+  {n:"MotherToBaby(미국 OTIS) \"What's the skinny on skin care?\" 2021-06-22",u:"https://mothertobaby.org/baby-blog/whats-the-skinny-on-skin-care/"},
+  {n:"MotherSafe(호주 NSW 왕립여성병원) \"Skin Care, Hair Care and Cosmetic Treatments in Pregnancy and Breastfeeding\" 2021-04 갱신",u:"https://www.seslhd.health.nsw.gov.au/sites/default/files/groups/Royal_Hospital_for_Women/Mothersafe/documents/skinhaircareandcosmetictreatmentsapril2021.pdf"}
+];
+function cosmPregHits(res){
+  const hits=[];
+  COSM_PREG.forEach(g=>{
+    const keys=g.names.map(cosmKey), found=[];
+    res.items.forEach(it=>{
+      const nm=[it.raw].concat((it.reg||[]).map(e=>e.n)).concat((it.ing||[]).map(r=>r[0]));
+      if(nm.some(x=>keys.indexOf(cosmKey(x))>=0)) found.push(it);
+    });
+    if(found.length) hits.push({g,items:found});
+  });
+  return hits;
+}
+function cosmPregSrcHtml(){
+  return '<p class="cm-src">근거: '+COSM_PREG_SRC.map(x=>'<a href="'+x.u+'" target="_blank" rel="noopener noreferrer">'+cosmEsc(x.n)+"</a>").join(" · ")+"</p>";
+}
+function cosmPregLines(g){
+  return '<p class="cm-src"><b>미국 MotherToBaby</b> '+cosmEsc(g.mtb)+"</p>"
+    +'<p class="cm-src"><b>호주 MotherSafe</b> '+cosmEsc(g.ms||"이 안내문에는 언급이 없어요.")+"</p>";
+}
+// 결과 맨 위: 임신 중 주의 안내가 있는 성분이 붙여 넣은 성분에 있는지
+function cosmPregBlock(res){
+  const hits=cosmPregHits(res);
+  const intro="<p>한국 식약처와 학회 자료에는 '임신 중 사용 금지 화장품 성분' 목록이 따로 없어요(2026년 11월 확인). 아래는 미국·호주 보건기관이 임신 중 주의를 안내한 성분이 붙여 넣은 성분표에 있는지 찾은 결과예요. 기관마다 의견이 다른 성분도 있어요.</p>";
+  if(!hits.length){
+    return '<div class="cm-grp"><h3>임신 중 주의 안내가 있는 성분</h3>'+intro
+      +'<div class="cm-note"><p><b>해외 보건기관이 주의를 안내한 성분(하이드로퀴논, 레티노이드, 고용량 살리실릭애씨드, 포름알데하이드, 화학적 자외선차단 성분)은 이 성분표에서 보이지 않아요.</b> 다만 이 다섯 가지만 찾은 것이고, 이름이 달라 못 찾았을 수 있어요. 다른 성분에 문제가 없다는 뜻은 아니에요.</p></div>'
+      +cosmPregSrcHtml()+"</div>";
+  }
+  return '<div class="cm-grp"><h3>임신 중 주의 안내가 있는 성분 ('+hits.length+')</h3>'+intro
+    +hits.map(h=>'<div class="cm-item"><h4>'+cosmEsc(h.g.n)+'<span class="cm-badge oth">붙여 넣은 이름: '+h.items.map(i=>cosmEsc(i.raw)).join(", ")+"</span></h4>"
+      +cosmPregLines(h.g)
+      +(h.items.some(i=>i.kind==="kr")?'<p class="cm-oth">한국 식약처 목록에도 사용한도·사용금지 원료로 올라 있는 성분이에요(아래 설명 참고).</p>':"")+"</div>").join("")
+    +cosmPregSrcHtml()+"</div>";
+}
+// 입력 위에 항상 보이는 설명(접힘): 어떤 성분을 주의하라고 하는지 표로
+function cosmPregInfoHtml(){
+  return '<details class="cm-more cm-preginfo"><summary>임신 중에 주의하라고 안내하는 성분이 따로 있나요? (보기)</summary>'
+    +"<p>한국 식약처와 학회 자료에는 '임신 중 사용 금지 화장품 성분' 목록이 따로 없어요(2026년 11월 확인). 이 화면의 '사용금지·사용한도 원료'는 임신 여부와 관계없이 모두에게 적용되는 기준이에요. 해외 보건기관 두 곳이 임신 중 주의를 안내한 성분은 아래와 같고, 기관마다 판단이 다른 성분도 있어요.</p>"
+    +'<div class="cm-tbwrap"><table class="cm-tb"><thead><tr><th>성분</th><th>미국 MotherToBaby</th><th>호주 MotherSafe</th></tr></thead><tbody>'
+    +COSM_PREG.map(g=>"<tr><th>"+cosmEsc(g.n)+"</th><td>"+cosmEsc(g.mtb)+"</td><td>"+cosmEsc(g.ms||"언급 없음")+"</td></tr>").join("")
+    +"</tbody></table></div>"
+    +"<p>두 기관 모두 대부분의 화장품·피부 제품은 우려가 적다고 안내하고, 걱정되면 의료진과 상의하라고 해요. 위 표는 두 기관 안내를 옮긴 것이고 맘케어의 판단이 아니에요.</p>"
+    +cosmPregSrcHtml()+"</details>";
+}
 function cosmResultHtml(res,D,sug){
   const g=res.g;
   if(!res.n) return '<div class="cm-note"><p>성분 이름으로 읽히는 게 없어요. 쉼표나 줄바꿈으로 나뉜 전성분을 붙여 넣었는지 확인해 주세요.</p></div>';
   let h='<div class="cm-sum"><b>붙여 넣은 성분 '+res.n+"개</b><br>"
     +"식약처 목록에 있는 성분 "+g.kr.length+"개 · 한국 목록에는 없고 다른 나라 목록에 있는 성분 "+g.other.length+"개<br>"
-    +"목록에서 찾지 못한 성분 "+g.dict.length+"개 · 이름을 알아보지 못한 성분 "+g.none.length+"개"
+    +"목록에서 찾지 못한 성분 "+g.dict.length+"개 · 이름을 알아보지 못한 성분 "+g.none.length+"개<br>"
+    +"임신 중 주의 안내가 있는 성분 "+cosmPregHits(res).length+"개(해외 보건기관 안내 기준)"
     +(res.cut?"<br>성분이 너무 많아 앞의 "+COSM_MAX+"개만 확인했어요.":"")+"</div>";
+  h+=cosmPregBlock(res);
   if(g.kr.length) h+='<div class="cm-grp"><h3>식약처 사용금지·사용한도 목록에 있어요 ('+g.kr.length+')</h3>'
-    +"<p>식약처 화장품 원료 자료의 한국 목록에 올라 있는 성분이에요. 임신 여부와 관계없는 일반 사용 기준이고, 임신 중 안전성을 판단한 것이 아니에요.</p>"
+    +"<p><b>사용한도 원료</b>는 화장품에 넣을 수 있는 최대량이 법으로 정해진 성분이에요. 보존제·항산화제·자외선차단제처럼 흔한 성분이 많고, 한도 안에서 들어 있는 건 정상이에요. 이 목록에 있다고 쓰면 안 된다는 뜻이 아니고, 실제로 얼마나 들었는지는 성분표에 나오지 않아요. <b>사용금지 원료</b>는 화장품에 넣을 수 없는 성분인데 정상 제품에는 거의 없어요. 임신 여부와 관계없는 일반 기준이고, 임신 중 안전성을 판단한 것이 아니에요.</p>"
     +g.kr.map(it=>cosmCardHtml(it,D)).join("")+"</div>";
   if(g.other.length) h+='<details class="cm-fold"><summary>한국 목록에는 없고 다른 나라 목록에 있는 성분 '+g.other.length+"개 보기</summary><div>"
     +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">같은 자료에 함께 실린 EU·캐나다 등 다른 나라의 사용제한 목록에 오른 성분이에요. 나라마다 기준이 달라 한국 기준과는 별개고, 특정 제품군이나 용도에만 적용되는 한도도 많아서 흔한 성분도 여럿 나와요.</p>"
@@ -4250,6 +4328,7 @@ function cosmResultHtml(res,D,sug){
   const $=id=>document.getElementById(id);
   const root=$("tab-cosm"); if(!root) return;
   let DATA=null, IX=null, loading=false, failed=false, pending=false;
+  if($("cmPregInfo")) $("cmPregInfo").innerHTML=cosmPregInfoHtml();
   function state(t){$("cmState").textContent=t||"";}
   function foot(){
     $("cmFoot").innerHTML="자료 출처: 식품의약품안전처 화장품 원료성분정보·화장품 사용제한 원료정보(공공데이터포털), 자료 기준일 "+cosmEsc(DATA.asof)
@@ -5486,7 +5565,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="40849521";
+var APP_BUILD="dbf5d7c0";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
