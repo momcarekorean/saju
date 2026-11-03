@@ -4287,6 +4287,7 @@ function cosmTokens(text){
     p=p.replace(/\u0001/g,",").trim();
     if(i===0) p=p.replace(/^[\[［【(]?\s*(전성분|성분|ingredients?)\s*[\]］】)]?\s*[:：]?\s*(?=[가-힣A-Za-z0-9])/i,"");
     p=p.replace(/^(?:[•·●■▪*\-–]|\d{1,2}[.)])\s+/,"");
+    p=p.replace(/\([^()]*\d\s*(?:%|ppm|ppb)\s*\)/gi,"");                          // 함량 설명이 붙은 괄호: 하이드록시프로필비스팔미타마이드엠이에이(세라마이드 PC-104 65.5ppm)
     p=p.replace(/\(?\s*\d+(?:\.\d+)?\s*(?:%|ppm|ppb|퍼센트)\s*\)?/gi,"");   // 함량 표기는 이름이 아니다
     p=p.replace(/\(\s*\d{1,3}(?!\d)(?:[.,]\d{1,2})?\s*\S?\)?/g,"");           // 글자 인식에서 %가 다른 글자로 읽힌 (0.496) 같은 함량 괄호(색소 번호 (77891) 는 다섯 자리라 남는다)
     p=p.replace(/[.。]+$/,"").replace(/^["'“‘]+|["'”’]+$/g,"").replace(/\s+/g," ").trim();
@@ -4630,7 +4631,8 @@ function cosmProdBtnsHtml(list){
   return list.map(p=>'<button type="button" class="cm-prod" data-id="'+cosmEsc(p.id)+'"><b>'+cosmEsc(p.brand+" "+p.name)+"</b><small>"+cosmEsc(p.target)+" · 전성분 "+cosmProdCount(p)+"개 · 확인 "+cosmEsc(p.verified)+"</small></button>").join("");
 }
 function cosmProdNoteText(p){
-  return "맘케어가 "+p.verified+"에 "+p.source+"를 직접 읽고 확인한 성분표예요. 제품이 리뉴얼되면 성분이 달라질 수 있으니 받으신 포장의 성분표와 맞춰 보세요."+(p.note?" "+p.note:"");
+  const c=String(p.source).slice(-1).charCodeAt(0), eul=(c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?"을":"를";   // 받침 있으면 '을'
+  return "맘케어가 "+p.verified+"에 "+p.source+eul+" 직접 읽고 확인한 성분표예요. 제품이 리뉴얼되면 성분이 달라질 수 있으니 받으신 포장의 성분표와 맞춰 보세요."+(p.note?" "+p.note:"");
 }
 /* 약 이름·성분 조회: 식약처 DUR 임부금기 품목정보(dur.json). 목록에 올라 있는지만 찾아 공식 사유를 그대로 보여 주고, 판단은 하지 않는다. */
 function cosmDrugKey(s){return String(s==null?"":s).normalize("NFKC").toLowerCase().replace(/[^0-9a-z가-힣]/g,"");}
@@ -5998,7 +6000,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="0d12dc7b";
+var APP_BUILD="aeb69408";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
