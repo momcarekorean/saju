@@ -1147,6 +1147,11 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cosm .cm-drl li{padding:8px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;line-height:1.5;overflow-wrap:anywhere}
 #tab-cosm .cm-drl li:last-child{border-bottom:0}
 #tab-cosm .cm-drl small{display:block;margin-top:1px;font-size:12px;color:var(--ink-3)}
+/* 약 조회: 이익과 위험을 견줘 처방한다는 설명(눈에 띄게) */
+#tab-cosm .cm-key{margin:0 0 14px;padding:14px 16px;border:2px solid var(--to);border-left-width:6px;border-radius:3px;background:rgba(184,134,43,.16);color:var(--ink)}
+#tab-cosm .cm-key p{margin:0 0 6px;font-size:14px;line-height:1.7}
+#tab-cosm .cm-key p:last-child{margin:0}
+#tab-cosm .cm-key b{font-size:15.5px;line-height:1.65}
 /*COSM:CSS:END*/
 
 </style>
@@ -1923,6 +1928,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
     <li><b>성격</b> 공식 자료를 찾아 보여 주는 정보 제공이에요. 의료행위, 진단, 처방, 복약지도가 아니에요.</li>
     <li><b>한계</b> 식약처 화장품 원료 자료 기준이고, 이름이 다르게 적히면 못 찾을 수 있어요. 염류나 에스터류는 묶음 이름으로 올라 있는 경우가 많아 개별 이름은 못 찾기도 해요. 성분이 얼마나 들었는지, 어디에 얼마나 바르는지는 반영하지 않아요.</li>
     <li><b>약 조회</b> 식약처 의약품안전사용서비스(DUR) 임부금기 품목정보에 올라 있는지만 찾아요. 이 목록은 임신 중 쓰지 말라고 정한 성분을 모은 것이라, 목록에서 찾지 못했다고 해서 임신 중 써도 된다는 뜻이 아니에요. 사유는 식약처 자료 그대로 보여 주고, 약을 권하거나 말리지 않아요.</li>
+    <li><b>약은 이익과 위험을 견줘 처방해요</b> 목록에 올라 있어도 약의 부작용 위험보다 처방으로 얻는 이익이 더 크다고 전문의가 판단하면 처방할 수 있어요. 처방받은 약을 이 화면만 보고 임의로 멈추지 마세요.</li>
     <li><b>전문의 판단이 먼저예요</b> 공식 목록과 다르게 안내받았거나 처방받은 경우가 있을 수 있어요. 임의로 시작하거나 멈추지 말고 담당 의사·약사와 상의하세요.</li>
     <li><b>이상이 있을 때</b> 쓰고 나서 발진, 가려움, 붓기 같은 이상이 생기면 사용을 멈추고 진료를 받으세요.</li>
     <li><b>구글 렌즈 같은 외부 서비스</b>를 쓰면 그 서비스로 사진이 올라가요. 맘케어와는 관계없는 서비스예요.</li>
@@ -4670,10 +4676,11 @@ function cosmDrugCardHtml(Dd,g,idxs,open,max){
     +'<details class="cm-fold"'+(open?" open":"")+"><summary>"+(open?"이 이름의 제품 ":"이 성분이 든 제품 ")+idxs.length+"개 보기</summary><div>"+cosmDrugItemsHtml(Dd,idxs,max)+"</div></details></div>";
 }
 function cosmDrugHtml(res,q,Dd,IX){
-  const note='<div class="cm-note"><p>목록에 올라 있어도 의사가 상태를 고려해 처방할 수 있어요. 임의로 시작하거나 멈추지 말고 담당 의사·약사와 상의하세요. 이 화면은 약을 권하거나 말리지 않아요.</p><p>이 목록은 식약처가 임신 중 쓰지 말라고 정한 의약품 성분을 모아 둔 것이라, 목록에서 찾지 못했다고 해서 임신 중 써도 된다는 뜻은 아니에요.</p><p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>';
+  const note='<div class="cm-note"><p>그래서 이 목록만 보고 임의로 시작하거나 멈추지 말고 담당 의사·약사와 상의하세요. 이 화면은 약을 권하거나 말리지 않아요.</p><p>이 목록은 식약처가 임신 중 쓰지 말라고 정한 의약품 성분을 모아 둔 것이라, 목록에서 찾지 못했다고 해서 임신 중 써도 된다는 뜻은 아니에요.</p><p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>';
   if(res.short) return '<div class="cm-note"><p>두 글자 이상 넣어 주세요.</p></div>';
   if(!res.nIng) return '<div class="cm-note"><p><b>\''+cosmEsc(q.trim())+"'을(를) 식약처 DUR 임부금기 품목 목록에서 찾지 못했어요.</b> 목록에 없다고 해서 임신 중 써도 된다는 뜻은 아니에요. 아직 목록에 오르지 않았거나, 이름이 달라 못 찾았을 수 있어요. 제품 이름의 일부나 성분 이름으로 다시 찾아보세요.</p><p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>";
-  let h='<div class="cm-sum"><b>\''+cosmEsc(q.trim())+"' 찾은 결과</b><br>DUR 임부금기 목록에 올라 있는 성분 "+res.nIng+"개 · 제품 "+res.nItem+"개</div>";
+  let h='<div class="cm-sum"><b>\''+cosmEsc(q.trim())+"' 찾은 결과</b><br>DUR 임부금기 목록에 올라 있는 성분 "+res.nIng+"개 · 제품 "+res.nItem+"개</div>"
+    +'<div class="cm-key"><p><b>목록에 올라 있어도, 약의 부작용 위험보다 처방으로 얻는 이익이 더 크다고 판단되면 전문의가 판단해서 처방할 수 있어요.</b></p><p>예를 들어 기침이 심해서 그대로 두는 것이 임신 중인 몸에 더 큰 부담이 될 때처럼, 약을 쓰지 않는 쪽의 부담이 더 크면 의사가 약을 처방하기도 해요.</p></div>';
   const MAXC=6;
   res.ingHits.slice(0,MAXC).forEach(g=>{h+=cosmDrugCardHtml(Dd,g,IX.byIng.get(g)||[],false,40);});
   res.nameHits.slice(0,Math.max(0,MAXC-res.ingHits.length)).forEach(x=>{h+=cosmDrugCardHtml(Dd,x.ing,x.items,true,15);});
@@ -5974,7 +5981,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="cc16a7d9";
+var APP_BUILD="c74385df";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
