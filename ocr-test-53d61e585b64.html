@@ -1062,6 +1062,49 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cosm .cm-tb th,#tab-cosm .cm-tb td{padding:6px 8px;border:1px solid var(--rule);text-align:left;vertical-align:top}
 #tab-cosm .cm-tb thead th{background:var(--paper-2);font-weight:700}
 #tab-cosm .cm-tb tbody th{background:var(--card);font-weight:700;min-width:110px}
+/* 전성분 한 줄씩 목록 */
+#tab-cosm .cm-sum2{margin:0 0 12px;padding:14px;border:1px solid var(--rule);border-radius:3px;background:var(--card)}
+#tab-cosm .cm-tot{margin:0 0 8px;font-size:15px;color:var(--ink)}
+#tab-cosm .cm-tot b{font-size:22px}
+#tab-cosm .cm-bar{display:flex;height:10px;margin:0 0 10px;border-radius:99px;overflow:hidden;background:var(--paper-2)}
+#tab-cosm .cm-bar span{display:block;min-width:4px}
+#tab-cosm .cm-bar .lv-check{background:var(--seal)}
+#tab-cosm .cm-bar .lv-lim{background:var(--to)}
+#tab-cosm .cm-bar .lv-oth{background:var(--su)}
+#tab-cosm .cm-bar .lv-ok{background:var(--ink-3);opacity:.35}
+#tab-cosm .cm-bar .lv-none{background:var(--ink-3)}
+#tab-cosm .cm-flts{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+#tab-cosm .cm-flt{margin:0;width:auto;letter-spacing:normal;font-family:inherit;font-weight:400;transition:none;appearance:none;display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:0 12px;border:1px solid var(--rule);border-radius:99px;background:var(--paper);color:var(--ink);font-size:13px;cursor:pointer}
+#tab-cosm .cm-flt.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+#tab-cosm .cm-flt::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
+#tab-cosm .cm-flt.lv-check::before{background:var(--seal)}
+#tab-cosm .cm-flt.lv-lim::before{background:var(--to)}
+#tab-cosm .cm-flt.lv-oth::before{background:var(--su)}
+#tab-cosm .cm-flt[data-lv="all"]::before{display:none}
+#tab-cosm .cm-legend{margin:8px 0 0}
+#tab-cosm .cm-legend p{margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)}
+#tab-cosm .cm-list{list-style:none;margin:0 0 16px;padding:0;border:1px solid var(--rule);border-radius:3px;background:var(--paper);overflow:hidden}
+#tab-cosm .cm-row{border-bottom:1px solid var(--rule)}
+#tab-cosm .cm-row:last-child{border-bottom:0}
+#tab-cosm .cm-row[hidden]{display:none}
+#tab-cosm .cm-row.lv-check{box-shadow:inset 4px 0 0 var(--seal)}
+#tab-cosm .cm-row.lv-lim{box-shadow:inset 4px 0 0 var(--to)}
+#tab-cosm .cm-rs,#tab-cosm .cm-row>details>summary{display:flex;align-items:flex-start;gap:10px;padding:11px 12px 11px 16px;list-style:none}
+#tab-cosm .cm-row>details>summary{cursor:pointer}
+#tab-cosm .cm-row>details>summary::-webkit-details-marker{display:none}
+#tab-cosm .cm-no{flex:0 0 24px;font-size:12px;line-height:24px;text-align:center;color:var(--ink-3)}
+#tab-cosm .cm-nm{flex:1;min-width:0;font-size:15px;line-height:1.5;font-weight:700;color:var(--ink);overflow-wrap:anywhere}
+#tab-cosm .cm-nm small{display:block;margin-top:2px;font-size:12px;font-weight:400;line-height:1.5;color:var(--ink-2)}
+#tab-cosm .cm-bdg{flex:0 0 auto;margin-top:1px;padding:3px 9px;border:1px solid var(--rule);border-radius:99px;font-size:11.5px;font-weight:700;white-space:nowrap;color:var(--ink-2)}
+#tab-cosm .cm-bdg.lv-check{border-color:var(--seal);color:var(--seal)}
+#tab-cosm .cm-bdg.lv-lim{border-color:var(--to);color:var(--to)}
+#tab-cosm .cm-bdg.lv-oth{border-color:var(--su);color:var(--su)}
+#tab-cosm .cm-bdg.lv-ok{border-color:transparent;font-weight:400;color:var(--ink-3)}
+#tab-cosm .cm-row>details>summary .cm-bdg::after{content:" \25BE"}
+#tab-cosm .cm-row>details[open]>summary .cm-bdg::after{content:" \25B4"}
+#tab-cosm .cm-row.lv-ok .cm-nm{font-weight:400;color:var(--ink-2)}
+#tab-cosm .cm-rb{padding:0 12px 12px 16px}
+#tab-cosm .cm-rsug{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding:0 12px 11px 50px}
 /*COSM:CSS:END*/
 
 </style>
@@ -4082,7 +4125,7 @@ function cosmTokens(text){
     p=p.replace(/\(\s*\d{1,3}(?!\d)(?:[.,]\d{1,2})?\s*\S?\)?/g,"");           // 글자 인식에서 %가 다른 글자로 읽힌 (0.496) 같은 함량 괄호(색소 번호 (77891) 는 다섯 자리라 남는다)
     p=p.replace(/[.。]+$/,"").replace(/^["'“‘]+|["'”’]+$/g,"").replace(/\s+/g," ").trim();
     const k=cosmKey(p);
-    if(!k||k.length<2||seen.has(k)) return;
+    if(!k||k.length<2||seen.has(k)||/^(전성분|주요성분|성분|ingredients?)$/.test(k)) return;   // '[전성분]' 같은 머리글만 남은 조각은 성분이 아니다
     if(out.length>=COSM_MAX){cut=true;return;}
     seen.add(k); out.push({raw:p,key:k});
   });
@@ -4141,8 +4184,19 @@ function cosmCheck(D,IX,text){
     const parts=t.raw.split(/\s+/).filter(p=>cosmKey(p).length>=2);
     if(parts.length>=2&&parts.some(p=>cosmLookup(D,IX,p).kind!=="none")) parts.forEach(push); else push(t.raw);
   });
-  items.forEach(it=>g[it.kind].push(it));
-  return {items,g,n:items.length,cut:tk.cut};
+  // 사용할 때의 주의사항 같은 문장 조각이 성분처럼 읽힌 것은 목록에서 뺀다(이름을 못 알아본 것 중에서만).
+  // 성분표 뒤에는 주의사항이 오므로, 끝쪽에 이어진 '못 알아본' 구간에서 첫 문장 조각이 나온 곳부터는 전부 뺀다(그 앞의 오타 난 성분은 남긴다).
+  let tail=items.length; while(tail>0&&items[tail-1].kind==="none") tail--;
+  let first=-1; for(let i=tail;i<items.length;i++){ if(cosmSentenceLike(items[i].raw)){first=i;break;} }
+  const junk=[], kept=[];
+  items.forEach((it,i)=>{ if(it.kind==="none"&&(cosmSentenceLike(it.raw)||(first>=0&&i>=first))) junk.push(it); else kept.push(it); });
+  kept.forEach(it=>g[it.kind].push(it));
+  return {items:kept,g,n:kept.length,cut:tk.cut,junk};
+}
+const COSM_CAUTION=/직사광선|전문의|상담|보관|어린이|상처|부작용|증상|부어오름|가려움|붉은|반점|의하여|사용\s*후|사용\s*부위|피해서|주의/;
+function cosmSentenceLike(raw){
+  const s=String(raw||"").trim();
+  return s.length>=22||s.split(/\s+/).length>=5||/(것|니다|세요|하여|하고|하며)\s*[)\]]?$/.test(s)||COSM_CAUTION.test(s);
 }
 const COSM_WHAT={"한도":"화장품에 넣을 수 있는 최대량이 정해진 성분이에요. 한도 안에서 들어 있는 건 정상이고, 쓰면 안 된다는 뜻이 아니에요.","금지":"화장품에 넣을 수 없는 원료로 올라 있어요. 조건이 붙은 경우는 아래 단서를 보세요.","한도/금지":"사용량을 제한하거나, 조건에 따라 쓸 수 없는 원료로 올라 있어요. 아래 조건과 단서를 보세요."};
 const COSM_TYPE_LABEL={"금지":"사용금지 원료","한도":"사용한도 원료","한도/금지":"사용한도·사용금지 원료"};
@@ -4150,27 +4204,6 @@ function cosmOthersText(e,D){
   const by={};
   (e.o||[]).forEach(p=>{const t=D.types[p[1]]; (by[t]=by[t]||[]).push(D.countries[p[0]]);});
   return Object.keys(by).map(t=>t+" "+by[t].join(", ")).join(" / ");
-}
-function cosmCardHtml(it,D){
-  if(it.kind==="kr"){
-    return it.reg.filter(e=>e.k).map(e=>{
-      const badges=e.k.map(k=>'<span class="cm-badge '+(k[0]==="금지"?"ban":"lim")+'">식약처 '+cosmEsc(COSM_TYPE_LABEL[k[0]]||k[0])+"</span>").join("");
-      const as=(cosmKey(it.raw)!==cosmKey(e.n))?'<p class="cm-as">붙여 넣은 이름: '+cosmEsc(it.raw)+"</p>":"";
-      const en=e.e?'<p class="cm-as">영문명 '+cosmEsc(e.e)+"</p>":"";
-      const what=e.k.map(k=>COSM_WHAT[k[0]]||"").filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).map(t=>'<p class="cm-what">'+cosmEsc(t)+"</p>").join("");
-      const body=e.k.map(k=>(k[1]?'<p class="cm-cond"><b>한국 배합 한도·조건 (식약처 자료 그대로)</b>'+cosmEsc(k[1])+"</p>":"")+(k[2]?'<p class="cm-cond"><b>단서 (식약처 자료 그대로)</b>'+cosmEsc(k[2])+"</p>":"")).join("");
-      const o=cosmOthersText(e,D);
-      return '<div class="cm-item"><h4>'+cosmEsc(e.n)+badges+"</h4>"+what+as+en+body+(o?'<p class="cm-oth">다른 나라에서도 정해 둔 곳: '+cosmEsc(o)+"</p>":"")+"</div>";
-    }).join("");
-  }
-  if(it.kind==="other"){
-    return it.reg.map(e=>{
-      const as=(cosmKey(it.raw)!==cosmKey(e.n))?'<p class="cm-as">붙여 넣은 이름: '+cosmEsc(it.raw)+"</p>":"";
-      const en=e.e?'<p class="cm-as">영문명 '+cosmEsc(e.e)+"</p>":"";
-      return '<div class="cm-item"><h4>'+cosmEsc(e.n)+'<span class="cm-badge oth">한국 목록에는 없음</span></h4>'+as+en+'<p class="cm-oth">다른 나라 목록: '+cosmEsc(cosmOthersText(e,D))+"</p></div>";
-    }).join("");
-  }
-  return "";
 }
 function cosmChips(items,cls){return '<div class="cm-chips'+(cls?" "+cls:"")+'">'+items.map(it=>"<span>"+cosmEsc(it.raw)+"</span>").join("")+"</div>";}
 // 복사해 온 글자 중 전성분 부분만 잘라 낸다: '전성분·주요성분' 글자나 '정제수,' 가 나오는 줄부터, 주의사항·제조업자 같은 줄 앞까지.
@@ -4234,14 +4267,6 @@ function cosmSuggest(S,raw,limit){
   }
   found.sort((x,y)=>x[0]-y[0]||(x[2][0]===k[0]?0:1)-(y[2][0]===k[0]?0:1)||x[1].length-y[1].length);
   return found.slice(0,limit||3).map(x=>x[1]);
-}
-function cosmUnknownHtml(items,sug){
-  return '<div class="cm-unks">'+items.map(it=>{
-    const s=sug?sug(it.raw):[];
-    return '<div class="cm-unk"><span class="cm-chip">'+cosmEsc(it.raw)+"</span>"
-      +(s.length?'<span class="cm-sg">혹시</span>'+s.map(n=>'<button type="button" class="cm-pick" data-f="'+cosmEsc(it.raw)+'" data-t="'+cosmEsc(n)+'">'+cosmEsc(n)+"</button>").join("")+'<span class="cm-sg">?</span>':"")
-      +"</div>";
-  }).join("")+"</div>";
 }
 // 임신 중 주의 안내가 있는 성분: 한국 식약처 고시에는 성분 단위로 임신 중 사용을 금지·주의하라고 정한 화장품 규정이 없다(2026-11-03 법제처 현행 원문 확인, verify_kr_preg.py 로 재확인).
 // 한국 자료는 ① 제품 종류별 의무 주의 문구(식약처 고시 별표 1) ② 의약품 DUR 임부금기(레티노이드 의약품) 두 가지라 그대로 옮기고, 해외 보건기관 두 곳의 성분별 안내를 나란히 둔다.
@@ -4312,9 +4337,8 @@ function cosmPregBlock(res){
       +cosmPregSrcHtml()+"</div>";
   }
   return '<div class="cm-grp"><h3>임신 중 주의 안내가 있는 성분 ('+hits.length+')</h3>'+intro
-    +hits.map(h=>'<div class="cm-item"><h4>'+cosmEsc(h.g.n)+'<span class="cm-badge oth">붙여 넣은 이름: '+h.items.map(i=>cosmEsc(i.raw)).join(", ")+"</span></h4>"
-      +cosmPregLines(h.g)
-      +(h.items.some(i=>i.kind==="kr")?'<p class="cm-oth">한국 식약처 목록에도 사용한도·사용금지 원료로 올라 있는 성분이에요(아래 설명 참고).</p>':"")+"</div>").join("")
+    +'<p class="cm-sub">위 목록의 \'확인 필요\' 줄을 열면 한국 식약처·미국·호주 안내를 볼 수 있어요.</p>'
+    +hits.map(h=>'<div class="cm-item"><h4>'+cosmEsc(h.g.n)+'<span class="cm-badge oth">붙여 넣은 이름: '+h.items.map(i=>cosmEsc(i.raw)).join(", ")+"</span></h4></div>").join("")
     +cosmPregSrcHtml()+"</div>";
 }
 // 입력 위에 항상 보이는 설명(접힘): 어떤 성분을 주의하라고 하는지 표로
@@ -4336,30 +4360,95 @@ function cosmPregInfoHtml(){
     +"<p>두 기관 모두 대부분의 화장품·피부 제품은 우려가 적다고 안내하고, 걱정되면 의료진과 상의하라고 해요. 위 표는 한국 식약처 자료와 두 기관 안내를 옮긴 것이고 맘케어의 판단이 아니에요.</p>"
     +cosmPregSrcHtml()+"</details>";
 }
+// ── 결과 목록: 붙여 넣은 순서(성분표는 많이 든 순서)대로 한 줄씩, 성분마다 상태 표시를 붙인다. 문제가 없다는 판정은 하지 않는다('목록에 없음'일 뿐).
+// check = 확인 필요(임신 중 주의 안내가 있는 성분군이거나 한국 사용금지 원료) / lim = 한국 사용한도 원료 / oth = 한국 목록엔 없고 다른 나라 목록에 있음 / ok = 두 목록에 없음 / none = 이름을 못 알아봄
+const COSM_LV={check:"확인 필요",lim:"사용한도 원료",oth:"다른 나라 목록",ok:"목록에 없음",none:"이름 못 알아봄"};
+const COSM_LV_FLT={check:"확인 필요",lim:"사용한도",oth:"다른 나라 목록",ok:"목록에 없음",none:"이름 못 알아봄"};
+const COSM_LV_KEYS=["check","lim","oth","ok","none"];
+function cosmLevel(it,pregOf){
+  if(pregOf.has(it)) return "check";
+  if(it.kind==="kr") return it.reg.some(e=>(e.k||[]).some(k=>k[0]==="금지"))?"check":"lim";
+  return {other:"oth",dict:"ok",grp:"check"}[it.kind]||"none";
+}
+function cosmKrType(it){const e=(it.reg||[]).find(x=>x.k); return e?e.k[0][0]:"";}
+function cosmBadge(it,lv){
+  if(lv==="lim") return COSM_TYPE_LABEL[cosmKrType(it)]||COSM_LV.lim;
+  return COSM_LV[lv];
+}
+// 이름 아래 한 줄: 왜 확인이 필요한지
+function cosmSub(it,lv,gi){
+  const p=[];
+  if(it.kind==="grp") p.push("성분표에 적히는 공식 이름이 아니에요");
+  if(gi>=0) p.push("임신 중 주의 안내: "+COSM_PREG[gi].n.split(" (")[0]);
+  if(it.kind==="kr"&&lv==="check") p.push("한국 "+(COSM_TYPE_LABEL[cosmKrType(it)]||"사용제한 원료"));
+  return p.join(" · ");
+}
+// 사용제한 원료 하나에 대한 설명 조각(제목 없이): 뜻, 식약처 이름·영문명, 한국 한도·단서(자료 그대로), 다른 나라
+function cosmRegBody(it,e,D){
+  let b="";
+  if(e.k) b+=e.k.map(k=>COSM_WHAT[k[0]]||"").filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).map(t=>'<p class="cm-what">'+cosmEsc(t)+"</p>").join("");
+  if(cosmKey(it.raw)!==cosmKey(e.n)) b+='<p class="cm-as">식약처 목록의 이름: '+cosmEsc(e.n)+"</p>";
+  if(e.e) b+='<p class="cm-as">영문명 '+cosmEsc(e.e)+"</p>";
+  if(e.k) b+=e.k.map(k=>(k[1]?'<p class="cm-cond"><b>한국 배합 한도·조건 (식약처 자료 그대로)</b>'+cosmEsc(k[1])+"</p>":"")+(k[2]?'<p class="cm-cond"><b>단서 (식약처 자료 그대로)</b>'+cosmEsc(k[2])+"</p>":"")).join("");
+  const o=cosmOthersText(e,D);
+  if(o) b+='<p class="cm-oth">'+(e.k?"다른 나라에서도 정해 둔 곳: ":"다른 나라 목록: ")+cosmEsc(o)+"</p>";
+  return b;
+}
+function cosmRowBody(it,D,gi){
+  let b="";
+  if(gi>=0){
+    const g=COSM_PREG[gi];
+    b+='<p class="cm-what"><b>임신 중 주의 안내가 있는 성분군: '+cosmEsc(g.n)+"</b></p>"+cosmPregLines(g);
+    if(it.kind==="grp") b+='<p class="cm-oth">'+cosmEsc("'"+it.raw+"'은 성분표에 적히는 공식 이름이 아니에요. 성분표에는 "+g.ex+"처럼 구체적인 이름으로 적혀 있어요. 포장의 성분표에서 그 이름을 찾아 넣어 보세요.")+"</p>";
+  }
+  if(it.kind==="kr") b+=it.reg.filter(e=>e.k).map(e=>cosmRegBody(it,e,D)).join("");
+  else if(it.kind==="other") b+='<p class="cm-what">한국 목록에는 없고 EU·캐나다 등 다른 나라의 사용제한 목록에 올라 있는 성분이에요. 나라마다 기준이 달라 한국 기준과는 별개예요.</p>'+it.reg.map(e=>cosmRegBody(it,e,D)).join("");
+  return b;
+}
+function cosmRowHtml(r,D,sug){
+  const it=r.it, lv=r.lv, sub=cosmSub(it,lv,r.gi);
+  const head='<span class="cm-no">'+r.no+'</span><span class="cm-nm">'+cosmEsc(it.raw)+(sub?"<small>"+cosmEsc(sub)+"</small>":"")+'</span><span class="cm-bdg lv-'+lv+'">'+cosmEsc(cosmBadge(it,lv))+"</span>";
+  const body=cosmRowBody(it,D,r.gi), open=lv==="check"?" open":"";
+  if(body) return '<li class="cm-row lv-'+lv+'" data-lv="'+lv+'"><details'+open+"><summary>"+head+'</summary><div class="cm-rb">'+body+"</div></details></li>";
+  if(lv==="none"){
+    const s=sug?sug(it.raw):[];
+    return '<li class="cm-row lv-none" data-lv="none"><div class="cm-rs">'+head+"</div>"
+      +'<div class="cm-rsug">'+(s.length?'<span class="cm-sg">혹시</span>'+s.map(n=>'<button type="button" class="cm-pick" data-f="'+cosmEsc(it.raw)+'" data-t="'+cosmEsc(n)+'">'+cosmEsc(n)+"</button>").join("")+'<span class="cm-sg">?</span>':'<span class="cm-sg">비슷한 공식 이름을 찾지 못했어요. 포장에 적힌 이름과 맞춰 보세요.</span>')+"</div></li>";
+  }
+  return '<li class="cm-row lv-'+lv+'" data-lv="'+lv+'"><div class="cm-rs">'+head+"</div></li>";
+}
+// 맨 위: 전체 개수·상태별 막대·거르기 버튼, 접어 둔 표시 설명
+function cosmSummaryHtml(rows,res,pregN){
+  const cnt={}; COSM_LV_KEYS.forEach(k=>{cnt[k]=rows.filter(r=>r.lv===k).length;});
+  const bar=COSM_LV_KEYS.filter(k=>cnt[k]).map(k=>'<span class="lv-'+k+'" style="flex:'+cnt[k]+'"></span>').join("");
+  const chips=[["all","전체",rows.length]].concat(COSM_LV_KEYS.filter(k=>cnt[k]).map(k=>[k,COSM_LV_FLT[k],cnt[k]]))
+    .map((c,i)=>'<button type="button" class="cm-flt'+(c[0]==="all"?"":" lv-"+c[0])+(i?"":" on")+'" data-lv="'+c[0]+'" aria-pressed="'+(i?"false":"true")+'">'+cosmEsc(c[1])+" <b>"+c[2]+"</b></button>").join("");
+  return '<div class="cm-sum2"><p class="cm-tot">전성분 <b>'+rows.length+"개</b></p>"
+    +'<div class="cm-bar" aria-hidden="true">'+bar+"</div>"
+    +'<div class="cm-flts">'+chips+"</div>"
+    +'<p class="cm-sub">임신 중 주의 안내가 있는 성분 '+pregN+"개(해외 보건기관 안내 기준, 한국 식약처 자료 함께 표시)"+(res.cut?"<br>성분이 너무 많아 앞의 "+COSM_MAX+"개만 확인했어요.":"")+"</p>"
+    +'<details class="cm-fold cm-legend"><summary>표시가 무슨 뜻인가요?</summary><div>'
+    +"<p><b>확인 필요</b>는 임신 중 주의 안내가 있는 성분군에 해당하거나, 한국에서 화장품에 쓸 수 없는 원료로 올라 있다는 뜻이에요. 쓰면 안 된다는 판정이 아니라, 한 번 확인해 보라는 표시예요.</p>"
+    +"<p><b>사용한도 원료</b>는 화장품에 넣을 수 있는 최대량이 법으로 정해진 성분이에요. 보존제·항산화제·자외선차단제처럼 흔한 성분이 많고, 한도 안에서 들어 있는 건 정상이에요. 이 목록에 있다고 쓰면 안 된다는 뜻이 아니고, 실제로 얼마나 들었는지는 성분표에 나오지 않아요. <b>사용금지 원료</b>는 화장품에 넣을 수 없는 성분인데 정상 제품에는 거의 없어요. 임신 여부와 관계없는 일반 기준이고, 임신 중 안전성을 판단한 것이 아니에요.</p>"
+    +"<p><b>다른 나라 목록</b>은 한국 목록에는 없고 EU·캐나다 등 다른 나라의 사용제한 목록에만 올라 있는 성분이에요. 나라마다 기준이 달라 한국 기준과는 별개고, 특정 제품군이나 용도에만 적용되는 한도도 많아서 흔한 성분도 여럿 나와요.</p>"
+    +"<p><b>목록에 없음</b>은 식약처 원료 이름 자료에서는 확인되지만 위 두 목록(한국 사용금지·사용한도, 다른 나라 사용제한)에서는 찾지 못했다는 뜻이에요. 문제가 없다는 판정은 아니에요.</p>"
+    +"<p><b>이름 못 알아봄</b>은 식약처 원료 이름 자료에서 찾지 못한 이름이에요. 오타나 표기 차이일 수 있어요.</p>"
+    +"</div></details></div>";
+}
 function cosmResultHtml(res,D,sug){
   const g=res.g;
   if(!res.n) return '<div class="cm-note"><p>성분 이름으로 읽히는 게 없어요. 쉼표나 줄바꿈으로 나뉜 전성분을 붙여 넣었는지 확인해 주세요.</p></div>';
-  let h='<div class="cm-sum"><b>붙여 넣은 성분 '+res.n+"개</b><br>"
-    +"식약처 목록에 있는 성분 "+g.kr.length+"개 · 한국 목록에는 없고 다른 나라 목록에 있는 성분 "+g.other.length+"개<br>"
-    +"목록에서 찾지 못한 성분 "+g.dict.length+"개 · 이름을 알아보지 못한 성분 "+g.none.length+"개"+(g.grp.length?" · 공식 이름이 아닌 것 "+g.grp.length+"개":"")+"<br>"
-    +"임신 중 주의 안내가 있는 성분 "+cosmPregHits(res).length+"개(해외 보건기관 안내 기준, 한국 식약처 자료 함께 표시)"
-    +(res.cut?"<br>성분이 너무 많아 앞의 "+COSM_MAX+"개만 확인했어요.":"")+"</div>";
+  const hits=cosmPregHits(res), pregOf=new Map();
+  hits.forEach(h=>h.items.forEach(i=>{if(!pregOf.has(i)) pregOf.set(i,COSM_PREG.indexOf(h.g));}));
+  const rows=res.items.map((it,i)=>({it,no:i+1,gi:pregOf.has(it)?pregOf.get(it):-1}));
+  rows.forEach(r=>{r.lv=cosmLevel(r.it,pregOf);});
+  let h=cosmSummaryHtml(rows,res,hits.length);
+  h+='<ol class="cm-list">'+rows.map(r=>cosmRowHtml(r,D,sug)).join("")+"</ol>";
   h+=cosmPregBlock(res);
-  if(g.kr.length) h+='<div class="cm-grp"><h3>식약처 사용금지·사용한도 목록에 있어요 ('+g.kr.length+')</h3>'
-    +"<p><b>사용한도 원료</b>는 화장품에 넣을 수 있는 최대량이 법으로 정해진 성분이에요. 보존제·항산화제·자외선차단제처럼 흔한 성분이 많고, 한도 안에서 들어 있는 건 정상이에요. 이 목록에 있다고 쓰면 안 된다는 뜻이 아니고, 실제로 얼마나 들었는지는 성분표에 나오지 않아요. <b>사용금지 원료</b>는 화장품에 넣을 수 없는 성분인데 정상 제품에는 거의 없어요. 임신 여부와 관계없는 일반 기준이고, 임신 중 안전성을 판단한 것이 아니에요.</p>"
-    +g.kr.map(it=>cosmCardHtml(it,D)).join("")+"</div>";
-  if(g.other.length) h+='<details class="cm-fold"><summary>한국 목록에는 없고 다른 나라 목록에 있는 성분 '+g.other.length+"개 보기</summary><div>"
-    +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">같은 자료에 함께 실린 EU·캐나다 등 다른 나라의 사용제한 목록에 오른 성분이에요. 나라마다 기준이 달라 한국 기준과는 별개고, 특정 제품군이나 용도에만 적용되는 한도도 많아서 흔한 성분도 여럿 나와요.</p>"
-    +g.other.map(it=>cosmCardHtml(it,D)).join("")+"</div></details>";
-  if(g.grp.length) h+='<div class="cm-grp"><h3>성분표에 적히는 공식 이름이 아니에요 ('+g.grp.length+")</h3>"
-    +"<p>계열 이름이거나 흔히 쓰는 이름이에요. 성분표에는 구체적인 성분 이름으로 적혀 있고, 식약처 원료 목록과는 그 이름으로 맞춰 볼 수 있어요. 임신 중 주의 안내가 있는 성분군은 위 블록에 함께 보여 드렸어요.</p>"
-    +g.grp.map(it=>'<div class="cm-item"><h4>'+cosmEsc(it.raw)+'<span class="cm-badge">'+cosmEsc(COSM_PREG[it.grp].n)+"</span></h4>"
-      +'<p class="cm-what">성분표에는 '+cosmEsc(COSM_PREG[it.grp].ex)+"처럼 구체적인 이름으로 적혀 있어요. 포장의 성분표에서 그 이름을 찾아 넣어 보세요.</p></div>").join("")+"</div>";  if(g.none.length) h+='<div class="cm-grp"><h3>이름을 알아보지 못했어요 ('+g.none.length+")</h3>"
-    +"<p>식약처 원료 이름 자료에서 찾지 못한 이름이에요. 오타나 표기 차이일 수 있고, 렌즈 같은 글자 인식으로 복사한 글자라면 틀리게 읽혔을 수도 있어요. 포장에 적힌 이름과 맞춰 보세요. 비슷한 공식 이름이 있으면 아래에 보여 드려요. 눌러서 바꾸기 전에 포장의 이름과 같은지 꼭 확인하세요. 이 성분들은 확인하지 못한 상태예요.</p>"
-    +cosmUnknownHtml(g.none,sug)+"</div>";
-  if(g.dict.length) h+='<details class="cm-fold"><summary>목록에서 찾지 못한 성분 '+g.dict.length+"개 보기</summary><div>"
-    +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">식약처 원료 이름 자료에서는 확인되지만, 위 두 목록(한국 사용금지·사용한도, 다른 나라 사용제한)에서는 찾지 못한 성분이에요.</p>"
-    +cosmChips(g.dict)+"</div></details>";
+  if(g.none.length) h+='<div class="cm-note"><p>이름을 알아보지 못한 성분이 있어요. 오타나 표기 차이일 수 있고, 렌즈 같은 글자 인식으로 복사한 글자라면 틀리게 읽혔을 수도 있어요. 포장에 적힌 이름과 맞춰 보세요. 비슷한 공식 이름이 있으면 \'혹시 ○○?\'로 보여 드려요. 눌러서 바꾸기 전에 포장의 이름과 같은지 꼭 확인하세요. 이 성분들은 확인하지 못한 상태예요.</p></div>';
+  if(res.junk.length) h+='<details class="cm-fold"><summary>성분 이름이 아닌 글자로 보여 뺀 것 '+res.junk.length+"개 보기</summary><div>"
+    +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">사용할 때의 주의사항 같은 문장 조각이 성분처럼 읽힌 것이라 목록에서 뺐어요. 성분이 맞다면 이름만 따로 적어서 다시 확인해 주세요.</p>"
+    +cosmChips(res.junk,"nm")+"</div></details>";
   h+='<div class="cm-note"><p>목록에 올라 있다고 해서 임신 중에 쓰면 안 된다는 뜻은 아니에요. 반대로 목록에서 찾지 못했다고 해서 문제가 없다는 뜻도 아니에요. 이름이 달라 못 찾았을 수 있고, 이 목록이 걱정되는 성분을 모두 담고 있지도 않아요.</p>'
     +"<p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>";
   return h;
@@ -4397,6 +4486,13 @@ function cosmResultHtml(res,D,sug){
     const from=b.dataset.f, to=b.dataset.t, toks=cosmTokens($("cmText").value).list.map(x=>x.raw), i=toks.indexOf(from);
     if(i<0) return;
     toks[i]=to; $("cmText").value=toks.join(", "); run();
+  });
+  // 위쪽 거르기 버튼: 전체 / 확인 필요 / 사용한도 … 중 고른 상태만 목록에 보인다
+  $("cmOut").addEventListener("click",e=>{
+    const f=e.target.closest(".cm-flt"); if(!f) return;
+    const lv=f.dataset.lv, o=$("cmOut");
+    o.querySelectorAll(".cm-flt").forEach(b=>{const on=b===f; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false");});
+    o.querySelectorAll(".cm-row").forEach(li=>{li.hidden=!(lv==="all"||li.dataset.lv===lv);});
   });
   $("cmRun").addEventListener("click",run);
   $("cmEx").addEventListener("click",()=>{$("cmText").value=COSM_EX; run(); state("예시예요. 실제 제품의 전성분이 아니에요.");});
@@ -5606,7 +5702,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="d61bae6c";
+var APP_BUILD="a90a9784";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
