@@ -4109,7 +4109,7 @@ function cosmCands(raw){
   const m=raw.match(/[\(\[（]([^\)\]）]+)[\)\]）]/); if(m) c.push(m[1]);
   return c;
 }
-// kind: kr = 한국 사용제한 목록에 있음 / other = 한국 목록엔 없고 다른 나라 목록에 있음 / dict = 원료 이름은 확인됐지만 두 목록에 없음 / none = 이름을 못 알아봄
+// kind: kr = 한국 사용제한 목록에 있음 / other = 한국 목록엔 없고 다른 나라 목록에 있음 / dict = 원료 이름은 확인됐지만 두 목록에 없음 / grp = 성분 하나의 이름이 아닌 계열·통용 이름(레티노이드 등) / none = 이름을 못 알아봄
 function cosmLookup(D,IX,raw){
   const cs=cosmCands(raw), keys=cs.map(cosmKey);
   for(const m of [IX.regP,IX.regS]){
@@ -4122,11 +4122,19 @@ function cosmLookup(D,IX,raw){
     const r=IX.ing.get(k);
     if(r) return {raw,kind:"dict",ing:r.map(i=>D.ing[i])};
   }
+  const gi=cosmPregAlias(raw);
+  if(gi>=0) return {raw,kind:"grp",grp:gi};
   return {raw,kind:"none"};
+}
+// 성분 하나의 공식 이름이 아닌 계열 이름·통용 이름(레티노이드, 비타민A, 살리실산 등)이면 해당 임신 안내 성분군의 번호를 준다(없으면 -1)
+function cosmPregAlias(raw){
+  const k=cosmKey(raw);
+  for(let i=0;i<COSM_PREG.length;i++) if((COSM_PREG[i].alias||[]).some(a=>cosmKey(a)===k)) return i;
+  return -1;
 }
 // 쉼표가 빠져 띄어쓰기로만 이어진 여러 성분(렌즈로 복사한 글자에서 흔하다)은, 그 안에서 아는 이름이 하나라도 있으면 낱말별로 나눠 따로 확인한다
 function cosmCheck(D,IX,text){
-  const tk=cosmTokens(cosmCutTail(text)), g={kr:[],other:[],dict:[],none:[]}, items=[], seen=new Set();
+  const tk=cosmTokens(cosmCutTail(text)), g={kr:[],other:[],dict:[],none:[],grp:[]}, items=[], seen=new Set();
   const push=raw=>{const k=cosmKey(raw); if(!k||k.length<2||seen.has(k)) return; seen.add(k); items.push(cosmLookup(D,IX,raw));};
   tk.list.forEach(t=>{
     if(!/\s/.test(t.raw)||cosmLookup(D,IX,t.raw).kind!=="none"){ push(t.raw); return; }
@@ -4240,18 +4248,18 @@ function cosmUnknownHtml(items,sug){
 // MotherToBaby(미국 OTIS, 2021-06-22): 레티노이드·고용량 살리실산·포름알데하이드·하이드로퀴논·화학적 자외선차단제는 "should be used with caution when pregnant and nursing".
 // MotherSafe(호주 NSW 왕립여성병원, 2021-04 갱신): 하이드로퀴논은 피하고, 처방 트레티노인·미녹시딜은 쓰지 않으며, 화장품 속 레티놀·살리실산·글라이콜산·벤조일퍼옥사이드·자외선차단제는 쓸 수 있다고 안내.
 const COSM_PREG=[
-  {n:"하이드로퀴논 (피부 미백 성분)",names:["하이드로퀴논"],
+  {n:"하이드로퀴논 (피부 미백 성분)",names:["하이드로퀴논"],alias:["히드로퀴논","하이드로퀴논류"],ex:"하이드로퀴논",
    kr:"한국에서는 임신 여부와 관계없이 화장품에 쓸 수 없는 원료예요(식약처 고시 '사용할 수 없는 원료' 목록의 히드로퀴논). 임신 중 사용을 따로 언급한 문구는 없어요.",
    mtb:"주의해서 사용해야 하는 성분으로 꼽았어요.",ms:"피부로 많이 흡수되기 때문에 임신 중에는 피하라고 했어요."},
-  {n:"레티노이드 (비타민 A 계열: 레티놀, 레티닐팔미테이트 등)",kr:"화장품에 쓰이는 레티놀·레티닐팔미테이트는 식약처 DUR 임부금기 목록에 없어요. 같은 계열의 의약품인 트레티노인·이소트레티노인·아시트레틴·아다팔렌은 이 목록에 올라 있어요(입력칸 위 설명의 ② 참고). 의약품 성분과 화장품 성분은 서로 다른 물질이라, 이 목록이 화장품 속 레티놀을 금지한다는 뜻은 아니에요.",names:["레티놀","레티닐팔미테이트","레티닐아세테이트","레티닐프로피오네이트","레티닐리놀리에이트","레티날","레틴알","레티노익애씨드","트라이테노인","트레티노인","아다팔렌","하이드록시피나콜론레티노에이트"],
+  {n:"레티노이드 (비타민 A 계열: 레티놀, 레티닐팔미테이트 등)",alias:["레티노이드","레티노이드류","레티노이드계열","레티놀계열","레티놀류","비타민A","비타민에이","비타민A유도체","비타민A계열"],ex:"레티놀, 레티닐팔미테이트, 레티날",kr:"화장품에 쓰이는 레티놀·레티닐팔미테이트는 식약처 DUR 임부금기 목록에 없어요. 같은 계열의 의약품인 트레티노인·이소트레티노인·아시트레틴·아다팔렌은 이 목록에 올라 있어요(입력칸 위 설명의 ② 참고). 의약품 성분과 화장품 성분은 서로 다른 물질이라, 이 목록이 화장품 속 레티놀을 금지한다는 뜻은 아니에요.",names:["레티놀","레티닐팔미테이트","레티닐아세테이트","레티닐프로피오네이트","레티닐리놀리에이트","레티날","레틴알","레티노익애씨드","트라이테노인","트레티노인","아다팔렌","하이드록시피나콜론레티노에이트"],
    mtb:"주의해서 사용해야 하는 성분으로 꼽았어요.",ms:"처방이 필요한 트레티노인은 쓰지 말라고 했어요. 화장품에 든 비타민 A(레티놀)는 양이 아주 적고 피부로 흡수도 적어서 일반 제품은 쓸 수 있다고 했어요."},
-  {n:"살리실릭애씨드",names:["살리실릭애씨드"],
+  {n:"살리실릭애씨드",names:["살리실릭애씨드"],alias:["살리실산","살리실릭산"],ex:"살리실릭애씨드",   // BHA 는 성분표에서 부틸레이티드하이드록시아니솔을 뜻하는 경우가 많아 별칭으로 넣지 않는다
    kr:"한국 고시는 살리실릭애씨드를 넣은 제품(샴푸처럼 바로 씻어내는 제품은 제외)에 '3세 이하 영유아에게는 사용하지 말 것'을 적게 해요. 임신에 관한 문구는 없고, DUR 임부금기 목록에서도 찾지 못했어요.",
    mtb:"고용량일 때 주의해서 사용해야 한다고 했어요.",ms:"안내대로 쓰면 임신 중에도 쓸 수 있다고 했어요. 다만 흡수가 많아지는 경우에는 의료진에게 확인하라고 했어요."},
-  {n:"포름알데하이드 (화장품 방부제로도 쓰여요)",names:["포름알데하이드","폼알데하이드","포름알데히드"],
+  {n:"포름알데하이드 (화장품 방부제로도 쓰여요)",names:["포름알데하이드","폼알데하이드","포름알데히드"],alias:["포르말린","포름알데하이드류"],ex:"포름알데하이드",
    kr:"한국 고시는 포름알데하이드가 0.05% 이상 검출된 제품에 '포름알데하이드 성분에 과민한 사람은 신중히 사용할 것'을 적게 해요. 임신에 관한 문구는 없어요.",
    mtb:"주의해서 사용해야 하는 성분으로 꼽았어요.",ms:""},
-  {n:"화학적 자외선차단 성분 (벤조페논-3, 옥토크릴렌 등)",kr:"한국 고시는 벤조페논-3(옥시벤존)을 2.4% 넘게 넣은 제품에 '용법·용량에 따른 부위에만 사용하고 전신에 사용하지 말 것'을 적게 해요(2026년 9월 2일부터 적용). 임신에 관한 문구는 없어요.",names:["벤조페논-3","옥토크릴렌","에칠헥실살리실레이트","에칠헥실메톡시신나메이트","부틸메톡시디벤조일메탄","호모살레이트","에칠헥실트리아존","4-메칠벤질리덴캠퍼","디에칠아미노하이드록시벤조일헥실벤조에이트"],
+  {n:"화학적 자외선차단 성분 (벤조페논-3, 옥토크릴렌 등)",alias:["화학적자외선차단제","화학적자외선차단성분","화학적자외선차단","유기자외선차단제","유기자외선차단성분","유기자차","옥시벤존"],ex:"벤조페논-3, 옥토크릴렌, 에칠헥실메톡시신나메이트",kr:"한국 고시는 벤조페논-3(옥시벤존)을 2.4% 넘게 넣은 제품에 '용법·용량에 따른 부위에만 사용하고 전신에 사용하지 말 것'을 적게 해요(2026년 9월 2일부터 적용). 임신에 관한 문구는 없어요.",names:["벤조페논-3","옥토크릴렌","에칠헥실살리실레이트","에칠헥실메톡시신나메이트","부틸메톡시디벤조일메탄","호모살레이트","에칠헥실트리아존","4-메칠벤질리덴캠퍼","디에칠아미노하이드록시벤조일헥실벤조에이트"],
    mtb:"화학적 자외선차단제는 주의해서 사용해야 한다고 했어요.",ms:"옥시벤존·옥토크릴렌·옥티살레이트 같은 성분도 피부로 흡수가 적어 임신·수유 중 위험이 없다고 하고, 임신 중에도 자외선 차단은 필요하다고 했어요."}
 ];
 // 한국 식약처 자료(2026-11-03 원문 대조, verify_kr_preg.py). 따옴표 안은 고시·DUR 원문 그대로다.
@@ -4276,7 +4284,7 @@ const COSM_PREG_SRC=[
 function cosmPregHits(res){
   const hits=[];
   COSM_PREG.forEach(g=>{
-    const keys=g.names.map(cosmKey), found=[];
+    const keys=g.names.concat(g.alias||[]).map(cosmKey), found=[];
     res.items.forEach(it=>{
       const nm=[it.raw].concat((it.reg||[]).map(e=>e.n)).concat((it.ing||[]).map(r=>r[0]));
       if(nm.some(x=>keys.indexOf(cosmKey(x))>=0)) found.push(it);
@@ -4333,7 +4341,7 @@ function cosmResultHtml(res,D,sug){
   if(!res.n) return '<div class="cm-note"><p>성분 이름으로 읽히는 게 없어요. 쉼표나 줄바꿈으로 나뉜 전성분을 붙여 넣었는지 확인해 주세요.</p></div>';
   let h='<div class="cm-sum"><b>붙여 넣은 성분 '+res.n+"개</b><br>"
     +"식약처 목록에 있는 성분 "+g.kr.length+"개 · 한국 목록에는 없고 다른 나라 목록에 있는 성분 "+g.other.length+"개<br>"
-    +"목록에서 찾지 못한 성분 "+g.dict.length+"개 · 이름을 알아보지 못한 성분 "+g.none.length+"개<br>"
+    +"목록에서 찾지 못한 성분 "+g.dict.length+"개 · 이름을 알아보지 못한 성분 "+g.none.length+"개"+(g.grp.length?" · 공식 이름이 아닌 것 "+g.grp.length+"개":"")+"<br>"
     +"임신 중 주의 안내가 있는 성분 "+cosmPregHits(res).length+"개(해외 보건기관 안내 기준, 한국 식약처 자료 함께 표시)"
     +(res.cut?"<br>성분이 너무 많아 앞의 "+COSM_MAX+"개만 확인했어요.":"")+"</div>";
   h+=cosmPregBlock(res);
@@ -4343,7 +4351,10 @@ function cosmResultHtml(res,D,sug){
   if(g.other.length) h+='<details class="cm-fold"><summary>한국 목록에는 없고 다른 나라 목록에 있는 성분 '+g.other.length+"개 보기</summary><div>"
     +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">같은 자료에 함께 실린 EU·캐나다 등 다른 나라의 사용제한 목록에 오른 성분이에요. 나라마다 기준이 달라 한국 기준과는 별개고, 특정 제품군이나 용도에만 적용되는 한도도 많아서 흔한 성분도 여럿 나와요.</p>"
     +g.other.map(it=>cosmCardHtml(it,D)).join("")+"</div></details>";
-  if(g.none.length) h+='<div class="cm-grp"><h3>이름을 알아보지 못했어요 ('+g.none.length+")</h3>"
+  if(g.grp.length) h+='<div class="cm-grp"><h3>성분표에 적히는 공식 이름이 아니에요 ('+g.grp.length+")</h3>"
+    +"<p>계열 이름이거나 흔히 쓰는 이름이에요. 성분표에는 구체적인 성분 이름으로 적혀 있고, 식약처 원료 목록과는 그 이름으로 맞춰 볼 수 있어요. 임신 중 주의 안내가 있는 성분군은 위 블록에 함께 보여 드렸어요.</p>"
+    +g.grp.map(it=>'<div class="cm-item"><h4>'+cosmEsc(it.raw)+'<span class="cm-badge">'+cosmEsc(COSM_PREG[it.grp].n)+"</span></h4>"
+      +'<p class="cm-what">성분표에는 '+cosmEsc(COSM_PREG[it.grp].ex)+"처럼 구체적인 이름으로 적혀 있어요. 포장의 성분표에서 그 이름을 찾아 넣어 보세요.</p></div>").join("")+"</div>";  if(g.none.length) h+='<div class="cm-grp"><h3>이름을 알아보지 못했어요 ('+g.none.length+")</h3>"
     +"<p>식약처 원료 이름 자료에서 찾지 못한 이름이에요. 오타나 표기 차이일 수 있고, 렌즈 같은 글자 인식으로 복사한 글자라면 틀리게 읽혔을 수도 있어요. 포장에 적힌 이름과 맞춰 보세요. 비슷한 공식 이름이 있으면 아래에 보여 드려요. 눌러서 바꾸기 전에 포장의 이름과 같은지 꼭 확인하세요. 이 성분들은 확인하지 못한 상태예요.</p>"
     +cosmUnknownHtml(g.none,sug)+"</div>";
   if(g.dict.length) h+='<details class="cm-fold"><summary>목록에서 찾지 못한 성분 '+g.dict.length+"개 보기</summary><div>"
@@ -5595,7 +5606,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="c758f9f8";
+var APP_BUILD="d61bae6c";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
