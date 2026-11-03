@@ -1152,6 +1152,11 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cosm .cm-key p{margin:0 0 6px;font-size:14px;line-height:1.7}
 #tab-cosm .cm-key p:last-child{margin:0}
 #tab-cosm .cm-key b{font-size:15.5px;line-height:1.65}
+/* 약 사유: 사유별로 줄 나누기 */
+#tab-cosm .cm-ln{display:block}
+#tab-cosm .cm-ln+.cm-ln{margin-top:4px}
+#tab-cosm .cm-ln.cm-rt{margin-top:8px;font-weight:700;color:var(--ink-2)}
+#tab-cosm .cm-ln.cm-rt:first-child{margin-top:0}
 /*COSM:CSS:END*/
 
 </style>
@@ -4650,13 +4655,25 @@ function cosmDrugSearch(Dd,IX,q){
   res.nItem=hitIng.reduce((n,g)=>n+(IX.byIng.get(g)||[]).length,0)+res.nameHits.reduce((n,h)=>n+h.items.length,0);
   return res;
 }
+/* 식약처 사유 문구를 사유별로 줄을 나눈다(글자는 그대로, 줄바꿈만 넣는다): 투여 경로 표시 '(경구, 주사)'·'(외용)' 은 따로 한 줄, '- ' 로 이어 붙은 사유와 마침표로 이어 붙은 문장은 한 줄씩 */
+const COSM_RT="\\((?:(?:경구|주사|외용|국소|흡입|점안|점비|비강|질내|질정|직장|구강|설하|경피|피부|전신|내복|정맥|근육|피하)[,·/ ]*)+\\)";
+function cosmDrugLines(t){
+  let s=String(t==null?"":t).replace(/\s+/g," ").trim();
+  s=s.replace(/^-\s*/,"").replace(/([.)])\s*-\s*(?=[가-힣A-Za-z(])/g,"$1\n");
+  s=s.replace(new RegExp(COSM_RT,"g"),"\n$&\n").replace(/\.\s*(?=[가-힣A-Za-z(])/g,".\n");
+  return s.split("\n").map(x=>x.trim()).filter(x=>x&&x!=="-");
+}
+function cosmDrugTextHtml(t){
+  const rt=new RegExp("^"+COSM_RT+"$");
+  return cosmDrugLines(t).map(x=>'<span class="cm-ln'+(rt.test(x)?" cm-rt":"")+'">'+cosmEsc(x)+"</span>").join("");
+}
 function cosmDrugReasonHtml(Dd,idxs){
   const seen=new Map(); idxs.forEach(i=>{const r=Dd.items[i][5]; seen.set(r,(seen.get(r)||0)+1);});
   const rows=[...seen.entries()].sort((a,b)=>b[1]-a[1]);
   const show=rows.slice(0,3).map(e=>{
     const r=Dd.rs[e[0]];
-    return '<p class="cm-cond"><b>식약처 목록의 사유 (자료 그대로)</b>'+cosmEsc(r[0]||"사유가 적혀 있지 않아요(식약처 자료에 사유가 비어 있어요).")+"</p>"
-      +(r[1]?'<p class="cm-cond"><b>비고 (자료 그대로)</b>'+cosmEsc(r[1])+"</p>":"");
+    return '<p class="cm-cond"><b>식약처 목록의 사유 (자료 그대로, 줄바꿈만 정리)</b>'+(r[0]?cosmDrugTextHtml(r[0]):cosmEsc("사유가 적혀 있지 않아요(식약처 자료에 사유가 비어 있어요)."))+"</p>"
+      +(r[1]?'<p class="cm-cond"><b>비고 (자료 그대로, 줄바꿈만 정리)</b>'+cosmDrugTextHtml(r[1])+"</p>":"");
   }).join("");
   return show+(rows.length>3?'<p class="cm-sub">같은 성분의 사유 표기가 '+(rows.length-3)+"가지 더 있어요. 제품 이름으로 찾으면 그 제품의 사유가 나와요.</p>":"");
 }
@@ -5981,7 +5998,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="c74385df";
+var APP_BUILD="0d12dc7b";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
