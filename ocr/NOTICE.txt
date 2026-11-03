@@ -1,7 +1,0 @@
-이 폴더의 글자 읽기(OCR) 파일은 모두 Apache License 2.0 으로 배포된 오픈소스입니다. 사진은 이 기기 안에서만 처리되고 서버로 보내지지 않습니다.
-
-- tesseract.min.js, worker.min.js : tesseract.js 7.0.0 (https://github.com/naptha/tesseract.js) Apache-2.0
-- tesseract-core-*-lstm.wasm.js : tesseract.js-core (Tesseract OCR 엔진 WebAssembly 빌드) Apache-2.0
-- kor.traineddata.gz : Tesseract 한글 학습 데이터(@tesseract.js-data/kor, 4.0.0_best_int) Apache-2.0
-
-License text: https://www.apache.org/licenses/LICENSE-2.0
