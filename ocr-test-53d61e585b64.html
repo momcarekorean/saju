@@ -4137,9 +4137,15 @@ function cosmLookup(D,IX,raw){
   }
   return {raw,kind:"none"};
 }
+// 쉼표가 빠져 띄어쓰기로만 이어진 여러 성분(렌즈·사진 글자에서 흔하다)은, 그 안에서 아는 이름이 하나라도 있으면 낱말별로 나눠 따로 확인한다
 function cosmCheck(D,IX,text){
-  const tk=cosmTokens(text), g={kr:[],other:[],dict:[],none:[]};
-  const items=tk.list.map(t=>cosmLookup(D,IX,t.raw));
+  const tk=cosmTokens(cosmCutTail(text)), g={kr:[],other:[],dict:[],none:[]}, items=[], seen=new Set();
+  const push=raw=>{const k=cosmKey(raw); if(!k||k.length<2||seen.has(k)) return; seen.add(k); items.push(cosmLookup(D,IX,raw));};
+  tk.list.forEach(t=>{
+    if(!/\s/.test(t.raw)||cosmLookup(D,IX,t.raw).kind!=="none"){ push(t.raw); return; }
+    const parts=t.raw.split(/\s+/).filter(p=>cosmKey(p).length>=2);
+    if(parts.length>=2&&parts.some(p=>cosmLookup(D,IX,p).kind!=="none")) parts.forEach(push); else push(t.raw);
+  });
   items.forEach(it=>g[it.kind].push(it));
   return {items,g,n:items.length,cut:tk.cut};
 }
@@ -4173,17 +4179,24 @@ function cosmChips(items,cls){return '<div class="cm-chips'+(cls?" "+cls:"")+'">
 // 사진에서 읽은 글자 중 전성분 부분만 잘라 낸다: '전성분·주요성분' 글자나 '정제수,' 가 나오는 줄부터, 주의사항·제조업자 같은 줄 앞까지.
 // 줄바꿈으로 갈라진 긴 이름이 두 성분으로 쪼개지지 않게 줄은 공백으로 이어 붙인다(구분은 쉼표만 본다).
 const COSM_STOP=/사용할\s*때의|주의\s*사항|사용상|보관|제조\s*번호|제조업자|책임\s*판매|사용\s*방법|품질\s*보증|^\s*[1-9]\s*[.)]/;
+// 줄바꿈 없이 한 줄로 복사돼도 '[사용할 때의 주의사항]' 같은 표지부터는 전성분이 아니므로 잘라 낸다
+const COSM_TAIL=/\[?\s*사용할\s*때의\s*주의\s*사항|\[\s*주의\s*사항\s*\]|사용상의?\s*주의\s*사항|\[?\s*제조번호|화장품\s*제조업자|화장품\s*책임\s*판매업자|소비자\s*상담실|고객\s*만족\s*센터/;
+function cosmCutTail(text){
+  const s=String(text==null?"":text), m=COSM_TAIL.exec(s);
+  return m&&m.index>0?s.slice(0,m.index):s;
+}
 function cosmRegion(text){
-  const lines=String(text==null?"":text).replace(/\r/g,"").split("\n");
+  const src=String(text==null?"":text).replace(/\r/g,"");
+  const lines=src.split("\n");
   const s=lines.findIndex(l=>/전\s*성\s*분|주요\s*성분/.test(l)||/(정제수|\bwater|\baqua)\s*[,，.]/i.test(l));
-  if(s<0) return "";
+  if(s<0){ const c=cosmCutTail(src); return c.length<src.length?c.replace(/\s+/g," ").trim():""; }   // 시작 표지가 없어도(목록 중간부터 복사) 꼬리 표지가 있으면 그 앞까지
   const out=[];
   for(let i=s;i<lines.length;i++){
     const l=lines[i];
     if(i>s&&COSM_STOP.test(l)) break;
     out.push(l.replace(/^.*?(?:전\s*성\s*분|주요\s*성분(?:\s*\(\s*전\s*성\s*분\s*\))?)\s*[\]］】)]?\s*[:：]?\s*/,""));   // [전성분] 처럼 대괄호로 싼 표기도
   }
-  return out.join(" ").replace(/\s+/g," ").trim();
+  return cosmCutTail(out.join(" ")).replace(/\s+/g," ").trim();
 }
 // 사진 글자는 한두 글자씩 틀려 읽히므로, 이름을 못 알아본 성분에는 비슷한 공식 이름을 제안만 한다(자동으로 고치지 않는다)
 function cosmLev(a,b,max){
@@ -4205,17 +4218,22 @@ function cosmSuggestIndex(D){
   const put=name=>{
     const k=cosmKey(name);
     if(!name||name.length>30||k.length<4||!/[가-힣]/.test(k)||seen.has(k)) return;
-    seen.add(k); const a=byLen.get(k.length); if(a) a.push([k,name]); else byLen.set(k.length,[[k,name]]);
+    seen.add(k); const a=byLen.get(k.length), e=[k,name,k.normalize("NFD"),String(name).toLowerCase().replace(/[^0-9a-z가-힣]/g,"")]; if(a) a.push(e); else byLen.set(k.length,[e]);
   };
   D.ing.forEach(r=>put(r[0])); D.reg.forEach(r=>put(r.n));
   return byLen;
 }
+// 편집거리는 글자(초성·중성·종성) 단위로 센다: 릴→틸, 을→올 처럼 한 글자 안의 자음·모음 하나 차이는 가깝게 본다
 function cosmSuggest(S,raw,limit){
   const k=cosmKey(raw);
   if(k.length<4||!/[가-힣]/.test(k)) return [];
-  const max=k.length>=7?2:1, found=[];   // 두 글자까지 틀려 읽히는 일이 흔해서 7글자부터 2글자 차이까지 본다(제안만 하므로 사용자가 확인)
-  for(let L=k.length-max;L<=k.length+max;L++){
-    for(const e of (S.get(L)||[])){const d=cosmLev(k,e[0],max); if(d>0&&d<=max) found.push([d,e[1],e[0]]);}
+  const n=k.length, max=n>=7?3:(n>=5?2:1), kj=k.normalize("NFD"), kr=String(raw).toLowerCase().replace(/[^0-9a-z가-힣]/g,""), found=[];
+  for(let L=n-2;L<=n+3;L++){
+    for(const e of (S.get(L)||[])){
+      if(e[3].length>kr.length&&e[3].length-kr.length<=3&&e[3].indexOf(kr)===0){found.push([1,e[1],e[0]]); continue;}   // 줄 끝에서 끊긴 이름(부틸렌글라이 → 부틸렌글라이콜)
+      if(L>n+2) continue;
+      const d=cosmLev(kj,e[2],max); if(d>0&&d<=max) found.push([d,e[1],e[0]]);
+    }
   }
   found.sort((x,y)=>x[0]-y[0]||(x[2][0]===k[0]?0:1)-(y[2][0]===k[0]?0:1)||x[1].length-y[1].length);
   return found.slice(0,limit||3).map(x=>x[1]);
@@ -5546,7 +5564,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="6cadd8a6";
+var APP_BUILD="5510a6de";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
