@@ -4634,8 +4634,7 @@ function cosmProdBtnsHtml(list){
   return list.map(p=>'<button type="button" class="cm-prod" data-id="'+cosmEsc(p.id)+'"><b>'+cosmEsc(p.brand+" "+p.name)+"</b><small>"+cosmEsc(p.target)+" · 전성분 "+cosmProdCount(p)+"개 · 확인 "+cosmEsc(p.verified)+"</small></button>").join("");
 }
 function cosmProdNoteText(p){
-  const c=String(p.source).slice(-1).charCodeAt(0), eul=(c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?"을":"를";   // 받침 있으면 '을'
-  return "맘케어가 "+p.verified+"에 "+p.source+eul+" 직접 읽고 확인한 성분표예요. 제품이 리뉴얼되면 성분이 달라질 수 있으니 받으신 포장의 성분표와 맞춰 보세요."+(p.note?" "+p.note:"");
+  return p.note||"";   // 확인 출처·날짜는 products.json 에만 두고 화면에는 제품 메모가 있을 때만 보여 준다(2026-11-03 사용자 지시로 출처·리뉴얼 문구 삭제)
 }
 /* 약 이름·성분 조회: 식약처 DUR 임부금기 품목정보(dur.json). 목록에 올라 있는지만 찾아 공식 사유를 그대로 보여 주고, 판단은 하지 않는다. */
 function cosmDrugKey(s){return String(s==null?"":s).normalize("NFKC").toLowerCase().replace(/[^0-9a-z가-힣]/g,"");}
@@ -6003,7 +6002,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="83cf6d29";
+var APP_BUILD="a6b7f810";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
