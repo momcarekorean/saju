@@ -1767,7 +1767,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <p class="cm-call"><b>임신 중에 써도 되는지 판단하는 화면이 아니에요.</b> 공식 목록에 올라 있는지 찾아서 보여 줄 뿐, 제품을 권하거나 말리지 않아요. 사용 여부는 담당 의사·약사와 상의하세요. 전문의의 판단이 항상 최우선이에요. 붙여 넣은 내용은 서버로 보내지 않고 이 기기에서만 처리해요.</p>
 <div class="cm-card cm-step">
   <h3>1. 제품의 전성분 확인하기</h3>
-  <p>모바일 환경의 화해에서 제품의 전성분을 조회할 수 있어요. 포장 뒷면의 전성분을 사진으로 찍어 올리거나 그대로 옮겨 적어도 돼요.</p>
+  <p>올리브영 상품 상세의 '상품정보 제공고시'에 있는 '화장품법에 따라 기재해야 하는 모든 성분'을 복사해서 아래 칸에 붙여 넣으면 돼요. 모바일 환경의 화해에서도 제품의 전성분을 조회할 수 있어요. 판매가 끝난 제품은 상세 페이지가 없으니 포장 뒷면의 전성분을 사진으로 찍어 올리거나 그대로 옮겨 적어 주세요.</p>
 </div>
 <div class="cm-card cm-step">
   <h3>2. 전성분 입력하기</h3>
@@ -4060,7 +4060,9 @@ function cosmKey(s){
 }
 // 붙여 넣은 전성분을 성분 하나씩으로 나눈다. 1,2-헥산다이올처럼 숫자 사이 쉼표는 이름의 일부다.
 function cosmTokens(text){
-  let t=String(text==null?"":text).replace(/\r/g,"\n").replace(/(\d),(?=\d)/g,"$1\u0001");
+  let t=String(text==null?"":text).replace(/\r/g,"\n")
+    .replace(/화장품법에\s*따라\s*기재(?:\s*[,，·]\s*표시)?\s*(?:하여야|해야)\s*하는\s*모든\s*성분\s*[:：]?/g,"\n")   // 올리브영·쿠팡 상품정보 표를 항목 이름째 복사했을 때의 머리글
+    .replace(/(\d),(?=\d)/g,"$1\u0001");
   let parts=t.split(/[,，、;；\n]+/);
   if(parts.length<3&&t.indexOf("/")>=0) parts=t.split(/[\/\n]+/);   // 쉼표 없이 / 로만 나눈 목록
   const out=[], seen=new Set(); let cut=false;
@@ -5511,7 +5513,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="2ff880b9";
+var APP_BUILD="d00610f0";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
