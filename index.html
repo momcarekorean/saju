@@ -1138,6 +1138,19 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cosm .cm-prod:hover{border-color:var(--seal);background:var(--paper-2)}
 #tab-cosm .cm-prod b{display:block;font-size:14.5px;line-height:1.5}
 #tab-cosm .cm-prod small{display:block;margin-top:2px;font-size:12.5px;color:var(--ink-3)}
+/* 제품군별 접이식 목록 */
+#tab-cosm .cm-cats{display:grid;gap:8px;margin:12px 0 0}
+#tab-cosm .cm-cats[hidden],#tab-cosm .cm-prods[hidden]{display:none}
+#tab-cosm .cm-cat{border:1px solid var(--rule);border-radius:3px;background:var(--card)}
+#tab-cosm .cm-cat>summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;cursor:pointer;list-style:none;font-size:15px;font-weight:700;color:var(--ink)}
+#tab-cosm .cm-cat>summary::-webkit-details-marker{display:none}
+#tab-cosm .cm-cat>summary small{font-size:12.5px;font-weight:400;color:var(--ink-3)}
+#tab-cosm .cm-cat>summary::after{content:"\25BE";margin-left:auto;color:var(--ink-3)}
+#tab-cosm .cm-cat[open]>summary::after{content:"\25B4"}
+#tab-cosm .cm-cat[open]>summary{border-bottom:1px solid var(--rule)}
+#tab-cosm .cm-catbody{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;padding:10px}
+#tab-cosm .cm-ini{grid-column:1/-1;margin:6px 2px 0;font-size:13px;font-weight:700;color:var(--seal)}
+#tab-cosm .cm-ini:first-child{margin-top:0}
 /* 화장품·약 고르기, 약 조회 결과 */
 #tab-cosm .cm-modes{display:flex;gap:8px;margin:0 0 14px}
 #tab-cosm .cm-mode{margin:0;width:auto;flex:1;letter-spacing:normal;font-family:inherit;font-weight:700;transition:none;appearance:none;min-height:44px;padding:0 12px;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink-2);font-size:14.5px;cursor:pointer}
@@ -1893,7 +1906,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <div id="cmPregInfo"></div>
 <div class="cm-card cm-step" id="cmProdCard">
   <h3>제품 이름으로 찾기 <span class="cm-wip">자료 쌓는 중</span></h3>
-  <p><b>지금은 제품 이름으로 찾기가 어려워요.</b> 식약처에는 화장품 제품별 전성분 공개 자료가 없어서, 맘케어가 제품 상세를 하나씩 직접 확인해 자료를 쌓고 있어요. 아직 등록된 제품이 적어서 대부분의 제품은 이름으로 찾을 수 없어요. 그럴 때는 아래 '전성분 넣기'에서 확인해 주세요. <span id="cmProdCount"></span></p>
+  <p><b>지금은 제품 이름으로 찾기가 어려워요.</b> 식약처에는 화장품 제품별 전성분 공개 자료가 없어서, 맘케어가 제품 상세를 하나씩 직접 확인해 자료를 쌓고 있어요. 등록된 제품은 일부라서 이름으로 찾을 수 없는 제품이 더 많아요. 그럴 때는 아래 '전성분 넣기'에서 확인해 주세요. <span id="cmProdCount"></span></p>
   <div class="cm-rep">
     <p><b>제보로 함께 채워 주세요.</b> 찾는 제품이 없거나 등록된 성분이 포장과 다르면 알려 주세요. 지금은 팔지 않는 제품이어도 괜찮아요. 제보는 맘케어가 확인한 뒤에만 사이트에 반영해요.</p>
     <p class="cm-sub">버튼을 누르면 구글 폼이 새 창으로 열려요. 폼에 적어서 제출한 내용만 맘케어로 전달되고, 이름, 연락처, 이메일은 받지 않아요. 이 화면에 붙여 넣은 성분표는 보내지 않아요.</p>
@@ -1902,8 +1915,9 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <div id="cmProdBox" hidden>
     <label for="cmProdQ">등록된 제품 이름이나 브랜드</label>
     <input type="search" id="cmProdQ" class="cm-q" placeholder="예: 세타필, 일리윤, 선크림" autocomplete="off" spellcheck="false">
-    <p class="cm-sub">맘케어가 직접 확인해 둔 제품은 이름을 찾아 누르면 전성분이 바로 들어가요.</p>
-    <div id="cmProdList" class="cm-prods"></div>
+    <p class="cm-sub">맘케어가 직접 확인해 둔 제품은 이름을 찾아 누르면 전성분이 바로 들어가요. 제품군을 누르면 제품 이름이 가나다 순으로 펼쳐져요.</p>
+    <div id="cmProdCats" class="cm-cats"></div>
+    <div id="cmProdList" class="cm-prods" hidden></div>
   </div>
 </div>
 <div class="cm-card cm-step">
@@ -4634,14 +4648,43 @@ function cosmResultHtml(res,D,sug){
   return h;
 }
 /* 등록된 제품(products.json): 맘케어가 직접 확인해 둔 제품의 전성분. 이름을 찾아 누르면 전성분이 바로 입력된다(다른 사이트에서 긁어 온 자료가 아니다). */
+function cosmProdTitle(p){return String(p.name).indexOf(p.brand)===0?String(p.name):p.brand+" "+p.name;}   // 이름이 브랜드로 시작하면(로레알파리 …) 브랜드를 또 붙이지 않는다
+/* 가나다 순: 한글 → 영문 → 숫자·기타. 완성형 한글은 코드 순서가 곧 가나다 순이라 글자 그대로 견주면 된다. */
+function cosmKoKey(s){
+  const t=String(s==null?"":s).normalize("NFC").trim().toLowerCase(), c=t.charCodeAt(0)||0;
+  return (c>=0xAC00&&c<=0xD7A3?"0":(c>=97&&c<=122?"1":"2"))+t;
+}
+function cosmKoCmp(a,b){const x=cosmKoKey(a), y=cosmKoKey(b); return x<y?-1:(x>y?1:0);}
+const COSM_CHO="ㄱㄱㄴㄷㄷㄹㅁㅂㅂㅅㅅㅇㅈㅈㅊㅋㅌㅍㅎ";   // 초성 19개(ㄲ·ㄸ·ㅃ·ㅆ·ㅉ 은 짝 자음과 같은 칸)
+function cosmInitial(s){
+  const c=String(s==null?"":s).normalize("NFC").trim().charCodeAt(0)||0;
+  if(c>=0xAC00&&c<=0xD7A3) return COSM_CHO.charAt(Math.floor((c-0xAC00)/588));
+  const l=String.fromCharCode(c).toLowerCase(); return (l>="a"&&l<="z")?"ABC":"기타";
+}
+const COSM_CATS=["스킨케어","마스크팩","클렌징","선케어","메이크업","네일","헤어케어","바디케어","향수·디퓨저","더모 코스메틱","럭스에딧"];
 function cosmProdSearch(P,q,limit){
   const toks=String(q||"").split(/\s+/).map(cosmKey).filter(Boolean), items=(P&&P.items)||[];
-  const hit=toks.length?items.filter(p=>{const k=cosmKey([p.brand,p.name,p.kind,p.target].join(" ")); return toks.every(t=>k.indexOf(t)>=0);}):items;
+  const hit=toks.length?items.filter(p=>{const k=cosmKey([p.brand,p.name,p.kind,p.cat,p.target].join(" ")); return toks.every(t=>k.indexOf(t)>=0);}).sort((a,b)=>cosmKoCmp(cosmProdTitle(a),cosmProdTitle(b))):items;
   return hit.slice(0,limit||8);
 }
-function cosmProdCount(p){return cosmTokens(p.ingredients).list.length;}
-function cosmProdBtnsHtml(list){
-  return list.map(p=>'<button type="button" class="cm-prod" data-id="'+cosmEsc(p.id)+'"><b>'+cosmEsc(p.brand+" "+p.name)+"</b><small>"+cosmEsc(p.target)+" · 전성분 "+cosmProdCount(p)+"개 · 확인 "+cosmEsc(p.verified)+"</small></button>").join("");
+function cosmProdCount(p){return p.n>0?p.n:cosmTokens(p.ingredients).list.length;}   // n: 등록할 때 cosmCheck 로 센 값(성분이 아닌 글자 제외), 없으면 쉼표 나눈 수
+function cosmProdBtnHtml(p){
+  return '<button type="button" class="cm-prod" data-id="'+cosmEsc(p.id)+'"><b>'+cosmEsc(cosmProdTitle(p))+"</b><small>"+cosmEsc(p.target)+" · 전성분 "+cosmProdCount(p)+"개 · 확인 "+cosmEsc(p.verified)+"</small></button>";
+}
+function cosmProdBtnsHtml(list){return list.map(cosmProdBtnHtml).join("");}
+/* 제품군별로 나누고 안의 제품은 가나다 순. 제품군 순서는 COSM_CATS(없는 제품군은 뒤에 가나다 순). */
+function cosmProdGroups(P){
+  const by={}; ((P&&P.items)||[]).forEach(p=>{const c=p.cat||"기타"; (by[c]||(by[c]=[])).push(p);});
+  const names=COSM_CATS.filter(c=>by[c]).concat(Object.keys(by).filter(c=>COSM_CATS.indexOf(c)<0).sort(cosmKoCmp));
+  return names.map(c=>({cat:c,items:by[c].slice().sort((a,b)=>cosmKoCmp(cosmProdTitle(a),cosmProdTitle(b))||(a.id<b.id?-1:1))}));
+}
+/* 접어 둔 목록: 제품군 이름을 눌러야 제품 이름이 나온다(초성마다 소제목). 제품 버튼은 검색 결과와 같은 모양. */
+function cosmProdCatsHtml(P){
+  return cosmProdGroups(P).map(g=>{
+    let h='<details class="cm-cat"><summary>'+cosmEsc(g.cat)+" <small>"+g.items.length+"개</small></summary><div class=\"cm-catbody\">", last="";
+    g.items.forEach(p=>{const ini=cosmInitial(cosmProdTitle(p)); if(ini!==last){h+='<div class="cm-ini">'+cosmEsc(ini)+"</div>"; last=ini;} h+=cosmProdBtnHtml(p);});
+    return h+"</div></details>";
+  }).join("");
 }
 function cosmProdNoteText(p){
   return p.note||"";   // 확인 출처·날짜는 products.json 에만 두고 화면에는 제품 메모가 있을 때만 보여 준다(2026-11-03 사용자 지시로 출처·리뉴얼 문구 삭제)
@@ -4748,17 +4791,21 @@ function cosmDrugHtml(res,q,Dd,IX){
   // 등록된 제품 찾기: products.json 은 글을 쓰면서 늘어나는 별도 자료라 cosmetic.json 과 따로 받는다
   function renderProd(){
     if(!PROD) return;
-    const hit=cosmProdSearch(PROD,$("cmProdQ").value,8);
+    const q=$("cmProdQ").value.trim();
     $("cmProdCount").textContent="지금 "+PROD.items.length+"개가 등록돼 있고, 천천히 늘려 가고 있어요.";
-    $("cmProdList").innerHTML=hit.length?cosmProdBtnsHtml(hit):'<p class="cm-sub">아직 등록되지 않은 제품이에요. 제품 자료를 쌓는 중이라 이름으로 찾을 수 없는 제품이 많아요. 아래 전성분 넣기에서 확인해 주세요.</p>';
+    // 검색어가 없으면 제품군별 접이식 목록, 있으면 찾은 제품만 가나다 순으로
+    $("cmProdCats").hidden=!!q; $("cmProdList").hidden=!q;
+    if(!q){ $("cmProdList").innerHTML=""; return; }
+    const all=cosmProdSearch(PROD,q,1e6), hit=all.slice(0,40);
+    $("cmProdList").innerHTML=hit.length?cosmProdBtnsHtml(hit)+(all.length>hit.length?'<p class="cm-sub">'+all.length+"개 중 "+hit.length+"개만 보여 줘요. 제품 이름을 조금 더 적어 주세요.</p>":""):'<p class="cm-sub">아직 등록되지 않은 제품이에요. 제품 자료를 쌓는 중이라 이름으로 찾을 수 없는 제품이 많아요. 아래 전성분 넣기에서 확인해 주세요.</p>';
   }
   function loadProd(){
     if(PROD) return;
     fetch("products.json?t="+Math.floor(Date.now()/600000)).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();})
-      .then(d=>{PROD=d; if(d&&d.items&&d.items.length){ $("cmProdBox").hidden=false; renderProd(); }}).catch(()=>{});
+      .then(d=>{PROD=d; if(d&&d.items&&d.items.length){ $("cmProdBox").hidden=false; $("cmProdCats").innerHTML=cosmProdCatsHtml(d); renderProd(); }}).catch(()=>{});
   }
   $("cmProdQ").addEventListener("input",renderProd);
-  $("cmProdList").addEventListener("click",e=>{
+  $("cmProdBox").addEventListener("click",e=>{
     const b=e.target.closest(".cm-prod"); if(!b||!PROD) return;
     const p=PROD.items.find(x=>x.id===b.dataset.id); if(!p) return;
     $("cmText").value=p.ingredients; prodNote=cosmProdNoteText(p); $("cmPasteNote").hidden=true; run();
@@ -6012,7 +6059,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="aa4799ef";
+var APP_BUILD="c28e4fd1";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
