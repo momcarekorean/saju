@@ -4293,11 +4293,11 @@ const COSM_VER=/*COSM:VER*/"20261103-6922-620f6b"/*COSM:VER:END*/;
 const COSM_EX="정제수, 글리세린, 나이아신아마이드, 페녹시에탄올, 1,2-헥산다이올, 토코페롤, 판테놀, 살리실릭애씨드, 레티놀, 향료";   // 실제 제품이 아닌 예시(한국 목록에 오른 성분·다른 나라 목록에만 있는 성분이 섞이게)
 const COSM_MAX=400;
 // 이름 표기가 달라도 같은 성분으로 묶는다(자료 쪽 이름과 붙여 넣은 이름 양쪽에 똑같이 적용)
-const COSM_VAR=[["애시드","애씨드"],["다이","디"],["트라이","트리"],["에칠","에틸"],["메칠","메틸"],["글라이콜","글리콜"],["에스테르","에스터"],["에스텔","에스터"],["알콜","알코올"],["나트륨","소듐"],["칼륨","포타슘"],["씨아이","ci"],["시아이","ci"]];
+const COSM_VAR=[["애시드","애씨드"],["다이","디"],["트라이","트리"],["에칠","에틸"],["메칠","메틸"],["글라이콜","글리콜"],["에스테르","에스터"],["에스텔","에스터"],["알콜","알코올"],["나트륨","소듐"],["칼륨","포타슘"],["씨아이","ci"],["시아이","ci"],["파레스","알케스"],["캐비어","캐비아"],["아르기닌","알지닌"],["탈크","탤크"],["나이론","나일론"],["니트로","나이트로"]];
 function cosmEsc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 // 비교용 열쇠: 글자·숫자만 남기고(공백·쉼표·하이픈·괄호 제거) 소문자로, 흔한 표기 차이를 한쪽으로 모은다
 function cosmKey(s){
-  let t=String(s==null?"":s).normalize("NFKC").toLowerCase().replace(/[^0-9a-z가-힣]/g,"");
+  let t=String(s==null?"":s).normalize("NFKC").toLowerCase().replace(/^\s*(디엘|엘|디)\s*[-‐‑‒–]\s*/,(m,a)=>(a==="디엘"?"dl":(a==="엘"?"l":"d"))+"-").replace(/[^0-9a-z가-힣]/g,"");   // 엘-멘톨 = l-멘톨
   for(const v of COSM_VAR) t=t.split(v[0]).join(v[1]);
   return t;
 }
@@ -4322,22 +4322,37 @@ function cosmTokens(text,known){
     .replace(/화장품법에\s*따라\s*기재(?:\s*[,，·]\s*표시)?\s*(?:하여야|해야)\s*하는\s*모든\s*성분\s*[:：]?/g,"\n")   // 올리브영·쿠팡 상품정보 표를 항목 이름째 복사했을 때의 머리글
     .replace(/\s*(\[[^\[\]\n,，、;；]{1,60}\])\s*/g,",$1,")   // 색상·호수·구성품 이름표([더스티 모브])는 쉼표 없이 성분 사이에 끼므로 따로 뗀다(쉼표가 든 [+/- 마이카, …] 는 성분 목록이라 그대로)
     .replace(/([-가-힣A-Za-z])(\d{1,3}),(?=(\d{1,2}(?:,\d{1,2})*)-[가-힣A-Za-z])/g,(m,p,a,loc)=>parseInt(a,10)>parseInt(loc,10)?p+a+", ":m)   // 글리세레스-26,1,2-헥산다이올·폴리솔베이트60,1,2-헥산다이올: 이름 끝 번호(-26, 60) 뒤 쉼표는 구분(위치 번호 1,2 는 오름차순이라 그 번호보다 작을 수 없다)
+    .replace(/\s*([■★※◆])\s*/g,",$1").replace(/(?:(?<=[가-힣A-Za-z0-9])|\s)\*(?=[^\s,*])/g,",*")                                              // ■리뉴얼 같은 안내 표지 뒤는 이름표다: 표지에서 끊고 조각 맨 앞에 표지를 남긴다
+    .replace(/(\[[^\[\]\n,，、;；]{1,60}\])|\s*[:：]\s*/g,(m,b)=>b?b:":,")                       // '2제:' '01 네이키드:' 처럼 콜론으로 끝나는 조각은 옵션 이름표다(대괄호 안 콜론은 그대로)
     .replace(/(\d),(?=\d)/g,"$1\u0001");
-  let parts=t.split(/[,，、;；\n]+/);
-  if(parts.length<3&&cosmSlashList(t)){ parts=t.split(/[\/\n,，、;；]+/); if(known) parts=cosmMergeSlash(parts,known); }   // 쉼표 없이 / 로만 나눈 목록
+  let parts=t.split(/[,，、;；@\n]+/);
+  if(parts.length<3&&cosmSlashList(t)){ parts=t.split(/[\/\n,，、;；@]+/); if(known) parts=cosmMergeSlash(parts,known); }   // 쉼표 없이 / 로만 나눈 목록
   const out=[], seen=new Set(); let cut=false;
+  const add=(p,lbl,alt)=>{
+    const k=cosmKey(p);
+    if(!k||k.length<2||seen.has(k)||/^(전성분|주요성분|성분|ingredients?)$/.test(k)) return;   // '[전성분]' 같은 머리글만 남은 조각은 성분이 아니다
+    if(out.length>=COSM_MAX){cut=true;return;}
+    seen.add(k); out.push(lbl||alt?{raw:p,key:k,lbl:!!lbl,alt:alt||""}:{raw:p,key:k});
+  };
   parts.forEach((p,i)=>{
     p=p.replace(/\u0001/g,",").trim();
     if(i===0) p=p.replace(/^[\[［【(]?\s*(전성분|성분|ingredients?)\s*[\]］】)]?\s*[:：]?\s*(?=[가-힣A-Za-z0-9])/i,"");
-    p=p.replace(/^(?:[•·●■▪*\-–]|\d{1,2}[.)])\s+/,"");
+    let lbl=/^[■★※◆*#＃]\S/.test(p)||/^[-–](?=[가-힣A-Za-z])/.test(p);                // 표지가 바로 붙은 조각(*구성품, -웜네추럴, ■리뉴얼 …)은 옵션 이름표
+    if(/:$/.test(p)){ lbl=true; p=p.slice(0,-1).trim(); }
+    p=p.replace(/^(?:[•·●■▪*\-–]|\d{1,2}[.)])\s+/,"").replace(/^[■★※◆*]+/,"");
     p=p.replace(/\([^()]*\d\s*(?:%|ppm|ppb)\s*\)/gi,"");                          // 함량 설명이 붙은 괄호: 하이드록시프로필비스팔미타마이드엠이에이(세라마이드 PC-104 65.5ppm)
     p=p.replace(/\(?\s*\d+(?:\.\d+)?\s*(?:%|ppm|ppb|퍼센트)\s*\)?/gi,"");   // 함량 표기는 이름이 아니다
     p=p.replace(/\(\s*\d{1,3}(?!\d)(?:[.,]\d{1,2})?\s*\S?\)?/g,"");           // 글자 인식에서 %가 다른 글자로 읽힌 (0.496) 같은 함량 괄호(색소 번호 (77891) 는 다섯 자리라 남는다)
     p=p.replace(/[.。]+$/,"").replace(/^["'“‘]+|["'”’]+$/g,"").replace(/\s+/g," ").trim();
-    const k=cosmKey(p);
-    if(!k||k.length<2||seen.has(k)||/^(전성분|주요성분|성분|ingredients?)$/.test(k)) return;   // '[전성분]' 같은 머리글만 남은 조각은 성분이 아니다
-    if(out.length>=COSM_MAX){cut=true;return;}
-    seen.add(k); out.push({raw:p,key:k});
+    // 여는 괄호 없이 닫는 괄호만 나온 조각: '황색4호14)'(각주 번호)·'슈가애프터눈)'(옵션 이름 끝). 닫는 괄호까지를 따로 떼고 뒤는 다음 조각으로
+    for(let guard=0;guard<4;guard++){
+      const m=/^([^()\[\]（）]*)[)\]）](.*)$/.exec(p);
+      if(!m) break;
+      const head=m[1].trim(), fn=head.replace(/(?<=[가-힣A-Za-z)])[A-Za-z]?\d{1,3}(?:\.\d+)?호?$/,"").trim();
+      if(head) add(head,true,fn&&fn!==head?fn:"");   // 각주 번호를 뗀 이름(alt)이 아는 이름이면 그 이름으로 쓴다
+      p=m[2].trim();
+    }
+    add(p,lbl);
   });
   return {list:out,cut};
 }
@@ -4385,23 +4400,117 @@ function cosmPregAlias(raw){
   for(let i=0;i<COSM_PREG.length;i++) if((COSM_PREG[i].alias||[]).some(a=>cosmKey(a)===k)) return i;
   return -1;
 }
-// 낱말로 나눴을 때 모르는 짧은 낱말이 연달아 있으면 한 이름으로 묶는다: '플로럴 머스크', '02 자스민 머스크' 같은 향·색 이름이 낱말마다 성분으로 보이지 않게(긴 낱말은 오타 난 성분일 수 있어 따로 둔다)
-function cosmJoinUnknown(words,isNone){
-  const out=[]; let run=[];
-  const flush=()=>{ if(run.length) out.push(run.join(" ")); run=[]; };
-  words.forEach(w=>{ if(w.length<=6&&isNone(w)) run.push(w); else { flush(); out.push(w); } });
-  flush();
+// 쉼표가 빠져 띄어쓰기로만 이어진 여러 성분(렌즈로 복사한 글자에서 흔하다)은, 그 안에서 아는 이름이 하나라도 있으면 낱말별로 나눠 따로 확인한다
+// 이름을 못 알아본 글자 중 성분이 아니라 제품의 색상·호수·향·구성품 이름표로 보이는 것(성분 이름이 될 수 없는 모양만)
+const COSM_QTY=/^[\s\d.,+\-\/()\[\]~x×]*(?:(?:ml|g|kg|l|ng|iu|ppm|mg|㎖|매|입|개|호|제|종|세대|비매품|본품|증정품|증정|기준|함량|함유|포함|구성품|세트|단품|기획)[\s\d.,+\-\/()\[\]~x×]*)*$/i;
+const COSM_LABEL_WORDS=/^(?:본품|구성품|증정품?\d*|사은품|리뉴얼|신형|구형|전성분|표시성분|성분|알레르기\s?물질|산화제|환원제|염모제|주요성분|동일|new|colorants?|complex|식물\s*유래\s*향|성능보조제)\s*[=)]?$/i;
+const COSM_MORPH=["핑크","블루","그린","레드","로즈","베이지","브라운","블랙","화이트","오렌지","퍼플","코랄","피치","라벤더","바닐라","시트러스","베리","아몬드","샌달우드","얼그레이","애쉬","그레이","누드","내추럴","뉴트럴","모던","클래식","레몬","자몽","복숭아","메론","포도","사과","머스크","플로럴","우디","코튼","체리","블라썸","퍼퓸","향수","베이비","오리지널","인텐시브","스트롱","센서티브","플러스","리치","진저","스위트","살몬","토프","모브","마젠타","골드","실버","카키","네이비","옐로우","머스타드","민트","캐모마일","그린티","티트리","샤인","글로우","샴푸","토너","앰플","로션","미스트","마스크","클렌저","클렌징","리무버","올인원","바디로션","바디워시","핸드크림","레이크","딥","라이트","다크","웜","쿨","향","색","에디션","크림","시럽","무스","글로스","새틴","카밍","샤워","헤이즈","페어","포그","코트","소프트","멜로우","브라이트닝","모이스처","자스민","쟈스민","로즈우드","튜브로즈","미네랄"];
+const COSM_MORPH_RX=new RegExp("^(?:"+COSM_MORPH.slice().sort((a,b)=>b.length-a.length).join("|")+")+$");
+function cosmIsLabel(raw){
+  const s=String(raw||"").trim();
+  if(!s) return false;
+  if(COSM_QTY.test(s)&&/[0-9a-zA-Z가-힣]/.test(s)) return true;                                   // 50ml, 30ml/10ml, 0.3 ng), 000, 18
+  if(COSM_LABEL_WORDS.test(s)||/\d제\s*$/.test(s)||/^제?\d제/.test(s)) return true;               // 본품, 증정품1, 1제, 2제
+  if(/^[#＃]/.test(s)) return true;                                                             // #모브 실루엣
+  if(/^[A-Za-z]{1,2}\d{1,4}[A-Za-z]?\d{0,2}$/.test(s)||/^\d{1,3}[A-Za-z]$/.test(s)||/^[A-Za-z]\d{3,}[A-Za-z]\d*$/.test(s)) return true;   // 21N, A04, M802, F0003087V01
+  if(/^\d{1,3}\s*[가-힣A-Za-z][가-힣A-Za-z &.'\-]{0,25}$/.test(s)) return true;                  // 03 로즈, 19 블랙베리 시럽, 10우디 피그
+  if(/^[A-Z]{1,3}\d{1,3}\s+[가-힣A-Za-z]/.test(s)) return true;                                  // SE01 허그 타이트, M201 샌드마그넷
+  if(/^\([^()]*\)$/.test(s)||/^[\[(][^\])]*$/.test(s)) return true;                              // (냥냥포근베이지), [딥토닝 (짝 없는 괄호)
+  if(/^[가-힣 ]{1,8}향\(?(?:new)?\)?$/i.test(s)) return true;                                    // 시트러스향, 레몬향(new
+  if(/^[A-Z][A-Z &'\-]{2,}\s+[가-힣][가-힣 ]*$/.test(s)) return true;                           // SELF MADE 셀프 메이드 (영문 대문자 이름 + 한글 발음)
+  const c=s.replace(/[\s&·]+/g,"");
+  if((c.length>=2||c==="향"||c==="색")&&COSM_MORPH_RX.test(c)) return true;
+  const b=s.replace(/\s*[(\[（][^)\]）]*[)\]）]?/g,"").trim();                                 // 퍼퓸(EDP) 처럼 괄호를 뺀 이름이 이름표인 경우
+  if(b&&b!==s&&b.length>=2&&COSM_MORPH_RX.test(b.replace(/[\s&·]+/g,""))) return true;                                           // 플로럴 머스크, 애쉬베이지그레이, 샴푸
+  return false;
+}
+// 이름이 이어 붙은 글자: 색상·옵션 이름이 성분 이름에 바로 붙은 것(리날룰그린티, 클렌저정제수, 카프릴릴글라이콜002)을 성분과 이름표로 가른다. 근거가 분명한 모양만 쪼갠다
+const COSM_HEAD=["하이드록시시트로넬알","알파-아이소메틸아이오논","부틸페닐메틸프로피오날","벤질살리실레이트","벤질벤조에이트","벤질신나메이트","헥실신남알","아밀신남알","아밀신나밀알코올","아이소유제놀","시트로넬올","벤질알코올","신나밀알코올","아니스알코올","제라니올","리날룰","리모넨","시트랄","쿠마린","유제놀","파네솔","신남알","향료","정제수"];   // 향료 뒤에 이어지는 알레르기 유발 향료 성분 + 목록 첫머리(정제수·향료)
+const COSM_START=["트라이메틸실록시실리케이트","합성플루오르플로고파이트","다이아이소스테아릴말레이트","메틸트라이메티콘","티타늄디옥사이드","정제수","마이카","탤크"];   // 옵션별 목록의 첫머리에 자주 오는 성분(앞에 붙은 글자는 옵션 이름)
+const COSM_HEAD_SOFT=["페퍼민트잎추출물","카프릴릴글라이콜","에틸헥실글리세린","시트릭애씨드","소르빅애씨드","벤조익애씨드","페녹시에탄올","부틸렌글라이콜","토코페롤","판테놀","글리세린","알란토인"];   // 이 성분 뒤에 색상·향 이름(핑크·시트러스·스트롱)만 붙어 있을 때 쪼갠다
+function cosmGlue(raw,kn,depth){
+  const s=String(raw||"");
+  if(s.length<4||/\s/.test(s)||/^[\[(（]/.test(s)) return null;
+  const rest=r=>{ const g=(depth||0)<3?cosmGlue(r,kn,(depth||0)+1):null; return g||[{raw:r,label:!kn(r)}]; };     // 남은 글자에도 이어 붙은 성분이 있으면 한 번 더 쪼갠다
+  const lbl=l=>!kn(l)||cosmIsLabel(l);
+  for(const h of COSM_HEAD){                                                                   // 성분 + 이름표
+    if(s.length>h.length+1&&s.indexOf(h)===0&&kn(h)){ const r=s.slice(h.length).replace(/^[\s\-]+/,""); if(r.length>=2) return [{raw:h,label:false}].concat(rest(r)); }
+  }
+  for(const h of COSM_HEAD_SOFT){
+    if(s.length>h.length+1&&s.indexOf(h)===0&&kn(h)){ const r=s.slice(h.length).replace(/^[\s\-]+/,""); if(r.length>=2&&cosmIsLabel(r)) return [{raw:h,label:false},{raw:r,label:true}]; }
+  }
+  for(const e of COSM_START){                                                                  // 이름표 + 성분
+    if(s.length>e.length&&s.slice(-e.length)===e&&kn(e)){ const l=s.slice(0,-e.length).replace(/[\s\-]+$/,""); if(l.length>=2||/\d/.test(l)) return [{raw:l,label:lbl(l)},{raw:e,label:false}]; }
+  }
+  if(/^[#＃]/.test(s)){                                                                         // #로 시작하면 앞부분은 옵션 이름: 뒤에 아는 성분이 붙어 있으면 갈라낸다
+    for(let i=2;i<=s.length-4;i++){ if(kn(s.slice(i).replace(/^[\s\-]+/,""))) return [{raw:s.slice(0,i),label:true},{raw:s.slice(i).replace(/^[\s\-]+/,""),label:false}]; }
+  }
+  let m=/^(.{1,5}빔)(.{4,})$/.exec(s);                                                        // OO빔 + 성분(너티빔티타늄디옥사이드: 색상 이름이 붙은 것)
+  if(m&&kn(m[2])) return [{raw:m[1],label:true},{raw:m[2],label:false}];
+  m=/^(.{3,}?)(증정품|증정|본품)$/.exec(s);                                                    // 성분 + 증정품
+  if(m&&kn(m[1])) return [{raw:m[1],label:false},{raw:m[2],label:true}];
+  m=/^(전|후)(정제수)$/.exec(s);                                                              // 리뉴얼 전정제수 / 후정제수
+  if(m&&kn(m[2])) return [{raw:m[1],label:true},{raw:m[2],label:false}];
+  m=/^(.{3,}?)([A-Za-z]?\d{1,3}(?:\.\d+)?\.?호?)$/.exec(s);                                                     // 성분 + 색상 번호(카프릴릴글라이콜002, 토코페롤23호)
+  if(m&&kn(m[1])&&(/[가-힣]/.test(m[1])||/[A-Za-z]{4,}/.test(m[1]))) return [{raw:m[1],label:false},{raw:m[2],label:true}];
+  m=/^(\d{1,2}호)(.{3,})$/.exec(s);                                                           // 색상 번호 + 성분(1호탤크)
+  if(m&&kn(m[2])) return [{raw:m[1],label:true},{raw:m[2],label:false}];
+  return null;
+}
+// 낱말로 나눈 것 중 이어 붙이면 아는 이름이 되는 낱말들은 한 이름으로 되돌린다(미로탐누스 플라벨리폴리아잎추출물)
+function cosmMergeKnown(words,kn){
+  const out=[];
+  for(let i=0;i<words.length;){
+    let hit=0;
+    for(let j=Math.min(words.length,i+4);j>i+1;j--){ if(kn(words.slice(i,j).join(" "))){hit=j;break;} }
+    if(hit){out.push(words.slice(i,hit).join(" ")); i=hit;} else {out.push(words[i]); i++;}
+  }
   return out;
 }
-// 쉼표가 빠져 띄어쓰기로만 이어진 여러 성분(렌즈로 복사한 글자에서 흔하다)은, 그 안에서 아는 이름이 하나라도 있으면 낱말별로 나눠 따로 확인한다
 function cosmCheck(D,IX,text){
-  const tk=cosmTokens(cosmCutTail(text),raw=>cosmLookup(D,IX,raw).kind!=="none"), g={kr:[],other:[],dict:[],none:[],grp:[]}, items=[], labels=[], seen=new Set();
+  const kn=raw=>cosmLookup(D,IX,raw).kind!=="none";
+  const tk=cosmTokens(cosmCutTail(text),kn), g={kr:[],other:[],dict:[],none:[],grp:[]}, items=[], labels=[], seen=new Set(), lseen=new Set();
   const push=raw=>{const k=cosmKey(raw); if(!k||k.length<2||seen.has(k)) return; seen.add(k); items.push(cosmLookup(D,IX,raw));};
+  const lab=raw=>{const k=cosmKey(raw)||raw; if(lseen.has(k)) return; lseen.add(k); labels.push({raw});};
+  // 낱말 하나(또는 조각 하나)를 아는 이름 / 이어 붙은 글자 / 이름표 / 못 알아봄으로 가른다
+  const slashKnown=r=>{ if(r.indexOf("/")<1||/\s/.test(r)) return null; const sp=r.split("/").filter(Boolean); return sp.length>=2&&sp.every(kn)?sp:null; };   // 적색산화철/황색산화철: 아는 이름들이 / 로 붙은 것
+  const openHead=r=>{ const h=r.replace(/\s*[(（\[][^)）\]]*$/,"").trim(); return h&&h!==r&&kn(h)?h:""; };   // 소듐디엔에이(PDRN : 닫히지 않은 괄호 앞의 아는 이름
+  const kind1=r=>{ if(kn(r)) return "k"; if(slashKnown(r)) return "s"; if(openHead(r)) return "o"; if(cosmGlue(r,kn)) return "g"; if(cosmIsLabel(r)) return "l"; return "u"; };
+  const place1=(r,k)=>{ if(k==="k") push(r); else if(k==="s") slashKnown(r).forEach(push); else if(k==="o") push(openHead(r)); else if(k==="g") cosmGlue(r,kn).forEach(x=>x.label?lab(x.raw):push(x.raw)); else if(k==="l") lab(r); else push(r); };
+  // 한 조각을 가른다. lbl: 콜론·표지가 붙은 조각 또는 [ ] 안(그 안에서 아는 성분만 성분이고 나머지는 이름표), orig: 이름표로 통째로 빼야 할 때 보여 줄 원래 글자
+  const proc=(raw,lbl,alt,orig)=>{
+    if(kn(raw)){ push(raw); return; }
+    if(alt&&kn(alt)){ push(alt); return; }                                    // 황색4호14) 의 각주 번호를 뗀 이름
+    const k0=/\s/.test(raw)&&!openHead(raw)?"u":kind1(raw);                                   // 공백이 든 조각은 낱말별로 먼저 가른다(19호 페어 정제수 에서 정제수를 살리려고)
+    if(k0==="l"&&orig){ lab(orig); return; }
+    if(k0==="g"||k0==="l"||k0==="s"||k0==="o"){ place1(raw,k0); return; }
+    if(!/\s/.test(raw)){ if(lbl) lab(orig||raw); else push(raw); return; }
+    // 쉼표가 빠져 띄어쓰기로만 이어진 여러 글자는 낱말별로 가른다(렌즈로 복사한 글자, 옵션 이름이 끼어든 목록)
+    const words=cosmMergeKnown(raw.split(/\s+/).filter(p=>cosmKey(p).length>=1),kn);
+    const ks=words.map(kind1);
+    for(let ch=true;ch;){ ch=false; ks.forEach((k,i)=>{ if(k==="u"&&words[i].length<=6&&(ks[i-1]==="l"||ks[i+1]==="l")){ ks[i]="l"; ch=true; } }); }   // 이름표 낱말 옆의 모르는 짧은 낱말은 같은 이름표(02 자스민 머스크)
+    if(lbl) ks.forEach((k,i)=>{ if(k==="u") ks[i]="l"; });
+    const anyIng=ks.some(k=>k!=="u"&&k!=="l"), anyKnown=ks.some(k=>k!=="u");
+    if(lbl&&!anyIng){ lab(orig||raw); return; }
+    if(words.length===1&&ks[0]==="k"){ push(words[0]); return; }
+    if(words.length>=2&&anyKnown){
+      let run=[], lrun=[];
+      const flushU=()=>{ if(run.length) push(run.join(" ")); run=[]; };
+      const flushL=()=>{ if(lrun.length) lab(lrun.join(" ")); lrun=[]; };
+      words.forEach((w,i)=>{
+        const k=ks[i];
+        if(k==="u"&&w.length<=6){ flushL(); run.push(w); return; }                  // 모르는 짧은 낱말이 연달아 있으면 한 이름
+        if(k==="l"){ flushU(); lrun.push(w); return; }
+        flushU(); flushL(); place1(w,k);
+      });
+      flushU(); flushL();
+    } else if(words.length>=3) lab(orig||raw);                                    // 아는 낱말이 하나도 없는 세 낱말 이상은 제품·옵션 이름(나르시소 로드리게즈 센티드 핸드)
+    else push(raw);
+  };
   tk.list.forEach(t=>{
-    if(/^\[[^\[\]]*\]$/.test(t.raw)&&cosmLookup(D,IX,t.raw).kind==="none"){ labels.push({raw:t.raw}); return; }   // [더스티 모브] 같은 색상·호수·구성품 이름표: 성분 이름이 아니라서 목록에서 뺀다
-    if(!/\s/.test(t.raw)||cosmLookup(D,IX,t.raw).kind!=="none"){ push(t.raw); return; }
-    const parts=t.raw.split(/\s+/).filter(p=>cosmKey(p).length>=2);
-    if(parts.length>=2&&parts.some(p=>cosmLookup(D,IX,p).kind!=="none")) cosmJoinUnknown(parts,p=>cosmLookup(D,IX,p).kind==="none").forEach(push); else push(t.raw);
+    if(kn(t.raw)){ push(t.raw); return; }
+    if(/^\[[^\[\]]*\]$/.test(t.raw)){ proc(t.raw.slice(1,-1).trim(),true,"",t.raw); return; }   // [더스티 모브] 같은 색상·호수·구성품 이름표: 성분 이름이 아니라서 목록에서 뺀다(안에 아는 성분이 있으면 그것만 성분)
+    proc(t.raw,t.lbl,t.alt);
   });
   // 사용할 때의 주의사항 같은 문장 조각이 성분처럼 읽힌 것은 목록에서 뺀다(이름을 못 알아본 것 중에서만).
   // 성분표 뒤에는 주의사항이 오므로, 끝쪽에 이어진 '못 알아본' 구간에서 첫 문장 조각이 나온 곳부터는 전부 뺀다(그 앞의 오타 난 성분은 남긴다).
@@ -4429,7 +4538,7 @@ function cosmChips(items,cls){return '<div class="cm-chips'+(cls?" "+cls:"")+'">
 // 줄바꿈으로 갈라진 긴 이름이 두 성분으로 쪼개지지 않게 줄은 공백으로 이어 붙인다(구분은 쉼표만 본다).
 const COSM_STOP=/사용할\s*때의|주의\s*사항|사용상|보관|제조\s*번호|제조업자|책임\s*판매|사용\s*방법|품질\s*보증|^\s*[1-9]\s*[.)]/;
 // 줄바꿈 없이 한 줄로 복사돼도 '[사용할 때의 주의사항]' 같은 표지부터는 전성분이 아니므로 잘라 낸다
-const COSM_TAIL=/\[?\s*사용할\s*때의\s*주의\s*사항|\[\s*주의\s*사항\s*\]|사용상의?\s*주의\s*사항|\[?\s*제조번호|화장품\s*제조업자|화장품\s*책임\s*판매업자|소비자\s*상담실|고객\s*만족\s*센터/;
+const COSM_TAIL=/제공된\s*성분은\s*동일|최신\s*정보는\s*제품\s*포장|\[?\s*사용할\s*때의\s*주의\s*사항|\[\s*주의\s*사항\s*\]|사용상의?\s*주의\s*사항|\[?\s*제조번호|화장품\s*제조업자|화장품\s*책임\s*판매업자|소비자\s*상담실|고객\s*만족\s*센터/;
 function cosmCutTail(text){
   const s=String(text==null?"":text), m=COSM_TAIL.exec(s);
   return m&&m.index>0?s.slice(0,m.index):s;
@@ -4473,8 +4582,12 @@ function cosmSuggestIndex(D){
   return byLen;
 }
 // 편집거리는 글자(초성·중성·종성) 단위로 센다: 릴→틸, 을→올 처럼 한 글자 안의 자음·모음 하나 차이는 가깝게 본다
+const COSM_SHORT=["향료","정제수","리날룰","리모넨","시트랄","제라니올","쿠마린","유제놀","탤크","마이카","실리카","카올린","글리세린"];   // 2~3글자 흔한 이름: 한 글자 오타(항료·라날룰)만 제안
 function cosmSuggest(S,raw,limit){
   const k=cosmKey(raw);
+  if(k.length>=2&&k.length<4&&/[가-힣]/.test(k)){
+    return COSM_SHORT.filter(n=>n!==k&&cosmLev(k,n,1)<=1).slice(0,limit||3);
+  }
   if(k.length<4||!/[가-힣]/.test(k)) return [];
   const n=k.length, max=n>=7?3:(n>=5?2:1), kj=k.normalize("NFD"), kr=String(raw).toLowerCase().replace(/[^0-9a-z가-힣]/g,""), found=[];
   for(let L=n-2;L<=n+3;L++){
@@ -4668,8 +4781,8 @@ function cosmResultHtml(res,D,sug){
   if(res.junk.length) h+='<details class="cm-fold"><summary>성분 이름이 아닌 글자로 보여 뺀 것 '+res.junk.length+"개 보기</summary><div>"
     +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">사용할 때의 주의사항 같은 문장 조각이 성분처럼 읽힌 것이라 목록에서 뺐어요. 성분이 맞다면 이름만 따로 적어서 다시 확인해 주세요.</p>"
     +cosmChips(res.junk,"nm")+"</div></details>";
-  if(res.labels.length) h+='<details class="cm-fold"><summary>색상·호수 이름표로 보여 뺀 것 '+res.labels.length+"개 보기</summary><div>"
-    +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">[ ] 로 묶인 색상·호수·구성품 이름이 성분 사이에 끼어 있어서 목록에서 뺐어요. 성분이 맞다면 이름만 따로 적어서 다시 확인해 주세요.</p>"
+  if(res.labels.length) h+='<details class="cm-fold"><summary>색상·호수·향 이름표로 보여 뺀 것 '+res.labels.length+"개 보기</summary><div>"
+    +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">색상·호수·향·구성품 이름이 성분 사이에 끼어 있어서 성분 목록에서 뺐어요. 옵션이 여러 개인 제품의 목록에서 자주 보여요. 성분이 맞다면 이름만 따로 적어서 다시 확인해 주세요.</p>"
     +cosmChips(res.labels,"nm")+"</div></details>";
   h+='<div class="cm-note"><p>목록에 올라 있다고 해서 임신 중에 쓰면 안 된다는 뜻은 아니에요. 반대로 목록에서 찾지 못했다고 해서 문제가 없다는 뜻도 아니에요. 이름이 달라 못 찾았을 수 있고, 이 목록이 걱정되는 성분을 모두 담고 있지도 않아요.</p>'
     +"<p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>";
@@ -6087,7 +6200,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="4796387f";
+var APP_BUILD="a88e5259";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
