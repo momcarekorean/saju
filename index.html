@@ -4321,6 +4321,7 @@ function cosmTokens(text,known){
   let t=String(text==null?"":text).replace(/\r/g,"\n")
     .replace(/화장품법에\s*따라\s*기재(?:\s*[,，·]\s*표시)?\s*(?:하여야|해야)\s*하는\s*모든\s*성분\s*[:：]?/g,"\n")   // 올리브영·쿠팡 상품정보 표를 항목 이름째 복사했을 때의 머리글
     .replace(/\s*(\[[^\[\]\n,，、;；]{1,60}\])\s*/g,",$1,")   // 색상·호수·구성품 이름표([더스티 모브])는 쉼표 없이 성분 사이에 끼므로 따로 뗀다(쉼표가 든 [+/- 마이카, …] 는 성분 목록이라 그대로)
+    .replace(/([-가-힣A-Za-z])(\d{1,3}),(?=(\d{1,2}(?:,\d{1,2})*)-[가-힣A-Za-z])/g,(m,p,a,loc)=>parseInt(a,10)>parseInt(loc,10)?p+a+", ":m)   // 글리세레스-26,1,2-헥산다이올·폴리솔베이트60,1,2-헥산다이올: 이름 끝 번호(-26, 60) 뒤 쉼표는 구분(위치 번호 1,2 는 오름차순이라 그 번호보다 작을 수 없다)
     .replace(/(\d),(?=\d)/g,"$1\u0001");
   let parts=t.split(/[,，、;；\n]+/);
   if(parts.length<3&&cosmSlashList(t)){ parts=t.split(/[\/\n,，、;；]+/); if(known) parts=cosmMergeSlash(parts,known); }   // 쉼표 없이 / 로만 나눈 목록
@@ -4384,6 +4385,14 @@ function cosmPregAlias(raw){
   for(let i=0;i<COSM_PREG.length;i++) if((COSM_PREG[i].alias||[]).some(a=>cosmKey(a)===k)) return i;
   return -1;
 }
+// 낱말로 나눴을 때 모르는 짧은 낱말이 연달아 있으면 한 이름으로 묶는다: '플로럴 머스크', '02 자스민 머스크' 같은 향·색 이름이 낱말마다 성분으로 보이지 않게(긴 낱말은 오타 난 성분일 수 있어 따로 둔다)
+function cosmJoinUnknown(words,isNone){
+  const out=[]; let run=[];
+  const flush=()=>{ if(run.length) out.push(run.join(" ")); run=[]; };
+  words.forEach(w=>{ if(w.length<=6&&isNone(w)) run.push(w); else { flush(); out.push(w); } });
+  flush();
+  return out;
+}
 // 쉼표가 빠져 띄어쓰기로만 이어진 여러 성분(렌즈로 복사한 글자에서 흔하다)은, 그 안에서 아는 이름이 하나라도 있으면 낱말별로 나눠 따로 확인한다
 function cosmCheck(D,IX,text){
   const tk=cosmTokens(cosmCutTail(text),raw=>cosmLookup(D,IX,raw).kind!=="none"), g={kr:[],other:[],dict:[],none:[],grp:[]}, items=[], labels=[], seen=new Set();
@@ -4392,7 +4401,7 @@ function cosmCheck(D,IX,text){
     if(/^\[[^\[\]]*\]$/.test(t.raw)&&cosmLookup(D,IX,t.raw).kind==="none"){ labels.push({raw:t.raw}); return; }   // [더스티 모브] 같은 색상·호수·구성품 이름표: 성분 이름이 아니라서 목록에서 뺀다
     if(!/\s/.test(t.raw)||cosmLookup(D,IX,t.raw).kind!=="none"){ push(t.raw); return; }
     const parts=t.raw.split(/\s+/).filter(p=>cosmKey(p).length>=2);
-    if(parts.length>=2&&parts.some(p=>cosmLookup(D,IX,p).kind!=="none")) parts.forEach(push); else push(t.raw);
+    if(parts.length>=2&&parts.some(p=>cosmLookup(D,IX,p).kind!=="none")) cosmJoinUnknown(parts,p=>cosmLookup(D,IX,p).kind==="none").forEach(push); else push(t.raw);
   });
   // 사용할 때의 주의사항 같은 문장 조각이 성분처럼 읽힌 것은 목록에서 뺀다(이름을 못 알아본 것 중에서만).
   // 성분표 뒤에는 주의사항이 오므로, 끝쪽에 이어진 '못 알아본' 구간에서 첫 문장 조각이 나온 곳부터는 전부 뺀다(그 앞의 오타 난 성분은 남긴다).
@@ -6078,7 +6087,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="84e29b6d";
+var APP_BUILD="4796387f";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
