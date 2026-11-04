@@ -1184,7 +1184,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <p class="sn-h"><b>준비 중인 서비스</b>아직 열리지 않았어요. 준비가 끝나면 아래 탭에 새로 생겨요.</p>
   <ul>
     <li><span class="sn-tg">준비 중</span><span><strong>달빛어린이병원·소아 응급실 찾기</strong> — 밤이나 주말에 아이가 아플 때 가까운 곳을 찾고, 전화나 지도로 바로 이어지게 만들고 있어요.</span></li>
-    <li><span class="sn-tg">준비 중</span><span><strong>임신 중 영양제 확인</strong> — 약과 화장품은 '화장품 성분 확인' 탭에서 찾아볼 수 있어요. 먹는 영양제도 주의 목록에 있는지 찾아 주도록 준비하고 있어요. 의사·약사 상담을 대신하지는 않아요.</span></li>
   </ul>
 </aside>
 <header>
@@ -4303,12 +4302,28 @@ function cosmKey(s){
   return t;
 }
 // 붙여 넣은 전성분을 성분 하나씩으로 나눈다. 1,2-헥산다이올처럼 숫자 사이 쉼표는 이름의 일부다.
-function cosmTokens(text){
+// 쉼표 없이 / 로만 이은 목록('정제수/글리세린/…')일 때만 / 를 구분으로 본다. 띄어쓰기로 이은 목록 안의 카프릴릭/카프릭트라이글리세라이드 같은 공식 이름 속 / 는 구분이 아니다
+function cosmSlashList(t){
+  const s=(t.match(/\//g)||[]).length, w=(t.replace(/\s*\/\s*/g,"/").trim().match(/\s+/g)||[]).length;
+  return s>0&&w*2<=s;
+}
+// / 로 나눈 조각 중 이어 붙이면 아는 이름(known)이 되는 것은 한 이름으로 되돌린다(정제수/카프릴릭/카프릭트라이글리세라이드 → 정제수, 카프릴릭/카프릭트라이글리세라이드)
+function cosmMergeSlash(parts,known){
+  const out=[];
+  for(let i=0;i<parts.length;){
+    let hit=0;
+    for(let j=Math.min(parts.length,i+7);j>i+1;j--){ if(known(parts.slice(i,j).join("/"))){hit=j;break;} }
+    if(hit){out.push(parts.slice(i,hit).join("/")); i=hit;} else {out.push(parts[i]); i++;}
+  }
+  return out;
+}
+function cosmTokens(text,known){
   let t=String(text==null?"":text).replace(/\r/g,"\n")
     .replace(/화장품법에\s*따라\s*기재(?:\s*[,，·]\s*표시)?\s*(?:하여야|해야)\s*하는\s*모든\s*성분\s*[:：]?/g,"\n")   // 올리브영·쿠팡 상품정보 표를 항목 이름째 복사했을 때의 머리글
+    .replace(/\s*(\[[^\[\]\n,，、;；]{1,60}\])\s*/g,",$1,")   // 색상·호수·구성품 이름표([더스티 모브])는 쉼표 없이 성분 사이에 끼므로 따로 뗀다(쉼표가 든 [+/- 마이카, …] 는 성분 목록이라 그대로)
     .replace(/(\d),(?=\d)/g,"$1\u0001");
   let parts=t.split(/[,，、;；\n]+/);
-  if(parts.length<3&&t.indexOf("/")>=0) parts=t.split(/[\/\n]+/);   // 쉼표 없이 / 로만 나눈 목록
+  if(parts.length<3&&cosmSlashList(t)){ parts=t.split(/[\/\n,，、;；]+/); if(known) parts=cosmMergeSlash(parts,known); }   // 쉼표 없이 / 로만 나눈 목록
   const out=[], seen=new Set(); let cut=false;
   parts.forEach((p,i)=>{
     p=p.replace(/\u0001/g,",").trim();
@@ -4371,9 +4386,10 @@ function cosmPregAlias(raw){
 }
 // 쉼표가 빠져 띄어쓰기로만 이어진 여러 성분(렌즈로 복사한 글자에서 흔하다)은, 그 안에서 아는 이름이 하나라도 있으면 낱말별로 나눠 따로 확인한다
 function cosmCheck(D,IX,text){
-  const tk=cosmTokens(cosmCutTail(text)), g={kr:[],other:[],dict:[],none:[],grp:[]}, items=[], seen=new Set();
+  const tk=cosmTokens(cosmCutTail(text),raw=>cosmLookup(D,IX,raw).kind!=="none"), g={kr:[],other:[],dict:[],none:[],grp:[]}, items=[], labels=[], seen=new Set();
   const push=raw=>{const k=cosmKey(raw); if(!k||k.length<2||seen.has(k)) return; seen.add(k); items.push(cosmLookup(D,IX,raw));};
   tk.list.forEach(t=>{
+    if(/^\[[^\[\]]*\]$/.test(t.raw)&&cosmLookup(D,IX,t.raw).kind==="none"){ labels.push({raw:t.raw}); return; }   // [더스티 모브] 같은 색상·호수·구성품 이름표: 성분 이름이 아니라서 목록에서 뺀다
     if(!/\s/.test(t.raw)||cosmLookup(D,IX,t.raw).kind!=="none"){ push(t.raw); return; }
     const parts=t.raw.split(/\s+/).filter(p=>cosmKey(p).length>=2);
     if(parts.length>=2&&parts.some(p=>cosmLookup(D,IX,p).kind!=="none")) parts.forEach(push); else push(t.raw);
@@ -4385,7 +4401,7 @@ function cosmCheck(D,IX,text){
   const junk=[], kept=[];
   items.forEach((it,i)=>{ if(it.kind==="none"&&(cosmSentenceLike(it.raw)||(first>=0&&i>=first))) junk.push(it); else kept.push(it); });
   kept.forEach(it=>g[it.kind].push(it));
-  return {items:kept,g,n:kept.length,cut:tk.cut,junk};
+  return {items:kept,g,n:kept.length,cut:tk.cut,junk,labels};
 }
 const COSM_CAUTION=/직사광선|전문의|상담|보관|어린이|상처|부작용|증상|부어오름|가려움|붉은|반점|의하여|사용\s*후|사용\s*부위|피해서|주의/;
 function cosmSentenceLike(raw){
@@ -4643,6 +4659,9 @@ function cosmResultHtml(res,D,sug){
   if(res.junk.length) h+='<details class="cm-fold"><summary>성분 이름이 아닌 글자로 보여 뺀 것 '+res.junk.length+"개 보기</summary><div>"
     +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">사용할 때의 주의사항 같은 문장 조각이 성분처럼 읽힌 것이라 목록에서 뺐어요. 성분이 맞다면 이름만 따로 적어서 다시 확인해 주세요.</p>"
     +cosmChips(res.junk,"nm")+"</div></details>";
+  if(res.labels.length) h+='<details class="cm-fold"><summary>색상·호수 이름표로 보여 뺀 것 '+res.labels.length+"개 보기</summary><div>"
+    +"<p style=\"margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--ink-2)\">[ ] 로 묶인 색상·호수·구성품 이름이 성분 사이에 끼어 있어서 목록에서 뺐어요. 성분이 맞다면 이름만 따로 적어서 다시 확인해 주세요.</p>"
+    +cosmChips(res.labels,"nm")+"</div></details>";
   h+='<div class="cm-note"><p>목록에 올라 있다고 해서 임신 중에 쓰면 안 된다는 뜻은 아니에요. 반대로 목록에서 찾지 못했다고 해서 문제가 없다는 뜻도 아니에요. 이름이 달라 못 찾았을 수 있고, 이 목록이 걱정되는 성분을 모두 담고 있지도 않아요.</p>'
     +"<p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>";
   return h;
@@ -6059,7 +6078,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="c28e4fd1";
+var APP_BUILD="84e29b6d";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
