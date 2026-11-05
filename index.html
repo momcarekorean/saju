@@ -4950,7 +4950,7 @@ function cosmDurIngSet(Dd){
   return Dd.__ik||(Dd.__ik=new Map(Dd.ings.map(g=>[cosmDrugKey(g.n),g.n])));
 }
 function cosmPermitIngText(P,i){
-  const a=(P.ings[P.items[i][3]][0]||"").split("|").filter(Boolean);
+  const a=(P.ings[P.items[i][3]][0]||"").split("|").filter((n,k,x)=>n&&x.indexOf(n)===k);   // 허가정보에 같은 성분이 두 번 적힌 제품이 있어 한 번만
   return a.length>6?a.slice(0,6).join(", ")+" 외 "+(a.length-6)+"가지":a.join(", ");
 }
 function cosmPermitCardHtml(P,i,Dd,DM,open){
@@ -6306,7 +6306,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="2758c751";
+var APP_BUILD="229315b3";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
