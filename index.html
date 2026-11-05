@@ -1059,6 +1059,9 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cosm .cm-badge.lim{border-color:var(--to);color:var(--to)}
 #tab-cosm .cm-badge.ban{border-color:var(--seal);color:var(--seal)}
 #tab-cosm .cm-badge.oth{border-color:var(--su);color:var(--su)}
+#tab-cosm .cm-badge.na{border-color:var(--rule);color:var(--ink-2);font-weight:600}
+#tab-cosm .cm-item h4 .cm-badge+.cm-badge{margin-left:6px}
+#tab-cosm .cm-caveat{margin:2px 0 6px;font-size:13px;line-height:1.7;font-weight:700;color:var(--ink)}
 #tab-cosm .cm-as{margin:0 0 4px;font-size:12.5px;color:var(--ink-3)}
 #tab-cosm .cm-cond{margin:6px 0 0;padding:8px 10px;border-radius:3px;background:var(--card);font-size:13px;line-height:1.7;color:var(--ink);white-space:pre-line}
 #tab-cosm .cm-cond b{display:block;margin:0 0 2px;font-size:12px;color:var(--ink-2)}
@@ -1897,6 +1900,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <div id="tab-cosm" class="hidden">
 <p class="upd"><b>업데이트 11/3</b> 화장품 성분 확인 탭이 생겼어요. 전성분을 붙여 넣으면 식약처 화장품 원료 자료와 하나씩 맞춰 봐 줘요</p>
 <p class="upd"><b>업데이트 11/3</b> 약 이름이나 성분으로 식약처 임부금기 목록에 올라 있는지 찾는 칸이 생겼어요</p>
+<p class="upd"><b>업데이트 11/5</b> 약 조회에 식약처 허가 의약품 3만 5천여 개를 추가했어요. 타이레놀·지르텍처럼 임부금기 목록에 없는 약도 이름으로 찾을 수 있고, 허가사항에 적힌 임신 관련 문구를 함께 보여 줘요</p>
 <h2 class="cm-h">화장품·약, 식약처 공식 자료와 맞춰 보기</h2>
 <p class="cm-lead">화장품은 전성분을 붙여 넣고, 약은 이름이나 성분을 넣으면 식품의약품안전처 공식 자료의 목록에 올라 있는지 하나씩 찾아 줘요.</p>
 <div class="cm-modes" role="group" aria-label="확인할 것 고르기"><button type="button" class="cm-mode on" data-m="cos" aria-pressed="true">화장품 전성분</button><button type="button" class="cm-mode" data-m="drug" aria-pressed="false">약 이름·성분</button></div>
@@ -1944,12 +1948,12 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <div id="cmModeDrug" hidden>
 <div class="cm-card cm-step">
   <h3>약 이름이나 성분 넣기</h3>
-  <p>먹거나 바르는 약의 이름(예: 게보린, 부루펜)이나 성분(예: 이부프로펜)을 넣으면, 식약처가 임신 중 쓰지 말라고 정한 의약품 목록(DUR 임부금기)에 올라 있는지 찾아 줘요.</p>
+  <p>먹거나 바르는 약의 이름(예: 타이레놀, 지르텍, 게보린)이나 성분(예: 아세트아미노펜, 이부프로펜)을 넣으면, 식약처가 임신 중 쓰지 말라고 정한 의약품 목록(DUR 임부금기)에 해당하는지와, 식약처 허가사항(사용상의 주의사항)에 임신 중 관련 문구가 어떻게 적혀 있는지를 함께 보여 줘요.</p>
   <label for="cmDrugQ">약 이름 또는 성분 이름</label>
-  <input type="search" id="cmDrugQ" class="cm-q" placeholder="예: 이부프로펜, 게보린, 아스피린" autocomplete="off" spellcheck="false">
+  <input type="search" id="cmDrugQ" class="cm-q" placeholder="예: 타이레놀, 지르텍, 이부프로펜" autocomplete="off" spellcheck="false">
   <button type="button" id="cmDrugRun" class="cm-run">찾아보기</button>
   <p class="cm-sub" id="cmDrugState" role="status"></p>
-  <p class="cm-sub">제품 이름의 일부만 넣어도 돼요. 이름은 식약처 허가 이름과 달라 못 찾을 수 있으니, 성분 이름으로도 찾아보세요. 영양제와 한약은 이 목록에 없어요.</p>
+  <p class="cm-sub">제품 이름의 일부만 넣어도 돼요. 이름은 식약처 허가 이름과 달라 못 찾을 수 있으니, 성분 이름으로도 찾아보세요. 건강기능식품(영양제)과 화장품은 이 자료에 없어요.</p>
 </div>
 <div id="cmDrugOut"></div>
 </div>
@@ -1958,7 +1962,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <ol>
     <li><b>성격</b> 공식 자료를 찾아 보여 주는 정보 제공이에요. 의료행위, 진단, 처방, 복약지도가 아니에요.</li>
     <li><b>한계</b> 식약처 화장품 원료 자료 기준이고, 이름이 다르게 적히면 못 찾을 수 있어요. 염류나 에스터류는 묶음 이름으로 올라 있는 경우가 많아 개별 이름은 못 찾기도 해요. 성분이 얼마나 들었는지, 어디에 얼마나 바르는지는 반영하지 않아요.</li>
-    <li><b>약 조회</b> 식약처 의약품안전사용서비스(DUR) 임부금기 품목정보에 올라 있는지만 찾아요. 이 목록은 임신 중 쓰지 말라고 정한 성분을 모은 것이라, 목록에서 찾지 못했다고 해서 임신 중 써도 된다는 뜻이 아니에요. 사유는 식약처 자료 그대로 보여 주고, 약을 권하거나 말리지 않아요.</li>
+    <li><b>약 조회</b> 식약처 의약품안전사용서비스(DUR) 임부금기 품목정보에 해당하는지와, 식약처 의약품 허가정보의 사용상의 주의사항 중 임신 관련 문구를 찾아 그대로 보여 줘요. DUR 임부금기에 해당하지 않는다고 해서 임신 중 써도 된다는 뜻이 아니에요. 허가사항 문구는 제품마다 달라서 제품 이름으로 찾아야 정확해요. 사유와 문구는 식약처 자료 그대로 보여 주고, 약을 권하거나 말리지 않아요.</li>
     <li><b>약은 이익과 위험을 견줘 처방해요</b> 목록에 올라 있어도 약의 부작용 위험보다 처방으로 얻는 이익이 더 크다고 전문의가 판단하면 처방할 수 있어요. 처방받은 약을 이 화면만 보고 임의로 멈추지 마세요.</li>
     <li><b>전문의 판단이 먼저예요</b> 공식 목록과 다르게 안내받았거나 처방받은 경우가 있을 수 있어요. 임의로 시작하거나 멈추지 말고 담당 의사·약사와 상의하세요.</li>
     <li><b>이상이 있을 때</b> 쓰고 나서 발진, 가려움, 붓기 같은 이상이 생기면 사용을 멈추고 진료를 받으세요.</li>
@@ -4890,15 +4894,114 @@ function cosmDrugCardHtml(Dd,g,idxs,open,max){
     +(mix?'<p class="cm-sub">복합제는 사유에 \'(○○에 한함)\'처럼 어느 성분이 금기인지 조건이 붙어 있어요. 사유를 끝까지 읽어 주세요.</p>':"")
     +'<details class="cm-fold"'+(open?" open":"")+"><summary>"+(open?"이 이름의 제품 ":"이 성분이 든 제품 ")+idxs.length+"개 보기</summary><div>"+cosmDrugItemsHtml(Dd,idxs,max)+"</div></details></div>";
 }
-function cosmDrugHtml(res,q,Dd,IX){
-  const note='<div class="cm-note"><p>그래서 이 목록만 보고 임의로 시작하거나 멈추지 말고 담당 의사·약사와 상의하세요. 이 화면은 약을 권하거나 말리지 않아요.</p><p>이 목록은 식약처가 임신 중 쓰지 말라고 정한 의약품 성분을 모아 둔 것이라, 목록에서 찾지 못했다고 해서 임신 중 써도 된다는 뜻은 아니에요.</p><p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>';
+/* 허가사항(식약처 의약품 제품 허가정보 permit.json)의 임신 관련 문구: DUR 임부금기에 해당하는지와 함께 보여 주고, 판단은 하지 않는다. */
+const COSM_PLV={
+  c:"허가사항 '투여하지 말 것' 항목에 임신 관련 문구",
+  n:"허가사항 '신중히 투여할 것' 항목에 임신 관련 문구",
+  s:"허가사항 '상의할 것' 항목에 임신 관련 문구",
+  p:"허가사항 '임부에 대한 투여' 항목에 안내",
+  o:"허가사항에 임신 관련 문구가 있어요",
+  x:"허가사항에 임신 중 문구가 따로 없어요",
+  u:"허가사항 자료가 없어요"
+};
+const COSM_PLV_SHORT={c:"'투여하지 말 것'",n:"'신중히 투여할 것'",s:"'상의할 것'",p:"'임부에 대한 투여'",o:"그 밖의 임신 관련 문구",x:"임신 중 문구 없음",u:"허가사항 자료 없음"};
+const COSM_PLV_ORDER=["c","n","s","p","o","x","u"];
+/* 약 결과에는 항상 붙는 단서: 해당 없음이어도, 해당해도 전문의와 상의하는 쪽이 더 정확하다 */
+const COSM_CAVEAT_NONE="DUR 임부금기 목록에는 없지만, 전문의와 상의하는 것이 더 정확해요.";
+const COSM_CAVEAT_HIT="목록에 올라 있어도 전문의가 이익과 위험을 견줘 판단하니, 전문의와 상의하는 것이 더 정확해요.";
+function cosmPermitIndex(P){
+  return {nameK:P.items.map(x=>cosmDrugKey(x[0])), ingK:P.ings.map(g=>cosmDrugKey(g[0]+" "+g[1]))};
+}
+/* 제품 이름에 들어 있으면 앞쪽에 들어 있는 것·이름이 짧은 것부터, 이름에는 없고 주성분에 들어 있으면 그 뒤에 */
+function cosmPermitSearch(P,PX,q){
+  const k=cosmDrugKey(q), res={k,name:[],ing:[]};
+  if(k.length<2) return res;
+  P.items.forEach((x,i)=>{
+    const p=PX.nameK[i].indexOf(k);
+    if(p>=0) res.name.push([p,PX.nameK[i].length,i]);
+    else if(PX.ingK[x[3]].indexOf(k)>=0) res.ing.push(i);
+  });
+  res.name.sort((a,b)=>a[0]-b[0]||a[1]-b[1]||a[2]-b[2]);
+  res.name=res.name.map(x=>x[2]);
+  return res;
+}
+/* 임신 관련 문구가 어느 항목에 있는지: 투여하지 말 것 > 신중히 투여할 것 > 상의할 것 > 임부에 대한 투여 > 그 밖 > 문구 없음 > 자료 없음 */
+function cosmPermitLevel(P,i){
+  const t=P.items[i][4];
+  if(t===-2) return "u";
+  if(t<0) return "x";
+  const ks=P.tx[t].map(l=>l[0]);
+  for(const k of ["c","n","s","p"]) if(ks.indexOf(k)>=0) return k;
+  return "o";
+}
+function cosmDurBySeq(Dd){
+  const m=new Map();
+  Dd.items.forEach((x,i)=>{ if(x[6]){ const a=m.get(x[6]); if(a) a.push(i); else m.set(x[6],[i]); } });
+  return m;
+}
+function cosmPermitStats(P,idxs,DM){
+  const lv={}, st={n:idxs.length,dur:0,lv:lv};
+  COSM_PLV_ORDER.forEach(k=>{lv[k]=0;});
+  idxs.forEach(i=>{ lv[cosmPermitLevel(P,i)]++; if(DM&&DM.has(P.items[i][6])) st.dur++; });
+  return st;
+}
+/* DUR 임부금기 성분 이름(띄어쓰기·기호를 없앤 열쇠 → 이름). 제품은 목록의 품목이 아니어도 주성분이 목록의 성분이면 짚어 주려고 쓴다 */
+function cosmDurIngSet(Dd){
+  return Dd.__ik||(Dd.__ik=new Map(Dd.ings.map(g=>[cosmDrugKey(g.n),g.n])));
+}
+function cosmPermitIngText(P,i){
+  const a=(P.ings[P.items[i][3]][0]||"").split("|").filter(Boolean);
+  return a.length>6?a.slice(0,6).join(", ")+" 외 "+(a.length-6)+"가지":a.join(", ");
+}
+function cosmPermitCardHtml(P,i,Dd,DM,open){
+  const x=P.items[i], lv=cosmPermitLevel(P,i), du=(DM&&DM.get(x[6]))||[], ing=cosmPermitIngText(P,i);
+  const ov=du.length?[]:(P.ings[x[3]][0]||"").split("|").map(n=>cosmDurIngSet(Dd).get(cosmDrugKey(n))).filter((n,k,a)=>n&&a.indexOf(n)===k);   // 이 제품은 목록의 품목이 아닌데 주성분이 목록의 성분인 경우
+  const chg=/^\d{8}$/.test(x[5])?x[5].slice(0,4)+"-"+x[5].slice(4,6)+"-"+x[5].slice(6):"";
+  let h='<div class="cm-item"><h4>'+cosmEsc(x[0])
+    +(du.length?'<span class="cm-badge ban">DUR 임부금기 목록에 해당</span>':(ov.length?'<span class="cm-badge lim">DUR 임부금기 품목에는 없음 · 주성분은 목록에 있는 성분</span>':'<span class="cm-badge na">DUR 임부금기 해당 없음</span>'))
+    +'<span class="cm-badge '+(lv==="c"?"ban":(lv==="x"||lv==="u"?"na":"lim"))+'">'+cosmEsc(COSM_PLV[lv])+"</span></h4>"
+    +'<p class="cm-as">'+cosmEsc(P.mk[x[2]])+" · "+(x[1]?"일반의약품":"전문의약품")+(ing?" · 주성분 "+cosmEsc(ing):"")+(chg?" · 허가사항 변경일 "+chg:"")+"</p>"
+    +'<p class="cm-caveat">'+cosmEsc(du.length?COSM_CAVEAT_HIT:COSM_CAVEAT_NONE)+"</p>"
+    +(ov.length?'<p class="cm-cond"><b>주성분을 함께 봐 주세요</b>'+cosmEsc("이 제품의 주성분 "+ov.join(", ")+"은(는) DUR 임부금기 목록에 올라 있는 성분이에요. 이 제품 자체는 목록의 품목으로 올라 있지 않지만, 같은 성분이 든 다른 제품은 올라 있어요. 아래 허가사항 문구와 함께 전문의와 상의하세요.")+"</p>":"");
+  const seen=new Set();
+  du.forEach(j=>{
+    const it=Dd.items[j], key=it[3]+"|"+it[5]; if(seen.has(key)) return; seen.add(key);
+    const r=Dd.rs[it[5]];
+    h+='<p class="cm-cond"><b>DUR 임부금기 사유: '+cosmEsc(Dd.ings[it[3]].n)+" (식약처 자료 그대로, 줄바꿈만 정리)</b>"+(r[0]?cosmDrugTextHtml(r[0]):cosmEsc("사유가 적혀 있지 않아요(식약처 자료에 사유가 비어 있어요)."))+"</p>"
+      +(r[1]?'<p class="cm-cond"><b>비고 (자료 그대로, 줄바꿈만 정리)</b>'+cosmDrugTextHtml(r[1])+"</p>":"");
+  });
+  if(lv==="x") h+='<p class="cm-sub">식약처 허가사항(사용상의 주의사항)에 임신이나 임부를 말한 문구가 따로 보이지 않아요. 문구가 없다고 해서 임신 중 써도 된다는 뜻은 아니에요.</p>';
+  else if(lv==="u") h+='<p class="cm-sub">식약처 허가정보에 이 제품의 사용상의 주의사항 자료가 없어요.</p>';
+  else h+='<details class="cm-fold"'+(open?" open":"")+"><summary>허가사항에 적힌 임신 관련 문구 보기 (자료 그대로)</summary><div>"
+    +P.tx[x[4]].map(l=>'<p class="cm-cond"><b>'+cosmEsc(l[1])+"</b>"+cosmEsc(l[2])+"</p>").join("")+"</div></details>";
+  return h+"</div>";
+}
+function cosmPermitStatsHtml(st){
+  const parts=COSM_PLV_ORDER.filter(k=>st.lv[k]>0).map(k=>COSM_PLV_SHORT[k]+" "+st.lv[k]+"개");
+  return '<p class="cm-sub">이 이름이 든 허가 제품 '+st.n+"개 중 DUR 임부금기 목록에 해당하는 제품은 "+st.dur+"개예요. 허가사항에서 임신 관련 문구가 있는 항목을 세어 보면 "+parts.join(", ")+"이에요. 복합제는 함께 든 다른 성분 때문에 목록에 해당하는 경우도 있어요.</p>";
+}
+function cosmDrugHtml(res,q,Dd,IX,P,PX,DM){
+  const qq=cosmEsc(q.trim());
+  const note='<div class="cm-note"><p>그래서 이 화면만 보고 임의로 시작하거나 멈추지 말고 담당 의사·약사와 상의하세요. 이 화면은 약을 권하거나 말리지 않아요.</p><p>DUR 임부금기에 해당하지 않는다고 해서 임신 중 써도 된다는 뜻은 아니에요. 허가사항의 문구도 약마다 달라서, 문구가 같은 약끼리도 몸 상태에 따라 판단이 달라질 수 있어요.</p><p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>';
   if(res.short) return '<div class="cm-note"><p>두 글자 이상 넣어 주세요.</p></div>';
-  if(!res.nIng) return '<div class="cm-note"><p><b>\''+cosmEsc(q.trim())+"'을(를) 식약처 DUR 임부금기 품목 목록에서 찾지 못했어요.</b> 목록에 없다고 해서 임신 중 써도 된다는 뜻은 아니에요. 아직 목록에 오르지 않았거나, 이름이 달라 못 찾았을 수 있어요. 제품 이름의 일부나 성분 이름으로 다시 찾아보세요.</p><p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>";
-  let h='<div class="cm-sum"><b>\''+cosmEsc(q.trim())+"' 찾은 결과</b><br>DUR 임부금기 목록에 올라 있는 성분 "+res.nIng+"개 · 제품 "+res.nItem+"개</div>"
-    +'<div class="cm-key"><p><b>목록에 올라 있어도, 약의 부작용 위험보다 처방으로 얻는 이익이 더 크다고 판단되면 전문의가 판단해서 처방할 수 있어요.</b></p><p>예를 들어 기침이 심해서 그대로 두는 것이 임신 중인 몸에 더 큰 부담이 될 때처럼, 약을 쓰지 않는 쪽의 부담이 더 크면 의사가 약을 처방하기도 해요.</p></div>';
+  const pm=P?cosmPermitSearch(P,PX,q):null, nName=pm?pm.name.length:0, nIng=pm?pm.ing.length:0;
+  if(!res.nIng&&!nName&&!nIng) return '<div class="cm-note"><p><b>\''+qq+"'을(를) 식약처 의약품 자료에서 찾지 못했어요.</b> 이름이 달라 못 찾았을 수 있어요. 제품 이름의 일부나 성분 이름으로 다시 찾아보세요. 건강기능식품, 한약, 화장품은 이 자료에 없어요.</p><p><b>담당 의사·약사와 상의하세요.</b> 전문의의 판단이 항상 최우선이에요.</p></div>";
+  const durN=(P&&nName>0)?res.ingHits.length:res.nIng, nProd=nName+nIng;
+  const pAll=P?pm.name.concat(pm.ing):[], durProd=pAll.reduce((n,i)=>n+(DM&&DM.has(P.items[i][6])?1:0),0);   // 찾은 허가 제품 중 DUR 임부금기 품목인 것
+  const sp=[];
+  if(durN) sp.push("DUR 임부금기 목록에 올라 있는 성분 "+durN+"개");
+  if(P) sp.push("식약처 허가 제품 "+nProd+"개"+(durProd?" (DUR 임부금기 목록에 해당 "+durProd+"개)":""));
+  if(!durN&&!durProd) sp.unshift("DUR 임부금기 목록에 해당하는 성분·제품은 없어요");
+  let h='<div class="cm-sum"><b>\''+qq+"' 찾은 결과</b><br>"+sp.join(" · ")+"</div>";
+  if(durN||durProd) h+='<div class="cm-key"><p><b>목록에 올라 있어도, 약의 부작용 위험보다 처방으로 얻는 이익이 더 크다고 판단되면 전문의가 판단해서 처방할 수 있어요.</b></p><p>예를 들어 기침이 심해서 그대로 두는 것이 임신 중인 몸에 더 큰 부담이 될 때처럼, 약을 쓰지 않는 쪽의 부담이 더 크면 의사가 약을 처방하기도 해요.</p></div>';
+  else h+='<div class="cm-key"><p><b>'+cosmEsc(COSM_CAVEAT_NONE)+'</b></p><p>이 목록은 식약처가 임신 중 쓰지 말라고 정한 약만 담고 있어서, 해당하지 않는 약도 허가사항에 임신 중 주의 문구가 적혀 있을 수 있어요. 아래 허가사항 문구를 함께 보고, 임신 중에 쓰는 약은 담당 의사·약사와 상의하세요.</p></div>';
   const MAXC=6;
   res.ingHits.slice(0,MAXC).forEach(g=>{h+=cosmDrugCardHtml(Dd,g,IX.byIng.get(g)||[],false,40);});
-  res.nameHits.slice(0,Math.max(0,MAXC-res.ingHits.length)).forEach(x=>{h+=cosmDrugCardHtml(Dd,x.ing,x.items,true,15);});
+  if(nProd>1) h+=cosmPermitStatsHtml(cosmPermitStats(P,pm.name.concat(pm.ing),DM));
+  const all=pAll, cap=res.ingHits.length?4:8;
+  all.slice(0,cap).forEach((i,k)=>{h+=cosmPermitCardHtml(P,i,Dd,DM,k<2);});
+  if(all.length>cap) h+='<p class="cm-sub">허가 제품 '+(all.length-cap)+"개가 더 있어요. 제품 이름을 조금 더 적으면 좁혀져요.</p>";
+  if(!P||nName===0) res.nameHits.slice(0,Math.max(0,MAXC-res.ingHits.length)).forEach(x=>{h+=cosmDrugCardHtml(Dd,x.ing,x.items,true,15);});
   if(res.nIng>MAXC) h+='<p class="cm-sub">성분 '+(res.nIng-MAXC)+"개는 줄여서 보여 드렸어요. 더 정확한 이름으로 찾아보세요.</p>";
   return h+note;
 }
@@ -4906,12 +5009,12 @@ function cosmDrugHtml(res,q,Dd,IX){
 (function(){
   const $=id=>document.getElementById(id);
   const root=$("tab-cosm"); if(!root) return;
-  let DATA=null, IX=null, loading=false, failed=false, pending=false, PROD=null, prodNote="", DRUG=null, DIDX=null, dloading=false, mode="cos";
+  let DATA=null, IX=null, loading=false, failed=false, pending=false, PROD=null, prodNote="", DRUG=null, DIDX=null, PERMIT=null, PIDX=null, DMAP=null, dloading=false, mode="cos";
   if($("cmPregInfo")) $("cmPregInfo").innerHTML=cosmPregInfoHtml();
   function state(t){$("cmState").textContent=t||"";}
   const NOGOV=". 이 사이트는 식품의약품안전처와 관계가 없고, 식품의약품안전처가 제공하거나 보증하는 서비스가 아니에요.";
   function foot(){
-    if(mode==="drug"){ $("cmFoot").innerHTML=DRUG?"자료 출처: 식품의약품안전처 의약품안전사용서비스(DUR) 임부금기 품목정보(공공데이터포털), 자료 기준일 "+cosmEsc(DRUG.asof)+NOGOV:""; return; }
+    if(mode==="drug"){ $("cmFoot").innerHTML=DRUG?"자료 출처: 식품의약품안전처 의약품안전사용서비스(DUR) 임부금기 품목정보(공공데이터포털), 자료 기준일 "+cosmEsc(DRUG.asof)+(PERMIT?" · 식품의약품안전처 의약품 제품 허가정보(공공데이터포털)의 사용상의 주의사항, 자료 기준일 "+cosmEsc(PERMIT.asof):"")+NOGOV:""; return; }
     if(DATA) $("cmFoot").innerHTML="자료 출처: 식품의약품안전처 화장품 원료성분정보·화장품 사용제한 원료정보(공공데이터포털), 자료 기준일 "+cosmEsc(DATA.asof)+NOGOV;
   }
   function load(){
@@ -4955,15 +5058,18 @@ function cosmDrugHtml(res,q,Dd,IX){
   // 약 이름·성분 조회: dur.json(식약처 DUR 임부금기)은 약 칸을 처음 열 때 받는다
   function loadDrug(){
     if(DRUG||dloading) return; dloading=true; $("cmDrugState").textContent="식약처 임부금기 자료를 받는 중이에요…";
-    fetch("dur.json?t="+Math.floor(Date.now()/86400000)).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();})
-      .then(d=>{DRUG=d; DIDX=cosmDrugIndex(d); dloading=false; $("cmDrugState").textContent=""; foot(); runDrug();})
+    const day=Math.floor(Date.now()/86400000);
+    const getJ=u=>fetch(u).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();});
+    // 허가사항 자료(permit.json)는 못 받아도 DUR 자료만으로 계속 동작한다
+    Promise.all([getJ("dur.json?t="+day), getJ("permit.json?t="+day).catch(()=>null)])
+      .then(a=>{DRUG=a[0]; DIDX=cosmDrugIndex(a[0]); DMAP=cosmDurBySeq(a[0]); PERMIT=a[1]; PIDX=a[1]?cosmPermitIndex(a[1]):null; dloading=false; $("cmDrugState").textContent=""; foot(); runDrug();})
       .catch(()=>{dloading=false; $("cmDrugState").textContent="자료를 불러오지 못했어요. 잠시 뒤 다시 눌러 주세요.";});
   }
   function runDrug(){
     const q=$("cmDrugQ").value;
     if(!q.trim()){ $("cmDrugOut").innerHTML=""; return; }
     if(!DRUG){ loadDrug(); return; }
-    $("cmDrugOut").innerHTML=cosmDrugHtml(cosmDrugSearch(DRUG,DIDX,q),q,DRUG,DIDX);
+    $("cmDrugOut").innerHTML=cosmDrugHtml(cosmDrugSearch(DRUG,DIDX,q),q,DRUG,DIDX,PERMIT,PIDX,DMAP);
   }
   function setMode(m){
     mode=m;
@@ -6200,7 +6306,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="b3999d02";
+var APP_BUILD="2758c751";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
