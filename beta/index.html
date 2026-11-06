@@ -975,6 +975,8 @@ dd b{font-weight:500; color:var(--ink)}
 .pwa-steps{margin:0;padding-left:20px;font-size:14px;line-height:1.75;color:var(--ink-2)}
 .pwa-steps li{margin:0 0 6px}
 .pwa-ic{vertical-align:-3px;color:var(--seal)}
+.pwa-safe{margin:10px 0 0;padding:9px 11px;border-radius:8px;background:var(--paper-2);font-size:12.5px;line-height:1.65;color:var(--ink-2)}
+.pwa-safe b{color:var(--ink)}
 .pwa-note{margin:8px 0 0;font-size:12.5px;line-height:1.65;color:var(--ink-3)}
 .pwa button:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
 /*TS:CSS:BEGIN*/
@@ -1298,6 +1300,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
       <p class="pwa-lead" id="pwaLead"></p>
       <ol class="pwa-steps" id="pwaSteps"></ol>
       <p class="pwa-note" id="pwaNote"></p>
+      <p class="pwa-safe"><b>안심하세요.</b> 바로가기는 이 사이트 주소로 바로 열리는 아이콘일 뿐이에요. 앱 설치 파일(APK)을 내려받지 않고, 악성코드나 바이러스도 없고, 연락처·사진 같은 폰 안의 정보를 가져가지 않아요.</p>
     </div>
   </div>
   <p class="visits" id="visitBox" hidden></p>
@@ -1365,10 +1368,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 
 <p class="upd"><b>업데이트 11/6</b> 휴대폰 홈 화면에 이 사이트 바로가기를 만들 수 있어요. 맨 위 '홈 화면에 바로가기 만들기'를 누르면 안드로이드·아이폰별로 방법이 나와요. 앱을 설치하는 게 아니라 바로가기 아이콘만 만들어요</p>
 <p class="upd"><b>업데이트 11/6</b> 태어난 지역을 시·군까지 고를 수 있어요(전국 161곳). 강원이 춘천뿐이라는 방문자 의견을 반영했어요 · 저장해 둔 기록과 공유 주소는 그대로 열려요</p>
-<p class="upd"><b>업데이트 10/21</b> 저장해 둔 작명 기록을 맨 위로 옮겼어요. 바로 불러올 수 있어요</p>
-<p class="upd"><b>업데이트 10/21</b> 성씨 한자를 고르거나 직접 넣을 수 있어요. 한자에 따라 획수가 달라 추천 이름이 달라져요 · 방문자 의견을 반영했어요</p>
-<p class="upd"><b>업데이트 10/19</b> 작명 기록을 이 기기에 저장할 수 있어요(선택) · 성씨 칸의 예시 글자 삭제</p>
-<p class="upd"><b>업데이트 9/29</b> 인명용 한자 대폭 추가 · 한자 이름 풀이 · 풀이를 쉬운 말로 · 오류 수정</p>
 
 <p class="sub" style="margin:0 0 18px">생년월일과 태어난 시각으로 사주 여덟 글자를 계산합니다. 절기와 진태양시를 적용하고, <b>무엇을 어떻게 보정했는지 전부 아래에 표시</b>합니다.</p>
 
@@ -1773,10 +1772,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <p class="upd"><b>업데이트 11/6</b> 점수를 어떤 비율로 매겼는지 결과 맨 위에 적었어요(다섯 기운 20%, 계절 20%, 부모님 15% …). 풀이하는 분마다 기준이 달라서 이 도구의 기준을 밝혀 뒀어요</p>
 <p class="upd"><b>업데이트 11/6</b> 결과 풀이를 쉬운 말로 바꿨어요. 항목마다 초록·노랑·빨강 신호등으로 한눈에 보고, 어려운 말은 접어 둔 풀이에서 볼 수 있어요 · 방문자 의견을 반영했어요</p>
 <p class="upd"><b>업데이트 11/6</b> 태어날 지역을 시·군까지 고를 수 있어요(전국 161곳)</p>
-<p class="upd"><b>업데이트 10/21</b> 저장해 둔 택일 기록을 맨 위로 옮겼어요 · 이 도구를 소개한 블로그 글(원문) 링크와 의견 남기는 곳을 맨 아래에 안내해요</p>
-<p class="upd"><b>업데이트 10/20</b> 택일 기록을 이 기기에 저장할 수 있어요(선택) · 예정일을 한 번만 넣으면 모든 탭에 들어가요</p>
-<p class="upd"><b>업데이트 10/19</b> 같은 날짜의 여러 시간대를 순위로 비교하는 옵션 추가</p>
-<p class="upd"><b>업데이트 9/30</b> 주말·공휴일·야간 제외 선택 및 오류 수정</p>
 
 <div class="card" id="phCard">
   <h2>내 택일 기록 <span class="hcnt" id="phCnt"></span></h2>
@@ -2148,8 +2143,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 
 <div id="tab-growth" class="hidden">
-<p class="upd"><b>업데이트 10/21</b> 저장한 초음파 기록을 맨 위로 옮겼어요</p>
-<p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
 <div class="card hidden" id="gListCard">
   <h2>저장한 기록</h2>
   <div class="gtw" id="gList"></div>
@@ -2243,8 +2236,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 </div>
 <div id="tab-week" class="hidden">
-<p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
-<p class="upd"><b>업데이트 10/19</b> 마지막 생리 시작일만 넣어도 출산 예정일과 오늘 몇 주 며칠인지 계산해요</p>
 <div class="card">
   <h2>주차별 우리 아기</h2>
   <p class="sub" style="margin-top:0">주차를 고르면 아기와 엄마 몸에 일어나는 일, 이번 주 검사와 챙길 것을 한 화면에서 볼 수 있어요. 임신 주수는 마지막 생리 시작일 기준이에요.</p>
@@ -2270,7 +2261,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 
 <div id="tab-check" class="hidden">
-<p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
 <div class="card">
   <h2>시기별 신청 체크리스트</h2>
   <p class="sub" style="margin-top:0">시기를 고르면 그때 신청할 것, 검사와 휴가, 살 것(필수와 선택), 안전 수칙을 한 화면에서 볼 수 있어요. 예정일을 몰라도 시기만 넘겨 보면 돼요. 제도는 바뀔 수 있으니 신청 전에 기관에서 한 번 더 확인해 주세요.</p>
@@ -2359,7 +2349,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <!--JP:HTML:END-->
 <!--BF:HTML:BEGIN-->
 <div id="tab-bf" class="hidden">
-<p class="upd"><b>업데이트 10/21</b> 이유식 가이드 탭이 생겼어요. 초기 레시피 4개부터 시작해요</p>
 <div id="bfBody"></div>
 </div>
 <!--BF:HTML:END-->
@@ -2367,7 +2356,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <div id="tab-benefit" class="hidden">
 <p class="upd"><b>업데이트 10/26</b> 소득 기준이 필요한 지원사업 카드마다 기준중위소득 금액표(2026년)와 건강보험료 기준표를 붙였어요 · 표 위에 가구원·태아·휴직 처리 기준도 적었어요</p>
 <p class="upd"><b>업데이트 10/26</b> 저소득층 기저귀·조제분유 카드에 누가 받을 수 있는지(수급·차상위·한부모, 장애인·다자녀 가구) 풀어 쓰고 조건 태그를 보강했어요</p>
-<p class="upd"><b>업데이트 10/23</b> 우리동네 혜택 탭이 생겼어요. 지역을 고르면 그 지역과 정부 혜택이 함께 나와요</p>
 <h2 class="ben-h">우리동네 임신·출산·육아 혜택 찾기</h2>
 <p class="ben-lead">사는 지역과 시기를 고르면 관련된 지원 사업을 찾아 줘요. 한부모, 기초수급, 장애처럼 특정 사유가 있어야 하는 혜택은 숨길 수 있어요.</p>
 <p class="ben-call">지자체가 직접 입력한 자료라 지역마다 양이 다르고, 빠진 혜택이나 오래된 내용이 있을 수 있어요. 신청 전에는 정부24나 해당 기관에서 꼭 확인하세요.</p>
@@ -7147,7 +7135,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="72b9284f";
+var APP_BUILD="cc5cc4c0";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -7693,6 +7681,25 @@ function phSaveLast(){
   });
 })();
 </script>
+<!--UPD:JS:BEGIN-->
+<script>
+/* === UPD-CORE START === */
+// '업데이트 11/6' 같은 문구가 며칠 지났는지. 연도는 적혀 있지 않아서 오늘 기준 가장 가까운 과거로 본다(하루 넘게 앞선 날짜는 작년).
+function updAgeDays(m,d,now){
+  const t=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
+  let x=Date.UTC(now.getFullYear(),m-1,d);
+  if(x>t+86400000) x=Date.UTC(now.getFullYear()-1,m-1,d);
+  return Math.floor((t-x)/86400000);
+}
+// 업데이트 문구는 14일(2주)만 보여 준다. 14일 이상 지났으면 true
+function updExpired(text,now,keepDays){
+  const mm=/업데이트\s*(\d{1,2})\/(\d{1,2})/.exec(String(text||"")); if(!mm) return false;
+  return updAgeDays(+mm[1],+mm[2],now)>=(keepDays||14);
+}
+/* === UPD-CORE END === */
+(function(){ try{ const now=new Date(); document.querySelectorAll("p.upd").forEach(p=>{ if(updExpired(p.textContent,now)) p.hidden=true; }); }catch(e){} })();
+</script>
+<!--UPD:JS:END-->
 <!--PWA:JS:BEGIN-->
 <script>
 /* === PWA-CORE START === */
