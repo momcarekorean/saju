@@ -11,6 +11,13 @@
 <meta property="og:url" content="https://momcarekorean.github.io/saju/">
 <meta property="og:image" content="https://momcarekorean.github.io/saju/tab-name.jpg">
 <link rel="canonical" href="https://momcarekorean.github.io/saju/">
+<meta name="theme-color" content="#F2EDE1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15130F" media="(prefers-color-scheme: dark)">
+<meta name="application-name" content="맘케어">
+<meta name="apple-mobile-web-app-title" content="맘케어">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
@@ -430,6 +437,33 @@ dd b{font-weight:500; color:var(--ink)}
 .pd{margin:14px 0 0;font-size:14px}
 .pd dt{font-weight:700;color:var(--seal);font-size:12.5px;letter-spacing:.03em;margin-top:12px}
 .pd dd{margin:4px 0 0;color:var(--ink-2);line-height:1.7}
+.wbar{display:flex;gap:2px;margin:12px 0 10px;height:30px;border-radius:8px;overflow:hidden}
+.wbar span{display:flex;align-items:center;justify-content:center;min-width:0;background:hsla(215,40%,52%,.6);font-size:12px;color:var(--ink)}
+.wbar span:nth-child(even){background:hsla(215,40%,52%,.32)}
+.wbar b{font-weight:800}
+.wlist{list-style:none;margin:0;padding:0}
+.wlist li{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--rule)}
+.wlist li:first-child{border-top:none}
+.wlist .wn{flex:none;width:22px;height:22px;border-radius:50%;background:var(--paper-2);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ink-2)}
+.wlist .wt{flex:1;min-width:0;font-size:14px;color:var(--ink)}
+.wlist .wt small{display:block;margin-top:1px;font-size:12.5px;color:var(--ink-3);line-height:1.5}
+.wlist em{flex:none;font-style:normal;font-weight:800;font-size:15px;color:var(--seal)}
+.glance{margin-top:14px}
+.glsum{margin:0 0 2px;font-size:13.5px;color:var(--ink-2)}
+.glloss{margin:0 0 6px;font-size:12.5px;color:var(--ink-3)}
+.gl{display:flex;gap:10px;padding:10px 12px;margin-top:8px;border:1px solid var(--rule);border-left-width:4px;border-radius:10px;background:var(--paper-2)}
+.tl{display:inline-block;flex:none;width:16px;height:16px;border-radius:50%;vertical-align:-3px;margin:0 3px 0 2px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.tl.ok{background:#2f9e5a}.tl.mid{background:#f2b705}.tl.bad{background:#e0463a}.tl.na{background:#b9b4a8}
+.gl .gi{margin:3px 0 0}
+.tlw{white-space:nowrap}
+.gl .gb{min-width:0;flex:1}
+.gl .gh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:14px;color:var(--ink)}
+.gl .gh em{flex:none;font-style:normal;font-size:12px;font-weight:700;color:var(--ink-3);white-space:nowrap}
+.gl p{margin:3px 0 0;font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+.gl.ok{border-left-color:#2f9e5a}.gl.mid{border-left-color:#f2b705}.gl.bad{border-left-color:#e0463a}.gl.na{border-left-color:#b9b4a8}
+.gdet{margin-top:14px;border:1px solid var(--rule);border-radius:10px;padding:2px 12px}
+.gdet>summary{cursor:pointer;padding:10px 0;font-weight:700;font-size:14px;color:var(--seal)}
+.gdet[open]>summary{border-bottom:1px solid var(--rule);margin-bottom:6px}
 .sbar{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
 .sbi{flex:1 1 92px;text-align:center;padding:9px 5px;border-radius:9px;
   background:var(--paper-2);border:1px solid var(--rule)}
@@ -929,6 +963,21 @@ dd b{font-weight:500; color:var(--ink)}
 .bf-disc p+p{margin-top:6px}
 .bf-disc b{color:var(--ink)}
 /*BF:CSS:END*/
+.pwa{margin-top:14px}
+.pwa-btn{appearance:none;min-height:44px;padding:0 18px;border:1px solid var(--seal);border-radius:99px;background:var(--card);color:var(--seal);font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.pwa-btn:hover,.pwa-btn[aria-expanded="true"]{background:var(--seal);color:#fff}
+.pwa-panel{margin-top:10px;padding:14px;border:1px solid var(--rule);border-radius:12px;background:var(--card);max-width:520px}
+.pwa-os{display:flex;gap:6px;margin:0 0 12px}
+.pwa-os button{appearance:none;flex:1;min-height:40px;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink-2);font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+.pwa-os button.on{background:var(--seal);border-color:var(--seal);color:#fff}
+.pwa-lead{margin:0 0 8px;font-size:14px;font-weight:700;line-height:1.6;color:var(--ink)}
+.pwa-steps{margin:0;padding-left:20px;font-size:14px;line-height:1.75;color:var(--ink-2)}
+.pwa-steps li{margin:0 0 6px}
+.pwa-ic{vertical-align:-3px;color:var(--seal)}
+.pwa-safe{margin:10px 0 0;padding:9px 11px;border-radius:8px;background:var(--paper-2);font-size:12.5px;line-height:1.65;color:var(--ink-2)}
+.pwa-safe b{color:var(--ink)}
+.pwa-note{margin:8px 0 0;font-size:12.5px;line-height:1.65;color:var(--ink-3)}
+.pwa button:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
 /*TS:CSS:BEGIN*/
 /* 한글 줄바꿈: 어절 중간에서 끊지 않고, 칸보다 긴 덩어리는 그 칸 안에서 접는다 */
 body{word-break:keep-all; overflow-wrap:break-word; text-wrap:pretty}
@@ -1243,6 +1292,16 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <p class="eyebrow">맘케어 · 임신부터 출산까지</p>
   <h1>임신·출산 무료 도구</h1>
   <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드, 우리동네 혜택, 화장품 성분 확인을 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
+  <div class="pwa" id="pwaBox" hidden>
+    <button type="button" class="pwa-btn" id="pwaBtn" aria-expanded="false" aria-controls="pwaPanel">홈 화면에 바로가기 만들기</button>
+    <div class="pwa-panel" id="pwaPanel" hidden>
+      <div class="pwa-os" role="group" aria-label="폰 종류 고르기"><button type="button" data-os="android">안드로이드</button><button type="button" data-os="ios">아이폰</button></div>
+      <p class="pwa-lead" id="pwaLead"></p>
+      <ol class="pwa-steps" id="pwaSteps"></ol>
+      <p class="pwa-note" id="pwaNote"></p>
+      <p class="pwa-safe"><b>안심하세요.</b> 바로가기는 이 사이트 주소로 바로 열리는 아이콘일 뿐이에요. 앱 설치 파일(APK)을 내려받지 않고, 악성코드나 바이러스도 없고, 연락처·사진 같은 폰 안의 정보를 가져가지 않아요.</p>
+    </div>
+  </div>
   <p class="visits" id="visitBox" hidden></p>
 </header>
 
@@ -1306,10 +1365,8 @@ h1,h2,h3,h4,th{text-wrap:balance}
 
 <div id="tab-saju">
 
-<p class="upd"><b>업데이트 10/21</b> 저장해 둔 작명 기록을 맨 위로 옮겼어요. 바로 불러올 수 있어요</p>
-<p class="upd"><b>업데이트 10/21</b> 성씨 한자를 고르거나 직접 넣을 수 있어요. 한자에 따라 획수가 달라 추천 이름이 달라져요 · 방문자 의견을 반영했어요</p>
-<p class="upd"><b>업데이트 10/19</b> 작명 기록을 이 기기에 저장할 수 있어요(선택) · 성씨 칸의 예시 글자 삭제</p>
-<p class="upd"><b>업데이트 9/29</b> 인명용 한자 대폭 추가 · 한자 이름 풀이 · 풀이를 쉬운 말로 · 오류 수정</p>
+<p class="upd"><b>업데이트 11/6</b> 휴대폰 홈 화면에 이 사이트 바로가기를 만들 수 있어요. 맨 위 '홈 화면에 바로가기 만들기'를 누르면 안드로이드·아이폰별로 방법이 나와요. 앱을 설치하는 게 아니라 바로가기 아이콘만 만들어요</p>
+<p class="upd"><b>업데이트 11/6</b> 태어난 지역을 시·군까지 고를 수 있어요(전국 161곳). 강원이 춘천뿐이라는 방문자 의견을 반영했어요 · 저장해 둔 기록과 공유 주소는 그대로 열려요</p>
 
 <p class="sub" style="margin:0 0 18px">생년월일과 태어난 시각으로 사주 여덟 글자를 계산합니다. 절기와 진태양시를 적용하고, <b>무엇을 어떻게 보정했는지 전부 아래에 표시</b>합니다.</p>
 
@@ -1338,18 +1395,192 @@ h1,h2,h3,h4,th{text-wrap:balance}
       <input type="text" id="t" value="14:25" inputmode="numeric" maxlength="5" placeholder="14:25" autocomplete="off">
     </div>
     <div>
-      <label for="city">태어난 지역</label>
+      <label for="city">태어난 지역 <span class="hint">시·군까지 골라요 · 없으면 가까운 곳</span></label>
       <select id="city">
-        <option value="126.978">서울 · 인천 · 경기</option>
-        <option value="129.075">부산</option>
-        <option value="128.601">대구</option>
-        <option value="126.851">광주</option>
-        <option value="127.385">대전 · 세종</option>
-        <option value="129.311">울산</option>
-        <option value="127.729">강원 (춘천)</option>
-        <option value="127.148">전주</option>
-        <option value="126.531">제주</option>
+        <!--CITY:OPTS:BEGIN-->
+        <optgroup label="서울·광역시">
+          <option value="126.978">서울</option>
+          <option value="129.075">부산</option>
+          <option value="128.601">대구</option>
+          <option value="126.694">인천</option>
+          <option value="126.851">광주</option>
+          <option value="127.385">대전</option>
+          <option value="129.311">울산</option>
+          <option value="127.259">세종</option>
+        </optgroup>
+        <optgroup label="경기">
+          <option value="127.495">가평군</option>
+          <option value="126.792">고양시</option>
+          <option value="126.991">과천시</option>
+          <option value="126.87">광명시</option>
+          <option value="127.257">광주시</option>
+          <option value="127.139">구리시</option>
+          <option value="126.935">군포시</option>
+          <option value="126.678">김포시</option>
+          <option value="127.193">남양주시</option>
+          <option value="127.054">동두천시</option>
+          <option value="126.782">부천시</option>
+          <option value="127.129">성남시</option>
+          <option value="127.021">수원시</option>
+          <option value="126.785">시흥시</option>
+          <option value="126.833">안산시</option>
+          <option value="127.267">안성시</option>
+          <option value="126.95">안양시</option>
+          <option value="127.063">양주시</option>
+          <option value="127.496">양평군</option>
+          <option value="127.636">여주시</option>
+          <option value="127.069">연천군</option>
+          <option value="127.07">오산시</option>
+          <option value="127.113">용인시</option>
+          <option value="126.974">의왕시</option>
+          <option value="127.051">의정부시</option>
+          <option value="127.448">이천시</option>
+          <option value="126.768">파주시</option>
+          <option value="127.064">평택시</option>
+          <option value="127.202">포천시</option>
+          <option value="127.194">하남시</option>
+          <option value="127.04">화성시</option>
+        </optgroup>
+        <optgroup label="강원">
+          <option value="128.894">강릉시</option>
+          <option value="128.47">고성군</option>
+          <option value="129.11">동해시</option>
+          <option value="129.164">삼척시</option>
+          <option value="128.584">속초시</option>
+          <option value="127.988">양구군</option>
+          <option value="128.622">양양군</option>
+          <option value="128.466">영월군</option>
+          <option value="127.948">원주시</option>
+          <option value="128.204">인제군</option>
+          <option value="128.698">정선군</option>
+          <option value="127.309">철원군</option>
+          <option value="127.729">춘천시</option>
+          <option value="128.991">태백시</option>
+          <option value="128.455">평창군</option>
+          <option value="127.883">홍천군</option>
+          <option value="127.705">화천군</option>
+          <option value="127.987">횡성군</option>
+        </optgroup>
+        <optgroup label="충북">
+          <option value="127.794">괴산군</option>
+          <option value="128.369">단양군</option>
+          <option value="127.72">보은군</option>
+          <option value="127.777">영동군</option>
+          <option value="127.568">옥천군</option>
+          <option value="127.592">음성군</option>
+          <option value="128.212">제천시</option>
+          <option value="127.582">증평군</option>
+          <option value="127.445">진천군</option>
+          <option value="127.472">청주시</option>
+          <option value="127.929">충주시</option>
+        </optgroup>
+        <optgroup label="충남">
+          <option value="127.243">계룡시</option>
+          <option value="127.125">공주시</option>
+          <option value="127.49">금산군</option>
+          <option value="127.088">논산시</option>
+          <option value="126.635">당진시</option>
+          <option value="126.597">보령시</option>
+          <option value="126.911">부여군</option>
+          <option value="126.458">서산시</option>
+          <option value="126.69">서천군</option>
+          <option value="127.017">아산시</option>
+          <option value="126.834">예산군</option>
+          <option value="127.137">천안시</option>
+          <option value="126.803">청양군</option>
+          <option value="126.303">태안군</option>
+          <option value="126.667">홍성군</option>
+        </optgroup>
+        <optgroup label="전북">
+          <option value="126.696">고창군</option>
+          <option value="126.714">군산시</option>
+          <option value="126.886">김제시</option>
+          <option value="127.387">남원시</option>
+          <option value="127.662">무주군</option>
+          <option value="126.736">부안군</option>
+          <option value="127.143">순창군</option>
+          <option value="127.123">완주군</option>
+          <option value="126.96">익산시</option>
+          <option value="127.283">임실군</option>
+          <option value="127.55">장수군</option>
+          <option value="127.148">전주시</option>
+          <option value="126.854">정읍시</option>
+          <option value="127.429">진안군</option>
+        </optgroup>
+        <optgroup label="전남">
+          <option value="126.769">강진군</option>
+          <option value="127.282">고흥군</option>
+          <option value="127.254">곡성군</option>
+          <option value="127.695">광양시</option>
+          <option value="127.466">구례군</option>
+          <option value="126.73">나주시</option>
+          <option value="126.983">담양군</option>
+          <option value="126.402">목포시</option>
+          <option value="126.466">무안군</option>
+          <option value="127.342">보성군</option>
+          <option value="127.517">순천시</option>
+          <option value="126.126">신안군</option>
+          <option value="127.703">여수시</option>
+          <option value="126.502">영광군</option>
+          <option value="126.609">영암군</option>
+          <option value="126.745">완도군</option>
+          <option value="126.783">장성군</option>
+          <option value="126.91">장흥군</option>
+          <option value="126.264">진도군</option>
+          <option value="126.522">함평군</option>
+          <option value="126.596">해남군</option>
+          <option value="126.989">화순군</option>
+        </optgroup>
+        <optgroup label="경북">
+          <option value="128.753">경산시</option>
+          <option value="129.216">경주시</option>
+          <option value="128.27">고령군</option>
+          <option value="128.345">구미시</option>
+          <option value="128.118">김천시</option>
+          <option value="128.199">문경시</option>
+          <option value="128.755">봉화군</option>
+          <option value="128.159">상주시</option>
+          <option value="128.286">성주군</option>
+          <option value="128.722">안동시</option>
+          <option value="129.381">영덕군</option>
+          <option value="129.112">영양군</option>
+          <option value="128.624">영주시</option>
+          <option value="128.937">영천시</option>
+          <option value="128.457">예천군</option>
+          <option value="130.905">울릉군</option>
+          <option value="129.413">울진군</option>
+          <option value="128.683">의성군</option>
+          <option value="128.739">청도군</option>
+          <option value="129.045">청송군</option>
+          <option value="128.399">칠곡군</option>
+          <option value="129.364">포항시</option>
+        </optgroup>
+        <optgroup label="경남">
+          <option value="128.629">거제시</option>
+          <option value="127.916">거창군</option>
+          <option value="128.325">고성군</option>
+          <option value="128.866">김해시</option>
+          <option value="127.895">남해군</option>
+          <option value="128.751">밀양시</option>
+          <option value="128.079">사천시</option>
+          <option value="127.878">산청군</option>
+          <option value="129.029">양산시</option>
+          <option value="128.262">의령군</option>
+          <option value="128.092">진주시</option>
+          <option value="128.495">창녕군</option>
+          <option value="128.639">창원시</option>
+          <option value="128.424">통영시</option>
+          <option value="127.753">하동군</option>
+          <option value="128.409">함안군</option>
+          <option value="127.73">함양군</option>
+          <option value="128.163">합천군</option>
+        </optgroup>
+        <optgroup label="제주">
+          <option value="126.561">서귀포시</option>
+          <option value="126.531">제주시</option>
+        </optgroup>
         <option value="135">보정 안 함 (동경 135°)</option>
+        <!--CITY:OPTS:END-->
       </select>
     </div>
   </div>
@@ -1537,10 +1768,9 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 <div id="tab-pick" class="hidden">
 
-<p class="upd"><b>업데이트 10/21</b> 저장해 둔 택일 기록을 맨 위로 옮겼어요 · 이 도구를 소개한 블로그 글(원문) 링크와 의견 남기는 곳을 맨 아래에 안내해요</p>
-<p class="upd"><b>업데이트 10/20</b> 택일 기록을 이 기기에 저장할 수 있어요(선택) · 예정일을 한 번만 넣으면 모든 탭에 들어가요</p>
-<p class="upd"><b>업데이트 10/19</b> 같은 날짜의 여러 시간대를 순위로 비교하는 옵션 추가</p>
-<p class="upd"><b>업데이트 9/30</b> 주말·공휴일·야간 제외 선택 및 오류 수정</p>
+<p class="upd"><b>업데이트 11/6</b> 점수를 어떤 비율로 매겼는지 결과 맨 위에 적었어요(다섯 기운 20%, 계절 20%, 부모님 15% …). 풀이하는 분마다 기준이 달라서 이 도구의 기준을 밝혀 뒀어요</p>
+<p class="upd"><b>업데이트 11/6</b> 결과 풀이를 쉬운 말로 바꿨어요. 항목마다 초록·노랑·빨강 신호등으로 한눈에 보고, 어려운 말은 접어 둔 풀이에서 볼 수 있어요 · 방문자 의견을 반영했어요</p>
+<p class="upd"><b>업데이트 11/6</b> 태어날 지역을 시·군까지 고를 수 있어요(전국 161곳)</p>
 
 <div class="card" id="phCard">
   <h2>내 택일 기록 <span class="hcnt" id="phCnt"></span></h2>
@@ -1578,17 +1808,191 @@ h1,h2,h3,h4,th{text-wrap:balance}
       <input type="text" id="edd" value="2027-04-09" placeholder="2027-04-09" inputmode="numeric" autocomplete="off"><label class="ck edsave"><input type="checkbox" class="edOn"> 이 기기에 예정일 저장 <span class="hint">모든 탭에 같은 예정일이 들어가요 · 서버로 보내지 않아요</span><span class="edmsg gnote" style="display:block;margin:2px 0 0"></span></label></div>
     <div><label for="bsex">아기 성별</label>
       <select id="bsex"><option value="F">여아</option><option value="M">남아</option></select></div>
-    <div><label for="pcity">태어날 지역</label><select id="pcity">
-        <option value="126.978">서울 · 인천 · 경기</option>
-        <option value="129.075">부산</option>
-        <option value="128.601">대구</option>
-        <option value="126.851">광주</option>
-        <option value="127.385">대전 · 세종</option>
-        <option value="129.311">울산</option>
-        <option value="127.729">강원 (춘천)</option>
-        <option value="127.148">전주</option>
-        <option value="126.531">제주</option>
+    <div><label for="pcity">태어날 지역 <span class="hint">시·군까지 골라요 · 없으면 가까운 곳</span></label><select id="pcity">
+        <!--CITY:OPTS:BEGIN-->
+        <optgroup label="서울·광역시">
+          <option value="126.978">서울</option>
+          <option value="129.075">부산</option>
+          <option value="128.601">대구</option>
+          <option value="126.694">인천</option>
+          <option value="126.851">광주</option>
+          <option value="127.385">대전</option>
+          <option value="129.311">울산</option>
+          <option value="127.259">세종</option>
+        </optgroup>
+        <optgroup label="경기">
+          <option value="127.495">가평군</option>
+          <option value="126.792">고양시</option>
+          <option value="126.991">과천시</option>
+          <option value="126.87">광명시</option>
+          <option value="127.257">광주시</option>
+          <option value="127.139">구리시</option>
+          <option value="126.935">군포시</option>
+          <option value="126.678">김포시</option>
+          <option value="127.193">남양주시</option>
+          <option value="127.054">동두천시</option>
+          <option value="126.782">부천시</option>
+          <option value="127.129">성남시</option>
+          <option value="127.021">수원시</option>
+          <option value="126.785">시흥시</option>
+          <option value="126.833">안산시</option>
+          <option value="127.267">안성시</option>
+          <option value="126.95">안양시</option>
+          <option value="127.063">양주시</option>
+          <option value="127.496">양평군</option>
+          <option value="127.636">여주시</option>
+          <option value="127.069">연천군</option>
+          <option value="127.07">오산시</option>
+          <option value="127.113">용인시</option>
+          <option value="126.974">의왕시</option>
+          <option value="127.051">의정부시</option>
+          <option value="127.448">이천시</option>
+          <option value="126.768">파주시</option>
+          <option value="127.064">평택시</option>
+          <option value="127.202">포천시</option>
+          <option value="127.194">하남시</option>
+          <option value="127.04">화성시</option>
+        </optgroup>
+        <optgroup label="강원">
+          <option value="128.894">강릉시</option>
+          <option value="128.47">고성군</option>
+          <option value="129.11">동해시</option>
+          <option value="129.164">삼척시</option>
+          <option value="128.584">속초시</option>
+          <option value="127.988">양구군</option>
+          <option value="128.622">양양군</option>
+          <option value="128.466">영월군</option>
+          <option value="127.948">원주시</option>
+          <option value="128.204">인제군</option>
+          <option value="128.698">정선군</option>
+          <option value="127.309">철원군</option>
+          <option value="127.729">춘천시</option>
+          <option value="128.991">태백시</option>
+          <option value="128.455">평창군</option>
+          <option value="127.883">홍천군</option>
+          <option value="127.705">화천군</option>
+          <option value="127.987">횡성군</option>
+        </optgroup>
+        <optgroup label="충북">
+          <option value="127.794">괴산군</option>
+          <option value="128.369">단양군</option>
+          <option value="127.72">보은군</option>
+          <option value="127.777">영동군</option>
+          <option value="127.568">옥천군</option>
+          <option value="127.592">음성군</option>
+          <option value="128.212">제천시</option>
+          <option value="127.582">증평군</option>
+          <option value="127.445">진천군</option>
+          <option value="127.472">청주시</option>
+          <option value="127.929">충주시</option>
+        </optgroup>
+        <optgroup label="충남">
+          <option value="127.243">계룡시</option>
+          <option value="127.125">공주시</option>
+          <option value="127.49">금산군</option>
+          <option value="127.088">논산시</option>
+          <option value="126.635">당진시</option>
+          <option value="126.597">보령시</option>
+          <option value="126.911">부여군</option>
+          <option value="126.458">서산시</option>
+          <option value="126.69">서천군</option>
+          <option value="127.017">아산시</option>
+          <option value="126.834">예산군</option>
+          <option value="127.137">천안시</option>
+          <option value="126.803">청양군</option>
+          <option value="126.303">태안군</option>
+          <option value="126.667">홍성군</option>
+        </optgroup>
+        <optgroup label="전북">
+          <option value="126.696">고창군</option>
+          <option value="126.714">군산시</option>
+          <option value="126.886">김제시</option>
+          <option value="127.387">남원시</option>
+          <option value="127.662">무주군</option>
+          <option value="126.736">부안군</option>
+          <option value="127.143">순창군</option>
+          <option value="127.123">완주군</option>
+          <option value="126.96">익산시</option>
+          <option value="127.283">임실군</option>
+          <option value="127.55">장수군</option>
+          <option value="127.148">전주시</option>
+          <option value="126.854">정읍시</option>
+          <option value="127.429">진안군</option>
+        </optgroup>
+        <optgroup label="전남">
+          <option value="126.769">강진군</option>
+          <option value="127.282">고흥군</option>
+          <option value="127.254">곡성군</option>
+          <option value="127.695">광양시</option>
+          <option value="127.466">구례군</option>
+          <option value="126.73">나주시</option>
+          <option value="126.983">담양군</option>
+          <option value="126.402">목포시</option>
+          <option value="126.466">무안군</option>
+          <option value="127.342">보성군</option>
+          <option value="127.517">순천시</option>
+          <option value="126.126">신안군</option>
+          <option value="127.703">여수시</option>
+          <option value="126.502">영광군</option>
+          <option value="126.609">영암군</option>
+          <option value="126.745">완도군</option>
+          <option value="126.783">장성군</option>
+          <option value="126.91">장흥군</option>
+          <option value="126.264">진도군</option>
+          <option value="126.522">함평군</option>
+          <option value="126.596">해남군</option>
+          <option value="126.989">화순군</option>
+        </optgroup>
+        <optgroup label="경북">
+          <option value="128.753">경산시</option>
+          <option value="129.216">경주시</option>
+          <option value="128.27">고령군</option>
+          <option value="128.345">구미시</option>
+          <option value="128.118">김천시</option>
+          <option value="128.199">문경시</option>
+          <option value="128.755">봉화군</option>
+          <option value="128.159">상주시</option>
+          <option value="128.286">성주군</option>
+          <option value="128.722">안동시</option>
+          <option value="129.381">영덕군</option>
+          <option value="129.112">영양군</option>
+          <option value="128.624">영주시</option>
+          <option value="128.937">영천시</option>
+          <option value="128.457">예천군</option>
+          <option value="130.905">울릉군</option>
+          <option value="129.413">울진군</option>
+          <option value="128.683">의성군</option>
+          <option value="128.739">청도군</option>
+          <option value="129.045">청송군</option>
+          <option value="128.399">칠곡군</option>
+          <option value="129.364">포항시</option>
+        </optgroup>
+        <optgroup label="경남">
+          <option value="128.629">거제시</option>
+          <option value="127.916">거창군</option>
+          <option value="128.325">고성군</option>
+          <option value="128.866">김해시</option>
+          <option value="127.895">남해군</option>
+          <option value="128.751">밀양시</option>
+          <option value="128.079">사천시</option>
+          <option value="127.878">산청군</option>
+          <option value="129.029">양산시</option>
+          <option value="128.262">의령군</option>
+          <option value="128.092">진주시</option>
+          <option value="128.495">창녕군</option>
+          <option value="128.639">창원시</option>
+          <option value="128.424">통영시</option>
+          <option value="127.753">하동군</option>
+          <option value="128.409">함안군</option>
+          <option value="127.73">함양군</option>
+          <option value="128.163">합천군</option>
+        </optgroup>
+        <optgroup label="제주">
+          <option value="126.561">서귀포시</option>
+          <option value="126.531">제주시</option>
+        </optgroup>
         <option value="135">보정 안 함 (동경 135°)</option>
+        <!--CITY:OPTS:END-->
       </select></div>
   </div>
   <h3 style="margin:22px 0 8px;font-size:15px">병원에서 가능하다고 한 날짜 범위</h3>
@@ -1612,15 +2016,29 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 
 <div id="pickOut" class="hidden">
+  <div class="card" id="pWeights"><h2>점수는 이렇게 매겼어요</h2>
+    <p class="sub" style="margin-top:0">사주 풀이는 보는 사람마다 무엇을 얼마나 중요하게 보는지가 달라요. 그래서 이 도구는 아래 일곱 가지를 <b>이 비율</b>로 보고,
+    100점 만점으로 더해서 순위를 매겼어요. 같은 사주도 다른 곳에서는 점수가 다르게 나올 수 있어요.</p>
+    <div class="wbar" role="img" aria-label="점수 비율: 다섯 기운의 균형 20%, 태어난 계절에 맞는 기운 20%, 부모님과 잘 맞는지 15%, 글자끼리 부딪히는 정도 15%, 옛사람들이 좋게 본 복 자리 10%, 20~50대 10년 흐름 10%, 병원 시간대 10%">
+      <span data-w="20" style="flex:20"><b>20%</b></span><span data-w="20" style="flex:20"><b>20%</b></span><span data-w="15" style="flex:15"><b>15%</b></span><span data-w="15" style="flex:15"><b>15%</b></span><span data-w="10" style="flex:10"><b>10%</b></span><span data-w="10" style="flex:10"><b>10%</b></span><span data-w="10" style="flex:10"><b>10%</b></span>
+    </div>
+    <ol class="wlist">
+      <li><span class="wn">1</span><span class="wt"><b>다섯 기운이 고른가</b><small>나무·불·흙·쇠·물이 고르게 들어 있는지</small></span><em>20%</em></li>
+      <li><span class="wn">2</span><span class="wt"><b>태어난 계절에 맞는 기운</b><small>계절에 필요한 기운과, 아기에게 제일 필요한 기운이 들어 있는지</small></span><em>20%</em></li>
+      <li><span class="wn">3</span><span class="wt"><b>부모님과 잘 맞는지</b><small>아빠·엄마 사주와 잘 어울리는지</small></span><em>15%</em></li>
+      <li><span class="wn">4</span><span class="wt"><b>글자끼리 부딪히는 정도</b><small>아기 사주 안에 서로 안 맞는 글자 짝이 적은지</small></span><em>15%</em></li>
+      <li><span class="wn">5</span><span class="wt"><b>옛사람들이 좋게 본 복 자리</b><small>귀인 자리가 있는지</small></span><em>10%</em></li>
+      <li><span class="wn">6</span><span class="wt"><b>20~50대 10년 흐름</b><small>필요한 기운이 들어오는 때가 있는지</small></span><em>10%</em></li>
+      <li><span class="wn">7</span><span class="wt"><b>병원 시간대</b><small>병원에서 수술 일정으로 잡기 쉬운 시간인지</small></span><em>10%</em></li>
+    </ol>
+    <p class="sub" style="margin:8px 0 0">순위는 이 일곱 항목의 점수를 모두 더한 총점이 높은 순서예요. 항목별 자세한 기준은 맨 아래 '어떻게 점수를 매겼나'에 있어요.</p>
+  </div>
   <div class="card"><h2>부모 사주</h2><div id="pParent"></div></div>
   <div class="card"><h2>후보를 전부 훑어봤어요</h2>
     <p class="sub" id="pAllSub" style="margin-top:0">가능한 날짜와 시각을 전부 계산했어요.</p>
     <div id="pAll"></div>
-    <p class="sub" style="margin-top:12px"><b>'걸리는 것' 읽는 법.</b> 사주는 태어난 해·달·날·시 네 칸이고,
-    옛사람들은 칸마다 인생의 자리를 하나씩 맡겼어요. <b>해</b>는 어린 시절, <b>달</b>은 부모·형제, <b>날</b>은 배우자·가정, <b>시</b>는 자녀·노년이에요.
-    두 자리의 글자가 서로 안 맞으면 그 사이에 일이 생기기 쉽다고 읽고, 안 맞는 정도에 따라 다섯 가지로 나눠요.<br>
-    <b>변화·이동이 많음</b>(충, 제일 셈) · <b>마찰이 잦음</b>(형) · <b>서운한 일이 생기기 쉬움</b>(해) · <b>괜히 서먹해지기 쉬움</b>(원진) · <b>작게 어긋남</b>(파, 제일 약함)<br>
-    예를 들어 '부모↔배우자 사이 변화·이동이 많음'은 커서 부모 곁을 일찍 떠나 따로 산다는 식으로 풀어요.
+    <p class="sub" style="margin-top:12px"><b>'걸리는 것' 읽는 법.</b> 아기 사주의 글자들 가운데 서로 안 어울리는 짝이 있으면 점수를 조금 깎아요.
+    표의 <b>크게·꽤·조금·살짝</b>은 안 어울리는 정도이고, 괄호는 깎은 점수예요. 칸이 비어 있으면(—) 걸리는 짝이 없다는 뜻이에요.<br>
     있다고 나쁜 사주는 아니고, 이 도구는 점수를 조금 빼는 데만 썼어요.</p></div>
   <div class="card">
     <h2>여기 나오는 말들, 짧게 풀어 드릴게요</h2>
@@ -1660,7 +2078,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
       <dd>사주의 아래쪽 네 글자(해·달·날·시의 아랫글자) 가운데 <b>서로 안 맞는 짝</b>이 정해져 있어요.
         옛 풀이로는 <b>충</b>이면 변화나 이동이 많고, <b>형</b>이면 마찰이나 다툼이 잦고,
         <b>해</b>면 서운한 일이 생기기 쉽고, <b>원진</b>이면 까닭 없이 서로 서먹해지기 쉽고, <b>파</b>면 작게 어긋나는 일이 있다고 봐요. 충이 제일 세고 파가 제일 약해요.
-        네 칸은 각각 어린 시절·부모·배우자·자녀 자리를 맡는다고 봐서, 어느 자리 사이의 일인지도 같이 적었어요.
         있다고 나쁜 사주는 아니고, 이 도구는 많을수록 점수를 조금씩 빼는 정도로만 써요.</dd>
 
       <dt>육합 · 삼합 <span class="hint">서로 잘 맞는 글자 짝</span></dt>
@@ -1725,8 +2142,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 
 <div id="tab-growth" class="hidden">
-<p class="upd"><b>업데이트 10/21</b> 저장한 초음파 기록을 맨 위로 옮겼어요</p>
-<p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
 <div class="card hidden" id="gListCard">
   <h2>저장한 기록</h2>
   <div class="gtw" id="gList"></div>
@@ -1820,8 +2235,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 </div>
 <div id="tab-week" class="hidden">
-<p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
-<p class="upd"><b>업데이트 10/19</b> 마지막 생리 시작일만 넣어도 출산 예정일과 오늘 몇 주 며칠인지 계산해요</p>
 <div class="card">
   <h2>주차별 우리 아기</h2>
   <p class="sub" style="margin-top:0">주차를 고르면 아기와 엄마 몸에 일어나는 일, 이번 주 검사와 챙길 것을 한 화면에서 볼 수 있어요. 임신 주수는 마지막 생리 시작일 기준이에요.</p>
@@ -1847,7 +2260,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 
 <div id="tab-check" class="hidden">
-<p class="upd"><b>업데이트 10/20</b> 예정일을 한 번만 넣으면 모든 탭에 들어가요(이 기기에 저장은 선택)</p>
 <div class="card">
   <h2>시기별 신청 체크리스트</h2>
   <p class="sub" style="margin-top:0">시기를 고르면 그때 신청할 것, 검사와 휴가, 살 것(필수와 선택), 안전 수칙을 한 화면에서 볼 수 있어요. 예정일을 몰라도 시기만 넘겨 보면 돼요. 제도는 바뀔 수 있으니 신청 전에 기관에서 한 번 더 확인해 주세요.</p>
@@ -1936,7 +2348,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <!--JP:HTML:END-->
 <!--BF:HTML:BEGIN-->
 <div id="tab-bf" class="hidden">
-<p class="upd"><b>업데이트 10/21</b> 이유식 가이드 탭이 생겼어요. 초기 레시피 4개부터 시작해요</p>
 <div id="bfBody"></div>
 </div>
 <!--BF:HTML:END-->
@@ -1944,7 +2355,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <div id="tab-benefit" class="hidden">
 <p class="upd"><b>업데이트 10/26</b> 소득 기준이 필요한 지원사업 카드마다 기준중위소득 금액표(2026년)와 건강보험료 기준표를 붙였어요 · 표 위에 가구원·태아·휴직 처리 기준도 적었어요</p>
 <p class="upd"><b>업데이트 10/26</b> 저소득층 기저귀·조제분유 카드에 누가 받을 수 있는지(수급·차상위·한부모, 장애인·다자녀 가구) 풀어 쓰고 조건 태그를 보강했어요</p>
-<p class="upd"><b>업데이트 10/23</b> 우리동네 혜택 탭이 생겼어요. 지역을 고르면 그 지역과 정부 혜택이 함께 나와요</p>
 <h2 class="ben-h">우리동네 임신·출산·육아 혜택 찾기</h2>
 <p class="ben-lead">사는 지역과 시기를 고르면 관련된 지원 사업을 찾아 줘요. 한부모, 기초수급, 장애처럼 특정 사유가 있어야 하는 혜택은 숨길 수 있어요.</p>
 <p class="ben-call">지자체가 직접 입력한 자료라 지역마다 양이 다르고, 빠진 혜택이나 오래된 내용이 있을 수 있어요. 신청 전에는 정부24나 해당 기관에서 꼭 확인하세요.</p>
@@ -3536,7 +3946,7 @@ function nhMsgShow(m){
 function nhRender(){
   const box=document.getElementById("nhList");
   const city=document.getElementById("city");
-  const cityName=v=>{ const o=[...city.options].find(x=>x.value===v); return o?o.textContent.trim():""; };
+  const cityName=v=>{ const o=[...city.options].find(x=>x.value===v); if(!o) return ""; const g=o.parentElement&&o.parentElement.tagName==="OPTGROUP"&&o.parentElement.label.indexOf("광역시")<0?o.parentElement.label+" ":""; return g+o.textContent.trim(); };
   document.getElementById("nhOn").checked=NH.on;
   document.getElementById("nhClear").classList.toggle("hidden",!NH.recs.length);
   document.getElementById("nhCnt").textContent=NH.recs.length?"("+NH.recs.length+"개)":"";
@@ -5523,6 +5933,9 @@ const CLASH_KO={충:["변화·이동이 많음","변화나 이동이 많다"],
                 원진:["괜히 서먹해지기 쉬움","까닭 없이 서로 서먹해지기 쉽다"],
                 파:["작게 어긋남","작게 어긋나는 일이 있다"]};
 
+// 안 맞는 글자 짝의 세기를 일상의 말로: 충(제일 셈) 크게 · 형 꽤 · 원진·해 조금 · 파(제일 약함) 살짝
+const LV={충:"크게",형:"꽤",원진:"조금",해:"조금",파:"살짝"};
+
 // ── 조후: 태어난 달의 계절이 무엇을 아쉬워하는가
 function johuOf(monJi){
   if([11,0,1].indexOf(monJi)>=0) return {need:1,ss:"겨울",msg:"추운 때라 <b>따뜻한 기운(불)</b>이 있어야 숨통이 트인다고 봐요"};
@@ -5646,18 +6059,18 @@ function scorePick(ch, ctx){
   const pairs=[[ch.monJi,ch.dayJi,"달","날"],[ch.dayJi,ch.hourJi,"날","시"],
                [ch.monJi,ch.hourJi,"달","시"],[ch.yJi,ch.dayJi,"해","날"]];
   pairs.forEach(([x,z,a,b])=>{
-    if(chungJi(x,z)){ pen+=4; bad.push({a,b,t:"충"}); }
-    else if(hyungJi(x,z)){ pen+=2.5; bad.push({a,b,t:"형"}); }
-    else if(haeJi(x,z)){ pen+=1.5; bad.push({a,b,t:"해"}); }
-    else if(wonJi(x,z)){ pen+=2; bad.push({a,b,t:"원진"}); }
-    else if(paJi(x,z)){ pen+=1; bad.push({a,b,t:"파"}); }
+    if(chungJi(x,z)){ pen+=4; bad.push({a,b,t:"충",pt:4}); }
+    else if(hyungJi(x,z)){ pen+=2.5; bad.push({a,b,t:"형",pt:2.5}); }
+    else if(haeJi(x,z)){ pen+=1.5; bad.push({a,b,t:"해",pt:1.5}); }
+    else if(wonJi(x,z)){ pen+=2; bad.push({a,b,t:"원진",pt:2}); }
+    else if(paJi(x,z)){ pen+=1; bad.push({a,b,t:"파",pt:1}); }
   });
   D.stab=Math.max(0,Math.round(15-pen));
-  D.stabNote=bad.map(o=>JARI_S[o.a]+"↔"+JARI_S[o.b]+" 사이 "+CLASH_KO[o.t][0]);
+  const stabSay=o=>LV[o.t]+" 안 맞는 글자 짝 (−"+o.pt+"점)";
+  D.stabNote=bad.map(stabSay);
   D.stabTypes=bad.map(o=>o.t);
-  D.stabPairs=bad.map(o=>({a:o.a,b:o.b,t:o.t,note:JARI_S[o.a]+"↔"+JARI_S[o.b]+" 사이 "+CLASH_KO[o.t][0]}));
-  D.stabLong=bad.map(o=>JARI_L[o.a]+" 자리(태어난 "+o.a+")와 "+JARI_L[o.b]+" 자리(태어난 "+o.b+") 사이에 "
-    +CLASH_KO[o.t][1]+"고 봐요.");
+  D.stabPairs=bad.map(o=>({a:o.a,b:o.b,t:o.t,lv:LV[o.t],pt:o.pt,note:stabSay(o)}));
+  D.stabLong=bad.map(o=>LV[o.t]+" 안 맞는 글자 짝 하나예요("+o.t+", −"+o.pt+"점).");
 
   // ⑤ 귀인·길신 10
   let g=0, gn=[];
@@ -5808,10 +6221,10 @@ function pickSlotInfo(r, bestTotal, nightOk, names){
   let hard=false;
   const hp=pairs.filter(o=>o.a==="시"||o.b==="시");
   hp.forEach(o=>{
-    if(o.t==="충"){ hard=true; bad.push("이 시간이 "+(o.a==="시"?o.b:o.a)+"과(와) 크게 부딪혀요(충): "+o.note); }
-    else bad.push("이 시간이 "+(o.a==="시"?o.b:o.a)+"과(와) 안 맞아요("+o.t+"): "+o.note);
+    if(o.t==="충"){ hard=true; bad.push("이 시간대로 하면 글자 짝 하나가 "+o.lv+" 안 맞아요(−"+o.pt+"점) · 제일 센 짝(충)이라 추천하지 않아요"); }
+    else bad.push("이 시간대로 하면 글자 짝 하나가 "+o.lv+" 안 맞아요(−"+o.pt+"점, "+o.t+")");
   });
-  if(!hp.length) good.push("이 시간은 날·달 글자와 부딪히는 짝이 없어요");
+  if(!hp.length) good.push("이 시간대는 서로 안 맞는 글자 짝이 없어요");
   const yn=r.ch.cnt[y.yong];
   if(yn===0) bad.push("제일 필요한 "+names[y.yong]+" 기운이 하나도 없어요");
   else good.push("제일 필요한 "+names[y.yong]+" 기운이 "+yn+"개 들어 있어요");
@@ -5831,12 +6244,85 @@ function pickSlotInfo(r, bestTotal, nightOk, names){
 // 시간과 상관없이 그 날짜 전체에 걸리는 것(해·달·날 사이 안 맞는 짝, 부모와의 관계)
 function pickDayNotes(r){
   const sc=r.sc, out=[];
-  (sc.stabPairs||[]).filter(o=>o.a!=="시"&&o.b!=="시").forEach(o=>out.push("안 맞는 글자 짝: "+o.note));
+  (sc.stabPairs||[]).filter(o=>o.a!=="시"&&o.b!=="시").forEach(o=>out.push("이 날짜는 글자 짝 하나가 "+o.lv+" 안 맞아요(−"+o.pt+"점)"));
   if((sc.parBad||[]).length) out.push("부모와 걸리는 점: "+sc.parBad.slice(0,2).join(", "));
   if((sc.parGood||[]).length) out.push("부모와 잘 맞는 점: "+sc.parGood.slice(0,2).join(", "));
   return out;
 }
 /* === PICK-SLOT-CORE END === */
+
+/* === PICK-GLANCE-CORE START === */
+// 택일 후보 한 개를 '한눈에 보기' 줄 7개로 바꾼다. 점수 항목마다 일상의 말 한두 문장 + 좋음·보통·아쉬움.
+// r: 후보(sc 점수 묶음, ch 사주, hh 시), o: {names:[나무,불,흙,쇠,물], sinsal:{귀인이름:뜻}, noNight, yongWin:[..], huiWin:[..]}
+function pickGlanceRows(r,o){
+  const sc=r.sc, cnt=r.ch.cnt, N=o.names, y=sc.yong, jn=sc.johu||{need:[]};
+  const pj=(w,a,b)=>{const c=String(w).charCodeAt(String(w).length-1)-0xAC00; return w+((c>=0&&c%28!==0)?a:b);};
+  const lv=(s0,m)=>{const x=s0/m; return x>=0.9?"ok":x>=0.5?"mid":"bad";};   // 초록은 만점에 가까울 때만(작은 감점도 노랑으로 보이게)
+  const rows=[];
+  // 1) 다섯 기운의 균형
+  { const zero=[0,1,2,3,4].filter(i=>cnt[i]===0).map(i=>N[i]);
+    const hi=cnt.indexOf(Math.max.apply(null,cnt)), lo=cnt.indexOf(Math.min.apply(null,cnt));
+    const t=zero.length?"나무·불·흙·쇠·물 가운데 "+pj(zero.join("·"),"이","가")+" 하나도 없어요."
+      :sc.oh>=17?"나무·불·흙·쇠·물이 고르게 들어 있어요."
+      :"가장 많은 "+N[hi]+"("+cnt[hi]+"개)와 가장 적은 "+N[lo]+"("+cnt[lo]+"개)의 차이가 커서 조금 치우쳤어요.";
+    rows.push({id:"oh",sh:"다섯 기운",title:"다섯 기운이 고른가",lv:lv(sc.oh,20),score:sc.oh,max:20,text:t}); }
+  // 2) 태어난 계절에 맞는 기운
+  { const need=(jn.need||[]), lack=need.filter(i=>cnt[i]===0), nn=need.map(i=>N[i]).join("·");
+    let t=y.jo.ss+"에 태어나요. ";
+    if(need.length) t+=lack.length?"이 계절엔 "+nn+" 기운이 필요한데 "+pj(lack.map(i=>N[i]).join("·"),"이","가")+" 하나도 없어요. "
+                                   :"이 계절에 필요한 "+nn+" 기운을 갖췄어요. ";
+    const yn=cnt[y.yong];
+    t+="그리고 이 아기에게 제일 필요한 기운은 "+N[y.yong]+"인데 "+(yn>0?yn+"개 들어 있어요.":"하나도 없어요.");
+    rows.push({id:"jo",sh:"계절 기운",title:"태어난 계절에 맞는 기운",lv:lv(sc.jo,20),score:sc.jo,max:20,text:t}); }
+  // 3) 부모님과 잘 맞는지
+  { const g=sc.parGood||[], b=sc.parBad||[];
+    let t=(!g.length&&!b.length)?"부모님 사주와 특별히 잘 맞거나 안 맞는 점은 없어요."
+      :(g.length?"잘 맞는 점: "+g.slice(0,2).join(", ")+". ":"")+(b.length?"걸리는 점: "+b.slice(0,2).join(", ")+".":"");
+    rows.push({id:"par",sh:"부모님",title:"부모님과 잘 맞는지",lv:lv(sc.par,15),score:sc.par,max:15,text:t.trim()}); }
+  // 4) 글자끼리 부딪히는 정도
+  { const pr=sc.stabPairs||[], by={};
+    pr.forEach(x=>{ const k=x.lv+"|"+x.pt; by[k]=(by[k]||{lv:x.lv,pt:x.pt,n:0}); by[k].n++; });
+    const parts=Object.keys(by).map(k=>by[k].lv+" 안 맞는 글자 짝 "+by[k].n+"쌍(−"+by[k].pt+"점)");
+    const t=pr.length?"아기 여덟 글자 안에 "+parts.join(", ")+"이 있어서 점수를 "+(15-sc.stab)+"점 깎았어요."
+      :"아기 여덟 글자 안에 서로 안 맞는 글자 짝이 없어요.";
+    rows.push({id:"stab",sh:"글자 부딪힘",title:"글자끼리 부딪히는 정도",lv:lv(sc.stab,15),score:sc.stab,max:15,text:t}); }
+  // 5) 옛사람들이 좋게 본 복 자리
+  { const gn=sc.guiNote||[];
+    const t=gn.length?gn.map(k=>k+": "+((o.sinsal||{})[k]||"")).join(" "):"따로 걸리는 복 자리는 없어요. 없다고 나쁜 건 아니에요.";
+    rows.push({id:"gui",sh:"복 자리",title:"옛사람들이 좋게 본 복 자리",lv:sc.gui>0?lv(sc.gui,10):"na",score:sc.gui,max:10,text:t}); }
+  // 6) 20~50대 10년 흐름
+  { const yw=o.yongWin||[], hw=o.huiWin||[];
+    let t="";
+    if(yw.length) t+="제일 필요한 "+N[y.yong]+" 기운이 들어오는 때: "+yw.join(", ")+". ";
+    if(hw.length) t+="거들어 주는 "+N[y.hui]+" 기운이 들어오는 때: "+hw.join(", ")+". ";
+    if(!t) t="20~50대에 필요한 기운이 눈에 띄게 들어오는 때는 없어요. ";
+    rows.push({id:"dw",sh:"10년 흐름",title:"20~50대 10년 흐름",lv:lv(sc.dw,10),score:sc.dw,max:10,text:t.trim()}); }
+  // 7) 병원 시간대
+  { let t, l;
+    if(!o.noNight){ t="병원에서 밤에도 된다고 해서 시간은 따지지 않았어요."; l="ok"; }
+    else if(r.hh>=10&&r.hh<=16){ t="낮 시간대라 수술 일정에 잡기 좋아요."; l="ok"; }
+    else if(r.hh===8){ t="첫 수술 시간대라 병원 일정에 따라 어려울 수 있어요."; l="mid"; }
+    else { t="저녁·밤·새벽 시간대라 병원에서 어렵다고 할 수 있어요."; l="bad"; }
+    rows.push({id:"real",sh:"병원 시간",title:"병원 시간대",lv:l,score:sc.real,max:10,text:t}); }
+  return rows;
+}
+function pickGlanceSummary(rows){
+  const n={ok:0,mid:0,bad:0,na:0}; rows.forEach(x=>{ n[x.lv]++; });
+  return "좋은 항목 "+n.ok+"개 · 보통 "+n.mid+"개 · 아쉬운 항목 "+n.bad+"개";
+}
+// 만점(100점)까지 어디서 몇 점이 모자란지(많이 모자란 순). 순위가 총점으로 정해지는 까닭을 눈으로 따라갈 수 있게
+function pickGlanceLoss(rows){
+  const full=rows.reduce((a,x)=>a+x.max,0), got=rows.reduce((a,x)=>a+x.score,0);
+  const lost=rows.filter(x=>x.score<x.max).sort((a,b)=>(b.max-b.score)-(a.max-a.score)).map(x=>x.sh+" −"+(x.max-x.score));
+  return lost.length?full+"점 만점까지 "+(full-got)+"점 모자라요 ("+lost.join(", ")+")":full+"점 만점이에요";
+}
+function pickGlanceHtml(rows,total){
+  const wd={ok:"좋음",mid:"보통",bad:"아쉬움",na:"참고"};
+  return '<div class="glance"><p class="glsum"><b>한눈에 보기</b> · '+pickGlanceSummary(rows)+' · 총 <b>'+total+'점</b></p><p class="glloss">'+pickGlanceLoss(rows)+'</p>'
+    +rows.map(x=>'<div class="gl '+x.lv+'"><span class="gi tl '+x.lv+'" aria-hidden="true"></span><div class="gb"><div class="gh"><b>'+x.title
+      +'</b><em>'+wd[x.lv]+' · '+x.score+'/'+x.max+'점</em></div><p>'+x.text+'</p></div></div>').join("")+'</div>';
+}
+/* === PICK-GLANCE-CORE END === */
 
 function pickSlotsHtml(R){
   const rows=R.rows, nightOk=!R.noNight, order=[], by={};
@@ -5871,8 +6357,8 @@ function pickRender(){
       const nm=p[0], c=p[1];
       const lk=c.cnt.indexOf(mn(c.cnt)), me=GAN_OH[c.dayGan], st=strengthOf(c);
       return '<div class="pblk"><h3>'+nm+'</h3>'+chartLine(c,c.noHour)+ohBar(c.cnt)
-        +'<p class="sub">'+GAN[c.dayGan]+'('+GAN_K[c.dayGan]+'), <b>'+OH[me]+'</b> 기운으로 태어났고 기운은 '
-        +(st.strong?'넉넉한 편(신강)':'여린 편(신약)')+'이에요. '
+        +'<p class="sub">'+GAN[c.dayGan]+'('+GAN_K[c.dayGan]+'), <b>'+OH[me]+'</b> 기운으로 태어났고 타고난 힘은 '
+        +(st.strong?'넉넉한 편':'여린 편')+'이에요. '
         +(c.cnt[lk]===0?'<b>'+iga(OH[lk])+' 하나도 없어요.</b>':'<b>'+iga(OH[lk])+' '+c.cnt[lk]+'개로 제일 적어요.</b>')
         +' 아기가 이 기운을 갖고 태어나면 부모와 잘 맞는다고 봐요.</p></div>';
     }).join("");
@@ -5886,7 +6372,7 @@ function pickRender(){
     +(R.skipped.length?' 주말·공휴일 <b>'+R.skipped.length+'일</b>은 뺐어요.':'')
     +' 시각은 그 시진 전체 범위예요. 고른 도시의 실제 태양 시간(경도·균시차)에 맞춰서 날짜마다 몇십 분씩 달라지고, 이 범위 안에서 태어나면 같은 시주예요.';
   let all='<table class="tb2"><thead><tr><th>날짜</th><th>주수</th><th>가장 좋은 시각 <span class="hint">시진 범위</span></th>'
-        + '<th>점수</th><th>걸리는 것</th></tr></thead><tbody>';
+        + '<th>점수</th><th>걸리는 것 <small>(안 맞는 글자 짝)</small></th></tr></thead><tbody>';
   Object.keys(byDay).concat(Object.keys(skipDay)).sort().forEach(function(dv){
     const s=skipDay[dv];
     if(s){
@@ -5911,13 +6397,13 @@ function pickRender(){
     if(top.length===3) break;
   }
 
-  document.getElementById("pTop3").innerHTML = top.map(function(r,i){
+  document.getElementById("pTop3").innerHTML = '<p class="sub" style="margin-top:0">후보마다 먼저 <b>한눈에 보기</b>에서 항목별 신호등 색을 보세요. <span class="tlw"><i class="tl ok"></i>초록 좋음</span> · <span class="tlw"><i class="tl mid"></i>노랑 보통</span> · <span class="tlw"><i class="tl bad"></i>빨강 아쉬움</span>이에요. 색은 항목마다 만점에 얼마나 가까운지를 보여 주고, <b>순위는 항목 점수를 모두 더한 총점</b>이 높은 순서예요. 어려운 말이 궁금하면 <b>어려운 말 풀이와 자세한 계산 보기</b>를 펼치면 돼요.</p>' + top.map(function(r,i){
     const y=r.sc.yong, st=y.st;
     const realBest=rows.filter(x=>x.dv===r.dv&&x.real).sort((p,q)=>q.sc.total-p.sc.total)[0];
     const dwRows=r.dw.list.filter(d=>d.from>=18&&d.from<=58).map(function(d){
       const tag=(GAN_OH[d.g]===y.yong||JI_OH[d.j]===y.yong)?"제일 필요한 "+OH[y.yong]+" 기운이 들어와요"
-               :((GAN_OH[d.g]===y.hui||JI_OH[d.j]===y.hui)?"거드는 "+OH[y.hui]+" 기운이 들어와요":"—");
-      return '<tr><td>'+d.from+'세~</td><td>'+gzp(d.g,d.j)+'</td><td class="sm">'+tag+'</td></tr>';
+               :((GAN_OH[d.g]===y.hui||JI_OH[d.j]===y.hui)?"거들어 주는 "+OH[y.hui]+" 기운이 들어와요":"—");
+      return '<tr><td>'+d.from+'세~</td><td>'+OH[GAN_OH[d.g]]+' · '+OH[JI_OH[d.j]]+' <small>'+GAN[d.g]+JI[d.j]+'</small></td><td class="sm">'+tag+'</td></tr>';
     }).join("");
     const timeNote = (realBest&&realBest.hh!==r.hh)
       ? ' · 병원에서 잡기 쉬운 낮 시간으로 보면 <b>'+jiRangeLab(realBest)+'</b>('+realBest.sc.total+'점)'
@@ -5927,48 +6413,53 @@ function pickRender(){
       ? '이 사주엔 '+jn.need.map(o=>OH[o]+' '+r.ch.cnt[o]+'개').join('·')+'가 있어서 <b>그 조건을 갖췄어요.</b>'
       : '<b>아쉽게도 '+jLack.map(o=>OH[o]).join('·')+jo(OH[jLack[jLack.length-1]],'이','가')+' 하나도 없어요.</b>';
     const yongN=r.ch.cnt[y.yong], ye=w=>w+jo(w,"이에요","예요");
-    const bars=[["오행 균형",r.sc.oh,20],["계절·용신",r.sc.jo,20],["부모 조화",r.sc.par,15],
-                ["안 맞는 짝 적음",r.sc.stab,15],["귀인",r.sc.gui,10],["10년운",r.sc.dw,10],
-                ["현실 시간",r.sc.real,10]].map(b=>
-      '<span class="sbi"><i>'+b[0]+'</i><b>'+b[1]+'</b><em>/'+b[2]+'</em></span>').join("");
+    const yS=[], hS=[];
+    r.dw.list.filter(d=>d.from>=18&&d.from<=58).forEach(function(d){
+      if(GAN_OH[d.g]===y.yong||JI_OH[d.j]===y.yong) yS.push(d.from);
+      else if(GAN_OH[d.g]===y.hui||JI_OH[d.j]===y.hui) hS.push(d.from);
+    });
+    // 바로 이어지는 10년(22~31, 32~41)은 하나로 묶어서 '22~41세'로
+    const mergeW=a=>{ const o=[]; a.forEach(function(f){ const l=o[o.length-1]; if(l&&l[1]+1===f) l[1]=f+9; else o.push([f,f+9]); }); return o.map(x=>x[0]+"~"+x[1]+"세"); };
+    const yongWin=mergeW(yS), huiWin=mergeW(hS);
     return '<div class="pcand">'
       +'<div class="rank">'+(i+1)+'순위 <b>'+r.sc.total+'점</b></div>'
       +'<h3>'+r.dv.replace(/-/g,".")+'('+WD_K[wdOf(r.dv)]+') · '+jiRangeLab(r)+' <small>'+JI[r.ch.hourJi]+'시'
         +(r.hol?' · '+r.hol:'')+'</small></h3>'
       +'<p class="sub">임신 <b>'+r.wk+'주 '+r.wd+'일</b>'+timeNote+'</p>'
       +chartLine(r.ch)+ohBar(r.ch.cnt)
+      +pickGlanceHtml(pickGlanceRows(r,{names:OH,sinsal:SINSAL_M,noNight:R.noNight,yongWin:yongWin,huiWin:huiWin}),r.sc.total)
+      +'<details class="gdet"><summary>어려운 말 풀이와 자세한 계산 보기</summary>'
       +'<dl class="pd">'
-      +'<dt>기운의 세기 <span class="hint">신강·신약</span></dt><dd><b>'+(st.strong?'넉넉한 편(신강)':'여린 편(신약)')+'</b>이에요. '+y.why+'.</dd>'
-      +'<dt>계절이 아쉬워하는 것</dt><dd>'+y.jo.ss+'에 태어나요. '+jn.msg+'. '+johuHas+'</dd>'
-      +'<dt>용신 · 희신 <span class="hint">제일 필요한 기운 · 그걸 거드는 기운</span></dt><dd>'
-        +'제일 필요한 기운(용신)은 <b>'+OH[y.yong]+'</b>, 거드는 기운(희신)은 <b>'+ye(OH[y.hui])+'</b>. '
+      +'<dt>타고난 힘의 세기 <span class="hint">흔히 신강·신약이라고 해요</span></dt><dd><b>'+(st.strong?'넉넉한 편':'여린 편')+'</b>이에요. '+y.why+'.</dd>'
+      +'<dt>계절이 필요로 하는 기운 <span class="hint">조후</span></dt><dd>'+y.jo.ss+'에 태어나요. '+jn.msg+'. '+johuHas+'</dd>'
+      +'<dt>제일 필요한 기운 · 거들어 주는 기운 <span class="hint">용신 · 희신</span></dt><dd>'
+        +'제일 필요한 기운은 <b>'+OH[y.yong]+'</b>, 거들어 주는 기운은 <b>'+ye(OH[y.hui])+'</b>. '
         +eun(OH[y.yong])+' '+OH_PLAIN[y.yong]+'이에요. '
         +(yongN>=3?'이 사주엔 '+iga(OH[y.yong])+' 벌써 '+yongN+'개나 있어서 더 채울 필요는 없어요.'
          :yongN>0?'이 사주엔 '+iga(OH[y.yong])+' '+yongN+'개 들어 있어요.'
                  :'이 사주엔 '+iga(OH[y.yong])+' 없어서, 이름 한자로 채워 주면 좋다고 봐요.')
-        +' <span class="sm">(무엇을 용신으로 볼지는 유파마다 달라요)</span></dd>'
-      +'<dt>귀인 <span class="hint">옛사람들이 좋게 본 자리</span></dt><dd>'+(r.sc.guiNote.length
+        +' <span class="sm">(무엇을 가장 필요한 기운으로 볼지는 유파마다 달라요)</span></dd>'
+      +'<dt>옛사람들이 좋게 본 복 자리 <span class="hint">귀인</span></dt><dd>'+(r.sc.guiNote.length
         ?r.sc.guiNote.map((k,j)=>'<b>'+k+'</b>'+(j?'도':'이')+' 있어요. '+SINSAL_M[k]).join(' ')
-        :"따로 걸리는 귀인은 없어요. 없다고 나쁜 건 아니에요.")+'</dd>'
-      +'<dt>부모와의 관계</dt><dd>15점 만점에 <b>'+r.sc.par+'점</b>이에요.'
-        +' <span class="sm">(부모 사주 글자와 아기 글자를 하나씩 맞대 봤어요)</span>'
+        :"따로 걸리는 복 자리는 없어요. 없다고 나쁜 건 아니에요.")+'</dd>'
+      +'<dt>부모님과의 관계</dt><dd>15점 만점에 <b>'+r.sc.par+'점</b>이에요.'
+        +' <span class="sm">(부모님 사주 글자와 아기 글자를 하나씩 맞대 봤어요)</span>'
         +(r.sc.parGood.length?'<br>잘 맞는 점: '+r.sc.parGood.slice(0,4).join(", "):'')
         +(r.sc.parBad.length?'<br>걸리는 점: '+r.sc.parBad.slice(0,4).join(", "):'')
-        +(!r.sc.parGood.length&&!r.sc.parBad.length?' 부모 글자와 특별히 잘 맞거나 안 맞는 짝은 없어요.':'')+'</dd>'
-      +'<dt>안 맞는 글자 짝 <span class="hint">충·형·해·파</span></dt><dd>'+(r.sc.stabNote.length
+        +(!r.sc.parGood.length&&!r.sc.parBad.length?' 부모님 글자와 특별히 잘 맞거나 안 맞는 짝은 없어요.':'')+'</dd>'
+      +'<dt>서로 안 맞는 글자 짝 <span class="hint">충·형·해·원진·파</span></dt><dd>'+(r.sc.stabNote.length
         ?r.sc.stabLong.join(" ")+' 그래서 15점에서 <b>'+(15-r.sc.stab)+'점</b> 뺐어요.'
         :'여덟 글자 안에 서로 안 맞는 짝이 없어요.')+'</dd>'
       +'</dl>'
-      +'<h4 style="margin:16px 0 6px;font-size:14px">10년마다 바뀌는 흐름</h4>'
-      +'<table class="tb2"><thead><tr><th>나이</th><th>간지</th><th>보는 점</th></tr></thead><tbody>'
-      +dwRows+'</tbody></table>'
-      +'<div class="sbar">'+bars+'</div></div>';
+      +'<h4 style="margin:16px 0 6px;font-size:14px">10년 단위로 바뀌는 흐름 <small>(원래 이름은 대운)</small></h4>'
+      +'<table class="tb2"><thead><tr><th>나이</th><th>들어오는 기운</th><th>보는 점</th></tr></thead><tbody>'
+      +dwRows+'</tbody></table></details></div>';
   }).join("");
 
   document.getElementById("pCmp").innerHTML =
     '<table class="tb2"><thead><tr><th>순위</th><th>날짜</th><th>주수</th><th>시각</th>'
-    +'<th>오행</th><th>계절</th><th>부모</th><th>안 맞는 짝</th><th>귀인</th><th>10년운</th>'
-    +'<th>현실</th><th>총점</th></tr></thead><tbody>'
+    +'<th>다섯 기운</th><th>계절</th><th>부모님</th><th>부딪힘</th><th>복 자리</th><th>10년 흐름</th>'
+    +'<th>병원 시간</th><th>총점</th></tr></thead><tbody>'
     + top.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+dLab(r.dv)+'</td>'
       +'<td>'+r.wk+'주'+r.wd+'일</td><td>'+jiRangeLab(r)+'</td>'
       +'<td>'+r.sc.oh+'</td><td>'+r.sc.jo+'</td><td>'+r.sc.par+'</td><td>'+r.sc.stab+'</td>'
@@ -5978,13 +6469,13 @@ function pickRender(){
   document.getElementById("pHow").innerHTML=
     '<p class="sub" style="margin-top:0">100점을 이렇게 나눠서 매겼어요. 왜 이 날짜가 위로 올라왔는지 항목별로 따라가 볼 수 있어요.</p>'
     +'<table class="tb2"><thead><tr><th>항목</th><th>배점</th><th>무엇을 보나</th></tr></thead><tbody>'
-    +'<tr><td>오행 균형</td><td>20</td><td>나무·불·흙·쇠·물이 고르게 들어 있는지, 하나도 없는 기운이 몇 개인지</td></tr>'
-    +'<tr><td>계절 · 용신</td><td>20</td><td>태어난 계절에 필요한 기운과, 이 사주에 제일 필요한 기운(용신)을 갖췄는지</td></tr>'
-    +'<tr><td>부모 조화</td><td>15</td><td>아빠·엄마 글자와 잘 맞는 짝이 많은지, 부모에게 모자란 기운을 아기가 채워 주는지</td></tr>'
-    +'<tr><td>안 맞는 짝</td><td>15</td><td>아기 여덟 글자 안에 서로 안 맞는 짝(충·형·해·파)이 적은지</td></tr>'
-    +'<tr><td>귀인</td><td>10</td><td>옛사람들이 좋게 본 천을귀인·문창귀인 자리가 있는지</td></tr>'
-    +'<tr><td>10년운</td><td>10</td><td>20대부터 50대까지의 10년운에 필요한 기운이 들어오는지</td></tr>'
-    +'<tr><td>현실 시간</td><td>10</td><td>'+(R.noNight
+    +'<tr><td>다섯 기운의 균형</td><td>20</td><td>나무·불·흙·쇠·물이 고르게 들어 있는지, 하나도 없는 기운이 몇 개인지</td></tr>'
+    +'<tr><td>태어난 계절에 맞는 기운</td><td>20</td><td>태어난 계절에 필요한 기운과, 이 아기에게 제일 필요한 기운(용신)을 갖췄는지</td></tr>'
+    +'<tr><td>부모님과 잘 맞는지</td><td>15</td><td>아빠·엄마 글자와 잘 맞는 짝이 많은지, 부모님에게 모자란 기운을 아기가 채워 주는지</td></tr>'
+    +'<tr><td>글자끼리 부딪히는 정도</td><td>15</td><td>아기 여덟 글자 안에 서로 안 맞는 글자 짝(충·형·해·원진·파)이 적은지, 많고 셀수록 점수를 깎아요</td></tr>'
+    +'<tr><td>옛사람들이 좋게 본 복 자리</td><td>10</td><td>귀인(천을귀인·문창귀인) 자리가 있는지</td></tr>'
+    +'<tr><td>20~50대 10년 흐름</td><td>10</td><td>20대부터 50대까지 10년 단위 흐름에 필요한 기운이 들어오는지</td></tr>'
+    +'<tr><td>병원 시간대</td><td>10</td><td>'+(R.noNight
       ?'계획 제왕절개는 대개 낮에 잡혀서 <b>오전 8시~오후 4시</b>만 봤어요. 10시~4시는 만점, 첫 수술 시간인 8시는 8점이에요'
       :'병원에서 밤에도 된다고 해서 <b>모든 시각에 만점</b>을 줬어요. 시간 때문에 순위가 바뀌지는 않아요')+'</td></tr>'
     +'</tbody></table>'
@@ -6643,7 +7134,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="522f16f0";
+var APP_BUILD="cc5cc4c0";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -7132,7 +7623,7 @@ function phMsgShow(m){
 }
 function phRender(){
   const box=document.getElementById("phList"), city=document.getElementById("pcity");
-  const cityName=v=>{ const o=[...city.options].find(x=>x.value===v); return o?o.textContent.trim():""; };
+  const cityName=v=>{ const o=[...city.options].find(x=>x.value===v); if(!o) return ""; const g=o.parentElement&&o.parentElement.tagName==="OPTGROUP"&&o.parentElement.label.indexOf("광역시")<0?o.parentElement.label+" ":""; return g+o.textContent.trim(); };
   document.getElementById("phOn").checked=PH.on;
   document.getElementById("phClear").classList.toggle("hidden",!PH.recs.length);
   document.getElementById("phCnt").textContent=PH.recs.length?"("+PH.recs.length+"개)":"";
@@ -7189,6 +7680,98 @@ function phSaveLast(){
   });
 })();
 </script>
+<!--UPD:JS:BEGIN-->
+<script>
+/* === UPD-CORE START === */
+// '업데이트 11/6' 같은 문구가 며칠 지났는지. 연도는 적혀 있지 않아서 오늘 기준 가장 가까운 과거로 본다(하루 넘게 앞선 날짜는 작년).
+function updAgeDays(m,d,now){
+  const t=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
+  let x=Date.UTC(now.getFullYear(),m-1,d);
+  if(x>t+86400000) x=Date.UTC(now.getFullYear()-1,m-1,d);
+  return Math.floor((t-x)/86400000);
+}
+// 업데이트 문구는 14일(2주)만 보여 준다. 14일 이상 지났으면 true
+function updExpired(text,now,keepDays){
+  const mm=/업데이트\s*(\d{1,2})\/(\d{1,2})/.exec(String(text||"")); if(!mm) return false;
+  return updAgeDays(+mm[1],+mm[2],now)>=(keepDays||14);
+}
+/* === UPD-CORE END === */
+(function(){ try{ const now=new Date(); document.querySelectorAll("p.upd").forEach(p=>{ if(updExpired(p.textContent,now)) p.hidden=true; }); }catch(e){} })();
+</script>
+<!--UPD:JS:END-->
+<!--PWA:JS:BEGIN-->
+<script>
+/* === PWA-CORE START === */
+// 홈 화면에 '바로가기'를 만드는 방법을 폰 종류에 맞게 고른다. 앱 설치(APK)가 아니라 일반 바로가기다.
+// 브라우저 글자(UA)와 몇 가지 사실만 받는 순수 함수라 따로 시험할 수 있다.
+function pwaKind(ua,o){
+  ua=String(ua||""); o=o||{};
+  if(o.standalone) return "installed";                                          // 이미 홈 화면에서 열었으면 안내가 필요 없다
+  const ios=/iPhone|iPad|iPod/.test(ua)||(/Macintosh/.test(ua)&&(o.maxTouch||0)>1);   // 아이패드가 '데스크톱 사파리'로 위장한 경우까지
+  const android=/Android/.test(ua);
+  if(!ios&&!android) return "desktop";
+  if(/KAKAOTALK|NAVER\(inapp|Instagram|FBAN|FBAV|Line\/|DaumApps|everytimeApp|; wv\)/i.test(ua)) return "inapp";   // 앱 안에서 연 화면에서는 추가가 안 된다
+  if(ios) return /CriOS|FxiOS|EdgiOS|OPiOS|SamsungBrowser/.test(ua)?"ios-other":"ios-safari";
+  if(/SamsungBrowser/.test(ua)) return "android-samsung";
+  if(/Chrome\//.test(ua)&&!/EdgA|OPR\/|Whale|Firefox/.test(ua)) return "android-chrome";
+  return "android-other";
+}
+function pwaGuide(kind){
+  const SHARE='<svg class="pwa-ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const ios=["화면 아래의 <b>공유 버튼</b> "+SHARE+"을 눌러요. 네모에서 화살표가 위로 나가는 모양이에요.",
+             "나오는 메뉴를 위로 올려서 <b>홈 화면에 추가</b>를 눌러요.",
+             "오른쪽 위의 <b>추가</b>를 누르면 끝이에요. 홈 화면에 '맘케어' 바로가기가 생겨요."];
+  const NOAPP="앱을 설치하는 게 아니라 바로가기 아이콘만 만들어요. '설치'가 따로 보이면 누르지 말고 '추가'나 '바로가기 만들기'를 눌러 주세요.";
+  const G={
+    "ios-safari":{lead:"아이폰은 사파리에서 이렇게 해요.",steps:ios,
+      note:"공유 버튼이 안 보이면 오른쪽 아래 ⋯(점 세 개) 메뉴 안에 있어요."},
+    "ios-other":{lead:"아이폰은 사파리(Safari)에서 열면 제일 쉬워요.",
+      steps:["이 주소를 사파리로 열어요. 주소를 복사해서 사파리에 붙여 넣어도 돼요."].concat(ios),
+      note:"지금 쓰는 앱에도 공유 메뉴에 '홈 화면에 추가'가 있으면 그대로 해도 돼요."},
+    "android-chrome":{lead:"안드로이드 크롬에서 이렇게 해요.",
+      steps:["오른쪽 위의 <b>⋮</b>(점 세 개) 메뉴를 눌러요.","<b>홈 화면에 추가</b>를 눌러요.","<b>추가</b>를 누르고, 이어서 나오는 창에서 <b>자동으로 추가</b>를 눌러요. 홈 화면에 바로 생겨요. (<b>길게 눌러서 놓기</b>를 고르면 원하는 자리에 직접 놓을 수 있어요.)"],note:NOAPP},
+    "android-samsung":{lead:"삼성 인터넷에서 이렇게 해요.",
+      steps:["오른쪽 아래의 <b>⋮</b>(점 세 개) 메뉴를 눌러요. 폰에 따라 <b>≡</b> 모양일 수도 있어요.","<b>현재 페이지 추가</b>를 누르고, 나오는 목록에서 <b>홈 화면에 추가</b>를 골라요.","<b>추가</b>를 누르면 홈 화면에 바로 생겨요."],note:NOAPP},
+    "android-other":{lead:"쓰는 브라우저의 메뉴에서 '홈 화면에 추가'를 찾아 보세요.",
+      steps:["메뉴(<b>⋮</b> 또는 <b>≡</b>)를 눌러요.","<b>홈 화면에 추가</b>를 찾아 눌러요.","안 보이면 크롬 앱에서 이 주소를 열어 주세요."],note:NOAPP},
+    "inapp":{lead:"지금은 카카오톡·네이버 같은 앱 안에서 열려 있어서 바로 만들 수 없어요.",
+      steps:["화면 오른쪽 위나 아래의 <b>메뉴(⋮ 또는 ⋯)</b>를 눌러요.","<b>다른 브라우저로 열기</b>를 눌러요. 안드로이드는 크롬, 아이폰은 사파리로 열면 돼요.","열린 화면 위쪽의 '홈 화면에 바로가기 만들기'를 다시 눌러 주세요."],note:""}
+  };
+  return G[kind]||null;
+}
+/* === PWA-CORE END === */
+(function(){
+  const $=id=>document.getElementById(id);
+  const box=$("pwaBox"); if(!box) return;
+  const btn=$("pwaBtn"), panel=$("pwaPanel");
+  let kind="desktop";
+  const standalone=()=>{ try{ return (window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true; }catch(e){ return false; } };
+  function render(which){
+    const k=which||kind, g=pwaGuide(k==="desktop"||k==="installed"?"android-chrome":k); if(!g) return;
+    $("pwaLead").innerHTML=g.lead;
+    $("pwaSteps").innerHTML=g.steps.map(x=>"<li>"+x+"</li>").join("");
+    $("pwaNote").innerHTML=g.note||""; $("pwaNote").hidden=!g.note;
+    const isIos=k.indexOf("ios")===0;
+    panel.querySelectorAll(".pwa-os button").forEach(b=>b.classList.toggle("on",(b.dataset.os==="ios")===isIos));
+  }
+  function refresh(){
+    kind=pwaKind(navigator.userAgent,{standalone:standalone(),maxTouch:navigator.maxTouchPoints});
+    box.hidden=(kind==="installed"||kind==="desktop");
+    if(!box.hidden) render(kind);
+  }
+  btn.addEventListener("click",()=>{
+    const open=panel.hidden; panel.hidden=!open; btn.setAttribute("aria-expanded",open?"true":"false");
+    if(open) render(kind);
+  });
+  panel.querySelector(".pwa-os").addEventListener("click",e=>{
+    const b=e.target.closest("button[data-os]"); if(!b) return;
+    render(b.dataset.os==="ios"?"ios-safari":(kind==="android-samsung"?"android-samsung":"android-chrome"));
+  });
+  window.pwaPreview=function(k){ kind=k; box.hidden=false; panel.hidden=false; btn.setAttribute("aria-expanded","true"); render(k); };   // 화면 확인용(데스크톱에서도 안내 칸을 열어 본다)
+  refresh();
+})();
+</script>
+<!--PWA:JS:END-->
 <!--TS:JS:BEGIN-->
 <script>
 /* 한글 줄바꿈 정리(TS) - POSTING_GUIDE §26 규칙을 화면 글에 적용한다.
