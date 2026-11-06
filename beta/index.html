@@ -7147,7 +7147,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="c13da1d9";
+var APP_BUILD="72b9284f";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -7725,7 +7725,7 @@ function pwaGuide(kind){
     "android-chrome":{lead:"안드로이드 크롬에서 이렇게 해요.",
       steps:["오른쪽 위의 <b>⋮</b>(점 세 개) 메뉴를 눌러요.","<b>홈 화면에 추가</b>를 눌러요.","<b>추가</b>를 누르고, 이어서 나오는 창에서 <b>자동으로 추가</b>를 눌러요. 홈 화면에 바로 생겨요. (<b>길게 눌러서 놓기</b>를 고르면 원하는 자리에 직접 놓을 수 있어요.)"],note:NOAPP},
     "android-samsung":{lead:"삼성 인터넷에서 이렇게 해요.",
-      steps:["오른쪽 아래의 <b>⋮</b>(점 세 개) 메뉴를 눌러요. 폰에 따라 <b>≡</b> 모양일 수도 있어요.","<b>현재 페이지 추가</b>를 누르고 <b>홈 화면</b>을 골라요.","<b>추가</b>를 누르면 홈 화면에 바로 생겨요."],note:NOAPP},
+      steps:["오른쪽 아래의 <b>⋮</b>(점 세 개) 메뉴를 눌러요. 폰에 따라 <b>≡</b> 모양일 수도 있어요.","<b>현재 페이지 추가</b>를 누르고, 나오는 목록에서 <b>홈 화면에 추가</b>를 골라요.","<b>추가</b>를 누르면 홈 화면에 바로 생겨요."],note:NOAPP},
     "android-other":{lead:"쓰는 브라우저의 메뉴에서 '홈 화면에 추가'를 찾아 보세요.",
       steps:["메뉴(<b>⋮</b> 또는 <b>≡</b>)를 눌러요.","<b>홈 화면에 추가</b>를 찾아 눌러요.","안 보이면 크롬 앱에서 이 주소를 열어 주세요."],note:NOAPP},
     "inapp":{lead:"지금은 카카오톡·네이버 같은 앱 안에서 열려 있어서 바로 만들 수 없어요.",
