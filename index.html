@@ -7134,7 +7134,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="df2b06b7";
+var APP_BUILD="9af4bdf3";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -7718,13 +7718,14 @@ function pwaKind(ua,o){
 }
 function pwaGuide(kind){
   const SHARE='<svg class="pwa-ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const ios=["화면 아래의 <b>공유 버튼</b> "+SHARE+"을 눌러요. 네모에서 화살표가 위로 나가는 모양이에요.",
-             "나오는 메뉴를 위로 올려서 <b>홈 화면에 추가</b>를 눌러요.",
+  const ios=["화면 아래의 <b>공유 버튼</b> "+SHARE+"을 눌러요. 네모에서 화살표가 위로 나가는 모양이에요. 안 보이면 오른쪽 아래 <b>⋯</b>(점 세 개)를 눌러 <b>공유</b>를 찾아요.",
+             "나오는 목록을 <b>위로 쭉 올려서</b> 아래쪽의 <b>홈 화면에 추가</b>를 눌러요. 처음엔 안 보이는 경우가 많아요.",
+             "목록에 없으면 맨 아래 <b>작업 편집</b>을 눌러서 <b>홈 화면에 추가</b>를 목록에 넣어 주세요.",
              "오른쪽 위의 <b>추가</b>를 누르면 끝이에요. 홈 화면에 '맘케어' 바로가기가 생겨요."];
   const NOAPP="앱을 설치하는 게 아니라 바로가기 아이콘만 만들어요. '설치'가 따로 보이면 누르지 말고 '추가'나 '바로가기 만들기'를 눌러 주세요.";
   const G={
     "ios-safari":{lead:"아이폰은 사파리에서 이렇게 해요.",steps:ios,
-      note:"공유 버튼이 안 보이면 오른쪽 아래 ⋯(점 세 개) 메뉴 안에 있어요."},
+      note:"카카오톡·네이버 같은 앱 안에서 열었다면 사파리로 다시 열어 주세요. 회사나 학교에서 관리하는 아이폰은 이 메뉴가 막혀 있을 수 있어요."},
     "ios-other":{lead:"아이폰은 사파리(Safari)에서 열면 제일 쉬워요.",
       steps:["이 주소를 사파리로 열어요. 주소를 복사해서 사파리에 붙여 넣어도 돼요."].concat(ios),
       note:"지금 쓰는 앱에도 공유 메뉴에 '홈 화면에 추가'가 있으면 그대로 해도 돼요."},
