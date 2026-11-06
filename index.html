@@ -5257,16 +5257,22 @@ function erFilter(list,f){
   const q=erNorm(f.q);
   return list.filter(x=>(!f.sd||x.sd===f.sd)&&(!f.sg||x.sg===f.sg)&&(!q||erNorm(x.n).includes(q))&&(!f.only||f.only(x)));
 }
-function erRegions(list,q){
-  const n=erNorm(q),c={};
+// extra = 같은 탭에 함께 보이는 다른 지정 목록(달빛 탭의 취약지 기관). n=본 목록 수, v=extra 수.
+function erRegions(list,q,extra){
+  const n=erNorm(q),c={},v={};
   list.forEach(x=>{if(!n||erNorm(x.n).includes(n)) c[x.sd]=(c[x.sd]||0)+1;});
-  return ER_SD.filter(s=>c[s[0]]).map(s=>({k:s[0],label:s[1],n:c[s[0]]}));
+  (extra||[]).forEach(x=>{if(!n||erNorm(x.n).includes(n)) v[x.sd]=(v[x.sd]||0)+1;});
+  return ER_SD.filter(s=>c[s[0]]||v[s[0]]).map(s=>({k:s[0],label:s[1],n:c[s[0]]||0,v:v[s[0]]||0}));
 }
-function erSgList(list,sd,q){
-  const n=erNorm(q),c={};
+function erSgList(list,sd,q,extra){
+  const n=erNorm(q),c={},v={};
   list.forEach(x=>{if(x.sd===sd&&x.sg&&(!n||erNorm(x.n).includes(n))) c[x.sg]=(c[x.sg]||0)+1;});
-  return Object.keys(c).sort((a,b)=>a.localeCompare(b,"ko")).map(k=>({k:k,n:c[k]}));
+  (extra||[]).forEach(x=>{if(x.sd===sd&&x.sg&&(!n||erNorm(x.n).includes(n))) v[x.sg]=(v[x.sg]||0)+1;});
+  const keys=Object.keys(c).concat(Object.keys(v).filter(k=>!(k in c)));
+  return keys.sort((a,b)=>a.localeCompare(b,"ko")).map(k=>({k:k,n:c[k]||0,v:v[k]||0}));
 }
+// 칩·선택 상자에 붙이는 건수 글자: 본 목록 수와 취약지 기관 수를 함께 보여 준다
+function erCntText(x){return x.n&&x.v?x.n+" · 취약지 "+x.v:x.n?String(x.n):"취약지 "+x.v;}
 // 정렬: 위치가 있으면 가까운 순(좌표 없는 곳은 뒤), 없으면 약국은 공공심야약국 표시 순, 그다음 시군구·이름
 function erSort(list,loc,pharm){
   const rank=x=>x.pub&&x.pub.length?0:x.pn?1:2;
@@ -5389,11 +5395,12 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
     $("erFilt").hidden=S.g!=="pharm"; $("erOnly").checked=S.only;
     if(S.g==="pharm"&&!P){ $("erOut").innerHTML=""; $("erMore").innerHTML=""; if(!ploading) loadP(); renderSrc(); return; }
     const list=base(),pharm=S.g==="pharm";
-    const regs=erRegions(list,S.q),all=regs.reduce((a,r)=>a+r.n,0);
-    $("erSd").innerHTML=chip("","전체",all,!S.sd)+regs.map(r=>chip(r.k,r.label,r.n,S.sd===r.k)).join("");
-    const sgs=S.sd?erSgList(list,S.sd,S.q):[];
+    const ex=S.g==="moon"?V:null;
+    const regs=erRegions(list,S.q,ex),all=regs.reduce((a,r)=>a+r.n,0);
+    $("erSd").innerHTML=chip("","전체",all,!S.sd)+regs.map(r=>chip(r.k,r.label,r.n?r.n:"취약지 "+r.v,S.sd===r.k)).join("");
+    const sgs=S.sd?erSgList(list,S.sd,S.q,ex):[];
     if(S.sg&&!sgs.some(x=>x.k===S.sg)) S.sg="";
-    $("erSg").innerHTML='<option value="">전체</option>'+sgs.map(x=>'<option value="'+erEsc(x.k)+'"'+(x.k===S.sg?' selected':'')+'>'+erEsc(x.k)+' ('+x.n+')</option>').join("");
+    $("erSg").innerHTML='<option value="">전체</option>'+sgs.map(x=>'<option value="'+erEsc(x.k)+'"'+(x.k===S.sg?' selected':'')+'>'+erEsc(x.k)+' ('+erEsc(erCntText(x))+')</option>').join("");
     $("erSg").disabled=!S.sd;
     let guide=GUIDE[S.g];
     if(pharm) guide+=erCovHtml(P.src,S.sd,S.sg);
@@ -5407,6 +5414,7 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
     const rows=erSort(erFilter(list,f),S.loc,pharm);
     const vr=S.g==="moon"?erSort(erFilter(V,{sd:S.sd,sg:S.sg,q:S.q}),S.loc,false):[];
     let html='<p class="er-count">'+(S.loc&&!S.sd&&!S.q.trim()?'내 위치에서 가까운 순 · ':'')+'<b>'+rows.length+'곳</b>'+(vr.length?' · 아래 취약지 기관 <b>'+vr.length+'곳</b>':'')+' · 자료 기준일 '+erEsc(((pharm?P.asof:D.asof)||"").slice(0,10))+'</p>';
+    if(S.g==="moon"&&!rows.length&&vr.length) html+='<p class="er-sub">이 조건에서는 자료에 달빛어린이병원이 없어요. 아래는 달빛어린이병원과 다른 지정인 취약지 소아 야간·휴일 진료기관이에요.</p>';
     html+=rows.slice(0,S.shown).map(x=>erCardHtml(x,S.g,c)).join("");
     if(!rows.length&&!vr.length) html+='<p class="er-hint">조건에 맞는 곳이 자료에 없어요. 지역이나 이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 119나 병원에 전화로 확인하세요.</p>';
     if(S.g==="moon"){
@@ -6635,7 +6643,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="470c6513";
+var APP_BUILD="e951d06d";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
