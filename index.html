@@ -59,16 +59,6 @@ h1{
   text-wrap:balance;
 }
 .sub{margin:12px 0 0; color:var(--ink-2); font-size:15px; max-width:62ch}
-/* 준비 중인 서비스 안내(맨 위) */
-.sn{--sb:#1F5FA8; --sb2:#3A69A0; border:1px dashed var(--rule); border:1px dashed color-mix(in srgb,var(--sb) 45%,transparent); background:var(--card); border-radius:3px; padding:14px clamp(14px,3vw,20px); margin:0 0 26px}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sn{--sb:#F3EEE2; --sb2:#D2CABA}}
-:root[data-theme="dark"] .sn{--sb:#F3EEE2; --sb2:#D2CABA}
-.sn-h{margin:0 0 8px; font-size:13px; font-weight:500; color:var(--sb2)}
-.sn-h b{font-family:"Nanum Myeongjo",serif; font-weight:700; font-size:15px; color:var(--sb); margin-right:6px}
-.sn ul{list-style:none; margin:0; padding:0; display:grid; gap:9px}
-.sn li{display:flex; gap:10px; align-items:baseline; font-size:14px; line-height:1.6; color:var(--sb2)}
-.sn li strong{color:var(--sb); font-weight:500}
-.sn .sn-tg{flex:none; font-size:11px; font-weight:500; padding:1px 8px; border:1px solid var(--sb); color:var(--sb); border-radius:999px}
 
 h2{
   font-family:"Nanum Myeongjo",serif; font-weight:700;
@@ -1179,16 +1169,76 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cosm .cm-repbtn{display:inline-block;padding:9px 14px;border:1px solid var(--seal);border-radius:3px;font-size:14px;font-weight:700;line-height:1.4;text-decoration:none;color:var(--seal);background:var(--paper)}
 #tab-cosm .cm-repbtn:hover{background:var(--paper-2)}
 /*COSM:CSS:END*/
+/*ER:CSS:BEGIN*/
+/* 병원 찾기 탭 */
+#tab-er [hidden]{display:none!important}
+#tab-er .er-h{margin:0 0 8px;font-family:"Nanum Myeongjo",serif;font-size:21px;line-height:1.4}
+#tab-er .er-lead{margin:0 0 14px;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+#tab-er .er-call{margin:0 0 16px;padding:12px 14px;border-left:4px solid var(--seal);background:rgba(168,50,42,.09);border-radius:0 3px 3px 0;font-size:13.5px;line-height:1.7;color:var(--ink)}
+#tab-er .er-call p{margin:0 0 6px;word-break:keep-all;overflow-wrap:anywhere}
+#tab-er .er-call p:last-child{margin:0}
+#tab-er .er-tok{margin:0 0 16px}
+#tab-er .er-tok p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--ink-2);word-break:keep-all;overflow-wrap:anywhere}
+#tab-er .er-acts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+#tab-er .er-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:1px solid var(--seal);border-radius:3px;background:var(--seal);color:#fff;font-size:14px;font-weight:700;text-decoration:none;line-height:1.3;text-align:center}
+#tab-er .er-btn.alt{background:var(--card);color:var(--seal)}
+#tab-er .er-btn:hover{filter:brightness(1.06)}
+#tab-er .er-btn119{min-width:120px}
+#tab-er .er-card{padding:16px;margin:0 0 14px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+#tab-er .er-card h3{margin:0 0 10px;font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:16.5px;line-height:1.4}
+#tab-er .er-locbtn{display:block;width:100%;min-height:48px;margin:0 0 6px;padding:0 16px;letter-spacing:normal;font-family:inherit;font-size:15px;font-weight:700;appearance:none;border:1px solid var(--seal);background:var(--card);color:var(--seal);border-radius:3px;cursor:pointer;transition:none}
+#tab-er .er-locbtn:hover,#tab-er .er-locbtn.on{background:var(--seal);color:#fff}
+#tab-er .er-sub{margin:0 0 10px;font-size:12.5px;line-height:1.7;color:var(--ink-3)}
+#tab-er .er-lab{margin:12px 0 8px;font-size:13.5px;font-weight:700;color:var(--ink-2)}
+#tab-er .er-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+#tab-er .er-chip{margin:0;width:auto;letter-spacing:normal;font-family:inherit;font-weight:400;transition:none;appearance:none;min-height:38px;padding:0 12px;border:1px solid var(--rule);border-radius:99px;background:var(--card);color:var(--ink);font-size:13.5px;cursor:pointer}
+#tab-er .er-chip.on{background:var(--seal);border-color:var(--seal);color:#fff;font-weight:700}
+#tab-er .er-chip .er-n{opacity:.75;font-size:12px}
+#tab-er .er-row{display:flex;flex-wrap:wrap;gap:10px}
+#tab-er .er-fld{display:flex;flex-direction:column;gap:4px;flex:1 1 140px;font-size:13px;color:var(--ink-2)}
+#tab-er .er-fld2{flex:2 1 200px}
+#tab-er .er-fld select,#tab-er .er-fld input{width:100%;min-height:44px;padding:0 10px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);font:inherit;font-size:15px}
+#tab-er .er-fld select:focus,#tab-er .er-fld input:focus{outline:2px solid var(--seal);outline-offset:1px;border-color:transparent}
+#tab-er .er-groups{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+#tab-er .er-g{margin:0;width:auto;flex:1 1 30%;letter-spacing:normal;font-family:inherit;font-weight:700;transition:none;appearance:none;min-height:46px;padding:6px 10px;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink-2);font-size:14px;cursor:pointer;line-height:1.35}
+#tab-er .er-g.on{background:var(--seal);border-color:var(--seal);color:#fff}
+#tab-er .er-g .er-n{font-weight:400;font-size:12px;opacity:.8}
+#tab-er .er-guide{margin:0 0 12px;font-size:13.5px;line-height:1.75;color:var(--ink)}
+#tab-er .er-guide p{margin:0 0 8px}
+#tab-er .er-cov{margin:0 0 12px;padding:10px 12px;border-left:4px solid var(--to);background:rgba(184,134,43,.12);border-radius:0 3px 3px 0;font-size:13px;line-height:1.7;color:var(--ink)}
+#tab-er .er-ck{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:14px;color:var(--ink)}
+#tab-er .er-ck input{width:20px;height:20px}
+#tab-er .er-state{margin:0 0 10px;min-height:1.2em;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+#tab-er .er-hint{padding:14px;border:1px dashed var(--rule);border-radius:3px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+#tab-er .er-item{margin:0 0 10px;padding:12px 14px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+#tab-er .er-item h4{margin:0 0 4px;font-size:15.5px;line-height:1.5;font-weight:700;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+#tab-er .er-badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;border:1px solid var(--rule);background:var(--card);color:var(--ink-2)}
+#tab-er .er-badge.pub{border-color:var(--seal);color:var(--seal)}
+#tab-er .er-badge.pn{border-color:var(--to);color:var(--to)}
+#tab-er .er-badge.vu{border-color:var(--su);color:var(--su)}
+#tab-er .er-dist{margin:0 0 2px;font-size:13px;font-weight:700;color:var(--su)}
+#tab-er .er-addr{margin:0 0 4px;font-size:13.5px;line-height:1.6;color:var(--ink)}
+#tab-er .er-time{margin:0 0 4px;font-size:14px;line-height:1.6;color:var(--ink)}
+#tab-er .er-pub,#tab-er .er-memo{margin:0 0 4px;font-size:13px;line-height:1.65;color:var(--ink-2);white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
+#tab-er .er-warn{margin:8px 0 0;font-size:12.5px;line-height:1.6;color:var(--ink-3)}
+#tab-er .er-more{margin:6px 0 0;font-size:13px;color:var(--ink-2)}
+#tab-er .er-more>summary{cursor:pointer;padding:6px 0;font-weight:700}
+#tab-er .er-more ul{margin:4px 0 0;padding-left:18px;line-height:1.7}
+#tab-er .er-sec{margin:18px 0 8px;font-family:"Nanum Myeongjo",serif;font-size:16px;font-weight:700;line-height:1.5}
+#tab-er .er-count{margin:0 0 8px;font-size:13.5px;color:var(--ink-2)}
+#tab-er .er-showmore{display:block;width:100%;min-height:46px;margin:6px 0 0;letter-spacing:normal;font-family:inherit;font-size:14.5px;font-weight:700;appearance:none;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:3px;cursor:pointer;transition:none}
+#tab-er .er-showmore:hover{border-color:var(--seal)}
+#tab-er .er-foot{margin:18px 0 0;padding-top:12px;border-top:1px solid var(--rule);font-size:12.5px;line-height:1.8;color:var(--ink-3)}
+#tab-er .er-foot details{margin:6px 0 0}
+#tab-er .er-foot summary{cursor:pointer;font-weight:700;color:var(--ink-2)}
+#tab-er .er-foot ul{margin:4px 0 0;padding-left:18px}
+#tab-er .er-btn:focus-visible,#tab-er .er-locbtn:focus-visible,#tab-er .er-chip:focus-visible,#tab-er .er-g:focus-visible,#tab-er .er-showmore:focus-visible,#tab-er .er-more>summary:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+@media(max-width:600px){#tab-er .er-h{font-size:19px}#tab-er .er-btn{flex:1 1 100%}#tab-er .er-g{flex:1 1 100%}}
+/*ER:CSS:END*/
 
 </style>
 
 <div class="wrap">
-<aside class="sn" aria-label="준비 중인 서비스">
-  <p class="sn-h"><b>준비 중인 서비스</b>아직 열리지 않았어요. 준비가 끝나면 아래 탭에 새로 생겨요.</p>
-  <ul>
-    <li><span class="sn-tg">준비 중</span><span><strong>달빛어린이병원·소아 응급실 찾기</strong> — 밤이나 주말에 아이가 아플 때 가까운 곳을 찾고, 전화나 지도로 바로 이어지게 만들고 있어요.</span></li>
-  </ul>
-</aside>
 <header>
   <p class="eyebrow">맘케어 · 임신부터 출산까지</p>
   <h1>임신·출산 무료 도구</h1>
@@ -1245,6 +1295,11 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-cosm">
     <img src="tab-cosm.jpg" width="800" height="597" decoding="async"
          alt="화장품 성분 확인 — 전성분을 붙여 넣으면 식약처 화장품 원료 목록과 하나씩 맞춰 줍니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-er">
+    <img src="tab-er.jpg" width="800" height="597" decoding="async"
+         alt="병원 찾기 — 달빛어린이병원·응급의료기관·늦게까지 여는 심야약국을 지역별로, 또는 내 위치에서 가까운 순으로 찾습니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
 </nav>
@@ -1974,6 +2029,46 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <p class="cm-foot" id="cmFoot"></p>
 </div>
 <!--COSM:HTML:END-->
+<!--ER:HTML:BEGIN-->
+<div id="tab-er" class="hidden">
+<p class="upd"><b>업데이트 11/6</b> 병원 찾기 탭이 생겼어요. 달빛어린이병원·응급의료기관·심야약국을 지역별로, 또는 내 위치에서 가까운 순으로 찾을 수 있어요</p>
+<h2 class="er-h">우리동네 소아 야간·응급 병원, 심야약국</h2>
+<p class="er-lead">밤이나 휴일에 아이가 아플 때, 가까운 달빛어린이병원과 응급의료기관, 늦게까지 여는 약국을 한곳에서 찾아요. 전화와 길찾기로 바로 이어져요.</p>
+<div class="er-call" role="note">
+<p><b>방문 전에 꼭 전화로 확인하세요.</b></p>
+<p>진료시간·휴진·운영 여부는 병원과 약국 사정에 따라 이 화면의 자료와 다를 수 있어요.</p>
+<p>이 화면은 응급인지 아닌지를 가려 주지 않아요.</p>
+<p><b>아이가 위급하면 바로 119에 전화하세요.</b></p>
+</div>
+<div class="er-sub er-tok">
+<p>소아 응급 상담이 필요하면 <b>아이안심톡</b>(소아 응급 온라인 상담)과 <b>응급똑똑</b> 앱이 있어요. 직접 검색해서 찾아보세요.</p>
+<p>두 곳이 안내하는 정보는 이용 시점과 병원 방문 시점의 증상 변화에 따라 결과가 달라질 수 있어요.</p>
+<p>의료 전문가의 직접적인 진단·판단을 대신할 수 없는 참고용이고, 시범사업 기간이라 내용이 바뀔 수 있어요.</p>
+</div>
+<div class="er-card" id="erFind">
+  <h3>어디서 찾을까요</h3>
+  <button type="button" class="er-locbtn" id="erLoc">내 위치에서 가까운 순으로 찾기</button>
+  <p class="er-sub" id="erLocNote">누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 아래에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요.</p>
+  <p class="er-lab" id="erSdLab">또는 시도를 골라요</p>
+  <div class="er-chips" id="erSd" role="group" aria-labelledby="erSdLab"></div>
+  <div class="er-row">
+    <label class="er-fld">시군구 <select id="erSg" aria-label="시군구 고르기"><option value="">전체</option></select></label>
+    <label class="er-fld er-fld2">이름 검색 <input type="search" id="erQ" placeholder="병원·약국 이름" autocomplete="off" aria-label="병원·약국 이름 검색"></label>
+  </div>
+</div>
+<div class="er-groups" role="group" aria-label="찾을 곳 고르기">
+  <button type="button" class="er-g on" data-g="moon" aria-pressed="true">달빛어린이병원 <span class="er-n" id="erCntMoon"></span></button>
+  <button type="button" class="er-g" data-g="emg" aria-pressed="false">응급의료기관 <span class="er-n" id="erCntEmg"></span></button>
+  <button type="button" class="er-g" data-g="pharm" aria-pressed="false">심야약국 <span class="er-n" id="erCntPh"></span></button>
+</div>
+<div id="erGuide" class="er-guide"></div>
+<label class="er-ck" id="erFilt" hidden><input type="checkbox" id="erOnly"> 공공심야약국 표시가 있는 곳만 보기</label>
+<p class="er-state" id="erState" aria-live="polite"></p>
+<div id="erOut"></div>
+<div id="erMore"></div>
+<div class="er-foot" id="erSrc"></div>
+</div>
+<!--ER:HTML:END-->
 <div id="tab-rank" class="hidden">
 <div class="card">
   <h2>용품별 순위</h2>
@@ -3552,7 +3647,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".tb").forEach(x=>{
     const on=(x===b); x.classList.toggle("on",on); x.setAttribute("aria-selected",on?"true":"false");
   });
-  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp","tab-bf","tab-benefit","tab-cosm"].forEach(id=>{
+  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp","tab-bf","tab-benefit","tab-cosm","tab-er"].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.classList.toggle("hidden", id!==b.dataset.tab);
   });
@@ -3565,6 +3660,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   if(b.dataset.tab==="tab-bf" && typeof bfOnOpen==="function") bfOnOpen();
   if(b.dataset.tab==="tab-benefit" && typeof benOnOpen==="function") benOnOpen();
   if(b.dataset.tab==="tab-cosm" && typeof cosmOnOpen==="function") cosmOnOpen();
+  if(b.dataset.tab==="tab-er" && typeof erOnOpen==="function") erOnOpen();
 }));
 
 /*JP:JS:BEGIN*/
@@ -5117,6 +5213,239 @@ function cosmDrugHtml(res,q,Dd,IX,P,PX,DM){
   if(INIT_TAB==="cosm"){ const b=document.querySelector('.tb[data-tab="tab-cosm"]'); if(b){ b.click(); window.scrollTo(0,0); } }
 })();
 /*COSM:JS:END*/
+/*ER:JS:BEGIN*/
+/* === ER-CORE START === */
+// 병원 찾기: 달빛어린이병원·응급의료기관(er.json)과 심야약국(er_pharm.json)은 탭을 열 때 받아 이 기기 안에서만 고른다. 위치는 서버로 보내지 않는다.
+const ER_SD=[["서울","서울"],["부산","부산"],["대구","대구"],["인천","인천"],["광주전남","광주·전남"],["대전","대전"],["울산","울산"],["세종","세종"],["경기","경기"],["강원","강원"],["충북","충북"],["충남","충남"],["전북","전북"],["경북","경북"],["경남","경남"],["제주","제주"]];
+const ER_DAY=["월","화","수","목","금","토","일","공휴일"];
+const ER_PAGE=20;
+function erEsc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function erNorm(s){return String(s==null?"":s).normalize("NFKC").toLowerCase().replace(/[^0-9a-z가-힣]/g,"");}
+function erSdLabel(k){const r=ER_SD.find(x=>x[0]===k);return r?r[1]:k;}
+// 시각 읽기: '0900'·'09:00'·'2500' → 분(0~). 못 읽으면 null
+function erMin(v){
+  const s=String(v==null?"":v).trim();
+  let m=s.match(/^(\d{1,2}):(\d{2})$/); if(m) return (+m[1])*60+(+m[2]);
+  m=s.match(/^(\d{3,4})$/); if(m){const z=("0000"+m[1]).slice(-4); return (+z.slice(0,2))*60+(+z.slice(2));}
+  return null;
+}
+function erClock(m){return ("0"+Math.floor(m/60)).slice(-2)+":"+("0"+(m%60)).slice(-2);}
+function erClockAt(m){return m>1440?"익일 "+erClock(m-1440):erClock(m);}
+// 시작·마감 → '22:00~익일 01:00'. 마감이 시작보다 이르면 다음 날로 본다. 시작=마감이거나 못 읽으면 빈 글자
+function erRange(s,c){
+  const a=erMin(s); let b=erMin(c);
+  if(a==null||b==null||a===b) return "";
+  if(b<a) b+=1440;
+  return erClockAt(a)+"~"+erClockAt(b);
+}
+function erTodayKst(now){return new Date((now==null?Date.now():now)+9*3600000).toISOString().slice(0,10);}
+// 날짜 → 1~7(월~일), 공휴일이면 8
+function erDayIdx(iso,holFn){
+  const wd=new Date(iso+"T00:00:00Z").getUTCDay();
+  return (holFn&&holFn(iso))?8:(wd===0?7:wd);
+}
+function erHours(it,idx){const v=(it&&it.tm||{})[String(idx)];return v?erRange(v[0],v[1]):"";}
+function erDist(a,b){
+  if(!a||!b||a.la==null||a.lo==null||b.la==null||b.lo==null) return null;
+  const r=Math.PI/180,dLa=(b.la-a.la)*r,dLo=(b.lo-a.lo)*r;
+  const h=Math.sin(dLa/2)**2+Math.cos(a.la*r)*Math.cos(b.la*r)*Math.sin(dLo/2)**2;
+  return 12742*Math.asin(Math.min(1,Math.sqrt(h)));
+}
+function erFmtDist(km){return km<1?"약 "+(Math.round(km*100)*10)+"m":"약 "+km.toFixed(1)+"km";}
+// 거르기: 시도·시군구·이름(부분 일치)·추가 조건
+function erFilter(list,f){
+  const q=erNorm(f.q);
+  return list.filter(x=>(!f.sd||x.sd===f.sd)&&(!f.sg||x.sg===f.sg)&&(!q||erNorm(x.n).includes(q))&&(!f.only||f.only(x)));
+}
+function erRegions(list,q){
+  const n=erNorm(q),c={};
+  list.forEach(x=>{if(!n||erNorm(x.n).includes(n)) c[x.sd]=(c[x.sd]||0)+1;});
+  return ER_SD.filter(s=>c[s[0]]).map(s=>({k:s[0],label:s[1],n:c[s[0]]}));
+}
+function erSgList(list,sd,q){
+  const n=erNorm(q),c={};
+  list.forEach(x=>{if(x.sd===sd&&x.sg&&(!n||erNorm(x.n).includes(n))) c[x.sg]=(c[x.sg]||0)+1;});
+  return Object.keys(c).sort((a,b)=>a.localeCompare(b,"ko")).map(k=>({k:k,n:c[k]}));
+}
+// 정렬: 위치가 있으면 가까운 순(좌표 없는 곳은 뒤), 없으면 약국은 공공심야약국 표시 순, 그다음 시군구·이름
+function erSort(list,loc,pharm){
+  const rank=x=>x.pub&&x.pub.length?0:x.pn?1:2;
+  const ko=(a,b)=>String(a||"").localeCompare(String(b||""),"ko");
+  const out=list.map(x=>({x:x,d:loc?erDist(loc,x):null}));
+  out.sort((p,q)=>{
+    if(loc){ if((p.d==null)!==(q.d==null)) return p.d==null?1:-1; if(p.d!=null&&p.d!==q.d) return p.d-q.d; }
+    else if(pharm&&rank(p.x)!==rank(q.x)) return rank(p.x)-rank(q.x);
+    return ko(p.x.sg,q.x.sg)||ko(p.x.n,q.x.n);
+  });
+  return out.map(o=>o.x);
+}
+// 공식 명단을 확인한 지역: src[].cov = [[시도, 시군구('' 이면 시도 전체)],…]
+function erCov(src,sd,sg){
+  const full=[],part=[];
+  (src||[]).forEach((s,i)=>(s.cov||[]).forEach(c=>{
+    if(c[0]!==sd) return;
+    if(c[1]===""||(sg&&c[1]===sg)) full.push(i); else if(!sg) part.push(i);
+  }));
+  return {full:full,part:part};
+}
+function erCovHtml(src,sd,sg){
+  if(!sd){
+    const whole=[],dist=[];
+    (src||[]).forEach(s=>(s.cov||[]).forEach(c=>{const l=erSdLabel(c[0]); if(c[1]==="") whole.indexOf(l)<0&&whole.push(l); else dist.push(l+" "+c[1]);}));
+    return '<p class="er-cov"><b>공공심야약국 표시는 지자체가 명단을 공개한 곳만 붙어요.</b> 확인한 지역은 '+erEsc(whole.join("·"))+' 전체, '+erEsc(dist.join(", "))+'예요. 다른 지역은 약국이 자료에 직접 적은 표시와 밤 10시 넘게 여는 것으로 적힌 약국만 보여요.</p>';
+  }
+  const c=erCov(src,sd,sg),name=i=>erEsc(src[i].org)+" 공개 명단(기준일 "+erEsc(src[i].date)+")";
+  if(c.full.length) return '<p class="er-cov">이 지역은 '+c.full.map(name).join(", ")+'을 확인했어요. 명단은 지자체가 바꿀 수 있어요.</p>';
+  if(c.part.length) return '<p class="er-cov">이 지역에서는 '+c.part.map(name).join(", ")+'만 확인했어요. 다른 시군구의 공공심야약국은 표시가 빠져 있을 수 있어요.</p>';
+  return '<p class="er-cov">이 지역은 지자체가 공개한 공공심야약국 명단을 아직 확인하지 못했어요. 약국이 직접 적어 둔 &#39;공공심야약국&#39; 표시와, 밤 10시 넘게 여는 것으로 자료에 적힌 약국만 보여요.</p>';
+}
+function erLinks(it){
+  const t=String(it.t||"").replace(/[^0-9]/g,"");
+  const nm=encodeURIComponent(it.n||""),q=encodeURIComponent((it.n||"")+" "+String(it.a||"").split(",")[0]);
+  const kk=(it.la!=null&&it.lo!=null)?"https://map.kakao.com/link/to/"+nm+","+it.la+","+it.lo:"https://map.kakao.com/link/search/"+nm;
+  return '<div class="er-acts">'+(t?'<a class="er-btn" href="tel:'+t+'">전화 '+erEsc(it.t)+'</a>':'<span class="er-sub">전화번호 자료가 없어요</span>')
+    +'<a class="er-btn alt" href="'+kk+'" target="_blank" rel="noopener noreferrer">카카오맵 길찾기</a>'
+    +'<a class="er-btn alt" href="https://map.naver.com/p/search/'+q+'" target="_blank" rel="noopener noreferrer">네이버지도</a></div>';
+}
+function erWeek(it){
+  const tm=it.tm||{},rows=[];
+  for(let k=1;k<=8;k++){const r=tm[String(k)]?erRange(tm[String(k)][0],tm[String(k)][1]):""; if(r) rows.push("<li><b>"+ER_DAY[k-1]+"</b> "+erEsc(r)+"</li>");}
+  return rows;
+}
+function erTimeLine(it,ctx){
+  const h=erHours(it,ctx.idx);
+  return '<p class="er-time">'+erEsc(ctx.dayName)+' 자료상 시간 '+(h?'<b>'+erEsc(h)+'</b>':'<b>자료에 없어요</b> · 전화로 확인하세요')+'</p>';
+}
+function erDistLine(it,ctx){const d=ctx.loc?erDist(ctx.loc,it):null;return d==null?"":'<p class="er-dist">내 위치에서 '+erFmtDist(d)+' (직선)</p>';}
+function erMoreBlock(it){
+  const w=erWeek(it),memo=[];
+  if(it.e) memo.push("병원 기재 메모: "+it.e);
+  if(it.i&&it.i!==it.e) memo.push("병원 안내: "+it.i);
+  if(!w.length&&!memo.length) return "";
+  return '<details class="er-more"><summary>요일별 시간·병원이 적은 메모 보기</summary>'+(w.length?'<ul>'+w.join("")+'</ul>':'')+memo.map(m=>'<p class="er-memo">'+erEsc(m)+'</p>').join("")+'</details>';
+}
+const ER_WARN='<p class="er-warn">자료상 시간이에요. 방문 전 전화로 확인하세요.</p>';
+function erMoonCard(it,ctx){
+  return '<article class="er-item"><h4>'+erEsc(it.n)+' <span class="er-badge">'+erEsc(it.k||"달빛어린이병원")+'</span></h4>'+erDistLine(it,ctx)
+    +'<p class="er-addr">'+erEsc(it.a)+'</p>'+erTimeLine(it,ctx)+erMoreBlock(it)+erLinks(it)+ER_WARN+'</article>';
+}
+function erEmgCard(it,ctx){
+  const t3=it.t3&&it.t3!==it.t?'<p class="er-time">응급실 전화 <b>'+erEsc(it.t3)+'</b></p>':'';
+  return '<article class="er-item"><h4>'+erEsc(it.n)+' <span class="er-badge">'+erEsc(it.g||"응급의료기관")+'</span></h4>'+erDistLine(it,ctx)
+    +'<p class="er-addr">'+erEsc(it.a)+'</p>'+t3+erLinks(it)+'<p class="er-warn">이 목록은 소아 진료가 되는지, 병상이 비어 있는지 알려 주지 않아요. 가기 전에 119나 병원에 전화로 확인하세요.</p></article>';
+}
+function erVulnCard(it,ctx){
+  const ht=it.ht&&it.ht.length?'<p class="er-time">야간·휴일 진료시간(지자체 공개'+(it.hu?', '+erEsc(it.hu)+' 수정':'')+')</p><ul>'+it.ht.map(x=>'<li>'+erEsc(x)+'</li>').join("")+'</ul>'
+    :'<p class="er-pub">야간·휴일 진료시간은 지자체와 협의해 정해져요. 병원에 전화로 확인하세요.</p>';
+  return '<article class="er-item"><h4>'+erEsc(it.n)+' <span class="er-badge vu">취약지 소아 야간·휴일 진료기관</span></h4>'+erDistLine(it,ctx)
+    +'<p class="er-addr">'+erEsc(it.a)+'</p>'+ht+(it.since?'<p class="er-pub">운영 시작 '+erEsc(it.since)+'</p>':'')+erLinks(it)+ER_WARN+'</article>';
+}
+function erPharmCard(it,ctx){
+  const pubs=(it.pub||[]).map(x=>({s:(ctx.src||[])[x[0]]||{},tx:x[1]}));
+  const badge=pubs.length?'<span class="er-badge pub">공공심야약국 · 지자체 명단</span>':it.pn?'<span class="er-badge pn">약국이 공공심야약국이라고 적어 둠</span>':'<span class="er-badge">밤 10시 넘게 여는 것으로 적힘</span>';
+  const pubHtml=pubs.map(p=>'<p class="er-pub">'+(p.tx?'지자체 공개 자료: '+erEsc(p.tx):'지자체가 공개한 공공심야약국 명단에 올라 있어요')+' <span class="er-sub">('+erEsc(p.s.org||"")+' · 기준일 '+erEsc(p.s.date||"")+')</span></p>').join("");
+  const memo=it.e?'<p class="er-memo">약국 기재 메모: '+erEsc(it.e)+'</p>':'';
+  const w=erWeek(it),more=w.length?'<details class="er-more"><summary>요일별 시간 보기</summary><ul>'+w.join("")+'</ul></details>':'';
+  return '<article class="er-item"><h4>'+erEsc(it.n)+' '+badge+'</h4>'+erDistLine(it,ctx)
+    +'<p class="er-addr">'+erEsc(it.a)+'</p>'+erTimeLine(it,ctx)+pubHtml+memo+more+erLinks(it)+ER_WARN+'</article>';
+}
+function erCardHtml(it,kind,ctx){return kind==="moon"?erMoonCard(it,ctx):kind==="emg"?erEmgCard(it,ctx):kind==="vuln"?erVulnCard(it,ctx):erPharmCard(it,ctx);}
+// 별표 명단(er.json 의 vuln)을 화면 공통 모양으로
+function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la:v.lat,lo:v.lon,sd:v.sd,sg:v.sg,ht:v.hours_text,hu:v.hours_source_updated,since:v.since}));}
+/* === ER-CORE END === */
+
+(function(){
+  const $=id=>document.getElementById(id);
+  let D=null,P=null,V=[],loading=false,ploading=false,failed=false,pfail=false;
+  const S={g:"moon",sd:"",sg:"",q:"",only:false,loc:null,shown:ER_PAGE};
+  const GUIDE={
+    moon:'<p>달빛어린이병원은 만 18세 이하 경증 소아 환자를 평일 밤 11~12시까지, 주말·공휴일은 오후 6시까지 진료하는 병·의원이에요. 병원마다 시간이 달라요. 병원 사정에 따라 임시휴진이나 운영 중단이 있을 수 있어요.</p>',
+    emg:'<p>응급의료기관은 등급이 달라요(권역응급의료센터·지역응급의료센터·지역응급의료기관·응급실운영신고기관). 이 목록으로는 소아 진료가 되는지, 병상이 비어 있는지 알 수 없어요. 가기 전에 119나 병원에 전화로 확인하세요.</p>',
+    pharm:'<p>공공심야약국은 지자체가 지정해 늦은 밤에도 여는 약국이에요. 시간과 요일은 지역과 약국마다 달라요. 아래 목록에는 지자체 명단에 있는 약국, 약국이 직접 &#39;공공심야약국&#39;이라고 적어 둔 약국, 자료상 밤 10시 넘게 여는 약국이 함께 나와요.</p>'
+  };
+  const day=()=>Math.floor(Date.now()/86400000);
+  const getJ=u=>fetch(u).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();});
+  function ctx(){
+    const iso=erTodayKst(),idx=erDayIdx(iso,d=>(typeof KR_HOL!=="undefined"&&KR_HOL[d])?1:0);
+    return {idx:idx,dayName:"오늘("+ER_DAY[idx-1]+")",loc:S.loc,src:P?P.src:[]};
+  }
+  function base(){return S.g==="moon"?D.moon:S.g==="emg"?D.emg:(P?P.p:[]);}
+  function state(t){$("erState").textContent=t||"";}
+  function load(){
+    if(D||loading) return; loading=true; failed=false; state("병원 자료를 받는 중이에요…");
+    getJ("er.json?t="+day()).then(d=>{D=d; V=erVulnItems(d.vuln); loading=false; state(""); render();})
+      .catch(()=>{loading=false; failed=true; state("자료를 불러오지 못했어요. 119 또는 병원에 전화하세요. 잠시 뒤 이 탭을 다시 열어 보세요.");});
+  }
+  function loadP(){
+    if(P||ploading) return; ploading=true; pfail=false; state("약국 자료를 받는 중이에요…");
+    getJ("er_pharm.json?t="+day()).then(d=>{P=d; ploading=false; state(""); render();})
+      .catch(()=>{ploading=false; pfail=true; state("약국 자료를 불러오지 못했어요. 잠시 뒤 다시 눌러 주세요.");});
+  }
+  function chip(k,label,n,on){return '<button type="button" class="er-chip'+(on?' on':'')+'" data-sd="'+erEsc(k)+'" aria-pressed="'+(on?'true':'false')+'">'+erEsc(label)+(n!=null?' <span class="er-n">'+n+'</span>':'')+'</button>';}
+  function render(){
+    if(!D) return;
+    $("erCntMoon").textContent=D.moon.length; $("erCntEmg").textContent=D.emg.length; $("erCntPh").textContent=P?P.p.length:"";
+    document.querySelectorAll("#tab-er .er-g").forEach(b=>{const on=b.dataset.g===S.g; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false");});
+    $("erFilt").hidden=S.g!=="pharm"; $("erOnly").checked=S.only;
+    if(S.g==="pharm"&&!P){ $("erOut").innerHTML=""; $("erMore").innerHTML=""; if(!ploading) loadP(); renderSrc(); return; }
+    const list=base(),pharm=S.g==="pharm";
+    const regs=erRegions(list,S.q),all=regs.reduce((a,r)=>a+r.n,0);
+    $("erSd").innerHTML=chip("","전체",all,!S.sd)+regs.map(r=>chip(r.k,r.label,r.n,S.sd===r.k)).join("");
+    const sgs=S.sd?erSgList(list,S.sd,S.q):[];
+    if(S.sg&&!sgs.some(x=>x.k===S.sg)) S.sg="";
+    $("erSg").innerHTML='<option value="">전체</option>'+sgs.map(x=>'<option value="'+erEsc(x.k)+'"'+(x.k===S.sg?' selected':'')+'>'+erEsc(x.k)+' ('+x.n+')</option>').join("");
+    $("erSg").disabled=!S.sd;
+    let guide=GUIDE[S.g];
+    if(pharm) guide+=erCovHtml(P.src,S.sd,S.sg);
+    $("erGuide").innerHTML=guide;
+    const c=ctx(),f={sd:S.sd,sg:S.sg,q:S.q,only:(pharm&&S.only)?(x=>(x.pub&&x.pub.length)||x.pn):null};
+    const has=S.sd||S.loc||S.q.trim();
+    if(!has){
+      $("erOut").innerHTML='<p class="er-hint">위에서 <b>내 위치로 찾기</b>를 누르거나 시도를 골라 주세요. 지역을 고르면 그 지역의 목록이 나와요.</p>';
+      $("erMore").innerHTML=""; renderSrc(); return;
+    }
+    const rows=erSort(erFilter(list,f),S.loc,pharm);
+    const vr=S.g==="moon"?erSort(erFilter(V,{sd:S.sd,sg:S.sg,q:S.q}),S.loc,false):[];
+    let html='<p class="er-count">'+(S.loc&&!S.sd&&!S.q.trim()?'내 위치에서 가까운 순 · ':'')+'<b>'+rows.length+'곳</b>'+(vr.length?' · 아래 취약지 기관 <b>'+vr.length+'곳</b>':'')+' · 자료 기준일 '+erEsc(((pharm?P.asof:D.asof)||"").slice(0,10))+'</p>';
+    html+=rows.slice(0,S.shown).map(x=>erCardHtml(x,S.g,c)).join("");
+    if(!rows.length&&!vr.length) html+='<p class="er-hint">조건에 맞는 곳이 자료에 없어요. 지역이나 이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 119나 병원에 전화로 확인하세요.</p>';
+    if(S.g==="moon"){
+      const narrow=S.sd||S.q.trim(),vs=narrow?vr:vr.slice(0,4);
+      if(vr.length) html+='<h3 class="er-sec">취약지 소아 야간·휴일 진료기관</h3><p class="er-sub">달빛어린이병원과 다른 지정이에요. 보건복지부 사업으로 지정된 병·의원이고, 진료시간은 지자체와 협의해 정해져요.'+(vs.length<vr.length?' 가까운 '+vs.length+'곳만 보여요. 시도를 고르면 그 지역을 모두 볼 수 있어요.':'')+'</p>'+vs.map(x=>erVulnCard(x,c)).join("");
+    }
+    $("erOut").innerHTML=html;
+    $("erMore").innerHTML=rows.length>S.shown?'<button type="button" class="er-showmore" id="erShowMore">더 보기 (남은 '+(rows.length-S.shown)+'곳)</button>':"";
+    renderSrc();
+  }
+  function renderSrc(){
+    let h='출처: 국립중앙의료원 전국 병·의원 찾기 서비스(달빛어린이병원), 전국 응급의료기관 정보 조회 서비스, 전국 약국 정보 조회 서비스(공공데이터포털).';
+    if(P&&P.src&&P.src.length) h+='<details><summary>공공심야약국 명단 출처 ('+P.src.length+'곳)</summary><ul>'+P.src.map(s=>'<li>'+erEsc(s.org)+' · '+erEsc(s.label)+' · 기준일 '+erEsc(s.date)+' · '+erEsc(s.kind)+' · '+erEsc(s.lic)+(s.url?' · <a href="'+erEsc(s.url)+'" target="_blank" rel="noopener noreferrer">공공데이터포털</a>':'')+'</li>').join("")+'</ul></details>';
+    h+='<br>이 사이트는 국립중앙의료원·지자체와 무관하며, 진단·치료·응급 여부 판단을 대신하지 않아요. 달빛어린이병원은 응급이 아닌 경증 소아 환자를 위한 곳이에요. 병원 목록은 매일 갱신해도 실제와 다를 수 있어요.';
+    $("erSrc").innerHTML=h;
+  }
+  // 이벤트
+  $("erSd").addEventListener("click",e=>{const b=e.target.closest(".er-chip"); if(!b) return; S.sd=b.dataset.sd; S.sg=""; S.shown=ER_PAGE; render();});
+  $("erSg").addEventListener("change",e=>{S.sg=e.target.value; S.shown=ER_PAGE; render();});
+  let tq=0;
+  $("erQ").addEventListener("input",e=>{clearTimeout(tq); tq=setTimeout(()=>{S.q=e.target.value; S.shown=ER_PAGE; render();},150);});
+  document.querySelector("#tab-er .er-groups").addEventListener("click",e=>{const b=e.target.closest(".er-g"); if(!b) return; S.g=b.dataset.g; S.sg=""; S.shown=ER_PAGE; render();});
+  $("erOnly").addEventListener("change",e=>{S.only=e.target.checked; S.shown=ER_PAGE; render();});
+  $("erMore").addEventListener("click",e=>{if(e.target.closest("#erShowMore")){S.shown+=ER_PAGE; render();}});
+  $("erLoc").addEventListener("click",()=>{
+    if(S.loc){ S.loc=null; $("erLoc").classList.remove("on"); $("erLoc").textContent="내 위치에서 가까운 순으로 찾기"; $("erLocNote").textContent="누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 아래에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요."; render(); return; }
+    if(!navigator.geolocation){ $("erLocNote").textContent="이 브라우저에서는 위치를 쓸 수 없어요. 아래에서 시도를 골라 찾아 주세요."; return; }
+    $("erLocNote").textContent="위치를 확인하는 중이에요…";
+    navigator.geolocation.getCurrentPosition(p=>{
+      S.loc={la:p.coords.latitude,lo:p.coords.longitude}; S.shown=ER_PAGE;
+      $("erLoc").classList.add("on"); $("erLoc").textContent="내 위치 기준 해제하기";
+      $("erLocNote").textContent="내 위치에서 가까운 순이에요. 위치는 이 기기 안에서만 쓰고 서버로 보내지 않아요. 거리는 직선거리라 실제 이동시간과 달라요.";
+      render();
+    },()=>{$("erLocNote").textContent="위치를 받지 못했어요. 브라우저의 위치 허용을 확인하거나, 아래에서 시도를 골라 찾아 주세요.";},{timeout:10000,maximumAge:300000});
+  });
+  window.erOnOpen=function(){ if(!D||failed){ D=null; load(); } else if(S.g==="pharm"&&(!P||pfail)){ P=null; loadP(); } };
+  if(INIT_TAB==="er"){ const b=document.querySelector('.tb[data-tab="tab-er"]'); if(b){ b.click(); window.scrollTo(0,0); } }
+})();
+/*ER:JS:END*/
 // 블로그 글에서 ?tab=pick 으로 들어오면 택일 탭을 바로 연다
 (function(){
   if(INIT_TAB!=="pick") return;
@@ -6306,7 +6635,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="1c7db0c3";
+var APP_BUILD="470c6513";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
