@@ -1249,7 +1249,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-er .er-fld select,#tab-er .er-fld input{width:100%;min-height:44px;padding:0 10px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);font:inherit;font-size:15px}
 #tab-er .er-fld select:focus,#tab-er .er-fld input:focus{outline:2px solid var(--seal);outline-offset:1px;border-color:transparent}
 #tab-er .er-groups{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
-#tab-er .er-g{margin:0;width:auto;flex:1 1 30%;letter-spacing:normal;font-family:inherit;font-weight:700;transition:none;appearance:none;min-height:46px;padding:6px 10px;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink-2);font-size:14px;cursor:pointer;line-height:1.35}
+#tab-er .er-g{margin:0;width:auto;flex:1 1 45%;letter-spacing:normal;font-family:inherit;font-weight:700;transition:none;appearance:none;min-height:46px;padding:6px 10px;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink-2);font-size:14px;cursor:pointer;line-height:1.35}
 #tab-er .er-g.on{background:var(--seal);border-color:var(--seal);color:#fff}
 #tab-er .er-g .er-n{font-weight:400;font-size:12px;opacity:.8}
 #tab-er .er-guide{margin:0 0 12px;font-size:13.5px;line-height:1.75;color:var(--ink)}
@@ -1265,6 +1265,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-er .er-badge.pub{border-color:var(--seal);color:var(--seal)}
 #tab-er .er-badge.pn{border-color:var(--to);color:var(--to)}
 #tab-er .er-badge.vu{border-color:var(--su);color:var(--su)}
+#tab-er .er-badge.pd{border-color:var(--seal);color:var(--seal)}
 #tab-er .er-dist{margin:0 0 2px;font-size:13px;font-weight:700;color:var(--su)}
 #tab-er .er-addr{margin:0 0 4px;font-size:13.5px;line-height:1.6;color:var(--ink)}
 #tab-er .er-time{margin:0 0 4px;font-size:14px;line-height:1.6;color:var(--ink)}
@@ -1358,7 +1359,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
   </button>
   <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-er">
     <img src="tab-er.jpg" width="800" height="597" decoding="async"
-         alt="병원 찾기 — 달빛어린이병원·응급의료기관·늦게까지 여는 심야약국을 지역별로, 또는 내 위치에서 가까운 순으로 찾습니다">
+         alt="병원 찾기 — 달빛어린이병원·소아전문응급의료센터·응급의료기관·늦게까지 여는 심야약국을 지역별로, 또는 내 위치에서 가까운 순으로 찾습니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
 </nav>
@@ -2442,8 +2443,9 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <!--ER:HTML:BEGIN-->
 <div id="tab-er" class="hidden">
 <p class="upd"><b>업데이트 11/6</b> 병원 찾기 탭이 생겼어요. 달빛어린이병원·응급의료기관·심야약국을 지역별로, 또는 내 위치에서 가까운 순으로 찾을 수 있어요</p>
+<p class="upd"><b>업데이트 11/7</b> 소아전문응급의료센터 14곳을 찾는 칸이 달빛어린이병원 옆에 생겼어요</p>
 <h2 class="er-h">우리동네 소아 야간·응급 병원, 심야약국</h2>
-<p class="er-lead">밤이나 휴일에 아이가 아플 때, 가까운 달빛어린이병원과 응급의료기관, 늦게까지 여는 약국을 한곳에서 찾아요. 전화와 길찾기로 바로 이어져요.</p>
+<p class="er-lead">밤이나 휴일에 아이가 아플 때, 가까운 달빛어린이병원과 소아전문응급의료센터, 응급의료기관, 늦게까지 여는 약국을 한곳에서 찾아요. 전화와 길찾기로 바로 이어져요.</p>
 <div class="er-call" role="note">
 <p><b>방문 전에 꼭 전화로 확인하세요.</b></p>
 <p>진료시간·휴진·운영 여부는 병원과 약국 사정에 따라 이 화면의 자료와 다를 수 있어요.</p>
@@ -2468,6 +2470,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 <div class="er-groups" role="group" aria-label="찾을 곳 고르기">
   <button type="button" class="er-g on" data-g="moon" aria-pressed="true">달빛어린이병원 <span class="er-n" id="erCntMoon"></span></button>
+  <button type="button" class="er-g" data-g="ped" aria-pressed="false">소아전문응급의료센터 <span class="er-n" id="erCntPed"></span></button>
   <button type="button" class="er-g" data-g="emg" aria-pressed="false">응급의료기관 <span class="er-n" id="erCntEmg"></span></button>
   <button type="button" class="er-g" data-g="pharm" aria-pressed="false">심야약국 <span class="er-n" id="erCntPh"></span></button>
 </div>
@@ -5662,35 +5665,47 @@ function erDist(a,b){
   return 12742*Math.asin(Math.min(1,Math.sqrt(h)));
 }
 function erFmtDist(km){return km<1?"약 "+(Math.round(km*100)*10)+"m":"약 "+km.toFixed(1)+"km";}
+// 이름 검색 글자: 공식 이름 + 흔히 부르는 이름(al, 소아전문응급의료센터의 '아주대병원' 같은 것)
+function erKey(x){return erNorm(String(x&&x.n||"")+" "+String(x&&x.al||""));}
 // 거르기: 시도·시군구·이름(부분 일치)·추가 조건
 function erFilter(list,f){
   const q=erNorm(f.q);
-  return list.filter(x=>(!f.sd||x.sd===f.sd)&&(!f.sg||x.sg===f.sg)&&(!q||erNorm(x.n).includes(q))&&(!f.only||f.only(x)));
+  return list.filter(x=>(!f.sd||x.sd===f.sd)&&(!f.sg||x.sg===f.sg)&&(!q||erKey(x).includes(q))&&(!f.only||f.only(x)));
 }
 // extra = 같은 탭에 함께 보이는 다른 지정 목록(달빛 탭의 취약지 기관). n=본 목록 수, v=extra 수.
 function erRegions(list,q,extra){
   const n=erNorm(q),c={},v={};
-  list.forEach(x=>{if(!n||erNorm(x.n).includes(n)) c[x.sd]=(c[x.sd]||0)+1;});
-  (extra||[]).forEach(x=>{if(!n||erNorm(x.n).includes(n)) v[x.sd]=(v[x.sd]||0)+1;});
+  list.forEach(x=>{if(!n||erKey(x).includes(n)) c[x.sd]=(c[x.sd]||0)+1;});
+  (extra||[]).forEach(x=>{if(!n||erKey(x).includes(n)) v[x.sd]=(v[x.sd]||0)+1;});
   return ER_SD.filter(s=>c[s[0]]||v[s[0]]).map(s=>({k:s[0],label:s[1],n:c[s[0]]||0,v:v[s[0]]||0}));
+}
+// 소아전문응급의료센터는 8개 시도에만 있어서, 없는 시도도 0곳으로 보여 준다(찾는 지역에 없다는 것도 정보다)
+function erPedRegions(list,q){
+  const n=erNorm(q);
+  return ER_SD.map(s=>({k:s[0],label:s[1],n:list.filter(x=>x.sd===s[0]&&(!n||erKey(x).includes(n))).length,v:0}));
 }
 function erSgList(list,sd,q,extra){
   const n=erNorm(q),c={},v={};
-  list.forEach(x=>{if(x.sd===sd&&x.sg&&(!n||erNorm(x.n).includes(n))) c[x.sg]=(c[x.sg]||0)+1;});
-  (extra||[]).forEach(x=>{if(x.sd===sd&&x.sg&&(!n||erNorm(x.n).includes(n))) v[x.sg]=(v[x.sg]||0)+1;});
+  list.forEach(x=>{if(x.sd===sd&&x.sg&&(!n||erKey(x).includes(n))) c[x.sg]=(c[x.sg]||0)+1;});
+  (extra||[]).forEach(x=>{if(x.sd===sd&&x.sg&&(!n||erKey(x).includes(n))) v[x.sg]=(v[x.sg]||0)+1;});
   const keys=Object.keys(c).concat(Object.keys(v).filter(k=>!(k in c)));
   return keys.sort((a,b)=>a.localeCompare(b,"ko")).map(k=>({k:k,n:c[k]||0,v:v[k]||0}));
 }
 // 칩·선택 상자에 붙이는 건수 글자: 본 목록 수와 취약지 기관 수를 함께 보여 준다
 function erCntText(x){return x.n&&x.v?x.n+" · 취약지 "+x.v:x.n?String(x.n):"취약지 "+x.v;}
 // 정렬: 위치가 있으면 가까운 순(좌표 없는 곳은 뒤), 없으면 약국은 공공심야약국 표시 순, 그다음 시군구·이름
-function erSort(list,loc,pharm){
+// bySd 가 참이면(소아전문응급의료센터처럼 시도가 섞인 짧은 목록) 위치가 없을 때 화면의 시도 순서를 먼저 따른다
+function erSdIdx(k){const i=ER_SD.findIndex(s=>s[0]===k);return i<0?99:i;}
+function erSort(list,loc,pharm,bySd){
   const rank=x=>x.pub&&x.pub.length?0:x.pn?1:2;
   const ko=(a,b)=>String(a||"").localeCompare(String(b||""),"ko");
   const out=list.map(x=>({x:x,d:loc?erDist(loc,x):null}));
   out.sort((p,q)=>{
     if(loc){ if((p.d==null)!==(q.d==null)) return p.d==null?1:-1; if(p.d!=null&&p.d!==q.d) return p.d-q.d; }
-    else if(pharm&&rank(p.x)!==rank(q.x)) return rank(p.x)-rank(q.x);
+    else{
+      if(pharm&&rank(p.x)!==rank(q.x)) return rank(p.x)-rank(q.x);
+      if(bySd&&erSdIdx(p.x.sd)!==erSdIdx(q.x.sd)) return erSdIdx(p.x.sd)-erSdIdx(q.x.sd);
+    }
     return ko(p.x.sg,q.x.sg)||ko(p.x.n,q.x.n);
   });
   return out.map(o=>o.x);
@@ -5750,6 +5765,14 @@ function erEmgCard(it,ctx){
   return '<article class="er-item"><h4>'+erEsc(it.n)+' <span class="er-badge">'+erEsc(it.g||"응급의료기관")+'</span></h4>'+erDistLine(it,ctx)
     +'<p class="er-addr">'+erEsc(it.a)+'</p>'+t3+erLinks(it)+'<p class="er-warn">이 목록은 소아 진료가 되는지, 병상이 비어 있는지 알려 주지 않아요. 가기 전에 119나 병원에 전화로 확인하세요.</p></article>';
 }
+// 소아전문응급의료센터: 지정 명단(복지부, 언론 보도로 확인)에 응급의료기관 자료의 주소·전화·등급을 합친 항목
+function erPedCard(it,ctx){
+  const t3=it.t3&&it.t3!==it.t?'<p class="er-time">응급실 전화 <b>'+erEsc(it.t3)+'</b></p>':'';
+  const al=it.al&&it.al!==it.n?' <span class="er-sub">('+erEsc(it.al)+')</span>':'';
+  return '<article class="er-item"><h4>'+erEsc(it.n)+al+' <span class="er-badge pd">소아전문응급의료센터</span></h4>'+erDistLine(it,ctx)
+    +'<p class="er-addr">'+erEsc(it.a)+'</p><p class="er-pub">응급의료기관 등급: '+erEsc(it.g||"자료에 없어요")+'</p>'+t3+erLinks(it)
+    +'<p class="er-warn">센터로 지정된 병원이어도 지금 소아 진료가 되는지, 병상이 비어 있는지는 이 목록으로 알 수 없어요. 가기 전에 119나 병원에 전화로 확인하세요.</p></article>';
+}
 function erVulnCard(it,ctx){
   const ht=it.ht&&it.ht.length?'<p class="er-time">야간·휴일 진료시간(지자체 공개'+(it.hu?', '+erEsc(it.hu)+' 수정':'')+')</p><ul>'+it.ht.map(x=>'<li>'+erEsc(x)+'</li>').join("")+'</ul>'
     :'<p class="er-pub">야간·휴일 진료시간은 지자체와 협의해 정해져요. 병원에 전화로 확인하세요.</p>';
@@ -5765,7 +5788,13 @@ function erPharmCard(it,ctx){
   return '<article class="er-item"><h4>'+erEsc(it.n)+' '+badge+'</h4>'+erDistLine(it,ctx)
     +'<p class="er-addr">'+erEsc(it.a)+'</p>'+erTimeLine(it,ctx)+pubHtml+memo+more+erLinks(it)+ER_WARN+'</article>';
 }
-function erCardHtml(it,kind,ctx){return kind==="moon"?erMoonCard(it,ctx):kind==="emg"?erEmgCard(it,ctx):kind==="vuln"?erVulnCard(it,ctx):erPharmCard(it,ctx);}
+function erCardHtml(it,kind,ctx){return kind==="moon"?erMoonCard(it,ctx):kind==="emg"?erEmgCard(it,ctx):kind==="ped"?erPedCard(it,ctx):kind==="vuln"?erVulnCard(it,ctx):erPharmCard(it,ctx);}
+// 소아전문응급의료센터 안내 글(개수·시도 수는 자료에서 센다)
+function erPedGuide(list){
+  const sds=[];list.forEach(x=>{if(sds.indexOf(x.sd)<0) sds.push(x.sd);});
+  const names=ER_SD.filter(s=>sds.indexOf(s[0])>=0).map(s=>s[1]).join("·");
+  return '<p>소아전문응급의료센터는 보건복지부가 지정해 소아 응급환자를 전담해 진료하는 곳이에요. 전국에 '+list.length+'곳이고 '+sds.length+'개 시도('+names+')에만 있어요. 이 명단은 복지부 원문이 아니라 언론 보도로 확인한 것이라 바뀔 수 있어요. 가까운 곳이 없으면 응급의료기관 칸에서 찾아 전화로 확인하세요.</p>';
+}
 // 별표 명단(er.json 의 vuln)을 화면 공통 모양으로
 function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la:v.lat,lo:v.lon,sd:v.sd,sg:v.sg,ht:v.hours_text,hu:v.hours_source_updated,since:v.since}));}
 /* === ER-CORE END === */
@@ -5785,7 +5814,7 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
     const iso=erTodayKst(),idx=erDayIdx(iso,d=>(typeof KR_HOL!=="undefined"&&KR_HOL[d])?1:0);
     return {idx:idx,dayName:"오늘("+ER_DAY[idx-1]+")",loc:S.loc,src:P?P.src:[]};
   }
-  function base(){return S.g==="moon"?D.moon:S.g==="emg"?D.emg:(P?P.p:[]);}
+  function base(){return S.g==="moon"?D.moon:S.g==="ped"?(D.ped||[]):S.g==="emg"?D.emg:(P?P.p:[]);}
   function state(t){$("erState").textContent=t||"";}
   function load(){
     if(D||loading) return; loading=true; failed=false; state("병원 자료를 받는 중이에요…");
@@ -5800,33 +5829,35 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
   function chip(k,label,n,on){return '<button type="button" class="er-chip'+(on?' on':'')+'" data-sd="'+erEsc(k)+'" aria-pressed="'+(on?'true':'false')+'">'+erEsc(label)+(n!=null?' <span class="er-n">'+n+'</span>':'')+'</button>';}
   function render(){
     if(!D) return;
-    $("erCntMoon").textContent=D.moon.length; $("erCntEmg").textContent=D.emg.length; $("erCntPh").textContent=P?P.p.length:"";
+    $("erCntMoon").textContent=D.moon.length; $("erCntPed").textContent=(D.ped||[]).length; $("erCntEmg").textContent=D.emg.length; $("erCntPh").textContent=P?P.p.length:"";
     document.querySelectorAll("#tab-er .er-g").forEach(b=>{const on=b.dataset.g===S.g; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false");});
     $("erFilt").hidden=S.g!=="pharm"; $("erOnly").checked=S.only;
     if(S.g==="pharm"&&!P){ $("erOut").innerHTML=""; $("erMore").innerHTML=""; if(!ploading) loadP(); renderSrc(); return; }
-    const list=base(),pharm=S.g==="pharm";
+    const list=base(),pharm=S.g==="pharm",ped=S.g==="ped";
     const ex=S.g==="moon"?V:null;
-    const regs=erRegions(list,S.q,ex),all=regs.reduce((a,r)=>a+r.n,0);
-    $("erSd").innerHTML=chip("","전체",all,!S.sd)+regs.map(r=>chip(r.k,r.label,r.n?r.n:"취약지 "+r.v,S.sd===r.k)).join("");
+    const regs=ped?erPedRegions(list,S.q):erRegions(list,S.q,ex),all=regs.reduce((a,r)=>a+r.n,0);
+    $("erSd").innerHTML=chip("","전체",all,!S.sd)+regs.map(r=>chip(r.k,r.label,ped?r.n:(r.n?r.n:"취약지 "+r.v),S.sd===r.k)).join("");
     const sgs=S.sd?erSgList(list,S.sd,S.q,ex):[];
     if(S.sg&&!sgs.some(x=>x.k===S.sg)) S.sg="";
     $("erSg").innerHTML='<option value="">전체</option>'+sgs.map(x=>'<option value="'+erEsc(x.k)+'"'+(x.k===S.sg?' selected':'')+'>'+erEsc(x.k)+' ('+erEsc(erCntText(x))+')</option>').join("");
     $("erSg").disabled=!S.sd;
-    let guide=GUIDE[S.g];
+    let guide=ped?erPedGuide(list):GUIDE[S.g];
     if(pharm) guide+=erCovHtml(P.src,S.sd,S.sg);
     $("erGuide").innerHTML=guide;
     const c=ctx(),f={sd:S.sd,sg:S.sg,q:S.q,only:(pharm&&S.only)?(x=>(x.pub&&x.pub.length)||x.pn):null};
-    const has=S.sd||S.loc||S.q.trim();
+    const has=S.sd||S.loc||S.q.trim()||ped;
     if(!has){
       $("erOut").innerHTML='<p class="er-hint">위에서 <b>내 위치로 찾기</b>를 누르거나 시도를 골라 주세요. 지역을 고르면 그 지역의 목록이 나와요.</p>';
       $("erMore").innerHTML=""; renderSrc(); return;
     }
-    const rows=erSort(erFilter(list,f),S.loc,pharm);
+    const rows=erSort(erFilter(list,f),S.loc,pharm,ped);
     const vr=S.g==="moon"?erSort(erFilter(V,{sd:S.sd,sg:S.sg,q:S.q}),S.loc,false):[];
-    let html='<p class="er-count">'+(S.loc&&!S.sd&&!S.q.trim()?'내 위치에서 가까운 순 · ':'')+'<b>'+rows.length+'곳</b>'+(vr.length?' · 아래 취약지 기관 <b>'+vr.length+'곳</b>':'')+' · 자료 기준일 '+erEsc(((pharm?P.asof:D.asof)||"").slice(0,10))+'</p>';
+    let html='<p class="er-count">'+(S.loc&&!S.sd&&!S.q.trim()?'내 위치에서 가까운 순 · ':'')+'<b>'+rows.length+'곳</b>'+(vr.length?' · 아래 취약지 기관 <b>'+vr.length+'곳</b>':'')+' · '+(ped?'주소·전화 기준일 ':'자료 기준일 ')+erEsc(((pharm?P.asof:D.asof)||"").slice(0,10))+'</p>';
+    const pedNone=ped&&S.sd&&!rows.length&&!S.q.trim();
+    if(pedNone) html+='<p class="er-hint"><b>'+erEsc(erSdLabel(S.sd))+'</b>에는 자료에 소아전문응급의료센터가 없어요. 센터는 일부 시도에만 있어요. 가까운 곳은 응급의료기관 칸에서 찾아 119나 병원에 전화로 확인하세요.</p><button type="button" class="er-showmore" id="erToEmg">응급의료기관에서 '+erEsc(erSdLabel(S.sd))+' 보기</button>';
     if(S.g==="moon"&&!rows.length&&vr.length) html+='<p class="er-sub">이 조건에서는 자료에 달빛어린이병원이 없어요. 아래는 달빛어린이병원과 다른 지정인 취약지 소아 야간·휴일 진료기관이에요.</p>';
     html+=rows.slice(0,S.shown).map(x=>erCardHtml(x,S.g,c)).join("");
-    if(!rows.length&&!vr.length) html+='<p class="er-hint">조건에 맞는 곳이 자료에 없어요. 지역이나 이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 119나 병원에 전화로 확인하세요.</p>';
+    if(!rows.length&&!vr.length&&!pedNone) html+='<p class="er-hint">조건에 맞는 곳이 자료에 없어요. 지역이나 이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 119나 병원에 전화로 확인하세요.</p>';
     if(S.g==="moon"){
       const narrow=S.sd||S.q.trim(),vs=narrow?vr:vr.slice(0,4);
       if(vr.length) html+='<h3 class="er-sec">취약지 소아 야간·휴일 진료기관</h3><p class="er-sub">달빛어린이병원과 다른 지정이에요. 보건복지부 사업으로 지정된 병·의원이고, 진료시간은 지자체와 협의해 정해져요.'+(vs.length<vr.length?' 가까운 '+vs.length+'곳만 보여요. 시도를 고르면 그 지역을 모두 볼 수 있어요.':'')+'</p>'+vs.map(x=>erVulnCard(x,c)).join("");
@@ -5838,6 +5869,7 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
   function renderSrc(){
     let h='출처: 국립중앙의료원 전국 병·의원 찾기 서비스(달빛어린이병원), 전국 응급의료기관 정보 조회 서비스, 전국 약국 정보 조회 서비스(공공데이터포털).';
     if(P&&P.src&&P.src.length) h+='<details><summary>공공심야약국 명단 출처 ('+P.src.length+'곳)</summary><ul>'+P.src.map(s=>'<li>'+erEsc(s.org)+' · '+erEsc(s.label)+' · 기준일 '+erEsc(s.date)+' · '+erEsc(s.kind)+' · '+erEsc(s.lic)+(s.url?' · <a href="'+erEsc(s.url)+'" target="_blank" rel="noopener noreferrer">공공데이터포털</a>':'')+'</li>').join("")+'</ul></details>';
+    if(D&&D.ped_src&&D.ped_src.length) h+='<br>소아전문응급의료센터 명단: 보건복지부 지정 기관을 '+D.ped_src.map(s=>erEsc(s.org)+' 보도('+erEsc(s.date)+')').join(', ')+'로 확인했어요. 복지부 원문 명단이 아니에요.';
     h+='<br>이 사이트는 국립중앙의료원·지자체와 무관하며, 진단·치료·응급 여부 판단을 대신하지 않아요. 달빛어린이병원은 응급이 아닌 경증 소아 환자를 위한 곳이에요. 병원 목록은 매일 갱신해도 실제와 다를 수 있어요.';
     $("erSrc").innerHTML=h;
   }
@@ -5848,6 +5880,7 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
   $("erQ").addEventListener("input",e=>{clearTimeout(tq); tq=setTimeout(()=>{S.q=e.target.value; S.shown=ER_PAGE; render();},150);});
   document.querySelector("#tab-er .er-groups").addEventListener("click",e=>{const b=e.target.closest(".er-g"); if(!b) return; S.g=b.dataset.g; S.sg=""; S.shown=ER_PAGE; render();});
   $("erOnly").addEventListener("change",e=>{S.only=e.target.checked; S.shown=ER_PAGE; render();});
+  $("erOut").addEventListener("click",e=>{if(e.target.closest("#erToEmg")){S.g="emg"; S.sg=""; S.shown=ER_PAGE; render();}});
   $("erMore").addEventListener("click",e=>{if(e.target.closest("#erShowMore")){S.shown+=ER_PAGE; render();}});
   $("erLoc").addEventListener("click",()=>{
     if(S.loc){ S.loc=null; $("erLoc").classList.remove("on"); $("erLoc").textContent="내 위치에서 가까운 순으로 찾기"; $("erLocNote").textContent="누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 아래에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요."; render(); return; }
@@ -7134,7 +7167,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="7b871145";
+var APP_BUILD="7986c23c";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
