@@ -2464,7 +2464,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <p class="er-lab" id="erSdLab">또는 시도를 골라요</p>
   <div class="er-chips" id="erSd" role="group" aria-labelledby="erSdLab"></div>
   <div class="er-row">
-    <label class="er-fld">시군구 <select id="erSg" aria-label="시군구 고르기"><option value="">전체</option></select></label>
+    <label class="er-fld" id="erSgFld">시군구 <select id="erSg" aria-label="시군구 고르기"><option value="">전체</option></select></label>
     <label class="er-fld er-fld2">이름 검색 <input type="search" id="erQ" placeholder="병원·약국 이름" autocomplete="off" aria-label="병원·약국 이름 검색"></label>
   </div>
 </div>
@@ -5679,11 +5679,6 @@ function erRegions(list,q,extra){
   (extra||[]).forEach(x=>{if(!n||erKey(x).includes(n)) v[x.sd]=(v[x.sd]||0)+1;});
   return ER_SD.filter(s=>c[s[0]]||v[s[0]]).map(s=>({k:s[0],label:s[1],n:c[s[0]]||0,v:v[s[0]]||0}));
 }
-// 소아전문응급의료센터는 8개 시도에만 있어서, 없는 시도도 0곳으로 보여 준다(찾는 지역에 없다는 것도 정보다)
-function erPedRegions(list,q){
-  const n=erNorm(q);
-  return ER_SD.map(s=>({k:s[0],label:s[1],n:list.filter(x=>x.sd===s[0]&&(!n||erKey(x).includes(n))).length,v:0}));
-}
 function erSgList(list,sd,q,extra){
   const n=erNorm(q),c={},v={};
   list.forEach(x=>{if(x.sd===sd&&x.sg&&(!n||erKey(x).includes(n))) c[x.sg]=(c[x.sg]||0)+1;});
@@ -5809,7 +5804,7 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
     pharm:'<p>공공심야약국은 지자체가 지정해 늦은 밤에도 여는 약국이에요. 시간과 요일은 지역과 약국마다 달라요. 아래 목록에는 지자체 명단에 있는 약국, 약국이 직접 &#39;공공심야약국&#39;이라고 적어 둔 약국, 자료상 밤 10시 넘게 여는 약국이 함께 나와요.</p>'
   };
   const day=()=>Math.floor(Date.now()/86400000);
-  const getJ=u=>fetch(u).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();});
+  const getJ=u=>fetch(u,{cache:"no-cache"}).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();});
   function ctx(){
     const iso=erTodayKst(),idx=erDayIdx(iso,d=>(typeof KR_HOL!=="undefined"&&KR_HOL[d])?1:0);
     return {idx:idx,dayName:"오늘("+ER_DAY[idx-1]+")",loc:S.loc,src:P?P.src:[]};
@@ -5835,8 +5830,11 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
     if(S.g==="pharm"&&!P){ $("erOut").innerHTML=""; $("erMore").innerHTML=""; if(!ploading) loadP(); renderSrc(); return; }
     const list=base(),pharm=S.g==="pharm",ped=S.g==="ped";
     const ex=S.g==="moon"?V:null;
-    const regs=ped?erPedRegions(list,S.q):erRegions(list,S.q,ex),all=regs.reduce((a,r)=>a+r.n,0);
-    $("erSd").innerHTML=chip("","전체",all,!S.sd)+regs.map(r=>chip(r.k,r.label,ped?r.n:(r.n?r.n:"취약지 "+r.v),S.sd===r.k)).join("");
+    // 소아전문응급의료센터는 14곳뿐이라 지역을 고르지 않고 전국을 한 번에 보여 준다(시도·시군구 고르기를 숨긴다)
+    if(ped){ S.sd=""; S.sg=""; }
+    $("erSdLab").hidden=ped; $("erSd").hidden=ped; $("erSgFld").hidden=ped;
+    const regs=ped?[]:erRegions(list,S.q,ex),all=regs.reduce((a,r)=>a+r.n,0);
+    $("erSd").innerHTML=ped?"":chip("","전체",all,!S.sd)+regs.map(r=>chip(r.k,r.label,r.n?r.n:"취약지 "+r.v,S.sd===r.k)).join("");
     const sgs=S.sd?erSgList(list,S.sd,S.q,ex):[];
     if(S.sg&&!sgs.some(x=>x.k===S.sg)) S.sg="";
     $("erSg").innerHTML='<option value="">전체</option>'+sgs.map(x=>'<option value="'+erEsc(x.k)+'"'+(x.k===S.sg?' selected':'')+'>'+erEsc(x.k)+' ('+erEsc(erCntText(x))+')</option>').join("");
@@ -5853,11 +5851,9 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
     const rows=erSort(erFilter(list,f),S.loc,pharm,ped);
     const vr=S.g==="moon"?erSort(erFilter(V,{sd:S.sd,sg:S.sg,q:S.q}),S.loc,false):[];
     let html='<p class="er-count">'+(S.loc&&!S.sd&&!S.q.trim()?'내 위치에서 가까운 순 · ':'')+'<b>'+rows.length+'곳</b>'+(vr.length?' · 아래 취약지 기관 <b>'+vr.length+'곳</b>':'')+' · '+(ped?'주소·전화 기준일 ':'자료 기준일 ')+erEsc(((pharm?P.asof:D.asof)||"").slice(0,10))+'</p>';
-    const pedNone=ped&&S.sd&&!rows.length&&!S.q.trim();
-    if(pedNone) html+='<p class="er-hint"><b>'+erEsc(erSdLabel(S.sd))+'</b>에는 자료에 소아전문응급의료센터가 없어요. 센터는 일부 시도에만 있어요. 가까운 곳은 응급의료기관 칸에서 찾아 119나 병원에 전화로 확인하세요.</p><button type="button" class="er-showmore" id="erToEmg">응급의료기관에서 '+erEsc(erSdLabel(S.sd))+' 보기</button>';
     if(S.g==="moon"&&!rows.length&&vr.length) html+='<p class="er-sub">이 조건에서는 자료에 달빛어린이병원이 없어요. 아래는 달빛어린이병원과 다른 지정인 취약지 소아 야간·휴일 진료기관이에요.</p>';
     html+=rows.slice(0,S.shown).map(x=>erCardHtml(x,S.g,c)).join("");
-    if(!rows.length&&!vr.length&&!pedNone) html+='<p class="er-hint">조건에 맞는 곳이 자료에 없어요. 지역이나 이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 119나 병원에 전화로 확인하세요.</p>';
+    if(!rows.length&&!vr.length) html+='<p class="er-hint">조건에 맞는 곳이 자료에 없어요. 지역이나 이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 119나 병원에 전화로 확인하세요.</p>';
     if(S.g==="moon"){
       const narrow=S.sd||S.q.trim(),vs=narrow?vr:vr.slice(0,4);
       if(vr.length) html+='<h3 class="er-sec">취약지 소아 야간·휴일 진료기관</h3><p class="er-sub">달빛어린이병원과 다른 지정이에요. 보건복지부 사업으로 지정된 병·의원이고, 진료시간은 지자체와 협의해 정해져요.'+(vs.length<vr.length?' 가까운 '+vs.length+'곳만 보여요. 시도를 고르면 그 지역을 모두 볼 수 있어요.':'')+'</p>'+vs.map(x=>erVulnCard(x,c)).join("");
@@ -5880,7 +5876,6 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
   $("erQ").addEventListener("input",e=>{clearTimeout(tq); tq=setTimeout(()=>{S.q=e.target.value; S.shown=ER_PAGE; render();},150);});
   document.querySelector("#tab-er .er-groups").addEventListener("click",e=>{const b=e.target.closest(".er-g"); if(!b) return; S.g=b.dataset.g; S.sg=""; S.shown=ER_PAGE; render();});
   $("erOnly").addEventListener("change",e=>{S.only=e.target.checked; S.shown=ER_PAGE; render();});
-  $("erOut").addEventListener("click",e=>{if(e.target.closest("#erToEmg")){S.g="emg"; S.sg=""; S.shown=ER_PAGE; render();}});
   $("erMore").addEventListener("click",e=>{if(e.target.closest("#erShowMore")){S.shown+=ER_PAGE; render();}});
   $("erLoc").addEventListener("click",()=>{
     if(S.loc){ S.loc=null; $("erLoc").classList.remove("on"); $("erLoc").textContent="내 위치에서 가까운 순으로 찾기"; $("erLocNote").textContent="누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 아래에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요."; render(); return; }
@@ -7167,7 +7162,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="7986c23c";
+var APP_BUILD="ec331691";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
