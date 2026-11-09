@@ -2354,8 +2354,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <!--BF:HTML:END-->
 <!--BEN:HTML:BEGIN-->
 <div id="tab-benefit" class="hidden">
-<p class="upd"><b>업데이트 10/26</b> 소득 기준이 필요한 지원사업 카드마다 기준중위소득 금액표(2026년)와 건강보험료 기준표를 붙였어요 · 표 위에 가구원·태아·휴직 처리 기준도 적었어요</p>
-<p class="upd"><b>업데이트 10/26</b> 저소득층 기저귀·조제분유 카드에 누가 받을 수 있는지(수급·차상위·한부모, 장애인·다자녀 가구) 풀어 쓰고 조건 태그를 보강했어요</p>
 <h2 class="ben-h">우리동네 임신·출산·육아 혜택 찾기</h2>
 <p class="ben-lead">사는 지역과 시기를 고르면 관련된 지원 사업을 찾아 줘요. 한부모, 기초수급, 장애처럼 특정 사유가 있어야 하는 혜택은 숨길 수 있어요.</p>
 <p class="ben-call">지자체가 직접 입력한 자료라 지역마다 양이 다르고, 빠진 혜택이나 오래된 내용이 있을 수 있어요. 신청 전에는 정부24나 해당 기관에서 꼭 확인하세요.</p>
@@ -5752,7 +5750,7 @@ function erMoreBlock(it){
 }
 const ER_WARN='<p class="er-warn">자료상 시간이에요. 방문 전 전화로 확인하세요.</p>';
 function erMoonCard(it,ctx){
-  return '<article class="er-item"><h4>'+erEsc(it.n)+' <span class="er-badge">'+erEsc(it.k||"달빛어린이병원")+'</span></h4>'+erDistLine(it,ctx)
+  return '<article class="er-item"><h4>'+erEsc(it.n)+' <span class="er-badge">달빛어린이병원'+(it.k?' · '+erEsc(it.k):'')+'</span></h4>'+erDistLine(it,ctx)
     +'<p class="er-addr">'+erEsc(it.a)+'</p>'+erTimeLine(it,ctx)+erMoreBlock(it)+erLinks(it)+ER_WARN+'</article>';
 }
 function erEmgCard(it,ctx){
@@ -5783,7 +5781,7 @@ function erPharmCard(it,ctx){
   return '<article class="er-item"><h4>'+erEsc(it.n)+' '+badge+'</h4>'+erDistLine(it,ctx)
     +'<p class="er-addr">'+erEsc(it.a)+'</p>'+erTimeLine(it,ctx)+pubHtml+memo+more+erLinks(it)+ER_WARN+'</article>';
 }
-function erCardHtml(it,kind,ctx){return kind==="moon"?erMoonCard(it,ctx):kind==="emg"?erEmgCard(it,ctx):kind==="ped"?erPedCard(it,ctx):kind==="vuln"?erVulnCard(it,ctx):erPharmCard(it,ctx);}
+function erCardHtml(it,kind,ctx){return kind==="moon"?(it.vu?erVulnCard(it,ctx):erMoonCard(it,ctx)):kind==="emg"?erEmgCard(it,ctx):kind==="ped"?erPedCard(it,ctx):kind==="vuln"?erVulnCard(it,ctx):erPharmCard(it,ctx);}
 // 소아전문응급의료센터 안내 글(개수·시도 수는 자료에서 센다)
 function erPedGuide(list){
   const sds=[];list.forEach(x=>{if(sds.indexOf(x.sd)<0) sds.push(x.sd);});
@@ -5791,7 +5789,7 @@ function erPedGuide(list){
   return '<p>소아전문응급의료센터는 보건복지부가 지정해 소아 응급환자를 전담해 진료하는 곳이에요. 전국에 '+list.length+'곳이고 '+sds.length+'개 시도('+names+')에만 있어요. 이 명단은 복지부 원문이 아니라 언론 보도로 확인한 것이라 바뀔 수 있어요. 가까운 곳이 없으면 응급의료기관 칸에서 찾아 전화로 확인하세요.</p>';
 }
 // 별표 명단(er.json 의 vuln)을 화면 공통 모양으로
-function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la:v.lat,lo:v.lon,sd:v.sd,sg:v.sg,ht:v.hours_text,hu:v.hours_source_updated,since:v.since}));}
+function erVulnItems(arr){return (arr||[]).map(v=>({vu:1,n:v.name,a:v.addr,t:v.tel,la:v.lat,lo:v.lon,sd:v.sd,sg:v.sg,ht:v.hours_text,hu:v.hours_source_updated,since:v.since}));}
 /* === ER-CORE END === */
 
 (function(){
@@ -5799,7 +5797,7 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
   let D=null,P=null,V=[],loading=false,ploading=false,failed=false,pfail=false;
   const S={g:"moon",sd:"",sg:"",q:"",only:false,loc:null,shown:ER_PAGE};
   const GUIDE={
-    moon:'<p>달빛어린이병원은 만 18세 이하 경증 소아 환자를 평일 밤 11~12시까지, 주말·공휴일은 오후 6시까지 진료하는 병·의원이에요. 병원마다 시간이 달라요. 병원 사정에 따라 임시휴진이나 운영 중단이 있을 수 있어요.</p>',
+    moon:'<p>달빛어린이병원은 만 18세 이하 경증 소아 환자를 평일 밤 11~12시까지, 주말·공휴일은 오후 6시까지 진료하는 병·의원이에요. 병원마다 시간이 달라요. 병원 사정에 따라 임시휴진이나 운영 중단이 있을 수 있어요.</p><p>달빛어린이병원과 함께, 달빛과 다른 지정인 <b>취약지 소아 야간·휴일 진료기관</b>(보건복지부 사업으로 지정된 병·의원, 진료시간은 지자체와 협의해 정해져요)도 한 목록에 섞어 가까운 순(위치를 쓰지 않으면 지역순)으로 보여 드려요. 이름 옆 표시로 구분해요.</p>',
     emg:'<p>응급의료기관은 등급이 달라요(권역응급의료센터·지역응급의료센터·지역응급의료기관·응급실운영신고기관). 이 목록으로는 소아 진료가 되는지, 병상이 비어 있는지 알 수 없어요. 가기 전에 119나 병원에 전화로 확인하세요.</p>',
     pharm:'<p>공공심야약국은 지자체가 지정해 늦은 밤에도 여는 약국이에요. 시간과 요일은 지역과 약국마다 달라요. 아래 목록에는 지자체 명단에 있는 약국, 약국이 직접 &#39;공공심야약국&#39;이라고 적어 둔 약국, 자료상 밤 10시 넘게 여는 약국이 함께 나와요.</p>'
   };
@@ -5848,16 +5846,14 @@ function erVulnItems(arr){return (arr||[]).map(v=>({n:v.name,a:v.addr,t:v.tel,la
       $("erOut").innerHTML='<p class="er-hint">위에서 <b>내 위치로 찾기</b>를 누르거나 시도를 골라 주세요. 지역을 고르면 그 지역의 목록이 나와요.</p>';
       $("erMore").innerHTML=""; renderSrc(); return;
     }
-    const rows=erSort(erFilter(list,f),S.loc,pharm,ped);
-    const vr=S.g==="moon"?erSort(erFilter(V,{sd:S.sd,sg:S.sg,q:S.q}),S.loc,false):[];
-    let html='<p class="er-count">'+(S.loc&&!S.sd&&!S.q.trim()?'내 위치에서 가까운 순 · ':'')+'<b>'+rows.length+'곳</b>'+(vr.length?' · 아래 취약지 기관 <b>'+vr.length+'곳</b>':'')+' · '+(ped?'주소·전화 기준일 ':'자료 기준일 ')+erEsc(((pharm?P.asof:D.asof)||"").slice(0,10))+'</p>';
-    if(S.g==="moon"&&!rows.length&&vr.length) html+='<p class="er-sub">이 조건에서는 자료에 달빛어린이병원이 없어요. 아래는 달빛어린이병원과 다른 지정인 취약지 소아 야간·휴일 진료기관이에요.</p>';
+    // 달빛 칸은 달빛어린이병원과 취약지 기관을 한 목록으로 합쳐 같은 기준(거리순, 위치가 없으면 지역순)으로 줄 세운다
+    const moon=S.g==="moon";
+    const rows=erSort(erFilter(list,f).concat(moon?erFilter(V,{sd:S.sd,sg:S.sg,q:S.q}):[]),S.loc,pharm,ped);
+    const nv=rows.filter(x=>x.vu).length,nm=rows.length-nv;
+    let html='<p class="er-count">'+(S.loc&&!S.sd&&!S.q.trim()?'내 위치에서 가까운 순 · ':'')+'<b>'+rows.length+'곳</b>'+(moon&&nv?' (달빛어린이병원 '+nm+' · 취약지 '+nv+')':'')+' · '+(ped?'주소·전화 기준일 ':'자료 기준일 ')+erEsc(((pharm?P.asof:D.asof)||"").slice(0,10))+'</p>';
+    if(moon&&!nm&&nv) html+='<p class="er-sub">이 조건에서는 자료에 달빛어린이병원이 없어요. 아래는 달빛어린이병원과 다른 지정인 취약지 소아 야간·휴일 진료기관이에요.</p>';
     html+=rows.slice(0,S.shown).map(x=>erCardHtml(x,S.g,c)).join("");
-    if(!rows.length&&!vr.length) html+='<p class="er-hint">조건에 맞는 곳이 자료에 없어요. 지역이나 이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 119나 병원에 전화로 확인하세요.</p>';
-    if(S.g==="moon"){
-      const narrow=S.sd||S.q.trim(),vs=narrow?vr:vr.slice(0,4);
-      if(vr.length) html+='<h3 class="er-sec">취약지 소아 야간·휴일 진료기관</h3><p class="er-sub">달빛어린이병원과 다른 지정이에요. 보건복지부 사업으로 지정된 병·의원이고, 진료시간은 지자체와 협의해 정해져요.'+(vs.length<vr.length?' 가까운 '+vs.length+'곳만 보여요. 시도를 고르면 그 지역을 모두 볼 수 있어요.':'')+'</p>'+vs.map(x=>erVulnCard(x,c)).join("");
-    }
+    if(!rows.length) html+='<p class="er-hint">조건에 맞는 곳이 자료에 없어요. 지역이나 이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 119나 병원에 전화로 확인하세요.</p>';
     $("erOut").innerHTML=html;
     $("erMore").innerHTML=rows.length>S.shown?'<button type="button" class="er-showmore" id="erShowMore">더 보기 (남은 '+(rows.length-S.shown)+'곳)</button>':"";
     renderSrc();
@@ -7162,7 +7158,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="ec331691";
+var APP_BUILD="5826afc6";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
