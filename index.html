@@ -649,6 +649,15 @@ dd b{font-weight:500; color:var(--ink)}
 .wkgrp{margin:16px 0 8px;padding-top:12px;border-top:1px dashed var(--rule);font-size:13.5px;font-weight:700;color:var(--ink-2)}
 .visits{margin:10px 0 0;font-size:13px;color:var(--ink-3)}
 .visits b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+/* 준비 중인 서비스 안내(머리말): 서비스마다 번호와 기능 설명 */
+header .soon{margin:14px 0 0;padding:12px 14px;border:1px dashed var(--rule);border-left:4px solid var(--to);border-radius:0 3px 3px 0;background:var(--card);font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+header .soon .soon-h{margin:0 0 6px}
+header .soon .soon-tag{display:inline-block;margin:0 6px 0 0;padding:1px 9px;border:1px solid var(--to);border-radius:99px;font-size:12px;font-weight:700;color:var(--to)}
+header .soon .soon-list{margin:0;padding-left:20px}
+header .soon .soon-list li{margin:0 0 6px}
+header .soon .soon-list li:last-child{margin:0}
+header .soon .soon-list b{display:block;color:var(--ink);font-weight:700}
+header .soon .soon-list span{display:block}
 /* 용품 순위 탭 */
 .rkbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 0}
 .rkbar input{flex:1 1 200px;width:auto;margin:0}
@@ -1307,6 +1316,13 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <p class="eyebrow">맘케어 · 임신부터 출산까지</p>
   <h1>임신·출산 무료 도구</h1>
   <p class="sub">아기 이름 짓기, 출산 택일, 태아 성장 분석, 주차별 정보, 시기별 체크리스트, 용품별 순위, 일본 육아용품 가격, 이유식 가이드, 우리동네 혜택, 화장품 성분 확인을 한곳에서 볼 수 있어요. <b>어떻게 계산했는지 기준과 근거를 화면에 그대로 보여 드려요.</b> 재미와 참고용이고, 진단이 아니에요.</p>
+  <div class="soon" role="note">
+    <p class="soon-h"><span class="soon-tag">준비 중</span> 이런 서비스를 준비하고 있어요. 열리면 이 자리에서 알려 드릴게요.</p>
+    <ol class="soon-list">
+      <li><b>어린이집 찾기</b><span>사는 지역을 고르면 가까운 어린이집의 이름, 종류(국공립·민간 등), 주소, 전화번호를 한곳에서 보여 줘요.</span></li>
+      <li><b>예방접종 일정</b><span>아기 생일을 넣으면 질병관리청 표준 일정에 맞춰 언제 어떤 접종을 맞는지 알려 줘요.</span></li>
+    </ol>
+  </div>
   <div class="pwa" id="pwaBox" hidden>
     <button type="button" class="pwa-btn" id="pwaBtn" aria-expanded="false" aria-controls="pwaPanel">홈 화면에 바로가기 만들기</button>
     <div class="pwa-panel" id="pwaPanel" hidden>
@@ -7250,7 +7266,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="435c964b";
+var APP_BUILD="dd500293";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
