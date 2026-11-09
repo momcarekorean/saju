@@ -1060,6 +1060,20 @@ h1,h2,h3,h4,th{text-wrap:balance}
 .ben-foot button{appearance:none;border:1px solid var(--rule);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:3px;font-size:13px;cursor:pointer;margin-top:6px}
 .ben-foot button:hover{background:var(--paper-2)}
 @media (max-width:520px){.ben-filters{grid-template-columns:1fr 1fr}.ben-filters .wide{grid-column:1/-1}}
+.ben-amt{margin:10px 0 0;padding:11px 13px;border:1px solid var(--rule);border-left:4px solid var(--to);border-radius:0 3px 3px 0;background:var(--card);font-size:13.5px;line-height:1.7;color:var(--ink)}
+.ben-amt>b{display:block;margin:0 0 4px;font-size:13.5px;color:var(--to)}
+.ben-amt ul{margin:0 0 6px;padding-left:18px}
+.ben-amt li{margin:0 0 3px}
+.ben-amt p{margin:6px 0 0}
+.ben-amt p.src{font-size:12px;color:var(--ink-3)}
+.ben-amt .ben-tb th{white-space:normal;text-align:left}
+.ben-amt .ben-tb td{white-space:normal}
+.ben-amt.none{border-left-color:var(--rule)}
+.ben-amt.none>b{color:var(--ink-2)}
+.ben-fold .ben-tb th{white-space:normal}
+.ben-tag.chg{font-weight:700}
+.ben-tag.chg.n{border-color:var(--seal);background:var(--seal);color:#fff}
+.ben-tag.chg.u{border-color:var(--to);color:var(--to)}
 /*BEN:CSS:END*/
 /*COSM:CSS:BEGIN*/
 /* 화장품 성분 확인 탭 */
@@ -2354,6 +2368,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <!--BF:HTML:END-->
 <!--BEN:HTML:BEGIN-->
 <div id="tab-benefit" class="hidden">
+<p class="upd"><b>업데이트 11/9</b> 혜택 카드마다 지원 금액 칸이 생겼어요. 일수·순위별 금액은 표로 보고, 금액이 없는 카드는 해당 지자체 누리집으로 바로 갈 수 있어요. 산모·신생아 건강관리는 일수·소득유형별 금액표도 붙였어요</p>
 <h2 class="ben-h">우리동네 임신·출산·육아 혜택 찾기</h2>
 <p class="ben-lead">사는 지역과 시기를 고르면 관련된 지원 사업을 찾아 줘요. 한부모, 기초수급, 장애처럼 특정 사유가 있어야 하는 혜택은 숨길 수 있어요.</p>
 <p class="ben-call">지자체가 직접 입력한 자료라 지역마다 양이 다르고, 빠진 혜택이나 오래된 내용이 있을 수 있어요. 신청 전에는 정부24나 해당 기관에서 꼭 확인하세요.</p>
@@ -4581,7 +4596,7 @@ function bfRulesHtml(){
 /*BEN:JS:BEGIN*/
 /* === BEN-CORE START === */
 // 우리동네 혜택: 자료(benefit.json)는 탭을 열 때 한 번 받아 오고, 아래 순수 함수로 걸러서 화면에 그린다.
-const BEN_VER=/*BEN:VER*/"20261024-2579-ac54a3"/*BEN:VER:END*/;
+const BEN_VER=/*BEN:VER*/"20261109-2579-0d6ca9"/*BEN:VER:END*/;
 const BEN_EX=[["첫만남이용권","첫만남이용권"],["아동수당","아동수당"],["육아휴직급여","육아휴직급여"],["산후조리비","산후조리"],["산후도우미","산모·신생아|산모신생아|산후도우미"],["출산지원금","출산지원금|출산장려금|출산축하금"],["가정양육수당","가정양육수당"],["영유아보육료","영유아보육료"],["난임 시술비","난임"],["국가예방접종","예방접종"]];   // 자료에 실제로 있고 많이 신청하는 것(검색어 | 는 '또는')
 const BEN_ORDER=["서울특별시","부산광역시","대구광역시","인천광역시","광주광역시","전남광주통합특별시","대전광역시","울산광역시","세종특별자치시","경기도","강원특별자치도","충청북도","충청남도","전북특별자치도","전라남도","경상북도","경상남도","제주특별자치도"];
 const BEN_TYPES=["현금","현물","이용권","서비스","서비스(의료)","서비스(돌봄)","현금(감면)","기타(교육)","기타"];
@@ -4606,8 +4621,16 @@ function benFilter(rows,o){
     if(o.fd&&r.s.indexOf(o.fd)<0) return false;
     if(on.length&&!on.some(t=>r.ty.indexOf(t)>=0)) return false;
     if(r.sp.some(t=>hide[t])) return false;
+    if(o.chg&&!benChgLabel(r,o.now)) return false;
     return benMatch(r,o.q,o.nameOnly);
   });
+}
+// 새로 생김·내용 바뀜: 자료를 새로 받아 지난번과 비교해서 찾은 것. 2주 동안만 표시한다(r.ck: n 새로 생김, u 내용 바뀜 / r.cd: 확인한 날 YYYYMMDD)
+function benChgLabel(r,now){
+  if(!r||!r.ck||!r.cd||String(r.cd).length<8) return "";
+  const d=Date.UTC(+r.cd.slice(0,4),+r.cd.slice(4,6)-1,+r.cd.slice(6,8)), age=Math.floor(((now==null?Date.now():now)-d)/86400000);
+  if(!(age>=0&&age<14)) return "";
+  return (r.ck==="n"?"새로 생김 ":"내용 바뀜 ")+(+r.cd.slice(4,6))+"/"+(+r.cd.slice(6,8));
 }
 // 시기순: 서비스명으로 임신 전 → 임신 초기 → 임신 중 → 출산 전후 → 육아 초기 → 유아 → 아동 순서를 정한다(먼저 맞는 규칙이 이긴다)
 const BEN_STAGES=[
@@ -4679,6 +4702,9 @@ function benMedAmt(base,pct){return Math.round(base*pct/100);}
 function benRefHtml(r,ref){
   if(!ref) return "";
   let out="";
+  if(r.pp&&ref.pp&&ref.pp.tbs){
+    out+='<details class="ben-fold" open><summary>산모·신생아 건강관리 정부 기준 금액표 (2026, 일수·소득유형별)</summary>'+benDetailHtml("표 보는 법",ref.pp.d)+ref.pp.tbs.map(benTableHtml).join("")+(ref.pp.sc?'<p class="src">'+benEsc(ref.pp.sc)+"</p>":"")+"</details>";
+  }
   const hi=r.hi&&ref.hi&&ref.hi[String(r.hi)];
   if(hi) out+='<details class="ben-fold"><summary>기준중위소득 '+benEsc(r.hi)+"% 건강보험료 기준표 (2026)</summary>"+benDetailHtml("표 보는 법 (가구원·휴직·태아·기준 시점)",hi.d)+benTableHtml(hi.tb)+(hi.ft||[]).map(t=>"<p>"+benEsc(t)+"</p>").join("")+(hi.sc?'<p class="src">'+benEsc(hi.sc)+"</p>":"")+"</details>";
   const med=ref.med;
@@ -4693,10 +4719,70 @@ function benRefHtml(r,ref){
   }
   return out;
 }
-function benCardHtml(r,q,ref){
+// ── 지원 금액 ─────────────────────────────────────────────
+// 지원내용 원문에서 금액(○원·○만원·○%)이 든 부분만 모은다. 원문에 없는 금액은 만들지 않는다.
+// 소득 기준(○원 이하·소득 ○%)은 지원 금액이 아니라서 뺀다.
+const BEN_AMT=/\d[\d,]*(?:\.\d+)?\s*(?:억|천만|백만|만|천)?\s*원(?:\s*[~∼～]\s*\d[\d,]*\s*(?:억|천만|백만|만|천)?\s*원)?(?:\s*(?:이내|이하|한도|정액|내외))?|\d[\d,]*\s*만(?!\s*(?:명|건|가구|세|개월|회|일|곳|대))(?![가-힣])(?:\s*(?:이내|한도))?|\d{1,3}\s*%(?:\s*[~∼～]\s*\d{1,3}\s*%)?/g;
+function benAmtClauses(t){
+  const s=String(t==null?"":t).replace(/\r/g,"\n").replace(/([^\n○◯●■□▶▪◦▷※•])[ \t]*([○◯●■□▶▪◦▷※•])(?![○◯●■□▶▪◦▷※•])/g,"$1\n$2");
+  return s.split(/\n+|(?:^|\s)[-–]\s+|,(?!\d{3})|;|\s\/\s/).map(x=>x.replace(/^[\s○◯●■□▶▪◦▷※•·\-–:]+/,"").trim()).filter(Boolean);
+}
+// → [{c: 문장, l: 구분(금액 앞 글), a: 금액}] 최대 12개
+function benAmtRows(t){
+  const out=[];
+  benAmtClauses(t).forEach(c=>{
+    const keep=[]; let m; BEN_AMT.lastIndex=0;
+    while((m=BEN_AMT.exec(c))){
+      if(m[0].length===0){BEN_AMT.lastIndex++;continue;}
+      const after=c.slice(m.index+m[0].length,m.index+m[0].length+8), before=c.slice(Math.max(0,m.index-10),m.index);
+      if(/^\s*(이하|이상|미만|초과)/.test(after)) continue;                 // 자격 문턱 금액
+      if(/소득/.test(before)&&!/지원|지급|환급|감면|할인/.test(c)) continue;
+      if(/%/.test(m[0])&&/소득/.test(before)) continue;
+      keep.push({i:m.index,t:m[0]});
+    }
+    if(!keep.length) return;
+    const f=keep[0],l=keep[keep.length-1];
+    let end=l.i+l.t.length;
+    const seg=c.slice(f.i,end), op=(seg.match(/\(/g)||[]).length, cl=(seg.match(/\)/g)||[]).length;
+    if(op>cl){const k=c.indexOf(")",end); if(k>=0&&k-end<=14) end=k+1;}   // '140만원(1일 10만원*14일)' 처럼 괄호 안 설명까지
+    let label=c.slice(0,f.i).replace(/[:：=→\s]+$/,"").trim(), pre="";
+    const mx=label.match(/[\s:：]*(최대|최고|약|총)$/);   // '… : 최대 140만원' 은 '최대'를 금액 쪽으로
+    if(mx){pre=mx[1]+" "; label=label.slice(0,label.length-mx[0].length).replace(/[:：=→\s]+$/,"").trim();}
+    label=label.replace(/^(지원\s*(금액|내용)|금액|사업\s*내용)\s*[:：]?\s*/,"").trim();
+    if(label.length>40) label="…"+label.slice(-38);
+    out.push({c:c.length>120?c.slice(0,120)+"…":c,l:label,a:pre+c.slice(f.i,end).trim()});
+  });
+  return out.slice(0,12);
+}
+// 지자체 누리집: loc = {sd:{시도명:{u:시도 주소, g:{시군구:주소}}}} (행정안전부 '지자체 누리집' 목록)
+function benLocUrl(loc,r){
+  const d=loc&&loc.sd&&loc.sd[r.sd]; if(!d) return "";
+  return benSafeUrl(r.gu?(d.g&&d.g[r.gu])||"":d.u);
+}
+function benSafeHttp(u){return /^https?:\/\/[^\s"'<>]+$/.test(u||"")?u:"";}
+function benAmtHtml(r,loc){
+  const rows=benAmtRows(r.ct);
+  const link=(u,t)=>'<a class="ben-link" href="'+benEsc(u)+'" target="_blank" rel="noopener noreferrer">'+benEsc(t)+"</a>";
+  if(rows.length){
+    const table=rows.length>=2&&rows.every(x=>x.l&&x.l.length<=26);
+    const body=table
+      ?'<div class="ben-tbwrap"><table class="ben-tb"><thead><tr><th>구분</th><th>지원 금액</th></tr></thead><tbody>'+rows.map(x=>'<tr><th scope="row">'+benEsc(x.l)+"</th><td>"+benEsc(x.a)+"</td></tr>").join("")+"</tbody></table></div>"
+      :"<ul>"+rows.slice(0,4).map(x=>"<li>"+benEsc(x.c)+"</li>").join("")+"</ul>";
+    return '<div class="ben-amt"><b>지원 금액 (원문에서 금액이 적힌 부분)</b>'+body+'<p class="src">원문에서 금액이 든 문장만 모았어요. 대상과 조건은 아래 원문을 확인하세요.</p></div>';
+  }
+  // 원문에 금액이 없으면 해당 지자체 사이트로 이어 준다
+  const cen=r.sd==="(중앙부처)", own=cen?"":benSafeHttp(r.lg), home=cen?"":benLocUrl(loc,r), name=r.o||"";
+  const ls=[];
+  if(own) ls.push(link(own,name+" 신청 사이트 열기"));
+  if(home) ls.push(link(home,name+" 누리집에서 금액 찾기"));
+  if(!ls.length) ls.push(link("https://search.naver.com/search.naver?query="+encodeURIComponent(name+" "+r.n+" 지원금액"),"검색으로 금액 찾기"));
+  return '<div class="ben-amt none"><b>지원 금액</b><p>이 카드 원문(지원내용)에는 금액이 적혀 있지 않아요. 아래 링크나 전화로 확인하세요.'+(r.tel?" 문의 전화: "+benEsc(r.tel):"")+'</p><div class="ben-links">'+ls.join("")+"</div></div>";
+}
+function benCardHtml(r,q,ref,loc){
   const cen=r.sd==="(중앙부처)";
   const srcName=r.src==="b"?"복지로":r.src==="gb"?"정부24·복지로":"정부24";
   const tags='<span class="ben-tag '+(cen?"cen":"reg")+'">'+benEsc(cen?"중앙부처":(r.t==="광역시도"?"시·도":r.t==="시군구"?"시·군·구":r.t))+"</span>"
+    +(benChgLabel(r)?'<span class="ben-tag chg '+(r.ck==="n"?"n":"u")+'" title="이 사이트가 자료를 새로 받아 지난번과 비교해서 찾았어요. 2주 동안만 표시해요">'+benEsc(benChgLabel(r))+"</span>":"")
     +(r.f?'<span class="ben-tag">'+benEsc(r.f)+"</span>":"")
     +r.ty.map(t=>'<span class="ben-tag">'+benEsc(t)+"</span>").join("")
     +r.sp.map(t=>'<span class="ben-tag sp" title="이 사유가 필요한 혜택">조건: '+benEsc(t)+"</span>").join("")
@@ -4706,7 +4792,7 @@ function benCardHtml(r,q,ref){
   const link=(u,t)=>'<a class="ben-link" href="'+benEsc(u)+'" target="_blank" rel="noopener noreferrer">'+t+"</a>";
   return '<div class="ben-card"><h3>'+benHl(r.n,q)+'</h3><div class="org">'+benEsc(r.o)+(r.md?" · 수정 "+benMod(r.md):"")+'</div><div class="ben-tags">'+tags+"</div>"
     +(r.ct?'<p class="ben-brief">'+benHl(benBrief(r.ct),q)+"</p>":"")
-    +benNoteHtml(r.nt)+benRefHtml(r,ref)
+    +benAmtHtml(r,loc)+benNoteHtml(r.nt)+benRefHtml(r,ref)
     +"<details><summary>자세히 (원문)</summary>"+row("지원대상",r.tg)+row("선정기준",r.cr)+row("지원내용",r.ct)+row("신청방법",r.hw)+row("신청기한",r.wh)
     +(r.ex||[]).map(e=>row(e[0],e[1])).join("")+row("전화문의",r.tel)+row("접수기관",r.ag)
     +'<div class="ben-links">'+(url?link(url,(r.src==="b"?"복지로":"정부24")+"에서 보기"):"")+(u2?link(u2,"복지로에서도 보기"):"")+"</div></details></div>";
@@ -4717,7 +4803,7 @@ function benCardHtml(r,q,ref){
   const root=$("tab-benefit"); if(!root) return;
   const PAGE=40;
   let DATA=null, loading=false, failed=false;
-  const S={sd:"",gu:"",fd:"",q:"",nameOnly:false,types:[],hide:{},cen:true,wide:true,sort:"stage",shown:PAGE,ex:""};
+  const S={sd:"",gu:"",fd:"",q:"",nameOnly:false,types:[],hide:{},cen:true,wide:true,sort:"stage",shown:PAGE,ex:"",chg:false};
   const store={get(){try{return JSON.parse(localStorage.getItem("momcare_ben_region")||"null");}catch(e){return null;}},
     set(v){try{localStorage.setItem("momcare_ben_region",JSON.stringify(v));}catch(e){}}};
 
@@ -4732,7 +4818,7 @@ function benCardHtml(r,q,ref){
       +'<div class="fld"><label class="l" for="benFd">시기</label><select class="ben-sel" id="benFd"><option value="">전체</option><option value="p">임신·출산</option><option value="c">영유아·아동</option></select></div>'
       +'<div class="fld"><label class="l" for="benSo">정렬</label><select class="ben-sel" id="benSo"><option value="stage">시기순 (임신 → 육아)</option><option value="md">최근 수정순</option><option value="n">이름순</option></select></div>'
       +'<div class="fld wide"><span class="l" style="display:block;font-size:12px;color:var(--ink-3);margin:0 0 3px">지원 형태</span><div class="ben-chips" id="benTy">'+BEN_TYPES.map(t=>'<button type="button" class="ben-chip" data-ty="'+benEsc(t)+'" aria-pressed="false">'+benEsc(t)+"</button>").join("")+"</div></div>"
-      +'<div class="fld wide"><div class="ben-checks"><label><input type="checkbox" id="benCen" checked> 중앙부처 혜택 포함</label><label><input type="checkbox" id="benWide" checked> 시·도 전체 사업 포함(시군구를 고를 때)</label></div></div>'
+      +'<div class="fld wide"><div class="ben-checks"><label><input type="checkbox" id="benCen" checked> 중앙부처 혜택 포함</label><label><input type="checkbox" id="benWide" checked> 시·도 전체 사업 포함(시군구를 고를 때)</label>'+chgBox()+'</div></div>'
       +'<div class="ben-hide"><div class="hd"><b>특정 사유가 있어야 받는 혜택 숨기기</b><button type="button" class="ben-chip gen" id="benGen">일반 혜택만 보기</button><button type="button" class="ben-chip" id="benGenOff">모두 보기</button></div><div class="ben-chips" id="benHide"></div></div>'
       +"</div>"
       +'<div id="benNow"></div><div class="ben-bar"><span id="benCnt"></span><span><a href="#" id="benReset">필터 초기화</a></span></div>'
@@ -4745,6 +4831,11 @@ function benCardHtml(r,q,ref){
       +"부모급여·임신·출산 진료비 같은 전국 공통 혜택 일부는 이 자료에 없을 수 있어요. 체크리스트 탭에서 함께 확인하세요.<br>"
       +'<button type="button" id="benGoCheck">체크리스트 탭에서 보기</button>';
     wire();
+  }
+  // 최근 2주 새로 생기거나 바뀐 혜택(자료를 새로 받을 때마다 지난번과 비교해서 표시)
+  function chgBox(){
+    let a=0,b=0; DATA.rows.forEach(r=>{const l=benChgLabel(r); if(l){ if(r.ck==="n") a++; else b++; }});
+    return a+b?'<label><input type="checkbox" id="benChg"> 최근 2주 새로 생기거나 내용이 바뀐 혜택만 (새로 생김 '+a+' · 내용 바뀜 '+b+')</label>':"";
   }
   function gus(){const g=$("benGu"); g.innerHTML='<option value="">'+(S.sd?"전체 시군구":"시도를 먼저 골라 주세요")+"</option>"+(S.sd?benGus(DATA.rows,S.sd).map(x=>'<option value="'+benEsc(x)+'">'+benEsc(x)+"</option>").join(""):""); g.disabled=!S.sd; g.value=S.gu;}
   function paint(){
@@ -4760,7 +4851,7 @@ function benCardHtml(r,q,ref){
     let grp="";   // 시기순일 때는 시기가 바뀔 때마다 작은 제목을 끼운다
     $("benList").innerHTML=res.length?res.slice(0,S.shown).map(r=>{
       let h=""; if(S.sort==="stage"){const g=benStageLabel(benStage(r)); if(g!==grp){grp=g; h='<h4 class="ben-stage">'+benEsc(g)+"</h4>";}}
-      return h+benCardHtml(r,S.nameOnly?"":S.q,DATA.ref);}).join(""):'<div class="ben-empty">조건에 맞는 혜택을 찾지 못했어요.<br>필터를 줄이거나 시군구를 \'전체\'로 바꿔 보세요.<br>이 자료에 없다고 혜택이 없는 건 아니니, 구청에서도 확인해 보세요.</div>';
+      return h+benCardHtml(r,S.nameOnly?"":S.q,DATA.ref,DATA.loc);}).join(""):'<div class="ben-empty">조건에 맞는 혜택을 찾지 못했어요.<br>필터를 줄이거나 시군구를 \'전체\'로 바꿔 보세요.<br>이 자료에 없다고 혜택이 없는 건 아니니, 구청에서도 확인해 보세요.</div>';
     $("benMore").hidden=res.length<=S.shown;
     paint();
     const c=$("benClearQ"); if(c) c.onclick=()=>{S.q="";S.nameOnly=false;$("benQ").value="";S.shown=PAGE;render();};
@@ -4774,13 +4865,14 @@ function benCardHtml(r,q,ref){
     $("benSo").addEventListener("change",e=>{S.sort=e.target.value;again();});
     $("benCen").addEventListener("change",e=>{S.cen=e.target.checked;again();});
     $("benWide").addEventListener("change",e=>{S.wide=e.target.checked;again();});
+    if($("benChg")) $("benChg").addEventListener("change",e=>{S.chg=e.target.checked;again();});
     $("benTy").addEventListener("click",e=>{const b=e.target.closest("[data-ty]"); if(!b) return; const t=b.dataset.ty, i=S.types.indexOf(t); if(i>=0) S.types.splice(i,1); else S.types.push(t); again();});
     $("benHide").addEventListener("click",e=>{const b=e.target.closest("[data-hide]"); if(!b) return; const t=b.dataset.hide; S.hide[t]=!S.hide[t]; again();});
     $("benGen").addEventListener("click",()=>{S.hide={}; DATA.general.forEach(t=>{S.hide[t]=true;}); again();});
     $("benGenOff").addEventListener("click",()=>{S.hide={}; again();});
     $("benEx").addEventListener("click",e=>{const b=e.target.closest("[data-ex]"); if(!b) return; const ex=BEN_EX[+b.dataset.ex]; if(S.nameOnly&&S.q===ex[1]){S.q="";S.nameOnly=false;} else {S.q=ex[1];S.nameOnly=true;} $("benQ").value=S.nameOnly?"":S.q; again();});
     $("benMore").addEventListener("click",()=>{S.shown+=PAGE;render();});
-    $("benReset").addEventListener("click",e=>{e.preventDefault(); S.q="";S.nameOnly=false;S.fd="";S.types=[];S.hide={};S.cen=true;S.wide=true;S.sort="stage";
+    $("benReset").addEventListener("click",e=>{e.preventDefault(); S.q="";S.nameOnly=false;S.fd="";S.types=[];S.hide={};S.cen=true;S.wide=true;S.sort="stage";S.chg=false;if($("benChg")) $("benChg").checked=false;
       $("benQ").value="";$("benFd").value="";$("benSo").value="stage";$("benCen").checked=true;$("benWide").checked=true; again();});
     $("benGoCheck").addEventListener("click",()=>{const b=document.querySelector('.tb[data-tab="tab-check"]'); if(b){b.click();window.scrollTo(0,0);}});
     // 저장해 둔 지역(이 기기에서만, 실패해도 동작)
@@ -7158,7 +7250,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="5826afc6";
+var APP_BUILD="435c964b";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
