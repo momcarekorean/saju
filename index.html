@@ -1419,6 +1419,10 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cc .cc-addr-row .cc-btn{flex:0 0 auto;cursor:pointer;font-family:inherit}
 #tab-cc .cc-addr-row .cc-btn.on{background:var(--seal);color:#fff}
 @media(max-width:600px){#tab-cc .cc-addr-row .cc-btn{flex:1 1 100%}}
+/* 나이별 입소대기·현원·반 표 */
+#tab-cc .cc-wtb th,#tab-cc .cc-wtb td{padding:4px 6px;font-size:12.5px;line-height:1.45}
+#tab-cc .cc-wtb thead th{font-size:12px}
+#tab-cc .cc-wtb td:nth-child(2){font-weight:700;color:var(--ink)}
 /*CC:CSS:END*/
 
 </style>
@@ -6285,12 +6289,32 @@ function ccFreeText(x){
   const d=x.cp-x.ch;
   return d>0?"정원보다 현원이 "+d+"명 적어요":d===0?"정원과 현원이 같아요":"현원이 정원보다 "+(-d)+"명 많아요";
 }
+// 나이별 [나이, 입소대기, 지금 다니는 아이 수, 반]. 연령별 정원은 공개 자료에 없어서 입소대기·현원·반 수를 나란히 보여 준다
+function ccAgeRows(x){
+  const lab=["0세","1세","2세","3세","4세","5세"],out=[];
+  const g=(a,i)=>a?ccN(a[i]):null;
+  const cls=c=>c==null?"-":(c>0?c+"반":"없음");
+  for(let i=0;i<6;i++){
+    const w=g(x.ew,i),k=g(x.ag,i),c=g(x.cl,i);
+    if(!(w>0)&&!(k>0)&&!(c>0)) continue;
+    out.push([lab[i],w==null?"-":w,k==null?"-":k,cls(c)]);
+  }
+  for(let i=6;i<=9;i++){   // 혼합반·특수반은 나이별 대기가 따로 없다
+    const k=g(x.ag,i),c=g(x.cl,i);
+    if(!(k>0)&&!(c>0)) continue;
+    out.push([CC_KLASS[i],"-",k==null?"-":k,cls(c)]);
+  }
+  const w6=g(x.ew,6); if(w6>0) out.push(["6세 이상",w6,"-","-"]);
+  return out;
+}
 function ccWaitHtml(x){
   const t=ccWaitTotal(x);
   if(t==null) return '<p class="cc-wait">입소대기 아동 수 자료가 없어요</p>';
-  const parts=[],lab=["0세","1세","2세","3세","4세","5세","6세 이상"];
-  for(let i=0;i<7;i++){ if(x.ew[i]) parts.push(lab[i]+" "+x.ew[i]); }
-  return '<p class="cc-wait">입소대기 아동 <b>'+t+'</b>명'+(parts.length?' ('+erEsc(parts.join(" · "))+')':'')+'</p>';
+  const rows=ccAgeRows(x);
+  let h='<p class="cc-wait">입소대기 아동 <b>'+t+'</b>명</p>';
+  if(rows.length) h+='<div class="cc-tbw"><table class="cc-tb cc-wtb"><thead><tr><th>나이</th><th>입소대기</th><th>그 반에 다니는 아이</th><th>반</th></tr></thead><tbody>'
+    +rows.map(r=>'<tr><th scope="row">'+erEsc(r[0])+'</th><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>').join("")+'</tbody></table></div>';
+  return h;
 }
 // 반별 표: [구분, 반 수, 아동 수, 반당 평균]
 function ccKlassRows(x){
@@ -6576,6 +6600,7 @@ function ccResHtml(inp){
     const rows=ccSort(ccFilter(list,{sg:S.sg,dg:S.dg,q:S.q,ty:S.ty,car:S.car,free:S.free,rest:S.rest}),key,S.loc);
     const ctx={loc:S.loc,anchor:S.anchor,asof:IDX.asof};
     let h='<p class="cc-count">'+(S.loc&&!S.sd?(S.anchor?'입력한 동네 근처 ':'내 위치 근처 ')+erEsc(S.boxes.map(sdName).join("·"))+' 어린이집 중 · ':'')+'<b>'+rows.length+'곳</b> · 자료 기준일 '+erEsc(IDX.asof)+(S.sort==="near"&&!S.loc?' · 가까운 순은 내 위치나 동네 이름을 정한 뒤에 쓸 수 있어요(지금은 이름순)':'')+'</p>';
+    h+='<p class="cc-sub">나이별 정원은 공개된 자료에 없어서, 나이별 입소대기와 그 나이 반에 다니는 아이 수, 반 수를 나란히 보여 드려요. 아이 수는 반 기준이라 아이가 자라도 그 해에는 다니던 반 나이로 세요. 반이 없음이면 그 나이만 받는 반이 없다는 뜻이에요(혼합반이 있으면 어린이집에 확인하세요). 0세 대기는 아기가 어릴 때 미리 걸어 두는 대기가 많아서(전국 입소대기 아동의 약 70%가 0세예요), 0세반이 없는 곳에서는 보통 3월 신학기에 1세반으로 들어오는 대기로 보여요. 정확한 입소 시기는 어린이집에 확인하세요.</p>';
     if(!S.sd&&S.boxes.some(c=>!DATA[c])) h+='<p class="cc-sub">옆 시도 자료를 더 받는 중이에요. 잠시 뒤 목록이 더 늘어나요.</p>';
     h+=rows.slice(0,S.shown).map(x=>ccCard(x,ctx)).join("");
     if(!rows.length) h+='<p class="cc-hint">조건에 맞는 어린이집이 자료에 없어요. 조건을 줄이거나 지역·이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 어린이집에 전화로 확인하세요.</p>';
@@ -6585,6 +6610,7 @@ function ccResHtml(inp){
   }
   function renderSrc(){
     $("ccSrc").innerHTML='출처: 어린이집정보공개포털 OpenAPI(한국사회보장정보원·교육부, 출처 표시 이용), 자료 기준일 '+erEsc(IDX?IDX.asof:"")
+      +'. 자료는 2주마다(매월 첫째·셋째 수요일) 새로 받아 와요'
       +'. 폐지된 어린이집은 뺐고, 입소대기 아동 수는 자료에 있는 어린이집만 보여요. 읍·면·동 구분은 통계청 SGIS 행정동 경계(공공누리 제1유형)를 <a href="https://github.com/vuski/admdongkor" target="_blank" rel="noopener noreferrer">admdongkor</a>가 가공한 자료(CC BY 4.0)와 어린이집 좌표로 정했고, 좌표나 주소로 못 정한 곳은 동 정보 없는 곳으로 따로 묶어요.<br>이 사이트는 교육부·한국사회보장정보원과 무관하며, 어린이집을 평가하거나 입소 가능 여부를 알려 주지 않아요. 숫자는 어린이집이 올린 자료라 실제와 다를 수 있어요.';
   }
   // 이벤트
@@ -7973,7 +7999,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="d9f9d1d8";
+var APP_BUILD="67382804";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
