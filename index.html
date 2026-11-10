@@ -1308,6 +1308,111 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-er .er-btn:focus-visible,#tab-er .er-locbtn:focus-visible,#tab-er .er-chip:focus-visible,#tab-er .er-g:focus-visible,#tab-er .er-showmore:focus-visible,#tab-er .er-more>summary:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
 @media(max-width:600px){#tab-er .er-h{font-size:19px}#tab-er .er-btn{flex:1 1 100%}#tab-er .er-g{flex:1 1 100%}}
 /*ER:CSS:END*/
+/*CC:CSS:BEGIN*/
+/* 어린이집 찾기 탭 */
+#tab-cc [hidden]{display:none!important}
+#tab-cc .cc-h{margin:0 0 8px;font-family:"Nanum Myeongjo",serif;font-size:21px;line-height:1.4}
+#tab-cc .cc-lead{margin:0 0 14px;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+#tab-cc .cc-call{margin:0 0 16px;padding:12px 14px;border-left:4px solid var(--seal);background:rgba(168,50,42,.09);border-radius:0 3px 3px 0;font-size:13.5px;line-height:1.7;color:var(--ink)}
+#tab-cc .cc-call p{margin:0 0 6px;word-break:keep-all;overflow-wrap:anywhere}
+#tab-cc .cc-call p:last-child{margin:0}
+#tab-cc .cc-tok{margin:0 0 16px}
+#tab-cc .cc-tok p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--ink-2);word-break:keep-all;overflow-wrap:anywhere}
+#tab-cc .cc-acts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+#tab-cc .cc-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:1px solid var(--seal);border-radius:3px;background:var(--seal);color:#fff;font-size:14px;font-weight:700;text-decoration:none;line-height:1.3;text-align:center}
+#tab-cc .cc-btn.alt{background:var(--card);color:var(--seal)}
+#tab-cc .cc-btn:hover{filter:brightness(1.06)}
+#tab-cc .cc-btn119{min-width:120px}
+#tab-cc .cc-card{padding:16px;margin:0 0 14px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+#tab-cc .cc-card h3{margin:0 0 10px;font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:16.5px;line-height:1.4}
+#tab-cc .cc-locbtn{display:block;width:100%;min-height:48px;margin:0 0 6px;padding:0 16px;letter-spacing:normal;font-family:inherit;font-size:15px;font-weight:700;appearance:none;border:1px solid var(--seal);background:var(--card);color:var(--seal);border-radius:3px;cursor:pointer;transition:none}
+#tab-cc .cc-locbtn:hover,#tab-cc .cc-locbtn.on{background:var(--seal);color:#fff}
+#tab-cc .cc-sub{margin:0 0 10px;font-size:12.5px;line-height:1.7;color:var(--ink-3)}
+#tab-cc .cc-lab{margin:12px 0 8px;font-size:13.5px;font-weight:700;color:var(--ink-2)}
+#tab-cc .cc-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+#tab-cc .cc-chip{margin:0;width:auto;letter-spacing:normal;font-family:inherit;font-weight:400;transition:none;appearance:none;min-height:38px;padding:0 12px;border:1px solid var(--rule);border-radius:99px;background:var(--card);color:var(--ink);font-size:13.5px;cursor:pointer}
+#tab-cc .cc-chip.on{background:var(--seal);border-color:var(--seal);color:#fff;font-weight:700}
+#tab-cc .cc-chip .cc-n{opacity:.75;font-size:12px}
+#tab-cc .cc-row{display:flex;flex-wrap:wrap;gap:10px}
+#tab-cc .cc-fld{display:flex;flex-direction:column;gap:4px;flex:1 1 140px;font-size:13px;color:var(--ink-2)}
+#tab-cc .cc-fld2{flex:2 1 200px}
+#tab-cc .cc-fld3{flex:1 1 240px}
+#tab-cc .cc-fld select,#tab-cc .cc-fld input{width:100%;min-height:44px;padding:0 10px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);font:inherit;font-size:15px}
+#tab-cc .cc-fld select:focus,#tab-cc .cc-fld input:focus{outline:2px solid var(--seal);outline-offset:1px;border-color:transparent}
+#tab-cc .cc-groups{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+#tab-cc .cc-g{margin:0;width:auto;flex:1 1 45%;letter-spacing:normal;font-family:inherit;font-weight:700;transition:none;appearance:none;min-height:46px;padding:6px 10px;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink-2);font-size:14px;cursor:pointer;line-height:1.35}
+#tab-cc .cc-g.on{background:var(--seal);border-color:var(--seal);color:#fff}
+#tab-cc .cc-g .cc-n{font-weight:400;font-size:12px;opacity:.8}
+#tab-cc .cc-guide{margin:0 0 12px;font-size:13.5px;line-height:1.75;color:var(--ink)}
+#tab-cc .cc-guide p{margin:0 0 8px}
+#tab-cc .cc-cov{margin:0 0 12px;padding:10px 12px;border-left:4px solid var(--to);background:rgba(184,134,43,.12);border-radius:0 3px 3px 0;font-size:13px;line-height:1.7;color:var(--ink)}
+#tab-cc .cc-ck{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:14px;color:var(--ink)}
+#tab-cc .cc-ck input{width:20px;height:20px}
+#tab-cc .cc-state{margin:0 0 10px;min-height:1.2em;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+#tab-cc .cc-hint{padding:14px;border:1px dashed var(--rule);border-radius:3px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+#tab-cc .cc-item{margin:0 0 10px;padding:12px 14px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+#tab-cc .cc-item h4{margin:0 0 4px;font-size:15.5px;line-height:1.5;font-weight:700;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+#tab-cc .cc-badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;border:1px solid var(--rule);background:var(--card);color:var(--ink-2)}
+#tab-cc .cc-badge.pub{border-color:var(--seal);color:var(--seal)}
+#tab-cc .cc-badge.pn{border-color:var(--to);color:var(--to)}
+#tab-cc .cc-badge.vu{border-color:var(--su);color:var(--su)}
+#tab-cc .cc-badge.pd{border-color:var(--seal);color:var(--seal)}
+#tab-cc .cc-dist{margin:0 0 2px;font-size:13px;font-weight:700;color:var(--su)}
+#tab-cc .cc-addr{margin:0 0 4px;font-size:13.5px;line-height:1.6;color:var(--ink)}
+#tab-cc .cc-time{margin:0 0 4px;font-size:14px;line-height:1.6;color:var(--ink)}
+#tab-cc .cc-pub,#tab-cc .cc-memo{margin:0 0 4px;font-size:13px;line-height:1.65;color:var(--ink-2);white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
+#tab-cc .cc-warn{margin:8px 0 0;font-size:12.5px;line-height:1.6;color:var(--ink-3)}
+#tab-cc .cc-more{margin:6px 0 0;font-size:13px;color:var(--ink-2)}
+#tab-cc .cc-more>summary{cursor:pointer;padding:6px 0;font-weight:700}
+#tab-cc .cc-more ul{margin:4px 0 0;padding-left:18px;line-height:1.7}
+#tab-cc .cc-sec{margin:18px 0 8px;font-family:"Nanum Myeongjo",serif;font-size:16px;font-weight:700;line-height:1.5}
+#tab-cc .cc-count{margin:0 0 8px;font-size:13.5px;color:var(--ink-2)}
+#tab-cc .cc-showmore{display:block;width:100%;min-height:46px;margin:6px 0 0;letter-spacing:normal;font-family:inherit;font-size:14.5px;font-weight:700;appearance:none;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:3px;cursor:pointer;transition:none}
+#tab-cc .cc-showmore:hover{border-color:var(--seal)}
+#tab-cc .cc-foot{margin:18px 0 0;padding-top:12px;border-top:1px solid var(--rule);font-size:12.5px;line-height:1.8;color:var(--ink-3)}
+#tab-cc .cc-foot details{margin:6px 0 0}
+#tab-cc .cc-foot summary{cursor:pointer;font-weight:700;color:var(--ink-2)}
+#tab-cc .cc-foot ul{margin:4px 0 0;padding-left:18px}
+#tab-cc .cc-btn:focus-visible,#tab-cc .cc-locbtn:focus-visible,#tab-cc .cc-chip:focus-visible,#tab-cc .cc-g:focus-visible,#tab-cc .cc-showmore:focus-visible,#tab-cc .cc-more>summary:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+@media(max-width:600px){#tab-cc .cc-h{font-size:19px}#tab-cc .cc-btn{flex:1 1 100%}#tab-cc .cc-g{flex:1 1 100%}}
+/* 어린이집 찾기 전용 */
+#tab-cc .cc-nums{display:flex;flex-wrap:wrap;gap:6px 14px;margin:6px 0 4px;font-size:14px;line-height:1.6;color:var(--ink)}
+#tab-cc .cc-nums b{font-variant-numeric:tabular-nums}
+#tab-cc .cc-wait{margin:2px 0 6px;font-size:13.5px;line-height:1.65;color:var(--ink)}
+#tab-cc .cc-wait b{font-variant-numeric:tabular-nums}
+#tab-cc .cc-tbw{margin:6px 0;overflow-x:auto}
+#tab-cc .cc-tb{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.5}
+#tab-cc .cc-tb th,#tab-cc .cc-tb td{padding:4px 7px;border:1px solid var(--rule);text-align:right;white-space:nowrap}
+#tab-cc .cc-tb thead th,#tab-cc .cc-tb tbody th{background:var(--paper-2);text-align:center;font-weight:700;color:var(--ink)}
+#tab-cc .cc-chk{margin:0 0 14px;padding:12px 14px;border:1px solid var(--rule);border-radius:3px;background:var(--card);font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+#tab-cc .cc-chk>b{display:block;margin:0 0 4px;color:var(--ink)}
+#tab-cc .cc-chk p{margin:0 0 6px}
+#tab-cc .cc-sorts{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 10px;font-size:13.5px;color:var(--ink-2)}
+#tab-cc .cc-sorts select{min-height:40px;padding:0 8px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);font:inherit;font-size:14px}
+#tab-cc .cc-ck.sm{margin:0;font-size:13.5px}
+#tab-cc .cc-badge.car{border-color:var(--su);color:var(--su)}
+#tab-cc .cc-badge.rest{border-color:var(--to);color:var(--to)}
+/* 입소 가점 계산기 */
+#tab-cc .cc-modes{display:flex;gap:8px;margin:0 0 14px}
+#tab-cc .cc-mode{flex:1 1 50%;margin:0;width:auto;letter-spacing:normal;font-family:inherit;font-weight:700;transition:none;appearance:none;min-height:48px;padding:6px 10px;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink-2);font-size:14.5px;cursor:pointer;line-height:1.35}
+#tab-cc .cc-mode.on{background:var(--seal);border-color:var(--seal);color:#fff}
+#tab-cc .cc-mode:focus-visible,#tab-cc .cc-fld select:focus-visible,#tab-cc .cc-ck input:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+#tab-cc .cc-ck.top{align-items:flex-start;margin:0 0 10px;line-height:1.6}
+#tab-cc .cc-ck input{flex:none;margin-top:2px}
+#tab-cc .cc-ck span{min-width:0;word-break:keep-all;overflow-wrap:anywhere}
+#tab-cc .cc-par{margin:0 0 6px;padding:0 0 8px}
+#tab-cc .cc-par+.cc-par{border-top:1px dashed var(--rule);padding-top:4px}
+#tab-cc .cc-par .cc-fld{margin:0 0 10px}
+#tab-cc .cc-cks{margin:0 0 6px}
+#tab-cc .cc-score{margin:0 0 10px;padding:12px 14px;border-left:4px solid var(--seal);background:rgba(168,50,42,.09);border-radius:0 3px 3px 0}
+#tab-cc .cc-big{margin:0;font-family:"Nanum Myeongjo",serif;font-size:22px;font-weight:700;line-height:1.4;color:var(--ink)}
+#tab-cc .cc-score .cc-sub{margin:4px 0 0}
+#tab-cc .cc-score-tb td.l{text-align:left;white-space:normal;word-break:keep-all;overflow-wrap:anywhere}
+#tab-cc .cc-notes{margin:10px 0 8px;padding-left:18px;font-size:13.5px;line-height:1.75;color:var(--ink-2)}
+#tab-cc .cc-notes li{margin:0 0 6px;word-break:keep-all;overflow-wrap:anywhere}
+#tab-cc .cc-resbox .cc-more ul{margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.7}
+#tab-cc .cc-resbox .cc-more li{margin:0 0 6px;word-break:keep-all;overflow-wrap:anywhere}
+/*CC:CSS:END*/
 
 </style>
 
@@ -1319,7 +1424,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <div class="soon" role="note">
     <p class="soon-h"><span class="soon-tag">준비 중</span> 이런 서비스를 준비하고 있어요. 열리면 이 자리에서 알려 드릴게요.</p>
     <ol class="soon-list">
-      <li><b>어린이집 찾기</b><span>사는 지역을 고르면 가까운 어린이집의 이름, 종류(국공립·민간 등), 주소, 전화번호를 한곳에서 보여 줘요.</span></li>
       <li><b>예방접종 일정</b><span>아기 생일을 넣으면 질병관리청 표준 일정에 맞춰 언제 어떤 접종을 맞는지 알려 줘요.</span></li>
     </ol>
   </div>
@@ -1390,6 +1494,11 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-er">
     <img src="tab-er.jpg" width="800" height="597" decoding="async"
          alt="병원 찾기 — 달빛어린이병원·소아전문응급의료센터·응급의료기관·늦게까지 여는 심야약국을 지역별로, 또는 내 위치에서 가까운 순으로 찾습니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-cc">
+    <img src="tab-cc.jpg" width="800" height="597" decoding="async"
+         alt="어린이집 찾기 — 사는 지역이나 내 위치에서 어린이집의 정원·현원·통학차량·입소대기 아동 수를 찾고, 입소 가점을 계산합니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
 </nav>
@@ -2511,6 +2620,113 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <div class="er-foot" id="erSrc"></div>
 </div>
 <!--ER:HTML:END-->
+<!--CC:HTML:BEGIN-->
+<div id="tab-cc" class="hidden">
+<p class="upd"><b>업데이트 11/10</b> 어린이집 찾기 탭이 생겼어요. 정원·현원·통학차량·입소대기 아동 수를 지역별로, 또는 내 위치에서 가까운 순으로 볼 수 있고 입소 가점 계산기도 있어요</p>
+<h2 class="cc-h">우리동네 어린이집 찾기</h2>
+<p class="cc-lead">사는 지역이나 내 위치를 고르면 어린이집의 정원, 현원, 통학차량, 입소대기 아동 수를 한곳에서 볼 수 있어요. 전화와 길찾기로 바로 이어져요. 등록대기 순서에 쓰이는 우선순위 점수는 '입소 가점 계산기'에서 미리 계산해 볼 수 있어요.</p>
+<div class="cc-modes" role="tablist" aria-label="이 탭에서 할 일 고르기">
+  <button type="button" class="cc-mode on" role="tab" id="ccModeFind" aria-selected="true" aria-controls="ccPaneFind">어린이집 찾기</button>
+  <button type="button" class="cc-mode" role="tab" id="ccModeCalc" aria-selected="false" aria-controls="ccPaneCalc">입소 가점 계산기</button>
+</div>
+<div id="ccPaneFind" role="tabpanel" aria-labelledby="ccModeFind">
+<div class="cc-call" role="note">
+<p><b>가기 전에 꼭 어린이집에 전화로 확인하세요.</b></p>
+<p>이 숫자는 어린이집정보공개포털에 올라온 자료예요. 정원보다 현원이 적어도 우리 아이 나이 반에 자리가 있다는 뜻은 아니에요.</p>
+<p>입소 가능 여부와 대기 순번은 이 화면으로 알 수 없어요. 어린이집이나 아이사랑에서 확인하세요.</p>
+</div>
+<div class="cc-card" id="ccFind">
+  <h3>어디서 찾을까요</h3>
+  <button type="button" class="cc-locbtn" id="ccLoc">내 위치에서 가까운 순으로 찾기</button>
+  <p class="cc-sub" id="ccLocNote">누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 아래에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요.</p>
+  <p class="cc-lab" id="ccSdLab">또는 시도를 골라요</p>
+  <div class="cc-chips" id="ccSd" role="group" aria-labelledby="ccSdLab"></div>
+  <div class="cc-row">
+    <label class="cc-fld">시군구 <select id="ccSg" aria-label="시군구 고르기"><option value="">전체</option></select></label>
+    <label class="cc-fld cc-fld2">이름 검색 <input type="search" id="ccQ" placeholder="어린이집 이름" autocomplete="off" aria-label="어린이집 이름 검색"></label>
+  </div>
+</div>
+<div class="cc-card" id="ccFilt">
+  <h3>조건으로 좁히기</h3>
+  <p class="cc-lab" id="ccTyLab">어린이집 종류 (여러 개 고를 수 있어요)</p>
+  <div class="cc-chips" id="ccTy" role="group" aria-labelledby="ccTyLab"></div>
+  <label class="cc-ck sm"><input type="checkbox" id="ccCar"> 통학차량을 운영하는 곳만</label>
+  <label class="cc-ck sm"><input type="checkbox" id="ccFree"> 현원이 정원보다 적은 곳만</label>
+  <label class="cc-ck sm"><input type="checkbox" id="ccRest"> 쉬고 있는(휴지) 어린이집도 보기</label>
+</div>
+<div class="cc-chk" role="note">
+  <b>가기 전에 이 세 곳도 확인해 보세요</b>
+  <p><a href="https://info.childcare.go.kr/info_html5/cfvp/VioltfcltySlL.jsp" target="_blank" rel="noopener noreferrer">위반시설 및 위반행위자 조회</a>: 법에 따라 공표된 처분만 나오고, 공표 기간이 지나면 사라져요. 시도와 시군구를 골라 어린이집 이름을 찾으세요.</p>
+  <p><a href="https://info.childcare.go.kr/info_html5/pnis/search/UnitySearchSlL.jsp" target="_blank" rel="noopener noreferrer">통합정보공시 검색</a>: 보육료와 그 밖의 필요경비, 급식, 안전점검, 보험, 통학버스 신고를 볼 수 있어요.</p>
+  <p><a href="https://www.childcare.go.kr/" target="_blank" rel="noopener noreferrer">아이사랑 보육포털</a>: 입소대기 신청과 어린이집 정보를 볼 수 있어요.</p>
+</div>
+<div class="cc-sorts"><label>정렬 <select id="ccSort" aria-label="정렬 기준"><option value="name">이름순</option><option value="near">가까운 순(내 위치를 켰을 때)</option><option value="wait">입소대기가 적은 순</option><option value="cap">정원이 큰 순</option></select></label></div>
+<p class="cc-state" id="ccState" aria-live="polite"></p>
+<div id="ccOut"></div>
+<div id="ccMore"></div>
+<div class="cc-foot" id="ccSrc"></div>
+</div>
+<div id="ccPaneCalc" role="tabpanel" aria-labelledby="ccModeCalc" hidden>
+<div class="cc-call" role="note">
+<p><b>참고용 계산이에요. 입소 순서는 아이사랑과 어린이집에서 정해요.</b></p>
+<p>아이사랑이 공개한 우선순위와 점수 기준을 그대로 계산했어요. 지역이나 어린이집에 따라 더 보는 기준이 있을 수 있고, 항목마다 서류로 확인돼야 인정돼요. 점수가 높아도 입소가 정해지는 것은 아니에요.</p>
+<p>고른 내용은 이 기기 안에서만 계산하고 저장하거나 보내지 않아요. 우선순위 해당 여부는 어린이집 등록일 기준이에요.</p>
+</div>
+<div class="cc-card" id="ccCalcHome">
+  <h3>1. 가구 상황</h3>
+  <div class="cc-row">
+    <label class="cc-fld cc-fld3">가구 형태 <select id="ccHh" aria-label="가구 형태" autocomplete="off">
+      <option value="two">본인과 배우자 두 분</option>
+      <option value="s1">한부모 가구(지원대상자)</option>
+      <option value="s2">한부모 가구(지원대상자 아님)</option>
+    </select></label>
+    <label class="cc-fld cc-fld3">자녀는 모두 몇 명인가요(입소할 이 아이 포함) <select id="ccKids" aria-label="자녀 수" autocomplete="off">
+      <option value="1">1명(이 아이만)</option>
+      <option value="2">2명</option>
+      <option value="3">3명 이상</option>
+    </select></label>
+  </div>
+  <p class="cc-sub">한부모 가구는 한부모가족지원법 지원대상자의 자녀면 1순위(100점), 그 밖의 한부모가족이면 2순위(50점)로 봐요.</p>
+  <p class="cc-sub">자녀 수는 지금 어린이집에 보낼 이 아이를 포함해 등록일 기준으로 세요. 배 속 아기(태아)는 이 아이가 등원하기 전에 태어나 출생신고를 할 수 있으면 자녀 수에 세고, 등원할 때까지 임신 중이면 아래 '임신부의 자녀'를 체크하세요. 둘을 함께 더하지는 않아요. 예를 들어 이 아이가 첫째이고 둘째가 등원 전에 태어나면 '2명'이에요.</p>
+  <label class="cc-ck top"><input type="checkbox" id="ccPreg" autocomplete="off"><span>어린이집에 다니기 시작할 때 본인 또는 배우자가 임신 중이에요(임신부의 자녀)</span></label>
+</div>
+<div class="cc-card" id="ccParents">
+  <h3>2. 본인과 배우자가 일하는 상황</h3>
+  <p class="cc-sub">아이의 부모인 본인과 배우자가 모두 취업 중이거나 취업을 준비 중이면 맞벌이 항목(200점)이에요. 한부모 가구는 본인 한 분만 해당돼도 돼요. 휴직 중(육아휴직 포함)도 맞벌이로 인정돼요.</p>
+  <div class="cc-par">
+    <p class="cc-lab">본인</p>
+    <label class="cc-fld"><span>일하는 상황</span><select id="ccWA" aria-label="본인의 일하는 상황" autocomplete="off"></select></label>
+    <label class="cc-ck top" id="ccWAc" hidden><input type="checkbox" id="ccWAok" autocomplete="off"><span id="ccWAt"></span></label>
+  </div>
+  <div class="cc-par" id="ccParB">
+    <p class="cc-lab">배우자</p>
+    <label class="cc-fld"><span>일하는 상황</span><select id="ccWB" aria-label="배우자의 일하는 상황" autocomplete="off"></select></label>
+    <label class="cc-ck top" id="ccWBc" hidden><input type="checkbox" id="ccWBok" autocomplete="off"><span id="ccWBt"></span></label>
+  </div>
+</div>
+<div class="cc-card" id="ccOther1">
+  <h3>3. 해당하는 1순위 항목을 모두 골라요</h3>
+  <p class="cc-sub">항목마다 100점이에요. 여기 없는 항목(맞벌이, 자녀 수, 임신부, 한부모)은 위에서 계산해요.</p>
+  <div id="ccX1"></div>
+</div>
+<div class="cc-card" id="ccOther2">
+  <h3>4. 해당하는 2순위 항목을 골라요</h3>
+  <p class="cc-sub">항목마다 50점이에요. 1순위 점수가 같을 때만 더해요.</p>
+  <div id="ccX2"></div>
+</div>
+<div class="cc-card cc-resbox" id="ccResBox">
+  <h3>계산 결과</h3>
+  <div id="ccRes" aria-live="polite"></div>
+  <button type="button" class="cc-showmore" id="ccReset">처음 상태로 되돌리기</button>
+</div>
+<div class="cc-chk" role="note">
+  <b>기준 출처</b>
+  <p>점수 기준: <a href="https://www.childcare.go.kr/?menuno=172" target="_blank" rel="noopener noreferrer">아이사랑 입소 우선순위 점수</a>. 1순위는 항목당 100점, 맞벌이와 자녀 3명 이상은 각 200점, 맞벌이이면서 자녀 3명 이상이면 700점, 2순위는 항목당 50점이에요. 2순위만 있으면 점수가 같거나 높아도 1순위보다 앞설 수 없어요.</p>
+  <p>항목과 서류: <a href="https://www.childcare.go.kr/?menuno=174" target="_blank" rel="noopener noreferrer">아이사랑 우선순위 관련 규정</a>(영유아보육법 제28조, 시행령 제21조의3, 시행규칙 제29조). 이 사이트는 교육부·한국사회보장정보원과 무관하며, 규정이 바뀌면 이 계산과 달라질 수 있어요. 점수가 같을 때 순서를 가르는 방법이나 지역별 추가 기준은 어린이집과 관할 지자체에 확인하세요.</p>
+</div>
+</div>
+</div>
+<!--CC:HTML:END-->
 <div id="tab-rank" class="hidden">
 <div class="card">
   <h2>용품별 순위</h2>
@@ -4089,7 +4305,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".tb").forEach(x=>{
     const on=(x===b); x.classList.toggle("on",on); x.setAttribute("aria-selected",on?"true":"false");
   });
-  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp","tab-bf","tab-benefit","tab-cosm","tab-er"].forEach(id=>{
+  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp","tab-bf","tab-benefit","tab-cosm","tab-er","tab-cc"].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.classList.toggle("hidden", id!==b.dataset.tab);
   });
@@ -4103,6 +4319,7 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   if(b.dataset.tab==="tab-benefit" && typeof benOnOpen==="function") benOnOpen();
   if(b.dataset.tab==="tab-cosm" && typeof cosmOnOpen==="function") cosmOnOpen();
   if(b.dataset.tab==="tab-er" && typeof erOnOpen==="function") erOnOpen();
+  if(b.dataset.tab==="tab-cc" && typeof ccOnOpen==="function") ccOnOpen();
 }));
 
 /*JP:JS:BEGIN*/
@@ -5996,6 +6213,380 @@ function erVulnItems(arr){return (arr||[]).map(v=>({vu:1,n:v.name,a:v.addr,t:v.t
   if(INIT_TAB==="er"){ const b=document.querySelector('.tb[data-tab="tab-er"]'); if(b){ b.click(); window.scrollTo(0,0); } }
 })();
 /*ER:JS:END*/
+/*CC:JS:BEGIN*/
+/* === CC-CORE START === */
+// 어린이집 찾기: 시도별 자료(cc/cc_<코드>.json)는 고른 시도만 받아 이 기기 안에서만 걸러 보여 준다. 위치는 서버로 보내지 않는다.
+// 병원 찾기 탭(ER-CORE)의 erEsc·erNorm·erDist·erFmtDist 를 함께 쓴다.
+const CC_TY=["국공립","민간","가정","직장","사회복지법인","법인·단체등","협동"];
+const CC_KLASS=["0세","1세","2세","3세","4세","5세","영아혼합(만0~2세)","영유아혼합(만2~3세)","유아혼합(만3~5세)","특수장애"];
+const CC_STAFF=["원장","보육교사","특수교사","치료교사","영양사","간호사","간호조무사","조리원","사무직원"];
+const CC_TENURE=["1년 미만","1~2년","2~4년","4~6년","6년 이상"];
+const CC_PAGE=20;
+function ccN(v){return v==null||v===""||isNaN(+v)?null:+v;}
+function ccDate(d){const s=String(d||"").replace(/\D/g,"");return s.length>=8?s.slice(0,4)+"."+s.slice(4,6)+"."+s.slice(6,8):"";}
+function ccHome(u){return /^https?:\/\/[^\s"'<>]+$/.test(u||"")?u:"";}
+// 거르기: 시군구·이름(부분 일치)·종류(여러 개)·통학차량·현원이 정원보다 적은 곳·휴지 포함 여부
+function ccFilter(list,f){
+  const q=erNorm(f.q),ty=f.ty||{},anyTy=Object.keys(ty).some(k=>ty[k]);
+  return list.filter(x=>(!f.sg||x.sg===f.sg)&&(!q||erNorm(x.n).includes(q))&&(!anyTy||ty[x.ty])&&(!f.car||x.cv==="운영")
+    &&(!f.free||(x.cp!=null&&x.ch!=null&&x.ch<x.cp))&&(f.rest||x.st!=="휴지"));
+}
+function ccWaitTotal(x){return x&&x.ew&&x.ew.length>=8&&x.ew[7]!=null?x.ew[7]:null;}
+// 정렬: name 이름순 · near 가까운 순(좌표 없는 곳은 뒤) · wait 입소대기 적은 순(자료 없는 곳은 뒤) · cap 정원 큰 순
+function ccSort(list,key,loc){
+  const ko=(a,b)=>String(a||"").localeCompare(String(b||""),"ko");
+  const base=(p,q)=>ko(p.n,q.n)||ko(p.id,q.id);
+  const a=list.slice();
+  if(key==="near"&&loc){
+    const d=new Map(a.map(x=>[x,erDist(loc,x)]));
+    a.sort((p,q)=>{const dp=d.get(p),dq=d.get(q); if((dp==null)!==(dq==null)) return dp==null?1:-1; if(dp!=null&&dp!==dq) return dp-dq; return base(p,q);});
+  }else if(key==="wait"){
+    a.sort((p,q)=>{const wp=ccWaitTotal(p),wq=ccWaitTotal(q); if((wp==null)!==(wq==null)) return wp==null?1:-1; if(wp!==wq&&wp!=null) return wp-wq; return base(p,q);});
+  }else if(key==="cap"){
+    a.sort((p,q)=>(q.cp||0)-(p.cp||0)||base(p,q));
+  }else a.sort(base);
+  return a;
+}
+// 내 위치가 들어가는 시도: 시도 영역(bb)을 0.2도(약 20km) 넓혀 겹치는 곳을 모두, 없으면 가장 가까운 한 곳
+function ccBoxSd(index,loc,pad){
+  const p=pad==null?0.2:pad,hit=[];let best=null,bd=1e9;
+  (index&&index.sd||[]).forEach(s=>{
+    if(!s.bb) return;
+    const c={la:(s.bb[0]+s.bb[2])/2,lo:(s.bb[1]+s.bb[3])/2},d=erDist(loc,c);
+    if(loc.la>=s.bb[0]-p&&loc.la<=s.bb[2]+p&&loc.lo>=s.bb[1]-p&&loc.lo<=s.bb[3]+p) hit.push(s.k);
+    if(d!=null&&d<bd){bd=d;best=s.k;}
+  });
+  return hit.length?hit:(best?[best]:[]);
+}
+function ccFreeText(x){
+  if(x.cp==null||x.ch==null) return "";
+  const d=x.cp-x.ch;
+  return d>0?"정원보다 현원이 "+d+"명 적어요":d===0?"정원과 현원이 같아요":"현원이 정원보다 "+(-d)+"명 많아요";
+}
+function ccWaitHtml(x){
+  const t=ccWaitTotal(x);
+  if(t==null) return '<p class="cc-wait">입소대기 아동 수 자료가 없어요</p>';
+  const parts=[],lab=["0세","1세","2세","3세","4세","5세","6세 이상"];
+  for(let i=0;i<7;i++){ if(x.ew[i]) parts.push(lab[i]+" "+x.ew[i]); }
+  return '<p class="cc-wait">입소대기 아동 <b>'+t+'</b>명'+(parts.length?' ('+erEsc(parts.join(" · "))+')':'')+'</p>';
+}
+// 반별 표: [구분, 반 수, 아동 수, 반당 평균]
+function ccKlassRows(x){
+  const out=[];
+  for(let i=0;i<CC_KLASS.length;i++){
+    const c=x.cl?ccN(x.cl[i]):null,k=x.ag?ccN(x.ag[i]):null;
+    if(!(c>0)&&!(k>0)) continue;
+    out.push([CC_KLASS[i],c==null?"":c,k==null?"":k,(c>0&&k!=null)?(Math.round(k/c*10)/10).toFixed(1):""]);
+  }
+  return out;
+}
+function ccStaffText(x){
+  if(!x.sf) return "";
+  const parts=[];
+  for(let i=0;i<CC_STAFF.length;i++){ if(x.sf[i]>0) parts.push(CC_STAFF[i]+" "+x.sf[i]); }
+  const tot=x.sf[9]!=null?x.sf[9]:x.em;
+  return (tot!=null?"보육교직원 총 "+tot+"명":"")+(parts.length?" ("+parts.join(" · ")+")":"");
+}
+function ccTenureText(x){
+  if(!x.tn||x.tn.every(v=>v==null)) return "";
+  return "교직원 근속연수(비율): "+CC_TENURE.map((l,i)=>x.tn[i]==null?"":l+" "+x.tn[i]+"%").filter(Boolean).join(" · ");
+}
+function ccFacText(x){
+  const p=[];
+  if(x.rm!=null) p.push("보육실 "+x.rm+"개"+(x.rs?" ("+x.rs+"㎡)":""));
+  if(x.pg!=null) p.push("놀이터 "+x.pg+"곳");
+  if(x.cc!=null) p.push("CCTV "+x.cc+"대");
+  return p.join(" · ");
+}
+function ccLinks(it){
+  const t=String(it.t||"").replace(/[^0-9]/g,"");
+  const nm=encodeURIComponent(it.n||""),q=encodeURIComponent((it.n||"")+" "+String(it.a||"").split(",")[0]);
+  const kk=(it.la!=null&&it.lo!=null)?"https://map.kakao.com/link/to/"+nm+","+it.la+","+it.lo:"https://map.kakao.com/link/search/"+nm;
+  return '<div class="cc-acts">'+(t?'<a class="cc-btn" href="tel:'+t+'">전화 '+erEsc(it.t)+'</a>':'<span class="cc-sub">전화번호 자료가 없어요</span>')
+    +'<a class="cc-btn alt" href="'+kk+'" target="_blank" rel="noopener noreferrer">카카오맵 길찾기</a>'
+    +'<a class="cc-btn alt" href="https://map.naver.com/p/search/'+q+'" target="_blank" rel="noopener noreferrer">네이버지도</a></div>';
+}
+function ccMoreBlock(x){
+  const kr=ccKlassRows(x),sf=ccStaffText(x),tn=ccTenureText(x),fc=ccFacText(x),h=ccHome(x.hm);
+  let b="";
+  if(kr.length) b+='<p class="cc-memo">반과 아동 수</p><div class="cc-tbw"><table class="cc-tb"><thead><tr><th>구분</th><th>반 수</th><th>아동 수</th><th>반당 평균</th></tr></thead><tbody>'
+    +kr.map(r=>"<tr><th scope=\"row\">"+erEsc(r[0])+"</th><td>"+r[1]+"</td><td>"+r[2]+"</td><td>"+r[3]+"</td></tr>").join("")+"</tbody></table></div>";
+  if(sf) b+='<p class="cc-memo">'+erEsc(sf)+"</p>";
+  if(tn) b+='<p class="cc-memo">'+erEsc(tn)+"</p>";
+  if(fc) b+='<p class="cc-memo">시설: '+erEsc(fc)+"</p>";
+  if(x.sp) b+='<p class="cc-memo">제공 서비스: '+erEsc(x.sp)+"</p>";
+  if(x.cf) b+='<p class="cc-memo">인가일 '+erEsc(ccDate(x.cf))+"</p>";
+  if(x.pb) b+='<p class="cc-memo">휴지 기간: '+erEsc(ccDate(x.pb))+" ~ "+erEsc(ccDate(x.pe)||"미정")+"</p>";
+  if(h) b+='<p class="cc-memo">홈페이지: <a href="'+erEsc(h)+'" target="_blank" rel="noopener noreferrer">'+erEsc(h)+"</a></p>";
+  return b?'<details class="cc-more"><summary>반·교직원·시설·제공 서비스 보기</summary>'+b+"</details>":"";
+}
+function ccCard(x,ctx){
+  const car=x.cv==="운영"?'<span class="cc-badge car">통학차량 운영</span>':"";
+  const st=x.st==="휴지"?'<span class="cc-badge rest">휴지 중</span>':x.st==="재개"?'<span class="cc-badge">재개</span>':"";
+  const d=ctx&&ctx.loc?erDist(ctx.loc,x):null;
+  const fr=ccFreeText(x);
+  return '<article class="cc-item"><h4>'+erEsc(x.n)+' <span class="cc-badge">'+erEsc(x.ty||"종류 미상")+"</span>"+car+st+"</h4>"
+    +(d==null?"":'<p class="cc-dist">내 위치에서 '+erFmtDist(d)+" (직선)</p>")
+    +'<p class="cc-addr">'+erEsc(x.a)+"</p>"
+    +'<p class="cc-nums"><span>정원 <b>'+(x.cp==null?"-":x.cp)+'</b>명</span><span>현원 <b>'+(x.ch==null?"-":x.ch)+'</b>명</span><span>통학차량 <b>'+erEsc(x.cv||"확인 안 됨")+"</b></span></p>"
+    +(fr?'<p class="cc-time">'+erEsc(fr)+"</p>":"")
+    +ccWaitHtml(x)+ccMoreBlock(x)+ccLinks(x)
+    +'<p class="cc-warn">자료 기준일 '+erEsc((ctx&&ctx.asof)||"")+'. 입소 가능 여부와 대기 순번은 어린이집에 전화로 확인하세요.</p></article>';
+}
+// ── 입소 가점 계산기: 아이사랑 '우선순위 관련 규정'(menuno=174)과 '우선순위 점수표'(menuno=172) 기준 ──
+// 1순위 항목당 100점, 맞벌이와 3자녀 이상은 각 200점, 둘 다면 700점. 2순위 항목당 50점(1순위 점수가 같을 때만 더함). 2순위만 있으면 1순위보다 앞설 수 없음.
+// 부모의 일하는 상황: [키, 이름, 확인할 조건(없으면 빈 칸), "no"면 취업으로 보지 않음(조건 칸은 이유)]
+const CC_WORK=[
+  ["emp","회사에 다녀요(근로자)","월 60시간 이상 일해요"],
+  ["leave","휴직 중이에요(육아휴직 포함)",""],
+  ["self","자영업을 해요(사업자등록이 있어요)","월 60시간 이상 일하는 수준의 소득이 서류로 확인돼요"],
+  ["free","프리랜서·위촉계약으로 일해요","월 60시간 이상 일했다는 것을 계약서와 소득 서류로 보일 수 있어요"],
+  ["farm","농업·어업으로 일해요","농(어)업인 확인서 같은 자격 증명이 있어요"],
+  ["art","예술인으로 활동해요","예술인 활동증명서가 유효기간 안에 있어요"],
+  ["stu","대학(원)에 다녀요","상시 출석수업이 있고 휴학 중이 아니에요"],
+  ["prep","취업을 준비하고 있어요","직업훈련 3개월 이상(수료는 6개월 이내) 또는 구직등록 3개월 이상이에요"],
+  ["unpaid","가족 일을 무급으로 도와요","무급가족종사자는 취업 중인 사람으로 보지 않아요","no"],
+  ["none","해당 없음(전업 등)","취업 중이거나 취업을 준비하는 상황이 아니에요","no"]
+];
+// 1순위 100점 항목: [키, 묶음, 고르는 문구, 결과표에 쓰는 이름]
+const CC_X1=[
+  ["basic","가구 상황","국민기초생활 보장법에 따른 수급자(법정)예요","기초생활수급자"],
+  ["low","가구 상황","차상위계층(중위소득 50% 이하)의 자녀예요","차상위계층의 자녀"],
+  ["inst","가구 상황","아동복지시설에서 생활하고 있어요","아동복지시설 생활"],
+  ["multi","가구 상황","다문화가족의 영유아예요(결혼이민자·귀화자로 이루어진 가족)","다문화가족"],
+  ["nk","가구 상황","북한이탈주민이거나 그 자녀예요","북한이탈주민 및 그 자녀"],
+  ["dadis","건강·장애","장애 정도가 심한 장애인(교육부령 기준)의 자녀예요","심한 장애인의 자녀"],
+  ["sibdis","건강·장애","장애 정도가 심한 장애인(교육부령 기준)인 형제·자매가 있어요","심한 장애인의 형제·자매"],
+  ["t1d","건강·장애","제1형 당뇨가 있지만 일상생활과 보육에 지장이 없어요","제1형 당뇨"],
+  ["rarep","건강·장애","희귀난치성 질환(보건복지부장관 인정)이 있는 사람의 자녀예요","희귀난치성 질환자의 자녀"],
+  ["rares","건강·장애","희귀난치성 질환(보건복지부장관 인정)이 있는 사람의 형제·자매예요","희귀난치성 질환자의 형제·자매"],
+  ["merit","그 밖의 경우","국가유공자(전몰자·순직자·상이자로서 교육부령이 정하는 자)의 자녀예요","국가유공자의 자녀"],
+  ["ind","그 밖의 경우","산업단지 입주기업·지원기관 근로자의 자녀로, 산업단지에 있는 어린이집을 이용해요","산업단지 근로자의 자녀"],
+  ["donate","그 밖의 경우","기부채납으로 국공립이 된 어린이집을 낸 법인·단체 근로자의 자녀로, 그 어린이집을 이용해요","기부채납 법인·단체 근로자의 자녀"],
+  ["apt","그 밖의 경우","공동주택 안 민간어린이집이 국공립으로 바뀐 곳의 거주자 자녀로, 그 어린이집을 이용해요","국공립 전환 공동주택 거주자의 자녀"]
+];
+// 2순위 50점 항목: [키, 고르는 문구, 결과표에 쓰는 이름]
+const CC_X2=[
+  ["fos","가정위탁 보호아동이거나 입양된 영유아예요","가정위탁 보호아동·입양"],
+  ["sib","같은 어린이집에 형제·자매가 등록일에 다니고 있어요(그해 초등학교에 입학하면 해당되지 않아요)","같은 어린이집 재원 형제·자매"]
+];
+const CC_TNOTE={
+  leave:"휴직 중인 사람(육아휴직 포함)은 맞벌이로 인정된다고 아이사랑이 안내하고 있어요. 어떤 서류로 확인하는지는 어린이집에 물어보세요.",
+  free:"아이사랑 안내에는 '프리랜서'라는 말이 따로 없어요. 위촉계약서·근로계약서는 근로자 서류로, 사업자등록과 소득 서류는 자영업자 서류로 낼 수 있고, 월 60시간 이상 일했는지는 어린이집 원장이 서류를 보고 확인해요. 신청 전에 어떤 서류를 인정하는지 어린이집에 물어보세요.",
+  self:"자영업은 사업자등록증명과 소득증명이 있어야 해요. 부동산 임대업은 인정되지 않고, 새로 시작한 자영업자는 매출 장부와 증빙이 맞지 않으면 인정받기 어려워요. 부부가 공동사업자면 두 사람 모두 서류로 확인돼야 해요(농·어업은 한 사람만 인정될 수 있어요).",
+  farm:"농·어업 종사자는 부부 중 한 사람만 인정될 수 있어요. 어린이집에 확인하세요.",
+  stu:"휴학 중이거나 상시 출석수업이 없는 원격대학(방송통신대·사이버대 등)은 인정되지 않아요.",
+  prep:"직업교육훈련은 한 과정을 3개월 이상 듣고 있거나, 수료한 지 6개월 안이어야 하고 출석수업만 인정돼요. 구직등록은 등원일 직전 3개월 이상이어야 해요(예외가 있어요).",
+  art:"예술인 활동증명서가 유효기간 안에 있으면 소득 증명은 필요 없어요.",
+  unpaid:"무급가족종사자는 취업 중인 사람으로 보지 않아요."
+};
+const CC_TDOC={
+  emp:["근로자","재직증명서·위촉계약서·근로계약서 같은 재직 증명 서류 중 1부, 그리고 고용보험 피보험자격내역서·건강보험 자격득실확인서·국민연금 가입자 가입증명서·근로소득원천징수영수증·소득금액증명원·고용임금확인서(3개월 이상 이체내역) 같은 소득 증명 서류 중 1부"],
+  leave:["휴직자","아이사랑 서류표에는 휴직자가 따로 없어요. 근로자와 같은 재직 증명 서류와 소득 증명 서류를 내는 경우가 많으니, 휴직 사실을 어떤 서류로 확인하는지 어린이집에 물어보세요"],
+  self:["자영업자","사업자등록증명원(또는 사업자격을 증명하는 서류) 1부, 그리고 소득금액증명원·부가가치세과세표준증명원·소득신고 증빙서류·최근 3개월 이상 매출장부(매출증빙 별도) 같은 소득 증명 서류 중 1부"],
+  free:["프리랜서","위촉계약서·계약서(근로자 서류) 또는 사업자등록증명원(자영업자 서류), 그리고 소득금액증명원·원천징수영수증·3개월 이상 이체내역 같은 소득 증명 서류 중 1부. 어린이집이 인정하는 서류를 미리 확인하세요"],
+  farm:["농·어업인","농(어)업인 확인서·농(어)업경영체 등록 증명서·어선원부등본 같은 자격 증명 중 1부, 그리고 매출계약서·판매증명서 같은 소득 증명 중 1부"],
+  art:["예술인","예술인 활동증명서(등원일 기준 유효기간 안). 소득 증명은 필요 없어요"],
+  stu:["대학(원)생","재학증명서(원격대학이나 휴학 중이면 인정되지 않아요)"],
+  prep:["취업준비자","직업훈련 참여확인서·수료증·수강증, 취업지원프로그램 참여확인서, 구직등록확인증과 구직활동 증명서류(면접확인서·입사지원서 등) 중 1부"]
+};
+// 한 사람이 취업(또는 취업 준비)으로 인정되는지: {ok, why}
+function ccWork(p){
+  const r=CC_WORK.find(w=>w[0]===(p&&p.t));
+  if(!r) return {ok:false,why:"일하는 상황을 아직 고르지 않았어요"};
+  if(r[3]==="no") return {ok:false,why:r[2]};
+  if(r[2]&&!p.c) return {ok:false,why:"아래 확인 칸에 체크하지 않았어요"};
+  return {ok:true,why:""};
+}
+// inp: {hh:"two"|"s1"|"s2"(두 부모 | 한부모 지원대상자 | 기타 한부모), kids:1|2|3(이 아이 포함), preg, a:{t,c}, b:{t,c}, x1:[키], x2:[키]}
+function ccScore(inp){
+  const x=inp||{},hh=x.hh||"two",single=hh!=="two",kids=+x.kids||1,k3=kids>=3;
+  const wa=ccWork(x.a),wb=single?null:ccWork(x.b),dual=single?wa.ok:(wa.ok&&wb.ok);
+  const lines=[],notes=[];
+  let p1=0,p2=0;
+  if(dual&&k3){p1+=700;lines.push(["맞벌이이면서 자녀 3명 이상",1,700]);}
+  else{
+    if(dual){p1+=200;lines.push([single?"한부모 가구에서 본인이 취업 중이거나 취업 준비 중":"본인과 배우자가 모두 취업 중이거나 취업 준비 중(맞벌이)",1,200]);}
+    if(k3){p1+=200;lines.push(["자녀 3명 이상 가구",1,200]);}
+  }
+  if(kids===2){p1+=100;lines.push(["자녀 2명 가구",1,100]);}
+  if(x.preg){
+    if(kids<2){p1+=100;lines.push(["임신부의 자녀",1,100]);}
+    else notes.push("임신부의 자녀 항목은 자녀 수 항목과 함께 더하지 않고 하나만 반영해요. 아이사랑 안내는 등원할 때 임신 중이면 '임신부의 자녀', 출산 뒤면 자녀 수 항목 중 하나로 보도록 해요.");
+  }
+  if(hh==="s1"){p1+=100;lines.push(["한부모가족지원법 지원대상자의 자녀·손자녀",1,100]);}
+  if(hh==="s2"){p2+=50;lines.push(["기타 한부모가족",2,50]);}
+  const has=(a,k)=>(a||[]).indexOf(k)>=0;
+  CC_X1.forEach(r=>{ if(has(x.x1,r[0])){p1+=100;lines.push([r[3],1,100]);} });
+  CC_X2.forEach(r=>{ if(has(x.x2,r[0])){p2+=50;lines.push([r[2],2,50]);} });
+  const rank=p1>0?1:(p2>0?2:3);
+  if(!dual){
+    const why=single?[wa.why]:[wa.ok?"":"본인: "+wa.why,wb.ok?"":"배우자: "+wb.why].filter(Boolean);
+    notes.unshift("맞벌이 항목은 받지 못했어요. "+why.join(" / "));
+  }
+  const seen={};
+  [x.a&&x.a.t,single?null:(x.b&&x.b.t)].forEach(t=>{ if(t&&CC_TNOTE[t]&&!seen[t]){seen[t]=1;notes.push(CC_TNOTE[t]);} });
+  if(rank===2) notes.push("2순위 항목만 있으면 점수가 같거나 높아도 1순위 아이보다 앞설 수 없어요.");
+  return {p1,p2,rank,lines,notes,dual,single};
+}
+function ccDocs(inp){
+  const x=inp||{},single=(x.hh||"two")!=="two",out=[],seen={};
+  [x.a&&x.a.t,single?null:(x.b&&x.b.t)].forEach(t=>{ if(t&&CC_TDOC[t]&&!seen[t]){seen[t]=1;out.push(CC_TDOC[t]);} });
+  return out;
+}
+// 결과 화면: 모두 고정 문구와 숫자만 쓴다(사용자가 쓴 글자는 넣지 않는다)
+function ccResHtml(inp){
+  const r=ccScore(inp),docs=ccDocs(inp);
+  const head=r.rank===1?"1순위 · "+r.p1+"점":r.rank===2?"2순위 · "+r.p2+"점":"3순위 (일반 영유아) · 0점";
+  let h='<div class="cc-score"><p class="cc-big">'+head+'</p>';
+  if(r.rank===1&&r.p2) h+='<p class="cc-sub">2순위 점수 '+r.p2+'점은 1순위 점수가 같은 아이끼리 겨룰 때만 더해요.</p>';
+  if(r.rank===3) h+='<p class="cc-sub">1순위와 2순위 항목에 해당하지 않으면 3순위예요. 위에서 빠진 항목이 없는지 확인해 보세요.</p>';
+  h+='</div>';
+  if(r.lines.length){
+    h+='<div class="cc-tbw"><table class="cc-tb cc-score-tb"><thead><tr><th>항목</th><th>순위</th><th>점수</th></tr></thead><tbody>'
+      +r.lines.map(z=>'<tr><td class="l">'+z[0]+'</td><td>'+z[1]+'순위</td><td>'+z[2]+'</td></tr>').join("")+'</tbody></table></div>';
+  }
+  if(r.notes.length) h+='<ul class="cc-notes">'+r.notes.map(n=>'<li>'+n+'</li>').join("")+'</ul>';
+  if(docs.length) h+='<details class="cc-more" open><summary>준비할 서류 (아이사랑 서류표 기준)</summary><ul>'+docs.map(d=>'<li><b>'+d[0]+'</b>: '+d[1]+'</li>').join("")+'</ul></details>';
+  return h;
+}
+/* === CC-CORE END === */
+
+(function(){
+  const $=id=>document.getElementById(id);
+  let IDX=null,loading=false,failed=false;
+  const DATA={};   // 시도 코드 → 시설 목록
+  const S={sd:"",sg:"",q:"",ty:{},car:false,free:false,rest:false,sort:"name",loc:null,boxes:[],shown:CC_PAGE};
+  const day=()=>Math.floor(Date.now()/86400000);
+  const getJ=u=>fetch(u,{cache:"no-cache"}).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();});
+  function state(t){$("ccState").textContent=t||"";}
+  function sdName(k){const s=(IDX&&IDX.sd||[]).find(z=>z.k===k);return s?s.label:k;}
+  function chip(k,label,n,on){return '<button type="button" class="cc-chip'+(on?' on':'')+'" data-k="'+erEsc(k)+'" aria-pressed="'+(on?'true':'false')+'">'+erEsc(label)+(n!=null?' <span class="cc-n">'+n+'</span>':'')+'</button>';}
+  function loadSd(codes,after){
+    const need=codes.filter(c=>!DATA[c]);
+    if(!need.length){after();return;}
+    state("어린이집 자료를 받는 중이에요…");
+    Promise.all(need.map(c=>getJ("cc/cc_"+c+".json?t="+day()).then(d=>{DATA[c]=d.rows;})))
+      .then(()=>{state("");after();}).catch(()=>{state("자료를 불러오지 못했어요. 잠시 뒤 다시 눌러 주세요.");});
+  }
+  function pool(){
+    if(S.sd) return DATA[S.sd]||[];
+    return [].concat.apply([],S.boxes.map(c=>DATA[c]||[]));
+  }
+  function load(){
+    if(IDX||loading) return; loading=true; failed=false; state("어린이집 목록을 받는 중이에요…");
+    getJ("cc/cc_index.json?t="+day()).then(d=>{IDX=d; loading=false; state(""); shell(); render();})
+      .catch(()=>{loading=false; failed=true; state("자료를 불러오지 못했어요. 잠시 뒤 이 탭을 다시 열어 보세요.");});
+  }
+  function shell(){
+    $("ccTy").innerHTML=CC_TY.map(t=>chip(t,t,null,false)).join("");
+  }
+  function render(){
+    if(!IDX) return;
+    const sds=IDX.sd;
+    $("ccSd").innerHTML=sds.map(s=>chip(s.k,s.label,s.cnt,S.sd===s.k)).join("");
+    document.querySelectorAll("#ccTy .cc-chip").forEach(b=>{const on=!!S.ty[b.dataset.k]; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false");});
+    const cur=S.sd?sds.find(s=>s.k===S.sd):null;
+    $("ccSg").innerHTML='<option value="">전체</option>'+(cur?cur.sg.map(z=>'<option value="'+erEsc(z[0])+'"'+(z[0]===S.sg?' selected':'')+'>'+erEsc(z[0])+' ('+z[1]+')</option>').join(""):"");
+    $("ccSg").disabled=!S.sd;
+    const has=S.sd||S.loc;
+    if(!has){
+      $("ccOut").innerHTML='<p class="cc-hint">위에서 <b>내 위치로 찾기</b>를 누르거나 시도를 골라 주세요. 시도를 고르면 그 지역 어린이집이 나와요.</p>';
+      $("ccMore").innerHTML=""; renderSrc(); return;
+    }
+    if((S.sd&&!DATA[S.sd])||(!S.sd&&!S.boxes.every(c=>DATA[c]))) return;   // 자료를 받는 중
+    const list=pool();
+    const key=S.sort==="near"&&!S.loc?"name":S.sort;
+    const rows=ccSort(ccFilter(list,{sg:S.sg,q:S.q,ty:S.ty,car:S.car,free:S.free,rest:S.rest}),key,S.loc);
+    const ctx={loc:S.loc,asof:IDX.asof};
+    let h='<p class="cc-count">'+(S.loc&&!S.sd?'내 위치 근처 '+erEsc(S.boxes.map(sdName).join("·"))+' 어린이집 중 · ':'')+'<b>'+rows.length+'곳</b> · 자료 기준일 '+erEsc(IDX.asof)+(S.sort==="near"&&!S.loc?' · 가까운 순은 내 위치를 켠 뒤에 쓸 수 있어요(지금은 이름순)':'')+'</p>';
+    h+=rows.slice(0,S.shown).map(x=>ccCard(x,ctx)).join("");
+    if(!rows.length) h+='<p class="cc-hint">조건에 맞는 어린이집이 자료에 없어요. 조건을 줄이거나 지역·이름을 바꿔 보세요. 자료에 없다고 해서 없는 것은 아니니 어린이집에 전화로 확인하세요.</p>';
+    $("ccOut").innerHTML=h;
+    $("ccMore").innerHTML=rows.length>S.shown?'<button type="button" class="cc-showmore" id="ccShowMore">더 보기 (남은 '+(rows.length-S.shown)+'곳)</button>':"";
+    renderSrc();
+  }
+  function renderSrc(){
+    $("ccSrc").innerHTML='출처: 어린이집정보공개포털 OpenAPI(한국사회보장정보원·교육부, 출처 표시 이용), 자료 기준일 '+erEsc(IDX?IDX.asof:"")
+      +'. 폐지된 어린이집은 뺐고, 입소대기 아동 수는 자료에 있는 어린이집만 보여요.<br>이 사이트는 교육부·한국사회보장정보원과 무관하며, 어린이집을 평가하거나 입소 가능 여부를 알려 주지 않아요. 숫자는 어린이집이 올린 자료라 실제와 다를 수 있어요.';
+  }
+  // 이벤트
+  function pickSd(k){ S.sd=k; S.sg=""; S.shown=CC_PAGE; if(!k){render();return;} loadSd([k],render); }
+  $("ccSd").addEventListener("click",e=>{const b=e.target.closest(".cc-chip"); if(!b) return; pickSd(S.sd===b.dataset.k?"":b.dataset.k);});
+  $("ccSg").addEventListener("change",e=>{S.sg=e.target.value; S.shown=CC_PAGE; render();});
+  let tq=0;
+  $("ccQ").addEventListener("input",e=>{clearTimeout(tq); tq=setTimeout(()=>{S.q=e.target.value; S.shown=CC_PAGE; render();},150);});
+  $("ccTy").addEventListener("click",e=>{const b=e.target.closest(".cc-chip"); if(!b) return; const k=b.dataset.k; S.ty[k]=!S.ty[k]; S.shown=CC_PAGE; render();});
+  $("ccCar").addEventListener("change",e=>{S.car=e.target.checked; S.shown=CC_PAGE; render();});
+  $("ccFree").addEventListener("change",e=>{S.free=e.target.checked; S.shown=CC_PAGE; render();});
+  $("ccRest").addEventListener("change",e=>{S.rest=e.target.checked; S.shown=CC_PAGE; render();});
+  $("ccSort").addEventListener("change",e=>{S.sort=e.target.value; S.shown=CC_PAGE; render();});
+  $("ccMore").addEventListener("click",e=>{if(e.target.closest("#ccShowMore")){S.shown+=CC_PAGE; render();}});
+  const LOC_NOTE="누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 아래에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요.";
+  $("ccLoc").addEventListener("click",()=>{
+    if(S.loc){ S.loc=null; S.boxes=[]; $("ccLoc").classList.remove("on"); $("ccLoc").textContent="내 위치에서 가까운 순으로 찾기"; $("ccLocNote").textContent=LOC_NOTE; render(); return; }
+    if(!navigator.geolocation){ $("ccLocNote").textContent="이 브라우저에서는 위치를 쓸 수 없어요. 아래에서 시도를 골라 찾아 주세요."; return; }
+    if(!IDX){ $("ccLocNote").textContent="목록을 받는 중이에요. 잠시 뒤 다시 눌러 주세요."; return; }
+    $("ccLocNote").textContent="위치를 확인하는 중이에요…";
+    navigator.geolocation.getCurrentPosition(p=>{
+      S.loc={la:p.coords.latitude,lo:p.coords.longitude}; S.boxes=ccBoxSd(IDX,S.loc); S.shown=CC_PAGE; S.sort="near"; $("ccSort").value="near";
+      $("ccLoc").classList.add("on"); $("ccLoc").textContent="내 위치 기준 해제하기";
+      $("ccLocNote").textContent="내 위치에서 가까운 순이에요. 위치는 이 기기 안에서만 쓰고 서버로 보내지 않아요. 시도 경계 근처라면 옆 시도 어린이집이 빠질 수 있으니 시도를 직접 골라 확인해 보세요. 거리는 직선거리예요.";
+      loadSd(S.boxes,render);
+    },()=>{$("ccLocNote").textContent="위치를 받지 못했어요. 브라우저의 위치 허용을 확인하거나, 아래에서 시도를 골라 찾아 주세요.";},{timeout:10000,maximumAge:300000});
+  });
+  // ── 입소 가점 계산기 (입력은 이 기기 안에서만 계산하고 저장·전송하지 않는다)
+  function mode(m){
+    const calc=m==="calc";
+    $("ccPaneFind").hidden=calc; $("ccPaneCalc").hidden=!calc;
+    $("ccModeFind").classList.toggle("on",!calc); $("ccModeCalc").classList.toggle("on",calc);
+    $("ccModeFind").setAttribute("aria-selected",calc?"false":"true"); $("ccModeCalc").setAttribute("aria-selected",calc?"true":"false");
+    if(calc) calcUpdate();
+  }
+  function buildCalc(){
+    const opt='<option value="">고르세요</option>'+CC_WORK.map(w=>'<option value="'+w[0]+'">'+w[1]+'</option>').join("");
+    $("ccWA").innerHTML=opt; $("ccWB").innerHTML=opt;
+    let g="",h="";
+    CC_X1.forEach(r=>{
+      if(r[1]!==g){ if(g) h+="</div>"; g=r[1]; h+='<p class="cc-lab">'+g+'</p><div class="cc-cks">'; }
+      h+='<label class="cc-ck top"><input type="checkbox" data-g="x1" value="'+r[0]+'"><span>'+r[2]+'</span></label>';
+    });
+    $("ccX1").innerHTML=h+"</div>";
+    $("ccX2").innerHTML='<div class="cc-cks">'+CC_X2.map(r=>'<label class="cc-ck top"><input type="checkbox" data-g="x2" value="'+r[0]+'"><span>'+r[1]+'</span></label>').join("")+"</div>";
+  }
+  function calcRead(){
+    const picked=g=>[].slice.call(document.querySelectorAll('#ccPaneCalc input[data-g="'+g+'"]:checked')).map(i=>i.value);
+    return {hh:$("ccHh").value,kids:+$("ccKids").value,preg:$("ccPreg").checked,
+      a:{t:$("ccWA").value,c:$("ccWAok").checked},b:{t:$("ccWB").value,c:$("ccWBok").checked},x1:picked("x1"),x2:picked("x2")};
+  }
+  function condBox(sel,wrap,txt){
+    const r=CC_WORK.find(w=>w[0]===$(sel).value);
+    const show=!!(r&&r[2]&&r[3]!=="no");
+    $(wrap).hidden=!show; $(txt).textContent=show?r[2]:"";
+  }
+  function calcUpdate(){
+    const two=$("ccHh").value==="two";
+    $("ccParB").hidden=!two;
+    condBox("ccWA","ccWAc","ccWAt"); condBox("ccWB","ccWBc","ccWBt");
+    $("ccRes").innerHTML=ccResHtml(calcRead());
+  }
+  // 처음 값: 본인과 배우자가 있고, 둘 다 회사에 다니는(월 60시간 이상) 아이 1명인 흔한 경우. 브라우저가 이전 선택을 되살려도 열 때마다 이 값으로 맞춘다.
+  function calcDefaults(){
+    $("ccHh").value="two"; $("ccKids").value="1"; $("ccPreg").checked=false;
+    $("ccWA").value="emp"; $("ccWB").value="emp"; $("ccWAok").checked=true; $("ccWBok").checked=true;
+    [].forEach.call(document.querySelectorAll('#ccPaneCalc input[data-g]'),i=>{i.checked=false;});
+    calcUpdate();
+  }
+  buildCalc();
+  calcDefaults();
+  $("ccModeFind").addEventListener("click",()=>mode("find"));
+  $("ccModeCalc").addEventListener("click",()=>mode("calc"));
+  $("ccPaneCalc").addEventListener("change",calcUpdate);
+  $("ccReset").addEventListener("click",calcDefaults);
+  window.ccOnOpen=function(){ if(!IDX||failed){ IDX=null; load(); } };
+  if(INIT_TAB==="cc"){ const b=document.querySelector('.tb[data-tab="tab-cc"]'); if(b){ b.click(); window.scrollTo(0,0); } }
+})();
+/*CC:JS:END*/
 // 블로그 글에서 ?tab=pick 으로 들어오면 택일 탭을 바로 연다
 (function(){
   if(INIT_TAB!=="pick") return;
@@ -7266,7 +7857,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="dd500293";
+var APP_BUILD="c9ec08fb";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
