@@ -1412,13 +1412,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cc .cc-notes li{margin:0 0 6px;word-break:keep-all;overflow-wrap:anywhere}
 #tab-cc .cc-resbox .cc-more ul{margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.7}
 #tab-cc .cc-resbox .cc-more li{margin:0 0 6px;word-break:keep-all;overflow-wrap:anywhere}
-/* 동네 이름으로 기준 잡기 */
-#tab-cc .cc-addr-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
-#tab-cc .cc-addr-row input{flex:1 1 200px;min-height:44px;padding:0 10px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);font:inherit;font-size:15px}
-#tab-cc .cc-addr-row input:focus{outline:2px solid var(--seal);outline-offset:1px;border-color:transparent}
-#tab-cc .cc-addr-row .cc-btn{flex:0 0 auto;cursor:pointer;font-family:inherit}
-#tab-cc .cc-addr-row .cc-btn.on{background:var(--seal);color:#fff}
-@media(max-width:600px){#tab-cc .cc-addr-row .cc-btn{flex:1 1 100%}}
 /* 나이별 입소대기·현원·반 표 */
 #tab-cc .cc-wtb th,#tab-cc .cc-wtb td{padding:4px 6px;font-size:12.5px;line-height:1.45}
 #tab-cc .cc-wtb thead th{font-size:12px}
@@ -2633,7 +2626,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <!--ER:HTML:END-->
 <!--CC:HTML:BEGIN-->
 <div id="tab-cc" class="hidden">
-<p class="upd"><b>업데이트 11/10</b> 어린이집 찾기 탭이 생겼어요. 정원·현원·통학차량·입소대기 아동 수를 지역별로, 읍·면·동별로, 또는 내 위치에서(안 잡히면 동네 이름으로) 가까운 순으로 볼 수 있고 입소 가점 계산기도 있어요</p>
+<p class="upd"><b>업데이트 11/10</b> 어린이집 찾기 탭이 생겼어요. 정원·현원·통학차량·입소대기 아동 수를 지역별로, 읍·면·동별로, 또는 내 위치에서 가까운 순으로 볼 수 있고 입소 가점 계산기도 있어요</p>
 <h2 class="cc-h">우리동네 어린이집 찾기</h2>
 <p class="cc-lead">사는 지역이나 내 위치를 고르면 어린이집의 정원, 현원, 통학차량, 입소대기 아동 수를 한곳에서 볼 수 있어요. 전화와 길찾기로 바로 이어져요. 등록대기 순서에 쓰이는 우선순위 점수는 '입소 가점 계산기'에서 미리 계산해 볼 수 있어요.</p>
 <div class="cc-modes" role="tablist" aria-label="이 탭에서 할 일 고르기">
@@ -2650,12 +2643,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <h3>어디서 찾을까요</h3>
   <button type="button" class="cc-locbtn" id="ccLoc">내 위치에서 가까운 순으로 찾기</button>
   <p class="cc-sub" id="ccLocNote">누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 아래에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요.</p>
-  <p class="cc-lab" id="ccAddrLab">위치가 안 잡히면 동네 이름이나 도로명을 써요</p>
-  <div class="cc-addr-row">
-    <input type="search" id="ccAddr" placeholder="예: 부산 전포동, 진남로 455" autocomplete="off" aria-labelledby="ccAddrLab">
-    <button type="button" class="cc-btn alt" id="ccAddrGo">이 동네 기준으로 찾기</button>
-  </div>
-  <p class="cc-sub" id="ccAddrNote">위치를 못 잡을 때 쓰세요. 어린이집 주소에서 그 이름이 든 곳들의 가운데를 기준으로 가까운 순을 보여 줘요. 앞에 시도 이름을 같이 쓰면 더 빨라요(예: 부산 전포동).</p>
   <p class="cc-lab" id="ccSdLab">또는 시도를 골라요</p>
   <div class="cc-chips" id="ccSd" role="group" aria-labelledby="ccSdLab"></div>
   <div class="cc-row">
@@ -6372,14 +6359,14 @@ function ccCard(x,ctx){
   const d=ctx&&ctx.loc?erDist(ctx.loc,x):null;
   const fr=ccFreeText(x);
   return '<article class="cc-item"><h4>'+erEsc(x.n)+' <span class="cc-badge">'+erEsc(x.ty||"종류 미상")+"</span>"+car+st+"</h4>"
-    +(d==null?"":'<p class="cc-dist">'+(ctx&&ctx.anchor?"입력한 동네 가운데에서 ":"내 위치에서 ")+erFmtDist(d)+" (직선)</p>")
+    +(d==null?"":'<p class="cc-dist">'+"내 위치에서 "+erFmtDist(d)+" (직선)</p>")
     +'<p class="cc-addr">'+erEsc(x.a)+"</p>"
     +'<p class="cc-nums"><span>정원 <b>'+(x.cp==null?"-":x.cp)+'</b>명</span><span>현원 <b>'+(x.ch==null?"-":x.ch)+'</b>명</span><span>통학차량 <b>'+erEsc(x.cv||"확인 안 됨")+"</b></span></p>"
     +(fr?'<p class="cc-time">'+erEsc(fr)+"</p>":"")
     +ccWaitHtml(x)+ccMoreBlock(x)+ccLinks(x)
     +'<p class="cc-warn">자료 기준일 '+erEsc((ctx&&ctx.asof)||"")+'. 입소 가능 여부와 대기 순번은 어린이집에 전화로 확인하세요.</p></article>';
 }
-// ── 위치 찾기 도우미: 위치를 못 받을 때 이유별 안내, 위치 오차 안내, 동네 이름으로 기준 잡기 ──
+// ── 위치 찾기 도우미: 위치를 못 받을 때 이유별 안내, 위치 오차 안내 ──
 // 오류 코드: 1 사용 거부, 2 기기가 위치를 못 알려 줌, 3 시간 초과, 0 위치 기능 없음
 function ccGeoMsg(code,ua){
   let m;
@@ -6388,38 +6375,12 @@ function ccGeoMsg(code,ua){
   else if(code===3) m="위치를 찾는 데 시간이 너무 오래 걸렸어요. 한 번 더 눌러 보세요.";
   else m="이 브라우저에서는 위치를 쓸 수 없어요.";
   if(/KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line\/|DaumApps/i.test(ua||"")) m+=" 카카오톡이나 네이버 같은 앱 안에서 열면 위치가 막히는 경우가 많아요. 메뉴에서 '다른 브라우저로 열기'를 눌러 크롬이나 사파리로 열어 보세요.";
-  return m+" 위치가 안 잡혀도 아래에서 동네 이름을 쓰거나 시도를 골라 찾을 수 있어요.";
+  return m+" 위치가 안 잡혀도 아래에서 시도를 골라 찾을 수 있어요.";
 }
 function ccAccText(acc){
   const a=ccN(acc);
   if(a==null||a<1000) return "";
-  return " 위치 오차가 약 "+Math.round(a/1000)+"km로 커요. 컴퓨터는 인터넷 주소로 위치를 잡아서 실제와 많이 다를 수 있으니, 거리는 참고만 하고 아래에서 동네 이름으로 기준을 잡아 보세요.";
-}
-// 어린이집 주소에 그 글자가 든 곳들의 가운데 좌표(가운데 값). 글자를 붙여 쓴 것과 낱말마다 모두 든 것 순서로 찾는다
-function ccAnchor(list,q){
-  const norm=s=>String(s||"").replace(/[\s,()]/g,"").toLowerCase();
-  const nq=norm(q);
-  if(nq.length<2) return null;
-  const toks=String(q||"").split(/[\s,]+/).filter(Boolean).map(t=>t.toLowerCase());
-  let m=list.filter(x=>x.la!=null&&norm(x.a).indexOf(nq)>=0);
-  if(!m.length) m=list.filter(x=>x.la!=null&&toks.every(t=>norm(x.a).indexOf(t)>=0));
-  if(!m.length) return null;
-  const med=a=>{const b=a.slice().sort((p,r)=>p-r),k=Math.floor(b.length/2);return b.length%2?b[k]:(b[k-1]+b[k])/2;};
-  return {la:med(m.map(x=>x.la)),lo:med(m.map(x=>x.lo)),n:m.length};
-}
-// 쓴 글에서 시도를 하나로 정한다: 고른 시도가 있으면 그것, 없으면 시도 이름·시군구 이름이 하나만 맞을 때만, 아니면 빈 목록
-function ccPickSd(index,q,cur){
-  if(cur) return [cur];
-  const toks=String(q||"").split(/[\s,]+/).filter(Boolean),strong={},weak={};
-  (index&&index.sd||[]).forEach(s=>{
-    toks.forEach(t=>{
-      if(t===s.n||s.label.split("·").indexOf(t)>=0||t===s.label+"시") strong[s.k]=1;
-      else if((s.sg||[]).some(z=>z[0]===t)) weak[s.k]=1;
-    });
-  });
-  const a=Object.keys(strong),b=Object.keys(weak);
-  if(a.length) return a.length===1?a:[];
-  return b.length===1?b:[];
+  return " 위치 오차가 약 "+Math.round(a/1000)+"km로 커요. 컴퓨터는 인터넷 주소로 위치를 잡아서 실제와 많이 다를 수 있으니, 거리는 참고만 하고 아래에서 시도와 시군구, 읍·면·동을 골라 확인해 보세요.";
 }
 // 시도 코드들을 내 위치에서 가까운(시도 영역 가운데가 가까운) 순으로
 function ccNearFirst(index,loc,codes){
@@ -6550,7 +6511,7 @@ function ccResHtml(inp){
   const $=id=>document.getElementById(id);
   let IDX=null,loading=false,failed=false;
   const DATA={};   // 시도 코드 → 시설 목록
-  const S={sd:"",sg:"",dg:"",q:"",ty:{},car:false,free:false,rest:false,sort:"name",loc:null,anchor:false,boxes:[],shown:CC_PAGE};
+  const S={sd:"",sg:"",dg:"",q:"",ty:{},car:false,free:false,rest:false,sort:"name",loc:null,boxes:[],shown:CC_PAGE};
   const day=()=>Math.floor(Date.now()/86400000);
   const getJ=u=>fetch(u,{cache:"no-cache"}).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();});
   function state(t){$("ccState").textContent=t||"";}
@@ -6591,15 +6552,15 @@ function ccResHtml(inp){
     }else{ dgSel.innerHTML='<option value="">시군구를 먼저 골라요</option>'; dgSel.disabled=true; }
     const has=S.sd||S.loc;
     if(!has){
-      $("ccOut").innerHTML='<p class="cc-hint">위에서 <b>내 위치로 찾기</b>를 누르거나, 동네 이름을 쓰거나, 시도를 골라 주세요. 시도를 고르면 그 지역 어린이집이 나와요.</p>';
+      $("ccOut").innerHTML='<p class="cc-hint">위에서 <b>내 위치로 찾기</b>를 누르거나 시도를 골라 주세요. 시도를 고르면 그 지역 어린이집이 나와요.</p>';
       $("ccMore").innerHTML=""; renderSrc(); return;
     }
     if((S.sd&&!DATA[S.sd])||(!S.sd&&!S.boxes.some(c=>DATA[c]))) return;   // 자료를 받는 중(위치로 찾을 때는 가장 가까운 시도 자료만 와도 먼저 보여 준다)
     const list=pool();
     const key=S.sort==="near"&&!S.loc?"name":S.sort;
     const rows=ccSort(ccFilter(list,{sg:S.sg,dg:S.dg,q:S.q,ty:S.ty,car:S.car,free:S.free,rest:S.rest}),key,S.loc);
-    const ctx={loc:S.loc,anchor:S.anchor,asof:IDX.asof};
-    let h='<p class="cc-count">'+(S.loc&&!S.sd?(S.anchor?'입력한 동네 근처 ':'내 위치 근처 ')+erEsc(S.boxes.map(sdName).join("·"))+' 어린이집 중 · ':'')+'<b>'+rows.length+'곳</b> · 자료 기준일 '+erEsc(IDX.asof)+(S.sort==="near"&&!S.loc?' · 가까운 순은 내 위치나 동네 이름을 정한 뒤에 쓸 수 있어요(지금은 이름순)':'')+'</p>';
+    const ctx={loc:S.loc,asof:IDX.asof};
+    let h='<p class="cc-count">'+(S.loc&&!S.sd?'내 위치 근처 '+erEsc(S.boxes.map(sdName).join("·"))+' 어린이집 중 · ':'')+'<b>'+rows.length+'곳</b> · 자료 기준일 '+erEsc(IDX.asof)+(S.sort==="near"&&!S.loc?' · 가까운 순은 내 위치를 켠 뒤에 쓸 수 있어요(지금은 이름순)':'')+'</p>';
     h+='<p class="cc-sub">나이별 정원은 공개된 자료에 없어서, 나이별 입소대기와 그 나이 반에 다니는 아이 수, 반 수를 나란히 보여 드려요. 아이 수는 반 기준이라 아이가 자라도 그 해에는 다니던 반 나이로 세요. 반이 없음이면 그 나이만 받는 반이 없다는 뜻이에요(혼합반이 있으면 어린이집에 확인하세요). 0세 대기는 아기가 어릴 때 미리 걸어 두는 대기가 많아서(전국 입소대기 아동의 약 70%가 0세예요), 0세반이 없는 곳에서는 보통 3월 신학기에 1세반으로 들어오는 대기로 보여요. 정확한 입소 시기는 어린이집에 확인하세요.</p>';
     if(!S.sd&&S.boxes.some(c=>!DATA[c])) h+='<p class="cc-sub">옆 시도 자료를 더 받는 중이에요. 잠시 뒤 목록이 더 늘어나요.</p>';
     h+=rows.slice(0,S.shown).map(x=>ccCard(x,ctx)).join("");
@@ -6626,24 +6587,22 @@ function ccResHtml(inp){
   $("ccRest").addEventListener("change",e=>{S.rest=e.target.checked; S.shown=CC_PAGE; render();});
   $("ccSort").addEventListener("change",e=>{S.sort=e.target.value; S.shown=CC_PAGE; render();});
   $("ccMore").addEventListener("click",e=>{if(e.target.closest("#ccShowMore")){S.shown+=CC_PAGE; render();}});
-  const LOC_NOTE="누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 아래에서 동네 이름을 쓰거나 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요.";
+  const LOC_NOTE="누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 아래에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요.";
   const LOC_OK="내 위치에서 가까운 순이에요. 위치는 이 기기 안에서만 쓰고 서버로 보내지 않아요. 시도 경계 근처라면 옆 시도 어린이집이 빠질 수 있으니 시도를 직접 골라 확인해 보세요. 거리는 직선거리예요.";
-  const ADDR_NOTE="위치를 못 잡을 때 쓰세요. 어린이집 주소에서 그 이름이 든 곳들의 가운데를 기준으로 가까운 순을 보여 줘요. 앞에 시도 이름을 같이 쓰면 더 빨라요(예: 부산 전포동).";
   function resetLoc(){
-    S.loc=null; S.anchor=false; S.boxes=[];
+    S.loc=null; S.boxes=[];
+    if(S.sort==="near"){ S.sort="name"; $("ccSort").value="name"; }   // 위치 기준을 풀면 이름순으로
     $("ccLoc").classList.remove("on"); $("ccLoc").textContent="내 위치에서 가까운 순으로 찾기"; $("ccLocNote").textContent=LOC_NOTE;
-    $("ccAddrGo").classList.remove("on"); $("ccAddrGo").textContent="이 동네 기준으로 찾기"; $("ccAddrNote").textContent=ADDR_NOTE;
   }
   // 가장 가까운 시도 자료를 먼저 받아 보여 주고, 옆 시도는 이어서 받는다(느린 휴대폰 회선에서 기다림을 줄인다)
   function loadNear(codes){ loadSd(codes.slice(0,1),()=>{ render(); if(codes.length>1) loadSd(codes.slice(1),render); }); }
   $("ccLoc").addEventListener("click",()=>{
-    if(S.loc&&!S.anchor){ resetLoc(); render(); return; }
-    if(S.anchor) resetLoc();
+    if(S.loc){ resetLoc(); render(); return; }
     if(!navigator.geolocation){ $("ccLocNote").textContent=ccGeoMsg(0,navigator.userAgent); return; }
     if(!IDX){ $("ccLocNote").textContent="목록을 받는 중이에요. 잠시 뒤 다시 눌러 주세요."; return; }
     $("ccLocNote").textContent="위치를 확인하는 중이에요…";
     const ok=p=>{
-      S.loc={la:p.coords.latitude,lo:p.coords.longitude}; S.anchor=false; S.boxes=ccNearFirst(IDX,S.loc,ccBoxSd(IDX,S.loc)); S.shown=CC_PAGE; S.sort="near"; $("ccSort").value="near";
+      S.loc={la:p.coords.latitude,lo:p.coords.longitude}; S.boxes=ccNearFirst(IDX,S.loc,ccBoxSd(IDX,S.loc)); S.shown=CC_PAGE; S.sort="near"; $("ccSort").value="near";
       $("ccLoc").classList.add("on"); $("ccLoc").textContent="내 위치 기준 해제하기";
       $("ccLocNote").textContent=LOC_OK+ccAccText(p.coords.accuracy);
       loadNear(S.boxes);
@@ -6655,28 +6614,6 @@ function ccResHtml(inp){
     },hi?{enableHighAccuracy:true,timeout:20000,maximumAge:0}:{timeout:10000,maximumAge:300000});
     ask(false);
   });
-  // 위치를 못 받는 기기를 위한 길: 동네 이름이나 도로명으로 기준 잡기(어린이집 주소에서 찾으니 외부 주소 서비스를 쓰지 않는다)
-  function goAddr(){
-    const q=$("ccAddr").value.trim();
-    if(S.anchor&&(!q||q===S.aq)){ resetLoc(); render(); return; }   // 같은 글로 다시 누르면 기준을 푼다
-    if(!IDX){ $("ccAddrNote").textContent="목록을 받는 중이에요. 잠시 뒤 다시 눌러 주세요."; return; }
-    if(q.replace(/\s/g,"").length<2){ $("ccAddrNote").textContent="동네나 도로명을 두 글자 이상 써 주세요."; return; }
-    const codes=ccPickSd(IDX,q,S.sd);
-    if(codes.length!==1){ $("ccAddrNote").textContent="어느 시도인지 알 수 없어요. 위에서 시도를 고르거나 앞에 시도 이름을 같이 써 주세요(예: 부산 전포동)."; return; }
-    $("ccAddrNote").textContent="찾는 중이에요…";
-    loadSd(codes,()=>{
-      const a=ccAnchor(DATA[codes[0]]||[],q);
-      if(!a){ $("ccAddrNote").textContent="그 이름이 들어간 어린이집 주소를 못 찾았어요. 동 이름이나 도로명으로 다시 써 보세요."; return; }
-      if(a.n>400){ $("ccAddrNote").textContent="범위가 너무 넓어요(어린이집 "+a.n+"곳). 동 이름이나 도로명까지 써 주세요."; return; }
-      resetLoc();
-      S.loc={la:a.la,lo:a.lo}; S.anchor=true; S.aq=q; S.boxes=codes; S.shown=CC_PAGE; S.sort="near"; $("ccSort").value="near";
-      $("ccAddrGo").classList.add("on"); $("ccAddrGo").textContent="동네 기준 해제하기";
-      $("ccAddrNote").textContent="그 이름이 든 어린이집 "+a.n+"곳의 가운데를 기준으로 가까운 순이에요. 실제 집 위치와 다를 수 있고 거리는 직선거리예요.";
-      render();
-    });
-  }
-  $("ccAddrGo").addEventListener("click",goAddr);
-  $("ccAddr").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); goAddr(); } });
   // ── 입소 가점 계산기 (입력은 이 기기 안에서만 계산하고 저장·전송하지 않는다)
   function mode(m){
     const calc=m==="calc";
@@ -7999,7 +7936,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="67382804";
+var APP_BUILD="3a73fcc6";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
