@@ -1509,6 +1509,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 
 <div id="tab-saju">
 
+<p class="upd"><b>업데이트 11/12</b> 날짜 칸에 20261016처럼 숫자 8자리만 쳐도 2026-10-16으로 바뀌어요. 휴대폰 숫자 자판에는 - 가 없어서 고쳤어요</p>
 <p class="upd"><b>업데이트 11/6</b> 휴대폰 홈 화면에 이 사이트 바로가기를 만들 수 있어요. 맨 위 '홈 화면에 바로가기 만들기'를 누르면 안드로이드·아이폰별로 방법이 나와요. 앱을 설치하는 게 아니라 바로가기 아이콘만 만들어요</p>
 <p class="upd"><b>업데이트 11/6</b> 태어난 지역을 시·군까지 고를 수 있어요(전국 161곳). 강원이 춘천뿐이라는 방문자 의견을 반영했어요 · 저장해 둔 기록과 공유 주소는 그대로 열려요</p>
 
@@ -1912,6 +1913,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 <div id="tab-pick" class="hidden">
 
+<p class="upd"><b>업데이트 11/12</b> 날짜 칸에 20261016처럼 숫자 8자리만 쳐도 2026-10-16으로 바뀌어요. 휴대폰 숫자 자판에는 - 가 없어서 고쳤어요</p>
 <p class="upd"><b>업데이트 11/6</b> 점수를 어떤 비율로 매겼는지 결과 맨 위에 적었어요(다섯 기운 20%, 계절 20%, 부모님 15% …). 풀이하는 분마다 기준이 달라서 이 도구의 기준을 밝혀 뒀어요</p>
 <p class="upd"><b>업데이트 11/6</b> 결과 풀이를 쉬운 말로 바꿨어요. 항목마다 초록·노랑·빨강 신호등으로 한눈에 보고, 어려운 말은 접어 둔 풀이에서 볼 수 있어요 · 방문자 의견을 반영했어요</p>
 <p class="upd"><b>업데이트 11/6</b> 태어날 지역을 시·군까지 고를 수 있어요(전국 161곳)</p>
@@ -2286,6 +2288,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 
 <div id="tab-growth" class="hidden">
+<p class="upd"><b>업데이트 11/12</b> 날짜 칸에 20261016처럼 숫자 8자리만 쳐도 2026-10-16으로 바뀌어요. 휴대폰 숫자 자판에는 - 가 없어서 고쳤어요</p>
 <div class="card hidden" id="gListCard">
   <h2>저장한 기록</h2>
   <div class="gtw" id="gList"></div>
@@ -2379,6 +2382,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 </div>
 <div id="tab-week" class="hidden">
+<p class="upd"><b>업데이트 11/12</b> 날짜 칸에 20261016처럼 숫자 8자리만 쳐도 2026-10-16으로 바뀌어요. 휴대폰 숫자 자판에는 - 가 없어서 고쳤어요</p>
 <div class="card">
   <h2>주차별 우리 아기</h2>
   <p class="sub" style="margin-top:0">주차를 고르면 아기와 엄마 몸에 일어나는 일, 이번 주 검사와 챙길 것을 한 화면에서 볼 수 있어요. 임신 주수는 마지막 생리 시작일 기준이에요.</p>
@@ -2404,6 +2408,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 
 <div id="tab-check" class="hidden">
+<p class="upd"><b>업데이트 11/12</b> 날짜 칸에 20261016처럼 숫자 8자리만 쳐도 2026-10-16으로 바뀌어요. 휴대폰 숫자 자판에는 - 가 없어서 고쳤어요</p>
 <div class="card">
   <h2>시기별 신청 체크리스트</h2>
   <p class="sub" style="margin-top:0">시기를 고르면 그때 신청할 것, 검사와 휴가, 살 것(필수와 선택), 안전 수칙을 한 화면에서 볼 수 있어요. 예정일을 몰라도 시기만 넘겨 보면 돼요. 제도는 바뀔 수 있으니 신청 전에 기관에서 한 번 더 확인해 주세요.</p>
@@ -7363,6 +7368,19 @@ function normDate(v){
   return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");
 }
 
+/* === DATEFMT-CORE START === */
+// 숫자 8자리(20261016)만 치면 바로 2026-10-16 으로. 아이폰 숫자 자판에는 - 가 없어서다.
+// 달력에 있는 날(1900~2100년)일 때만 바꾸고, 아니면 그대로 둔다(칸을 벗어날 때 normDate 가 한 번 더 정리).
+const DATE_IDS=["d","pfD","pmD","edd","rng1","rng2","gEdd","gDate","wkLmp","wkEdd","ckEdd"];
+function dateFrom8(v){
+  const s=String(v==null?"":v).trim(); if(!/^\d{8}$/.test(s)) return "";
+  const y=+s.slice(0,4), m=+s.slice(4,6), d=+s.slice(6,8);
+  if(y<1900||y>2100||m<1||m>12||d<1) return "";
+  const t=new Date(Date.UTC(y,m-1,d)); if(t.getUTCMonth()!==m-1||t.getUTCDate()!==d) return "";
+  return s.slice(0,4)+"-"+s.slice(4,6)+"-"+s.slice(6,8);
+}
+/* === DATEFMT-CORE END === */
+
 function bindDateText(el){
   if(!el) return;
   const fix=()=>{ const n=normDate(el.value); if(n) el.value=n; };
@@ -7371,8 +7389,13 @@ function bindDateText(el){
   el.addEventListener("keydown", e=>{ if(e.key==="Enter") fix(); });
 }
 (function(){
-  ["d","edd","rng1","rng2","pfD","pmD"].forEach(id=>bindDateText(document.getElementById(id)));
+  DATE_IDS.forEach(id=>bindDateText(document.getElementById(id)));
 })();
+// 캡처 단계(document)에서 먼저 바꿔 둬야, 칸마다 걸린 input 처리(gShowGa 등)가 하이픈 형태를 읽는다
+document.addEventListener("input",e=>{
+  const el=e.target; if(!el||!el.id||DATE_IDS.indexOf(el.id)<0) return;
+  const n=dateFrom8(el.value); if(n) el.value=n;
+},true);
 
 
 /* ══════════════════════════════════════════════════════════════
@@ -7583,7 +7606,7 @@ $g("gNick").addEventListener("change",()=>{ G.nickname=$g("gNick").value.trim().
 $g("gSave").addEventListener("click",()=>{
   if(!G.consent && !G.sessionOnly){ gAskConsent(); return; }
   const ga=gCurrentGa();
-  if(ga==null){ gMsg($g("gManual").checked ? "주수를 숫자로 넣어 주세요." : "예정일과 초음파 본 날을 2026-09-19처럼 넣어 주세요."); return; }
+  if(ga==null){ gMsg($g("gManual").checked ? "주수를 숫자로 넣어 주세요." : "예정일과 초음파 본 날을 20260919처럼 숫자 8자리로 넣어 주세요."); return; }
   if(ga<98 || ga>286){ gMsg("WHO 표는 14주 0일부터 40주 6일까지만 있어서, 이 주수("+gcFmtGa(ga)+")는 계산할 수 없어요."); return; }
   const rec={id:Date.now().toString(36), date: $g("gManual").checked ? "" : $g("gDate").value.trim(),
              gaDays:ga, manual:$g("gManual").checked, bpd:null, hc:null, ac:null, fl:null, efw:null};
@@ -7936,7 +7959,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="3a73fcc6";
+var APP_BUILD="0d7f20a2";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
