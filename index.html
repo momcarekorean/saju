@@ -8592,7 +8592,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="f93bcfd0";
+var APP_BUILD="f8f94cf1";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
@@ -8938,7 +8938,7 @@ window.rOnOpen=function(){};
   const seen = ()=>{ try{ return localStorage.getItem(KEY)===day; }catch(e){ return false; } };
   const mark = ()=>{ try{ localStorage.setItem(KEY,day); }catch(e){} };
   async function call(op,key){
-    const ctl=new AbortController(), t=setTimeout(()=>ctl.abort(),5000);
+    const ctl=new AbortController(), t=setTimeout(()=>ctl.abort(),12000);
     try{
       const r=await fetch(API+"/"+op+"/"+NS+"/"+key,{signal:ctl.signal,cache:"no-store",referrerPolicy:"no-referrer"});
       if(r.status===404) return 0;
