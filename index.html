@@ -1506,6 +1506,11 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-dl .dl-ck{display:flex;align-items:center;gap:8px;margin:0 0 4px;font-size:14px;color:var(--ink)}
 #tab-dl .dl-ck input{width:20px;height:20px;flex:none}
 #tab-dl .dl-dist{margin:0 0 2px;font-size:13px;font-weight:700;color:var(--su)}
+#tab-dl .dl-hichk{margin:0 0 12px;padding:12px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+#tab-dl .dl-hires{margin:6px 0 0;padding:12px 14px;border:1px solid var(--rule);border-radius:3px;background:var(--card)}
+#tab-dl .dl-hires-t{margin:0 0 4px;font-size:16px;font-weight:700;color:var(--ink)}
+#tab-dl button.dl-btnb{width:auto;margin:4px 0 6px;letter-spacing:normal;font-family:inherit;appearance:none;cursor:pointer}
+#tab-dl .dl-hires .dl-sub:last-child{margin-bottom:0}
 /*DL:CSS:END*/
 
 </style>
@@ -2873,7 +2878,7 @@ h1,h2,h3,h4,th{text-wrap:balance}
     </select></label>
     <label class="dl-fld dl-fld3">이용 기간 <select id="dlDu" aria-label="이용 기간" autocomplete="off"></select></label>
   </div>
-  <details class="dl-more" id="dlHiBox"><summary>내 소득 유형은 어떻게 알아요? (건강보험료 기준표)</summary><div id="dlHi"></div></details>
+  <details class="dl-more" id="dlHiBox"><summary>내 소득 유형 확인하기 (건강보험료·기준중위소득 150% 기준)</summary><div id="dlHi"></div></details>
   <div id="dlPayOut" aria-live="polite"></div>
   <div id="dlPayLinks"></div>
 </div>
@@ -7058,6 +7063,23 @@ function dlGeoMsg(code,ua){
   if(/KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line\/|DaumApps/i.test(ua||"")) m+=" 카카오톡이나 네이버 같은 앱 안에서 열면 위치가 막히는 경우가 많아요. 메뉴에서 '다른 브라우저로 열기'를 눌러 크롬이나 사파리로 열어 보세요.";
   return m+" 위치가 안 잡혀도 위에서 시도를 골라 찾을 수 있어요.";
 }
+// 건강보험료로 소득 유형 확인: 기준표(hi)에서 가구원 수·가입 형태(직장·지역·혼합)에 맞는 금액을 찾고,
+// 산모·배우자 보험료를 합쳐(둘 다 있으면 낮은 쪽은 절반) 기준중위소득 150% 기준과 견준다. 기준 이하는 통합형, 넘으면 라형.
+function dlHiLimit(hi,n,kind){
+  const ci=hi.th.findIndex(t=>String(t).indexOf(kind)===0);
+  const r=hi.rows.find(z=>z[0]===n+"인");
+  if(ci<1||!r) return null;
+  const v=parseInt(String(r[ci]).replace(/[^0-9]/g,""),10);
+  return isNaN(v)?null:v;
+}
+function dlHiSum(a,b){
+  const p=dlN(a)>0?+a:0,q=dlN(b)>0?+b:0;
+  return Math.max(p,q)+Math.floor(Math.min(p,q)/2);
+}
+function dlHiVerdict(limit,sum){
+  const ok=sum<=limit;
+  return {ty:ok?"통합":"라",gap:Math.abs(sum-limit),text:ok?"통합형(기준중위소득 150% 이하)이에요.":"라형(기준중위소득 150% 초과)이에요."};
+}
 /* === DL-CORE END === */
 
 (function(){
@@ -7078,11 +7100,39 @@ function dlGeoMsg(code,ua){
   function shell(){
     $("dlGr").innerHTML=DL_GRADES.map(g=>chip(g,g+"등급",null,false)).join("")+chip("X","평가 제외·비대상",null,false);
     const hi=SUP.hi;
-    $("dlHi").innerHTML='<p class="dl-sub">가구원 수에 신생아(출산 전이면 태아)가 들어가요. 표의 금액 이하이면 통합형(150% 이하)이에요. 수급자·차상위는 가형이에요. 자세한 기준은 사는 곳 보건소에서 안내해요.</p>'
+    const kinds=[["직장","직장가입자"],["지역","지역가입자"],["혼합","혼합(한 사람은 직장, 한 사람은 지역)"]];
+    $("dlHi").innerHTML='<div class="dl-hichk"><p class="dl-sub"><b>건강보험료로 확인하기</b> 월 건강보험료를 넣으면 기준중위소득 150% 이하인지 바로 알려 드려요. 이 기기 안에서만 계산하고 저장하거나 보내지 않아요.</p>'
+      +'<div class="dl-row"><label class="dl-fld dl-fld3">가구원 수(신생아·태아 포함)<select id="dlHiN" aria-label="가구원 수" autocomplete="off">'
+      +hi.rows.map(r=>'<option value="'+erEsc(parseInt(r[0],10))+'"'+(parseInt(r[0],10)===3?" selected":"")+'>'+erEsc(r[0])+'</option>').join("")+'</select></label>'
+      +'<label class="dl-fld dl-fld3">건강보험 가입 형태<select id="dlHiK" aria-label="건강보험 가입 형태" autocomplete="off">'
+      +kinds.map(k=>'<option value="'+k[0]+'">'+erEsc(k[1])+'</option>').join("")+'</select></label></div>'
+      +'<div class="dl-row"><label class="dl-fld dl-fld3">산모 월 건강보험료(원)<input id="dlHiA" type="text" inputmode="numeric" autocomplete="off" placeholder="예: 150000" aria-label="산모 월 건강보험료"></label>'
+      +'<label class="dl-fld dl-fld3">배우자 월 건강보험료(원)<input id="dlHiB" type="text" inputmode="numeric" autocomplete="off" placeholder="없으면 비워 두세요" aria-label="배우자 월 건강보험료"></label></div>'
+      +'<div id="dlHiRes" aria-live="polite"></div></div>'
+      +'<p class="dl-sub">가구원 수에 신생아(출산 전이면 태아)가 들어가요. 표의 금액 이하이면 통합형(150% 이하)이에요. 수급자·차상위는 보험료와 상관없이 가형이에요. 자세한 기준은 사는 곳 보건소에서 안내해요.</p>'
       +'<div class="dl-tbw"><table class="dl-tb"><thead><tr>'+hi.th.map(t=>'<th>'+erEsc(t)+'</th>').join("")+'</tr></thead><tbody>'
       +hi.rows.map(r=>'<tr><th scope="row">'+erEsc(r[0])+'</th>'+r.slice(1).map(c=>'<td>'+erEsc(c)+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>'
-      +'<p class="dl-sub">건강보험료는 장기요양보험료를 뺀 금액이고, 맞벌이는 보험료가 낮은 쪽을 반으로 줄여 합쳐요. 6인까지만 실었어요.</p>';
+      +'<p class="dl-sub">건강보험료는 장기요양보험료를 뺀 금액이고, 맞벌이는 보험료가 낮은 쪽을 반으로 줄여 합쳐요. 6인까지만 실었어요. 내 보험료는 국민건강보험공단 누리집이나 앱의 보험료 조회, 납부확인서에서 볼 수 있어요.</p>';
+    ["dlHiN","dlHiK","dlHiA","dlHiB"].forEach(id=>{ $(id).addEventListener("input",hiRun); $(id).addEventListener("change",hiRun); });
+    $("dlHiRes").addEventListener("click",e=>{
+      const b=e.target.closest("[data-ty]"); if(!b) return;
+      S.ty=b.dataset.ty; $("dlTy").value=S.ty; render(); hiRun();
+    });
+    hiRun();
     fillDur();
+  }
+  function hiRun(){
+    const hi=SUP&&SUP.hi,out=$("dlHiRes"); if(!hi||!out) return;
+    const num=id=>parseInt(String($(id).value).replace(/[^0-9]/g,""),10)||0;
+    const n=parseInt($("dlHiN").value,10),kind=$("dlHiK").value,a=num("dlHiA"),b=num("dlHiB");
+    const lim=dlHiLimit(hi,n,kind);
+    if(lim==null){ out.innerHTML=""; return; }
+    if(!a&&!b){ out.innerHTML='<p class="dl-hint">보험료를 넣으면 기준 '+dlWon(lim)+'과 견줘 볼게요.</p>'; return; }
+    const sum=dlHiSum(a,b),v=dlHiVerdict(lim,sum),same=(S.ty===v.ty);
+    out.innerHTML='<div class="dl-hires"><p class="dl-hires-t">'+erEsc(v.text)+'</p>'
+      +'<p class="dl-sub">합산 보험료 '+dlWon(sum)+(a&&b?'(낮은 쪽은 절반)':'')+' · 기준 '+dlWon(lim)+'(가구원 '+n+'인, '+erEsc(kind==="혼합"?"혼합":kind+"가입자")+') · 기준보다 '+dlWon(v.gap)+(sum<=lim?' 낮아요.':' 높아요.')+'</p>'
+      +(same?'<p class="dl-sub">위 계산에 이 유형이 이미 반영돼 있어요.</p>':'<button type="button" class="dl-btn alt dl-btnb" data-ty="'+v.ty+'">소득 유형을 '+(v.ty==="통합"?"통합형":"라형")+'으로 맞춰 계산하기</button>')
+      +'<p class="dl-sub">참고용이에요. 실제 소득 유형은 사는 곳 보건소가 건강보험공단 자료로 확인해요.'+(v.ty==="라"?' 라형은 지역에 따라 지원 범위가 달라서 보건소에 한 번 확인해 보세요.':'')+'</p></div>';
   }
   function fillDur(){
     const g=SUP.gov.pp[S.nm];
@@ -7224,7 +7274,7 @@ function dlGeoMsg(code,ua){
   $("dlSort").addEventListener("change",e=>{S.sort=e.target.value; S.shown=DL_PAGE; render();});
   $("dlMore").addEventListener("click",e=>{if(e.target.closest("#dlShowMore")){S.shown+=DL_PAGE; render();}});
   $("dlPMore").addEventListener("click",e=>{if(e.target.closest("#dlPShowMore")){S.pshown+=DL_PAGE; render();}});
-  $("dlTy").addEventListener("change",e=>{S.ty=e.target.value; render();});
+  $("dlTy").addEventListener("change",e=>{S.ty=e.target.value; render(); hiRun();});
   $("dlNm").addEventListener("change",e=>{S.nm=e.target.value; S.j=Math.min(S.j,2); fillDur(); render();});
   $("dlDu").addEventListener("change",e=>{S.j=+e.target.value; render();});
   $("dlPSort").addEventListener("change",e=>{S.psort=e.target.value; S.pshown=DL_PAGE; render();});
@@ -8542,7 +8592,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="368cd424";
+var APP_BUILD="f93bcfd0";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
