@@ -310,12 +310,19 @@ dd b{font-weight:500; color:var(--ink)}
 .tb:focus-visible{outline:3px solid var(--seal);outline-offset:3px}
 .tb.on{border-color:var(--seal);box-shadow:0 6px 20px rgba(168,50,42,.22)}
 .tbnow{display:none}
+.tb.gx{display:none}
+.tgrp{display:flex;gap:4px;margin:0 0 14px;padding:4px;background:var(--paper-2);border-radius:12px}
+.tgb{flex:1;width:auto;margin:0;padding:10px 4px;min-height:44px;font:inherit;font-size:15px;font-weight:500;letter-spacing:0;color:var(--ink-2);background:transparent;border:none;border-radius:9px;cursor:pointer;transition:background .15s,color .15s}
+.tgb:hover{background:var(--card);color:var(--ink)}
+.tgb.on,.tgb.on:hover{background:var(--ink);color:var(--paper)}
+.tgb:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
 .tb.on .tbnow{display:inline-block;position:absolute;top:10px;right:10px;
   background:var(--seal);color:#fff;font-size:11.5px;font-weight:700;
   padding:5px 11px;border-radius:999px;letter-spacing:.02em;
   box-shadow:0 2px 6px rgba(0,0,0,.18)}
 @media(max-width:600px){ .tabs{grid-template-columns:repeat(2,1fr);gap:8px} .tb{border-width:2px;border-radius:10px} .tb.on .tbnow{display:none}
-  .tb:last-child:nth-child(odd){grid-column:1/-1;max-width:calc(50% - 4px);justify-self:center} }
+  .tb.solo{grid-column:1/-1;max-width:calc(50% - 4px);justify-self:center}
+  .tgb{font-size:14px} }
 .upd{margin:0 0 12px;font-size:12.5px;color:var(--ink-2)}
 .upd b{display:inline-block;margin-right:6px;padding:2px 8px;border-radius:999px;background:var(--seal);color:#fff;font-size:11.5px;font-weight:700}
 .hjx{margin-top:10px;font-size:13px;color:var(--ink-2)}
@@ -1417,6 +1424,89 @@ h1,h2,h3,h4,th{text-wrap:balance}
 #tab-cc .cc-wtb thead th{font-size:12px}
 #tab-cc .cc-wtb td:nth-child(2){font-weight:700;color:var(--ink)}
 /*CC:CSS:END*/
+/*DL:CSS:BEGIN*/
+/* 산후도우미 찾기 탭 */
+#tab-dl [hidden]{display:none!important}
+#tab-dl .dl-h{margin:0 0 8px;font-family:"Nanum Myeongjo",serif;font-size:21px;line-height:1.4}
+#tab-dl .dl-lead{margin:0 0 14px;font-size:14.5px;line-height:1.7;color:var(--ink-2);word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-call{margin:0 0 16px;padding:12px 14px;border-left:4px solid var(--seal);background:rgba(168,50,42,.09);border-radius:0 3px 3px 0;font-size:13.5px;line-height:1.7;color:var(--ink)}
+#tab-dl .dl-call p{margin:0 0 6px;word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-call p:last-child{margin:0}
+#tab-dl .dl-card{padding:16px;margin:0 0 14px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+#tab-dl .dl-card h3{margin:0 0 10px;font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:16.5px;line-height:1.4}
+#tab-dl .dl-sub{margin:0 0 10px;font-size:12.5px;line-height:1.7;color:var(--ink-3);word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-lab{margin:12px 0 8px;font-size:13.5px;font-weight:700;color:var(--ink-2)}
+#tab-dl .dl-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+#tab-dl .dl-chip{margin:0;width:auto;letter-spacing:normal;font-family:inherit;font-weight:400;transition:none;appearance:none;min-height:40px;padding:0 12px;border:1px solid var(--rule);border-radius:99px;background:var(--card);color:var(--ink);font-size:13.5px;cursor:pointer}
+#tab-dl .dl-chip.on{background:var(--seal);border-color:var(--seal);color:#fff;font-weight:700}
+#tab-dl .dl-chip .dl-n{opacity:.75;font-size:12px}
+#tab-dl .dl-row{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 10px}
+#tab-dl .dl-fld{display:flex;flex-direction:column;gap:4px;flex:1 1 140px;font-size:13px;color:var(--ink-2)}
+#tab-dl .dl-fld2{flex:2 1 200px}
+#tab-dl .dl-fld3{flex:1 1 200px}
+#tab-dl .dl-fld select,#tab-dl .dl-fld input{width:100%;min-height:44px;padding:0 10px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);font:inherit;font-size:15px}
+#tab-dl .dl-fld select:focus,#tab-dl .dl-fld input:focus{outline:2px solid var(--seal);outline-offset:1px;border-color:transparent}
+#tab-dl .dl-chip:focus-visible,#tab-dl .dl-btn:focus-visible,#tab-dl .dl-showmore:focus-visible,#tab-dl .dl-more>summary:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+#tab-dl .dl-state{margin:0 0 10px;min-height:1.2em;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+#tab-dl .dl-hint{padding:14px;border:1px dashed var(--rule);border-radius:3px;font-size:14px;line-height:1.7;color:var(--ink-2);word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-count{margin:0 0 8px;font-size:13.5px;color:var(--ink-2)}
+/* 업체 카드 */
+#tab-dl .dl-item{margin:0 0 10px;padding:12px 14px;border:1px solid var(--rule);border-radius:3px;background:var(--paper)}
+#tab-dl .dl-item h4{margin:0 0 4px;font-size:15.5px;line-height:1.5;font-weight:700;word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-badges{display:flex;flex-wrap:wrap;gap:4px 6px;margin:0 0 6px}
+#tab-dl .dl-badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;border:1px solid var(--rule);background:var(--card);color:var(--ink-2)}
+#tab-dl .dl-badge.gA{border-color:var(--seal);background:var(--seal);color:#fff}
+#tab-dl .dl-badge.gB{border-color:var(--seal);color:var(--seal)}
+#tab-dl .dl-badge.gC,#tab-dl .dl-badge.gD,#tab-dl .dl-badge.gF{border-color:var(--to);color:var(--to)}
+#tab-dl .dl-addr{margin:0 0 4px;font-size:13.5px;line-height:1.6;color:var(--ink);word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-nums{display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0 8px;font-size:14px;line-height:1.6;color:var(--ink)}
+#tab-dl .dl-nums b{font-variant-numeric:tabular-nums}
+#tab-dl .dl-acts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+#tab-dl .dl-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:1px solid var(--seal);border-radius:3px;background:var(--seal);color:#fff;font-size:14px;font-weight:700;text-decoration:none;line-height:1.3;text-align:center}
+#tab-dl .dl-btn.alt{background:var(--card);color:var(--seal)}
+#tab-dl .dl-btn:hover{filter:brightness(1.06)}
+#tab-dl .dl-memo{margin:0 0 4px;font-size:13px;line-height:1.65;color:var(--ink-2);word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-more{margin:6px 0 0;font-size:13px;color:var(--ink-2)}
+#tab-dl .dl-more>summary{cursor:pointer;padding:6px 0;font-weight:700}
+#tab-dl .dl-warn{margin:8px 0 0;font-size:12.5px;line-height:1.6;color:var(--ink-3)}
+#tab-dl .dl-showmore{display:block;width:100%;min-height:46px;margin:6px 0 0;letter-spacing:normal;font-family:inherit;font-size:14.5px;font-weight:700;appearance:none;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:3px;cursor:pointer;transition:none}
+#tab-dl .dl-showmore:hover{border-color:var(--seal)}
+/* 내가 내는 돈 */
+#tab-dl .dl-score{margin:6px 0 10px;padding:12px 14px;border-left:4px solid var(--seal);background:rgba(168,50,42,.09);border-radius:0 3px 3px 0}
+#tab-dl .dl-big{margin:0;font-family:"Nanum Myeongjo",serif;font-size:24px;font-weight:700;line-height:1.4;color:var(--ink)}
+#tab-dl .dl-score .dl-sub{margin:4px 0 0}
+#tab-dl .dl-tbw{margin:6px 0 10px;overflow-x:auto}
+#tab-dl .dl-tb{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.5}
+#tab-dl .dl-tb th,#tab-dl .dl-tb td{padding:6px 8px;border:1px solid var(--rule);text-align:right}
+#tab-dl .dl-tb tbody th{background:var(--paper-2);text-align:left;font-weight:700;color:var(--ink)}
+#tab-dl .dl-tb thead th{background:var(--paper-2);text-align:center;color:var(--ink)}
+#tab-dl .dl-tb td{font-variant-numeric:tabular-nums}
+#tab-dl .dl-tb tr.dl-sum th,#tab-dl .dl-tb tr.dl-sum td{background:rgba(168,50,42,.09);font-weight:700;color:var(--ink)}
+#tab-dl .dl-notes{margin:10px 0 8px;padding-left:18px;font-size:13.5px;line-height:1.75;color:var(--ink-2)}
+#tab-dl .dl-notes li{margin:0 0 6px;word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-links{display:flex;flex-direction:column;gap:6px;margin:8px 0 0;font-size:13.5px}
+#tab-dl .dl-links a{color:var(--seal);font-weight:700}
+/* 이 지역 지원 */
+#tab-dl .dl-loc{margin:0 0 10px;padding:10px 12px;border:1px solid var(--rule);border-radius:3px;background:var(--card)}
+#tab-dl .dl-loc h4{margin:0 0 4px;font-size:14.5px;line-height:1.5;font-weight:700;word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-loc p{margin:0 0 4px;font-size:13px;line-height:1.65;color:var(--ink-2);white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
+#tab-dl .dl-loc a{color:var(--seal)}
+#tab-dl .dl-chk{margin:0 0 14px;padding:12px 14px;border:1px solid var(--rule);border-radius:3px;background:var(--card);font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+#tab-dl .dl-chk>b{display:block;margin:0 0 4px;color:var(--ink)}
+#tab-dl .dl-chk p{margin:0 0 6px}
+#tab-dl .dl-foot{margin:18px 0 0;padding-top:12px;border-top:1px solid var(--rule);font-size:12.5px;line-height:1.8;color:var(--ink-3);word-break:keep-all;overflow-wrap:anywhere}
+@media(max-width:600px){#tab-dl .dl-h{font-size:19px}#tab-dl .dl-btn{flex:1 1 100%}#tab-dl .dl-big{font-size:21px}}
+/* 산후도우미 / 산후조리원 전환 */
+#tab-dl .dl-modes{display:flex;gap:8px;margin:0 0 14px}
+#tab-dl .dl-mode{flex:1 1 50%;margin:0;width:auto;letter-spacing:normal;font-family:inherit;font-weight:700;transition:none;appearance:none;min-height:48px;padding:6px 10px;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink-2);font-size:14.5px;cursor:pointer;line-height:1.35}
+#tab-dl .dl-mode.on{background:var(--seal);border-color:var(--seal);color:#fff}
+#tab-dl .dl-mode:focus-visible,#tab-dl .dl-locbtn:focus-visible,#tab-dl .dl-ck input:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+#tab-dl .dl-locbtn{display:block;width:100%;min-height:48px;margin:0 0 6px;padding:0 16px;letter-spacing:normal;font-family:inherit;font-size:15px;font-weight:700;appearance:none;border:1px solid var(--seal);background:var(--card);color:var(--seal);border-radius:3px;cursor:pointer;transition:none}
+#tab-dl .dl-locbtn:hover,#tab-dl .dl-locbtn.on{background:var(--seal);color:#fff}
+#tab-dl .dl-ck{display:flex;align-items:center;gap:8px;margin:0 0 4px;font-size:14px;color:var(--ink)}
+#tab-dl .dl-ck input{width:20px;height:20px;flex:none}
+#tab-dl .dl-dist{margin:0 0 2px;font-size:13px;font-weight:700;color:var(--su)}
+/*DL:CSS:END*/
 
 </style>
 
@@ -1444,65 +1534,76 @@ h1,h2,h3,h4,th{text-wrap:balance}
   <p class="visits" id="visitBox" hidden></p>
 </header>
 
+<div class="tgrp" role="group" aria-label="묶음 고르기">
+  <button type="button" class="tgb" data-grp="preg" aria-pressed="false">임신 중</button>
+  <button type="button" class="tgb on" data-grp="birth" aria-pressed="true">출산 준비</button>
+  <button type="button" class="tgb" data-grp="baby" aria-pressed="false">육아</button>
+  <button type="button" class="tgb" data-grp="aid" aria-pressed="false">지원금</button>
+</div>
 <nav class="tabs" role="tablist" aria-label="도구 선택">
-  <button type="button" class="tb on" role="tab" aria-selected="true" data-tab="tab-saju">
-    <img src="tab-name.jpg" width="800" height="597" decoding="async"
-         alt="이름 짓기 — 만세력과 사주 풀이로 아기 이름을 지어 봅니다">
-    <span class="tbnow">지금 보는 중</span>
-  </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-pick">
-    <img src="tab-pick.jpg" width="800" height="597" decoding="async"
-         alt="출산 택일 — 부모 사주로 제왕절개 날짜와 시간을 견줘 봅니다">
-    <span class="tbnow">지금 보는 중</span>
-  </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-growth">
-    <img src="tab-growth.jpg" width="800" height="597" decoding="async"
-         alt="성장 분석 — 초음파 수치로 우리 아기가 같은 주수에서 어디쯤인지 봅니다">
-    <span class="tbnow">지금 보는 중</span>
-  </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-week">
+  <button type="button" class="tb gx" role="tab" aria-selected="false" data-tab="tab-week" data-grp="preg">
     <img src="tab-week.jpg" width="800" height="597" decoding="async"
          alt="주차별 — 임신 주차마다 아기와 엄마 몸의 변화, 이번 주 검사와 할 일을 봅니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-check">
+  <button type="button" class="tb gx" role="tab" aria-selected="false" data-tab="tab-growth" data-grp="preg">
+    <img src="tab-growth.jpg" width="800" height="597" decoding="async"
+         alt="성장 분석 — 초음파 수치로 우리 아기가 같은 주수에서 어디쯤인지 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb gx" role="tab" aria-selected="false" data-tab="tab-check" data-grp="preg">
     <img src="tab-check.jpg" width="800" height="597" decoding="async"
          alt="체크리스트 — 시기별로 신청할 것, 검사, 살 것과 안전 수칙을 봅니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-rank">
-    <img src="tab-rank.jpg" width="800" height="597" decoding="async"
-         alt="용품 순위 — 유모차·카시트·분유포트 같은 용품을 맘카페 글에서 많이 나온 제품 순서로 봅니다">
-    <span class="tbnow">지금 보는 중</span>
-  </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-jp">
-    <img src="tab-jp.jpg" width="800" height="597" decoding="async"
-         alt="일본 추천구매 재고·가격(매일 갱신) — 일본에서 많이 사 오는 유모차·카시트·하이체어의 오늘 가격과 재고, 구매처 찾아가는 법을 봅니다">
-    <span class="tbnow">지금 보는 중</span>
-  </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-bf">
-    <img src="tab-bf.jpg" width="800" height="597" decoding="async"
-         alt="이유식 가이드 — 시기별 레시피와 보관·해동, 막혔을 때 해결법을 숫자로 봅니다">
-    <span class="tbnow">지금 보는 중</span>
-  </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-benefit">
-    <img src="tab-benefit.jpg" width="800" height="597" decoding="async"
-         alt="우리동네 혜택 — 사는 지역과 시기를 고르면 임신·출산·육아 지원 사업을 찾아 줍니다">
-    <span class="tbnow">지금 보는 중</span>
-  </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-cosm">
+  <button type="button" class="tb gx" role="tab" aria-selected="false" data-tab="tab-cosm" data-grp="preg">
     <img src="tab-cosm.jpg" width="800" height="597" decoding="async"
          alt="화장품 성분 확인 — 전성분을 붙여 넣으면 식약처 화장품 원료 목록과 하나씩 맞춰 줍니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-er">
+  <button type="button" class="tb on" role="tab" aria-selected="true" data-tab="tab-saju" data-grp="birth">
+    <img src="tab-name.jpg" width="800" height="597" decoding="async"
+         alt="이름 짓기 — 만세력과 사주 풀이로 아기 이름을 지어 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-pick" data-grp="birth">
+    <img src="tab-pick.jpg" width="800" height="597" decoding="async"
+         alt="출산 택일 — 부모 사주로 제왕절개 날짜와 시간을 견줘 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-dl" data-grp="birth">
+    <img src="tab-dl.jpg" width="800" height="597" decoding="async"
+         alt="산후조리원 &amp; 도우미 — 사는 지역의 산후도우미 업체와 영업 중인 산후조리원의 전화번호를 찾고, 내가 내는 돈과 산후조리비 지원을 확인합니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-rank" data-grp="birth">
+    <img src="tab-rank.jpg" width="800" height="597" decoding="async"
+         alt="용품 순위 — 유모차·카시트·분유포트 같은 용품을 맘카페 글에서 많이 나온 제품 순서로 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-jp" data-grp="birth">
+    <img src="tab-jp.jpg" width="800" height="597" decoding="async"
+         alt="일본 추천구매 재고·가격(매일 갱신) — 일본에서 많이 사 오는 유모차·카시트·하이체어의 오늘 가격과 재고, 구매처 찾아가는 법을 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb gx" role="tab" aria-selected="false" data-tab="tab-bf" data-grp="baby">
+    <img src="tab-bf.jpg" width="800" height="597" decoding="async"
+         alt="이유식 가이드 — 시기별 레시피와 보관·해동, 막혔을 때 해결법을 숫자로 봅니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb gx" role="tab" aria-selected="false" data-tab="tab-er" data-grp="baby">
     <img src="tab-er.jpg" width="800" height="597" decoding="async"
          alt="병원 찾기 — 달빛어린이병원·소아전문응급의료센터·응급의료기관·늦게까지 여는 심야약국을 지역별로, 또는 내 위치에서 가까운 순으로 찾습니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
-  <button type="button" class="tb" role="tab" aria-selected="false" data-tab="tab-cc">
+  <button type="button" class="tb gx" role="tab" aria-selected="false" data-tab="tab-cc" data-grp="baby">
     <img src="tab-cc.jpg" width="800" height="597" decoding="async"
          alt="어린이집 찾기 — 사는 지역이나 내 위치에서 어린이집의 정원·현원·통학차량·입소대기 아동 수를 찾고, 입소 가점을 계산합니다">
+    <span class="tbnow">지금 보는 중</span>
+  </button>
+  <button type="button" class="tb gx" role="tab" aria-selected="false" data-tab="tab-benefit" data-grp="aid">
+    <img src="tab-benefit.jpg" width="800" height="597" decoding="async"
+         alt="우리동네 혜택 — 사는 지역과 시기를 고르면 임신·출산·육아 지원 사업을 찾아 줍니다">
     <span class="tbnow">지금 보는 중</span>
   </button>
 </nav>
@@ -2431,9 +2532,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 
 <!--JP:HTML:BEGIN-->
 <div id="tab-jp" class="hidden">
-<p class="upd"><b>업데이트 11/3</b> 일본 세관이 만든 한국어 안내문을 이미지로 저장할 수 있어요. 공항에서 데이터가 안 될 때도 볼 수 있어요</p>
-<p class="upd"><b>업데이트 11/3</b> 일본 면세가 11월 1일 구매분부터 환급 방식으로 바뀐 내용을 정리했어요. 절차와 공항별 처리는 '면세(환급) 방식 안내'에서 볼 수 있어요</p>
-<p class="upd"><b>업데이트 11/3</b> 가격 계산을 새 방식으로 바꿨어요. 계산대에서 먼저 낼 돈과 출국 때 돌려받을 돈이 따로 나오고, 환급 수수료를 직접 넣을 수 있어요</p>
 <div class="jpnotice" role="note"><p class="jpnotice-a">매일 14~15시 기준으로 갱신돼요. 하지만 실시간으로 반영되지는 않아서 실제 가격·재고와 다를 수 있어요.</p><p class="jpnotice-b">이 정보를 보고 구매하셔서 생긴 손해에 대해서는 책임질 수 없으니, 구매 전에 공식몰·매장에서 꼭 다시 확인하세요.</p><p class="jpnotice-c"><b>재고 정보 출처:</b> 아카짱혼포 공식 온라인몰(<a href="https://shop.akachan.jp/" target="_blank" rel="noopener nofollow">shop.akachan.jp</a>) 상품 페이지에 표시되는 매장별 참고 재고예요. 한큐·블라썸39는 재고를 공개하지 않아 표시하지 않아요.</p></div>
 <p class="jpalert" role="note"><b>일본 면세 제도가 2026년 11월 1일 구매분부터 '환급 방식'으로 바뀌었어요.</b> 계산대에서는 세금 포함 가격을 내고, 출국할 때 세관 확인을 받은 뒤 소비세를 돌려받아요. 아래 가격 계산도 이 방식으로 바꿨어요. 백화점 게스트카드 5%가 11월 1일 이후에도 그대로인지는 매장별로 다를 수 있어서 구매 전에 확인하세요. 절차와 공항별 처리는 <a href="#jpRefund">면세(환급) 방식 안내</a>에 정리했어요.</p>
 <div class="card">
@@ -2511,9 +2609,6 @@ h1,h2,h3,h4,th{text-wrap:balance}
 <!--BEN:HTML:END-->
 <!--COSM:HTML:BEGIN-->
 <div id="tab-cosm" class="hidden">
-<p class="upd"><b>업데이트 11/3</b> 화장품 성분 확인 탭이 생겼어요. 전성분을 붙여 넣으면 식약처 화장품 원료 자료와 하나씩 맞춰 봐 줘요</p>
-<p class="upd"><b>업데이트 11/3</b> 약 이름이나 성분으로 식약처 임부금기 목록에 올라 있는지 찾는 칸이 생겼어요</p>
-<p class="upd"><b>업데이트 11/5</b> 약 조회에 식약처 허가 의약품 3만 5천여 개를 추가했어요. 타이레놀·지르텍처럼 임부금기 목록에 없는 약도 이름으로 찾을 수 있고, 허가사항에 적힌 임신 관련 문구를 함께 보여 줘요</p>
 <h2 class="cm-h">화장품·약, 식약처 공식 자료와 맞춰 보기</h2>
 <p class="cm-lead">화장품은 전성분을 붙여 넣고, 약은 이름이나 성분을 넣으면 식품의약품안전처 공식 자료의 목록에 올라 있는지 하나씩 찾아 줘요.</p>
 <div class="cm-modes" role="group" aria-label="확인할 것 고르기"><button type="button" class="cm-mode on" data-m="cos" aria-pressed="true">화장품 전성분</button><button type="button" class="cm-mode" data-m="drug" aria-pressed="false">약 이름·성분</button></div>
@@ -2737,6 +2832,109 @@ h1,h2,h3,h4,th{text-wrap:balance}
 </div>
 </div>
 <!--CC:HTML:END-->
+<!--DL:HTML:BEGIN-->
+<div id="tab-dl" class="hidden">
+<p class="upd"><b>업데이트 11/19</b> 산후조리원 &amp; 도우미 탭이 생겼어요. 산후도우미 업체와 영업 중인 산후조리원의 전화번호를 지역별로 찾고, 그 지역에서 내가 내는 돈과 산후조리비 지원까지 한곳에서 볼 수 있어요</p>
+<h2 class="dl-h">우리동네 산후조리원 &amp; 도우미 찾기</h2>
+<p class="dl-lead">사는 곳을 고르면 산후도우미 업체(정부 바우처 제공기관)와 영업 중인 산후조리원의 전화번호가 나와요. 산후도우미는 소득 유형과 아이 순서를 고르면 정부와 지자체 지원을 뺀 '내가 내는 돈'까지 계산해 드리고, 산후조리원은 그 지역 산후조리비 지원을 함께 보여 드려요.</p>
+<div class="dl-modes" role="tablist" aria-label="이 탭에서 찾을 것 고르기">
+  <button type="button" class="dl-mode on" role="tab" id="dlModeD" aria-selected="true" aria-controls="dlPaneD">산후도우미</button>
+  <button type="button" class="dl-mode" role="tab" id="dlModeP" aria-selected="false" aria-controls="dlPaneP">산후조리원</button>
+</div>
+<div class="dl-card" id="dlFind">
+  <h3>어디에 사세요</h3>
+  <p class="dl-lab" id="dlSdLab">시도를 골라요</p>
+  <div class="dl-chips" id="dlSd" role="group" aria-labelledby="dlSdLab"></div>
+  <div class="dl-row">
+    <label class="dl-fld">시군구 <select id="dlSg" aria-label="시군구 고르기" disabled><option value="">시도를 먼저 골라요</option></select></label>
+    <label class="dl-fld dl-fld2">이름 검색 <input type="search" id="dlQ" placeholder="업체 또는 산후조리원 이름" autocomplete="off" aria-label="이름 검색"></label>
+  </div>
+</div>
+<p class="dl-state" id="dlState" aria-live="polite"></p>
+<div id="dlPaneD" role="tabpanel" aria-labelledby="dlModeD">
+<div class="dl-call" role="note">
+<p><b>전화하기 전에 확인해 주세요.</b></p>
+<p>이 목록은 한국사회보장정보원 사회서비스전자바우처에 올라온 제공기관이에요. 이 사이트가 업체를 평가하거나 추천하지 않아요.</p>
+<p>산후도우미는 집으로 오는 서비스라 업체가 있는 시군구와 우리 집이 달라도 올 수 있어요. 우리 집까지 오는지, 원하는 날짜에 시작할 수 있는지는 업체에 전화로 확인하세요.</p>
+</div>
+<div class="dl-card" id="dlPay" hidden>
+  <h3>내가 내는 돈 계산</h3>
+  <p class="dl-sub" id="dlPayFor"></p>
+  <div class="dl-row">
+    <label class="dl-fld dl-fld3">소득 유형 <select id="dlTy" aria-label="소득 유형" autocomplete="off">
+      <option value="가">가형: 기초생활수급자·차상위계층</option>
+      <option value="통합">통합형: 건강보험료가 기준중위소득 150% 이하</option>
+      <option value="라">라형: 기준중위소득 150% 초과</option>
+    </select></label>
+    <label class="dl-fld dl-fld3">아이 순서 <select id="dlNm" aria-label="아이 순서" autocomplete="off">
+      <option value="첫째아">첫째아</option>
+      <option value="둘째아">둘째아</option>
+      <option value="셋째아 이상">셋째아 이상</option>
+    </select></label>
+    <label class="dl-fld dl-fld3">이용 기간 <select id="dlDu" aria-label="이용 기간" autocomplete="off"></select></label>
+  </div>
+  <details class="dl-more" id="dlHiBox"><summary>내 소득 유형은 어떻게 알아요? (건강보험료 기준표)</summary><div id="dlHi"></div></details>
+  <div id="dlPayOut" aria-live="polite"></div>
+  <div id="dlPayLinks"></div>
+</div>
+<div class="dl-card" id="dlLocal" hidden>
+  <h3>이 지역에 올라온 산후도우미 지원</h3>
+  <p class="dl-sub" id="dlLocalSub"></p>
+  <div id="dlLocalOut"></div>
+</div>
+<div class="dl-card" id="dlFilt" hidden>
+  <h3>업체 조건으로 좁히기</h3>
+  <p class="dl-lab" id="dlGrLab">품질평가 (여러 개 고를 수 있어요)</p>
+  <div class="dl-chips" id="dlGr" role="group" aria-labelledby="dlGrLab"></div>
+  <details class="dl-more" id="dlGrWhy"><summary>품질평가 등급은 무슨 기준이에요?</summary>
+    <ul class="dl-notes">
+      <li>사회서비스 이용 및 이용권 관리에 관한 법률에 따라 보건복지부가 정한 기준으로, 제공기관을 3년마다 1회 이상 평가하는 제도예요(법 제30조, 시행규칙 제19조). 이 사이트가 매기는 등급이 아니에요.</li>
+      <li>기관이 낸 자체평가에 이어 평가위원이 찾아가는 현장평가를 하고, 이용자와 제공인력, 서비스 제공환경을 조사한 만족도 조사 결과가 더해져요. 시·군·구 행정처분도 결과에 반영해요.</li>
+      <li>평가 영역은 기관운영, 제공인력 관리, 서비스 제공, 서비스 성과(이용자 만족도, 제공인력과 서비스 제공환경 평가) 네 가지예요.</li>
+      <li>등급은 2019년 평가부터 점수로 정해요. A는 90점 이상, B는 80점 이상 90점 미만, C는 70점 이상 80점 미만, D는 60점 이상 70점 미만, F는 60점 미만이에요. 그 전에는 상위 몇 %인지로 정하는 상대평가였어요.</li>
+      <li>평가 제외기관은 새로 생겼거나 해당 사업을 접은 기관이에요. 비대상기관은 현장평가 기준에 못 미치는 소규모 기관이고, 거부기관은 평가를 거부한 기관이에요. 지자체 행정처분이 있으면 전체 등급과 세부 등급이 다를 수 있어요.</li>
+      <li>'이용자 만족도 평점'은 전자바우처 사이트에 따로 공개된 만족도 조사 점수예요. 설문에 참여한 사람이 기준에 못 미치면 '미공개'로 나와요.</li>
+    </ul>
+    <p class="dl-sub">출처: <a href="https://www.socialservice.or.kr:444/user/quality/intro/viewQualityIntroduce.do?p_sn=29" target="_blank" rel="noopener noreferrer">사회서비스전자바우처 품질평가 소개</a>와 업체별 품질평가 상세내역(전자바우처 제공기관 검색)</p>
+  </details>
+  <div class="dl-row">
+    <label class="dl-fld">제공인력<select id="dlStaff" aria-label="제공인력 수 기준"><option value="0">전체</option><option value="11">11명 이상</option><option value="21">21명 이상</option><option value="41">41명 이상</option></select></label>
+    <label class="dl-fld">정렬 <select id="dlSort" aria-label="정렬 기준"><option value="name">이름순</option><option value="staff">제공인력 많은 순</option><option value="user">이용자 많은 순</option><option value="score">이용자 만족도 높은 순</option><option value="grade">품질평가 등급순</option></select></label>
+  </div>
+</div>
+<div id="dlOut"></div>
+<div id="dlMore"></div>
+<div class="dl-chk" role="note" id="dlChk" hidden>
+  <b>전화할 때 이런 것을 물어보세요</b>
+  <p>우리 집(동·번지)까지 방문이 되는지, 원하는 시작일에 관리사 배정이 되는지, 관리사가 바뀌어야 하면 어떻게 되는지, 본인부담금은 언제 어떻게 내는지 물어보세요. 바우처 승인과 이용 방법은 사는 곳 보건소에서 안내해요.</p>
+</div>
+</div>
+<div id="dlPaneP" role="tabpanel" aria-labelledby="dlModeP" hidden>
+<div class="dl-call" role="note">
+<p><b>전화하기 전에 확인해 주세요.</b></p>
+<p>이 목록은 행정안전부 지방행정 인허가 자료에 올라 있는 영업 중인 산후조리원이에요. 이용 요금, 빈 방, 시설 평가는 이 자료에 없어서 이 사이트가 알려 드릴 수 없어요. 조리원에 전화로 확인하세요.</p>
+<p>이 사이트가 산후조리원을 평가하거나 추천하지 않아요. 정원과 인력은 조리원이 신고한 숫자예요.</p>
+</div>
+<div class="dl-card" id="dlPcFind">
+  <h3>내 위치에서 찾기</h3>
+  <button type="button" class="dl-locbtn" id="dlLoc">내 위치에서 가까운 순으로 찾기</button>
+  <p class="dl-sub" id="dlLocNote">누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 위에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요.</p>
+  <div class="dl-row">
+    <label class="dl-fld">정렬 <select id="dlPSort" aria-label="정렬 기준"><option value="name">이름순</option><option value="near">가까운 순(내 위치를 켰을 때)</option><option value="cap">임산부 정원 많은 순</option><option value="new">새로 문 연 순</option></select></label>
+  </div>
+  <label class="dl-ck"><input type="checkbox" id="dlPHold"> 휴업 중인 곳도 보기</label>
+</div>
+<div class="dl-card" id="dlPcLocal" hidden>
+  <h3>이 지역 산후조리비 지원</h3>
+  <p class="dl-sub" id="dlPcLocalSub"></p>
+  <div id="dlPcLocalOut"></div>
+</div>
+<div id="dlPOut"></div>
+<div id="dlPMore"></div>
+</div>
+<div class="dl-foot" id="dlSrc"></div>
+</div>
+<!--DL:HTML:END-->
 <div id="tab-rank" class="hidden">
 <div class="card">
   <h2>용품별 순위</h2>
@@ -4311,11 +4509,19 @@ calc();
    ─ 날짜는 의료진이 정한다. 이 코드는 '허용된 날짜들의 순서'만 매긴다.
    ══════════════════════════════════════════════════════════════ */
 
+/* 탭 메뉴 4묶음: 고른 묶음의 그림 타일만 보인다(타일 수가 홀수면 마지막 타일은 가운데) */
+function tgShow(g){
+  document.querySelectorAll(".tgb").forEach(x=>{ const on=(x.dataset.grp===g); x.classList.toggle("on",on); x.setAttribute("aria-pressed",on?"true":"false"); });
+  const vis=[];
+  document.querySelectorAll(".tb").forEach(x=>{ const show=(x.dataset.grp===g); x.classList.toggle("gx",!show); x.classList.remove("solo"); if(show) vis.push(x); });
+  if(vis.length%2===1) vis[vis.length-1].classList.add("solo");
+}
 document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".tb").forEach(x=>{
     const on=(x===b); x.classList.toggle("on",on); x.setAttribute("aria-selected",on?"true":"false");
   });
-  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp","tab-bf","tab-benefit","tab-cosm","tab-er","tab-cc"].forEach(id=>{
+  tgShow(b.dataset.grp);
+  ["tab-saju","tab-pick","tab-growth","tab-week","tab-check","tab-rank","tab-jp","tab-bf","tab-benefit","tab-cosm","tab-er","tab-cc","tab-dl"].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.classList.toggle("hidden", id!==b.dataset.tab);
   });
@@ -4330,7 +4536,15 @@ document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
   if(b.dataset.tab==="tab-cosm" && typeof cosmOnOpen==="function") cosmOnOpen();
   if(b.dataset.tab==="tab-er" && typeof erOnOpen==="function") erOnOpen();
   if(b.dataset.tab==="tab-cc" && typeof ccOnOpen==="function") ccOnOpen();
+  if(b.dataset.tab==="tab-dl" && typeof dlOnOpen==="function") dlOnOpen();
 }));
+document.querySelectorAll(".tgb").forEach(b=>b.addEventListener("click",()=>{
+  const cur=document.querySelector(".tb.on");
+  if(cur && cur.dataset.grp===b.dataset.grp) return;
+  const first=document.querySelector('.tb[data-grp="'+b.dataset.grp+'"]');
+  if(first) first.click();
+}));
+tgShow((document.querySelector(".tb.on")||{dataset:{}}).dataset.grp||"birth");
 
 /*JP:JS:BEGIN*/
 /* === JP-CORE START === */
@@ -6671,6 +6885,375 @@ function ccResHtml(inp){
   if(INIT_TAB==="cc"){ const b=document.querySelector('.tb[data-tab="tab-cc"]'); if(b){ b.click(); window.scrollTo(0,0); } }
 })();
 /*CC:JS:END*/
+/*DL:JS:BEGIN*/
+/* === DL-CORE START === */
+// 산후조리원 & 도우미 찾기: 업체 자료(dl/dl_<시도>.json, dl/pc_all.json)와 지원금 자료(dl/dl_support.json)는 이 기기 안에서만 걸러 보여 준다.
+// 병원 찾기 탭(ER-CORE)의 erEsc·erNorm·erDist·erFmtDist 를 함께 쓴다.
+const DL_GRADES=["A","B","C","D","F"];
+const DL_DUR=["단축","표준","연장"];
+const DL_TYNAME={"가":"가형(수급자·차상위)","통합":"통합형(건강보험료 150% 이하)","라":"라형(150% 초과)"};
+const DL_PAGE=20;
+function dlN(v){return v==null||v===""||isNaN(+v)?null:+v;}
+function dlWon(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,",")+"원";}
+function dlTel(t){return String(t||"").replace(/[^0-9]/g,"");}
+function dlTelOk(t){const d=dlTel(t);return d.length>=8&&d.length<=12;}
+function dlHome(u){
+  let s=String(u||"").trim(); if(!s) return "";
+  if(!/^https?:\/\//i.test(s)) s="http://"+s;
+  return /^https?:\/\/[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+(\/[^\s"'<>]*)?$/.test(s)?s:"";
+}
+// 품질평가: 등급(A~F), 평가 제외기관(X), 정보 없음(N)
+function dlGradeKey(x){return x.g?x.g:(x.x?"X":"N");}
+function dlGradeText(x){
+  if(x.g) return (x.y?x.y+" ":"")+"품질평가 "+x.g+"등급";
+  if(x.x===2) return "품질평가 비대상기관";
+  if(x.x===3) return "품질평가 거부기관";
+  if(x.x) return "품질평가 제외기관";
+  return "품질평가 정보 없음";
+}
+function dlGradeRank(x){const k=dlGradeKey(x);const i=DL_GRADES.indexOf(k);return i>=0?i:(k==="X"?5:6);}
+function dlScoreText(x){return x.s==null?"만족도 평점 미공개":"이용자 만족도 평점 <b>"+x.s+"</b>점";}
+// 거르기: 시군구·이름(부분 일치)·품질평가(여러 개)·제공인력 최소 인원
+function dlFilter(list,f){
+  const q=erNorm(f.q),gr=f.gr||{},any=Object.keys(gr).some(k=>gr[k]),min=f.staff||0;
+  return list.filter(x=>(!f.sg||x.sg===f.sg)&&(!q||erNorm(x.n).includes(q))&&(!any||gr[dlGradeKey(x)])&&(!min||(x.p||0)>=min));
+}
+// 정렬: name 이름순 · staff 제공인력 많은 순 · user 이용자 많은 순 · score 만족도 높은 순(미공개는 뒤) · grade 품질평가 등급순(A→F, 제외·정보 없음은 뒤)
+function dlSort(list,key){
+  const ko=(a,b)=>String(a||"").localeCompare(String(b||""),"ko");
+  const base=(p,q)=>ko(p.n,q.n)||ko(p.id,q.id);
+  const a=list.slice();
+  if(key==="staff") a.sort((p,q)=>(q.p||0)-(p.p||0)||base(p,q));
+  else if(key==="user") a.sort((p,q)=>(q.u||0)-(p.u||0)||base(p,q));
+  else if(key==="score") a.sort((p,q)=>{if((p.s==null)!==(q.s==null)) return p.s==null?1:-1; if(p.s!==q.s&&p.s!=null) return q.s-p.s; return base(p,q);});
+  else if(key==="grade") a.sort((p,q)=>dlGradeRank(p)-dlGradeRank(q)||base(p,q));
+  else a.sort(base);
+  return a;
+}
+// 시군구 목록 [[이름, 곳 수]] 이름순
+function dlSgList(list){
+  const c={};
+  list.forEach(x=>{c[x.sg]=(c[x.sg]||0)+1;});
+  return Object.keys(c).sort((p,q)=>String(p).localeCompare(String(q),"ko")).map(k=>[k,c[k]]);
+}
+// 내가 내는 돈: 정부 기준 표(gov)와 시도 지원 표(sup[순서][유형][기간 번호]). 지원이 없으면 0.
+function dlSupTab(ent,code,sg,gjGu){
+  if(!ent||!ent.sup) return null;
+  if(code==="018"){ if(!sg) return undefined; return (gjGu||[]).indexOf(sg)>=0?ent.sup.gj:ent.sup.jn; }
+  return ent.sup;
+}
+function dlPayCalc(gov,tab,name,t,j){
+  const g=gov.pp[name],c=g.g[t][j];
+  const s=tab?tab[name][t][j]:0;
+  return {days:g.days[j],price:g.price[j],gv:c[0],own:c[1],sup:s,pay:c[1]-s};
+}
+function dlPayHtml(r,o){
+  const nm=o.name+" · "+DL_DUR[o.j]+" "+r.days+"일 · "+DL_TYNAME[o.t]+" · 아이 1명(단태아) 기준";
+  let h='<div class="dl-score"><p class="dl-big">내가 내는 돈 '+dlWon(r.pay)+'</p><p class="dl-sub">'+erEsc(nm)+'</p></div>';
+  h+='<div class="dl-tbw"><table class="dl-tb"><tbody>'
+    +'<tr><th scope="row">서비스 가격</th><td>'+dlWon(r.price)+'</td></tr>'
+    +'<tr><th scope="row">정부 지원</th><td>-'+dlWon(r.gv)+'</td></tr>'
+    +'<tr><th scope="row">정부 기준 본인부담금</th><td>'+dlWon(r.own)+'</td></tr>';
+  if(o.supLabel) h+='<tr><th scope="row">'+erEsc(o.supLabel)+'</th><td>'+(r.sup>0?"-"+dlWon(r.sup):"0원")+'</td></tr>';
+  h+='<tr class="dl-sum"><th scope="row">내가 내는 돈</th><td>'+dlWon(r.pay)+'</td></tr></tbody></table></div>';
+  return h;
+}
+// 이 지역에 올라온 지원: 시도 전체 안내(g 빈 값)와 고른 시군구를 먼저, 나머지는 접어 둔다
+function dlLocSplit(items,sg){
+  const top=[],rest=[];
+  (items||[]).forEach(x=>{ if(!x.g||(sg&&x.g===sg)) top.push(x); else rest.push(x); });
+  return {top,rest};
+}
+function dlLocCard(x){
+  const tl=(x.t||[]).map(p=>dlTelOk(p[1])?erEsc(p[0])+' <a href="tel:'+dlTel(p[1])+'">'+erEsc(p[1])+'</a>':erEsc(p[0]+" "+p[1])).join(" · ");
+  return '<article class="dl-loc"><h4>'+(x.g?erEsc(x.g)+" · ":"")+erEsc(x.n)+'</h4>'
+    +(x.c?'<p>'+erEsc(x.c)+'</p>':"")
+    +(x.w?'<p>신청 시기: '+erEsc(x.w)+'</p>':"")
+    +(tl?'<p>문의: '+tl+'</p>':"")
+    +(/^https?:\/\//.test(x.u||"")?'<p><a href="'+erEsc(x.u)+'" target="_blank" rel="noopener noreferrer">정부24·복지로에서 자세히 보기</a></p>':"")
+    +'</article>';
+}
+function dlLinks(x){
+  const t=dlTel(x.t);
+  const q=encodeURIComponent((x.sg||"")+" "+(x.n||"")+" 산후도우미 후기");
+  const km=encodeURIComponent((x.n||"")+" "+(x.sg||""));
+  return '<div class="dl-acts">'+(dlTelOk(x.t)?'<a class="dl-btn" href="tel:'+t+'">전화 '+erEsc(x.t)+'</a>':'<span class="dl-sub">전화번호 자료가 없어요</span>')
+    +'<a class="dl-btn alt" href="https://search.naver.com/search.naver?ssc=tab.blog.all&query='+q+'" target="_blank" rel="noopener noreferrer">블로그 후기 검색</a>'
+    +'<a class="dl-btn alt" href="https://map.kakao.com/link/search/'+km+'" target="_blank" rel="noopener noreferrer">카카오맵</a></div>';
+}
+function dlMoreBlock(x){
+  const h=dlHome(x.w);
+  let b="";
+  if(x.a) b+='<p class="dl-memo">주소: '+erEsc(x.a)+'</p>';
+  if(x.o) b+='<p class="dl-memo">기관 유형: '+erEsc(x.o)+'</p>';
+  if(h) b+='<p class="dl-memo">홈페이지: <a href="'+erEsc(h)+'" target="_blank" rel="noopener noreferrer">'+erEsc(h)+'</a></p>';
+  if(x.r>0) b+='<p class="dl-memo">전자바우처 사이트에 올라온 이용후기 '+x.r+'건</p>';
+  return b?'<details class="dl-more"><summary>주소·홈페이지 더 보기</summary>'+b+'</details>':"";
+}
+function dlCard(x,ctx){
+  const gk=dlGradeKey(x);
+  return '<article class="dl-item"><h4>'+erEsc(x.n)+'</h4>'
+    +'<div class="dl-badges"><span class="dl-badge g'+gk+'">'+erEsc(dlGradeText(x))+'</span><span class="dl-badge">'+erEsc(x.sg)+'</span>'+(x.o?'<span class="dl-badge">'+erEsc(x.o)+'</span>':"")+'</div>'
+    +'<p class="dl-nums"><span>제공인력 <b>'+(x.p==null?"-":x.p)+'</b>명</span><span>이용자 <b>'+(x.u==null?"-":x.u)+'</b>명</span><span>'+dlScoreText(x)+'</span></p>'
+    +dlLinks(x)+dlMoreBlock(x)+'</article>';
+}
+// 목록 위 한 줄 안내(카드마다 반복하지 않는다)
+function dlNote(mode,asof){
+  return mode==="d"?"자료 기준일 "+asof+" · 이용자 수와 제공인력 수는 전월 기준이에요. 우리 집까지 오는지는 업체에 전화로 확인하세요."
+    :"자료 기준일 "+asof+" · 이용 요금과 빈 방은 이 자료에 없어요. 조리원에 전화로 확인하세요.";
+}
+// ── 산후조리원 ──
+// 거르기: 시도(k)·시군구·이름·휴업 포함 여부
+function dlPcFilter(list,f){
+  const q=erNorm(f.q);
+  return list.filter(x=>(!f.sd||x.k===f.sd)&&(!f.sg||x.sg===f.sg)&&(!q||erNorm(x.n).includes(q))&&(f.hold||!x.h));
+}
+// 정렬: name 이름순 · near 가까운 순(좌표 없는 곳은 뒤) · cap 임산부 정원 많은 순 · new 허가 연도가 최근인 순
+function dlPcSort(list,key,loc){
+  const ko=(a,b)=>String(a||"").localeCompare(String(b||""),"ko");
+  const base=(p,q)=>ko(p.n,q.n)||ko(p.id,q.id);
+  const a=list.slice();
+  if(key==="near"&&loc){
+    const d=new Map(a.map(x=>[x,erDist(loc,x)]));
+    a.sort((p,q)=>{const dp=d.get(p),dq=d.get(q); if((dp==null)!==(dq==null)) return dp==null?1:-1; if(dp!=null&&dp!==dq) return dp-dq; return base(p,q);});
+  }else if(key==="cap") a.sort((p,q)=>(q.c||0)-(p.c||0)||base(p,q));
+  else if(key==="new") a.sort((p,q)=>(q.y||0)-(p.y||0)||base(p,q));
+  else a.sort(base);
+  return a;
+}
+function dlPcStaff(x){
+  const p=[];
+  if(x.nu) p.push("간호사 "+x.nu+"명");
+  if(x.na) p.push("간호조무사 "+x.na+"명");
+  if(x.di) p.push("영양사 "+x.di+"명");
+  return p.length?"신고된 인력: "+p.join(" · "):"";
+}
+function dlPcLinks(x){
+  const t=dlTel(x.t);
+  const q=encodeURIComponent((x.sg||"")+" "+(x.n||"")+" 후기");
+  const km=(x.la!=null&&x.lo!=null)?"https://map.kakao.com/link/to/"+encodeURIComponent(x.n||"")+","+x.la+","+x.lo:"https://map.kakao.com/link/search/"+encodeURIComponent((x.n||"")+" "+(x.sg||""));
+  return '<div class="dl-acts">'+(dlTelOk(x.t)?'<a class="dl-btn" href="tel:'+t+'">전화 '+erEsc(x.t)+'</a>':'<span class="dl-sub">전화번호 자료가 없어요</span>')
+    +'<a class="dl-btn alt" href="'+km+'" target="_blank" rel="noopener noreferrer">카카오맵 길찾기</a>'
+    +'<a class="dl-btn alt" href="https://search.naver.com/search.naver?ssc=tab.blog.all&query='+q+'" target="_blank" rel="noopener noreferrer">블로그 후기 검색</a></div>';
+}
+function dlPcCard(x,ctx){
+  const d=ctx&&ctx.loc?erDist(ctx.loc,x):null;
+  const st=dlPcStaff(x);
+  return '<article class="dl-item"><h4>'+erEsc(x.n)+'</h4>'
+    +'<div class="dl-badges"><span class="dl-badge">'+erEsc(x.sg)+'</span>'+(x.h?'<span class="dl-badge gC">휴업 중</span>':"")+(x.y?'<span class="dl-badge">'+x.y+'년 허가</span>':"")+'</div>'
+    +(d==null?"":'<p class="dl-dist">내 위치에서 '+erFmtDist(d)+' (직선)</p>')
+    +'<p class="dl-addr">'+erEsc(x.a)+'</p>'
+    +'<p class="dl-nums"><span>임산부 정원 <b>'+(x.c==null?"-":x.c)+'</b>명</span><span>신생아 정원 <b>'+(x.ic==null?"-":x.ic)+'</b>명</span></p>'
+    +(st?'<p class="dl-memo">'+erEsc(st)+'</p>':"")
+    +(x.tp&&dlTelOk(x.t)?'<p class="dl-memo">이 번호는 인허가 자료에 없어서 지도 서비스 검색으로 확인했어요'+(ctx&&ctx.tpd?'('+erEsc(ctx.tpd)+')':"")+'. 연결이 안 되면 카카오맵에서 확인하세요.</p>':"")
+    +dlPcLinks(x)+'</article>';
+}
+// 위치를 못 받을 때 이유별 안내(오류 코드 1 거부, 2 기기가 모름, 3 시간 초과, 0 기능 없음)
+function dlGeoMsg(code,ua){
+  let m;
+  if(code===1) m="위치 사용이 막혀 있어요. 주소창 왼쪽 자물쇠나 설정에서 이 사이트의 위치를 '허용'으로 바꾸고 다시 눌러 주세요. 폰은 기기 설정에서 브라우저의 위치 접근도 켜져 있어야 해요.";
+  else if(code===2) m="이 기기가 위치를 알려 주지 못했어요. 폰은 위치(GPS)를 켜고, 컴퓨터는 Windows 설정의 개인정보 및 보안, 위치를 켜 보세요.";
+  else if(code===3) m="위치를 찾는 데 시간이 너무 오래 걸렸어요. 한 번 더 눌러 보세요.";
+  else m="이 브라우저에서는 위치를 쓸 수 없어요.";
+  if(/KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line\/|DaumApps/i.test(ua||"")) m+=" 카카오톡이나 네이버 같은 앱 안에서 열면 위치가 막히는 경우가 많아요. 메뉴에서 '다른 브라우저로 열기'를 눌러 크롬이나 사파리로 열어 보세요.";
+  return m+" 위치가 안 잡혀도 위에서 시도를 골라 찾을 수 있어요.";
+}
+/* === DL-CORE END === */
+
+(function(){
+  const $=id=>document.getElementById(id);
+  let IDX=null,SUP=null,PC=null,loading=false,failed=false;
+  const DATA={};
+  const S={mode:"d",sd:"",sg:"",q:"",gr:{},staff:0,sort:"name",shown:DL_PAGE,ty:"통합",nm:"첫째아",j:1,psort:"name",hold:false,loc:null,pshown:DL_PAGE};
+  const day=()=>Math.floor(Date.now()/86400000);
+  const getJ=u=>fetch(u,{cache:"no-cache"}).then(r=>{if(!r.ok) throw new Error(r.status); return r.json();});
+  function state(t){$("dlState").textContent=t||"";}
+  function chip(k,label,n,on){return '<button type="button" class="dl-chip'+(on?' on':'')+'" data-k="'+erEsc(k)+'" aria-pressed="'+(on?'true':'false')+'">'+erEsc(label)+(n!=null?' <span class="dl-n">'+n+'</span>':'')+'</button>';}
+  function load(){
+    if(IDX||loading) return; loading=true; failed=false; state("업체 목록을 받는 중이에요…");
+    Promise.all([getJ("dl/dl_index.json?t="+day()),getJ("dl/dl_support.json?t="+day())])
+      .then(r=>{IDX=r[0]; SUP=r[1]; loading=false; state(""); shell(); render();})
+      .catch(()=>{loading=false; failed=true; state("자료를 불러오지 못했어요. 잠시 뒤 이 탭을 다시 열어 보세요.");});
+  }
+  function shell(){
+    $("dlGr").innerHTML=DL_GRADES.map(g=>chip(g,g+"등급",null,false)).join("")+chip("X","평가 제외·비대상",null,false);
+    const hi=SUP.hi;
+    $("dlHi").innerHTML='<p class="dl-sub">가구원 수에 신생아(출산 전이면 태아)가 들어가요. 표의 금액 이하이면 통합형(150% 이하)이에요. 수급자·차상위는 가형이에요. 자세한 기준은 사는 곳 보건소에서 안내해요.</p>'
+      +'<div class="dl-tbw"><table class="dl-tb"><thead><tr>'+hi.th.map(t=>'<th>'+erEsc(t)+'</th>').join("")+'</tr></thead><tbody>'
+      +hi.rows.map(r=>'<tr><th scope="row">'+erEsc(r[0])+'</th>'+r.slice(1).map(c=>'<td>'+erEsc(c)+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>'
+      +'<p class="dl-sub">건강보험료는 장기요양보험료를 뺀 금액이고, 맞벌이는 보험료가 낮은 쪽을 반으로 줄여 합쳐요. 6인까지만 실었어요.</p>';
+    fillDur();
+  }
+  function fillDur(){
+    const g=SUP.gov.pp[S.nm];
+    $("dlDu").innerHTML=g.days.map((d,i)=>'<option value="'+i+'">'+DL_DUR[i]+' '+d+'일 (서비스 가격 '+dlWon(g.price[i])+')</option>').join("");
+    $("dlDu").value=String(S.j);
+  }
+  function loadSd(code,after){
+    if(DATA[code]){after();return;}
+    state("업체 자료를 받는 중이에요…");
+    getJ("dl/dl_"+code+".json?t="+day()).then(d=>{DATA[code]=d.rows;state("");after();}).catch(()=>{state("자료를 불러오지 못했어요. 잠시 뒤 다시 눌러 주세요.");});
+  }
+  function loadPc(after){
+    if(PC){after();return;}
+    state("산후조리원 자료를 받는 중이에요…");
+    getJ("dl/pc_all.json?t="+day()).then(d=>{PC=d;state("");after();}).catch(()=>{state("자료를 불러오지 못했어요. 잠시 뒤 다시 눌러 주세요.");});
+  }
+  function curEnt(){return S.sd&&SUP?SUP.sido[S.sd]:null;}
+  function sdLabel(k){const s=(IDX&&IDX.sd||[]).find(z=>z.k===k);return s?s.label:k;}
+  function renderPay(){
+    const ent=curEnt(),on=S.mode==="d"&&!!ent;
+    $("dlPay").hidden=!on; $("dlLocal").hidden=!on;
+    if(!on) return;
+    $("dlPayFor").textContent=ent.label+(S.sg?" "+S.sg:"")+" 기준으로 계산해요. 아이 1명(단태아) 기준이에요. 쌍둥이 이상·중증은 금액이 달라서 보건소에 확인하세요.";
+    const tab=dlSupTab(ent,S.sd,S.sg,SUP.gwangju_gu);
+    let out="";
+    if(tab===undefined){
+      const r0=dlPayCalc(SUP.gov,null,S.nm,S.ty,S.j);
+      out=dlPayHtml(r0,{name:S.nm,t:S.ty,j:S.j})+'<p class="dl-hint">시군구를 고르면 광주 5개 구와 전남 시군에 맞는 지원까지 계산해요. 지금은 정부 기준만 보여 드려요.</p>';
+    }else{
+      const r=dlPayCalc(SUP.gov,tab,S.nm,S.ty,S.j);
+      out=dlPayHtml(r,{name:S.nm,t:S.ty,j:S.j,supLabel:tab?(ent.short==="광주·전남"?"전남도 지원":ent.short+" 지원"):""});
+    }
+    const notes=(S.sd==="018"&&tab?(ent.notes_jn||[]):(ent.notes||[]));
+    out+='<ul class="dl-notes">'+notes.map(n=>'<li>'+erEsc(n)+'</li>').join("")+'<li>정부 기준 금액은 구리시·동대문구 보건소의 2026년 안내를 맞춰 본 값이에요. 실제 금액은 사는 곳 보건소 승인 결과를 따라요.</li></ul>';
+    $("dlPayOut").innerHTML=out;
+    const posts=ent.posts.concat([SUP.national]);
+    $("dlPayLinks").innerHTML='<div class="dl-links">'+posts.map(p=>'<a href="'+erEsc(p.u)+'" target="_blank" rel="noopener noreferrer">'+erEsc(p.t)+' 글에서 자세히 보기</a>').join("")+'</div>';
+    $("dlLocalSub").textContent=(S.sg?S.sg+"와 ":"")+ent.label+" 전체에 올라온 산후도우미·산모 건강관리 지원이에요. 정부24·복지로 자료를 우리동네 혜택 탭과 같은 기준으로 옮겼고, 금액은 안내 문구 그대로예요.";
+    $("dlLocalOut").innerHTML=locHtml(SUP.local[S.sd],"산후도우미");
+  }
+  function locHtml(items,what){
+    const sp=dlLocSplit(items,S.sg);
+    let lh=sp.top.length?sp.top.map(dlLocCard).join(""):'<p class="dl-hint">'+(S.sg?erEsc(S.sg)+"에 따로 올라온 "+what+" 지원이 없어요. 시도 전체나 다른 시군구 지원을 아래에서 확인하세요.":"시도 전체에 올라온 "+what+" 지원이 없어요. 시군구를 고르면 그 지역 지원이 나와요.")+'</p>';
+    if(sp.rest.length) lh+='<details class="dl-more"><summary>'+(S.sg?"다른 시군구 지원 ":"시군구별 지원 ")+sp.rest.length+'건 보기</summary>'+sp.rest.map(dlLocCard).join("")+'</details>';
+    return lh;
+  }
+  // 시도 칩과 시군구 칸: 보고 있는 쪽(도우미/조리원) 자료의 곳 수로 채운다
+  function renderFind(){
+    let sds;
+    if(S.mode==="d") sds=IDX.sd.map(s=>({k:s.k,label:s.label,cnt:s.cnt,sg:s.sg}));
+    else if(PC){
+      const by={}; PC.rows.forEach(x=>{ if(!x.h||S.hold){ (by[x.k]=by[x.k]||[]).push(x); } });
+      sds=IDX.sd.map(s=>({k:s.k,label:s.label,cnt:(by[s.k]||[]).length,sg:dlSgList(by[s.k]||[])}));
+    }else sds=IDX.sd.map(s=>({k:s.k,label:s.label,cnt:null,sg:[]}));
+    $("dlSd").innerHTML=sds.map(s=>chip(s.k,s.label,s.cnt,S.sd===s.k)).join("");
+    const cur=S.sd?sds.find(s=>s.k===S.sd):null;
+    if(cur&&S.sg&&!cur.sg.some(z=>z[0]===S.sg)) S.sg="";
+    $("dlSg").innerHTML=cur?'<option value="">전체</option>'+cur.sg.map(z=>'<option value="'+erEsc(z[0])+'"'+(z[0]===S.sg?' selected':'')+'>'+erEsc(z[0])+' ('+z[1]+')</option>').join(""):'<option value="">시도를 먼저 골라요</option>';
+    $("dlSg").disabled=!S.sd;
+  }
+  function renderD(){
+    document.querySelectorAll("#dlGr .dl-chip").forEach(b=>{const on=!!S.gr[b.dataset.k]; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false");});
+    $("dlFilt").hidden=!S.sd; $("dlChk").hidden=!S.sd;
+    $("dlTy").value=S.ty; $("dlNm").value=S.nm; $("dlDu").value=String(S.j);
+    renderPay();
+    if(!S.sd){
+      $("dlOut").innerHTML='<p class="dl-hint">위에서 시도를 고르면 그 지역 산후도우미 업체와 내가 내는 돈이 나와요. 전국 '+IDX.total+'곳이 들어 있어요.</p>';
+      $("dlMore").innerHTML=""; return;
+    }
+    if(!DATA[S.sd]) return;
+    const rows=dlSort(dlFilter(DATA[S.sd],{sg:S.sg,q:S.q,gr:S.gr,staff:S.staff}),S.sort);
+    let h='<p class="dl-count">'+erEsc(sdLabel(S.sd))+(S.sg?" "+erEsc(S.sg):"")+' 업체 <b>'+rows.length+'곳</b></p><p class="dl-sub">'+erEsc(dlNote("d",IDX.asof))+'</p>';
+    h+=rows.slice(0,S.shown).map(x=>dlCard(x,{asof:IDX.asof})).join("");
+    if(!rows.length) h+='<p class="dl-hint">조건에 맞는 업체가 자료에 없어요. 조건을 줄이거나 다른 시군구를 골라 보세요. 산후도우미는 집으로 오는 서비스라 이웃 시군구 업체도 우리 집까지 오는지 전화로 확인해 볼 수 있어요.</p>';
+    $("dlOut").innerHTML=h;
+    $("dlMore").innerHTML=rows.length>S.shown?'<button type="button" class="dl-showmore" id="dlShowMore">더 보기 (남은 '+(rows.length-S.shown)+'곳)</button>':"";
+  }
+  function renderP(){
+    $("dlPHold").checked=S.hold; $("dlPSort").value=S.psort;
+    const ent=curEnt();
+    $("dlPcLocal").hidden=!(S.sd&&ent);
+    if(S.sd&&ent){
+      $("dlPcLocalSub").textContent=(S.sg?S.sg+"와 ":"")+ent.label+" 전체에 올라온 산후조리비·산후관리비 지원이에요. 정부24·복지로 자료를 우리동네 혜택 탭과 같은 기준으로 옮겼고, 금액은 안내 문구 그대로예요.";
+      $("dlPcLocalOut").innerHTML=locHtml((SUP.local_pc||{})[S.sd],"산후조리비");
+    }
+    if(!PC) return;
+    if(!S.sd&&!S.loc){
+      $("dlPOut").innerHTML='<p class="dl-hint">위에서 시도를 고르거나 내 위치를 켜면 영업 중인 산후조리원이 나와요. 전국 '+PC.rows.filter(x=>!x.h).length+'곳이 들어 있어요.</p>';
+      $("dlPMore").innerHTML=""; return;
+    }
+    const key=S.psort==="near"&&!S.loc?"name":S.psort;
+    const rows=dlPcSort(dlPcFilter(PC.rows,{sd:S.sd,sg:S.sg,q:S.q,hold:S.hold}),key,S.loc);
+    let h='<p class="dl-count">'+(S.sd?erEsc(sdLabel(S.sd))+(S.sg?" "+erEsc(S.sg):""):"전국")+' 산후조리원 <b>'+rows.length+'곳</b>'+(S.psort==="near"&&!S.loc?' · 가까운 순은 내 위치를 켠 뒤에 쓸 수 있어요(지금은 이름순)':'')+'</p><p class="dl-sub">'+erEsc(dlNote("p",PC.asof))+'</p>';
+    h+=rows.slice(0,S.pshown).map(x=>dlPcCard(x,{loc:S.loc,asof:PC.asof,tpd:PC.tpd})).join("");
+    if(!rows.length) h+='<p class="dl-hint">조건에 맞는 산후조리원이 자료에 없어요. 다른 시군구를 골라 보세요. 자료에 없다고 해서 없는 것은 아니니 사는 곳 보건소에도 물어보세요.</p>';
+    $("dlPOut").innerHTML=h;
+    $("dlPMore").innerHTML=rows.length>S.pshown?'<button type="button" class="dl-showmore" id="dlPShowMore">더 보기 (남은 '+(rows.length-S.pshown)+'곳)</button>':"";
+  }
+  function render(){
+    if(!IDX) return;
+    renderFind();
+    if(S.mode==="d") renderD(); else renderP();
+    renderSrc();
+  }
+  function renderSrc(){
+    const d=S.mode==="d";
+    $("dlSrc").innerHTML=d
+      ?'출처: 한국사회보장정보원 사회서비스전자바우처 제공기관 검색(산모·신생아 건강관리지원사업)과 공공데이터포털 제공기관 정보, 자료 기준일 '+erEsc(IDX?IDX.asof:"")
+        +'. 품질평가 등급·만족도 평점·이용자 수·제공인력 수·연락처는 전자바우처 사이트에 공개된 값이고, 이용자 수와 제공인력 수는 전월 기준이에요. 자료는 한 달에 한 번 새로 받아 와요. 지원금 금액은 보건복지부 사업 안내와 시도·시군구 안내를 맞춰 본 값이에요.'
+        +'<br>이 사이트는 한국사회보장정보원·보건복지부와 무관하며, 업체를 평가하거나 추천하지 않아요. 사업을 접었거나 연락처가 바뀐 업체가 있을 수 있어요.'
+      :'출처: 행정안전부 지방행정 인허가 데이터(localdata.go.kr) 건강_산후조리업'+(PC?', 자료 기준일 '+erEsc(PC.asof):"")
+        +'. 영업/정상·휴업 상태인 곳만 실었고 폐업·취소된 곳은 뺐어요. 정원·인력·허가 연도는 조리원이 신고한 값이에요. 위치는 인허가 자료의 좌표를 위도·경도로 바꿔 쓴 것이라 실제와 조금 다를 수 있어요. 인허가 자료에 전화번호가 없는 곳 가운데 이름과 위치가 맞는 곳은 지도 서비스 장소 검색으로 확인한 번호를 넣고 확인한 날을 적었어요. 그래도 없는 곳은 비워 뒀으니 카카오맵 링크로 확인하세요. 자료는 한 달에 한 번 새로 받아 와요.'
+        +'<br>이 사이트는 행정안전부·보건복지부와 무관하며, 산후조리원을 평가하거나 추천하지 않아요. 이용 요금은 인허가 자료에 없어서 싣지 않았어요.';
+  }
+  function mode(m){
+    S.mode=m; S.shown=DL_PAGE; S.pshown=DL_PAGE;
+    $("dlPaneD").hidden=m!=="d"; $("dlPaneP").hidden=m!=="p";
+    $("dlModeD").classList.toggle("on",m==="d"); $("dlModeP").classList.toggle("on",m==="p");
+    $("dlModeD").setAttribute("aria-selected",m==="d"?"true":"false"); $("dlModeP").setAttribute("aria-selected",m==="p"?"true":"false");
+    $("dlQ").placeholder=m==="d"?"업체 이름":"산후조리원 이름";
+    if(!IDX){ load(); return; }
+    if(m==="p"&&!PC){ loadPc(render); return; }
+    if(m==="d"&&S.sd&&!DATA[S.sd]){ loadSd(S.sd,render); return; }
+    render();
+  }
+  function pickSd(k){
+    S.sd=k; S.sg=""; S.shown=DL_PAGE; S.pshown=DL_PAGE;
+    if(!k){render();return;}
+    if(S.mode==="d") loadSd(k,render); else loadPc(render);
+  }
+  $("dlModeD").addEventListener("click",()=>mode("d"));
+  $("dlModeP").addEventListener("click",()=>mode("p"));
+  $("dlSd").addEventListener("click",e=>{const b=e.target.closest(".dl-chip"); if(!b) return; pickSd(S.sd===b.dataset.k?"":b.dataset.k);});
+  $("dlSg").addEventListener("change",e=>{S.sg=e.target.value; S.shown=DL_PAGE; S.pshown=DL_PAGE; render();});
+  let tq=0;
+  $("dlQ").addEventListener("input",e=>{clearTimeout(tq); tq=setTimeout(()=>{S.q=e.target.value; S.shown=DL_PAGE; S.pshown=DL_PAGE; render();},150);});
+  $("dlGr").addEventListener("click",e=>{const b=e.target.closest(".dl-chip"); if(!b) return; const k=b.dataset.k; S.gr[k]=!S.gr[k]; S.shown=DL_PAGE; render();});
+  $("dlStaff").addEventListener("change",e=>{S.staff=+e.target.value; S.shown=DL_PAGE; render();});
+  $("dlSort").addEventListener("change",e=>{S.sort=e.target.value; S.shown=DL_PAGE; render();});
+  $("dlMore").addEventListener("click",e=>{if(e.target.closest("#dlShowMore")){S.shown+=DL_PAGE; render();}});
+  $("dlPMore").addEventListener("click",e=>{if(e.target.closest("#dlPShowMore")){S.pshown+=DL_PAGE; render();}});
+  $("dlTy").addEventListener("change",e=>{S.ty=e.target.value; render();});
+  $("dlNm").addEventListener("change",e=>{S.nm=e.target.value; S.j=Math.min(S.j,2); fillDur(); render();});
+  $("dlDu").addEventListener("change",e=>{S.j=+e.target.value; render();});
+  $("dlPSort").addEventListener("change",e=>{S.psort=e.target.value; S.pshown=DL_PAGE; render();});
+  $("dlPHold").addEventListener("change",e=>{S.hold=e.target.checked; S.pshown=DL_PAGE; render();});
+  const LOC_NOTE="누르면 브라우저가 위치 허용 여부를 물어봐요. 허용하면 이 기기 안에서만 거리를 계산하고, 서버로 보내거나 저장하지 않아요. 허용하지 않아도 위에서 시도를 골라 찾을 수 있어요. 거리는 직선거리라 실제 이동시간과 달라요.";
+  function resetLoc(){
+    S.loc=null; if(S.psort==="near"){ S.psort="name"; }
+    $("dlLoc").classList.remove("on"); $("dlLoc").textContent="내 위치에서 가까운 순으로 찾기"; $("dlLocNote").textContent=LOC_NOTE;
+  }
+  $("dlLoc").addEventListener("click",()=>{
+    if(S.loc){ resetLoc(); render(); return; }
+    if(!navigator.geolocation){ $("dlLocNote").textContent=dlGeoMsg(0,navigator.userAgent); return; }
+    $("dlLocNote").textContent="위치를 확인하는 중이에요…";
+    const ok=p=>{
+      S.loc={la:p.coords.latitude,lo:p.coords.longitude}; S.psort="near"; S.pshown=DL_PAGE;
+      $("dlLoc").classList.add("on"); $("dlLoc").textContent="내 위치 기준 해제하기";
+      $("dlLocNote").textContent="내 위치에서 가까운 순이에요. 위치는 이 기기 안에서만 쓰고 서버로 보내지 않아요. 거리는 직선거리예요.";
+      loadPc(render);
+    };
+    const ask=hi=>navigator.geolocation.getCurrentPosition(ok,e=>{
+      if(!hi&&(e.code===2||e.code===3)){ $("dlLocNote").textContent="한 번 더 정확하게 찾아 볼게요…"; ask(true); return; }
+      $("dlLocNote").textContent=dlGeoMsg(e.code,navigator.userAgent);
+    },hi?{enableHighAccuracy:true,timeout:20000,maximumAge:0}:{timeout:10000,maximumAge:300000});
+    ask(false);
+  });
+  window.dlOnOpen=function(){ if(!IDX||failed){ IDX=null; load(); } };
+  if(INIT_TAB==="dl"){ const b=document.querySelector('.tb[data-tab="tab-dl"]'); if(b){ b.click(); window.scrollTo(0,0); } }
+})();
+/*DL:JS:END*/
 // 블로그 글에서 ?tab=pick 으로 들어오면 택일 탭을 바로 연다
 (function(){
   if(INIT_TAB!=="pick") return;
@@ -7959,7 +8542,7 @@ function wkApplyShop(j){
   return changed;
 }
 // 이 파일의 지문(stamp_build.py 가 배포 전에 채움). shop.json 의 html 값과 다르면 캐시에 남은 옛 페이지라는 뜻 → 같은 탭에서 한 번만 새로 읽는다.
-var APP_BUILD="0d7f20a2";
+var APP_BUILD="368cd424";
 function wkLoadShop(){
   try{
     fetch("shop.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{
